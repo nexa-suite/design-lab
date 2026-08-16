@@ -6,7 +6,7 @@
 - Local checkout: `/Users/diegosandoval284/Developer/nexa-design-lab`
 - Starting SHA: `e2e633bfaf52f98c9261f8bacd5257e0f5ca51c1`
 - Branch: `design/v0.3-normalized-screen-library`
-- Final SHA: recorded after validation commit
+- Final implementation SHA: `9d6d1f3`
 - Remote branch: feature branch only; no direct `main` push, merge, tag, release or settings change
 
 ## Sources consumed
