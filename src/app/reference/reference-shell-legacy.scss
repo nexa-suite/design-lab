@@ -1,0 +1,22 @@
+.reference-role { display: inline-flex; min-height: 28px; align-items: center; gap: 8px; width: fit-content; margin: 10px 12px 18px; padding: 0 10px; border: 1px solid var(--nexa-color-role-sales-border); border-radius: var(--nexa-radius-full); background: var(--nexa-color-role-sales-surface); color: var(--nexa-color-role-sales-text); font-size: 11px; font-weight: 600; }
+.reference-role i { font-size: 13px; }
+.reference-context { display: none; }
+.reference-nav { gap: 24px; padding-bottom: 8px; }
+.reference-nav-group { gap: 2px; }
+.reference-nav-item { min-height: 40px; padding-inline: 11px; border-left-width: 3px; border-radius: 0 var(--nexa-radius-lg) var(--nexa-radius-lg) 0; font-size: 13px; }
+.reference-nav-item i { width: 18px; font-size: 16px; line-height: 1; }
+.reference-nav-item.active { box-shadow: inset 3px 0 0 var(--nexa-color-primary-600); }
+.reference-topbar { padding-inline: 24px; }
+.topbar-workspace, .topbar-actions, .topbar-workspace > span:last-child { display: flex; align-items: center; }
+.topbar-workspace { gap: 11px; min-width: 0; }
+.topbar-workspace > span:last-child { display: grid; gap: 3px; min-width: 0; }
+.topbar-workspace strong { overflow: hidden; color: var(--nexa-color-text-primary); font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.topbar-workspace small { color: var(--nexa-color-text-secondary); font-size: 11px; }
+.topbar-identity-mark { display: grid; width: 38px; height: 38px; flex: 0 0 38px; place-items: center; border: 1px solid var(--nexa-color-primary-200); border-radius: var(--nexa-radius-lg); background: var(--nexa-color-primary-50); color: var(--nexa-color-primary-700); font-size: 12px; font-weight: 700; }
+.topbar-actions { gap: 8px; }
+.language-button, .topbar-icon { display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid var(--nexa-color-border-interactive); border-radius: 50%; background: var(--nexa-surface-card); color: var(--nexa-color-neutral-600); cursor: pointer; font-size: 11px; }
+.language-button.active { border-color: var(--nexa-color-primary-200); background: var(--nexa-color-primary-50); color: var(--nexa-color-primary-700); }
+.topbar-icon { position: relative; border-radius: var(--nexa-radius-md); font-size: 15px; }
+.notification-dot { position: absolute; top: 7px; right: 7px; width: 5px; height: 5px; border-radius: 50%; background: var(--nexa-color-attention-500); }
+.topbar-actions .back-to-lab { margin-left: 8px; }
+@media (max-width: 920px) { .reference-topbar { padding-inline: 16px; }.topbar-workspace { flex: 1; }.topbar-actions .language-button, .topbar-actions .topbar-icon { display: none; }.topbar-actions .back-to-lab { margin-left: 0; } }

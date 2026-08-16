@@ -19,7 +19,7 @@ abstract class ReferenceShellBase {
   private afterRender(callback: () => void): void { afterNextRender(callback, { injector: this.environmentInjector }); }
 }
 
-@Component({ selector: 'nexa-platform-shell', imports: [RouterLink, RouterLinkActive, RouterOutlet], changeDetection: ChangeDetectionStrategy.OnPush, templateUrl: './reference-shell.html', styleUrl: './reference-shell.scss', host: { '(document:keydown.escape)': 'closeMobileNav()' } })
+@Component({ selector: 'nexa-platform-shell', imports: [RouterLink, RouterLinkActive, RouterOutlet], changeDetection: ChangeDetectionStrategy.OnPush, templateUrl: './reference-shell.html', styleUrls: ['./reference-shell.scss', './reference-shell-legacy.scss'], host: { '(document:keydown.escape)': 'closeMobileNav()' } })
 export class NexaPlatformShell extends ReferenceShellBase {
   protected readonly drawerClose = viewChild<ElementRef<HTMLButtonElement>>('drawerClose');
   protected readonly isPortal = false;
@@ -32,7 +32,7 @@ export class NexaPlatformShell extends ReferenceShellBase {
   ];
 }
 
-@Component({ selector: 'nexa-portal-shell', imports: [RouterLink, RouterLinkActive, RouterOutlet], changeDetection: ChangeDetectionStrategy.OnPush, templateUrl: './reference-shell.html', styleUrl: './reference-shell.scss', host: { '(document:keydown.escape)': 'closeMobileNav()' } })
+@Component({ selector: 'nexa-portal-shell', imports: [RouterLink, RouterLinkActive, RouterOutlet], changeDetection: ChangeDetectionStrategy.OnPush, templateUrl: './reference-shell.html', styleUrls: ['./reference-shell.scss', './reference-shell-legacy.scss'], host: { '(document:keydown.escape)': 'closeMobileNav()' } })
 export class NexaPortalShell extends ReferenceShellBase {
   protected readonly drawerClose = viewChild<ElementRef<HTMLButtonElement>>('drawerClose');
   protected readonly isPortal = true;
@@ -44,5 +44,5 @@ export class NexaPortalShell extends ReferenceShellBase {
   ];
 }
 
-@Component({ selector: 'nexa-auth-shell', imports: [RouterOutlet, RouterLink], changeDetection: ChangeDetectionStrategy.OnPush, template: '<div class="auth-shell"><header class="auth-topbar"><a routerLink="/guidelines/overview" class="auth-brand">nexa <span>reference screen</span></a><a routerLink="/reference/auth/workspace">Workspace detection</a></header><router-outlet /></div>', styleUrl: './reference-shell.scss' })
+@Component({ selector: 'nexa-auth-shell', imports: [RouterOutlet, RouterLink], changeDetection: ChangeDetectionStrategy.OnPush, template: '<div class="auth-shell"><header class="auth-topbar"><a routerLink="/guidelines/overview" class="auth-brand">nexa <span>reference screen</span></a><a routerLink="/reference/auth/workspace">Workspace detection</a></header><router-outlet /></div>', styleUrls: ['./reference-shell.scss', './reference-shell-legacy.scss'] })
 export class NexaAuthShell {}
