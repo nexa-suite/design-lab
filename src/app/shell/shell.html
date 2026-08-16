@@ -1,165 +1,17 @@
-<div class="ops-shell">
-  <aside class="workspace-sidebar" aria-label="Workspace navigation">
-    <div class="workspace-identity">
-      <div class="workspace-brand">
-        <span class="brand-wordmark" aria-label="Nexa">nexa</span>
-        <span>WORKSPACE</span>
-      </div>
-
-      <div class="workspace-card">
-        <div class="workspace-mark" aria-hidden="true">IC</div>
-        <div class="workspace-copy">
-          <strong>ICISA Distribuciones</strong>
-          <span>icisa.nexa.com.pe</span>
-        </div>
-      </div>
-
-      <div class="workspace-role">
-        <i class="pi pi-id-card" aria-hidden="true"></i>
-        <span>Sales</span>
-      </div>
-    </div>
-
-    <nav class="workspace-nav">
-      @for (group of navGroups; track group.label) {
-        <div class="nav-group">
-          <p class="nav-section">{{ group.label }}</p>
-          @for (item of group.items; track item.label) {
-            <button
-              class="workspace-nav-item"
-              [class.active]="activeSection() === item.target"
-              [class.danger]="item.danger"
-              [attr.aria-current]="activeSection() === item.target ? 'page' : null"
-              type="button"
-              (click)="navigate(item)"
-            >
-              <i class="pi {{ item.icon }}" aria-hidden="true"></i>
-              <span>{{ item.label }}</span>
-              @if (item.badge) {
-                <span class="nav-count" aria-label="{{ item.badge }} pending">{{
-                  item.badge
-                }}</span>
-              }
-            </button>
-          }
-        </div>
-      }
+<div class="lab-shell">
+  <aside class="lab-sidebar" aria-label="Design Lab navigation">
+    <a class="lab-brand" routerLink="/guidelines/overview" (click)="navigate()"><span class="brand-wordmark">nexa</span><span>DESIGN LAB <b>v0.3</b></span></a>
+    <p class="lab-context">Normalized foundation and reference screen library</p>
+    <nav class="lab-nav">
+      @for (group of navGroups; track group.label) { <div class="lab-nav-group"><p class="nav-section">{{ group.label }}</p>
+        @for (item of group.items; track item.link) { <a class="lab-nav-item" [routerLink]="item.link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="navigate()"><i class="pi {{ item.icon }}" aria-hidden="true"></i><span>{{ item.label }}</span></a> }
+      </div> }
     </nav>
-
-    <button
-      class="workspace-user"
-      type="button"
-      (click)="action.emit({ label: 'Profile menu opened' })"
-    >
-      <span class="avatar" aria-hidden="true">DS</span>
-      <span>
-        <strong>Diego Sandoval</strong>
-        <small>System Operator</small>
-      </span>
-      <i class="pi pi-angle-right" aria-hidden="true"></i>
-    </button>
+    <div class="lab-footer"><span class="status-dot" aria-hidden="true"></span><span><strong>Experimental</strong><small>Not production or Blueprint authority</small></span></div>
   </aside>
-
-  <div class="shell-main">
-    <header class="topbar">
-      <button
-        class="mobile-menu-button"
-        type="button"
-        aria-label="Open workspace navigation"
-        [attr.aria-expanded]="mobileNavOpen()"
-        (click)="openMobileNav()"
-      >
-        <i class="pi pi-bars" aria-hidden="true"></i>
-      </button>
-      <div class="topbar-context">
-        <span class="topbar-company">ICISA Distribuciones</span>
-        <span class="topbar-separator" aria-hidden="true">/</span>
-        <span>Sales workspace</span>
-      </div>
-      <div class="topbar-actions">
-        <button
-          class="topbar-link"
-          type="button"
-          (click)="action.emit({ label: 'Language selector opened' })"
-        >
-          EN
-        </button>
-        <button
-          class="topbar-link review-link"
-          type="button"
-          (click)="sectionChange.emit('guidelines-patterns')"
-        >
-          <i class="pi pi-inbox" aria-hidden="true"></i>
-          <span>1 review pending</span>
-        </button>
-        <button
-          class="icon-button"
-          type="button"
-          aria-label="Open notifications"
-          (click)="action.emit({ label: 'Notifications opened' })"
-        >
-          <i class="pi pi-bell" aria-hidden="true"></i>
-          <span class="notification-dot" aria-hidden="true"></span>
-        </button>
-      </div>
-    </header>
-
-    <div class="shell-content">
-      <ng-content></ng-content>
-    </div>
+  <div class="lab-main">
+    <header class="lab-topbar"><button class="mobile-menu-button" type="button" aria-label="Open Design Lab navigation" [attr.aria-expanded]="mobileNavOpen()" (click)="openMobileNav()"><i class="pi pi-bars" aria-hidden="true"></i></button><span>Design documentation</span><a class="topbar-reference" routerLink="/reference/platform/dashboard">Open reference screens</a></header>
+    <div class="lab-content"><router-outlet /></div>
   </div>
 </div>
-
-@if (mobileNavOpen()) {
-  <div class="mobile-navigation-layer">
-    <button
-      class="drawer-backdrop"
-      type="button"
-      aria-label="Close workspace navigation"
-      (click)="closeMobileNav()"
-    ></button>
-    <aside
-      class="mobile-drawer"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="mobile-drawer-title"
-    >
-      <div class="mobile-drawer-heading">
-        <div>
-          <span class="brand-wordmark">nexa</span
-          ><span id="mobile-drawer-title">Workspace navigation</span>
-        </div>
-        <button
-          #drawerClose
-          class="icon-button"
-          type="button"
-          aria-label="Close workspace navigation"
-          (click)="closeMobileNav()"
-        >
-          <i class="pi pi-times" aria-hidden="true"></i>
-        </button>
-      </div>
-      <nav class="workspace-nav mobile-nav" aria-label="Mobile workspace navigation">
-        @for (group of navGroups; track group.label) {
-          <div class="nav-group">
-            <p class="nav-section">{{ group.label }}</p>
-            @for (item of group.items; track item.label) {
-              <button
-                class="workspace-nav-item"
-                [class.active]="activeSection() === item.target"
-                [class.danger]="item.danger"
-                type="button"
-                (click)="navigate(item)"
-              >
-                <i class="pi {{ item.icon }}" aria-hidden="true"></i><span>{{ item.label }}</span>
-                @if (item.badge) {
-                  <span class="nav-count">{{ item.badge }}</span>
-                }
-              </button>
-            }
-          </div>
-        }
-      </nav>
-    </aside>
-  </div>
-}
+@if (mobileNavOpen()) { <div class="mobile-navigation-layer"><button class="drawer-backdrop" type="button" aria-label="Close Design Lab navigation" (click)="closeMobileNav()"></button><aside class="mobile-drawer" role="dialog" aria-modal="true" aria-labelledby="mobile-drawer-title"><div class="mobile-drawer-heading"><span id="mobile-drawer-title" class="brand-wordmark">nexa</span><button #drawerClose class="icon-button" type="button" aria-label="Close Design Lab navigation" (click)="closeMobileNav()"><i class="pi pi-times" aria-hidden="true"></i></button></div><nav class="lab-nav mobile-nav" aria-label="Mobile Design Lab navigation">@for (group of navGroups; track group.label) { <div class="lab-nav-group"><p class="nav-section">{{ group.label }}</p>@for (item of group.items; track item.link) { <a class="lab-nav-item" [routerLink]="item.link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="navigate()"><i class="pi {{ item.icon }}" aria-hidden="true"></i><span>{{ item.label }}</span></a> }</div> }</nav></aside></div> }

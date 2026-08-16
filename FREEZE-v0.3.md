@@ -1,6 +1,6 @@
 # Nexa Design Lab — Mini Freeze v0.3
 
-Status: superseded by `STYLE-GUIDELINES-v0.4.md`; retained as the original visual freeze
+Status: historical v0.2 freeze; superseded by the routed v0.3 implementation
 Date: 2026-08-16
 Workspace: `/Users/diegosandoval284/Developer/nexa-design-lab`
 
@@ -18,6 +18,9 @@ Workspace: `/Users/diegosandoval284/Developer/nexa-design-lab`
 - Product media: white surface, contained images, no text overlap.
 - Responsive baseline: desktop sidebar; mobile sidebar hidden and dashboard stacked.
 
+The v0.3 implementation keeps this visual evidence but adds separate Design Lab, Platform,
+Buyer Portal and Authentication shells, formalized routes and a complete reference screen library.
+
 ## Source references
 
 - `src/app/presentation/layouts/ops-layout.vue`
@@ -29,8 +32,8 @@ Remote source repository: `upc-pre-202610-1asi0730-12242-king/nexa-webapp`.
 ## Local boundaries
 
 - Do not edit `/Users/diegosandoval284/Developer/nexa-suite` from this lab.
-- Do not send to the auditor yet.
-- Do not commit or push without explicit instruction.
+- Design audit remains reserved for the Principal Product Designer.
+- v0.3 implementation may be reviewed from its feature branch; no direct main push.
 - Do not replace Vue-derived values with report-derived rules.
 - Do not add new dashboard sections, metrics, navigation or product data without approval.
 

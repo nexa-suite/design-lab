@@ -9,7 +9,7 @@
       <button
         class="button button-secondary"
         type="button"
-        (click)="emitAction('Purchase Requests opened', 'guidelines-patterns')"
+        routerLink="/reference/platform/purchase-requests"
       >
         <i class="pi pi-inbox" aria-hidden="true"></i>
         Purchase Requests
@@ -17,7 +17,7 @@
       <button
         class="button button-primary"
         type="button"
-        (click)="emitAction('Manual Order Entry opened', 'guidelines-patterns')"
+        routerLink="/reference/platform/manual-order-entry"
       >
         <i class="pi pi-plus" aria-hidden="true"></i>
         Manual Order Entry
@@ -34,7 +34,7 @@
     <button
       class="button button-primary"
       type="button"
-      (click)="emitAction('Business Documents opened', 'guidelines-patterns')"
+      routerLink="/reference/platform/documents"
     >
       <i class="pi pi-file-check" aria-hidden="true"></i>
       Business Documents
@@ -66,7 +66,7 @@
         <button
           class="button button-quiet"
           type="button"
-          (click)="emitAction('All purchase requests opened', 'guidelines-patterns')"
+          routerLink="/reference/platform/purchase-requests"
         >
           View All
         </button>
@@ -137,7 +137,7 @@
             [class.button-primary]="$first"
             [class.button-secondary]="!$first"
             type="button"
-            (click)="emitAction(item.label + ' opened', item.target)"
+          [routerLink]="item.target"
           >
             <i class="pi {{ item.icon }}" aria-hidden="true"></i>
             {{ item.label }}
@@ -174,4 +174,5 @@
       </div>
     </article>
   </div>
+  @if (lastAction()) { <p class="dashboard-status" role="status">{{ lastAction() }}</p> }
 </section>

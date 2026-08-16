@@ -25,6 +25,10 @@
   --nexa-color-text-inverse: var(--nexa-primitive-white);
   --nexa-color-border-default: var(--nexa-primitive-slate-200);
   --nexa-color-border-strong: var(--nexa-primitive-slate-300);
+  --nexa-color-border-decorative: var(--nexa-primitive-slate-200);
+  --nexa-color-border-structural: var(--nexa-primitive-slate-200);
+  --nexa-color-border-interactive: var(--nexa-primitive-slate-300);
+  --nexa-color-focus-ring: var(--nexa-primitive-blue-600);
   --nexa-color-info-50: var(--nexa-primitive-blue-50);
   --nexa-color-info-700: var(--nexa-primitive-blue-700);
   --nexa-color-success-50: var(--nexa-primitive-green-50);
@@ -45,7 +49,7 @@
   --nexa-color-cold-refrigerated-soft: var(--nexa-primitive-sky-50);
   --nexa-color-cold-frozen: var(--nexa-primitive-indigo-600);
   --nexa-color-cold-frozen-soft: var(--nexa-primitive-indigo-50);
-  --nexa-surface-page: #f6faff;
+  --nexa-surface-page: var(--nexa-primitive-canvas);
   --nexa-surface-card: var(--nexa-primitive-white);
   --nexa-surface-inset: var(--nexa-primitive-slate-100);
   --nexa-surface-overlay: rgb(15 23 42 / 48%);

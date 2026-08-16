@@ -1,64 +1,48 @@
+import { provideRouter, Router } from '@angular/router';
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
+import { routes } from './app.routes';
 
-describe('App', () => {
+describe('Nexa Design Lab v0.3 routes', () => {
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [App],
-    }).compileComponents();
+    await TestBed.configureTestingModule({ imports: [App], providers: [provideRouter(routes)] }).compileComponents();
   });
 
-  it('should create the app', () => {
+  async function navigate(path: string): Promise<HTMLElement> {
     const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it('should render the normalized Sales Dashboard', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Sales Dashboard');
-    expect(compiled.querySelector('#guidelines-title')?.textContent).toContain(
-      'Normalized Nexa design foundation',
-    );
-  });
-
-  it('should expose usable dashboard actions', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const button = fixture.nativeElement.querySelector(
-      '.panel-requests .button-small',
-    ) as HTMLButtonElement;
-    button.click();
+    const router = TestBed.inject(Router);
+    await router.navigateByUrl(path);
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.action-toast')?.textContent).toContain(
-      'PR-2026-0001 review opened',
-    );
-  });
-
-  it('should render operational and compatibility review surfaces', async () => {
-    const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('#orders-table-title')?.textContent).toContain('Sales Orders');
-    expect(compiled.querySelector('#material-title')?.textContent).toContain(
-      'Material can carry Nexa rules',
-    );
-    expect(compiled.querySelectorAll('.contrast-card tbody tr')).toHaveLength(9);
-    expect(compiled.textContent).not.toContain('Purchase Orders');
-  });
-
-  it('should open mobile navigation as a dialog', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const menuButton = fixture.nativeElement.querySelector(
-      '.mobile-menu-button',
-    ) as HTMLButtonElement;
-    menuButton.click();
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.mobile-drawer')?.getAttribute('aria-modal')).toBe(
-      'true',
-    );
+    return fixture.nativeElement as HTMLElement;
+  }
+
+  it('creates the application with the documented route tree', () => {
+    expect(TestBed.createComponent(App).componentInstance).toBeTruthy();
+  });
+
+  it('separates Design Lab documentation from Platform and Portal shells', async () => {
+    const guidelines = await navigate('/guidelines/foundations');
+    expect(guidelines.querySelector('nexa-shell')).toBeTruthy();
+    expect(guidelines.querySelector('h1')?.textContent).toContain('The rules underneath every screen');
+
+    const platform = await navigate('/reference/platform/inventory');
+    expect(platform.querySelector('nexa-platform-shell')).toBeTruthy();
+    expect(platform.querySelector('h1')?.textContent).toContain('Inventory Control');
+
+    const portal = await navigate('/reference/portal/request-builder');
+    expect(portal.querySelector('nexa-portal-shell')).toBeTruthy();
+    expect(portal.querySelector('h1')?.textContent).toContain('Build a purchase request');
+  });
+
+  it('renders real Material and authentication reference routes', async () => {
+    const material = await navigate('/guidelines/material');
+    expect(material.querySelector('h1')?.textContent).toContain('Material compatibility');
+    expect(material.querySelectorAll('mat-form-field').length).toBe(2);
+
+    const auth = await navigate('/reference/auth/login');
+    expect(auth.querySelector('h1')?.textContent).toContain('Sign in to Nexa');
+    expect(auth.querySelector('form')).toBeTruthy();
   });
 });

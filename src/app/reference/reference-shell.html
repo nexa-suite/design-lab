@@ -1,0 +1,16 @@
+<div class="reference-shell {{ isPortal ? 'portal-shell' : 'platform-shell' }}">
+  <aside class="reference-sidebar" aria-label="{{ shellTitle }} navigation">
+    <a class="reference-brand" routerLink="/guidelines/overview"><span class="brand-wordmark">nexa</span><span>{{ shellTitle }}</span></a>
+    <div class="reference-identity"><span class="identity-mark">IC</span><span><strong>ICISA Distribuciones</strong><small>icisa.nexa.com.pe</small></span></div>
+    <p class="reference-context">{{ shellContext }}</p>
+    <nav class="reference-nav">
+      @for (group of navigation; track group.label) { <div class="reference-nav-group"><p class="nav-section">{{ group.label }}</p>@for (item of group.items; track item.link) { <a class="reference-nav-item" [routerLink]="item.link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="navigate()"><i class="pi {{ item.icon }}" aria-hidden="true"></i><span>{{ item.label }}</span>@if (item.badge) { <span class="nav-badge">{{ item.badge }}</span> }</a> }</div> }
+    </nav>
+    <div class="reference-user"><span class="avatar">{{ isPortal ? 'CM' : 'DS' }}</span><span><strong>{{ isPortal ? 'Carlos Mendoza' : 'Diego Sandoval' }}</strong><small>{{ isPortal ? 'Buyer' : 'System Operator' }}</small></span></div>
+  </aside>
+  <div class="reference-main">
+    <header class="reference-topbar"><button class="mobile-menu-button" type="button" aria-label="Open product navigation" [attr.aria-expanded]="mobileNavOpen()" (click)="openMobileNav()"><i class="pi pi-bars" aria-hidden="true"></i></button><span class="topbar-context">{{ shellTitle }} <small>/ {{ shellContext }}</small></span><a class="back-to-lab" routerLink="/guidelines/overview">Design Lab</a></header>
+    <div class="reference-content"><router-outlet /></div>
+  </div>
+</div>
+@if (mobileNavOpen()) { <div class="mobile-navigation-layer"><button class="drawer-backdrop" type="button" aria-label="Close product navigation" (click)="closeMobileNav()"></button><aside class="mobile-drawer" role="dialog" aria-modal="true" aria-label="Product navigation"><div class="mobile-drawer-heading"><span class="brand-wordmark">nexa</span><button #drawerClose class="icon-button" type="button" aria-label="Close product navigation" (click)="closeMobileNav()"><i class="pi pi-times" aria-hidden="true"></i></button></div><nav class="reference-nav mobile-nav">@for (group of navigation; track group.label) { <div class="reference-nav-group"><p class="nav-section">{{ group.label }}</p>@for (item of group.items; track item.link) { <a class="reference-nav-item" [routerLink]="item.link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="navigate()"><i class="pi {{ item.icon }}" aria-hidden="true"></i><span>{{ item.label }}</span></a> }</div> }</nav></aside></div> }

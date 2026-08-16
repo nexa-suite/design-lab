@@ -1,100 +1,34 @@
-import {
-  afterNextRender,
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  EnvironmentInjector,
-  inject,
-  input,
-  output,
-  runInInjectionContext,
-  signal,
-  viewChild,
-} from '@angular/core';
-import { UiAction } from '../shared/ui-action';
+import { afterNextRender, ChangeDetectionStrategy, Component, ElementRef, EnvironmentInjector, inject, signal, viewChild } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
-interface ShellNavItem {
-  readonly label: string;
-  readonly icon: string;
-  readonly target?: string;
-  readonly badge?: number;
-  readonly danger?: boolean;
-}
-
-interface ShellNavGroup {
-  readonly label: string;
-  readonly items: readonly ShellNavItem[];
-}
+interface LabNavGroup { readonly label: string; readonly items: readonly { label: string; icon: string; link: string }[]; }
 
 @Component({
-  selector: 'nexa-shell',
-  host: { '(document:keydown.escape)': 'closeMobileNav()' },
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './shell.html',
-  styleUrl: './shell.scss',
+  selector: 'nexa-shell', imports: [RouterLink, RouterLinkActive, RouterOutlet], changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './shell.html', styleUrl: './shell.scss', host: { '(document:keydown.escape)': 'closeMobileNav()' },
 })
-export class NexaShell {
-  readonly activeSection = input('dashboard');
-  readonly sectionChange = output<string>();
-  readonly action = output<UiAction>();
+export class NexaDesignLabShell {
   protected readonly mobileNavOpen = signal(false);
   protected readonly drawerClose = viewChild<ElementRef<HTMLButtonElement>>('drawerClose');
   private readonly environmentInjector = inject(EnvironmentInjector);
   private previousFocus: HTMLElement | null = null;
-
-  protected readonly navGroups: readonly ShellNavGroup[] = [
-    {
-      label: 'WORKSPACE',
-      items: [
-        { label: 'Sales Dashboard', icon: 'pi-th-large', target: 'dashboard' },
-        { label: 'Product Catalog', icon: 'pi-box', target: 'guidelines-catalog' },
-      ],
-    },
-    {
-      label: 'SALES',
-      items: [
-        { label: 'Purchase Requests', icon: 'pi-inbox', target: 'guidelines-patterns', badge: 1 },
-        { label: 'Sales Orders', icon: 'pi-file-edit', target: 'guidelines-table', badge: 1 },
-        { label: 'Manual Order Entry', icon: 'pi-plus-circle', target: 'guidelines-patterns' },
-        { label: 'B2B Clients', icon: 'pi-users', target: 'guidelines-patterns' },
-        { label: 'Business Documents', icon: 'pi-file-check', target: 'guidelines-patterns' },
-      ],
-    },
-    {
-      label: 'ACCOUNT',
-      items: [
-        { label: 'My Profile', icon: 'pi-user-edit', target: 'guidelines-accessibility' },
-        { label: 'Sign out', icon: 'pi-sign-out', danger: true },
-      ],
-    },
+  protected readonly navGroups: readonly LabNavGroup[] = [
+    { label: 'GUIDELINES', items: [
+      { label: 'Overview', icon: 'pi-th-large', link: '/guidelines/overview' },
+      { label: 'Foundations', icon: 'pi-palette', link: '/guidelines/foundations' },
+      { label: 'Components', icon: 'pi-sliders-h', link: '/guidelines/components' },
+      { label: 'Patterns', icon: 'pi-sitemap', link: '/guidelines/patterns' },
+      { label: 'Accessibility', icon: 'pi-universal-access', link: '/guidelines/accessibility' },
+      { label: 'Material compatibility', icon: 'pi-box', link: '/guidelines/material' },
+    ]},
+    { label: 'REFERENCE SCREENS', items: [
+      { label: 'Nexa Platform', icon: 'pi-building', link: '/reference/platform/dashboard' },
+      { label: 'Buyer Portal', icon: 'pi-shopping-bag', link: '/reference/portal/home' },
+      { label: 'Authentication', icon: 'pi-lock', link: '/reference/auth/login' },
+    ]},
   ];
-
-  protected navigate(item: ShellNavItem): void {
-    this.closeMobileNav();
-    if (item.target) {
-      this.sectionChange.emit(item.target);
-      return;
-    }
-
-    this.action.emit({ label: `${item.label} is a preview action` });
-  }
-
-  protected openMobileNav(): void {
-    this.previousFocus =
-      document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    this.mobileNavOpen.set(true);
-    this.afterRender(() => this.drawerClose()?.nativeElement.focus());
-  }
-
-  protected closeMobileNav(): void {
-    if (!this.mobileNavOpen()) {
-      return;
-    }
-    this.mobileNavOpen.set(false);
-    this.afterRender(() => this.previousFocus?.focus());
-  }
-
-  private afterRender(callback: () => void): void {
-    runInInjectionContext(this.environmentInjector, () => afterNextRender(callback));
-  }
+  protected openMobileNav(): void { this.previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null; this.mobileNavOpen.set(true); this.afterRender(() => this.drawerClose()?.nativeElement.focus()); }
+  protected closeMobileNav(): void { if (!this.mobileNavOpen()) return; this.mobileNavOpen.set(false); this.afterRender(() => this.previousFocus?.focus()); }
+  protected navigate(): void { this.closeMobileNav(); }
+  private afterRender(callback: () => void): void { afterNextRender(callback, { injector: this.environmentInjector }); }
 }

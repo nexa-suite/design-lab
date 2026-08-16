@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.3 — Routed Reference Screen Library
+
+- Replaced the continuous v0.2 scroll with Angular Router feature routes.
+- Separated Design Lab documentation, Platform, Buyer Portal and Authentication shells.
+- Added substantive Foundations, Components, Patterns and Accessibility pages.
+- Reworked Material compatibility into compact Actions, Forms, Selection, Feedback and Menu specimens.
+- Added Sales, Logistics, Buyer Portal and Auth reference routes with safe synthetic data.
+- Added semantic border intent tokens and removed mandatory JetBrains Mono loading.
+
 ## v0.2 — Normalized Design Foundation
 
 - Preserved v0.1 Nexa shell and Sales Dashboard character.

@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, output, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { UiAction } from '../shared/ui-action';
 
 interface DashboardKpi {
@@ -17,12 +18,14 @@ interface DashboardAction {
 
 @Component({
   selector: 'nexa-dashboard',
+  imports: [RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
 export class NexaDashboard {
   readonly action = output<UiAction>();
+  protected readonly lastAction = signal('');
 
   protected readonly kpis: readonly DashboardKpi[] = [
     {
@@ -56,9 +59,9 @@ export class NexaDashboard {
   ];
 
   protected readonly quickActions: readonly DashboardAction[] = [
-    { label: 'Manual Order Entry', icon: 'pi-plus', target: 'guidelines-patterns' },
-    { label: 'Purchase Requests', icon: 'pi-inbox', target: 'guidelines-patterns' },
-    { label: 'Sales Orders', icon: 'pi-file-edit', target: 'guidelines-table' },
+    { label: 'Manual Order Entry', icon: 'pi-plus', target: '/reference/platform/manual-order-entry' },
+    { label: 'Purchase Requests', icon: 'pi-inbox', target: '/reference/platform/purchase-requests' },
+    { label: 'Sales Orders', icon: 'pi-file-edit', target: '/reference/platform/sales-orders' },
   ];
 
   protected readonly recentActivity = [
@@ -83,6 +86,7 @@ export class NexaDashboard {
   ] as const;
 
   protected emitAction(label: string, target?: string): void {
+    this.lastAction.set(label);
     this.action.emit({ label, target });
   }
 }
