@@ -5,7 +5,8 @@
 - Branch: `design/v0.4-legacy-visual-parity`
 - Starting SHA: `c388769f01a176684456cda4827244b06af9ec32`
 - Implementation SHA: `36ffc1d8a5cfe356b1854361382593c5ef7430a6`
-- Pushed branch SHA: `36ffc1d8a5cfe356b1854361382593c5ef7430a6`
+- Pushed implementation SHA: `36ffc1d8a5cfe356b1854361382593c5ef7430a6`
+- Report commit SHA: `60ed3ae4fed669b385fe477e4093dd024e71bf5e`
 - Package version: `0.4.0-rc.1`
 - Candidate release: `v0.4.0-rc.1`
 - Historical releases restored: `v0.1.0`, `v0.2.0`, `v0.3.0`
