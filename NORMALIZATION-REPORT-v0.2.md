@@ -9,7 +9,9 @@ PASS for experimental Design Lab normalization. Human design approval remains re
 - Repository: `nexa-suite/design-lab`
 - Local checkout: `/Users/diegosandoval284/Developer/nexa-design-lab`
 - Starting state: local source had no Git metadata; remote repository was verified empty with `git ls-remote` before initialization.
-- Branch, commit SHA and push result: recorded after final SCM validation.
+- Branch: `main`.
+- Implementation commit: `a442f8d96775b1bd83417626bbe05facb9424ab3`.
+- Remote push: `origin/main` created and tracking successfully.
 - No force-push, tag, release, branch-protection or organization change.
 
 ## 3. RESEARCH REVIEWED
@@ -136,11 +138,66 @@ npm run build
 npm audit --omit=dev --audit-level=high
 ```
 
-Results recorded after final run. Browser checkpoints: wide desktop, standard desktop, tablet and phone; console errors checked.
+Results: 5/5 tests PASS; production build PASS; audit PASS with 0 vulnerabilities. Browser checkpoints: 1440, 1024, 768 and 390px; page-level horizontal overflow 0; mobile drawer open/close/focus restoration PASS; console errors 0.
 
 ## 19. FILES CHANGED
 
-See final `git show --stat` and `git status --short`. Main areas: `src/app/shell`, `src/app/dashboard`, `src/app/style-guidelines`, `src/app/operational-table`, `src/app/material-bench`, `src/styles/_tokens-*`, `README.md`, `CHANGELOG.md` and this report.
+Full tracked source list:
+
+```text
+.editorconfig
+.gitignore
+.prettierrc
+.vscode/extensions.json
+.vscode/launch.json
+.vscode/tasks.json
+CHANGELOG.md
+FREEZE-v0.3.md
+NORMALIZATION-REPORT-v0.2.md
+README.md
+STYLE-GUIDELINES-v0.2.md
+angular.json
+package-lock.json
+package.json
+public/catalog-items/*.png
+public/favicon.ico
+src/app/app.config.ts
+src/app/app.html
+src/app/app.scss
+src/app/app.spec.ts
+src/app/app.ts
+src/app/dashboard/dashboard.html
+src/app/dashboard/dashboard.scss
+src/app/dashboard/dashboard.ts
+src/app/demo-data.ts
+src/app/material-bench/material-bench.html
+src/app/material-bench/material-bench.scss
+src/app/material-bench/material-bench.ts
+src/app/operational-table/operational-table.html
+src/app/operational-table/operational-table.scss
+src/app/operational-table/operational-table.ts
+src/app/shared/ui-action.ts
+src/app/shell/shell.html
+src/app/shell/shell.scss
+src/app/shell/shell.ts
+src/app/style-guidelines/style-guidelines.html
+src/app/style-guidelines/style-guidelines.scss
+src/app/style-guidelines/style-guidelines.ts
+src/index.html
+src/main.ts
+src/styles.scss
+src/styles/_accessibility.scss
+src/styles/_material-theme.scss
+src/styles/_motion.scss
+src/styles/_tokens-components.scss
+src/styles/_tokens-primitives.scss
+src/styles/_tokens-semantic.scss
+src/styles/_tokens.scss
+src/styles/_typography.scss
+tsconfig.app.json
+tsconfig.json
+tsconfig.spec.json
+```
 
 ## 20. OPEN DESIGN DECISIONS
 
