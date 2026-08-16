@@ -1,0 +1,433 @@
+<section id="guidelines" class="guidelines-page" aria-labelledby="guidelines-title">
+  <div class="guidelines-hero">
+    <div>
+      <p class="eyebrow">NEXA / ANGULAR DESIGN LAB</p>
+      <h2 id="guidelines-title">Normalized Nexa design foundation</h2>
+      <p>
+        Historical visual DNA preserved where valuable, normalized into reusable Angular rules for
+        human review.
+      </p>
+    </div>
+    <div class="source-note">
+      <span class="source-note-label">Target candidate</span>
+      <strong>NEXA DESIGN LAB / v0.2</strong>
+      <span>Experimental foundation. Not production. Not canonical Blueprint.</span>
+    </div>
+  </div>
+
+  <nav class="guideline-index" aria-label="Style guideline sections">
+    @for (section of sections; track section.id) {
+      <a [href]="'#' + section.id">
+        <strong>{{ section.label }}</strong>
+        <span>{{ section.description }}</span>
+      </a>
+    }
+  </nav>
+
+  <section id="guidelines-foundations" class="guide-section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">01 / FOUNDATION</p>
+        <h3>Color, type, spacing and shape</h3>
+      </div>
+      <p>Operational clarity first. Color carries context, not decoration.</p>
+    </div>
+
+    <div class="guide-grid foundations-grid">
+      <article class="guide-card color-card">
+        <div class="card-heading">
+          <h4>Semantic color</h4>
+          <span>token layer</span>
+        </div>
+        <div class="color-list">
+          @for (color of colors; track color.name) {
+            <div class="color-row">
+              <span class="color-swatch {{ color.className }}" aria-hidden="true"></span>
+              <span
+                ><strong>{{ color.name }}</strong
+                ><small>{{ color.use }}</small></span
+              >
+              <code>{{ color.value }}</code>
+            </div>
+          }
+        </div>
+      </article>
+
+      <article class="guide-card type-card">
+        <div class="card-heading">
+          <h4>Typography</h4>
+          <span>no display tricks</span>
+        </div>
+        <div class="type-specimen">
+          <p class="type-display">Plus Jakarta Sans</p>
+          <p class="type-body">
+            Inter for UI copy, labels and descriptions. Comfortable line-height keeps dense
+            operations readable.
+          </p>
+          <p class="type-mono">PR-2026-0001 · CAT-0001 · LOT-26-0812-A</p>
+        </div>
+        <dl class="spec-list">
+          <div>
+            <dt>Display</dt>
+            <dd>Plus Jakarta Sans / 800</dd>
+          </div>
+          <div>
+            <dt>Body</dt>
+            <dd>Inter / 400–600</dd>
+          </div>
+          <div>
+            <dt>Data</dt>
+            <dd>JetBrains Mono / 500</dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="guide-card spacing-card">
+        <div class="card-heading">
+          <h4>Spacing rhythm</h4>
+          <span>4px base</span>
+        </div>
+        <div class="spacing-list">
+          @for (space of spacingScale; track space.token) {
+            <div class="spacing-row">
+              <code>{{ space.token }}</code
+              ><span class="spacing-bar" [style.width]="space.width"></span
+              ><span>{{ space.value }}</span>
+            </div>
+          }
+        </div>
+        <p class="rule-note">
+          Page gutter: 18–34px responsive. Cards: 20–24px. Sections: 48px. Keep related controls
+          inside one spacing context.
+        </p>
+      </article>
+
+      <article class="guide-card shape-card">
+        <div class="card-heading">
+          <h4>Shape and elevation</h4>
+          <span>quiet hierarchy</span>
+        </div>
+        <div class="shape-samples">
+          <span class="shape-sample shape-sm">6px</span>
+          <span class="shape-sample shape-md">8px</span>
+          <span class="shape-sample shape-lg">12px</span>
+          <span class="shape-sample shape-xl">16px</span>
+          <span class="shape-sample shape-pill">pill</span>
+        </div>
+        <p class="rule-note">
+          Use borders to structure the page. Shadows are reserved for overlays and elevated
+          interaction, never every card.
+        </p>
+      </article>
+    </div>
+
+    <article class="guide-card scale-card">
+      <div class="card-heading">
+        <h4>Brand blue candidate scale</h4>
+        <span>OKLCH model / #2563EB anchor</span>
+      </div>
+      <p class="scale-intro">
+        Candidate primitives retain Nexa blue while keeping perceptual lightness progression
+        visible. White and dark columns show calculated contrast ratios; human visual review remains
+        required.
+      </p>
+      <div class="blue-scale">
+        @for (color of blueScale; track color.token) {
+          <div class="blue-scale-row">
+            <span class="scale-swatch" [style.background]="color.hex"></span>
+            <code>{{ color.token }}</code>
+            <code>{{ color.hex }}</code>
+            <code>oklch({{ color.oklch }})</code>
+            <span>{{ color.white }} white / {{ color.dark }} dark</span>
+            <small>{{ color.safe }}</small>
+          </div>
+        }
+      </div>
+    </article>
+
+    <div class="guide-grid foundations-grid foundation-detail-grid">
+      <article class="guide-card iconography-card">
+        <div class="card-heading">
+          <h4>Iconography</h4>
+          <span>review candidate</span>
+        </div>
+        <div class="icon-comparison">
+          <div>
+            <i class="pi pi-inbox" aria-hidden="true"></i><strong>PrimeIcons</strong
+            ><span>Current visual fit, lightweight line weight, CDN dependency in lab.</span>
+          </div>
+          <div>
+            <i class="material-icons-outlined" aria-hidden="true">inbox</i
+            ><strong>Material Icons</strong
+            ><span>Angular-native option, wider ecosystem, different optical character.</span>
+          </div>
+        </div>
+        <p class="rule-note">
+          Recommendation: keep PrimeIcons for v0.2 parity candidate; remove duplicate font loading
+          after human review.
+        </p>
+      </article>
+      <article class="guide-card motion-card">
+        <div class="card-heading">
+          <h4>Motion</h4>
+          <span>state, feedback, continuity</span>
+        </div>
+        <div class="motion-demo"><span></span><span></span><span></span></div>
+        <p class="rule-note">
+          Short interaction transitions only. Reduced motion disables smooth programmatic scroll and
+          decorative movement.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section id="guidelines-components" class="guide-section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">02 / COMPONENTS</p>
+        <h3>Usable controls, not screenshots</h3>
+      </div>
+      <p>Every demo below has a real interaction and an accessible name.</p>
+    </div>
+
+    <div class="guide-grid components-grid">
+      <article class="guide-card button-card">
+        <div class="card-heading">
+          <h4>Buttons</h4>
+          <span>stateful demo</span>
+        </div>
+        <div class="button-demo">
+          <button class="demo-button demo-primary" type="button" (click)="setButton('Primary')">
+            Create Sales Order
+          </button>
+          <button class="demo-button demo-secondary" type="button" (click)="setButton('Secondary')">
+            Save as draft
+          </button>
+          <button class="demo-button demo-quiet" type="button" (click)="setButton('Quiet')">
+            View details
+          </button>
+        </div>
+        <p class="selected-state" role="status">
+          Selected: <strong>{{ selectedButton() }}</strong>
+        </p>
+      </article>
+
+      <article class="guide-card field-card">
+        <div class="card-heading">
+          <h4>Search field</h4>
+          <span>catalog example</span>
+        </div>
+        <label for="catalog-search">Search reference products</label>
+        <div class="search-field">
+          <i class="pi pi-search" aria-hidden="true"></i>
+          <input
+            id="catalog-search"
+            type="search"
+            placeholder="Search by product or SKU"
+            [value]="searchTerm()"
+            (input)="updateSearch($event)"
+          />
+        </div>
+        <p class="field-result" role="status">
+          {{ filteredProducts().length }} matching reference products
+        </p>
+      </article>
+
+      <article class="guide-card component-rules-card">
+        <div class="card-heading">
+          <h4>Component rules</h4>
+          <span>review checklist</span>
+        </div>
+        <div class="rule-list">
+          @for (rule of componentRules; track rule.name) {
+            <div>
+              <strong>{{ rule.name }}</strong
+              ><span>{{ rule.rule }}</span>
+            </div>
+          }
+        </div>
+      </article>
+
+      <article class="guide-card catalog-card" id="guidelines-catalog">
+        <div class="card-heading">
+          <h4>Catalog card anatomy</h4>
+          <button
+            class="text-button"
+            type="button"
+            (click)="emitAction('Catalog reference opened')"
+          >
+            Open catalog
+          </button>
+        </div>
+        <div class="catalog-preview">
+          @for (product of filteredProducts().slice(0, 3); track product.id) {
+            <div class="catalog-item">
+              <div class="product-image"><img [src]="product.image" [alt]="product.name" /></div>
+              <div class="product-meta">
+                <span>{{ product.brand }} · {{ product.category }}</span
+                ><strong>{{ product.name }}</strong
+                ><small>{{ product.presentation }} · {{ product.sku }}</small
+                ><b>{{ product.price }}</b>
+              </div>
+            </div>
+          }
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="guidelines-patterns" class="guide-section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">03 / PATTERNS</p>
+        <h3>Workflow composition</h3>
+      </div>
+      <p>Patterns are taken from the real Sales workspace, not generic landing-page conventions.</p>
+    </div>
+    <div class="pattern-grid">
+      <article class="pattern-card">
+        <span class="pattern-number">01</span>
+        <div>
+          <h4>Workspace shell</h4>
+          <p>
+            284px navigation, identity card, grouped operations and a slim context toolbar. On
+            mobile the sidebar collapses; the content remains the priority.
+          </p>
+        </div>
+      </article>
+      <article class="pattern-card">
+        <span class="pattern-number">02</span>
+        <div>
+          <h4>Action-led dashboard</h4>
+          <p>
+            Page heading, workflow banner, KPI summary, request/document split, credit queue, quick
+            actions and traceable activity.
+          </p>
+        </div>
+      </article>
+      <article class="pattern-card">
+        <span class="pattern-number">03</span>
+        <div>
+          <h4>Catalog surface</h4>
+          <p>
+            Product images stay on white surfaces. Show brand, category, name, presentation, SKU,
+            price and availability in a predictable scan path.
+          </p>
+        </div>
+      </article>
+      <article class="pattern-card">
+        <span class="pattern-number">04</span>
+        <div>
+          <h4>Cold-chain context</h4>
+          <p>
+            Refrigerated, frozen and ambient are domain states. Use a small semantic marker and keep
+            the operational label visible.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="guidelines-contrast" class="guide-section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">03 / CONTRAST LAB</p>
+        <h3>Actual semantic combinations</h3>
+      </div>
+      <p>
+        Known failures remain visible. Softness comes from role selection, not inaccessible
+        foregrounds.
+      </p>
+    </div>
+    <article class="contrast-card">
+      <div class="contrast-table-scroll">
+        <table>
+          <caption class="sr-only">
+            Nexa active color contrast audit
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Usage</th>
+              <th scope="col">Foreground</th>
+              <th scope="col">Background</th>
+              <th scope="col">Ratio</th>
+              <th scope="col">AA normal</th>
+              <th scope="col">Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of contrastRows; track row.usage) {
+              <tr>
+                <th scope="row">{{ row.usage }}</th>
+                <td>
+                  <code>{{ row.foreground }}</code>
+                </td>
+                <td>
+                  <code>{{ row.background }}</code>
+                </td>
+                <td>{{ row.ratio }}</td>
+                <td>
+                  <span class="audit-result audit-{{ row.result.toLowerCase() }}">{{
+                    row.result
+                  }}</span>
+                </td>
+                <td>{{ row.note }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </article>
+  </section>
+
+  <section id="guidelines-accessibility" class="guide-section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">04 / STATES & ACCESSIBILITY</p>
+        <h3>Predictable under pressure</h3>
+      </div>
+      <p>
+        Controls must remain understandable when the workflow is dense or the viewport is small.
+      </p>
+    </div>
+    <div class="accessibility-grid">
+      <article class="guide-card">
+        <h4>Interaction states</h4>
+        <ul>
+          <li>Rest, hover, focus-visible, pressed, disabled and error are explicit.</li>
+          <li>Focus uses a blue ring with enough contrast against white surfaces.</li>
+          <li>Loading labels preserve the action name; no ambiguous spinner-only control.</li>
+        </ul>
+      </article>
+      <article class="guide-card">
+        <h4>Responsive contract</h4>
+        <ul>
+          <li>320px: one column and full-width actions.</li>
+          <li>700px: mobile menu opens an accessible drawer.</li>
+          <li>980px: two-column KPI and panel layout.</li>
+          <li>1440px: 284px shell with 12-column flow grid.</li>
+        </ul>
+      </article>
+      <article class="guide-card">
+        <h4>Angular implementation</h4>
+        <ul>
+          <li>Standalone components with OnPush change detection.</li>
+          <li>Signals for local interactive state and outputs for user actions.</li>
+          <li>Built-in control flow with stable tracking; no duplicated click logic.</li>
+          <li>Tokens are global; component styles consume semantic variables.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <footer class="guidelines-footer">
+    <span>Source: Nexa historical visual evidence, normalized TARGET candidate</span>
+    <button
+      class="button button-primary"
+      type="button"
+      (click)="emitAction('Style guideline review marked ready')"
+    >
+      Mark review ready
+    </button>
+  </footer>
+</section>

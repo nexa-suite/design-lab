@@ -1,0 +1,57 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.content-wrap {
+  min-width: 0;
+}
+
+.action-toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 10;
+  display: flex;
+  max-width: min(380px, calc(100vw - 32px));
+  align-items: center;
+  gap: 10px;
+  padding: 12px 12px 12px 14px;
+  border: 1px solid var(--nexa-color-primary-200);
+  border-radius: var(--nexa-radius-lg);
+  background: var(--nexa-surface-card);
+  box-shadow: var(--nexa-shadow-toast);
+  color: var(--nexa-color-text-primary);
+  font-size: 12px;
+}
+
+.action-toast > i {
+  color: var(--nexa-color-success-700);
+  font-size: 16px;
+}
+
+.action-toast span {
+  flex: 1;
+}
+
+.action-toast button {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--nexa-color-neutral-500);
+  cursor: pointer;
+}
+
+.action-toast button:hover {
+  background: var(--nexa-color-neutral-100);
+  color: var(--nexa-color-text-primary);
+}
+
+.action-toast button:focus-visible {
+  outline: 0;
+  box-shadow: var(--nexa-focus-ring);
+}

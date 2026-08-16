@@ -1,0 +1,177 @@
+<section id="dashboard" class="dashboard-page" aria-labelledby="dashboard-title">
+  <div class="page-heading">
+    <div>
+      <p class="eyebrow">SALES / WORKSPACE</p>
+      <h1 id="dashboard-title">Sales Dashboard</h1>
+      <p class="page-subtitle">Review buyer requests, validation tasks and document workload.</p>
+    </div>
+    <div class="heading-actions" aria-label="Dashboard actions">
+      <button
+        class="button button-secondary"
+        type="button"
+        (click)="emitAction('Purchase Requests opened', 'guidelines-patterns')"
+      >
+        <i class="pi pi-inbox" aria-hidden="true"></i>
+        Purchase Requests
+      </button>
+      <button
+        class="button button-primary"
+        type="button"
+        (click)="emitAction('Manual Order Entry opened', 'guidelines-patterns')"
+      >
+        <i class="pi pi-plus" aria-hidden="true"></i>
+        Manual Order Entry
+      </button>
+    </div>
+  </div>
+
+  <div class="flow-action-banner">
+    <div>
+      <p class="banner-eyebrow">SALES WORK QUEUE / REVIEW AND DOCUMENTS</p>
+      <h2>There is 1 regular request, 1 credit case and 0 documents requiring Sales action.</h2>
+      <p>Prioritize credit, availability and each order's document profile.</p>
+    </div>
+    <button
+      class="button button-primary"
+      type="button"
+      (click)="emitAction('Business Documents opened', 'guidelines-patterns')"
+    >
+      <i class="pi pi-file-check" aria-hidden="true"></i>
+      Business Documents
+    </button>
+  </div>
+
+  <div class="kpi-grid" aria-label="Sales workload summary">
+    @for (kpi of kpis; track kpi.label) {
+      <article class="kpi-card">
+        <div class="kpi-card-heading">
+          <span><i class="pi {{ kpi.icon }}" aria-hidden="true"></i>{{ kpi.label }}</span>
+          <span class="kpi-icon kpi-icon-{{ kpi.tone }}"
+            ><i class="pi {{ kpi.icon }}" aria-hidden="true"></i
+          ></span>
+        </div>
+        <strong class="kpi-value">{{ kpi.value }}</strong>
+        <p>{{ kpi.note }}</p>
+      </article>
+    }
+  </div>
+
+  <div class="dashboard-grid">
+    <article class="panel panel-requests">
+      <div class="panel-heading">
+        <div>
+          <h2>Purchase Requests</h2>
+          <p>Buyer purchase requests connected to Sales review.</p>
+        </div>
+        <button
+          class="button button-quiet"
+          type="button"
+          (click)="emitAction('All purchase requests opened', 'guidelines-patterns')"
+        >
+          View All
+        </button>
+      </div>
+      <div class="panel-body request-row">
+        <div>
+          <div class="request-meta">
+            <span>PR-2026-0001</span><span class="status-chip status-chip-blue">Submitted</span
+            ><span class="priority-chip">HIGH</span>
+          </div>
+          <strong>La Cava Fría</strong>
+          <p>Buyer request for Sales review and cold-chain dispatch coordination.</p>
+        </div>
+        <button
+          class="button button-primary button-small"
+          type="button"
+          (click)="emitAction('PR-2026-0001 review opened')"
+        >
+          Review
+        </button>
+      </div>
+    </article>
+
+    <article class="panel panel-documents">
+      <div class="panel-heading">
+        <div>
+          <h2>Pending Business Documents</h2>
+          <p>Operational checklist by Sales Order.</p>
+        </div>
+      </div>
+      <div class="panel-body empty-state">
+        <i class="pi pi-file-check" aria-hidden="true"></i>
+        <span>No business documents require Sales action.</span>
+      </div>
+    </article>
+
+    <article class="panel panel-credit">
+      <div class="panel-heading">
+        <div>
+          <h2>Credit Increase Requests</h2>
+          <p>Buyer credit messages assigned to Sales.</p>
+        </div>
+      </div>
+      <div class="panel-body credit-row">
+        <div class="credit-index">1</div>
+        <div>
+          <span class="status-chip status-chip-amber">submitted</span>
+          <strong>La Cava Fría</strong>
+          <p>
+            Requested S/ 15,000 · Temporary credit extension for recurring cold-chain purchase
+            cycle.
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <article class="panel panel-actions">
+      <div class="panel-heading">
+        <div>
+          <h2>Quick Actions</h2>
+          <p>Shortcuts for the Sales workspace.</p>
+        </div>
+      </div>
+      <div class="quick-actions">
+        @for (item of quickActions; track item.label) {
+          <button
+            class="button"
+            [class.button-primary]="$first"
+            [class.button-secondary]="!$first"
+            type="button"
+            (click)="emitAction(item.label + ' opened', item.target)"
+          >
+            <i class="pi {{ item.icon }}" aria-hidden="true"></i>
+            {{ item.label }}
+          </button>
+        }
+      </div>
+    </article>
+
+    <article class="panel panel-activity">
+      <div class="panel-heading">
+        <div>
+          <h2>Recent Activity</h2>
+          <p>Traceable events across the commercial workflow.</p>
+        </div>
+        <button
+          class="button button-quiet"
+          type="button"
+          (click)="emitAction('Activity history opened')"
+        >
+          History
+        </button>
+      </div>
+      <div class="activity-list">
+        @for (item of recentActivity; track item.title) {
+          <div class="activity-row">
+            <span class="activity-icon"><i class="pi {{ item.icon }}" aria-hidden="true"></i></span>
+            <div>
+              <strong>{{ item.title }}</strong>
+              <p>{{ item.detail }}</p>
+            </div>
+            <time>{{ item.time }}</time>
+          </div>
+        }
+      </div>
+    </article>
+  </div>
+</section>

@@ -1,0 +1,24 @@
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<nexa-shell
+  [activeSection]="activeSection()"
+  (sectionChange)="handleSectionChange($event)"
+  (action)="handleAction($event)"
+>
+  <main id="main-content" class="content-wrap">
+    <nexa-dashboard (action)="handleAction($event)"></nexa-dashboard>
+    <nexa-style-guidelines (action)="handleAction($event)"></nexa-style-guidelines>
+    <nexa-operational-table (action)="handleAction($event)"></nexa-operational-table>
+    <nexa-material-bench></nexa-material-bench>
+  </main>
+</nexa-shell>
+
+@if (actionNotice(); as notice) {
+  <div class="action-toast" role="status" aria-live="polite">
+    <i class="pi pi-check-circle" aria-hidden="true"></i>
+    <span>{{ notice }}</span>
+    <button type="button" aria-label="Dismiss notification" (click)="dismissNotice()">
+      <i class="pi pi-times" aria-hidden="true"></i>
+    </button>
+  </div>
+}
