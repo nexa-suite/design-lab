@@ -18,7 +18,7 @@
 
 Design Lab is Nexa's executable visual laboratory. It holds design evidence, component behavior and representative B2B workflow experiments for human review.
 
-Current state: v0.3 normalized foundation plus routed reference screen library. Experimental, not production, not canonical Blueprint.
+Current state: v0.4 Legacy visual parity candidate plus routed reference screen library. Experimental, not production, not canonical Blueprint.
 
 ## What belongs here
 
@@ -79,7 +79,8 @@ Browser review checkpoints: 320px, 768px, 1024px and 1440px.
 
     src/                 Angular application
     public/              Static assets
-    IMPLEMENTATION-REPORT-v0.3.md
+    IMPLEMENTATION-REPORT-v0.4.md
+    TRACEABILITY-v0.4.md
     NORMALIZATION-REPORT-v0.2.md
     package.json
     angular.json

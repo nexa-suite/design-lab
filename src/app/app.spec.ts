@@ -3,9 +3,12 @@ import { TestBed } from '@angular/core/testing';
 import { App } from './app';
 import { routes } from './app.routes';
 
-describe('Nexa Design Lab v0.3 routes', () => {
+describe('Nexa Design Lab v0.4 routes', () => {
   beforeEach(async () => {
-    await TestBed.configureTestingModule({ imports: [App], providers: [provideRouter(routes)] }).compileComponents();
+    await TestBed.configureTestingModule({
+      imports: [App],
+      providers: [provideRouter(routes)],
+    }).compileComponents();
   });
 
   async function navigate(path: string): Promise<HTMLElement> {
@@ -25,7 +28,9 @@ describe('Nexa Design Lab v0.3 routes', () => {
   it('separates Design Lab documentation from Platform and Portal shells', async () => {
     const guidelines = await navigate('/guidelines/foundations');
     expect(guidelines.querySelector('nexa-shell')).toBeTruthy();
-    expect(guidelines.querySelector('h1')?.textContent).toContain('The rules underneath every screen');
+    expect(guidelines.querySelector('h1')?.textContent).toContain(
+      'The rules extracted from Legacy',
+    );
 
     const platform = await navigate('/reference/platform/inventory');
     expect(platform.querySelector('nexa-platform-shell')).toBeTruthy();
@@ -39,7 +44,8 @@ describe('Nexa Design Lab v0.3 routes', () => {
   it('renders real Material and authentication reference routes', async () => {
     const material = await navigate('/guidelines/material');
     expect(material.querySelector('h1')?.textContent).toContain('Material compatibility');
-    expect(material.querySelectorAll('mat-form-field').length).toBe(2);
+    expect(material.querySelectorAll('.nexa-field').length).toBe(2);
+    expect(material.querySelector('select.nexa-native-select')).toBeTruthy();
 
     const auth = await navigate('/reference/auth/login');
     expect(auth.querySelector('h1')?.textContent).toContain('Sign in to Nexa');

@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.4.0-rc.1 — Legacy Visual Parity Restoration
+
+- Restored the Legacy Platform shell, workspace identity, role treatment, navigation and PrimeIcons visual weight.
+- Reconstructed the catalog filter rhythm and golden product card with controlled media, brand assets, semantic badges, S/ price presentation and compact add actions.
+- Added a dedicated inventory reference screen matching the Legacy operational hierarchy, warning, KPIs, tabs, warehouse surface and stock table.
+- Added the horizontal Buyer Portal shell and restored its hero, metric cards and status progression composition.
+- Replaced the technical Material select/menu specimens with a native select and a Nexa custom action panel while preserving behavior evidence.
+- Added Legacy asset provenance and FLOW-to-route traceability for the human design audit.
+
 ## v0.3 — Routed Reference Screen Library
 
 - Replaced the continuous v0.2 scroll with Angular Router feature routes.

@@ -1,31 +1,1000 @@
 <div class="reference-screen">
   @switch (screen) {
-    @case ('platform-catalog') { <header class="screen-header"><div><p class="eyebrow">CATALOG / REFERENCE DATA</p><h1>Available products</h1><p>Internal Platform catalog with operational density and white product surfaces.</p></div><label class="search-box"><i class="pi pi-search" aria-hidden="true"></i><input type="search" placeholder="Search products" aria-label="Search products" /></label></header><div class="product-grid platform-products">@for (product of products; track product.id) { <article class="product-card"><div class="product-image"><span class="cold-badge">{{ product.coldChain }}</span><img [src]="product.image" [alt]="product.name" /></div><div class="product-copy"><p>{{ product.brand }} · {{ product.category }}</p><h2>{{ product.name }}</h2><span>{{ product.presentation }} · <code>{{ product.sku }}</code></span><div class="product-price"><strong>{{ product.price }}</strong><small>{{ product.availability }}</small></div><button class="button button-secondary" type="button" (click)="chooseProduct(product.id)">Add to request</button></div></article> }</div> }
-    @case ('platform-purchase-requests') { <header class="screen-header"><div><p class="eyebrow">SALES / PURCHASE REQUESTS</p><h1>Purchase Requests</h1><p>Queue, review and detail references. Purchase Request remains distinct from Sales Order.</p></div><button class="button button-primary" type="button" (click)="announce('Manual Order Entry opened')">Manual Order Entry</button></header><div class="work-surface"><div class="surface-toolbar"><span>1 request requires Sales review</span><button class="button button-quiet" type="button" (click)="announce('Filters opened')">Filters</button></div><div class="request-item"><span class="entity-id">PR-2026-0001</span><span class="status status-info">Submitted</span><span class="status status-attention">High</span><h2>La Cava Fría</h2><p>Buyer request for Sales review and cold-chain dispatch coordination.</p><div class="item-actions"><button class="button button-secondary" type="button" (click)="openReview()">Review</button><button class="button button-quiet" type="button" (click)="openReview()">Open modal</button></div></div></div>@if (reviewOpen()) { <div class="modal-layer"><button class="modal-backdrop" type="button" aria-label="Close request review" (click)="closeReview()"></button><section class="review-modal" role="dialog" aria-modal="true" aria-labelledby="review-title"><div><p class="eyebrow">PURCHASE REQUEST / REVIEW</p><h2 id="review-title">PR-2026-0001</h2></div><button class="icon-close" type="button" aria-label="Close request review" (click)="closeReview()">×</button><p>La Cava Fría submitted a request for Sales review. This is a reference dialog only.</p><div class="summary-list"><span>Request type <b>Purchase Request</b></span><span>Next view <b>Sales review</b></span></div><p class="decision-note">PROCESS DECISION REQUIRED — no reconfirmation behavior is encoded.</p></section></div> } @if (actionMessage()) { <p class="action-message" role="status">{{ actionMessage() }}</p> } }
-    @case ('platform-manual-order') { <header class="screen-header"><div><p class="eyebrow">SALES / MANUAL ORDER ENTRY</p><h1>Create a Sales Order</h1><p>Staged form reference using the normalized Wizard, Form Section and Summary patterns.</p></div><span class="screen-note">FLOW: sales-manual-order-entry*</span></header><div class="wizard-steps">@for (step of ['Buyer', 'Products', 'Delivery', 'Review']; track step; let i = $index) { <button type="button" [class.current]="requestStep() === i + 1" (click)="setStep(i + 1)"><span>{{ i + 1 }}</span>{{ step }}</button> }</div><div class="wizard-content"><div class="form-surface"><p class="eyebrow">PHASE {{ requestStep() }} / 4</p>@switch (requestStep()) { @case (1) { <h2>Select a B2B client</h2><label>Buyer account<select><option>La Cava Fría Restaurant Group</option><option>Hotel Andino Food Service</option></select></label><label>Contact<input value="Carlos Mendoza" /></label> } @case (2) { <h2>Select products</h2><div class="compact-product-list">@for (product of products.slice(0, 3); track product.id) { <button type="button" [class.selected]="selectedProduct() === product.id" (click)="chooseProduct(product.id)"><span>{{ product.name }}</span><code>{{ product.sku }}</code><b>{{ product.price }}</b></button> }</div> } @case (3) { <h2>Delivery information</h2><label>Requested date<input type="date" value="2026-08-18" /></label><label>Delivery window<select><option>Morning · 08:00–12:00</option><option>Afternoon · 14:00–18:00</option></select></label> } @case (4) { <h2>Review Sales Order</h2><div class="summary-list"><span>Buyer <b>La Cava Fría Restaurant Group</b></span><span>Items <b>3 reference products</b></span><span>Delivery <b>18 Aug 2026 · Morning</b></span></div><p class="decision-note">PROCESS DECISION REQUIRED — final transition is presentation-only.</p> } }</div><div class="wizard-actions"><button class="button button-quiet" type="button" [disabled]="requestStep() === 1" (click)="setStep(requestStep() - 1)">Back</button><button class="button button-primary" type="button" (click)="requestStep() === 4 ? announce('Sales Order review retained as reference') : setStep(requestStep() + 1)">{{ requestStep() === 4 ? 'Save reference state' : 'Continue' }}</button></div></div> }
-    @case ('logistics-inventory') { <header class="screen-header"><div><p class="eyebrow">LOGISTICS / INVENTORY CONTROL</p><h1>Inventory Control</h1><p>Dense operational table reference for product, lot, expiry and availability.</p></div><button class="button button-secondary" type="button" (click)="announce('Inventory filters opened')">Filter inventory</button></header><div class="table-surface"><div class="surface-toolbar"><span>3 inventory records · ICISA reference data</span><span class="table-meta">FEFO-aware scanning</span></div><div class="table-scroll" tabindex="0" aria-label="Inventory control table, scroll horizontally on narrow screens"><table><caption class="sr-only">Inventory Control reference data</caption><thead><tr><th>Product</th><th>SKU</th><th>Lot</th><th>Expiry</th><th>On hand</th><th>Reserved</th><th>Available</th><th>Attention</th></tr></thead><tbody>@for (row of inventory; track row.lot) { <tr><th>{{ row.product }}</th><td><code>{{ row.sku }}</code></td><td><code>{{ row.lot }}</code></td><td>{{ row.expiry }}</td><td>{{ row.onHand }}</td><td>{{ row.reserved }}</td><td><strong>{{ row.available }}</strong></td><td><span class="status" [class.status-attention]="row.attention !== 'Normal'" [class.status-positive]="row.attention === 'Normal'">{{ row.attention }}</span></td></tr> }</tbody></table></div></div> }
-    @case ('logistics-dashboard') { <header class="screen-header"><div><p class="eyebrow">LOGISTICS / OPERATIONS</p><h1>Logistics Dashboard</h1><p>Exception-first work queue for inventory, dispatch and proof of delivery.</p></div></header><div class="summary-row"><div><span>Dispatch attention</span><strong>1</strong><small>Delivery window changed</small></div><div><span>Pending POD</span><strong>1</strong><small>Operational task</small></div><div><span>Low stock</span><strong>1</strong><small>Lot review required</small></div></div><div class="work-grid"><div class="work-surface"><div class="surface-toolbar"><h2>Exceptions to review</h2><button class="button button-quiet" type="button" (click)="announce('Dispatch queue opened')">Open queue</button></div>@for (row of dispatch; track row.id) { @if (row.exception !== 'None') { <div class="exception-row"><span class="status status-attention">Attention</span><div><strong>{{ row.id }} · {{ row.order }}</strong><p>{{ row.exception }} · {{ row.destination }}</p></div></div> } }</div><div class="work-surface"><div class="surface-toolbar"><h2>Next operational actions</h2></div><ul class="action-list"><li>Confirm staged dispatch <b>Today · 14:30</b></li><li>Review FEFO soon lot <b>22 Aug 2026</b></li><li>Collect proof of delivery <b>1 pending</b></li></ul></div></div> }
-    @case ('logistics-dispatch') { <header class="screen-header"><div><p class="eyebrow">LOGISTICS / DISPATCH ORDERS</p><h1>Dispatch Orders</h1><p>Board composition with explicit accessible actions; drag is not the only state transition.</p></div><button class="button button-primary" type="button" (click)="announce('Move dispatch dialog opened')">Move dispatch</button></header><div class="dispatch-board">@for (state of ['Staged', 'Attention', 'Delivered']; track state) { <section><h2>{{ state }} <span>{{ countDispatch(state) }}</span></h2>@for (row of dispatch; track row.id) { @if (row.state === state) { <article><code>{{ row.id }}</code><strong>{{ row.destination }}</strong><span>{{ row.order }} · {{ row.departure }}</span><button class="button button-quiet" type="button" (click)="announce(row.id + ' action menu opened')">Actions</button></article> } }</section> }</div> }
-    @case ('logistics-pod') { <header class="screen-header"><div><p class="eyebrow">LOGISTICS / PROOF OF DELIVERY</p><h1>Proof of Delivery</h1><p>Operational evidence and task queue for completed delivery work.</p></div></header><div class="work-surface"><div class="surface-toolbar"><span>1 proof awaiting receipt</span><button class="button button-secondary" type="button" (click)="announce('POD upload opened')">Upload evidence</button></div>@for (row of dispatch; track row.id) { <div class="request-item"><span class="entity-id">{{ row.id }}</span><span class="status" [class.status-attention]="row.pod === 'Pending'" [class.status-positive]="row.pod === 'Received'">{{ row.pod }}</span><h2>{{ row.destination }}</h2><p>{{ row.order }} · Departure {{ row.departure }}</p><div class="item-actions"><button class="button button-quiet" type="button" (click)="announce(row.id + ' detail opened')">View detail</button></div></div> }</div> }
-    @case ('logistics-analytics') { <header class="screen-header"><div><p class="eyebrow">LOGISTICS / ANALYTICS</p><h1>Operations overview</h1><p>Layout evidence only. Metrics are labeled as synthetic reference data.</p></div></header><div class="summary-row"><div><span>Reference orders</span><strong>4</strong><small>Synthetic demo data</small></div><div><span>Dispatch records</span><strong>3</strong><small>Synthetic demo data</small></div><div><span>Inventory rows</span><strong>3</strong><small>Reference data</small></div></div><div class="chart-placeholder"><span class="bar bar-1"></span><span class="bar bar-2"></span><span class="bar bar-3"></span><span class="bar bar-4"></span><span class="bar bar-5"></span><p>Chart composition placeholder for approved business metrics.</p></div> }
-    @case ('platform-documents') { <ng-container *ngTemplateOutlet="documentTemplate"></ng-container> }
-    @case ('platform-clients') { <header class="screen-header"><div><p class="eyebrow">SALES / B2B CLIENTS</p><h1>B2B Clients</h1><p>Client-account orientation for Sales operations.</p></div><button class="button button-primary" type="button" (click)="announce('Client creation remains reference-only')">Create client</button></header><div class="client-list">@for (client of ['La Cava Fría Restaurant Group', 'Hotel Andino Food Service', 'Catering Miraflores Kitchen', 'Market Gourmet San Isidro']; track client) { <article><span class="avatar">{{ client.slice(0, 2) }}</span><div><h2>{{ client }}</h2><p>Active buyer account · ICISA Distribuciones</p></div><button class="button button-quiet" type="button" (click)="announce(client + ' opened')">View</button></article> }</div> }
-    @case ('platform-profile') { <ng-container *ngTemplateOutlet="profileTemplate"></ng-container> }
-    @case ('platform-sales-order-detail') { <header class="screen-header"><div><p class="eyebrow">SALES / SALES ORDER DETAIL</p><h1>SO-2026-0418</h1><p>Seller-side confirmed order reference, separate from the originating Purchase Request.</p></div><span class="status status-attention">Awaiting review</span></header><div class="detail-grid"><div class="work-surface"><div class="surface-toolbar"><h2>Order summary</h2></div><div class="summary-list detail-summary"><span>Buyer <b>Hotel Andino Food Service</b></span><span>Delivery <b>18 Aug 2026 · Morning</b></span><span>Total <b>PEN 8,420.00</b></span><span>Source <b>PR-2026-0004</b></span></div></div><div class="work-surface"><div class="surface-toolbar"><h2>Status progression</h2></div><ol class="timeline"><li class="current"><strong>Awaiting review</strong><span>Current reference state</span></li><li><strong>In preparation</strong><span>Next operational state</span></li><li><strong>Ready for dispatch</strong><span>Later state</span></li><li><strong>Delivered</strong><span>Completion state</span></li></ol></div></div> }
-    @case ('portal-home') { <header class="portal-hero"><p class="eyebrow">BUYER PORTAL / HOME</p><h1>Good morning, Carlos</h1><p>Keep your requests, Sales Orders and delivery visibility in one place.</p><a class="button button-primary" routerLink="/reference/portal/request-builder">Start a request</a></header><div class="portal-work-grid"><div class="work-surface"><div class="surface-toolbar"><h2>Recent requests</h2><a routerLink="/reference/portal/requests">View all</a></div><div class="portal-row"><span class="entity-id">PR-2026-0001</span><strong>La Cava Fría</strong><span class="status status-info">Submitted</span></div></div><div class="work-surface"><div class="surface-toolbar"><h2>Next step</h2></div><p class="next-step">Review the submitted request while Sales validates availability.</p><a routerLink="/reference/portal/requests">Open request</a></div></div> }
-    @case ('portal-catalog') { <header class="screen-header portal-header"><div><p class="eyebrow">BUYER PORTAL / CATALOG</p><h1>Products for your next request</h1><p>Customer-facing catalog with clearer hierarchy and breathing room.</p></div><label class="search-box"><i class="pi pi-search" aria-hidden="true"></i><input type="search" placeholder="Search products" aria-label="Search products" /></label></header><div class="product-grid portal-products">@for (product of products.slice(0, 4); track product.id) { <article class="product-card"><div class="product-image"><span class="cold-badge">{{ product.coldChain }}</span><img [src]="product.image" [alt]="product.name" /></div><div class="product-copy"><p>{{ product.brand }} · {{ product.category }}</p><h2>{{ product.name }}</h2><span>{{ product.presentation }}</span><div class="product-price"><strong>{{ product.price }}</strong><small>{{ product.availability }}</small></div><button class="button button-primary" type="button" (click)="chooseProduct(product.id)">Add to request</button></div></article> }</div> }
-    @case ('portal-request-builder') { <header class="screen-header"><div><p class="eyebrow">BUYER PORTAL / REQUEST BUILDER</p><h1>Build a purchase request</h1><p>Products, delivery information and review, without exposing warehouse mechanics.</p></div><span class="screen-note">FLOW: buyer-request-builder-phase-*</span></header><div class="wizard-steps">@for (step of ['Products', 'Delivery', 'Review', 'Submitted']; track step; let i = $index) { <button type="button" [class.current]="requestStep() === i + 1" (click)="setStep(i + 1)"><span>{{ i + 1 }}</span>{{ step }}</button> }</div><div class="wizard-content portal-wizard"><div class="form-surface">@switch (requestStep()) { @case (1) { <h2>Choose products</h2><p>Select the items you want to include in the request.</p><div class="compact-product-list">@for (product of products.slice(0, 3); track product.id) { <button type="button" [class.selected]="selectedProduct() === product.id" (click)="chooseProduct(product.id)"><span>{{ product.name }}</span><code>{{ product.price }}</code><b>Add</b></button> }</div> } @case (2) { <h2>Delivery information</h2><label>Preferred delivery date<input type="date" value="2026-08-18" /></label><label>Notes<textarea rows="3">Please confirm the delivery window.</textarea></label> } @case (3) { <h2>Review your request</h2><div class="summary-list"><span>Products <b>{{ selectedProduct() ? '1 selected product' : '3 reference products' }}</b></span><span>Delivery <b>18 Aug 2026</b></span><span>Contact <b>Carlos Mendoza</b></span></div> } @case (4) { <h2>Request submitted</h2><p class="success-copy">Your reference request is ready for Sales review.</p><span class="entity-id">PR-2026-0001</span> } }</div><div class="wizard-actions"><button class="button button-quiet" type="button" [disabled]="requestStep() === 1" (click)="setStep(requestStep() - 1)">Back</button><button class="button button-primary" type="button" [disabled]="requestStep() === 4" (click)="setStep(requestStep() + 1)">{{ requestStep() === 3 ? 'Submit request' : 'Continue' }}</button></div></div> }
-    @case ('portal-requests') { <header class="screen-header"><div><p class="eyebrow">BUYER PORTAL / MY REQUESTS</p><h1>My requests</h1><p>Buyer-facing progression with clear next actions.</p></div><a class="button button-primary" routerLink="/reference/portal/request-builder">New request</a></header><div class="portal-list">@for (request of ['PR-2026-0001 · La Cava Fría', 'PR-2026-0002 · Hotel Andino Food Service']; track request; let i = $index) { <article><span class="entity-id">PR-2026-000{{ i + 1 }}</span><h2>{{ request.split(' · ')[1] }}</h2><p>Submitted 15 Aug 2026 · Delivery request in review</p><span class="status" [class.status-info]="i === 0" [class.status-attention]="i === 1">{{ i === 0 ? 'Submitted' : 'Awaiting information' }}</span><button class="button button-quiet" type="button" (click)="announce(request + ' opened')">View request</button></article> }</div> }
-    @case ('portal-orders') { <header class="screen-header"><div><p class="eyebrow">BUYER PORTAL / MY SALES ORDERS</p><h1>My Sales Orders</h1><p>Customer-facing order progress: what happened, what is next and any exception.</p></div></header><div class="portal-list">@for (order of orders; track order.id) { <article><span class="entity-id">{{ order.id }}</span><h2>{{ order.buyer }}</h2><p>Delivery {{ order.delivery }} · {{ order.total }}</p><span class="status status-info">{{ order.status }}</span><button class="button button-quiet" type="button" (click)="announce(order.id + ' tracking opened')">Track order</button></article> }</div> }
-    @case ('portal-profile') { <ng-container *ngTemplateOutlet="profileTemplate"></ng-container> }
-    @case ('portal-support') { <header class="screen-header"><div><p class="eyebrow">BUYER PORTAL / SUPPORT</p><h1>How can we help?</h1><p>Support references keep the request and order context visible.</p></div></header><div class="support-grid"><button type="button" (click)="announce('Request support selected')"><i class="pi pi-inbox"></i><strong>Request support</strong><span>Ask about a request or product</span></button><button type="button" (click)="announce('Order support selected')"><i class="pi pi-file-edit"></i><strong>Order support</strong><span>Ask about delivery visibility</span></button><button type="button" (click)="announce('Documents support selected')"><i class="pi pi-file"></i><strong>Documents</strong><span>Find business documents</span></button></div> }
-    @case ('portal-legal') { <header class="screen-header"><div><p class="eyebrow">BUYER PORTAL / LEGAL</p><h1>Terms and privacy</h1><p>Reference information page preserved from the Portal flow.</p></div></header><article class="legal-copy"><h2>Using the Buyer Portal</h2><p>This Design Lab screen contains synthetic reference copy. Production legal content is owned and maintained outside this implementation.</p><h2>Privacy summary</h2><p>Use this page to explain how account, request and delivery information is handled once approved product and legal content exists.</p></article> }
-    @case ('auth-login') { <div class="auth-screen"><div class="auth-brand-panel"><span class="brand-wordmark">nexa</span><p>Cold-chain commerce operations, organized for people who need to move work forward.</p><small>FLOW: login-1.png</small></div><form class="auth-form" (submit)="$event.preventDefault(); submitLogin()"><p class="eyebrow">SIGN IN</p><h1>Sign in to Nexa</h1><p>Use your account details to continue.</p><label>Email<input type="email" value="carlos@icisa.test" /></label><label>Password<input type="password" value="reference" /></label><button class="button button-primary" type="submit">Sign in</button>@if (loginSubmitted()) { <p class="success-copy" role="status">Reference sign-in submitted.</p> }<a routerLink="/reference/auth/workspace">Need workspace detection?</a></form></div> }
-    @case ('auth-workspace') { <div class="auth-screen workspace-detection"><div class="auth-brand-panel"><span class="brand-wordmark">nexa</span><p>Choose the workspace associated with your account.</p><small>FLOW: login-workspace detected.png</small></div><div class="auth-form"><p class="eyebrow">WORKSPACE DETECTION</p><h1>Continue to ICISA</h1><p>We found one available workspace for this reference account.</p><button class="workspace-option" type="button" (click)="announce('ICISA workspace selected')"><span class="identity-mark">IC</span><span><strong>ICISA Distribuciones</strong><small>icisa.nexa.com.pe</small></span><i class="pi pi-arrow-right"></i></button><a routerLink="/reference/auth/organization-setup">Organization setup reference</a><a routerLink="/reference/auth/login">Back to sign in</a>@if (actionMessage()) { <p class="success-copy" role="status">{{ actionMessage() }}</p> }</div></div> }
-    @case ('auth-organization-setup') { <div class="auth-screen workspace-detection"><div class="auth-brand-panel"><span class="brand-wordmark">nexa</span><p>Organization setup after approved activation.</p><small>FLOW evidence: Register-1-Company · Register-6-Review</small></div><div class="auth-form"><p class="eyebrow">TENANT ADMIN / SETUP</p><h1>Set up your organization</h1><p>Historical registration screens inform the grouped form and review rhythm. Anonymous tenant provisioning is not implemented.</p><label>Organization name<input value="ICISA Distribuciones" /></label><label>Primary operation<select><option>Food service distribution</option><option>Other distribution</option></select></label><button class="button button-primary" type="button" (click)="announce('Organization setup saved as reference')">Continue to review</button><a routerLink="/reference/auth/workspace">Back to workspace detection</a>@if (actionMessage()) { <p class="success-copy" role="status">{{ actionMessage() }}</p> }</div></div> }
-    @default { <p>Reference screen not found.</p> }
+    @case ('platform-catalog') {
+      <header class="screen-header catalog-header">
+        <div>
+          <p class="eyebrow">CATALOG / REFERENCE DATA</p>
+          <h1>Product Catalog</h1>
+          <p>50 products · North Lima and Callao</p>
+        </div>
+        <button
+          class="button button-primary"
+          type="button"
+          routerLink="/reference/platform/manual-order-entry"
+        >
+          <i class="pi pi-shopping-cart" aria-hidden="true"></i>Manual Order Entry
+        </button>
+      </header>
+      <div class="catalog-layout">
+        <aside class="catalog-filters">
+          <label class="search-box"
+            ><i class="pi pi-search" aria-hidden="true"></i
+            ><input
+              type="search"
+              placeholder="Search product, SKU, category or brand"
+              aria-label="Search products"
+          /></label>
+          <section>
+            <h2>Categories</h2>
+            <button class="filter-option active" type="button">All categories</button
+            ><button class="filter-option" type="button">Butter</button
+            ><button class="filter-option" type="button">Charcuterie</button
+            ><button class="filter-option" type="button">Cheese</button
+            ><button class="filter-option" type="button">Desserts</button>
+          </section>
+          <section>
+            <h2>Status</h2>
+            <button class="filter-option active" type="button">All stock</button
+            ><button class="filter-option" type="button">Available</button
+            ><button class="filter-option" type="button">Low stock</button
+            ><button class="filter-option" type="button">Out of stock</button>
+          </section>
+          <section>
+            <h2>Cold type</h2>
+            <button class="filter-option active" type="button">All cold types</button
+            ><button class="filter-option" type="button">Chilled</button>
+          </section>
+          <section>
+            <h2>Brand</h2>
+            <button class="filter-option active" type="button">All brands</button>
+          </section>
+        </aside>
+        <section class="catalog-results">
+          <div class="catalog-results-head">
+            <strong>{{ products.length }} of 50 products</strong
+            ><span>Product catalog filters</span>
+          </div>
+          <div class="product-grid platform-products">
+            @for (product of products; track product.id) {
+              <nexa-product-card [product]="product" (addToRequest)="chooseProduct($event)" />
+            }
+          </div>
+        </section>
+      </div>
+    }
+    @case ('platform-purchase-requests') {
+      <header class="screen-header">
+        <div>
+          <p class="eyebrow">SALES / PURCHASE REQUESTS</p>
+          <h1>Purchase Requests</h1>
+          <p>
+            Queue, review and detail references. Purchase Request remains distinct from Sales Order.
+          </p>
+        </div>
+        <button
+          class="button button-primary"
+          type="button"
+          (click)="announce('Manual Order Entry opened')"
+        >
+          Manual Order Entry
+        </button>
+      </header>
+      <div class="work-surface">
+        <div class="surface-toolbar">
+          <span>1 request requires Sales review</span
+          ><button class="button button-quiet" type="button" (click)="announce('Filters opened')">
+            Filters
+          </button>
+        </div>
+        <div class="request-item">
+          <span class="entity-id">PR-2026-0001</span
+          ><span class="status status-info">Submitted</span
+          ><span class="status status-attention">High</span>
+          <h2>La Cava Fría</h2>
+          <p>Buyer request for Sales review and cold-chain dispatch coordination.</p>
+          <div class="item-actions">
+            <button class="button button-secondary" type="button" (click)="openReview()">
+              Review</button
+            ><button class="button button-quiet" type="button" (click)="openReview()">
+              Open modal
+            </button>
+          </div>
+        </div>
+      </div>
+      @if (reviewOpen()) {
+        <div class="modal-layer">
+          <button
+            class="modal-backdrop"
+            type="button"
+            aria-label="Close request review"
+            (click)="closeReview()"
+          ></button>
+          <section
+            class="review-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="review-title"
+          >
+            <div>
+              <p class="eyebrow">PURCHASE REQUEST / REVIEW</p>
+              <h2 id="review-title">PR-2026-0001</h2>
+            </div>
+            <button
+              class="icon-close"
+              type="button"
+              aria-label="Close request review"
+              (click)="closeReview()"
+            >
+              ×
+            </button>
+            <p>
+              La Cava Fría submitted a request for Sales review. This is a reference dialog only.
+            </p>
+            <div class="summary-list">
+              <span>Request type <b>Purchase Request</b></span
+              ><span>Next view <b>Sales review</b></span>
+            </div>
+            <p class="decision-note">
+              PROCESS DECISION REQUIRED — no reconfirmation behavior is encoded.
+            </p>
+          </section>
+        </div>
+      }
+      @if (actionMessage()) {
+        <p class="action-message" role="status">{{ actionMessage() }}</p>
+      }
+    }
+    @case ('platform-manual-order') {
+      <header class="screen-header">
+        <div>
+          <p class="eyebrow">SALES / MANUAL ORDER ENTRY</p>
+          <h1>Create a Sales Order</h1>
+          <p>
+            Staged form reference using the normalized Wizard, Form Section and Summary patterns.
+          </p>
+        </div>
+        <span class="screen-note">FLOW: sales-manual-order-entry*</span>
+      </header>
+      <div class="wizard-steps">
+        @for (step of ['Buyer', 'Products', 'Delivery', 'Review']; track step; let i = $index) {
+          <button type="button" [class.current]="requestStep() === i + 1" (click)="setStep(i + 1)">
+            <span>{{ i + 1 }}</span
+            >{{ step }}
+          </button>
+        }
+      </div>
+      <div class="wizard-content">
+        <div class="form-surface">
+          <p class="eyebrow">PHASE {{ requestStep() }} / 4</p>
+          @switch (requestStep()) {
+            @case (1) {
+              <h2>Select a B2B client</h2>
+              <label
+                >Buyer account<select>
+                  <option>La Cava Fría Restaurant Group</option>
+                  <option>Hotel Andino Food Service</option>
+                </select></label
+              ><label>Contact<input value="Carlos Mendoza" /></label>
+            }
+            @case (2) {
+              <h2>Select products</h2>
+              <div class="compact-product-list">
+                @for (product of products.slice(0, 3); track product.id) {
+                  <button
+                    type="button"
+                    [class.selected]="selectedProduct() === product.id"
+                    (click)="chooseProduct(product.id)"
+                  >
+                    <span>{{ product.name }}</span
+                    ><code>{{ product.sku }}</code
+                    ><b>{{ product.price }}</b>
+                  </button>
+                }
+              </div>
+            }
+            @case (3) {
+              <h2>Delivery information</h2>
+              <label>Requested date<input type="date" value="2026-08-18" /></label
+              ><label
+                >Delivery window<select>
+                  <option>Morning · 08:00–12:00</option>
+                  <option>Afternoon · 14:00–18:00</option>
+                </select></label
+              >
+            }
+            @case (4) {
+              <h2>Review Sales Order</h2>
+              <div class="summary-list">
+                <span>Buyer <b>La Cava Fría Restaurant Group</b></span
+                ><span>Items <b>3 reference products</b></span
+                ><span>Delivery <b>18 Aug 2026 · Morning</b></span>
+              </div>
+              <p class="decision-note">
+                PROCESS DECISION REQUIRED — final transition is presentation-only.
+              </p>
+            }
+          }
+        </div>
+        <div class="wizard-actions">
+          <button
+            class="button button-quiet"
+            type="button"
+            [disabled]="requestStep() === 1"
+            (click)="setStep(requestStep() - 1)"
+          >
+            Back</button
+          ><button
+            class="button button-primary"
+            type="button"
+            (click)="
+              requestStep() === 4
+                ? announce('Sales Order review retained as reference')
+                : setStep(requestStep() + 1)
+            "
+          >
+            {{ requestStep() === 4 ? 'Save reference state' : 'Continue' }}
+          </button>
+        </div>
+      </div>
+    }
+    @case ('logistics-inventory') {
+      <header class="screen-header">
+        <div>
+          <p class="eyebrow">LOGISTICS / INVENTORY CONTROL</p>
+          <h1>Inventory Control</h1>
+          <p>Dense operational table reference for product, lot, expiry and availability.</p>
+        </div>
+        <button
+          class="button button-secondary"
+          type="button"
+          (click)="announce('Inventory filters opened')"
+        >
+          Filter inventory
+        </button>
+      </header>
+      <div class="table-surface">
+        <div class="surface-toolbar">
+          <span>3 inventory records · ICISA reference data</span
+          ><span class="table-meta">FEFO-aware scanning</span>
+        </div>
+        <div
+          class="table-scroll"
+          tabindex="0"
+          aria-label="Inventory control table, scroll horizontally on narrow screens"
+        >
+          <table>
+            <caption class="sr-only">
+              Inventory Control reference data
+            </caption>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>SKU</th>
+                <th>Lot</th>
+                <th>Expiry</th>
+                <th>On hand</th>
+                <th>Reserved</th>
+                <th>Available</th>
+                <th>Attention</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (row of inventory; track row.lot) {
+                <tr>
+                  <th>{{ row.product }}</th>
+                  <td>
+                    <code>{{ row.sku }}</code>
+                  </td>
+                  <td>
+                    <code>{{ row.lot }}</code>
+                  </td>
+                  <td>{{ row.expiry }}</td>
+                  <td>{{ row.onHand }}</td>
+                  <td>{{ row.reserved }}</td>
+                  <td>
+                    <strong>{{ row.available }}</strong>
+                  </td>
+                  <td>
+                    <span
+                      class="status"
+                      [class.status-attention]="row.attention !== 'Normal'"
+                      [class.status-positive]="row.attention === 'Normal'"
+                      >{{ row.attention }}</span
+                    >
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    }
+    @case ('logistics-dashboard') {
+      <header class="screen-header">
+        <div>
+          <p class="eyebrow">LOGISTICS / OPERATIONS</p>
+          <h1>Logistics Dashboard</h1>
+          <p>Exception-first work queue for inventory, dispatch and proof of delivery.</p>
+        </div>
+      </header>
+      <div class="summary-row">
+        <div>
+          <span>Dispatch attention</span><strong>1</strong><small>Delivery window changed</small>
+        </div>
+        <div><span>Pending POD</span><strong>1</strong><small>Operational task</small></div>
+        <div><span>Low stock</span><strong>1</strong><small>Lot review required</small></div>
+      </div>
+      <div class="work-grid">
+        <div class="work-surface">
+          <div class="surface-toolbar">
+            <h2>Exceptions to review</h2>
+            <button
+              class="button button-quiet"
+              type="button"
+              (click)="announce('Dispatch queue opened')"
+            >
+              Open queue
+            </button>
+          </div>
+          @for (row of dispatch; track row.id) {
+            @if (row.exception !== 'None') {
+              <div class="exception-row">
+                <span class="status status-attention">Attention</span>
+                <div>
+                  <strong>{{ row.id }} · {{ row.order }}</strong>
+                  <p>{{ row.exception }} · {{ row.destination }}</p>
+                </div>
+              </div>
+            }
+          }
+        </div>
+        <div class="work-surface">
+          <div class="surface-toolbar"><h2>Next operational actions</h2></div>
+          <ul class="action-list">
+            <li>Confirm staged dispatch <b>Today · 14:30</b></li>
+            <li>Review FEFO soon lot <b>22 Aug 2026</b></li>
+            <li>Collect proof of delivery <b>1 pending</b></li>
+          </ul>
+        </div>
+      </div>
+    }
+    @case ('logistics-dispatch') {
+      <header class="screen-header">
+        <div>
+          <p class="eyebrow">LOGISTICS / DISPATCH ORDERS</p>
+          <h1>Dispatch Orders</h1>
+          <p>
+            Board composition with explicit accessible actions; drag is not the only state
+            transition.
+          </p>
+        </div>
+        <button
+          class="button button-primary"
+          type="button"
+          (click)="announce('Move dispatch dialog opened')"
+        >
+          Move dispatch
+        </button>
+      </header>
+      <div class="dispatch-board">
+        @for (state of ['Staged', 'Attention', 'Delivered']; track state) {
+          <section>
+            <h2>
+              {{ state }} <span>{{ countDispatch(state) }}</span>
+            </h2>
+            @for (row of dispatch; track row.id) {
+              @if (row.state === state) {
+                <article>
+                  <code>{{ row.id }}</code
+                  ><strong>{{ row.destination }}</strong
+                  ><span>{{ row.order }} · {{ row.departure }}</span>
+                  <div class="action-menu-anchor">
+                    <button
+                      class="button button-quiet"
+                      type="button"
+                      [attr.aria-expanded]="actionMenuOpen() === row.id"
+                      (click)="toggleActionMenu(row.id)"
+                    >
+                      Actions
+                    </button>
+                    @if (actionMenuOpen() === row.id) {
+                      <div class="nexa-action-menu" role="menu">
+                        <button
+                          type="button"
+                          role="menuitem"
+                          (click)="announce(row.id + ' detail opened'); closeActionMenu()"
+                        >
+                          Open detail</button
+                        ><button
+                          type="button"
+                          role="menuitem"
+                          (click)="announce(row.id + ' assigned'); closeActionMenu()"
+                        >
+                          Assign reviewer
+                        </button>
+                      </div>
+                    }
+                  </div>
+                </article>
+              }
+            }
+          </section>
+        }
+      </div>
+    }
+    @case ('logistics-pod') {
+      <header class="screen-header">
+        <div>
+          <p class="eyebrow">LOGISTICS / PROOF OF DELIVERY</p>
+          <h1>Proof of Delivery</h1>
+          <p>Operational evidence and task queue for completed delivery work.</p>
+        </div>
+      </header>
+      <div class="work-surface">
+        <div class="surface-toolbar">
+          <span>1 proof awaiting receipt</span
+          ><button
+            class="button button-secondary"
+            type="button"
+            (click)="announce('POD upload opened')"
+          >
+            Upload evidence
+          </button>
+        </div>
+        @for (row of dispatch; track row.id) {
+          <div class="request-item">
+            <span class="entity-id">{{ row.id }}</span
+            ><span
+              class="status"
+              [class.status-attention]="row.pod === 'Pending'"
+              [class.status-positive]="row.pod === 'Received'"
+              >{{ row.pod }}</span
+            >
+            <h2>{{ row.destination }}</h2>
+            <p>{{ row.order }} · Departure {{ row.departure }}</p>
+            <div class="item-actions">
+              <button
+                class="button button-quiet"
+                type="button"
+                (click)="announce(row.id + ' detail opened')"
+              >
+                View detail
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    }
+    @case ('logistics-analytics') {
+      <header class="screen-header">
+        <div>
+          <p class="eyebrow">LOGISTICS / ANALYTICS</p>
+          <h1>Operations overview</h1>
+          <p>Layout evidence only. Metrics are labeled as synthetic reference data.</p>
+        </div>
+      </header>
+      <div class="summary-row">
+        <div><span>Reference orders</span><strong>4</strong><small>Synthetic demo data</small></div>
+        <div><span>Dispatch records</span><strong>3</strong><small>Synthetic demo data</small></div>
+        <div><span>Inventory rows</span><strong>3</strong><small>Reference data</small></div>
+      </div>
+      <div class="chart-placeholder">
+        <span class="bar bar-1"></span><span class="bar bar-2"></span><span class="bar bar-3"></span
+        ><span class="bar bar-4"></span><span class="bar bar-5"></span>
+        <p>Chart composition placeholder for approved business metrics.</p>
+      </div>
+    }
+    @case ('platform-documents') {
+      <ng-container *ngTemplateOutlet="documentTemplate"></ng-container>
+    }
+    @case ('platform-clients') {
+      <header class="screen-header">
+        <div>
+          <p class="eyebrow">SALES / B2B CLIENTS</p>
+          <h1>B2B Clients</h1>
+          <p>Client-account orientation for Sales operations.</p>
+        </div>
+        <button
+          class="button button-primary"
+          type="button"
+          (click)="announce('Client creation remains reference-only')"
+        >
+          Create client
+        </button>
+      </header>
+      <div class="client-list">
+        @for (
+          client of [
+            'La Cava Fría Restaurant Group',
+            'Hotel Andino Food Service',
+            'Catering Miraflores Kitchen',
+            'Market Gourmet San Isidro',
+          ];
+          track client
+        ) {
+          <article>
+            <span class="avatar">{{ client.slice(0, 2) }}</span>
+            <div>
+              <h2>{{ client }}</h2>
+              <p>Active buyer account · ICISA Distribuciones</p>
+            </div>
+            <button
+              class="button button-quiet"
+              type="button"
+              (click)="announce(client + ' opened')"
+            >
+              View
+            </button>
+          </article>
+        }
+      </div>
+    }
+    @case ('platform-profile') {
+      <ng-container *ngTemplateOutlet="profileTemplate"></ng-container>
+    }
+    @case ('platform-sales-order-detail') {
+      <header class="screen-header">
+        <div>
+          <p class="eyebrow">SALES / SALES ORDER DETAIL</p>
+          <h1>SO-2026-0418</h1>
+          <p>
+            Seller-side confirmed order reference, separate from the originating Purchase Request.
+          </p>
+        </div>
+        <span class="status status-attention">Awaiting review</span>
+      </header>
+      <div class="detail-grid">
+        <div class="work-surface">
+          <div class="surface-toolbar"><h2>Order summary</h2></div>
+          <div class="summary-list detail-summary">
+            <span>Buyer <b>Hotel Andino Food Service</b></span
+            ><span>Delivery <b>18 Aug 2026 · Morning</b></span
+            ><span>Total <b>PEN 8,420.00</b></span
+            ><span>Source <b>PR-2026-0004</b></span>
+          </div>
+        </div>
+        <div class="work-surface">
+          <div class="surface-toolbar"><h2>Status progression</h2></div>
+          <ol class="timeline">
+            <li class="current">
+              <strong>Awaiting review</strong><span>Current reference state</span>
+            </li>
+            <li><strong>In preparation</strong><span>Next operational state</span></li>
+            <li><strong>Ready for dispatch</strong><span>Later state</span></li>
+            <li><strong>Delivered</strong><span>Completion state</span></li>
+          </ol>
+        </div>
+      </div>
+    }
+    @case ('portal-home') {
+      <header class="portal-hero">
+        <span class="portal-plan">Standard Buyer Portal</span>
+        <h1>Hello, Carlos. Your refrigerated order flow is under control.</h1>
+        <p>
+          La Cava Fría can request products, review Sales validation, track dispatch orders and
+          access reference documents.
+        </p>
+        <div class="portal-hero-actions">
+          <a class="button portal-hero-primary" routerLink="/reference/portal/catalog"
+            ><i class="pi pi-box" aria-hidden="true"></i>Product Catalog</a
+          ><a class="button portal-hero-secondary" routerLink="/reference/portal/request-builder"
+            ><i class="pi pi-shopping-cart" aria-hidden="true"></i>Request Builder</a
+          >
+        </div>
+      </header>
+      <div class="portal-metric-row">
+        <a routerLink="/reference/portal/catalog"
+          ><i class="pi pi-box" aria-hidden="true"></i><strong>Product Catalog</strong
+          ><span>Authorized products and Sales availability.</span></a
+        ><a routerLink="/reference/portal/requests"
+          ><i class="pi pi-inbox" aria-hidden="true"></i><strong>My Requests</strong
+          ><span>1 request(s), with S1 validation.</span></a
+        ><a routerLink="/reference/portal/orders"
+          ><i class="pi pi-truck" aria-hidden="true"></i><strong>My Orders</strong
+          ><span>1 confirmed or historical purchase order(s).</span></a
+        ><a routerLink="/reference/portal/profile"
+          ><i class="pi pi-credit-card" aria-hidden="true"></i><strong>Monthly Credit</strong
+          ><span>Available S/ 33,600 of S/ 42,000.</span></a
+        >
+      </div>
+      <div class="portal-status-panel work-surface">
+        <div class="surface-toolbar">
+          <div>
+            <h2>Current Status</h2>
+            <span>Tracking connected to validation, business documents and dispatch orders.</span>
+          </div>
+          <span class="status status-positive">Delivered</span>
+        </div>
+        <div class="portal-status-content">
+          <strong>ORD-2026-0001</strong><span>Requested delivery · estimated kg</span>
+          <div class="portal-progress">
+            @for (
+              step of [
+                'Request received',
+                'Sales validation',
+                'Purchase order created',
+                'Business documents prepared',
+                'Ready for operations',
+                'Preparing dispatch',
+                'Ready for route',
+                'On route',
+                'Delivered',
+              ];
+              track step;
+              let i = $index
+            ) {
+              <span
+                ><b>{{ i + 1 }}</b
+                ><strong>{{ step }}</strong
+                ><small>{{ i > 6 ? 'Aug 12 at 02:08 PM' : 'Pending' }}</small></span
+              >
+            }
+          </div>
+        </div>
+      </div>
+    }
+    @case ('portal-catalog') {
+      <header class="screen-header portal-header">
+        <div>
+          <p class="eyebrow">BUYER PORTAL / CATALOG</p>
+          <h1>Products for your next request</h1>
+          <p>Authorized products and Sales availability.</p>
+        </div>
+        <label class="search-box"
+          ><i class="pi pi-search" aria-hidden="true"></i
+          ><input type="search" placeholder="Search products" aria-label="Search products"
+        /></label>
+      </header>
+      <div class="product-grid portal-products">
+        @for (product of products.slice(0, 4); track product.id) {
+          <nexa-product-card [product]="product" (addToRequest)="chooseProduct($event)" />
+        }
+      </div>
+    }
+    @case ('portal-request-builder') {
+      <header class="screen-header">
+        <div>
+          <p class="eyebrow">BUYER PORTAL / REQUEST BUILDER</p>
+          <h1>Build a purchase request</h1>
+          <p>Products, delivery information and review, without exposing warehouse mechanics.</p>
+        </div>
+        <span class="screen-note">FLOW: buyer-request-builder-phase-*</span>
+      </header>
+      <div class="wizard-steps">
+        @for (step of ['Products', 'Delivery', 'Review', 'Submitted']; track step; let i = $index) {
+          <button type="button" [class.current]="requestStep() === i + 1" (click)="setStep(i + 1)">
+            <span>{{ i + 1 }}</span
+            >{{ step }}
+          </button>
+        }
+      </div>
+      <div class="wizard-content portal-wizard">
+        <div class="form-surface">
+          @switch (requestStep()) {
+            @case (1) {
+              <h2>Choose products</h2>
+              <p>Select the items you want to include in the request.</p>
+              <div class="compact-product-list">
+                @for (product of products.slice(0, 3); track product.id) {
+                  <button
+                    type="button"
+                    [class.selected]="selectedProduct() === product.id"
+                    (click)="chooseProduct(product.id)"
+                  >
+                    <span>{{ product.name }}</span
+                    ><code>{{ product.price }}</code
+                    ><b>Add</b>
+                  </button>
+                }
+              </div>
+            }
+            @case (2) {
+              <h2>Delivery information</h2>
+              <label>Preferred delivery date<input type="date" value="2026-08-18" /></label
+              ><label>Notes<textarea rows="3">Please confirm the delivery window.</textarea></label>
+            }
+            @case (3) {
+              <h2>Review your request</h2>
+              <div class="summary-list">
+                <span
+                  >Products
+                  <b>{{
+                    selectedProduct() ? '1 selected product' : '3 reference products'
+                  }}</b></span
+                ><span>Delivery <b>18 Aug 2026</b></span
+                ><span>Contact <b>Carlos Mendoza</b></span>
+              </div>
+            }
+            @case (4) {
+              <h2>Request submitted</h2>
+              <p class="success-copy">Your reference request is ready for Sales review.</p>
+              <span class="entity-id">PR-2026-0001</span>
+            }
+          }
+        </div>
+        <div class="wizard-actions">
+          <button
+            class="button button-quiet"
+            type="button"
+            [disabled]="requestStep() === 1"
+            (click)="setStep(requestStep() - 1)"
+          >
+            Back</button
+          ><button
+            class="button button-primary"
+            type="button"
+            [disabled]="requestStep() === 4"
+            (click)="setStep(requestStep() + 1)"
+          >
+            {{ requestStep() === 3 ? 'Submit request' : 'Continue' }}
+          </button>
+        </div>
+      </div>
+    }
+    @case ('portal-requests') {
+      <header class="screen-header">
+        <div>
+          <p class="eyebrow">BUYER PORTAL / MY REQUESTS</p>
+          <h1>My requests</h1>
+          <p>Buyer-facing progression with clear next actions.</p>
+        </div>
+        <a class="button button-primary" routerLink="/reference/portal/request-builder"
+          >New request</a
+        >
+      </header>
+      <div class="portal-list">
+        @for (
+          request of ['PR-2026-0001 · La Cava Fría', 'PR-2026-0002 · Hotel Andino Food Service'];
+          track request;
+          let i = $index
+        ) {
+          <article>
+            <span class="entity-id">PR-2026-000{{ i + 1 }}</span>
+            <h2>{{ request.split(' · ')[1] }}</h2>
+            <p>Submitted 15 Aug 2026 · Delivery request in review</p>
+            <span class="status" [class.status-info]="i === 0" [class.status-attention]="i === 1">{{
+              i === 0 ? 'Submitted' : 'Awaiting information'
+            }}</span
+            ><button
+              class="button button-quiet"
+              type="button"
+              (click)="announce(request + ' opened')"
+            >
+              View request
+            </button>
+          </article>
+        }
+      </div>
+    }
+    @case ('portal-orders') {
+      <header class="screen-header">
+        <div>
+          <p class="eyebrow">BUYER PORTAL / MY SALES ORDERS</p>
+          <h1>My Sales Orders</h1>
+          <p>Customer-facing order progress: what happened, what is next and any exception.</p>
+        </div>
+      </header>
+      <div class="portal-list">
+        @for (order of orders; track order.id) {
+          <article>
+            <span class="entity-id">{{ order.id }}</span>
+            <h2>{{ order.buyer }}</h2>
+            <p>Delivery {{ order.delivery }} · {{ order.total }}</p>
+            <span class="status status-info">{{ order.status }}</span
+            ><button
+              class="button button-quiet"
+              type="button"
+              (click)="announce(order.id + ' tracking opened')"
+            >
+              Track order
+            </button>
+          </article>
+        }
+      </div>
+    }
+    @case ('portal-profile') {
+      <ng-container *ngTemplateOutlet="profileTemplate"></ng-container>
+    }
+    @case ('portal-support') {
+      <header class="screen-header">
+        <div>
+          <p class="eyebrow">BUYER PORTAL / SUPPORT</p>
+          <h1>How can we help?</h1>
+          <p>Support references keep the request and order context visible.</p>
+        </div>
+      </header>
+      <div class="support-grid">
+        <button type="button" (click)="announce('Request support selected')">
+          <i class="pi pi-inbox"></i><strong>Request support</strong
+          ><span>Ask about a request or product</span></button
+        ><button type="button" (click)="announce('Order support selected')">
+          <i class="pi pi-file-edit"></i><strong>Order support</strong
+          ><span>Ask about delivery visibility</span></button
+        ><button type="button" (click)="announce('Documents support selected')">
+          <i class="pi pi-file"></i><strong>Documents</strong><span>Find business documents</span>
+        </button>
+      </div>
+    }
+    @case ('portal-legal') {
+      <header class="screen-header">
+        <div>
+          <p class="eyebrow">BUYER PORTAL / LEGAL</p>
+          <h1>Terms and privacy</h1>
+          <p>Reference information page preserved from the Portal flow.</p>
+        </div>
+      </header>
+      <article class="legal-copy">
+        <h2>Using the Buyer Portal</h2>
+        <p>
+          This Design Lab screen contains synthetic reference copy. Production legal content is
+          owned and maintained outside this implementation.
+        </p>
+        <h2>Privacy summary</h2>
+        <p>
+          Use this page to explain how account, request and delivery information is handled once
+          approved product and legal content exists.
+        </p>
+      </article>
+    }
+    @case ('auth-login') {
+      <div class="auth-screen">
+        <div class="auth-brand-panel">
+          <img class="auth-nexa-logo" src="/brand/nexa-white.svg" alt="nexa" />
+          <p>Cold-chain commerce operations, organized for people who need to move work forward.</p>
+          <small>FLOW: login-1.png</small>
+        </div>
+        <form class="auth-form" (submit)="$event.preventDefault(); submitLogin()">
+          <div class="auth-controls">
+            <button type="button" aria-label="Spanish language">ES</button
+            ><button class="active" type="button" aria-label="English language">EN</button>
+          </div>
+          <p class="eyebrow">SIGN IN</p>
+          <h1>Sign in to Nexa</h1>
+          <p>Use your account details to continue.</p>
+          <label>Email<input type="email" value="carlos@icisa.test" /></label
+          ><label>Password<input type="password" value="reference" /></label
+          ><button class="button button-primary" type="submit">Sign in</button>
+          @if (loginSubmitted()) {
+            <p class="success-copy" role="status">Reference sign-in submitted.</p>
+          }
+          <a routerLink="/reference/auth/workspace">Need workspace detection?</a>
+        </form>
+      </div>
+    }
+    @case ('auth-workspace') {
+      <div class="auth-screen workspace-detection">
+        <div class="auth-brand-panel">
+          <img class="auth-nexa-logo" src="/brand/nexa-white.svg" alt="nexa" />
+          <p>Choose the workspace associated with your account.</p>
+          <small>FLOW: login-workspace detected.png</small>
+        </div>
+        <div class="auth-form">
+          <div class="auth-controls">
+            <button type="button">ES</button><button class="active" type="button">EN</button>
+          </div>
+          <p class="eyebrow">WORKSPACE DETECTION</p>
+          <h1>Continue to ICISA</h1>
+          <p>We found one available workspace for this reference account.</p>
+          <button
+            class="workspace-option"
+            type="button"
+            (click)="announce('ICISA workspace selected')"
+          >
+            <span class="identity-mark">IC</span
+            ><span><strong>ICISA Distribuciones</strong><small>icisa.nexa.com.pe</small></span
+            ><i class="pi pi-arrow-right"></i></button
+          ><a routerLink="/reference/auth/organization-setup">Organization setup reference</a
+          ><a routerLink="/reference/auth/login">Back to sign in</a>
+          @if (actionMessage()) {
+            <p class="success-copy" role="status">{{ actionMessage() }}</p>
+          }
+        </div>
+      </div>
+    }
+    @case ('auth-organization-setup') {
+      <div class="auth-screen workspace-detection">
+        <div class="auth-brand-panel">
+          <img class="auth-nexa-logo" src="/brand/nexa-white.svg" alt="nexa" />
+          <p>Organization setup after approved activation.</p>
+          <small>FLOW evidence: Register-1-Company · Register-6-Review</small>
+        </div>
+        <div class="auth-form">
+          <div class="auth-controls">
+            <button type="button">ES</button><button class="active" type="button">EN</button>
+          </div>
+          <p class="eyebrow">TENANT ADMIN / SETUP</p>
+          <h1>Set up your organization</h1>
+          <p>
+            Historical registration screens inform the grouped form and review rhythm. Anonymous
+            tenant provisioning is not implemented.
+          </p>
+          <label>Organization name<input value="ICISA Distribuciones" /></label
+          ><label
+            >Primary operation<select>
+              <option>Food service distribution</option>
+              <option>Other distribution</option>
+            </select></label
+          ><button
+            class="button button-primary"
+            type="button"
+            (click)="announce('Organization setup saved as reference')"
+          >
+            Continue to review</button
+          ><a routerLink="/reference/auth/workspace">Back to workspace detection</a>
+          @if (actionMessage()) {
+            <p class="success-copy" role="status">{{ actionMessage() }}</p>
+          }
+        </div>
+      </div>
+    }
+    @default {
+      <p>Reference screen not found.</p>
+    }
   }
 </div>
 
-<ng-template #documentTemplate><header class="screen-header"><div><p class="eyebrow">PLATFORM / BUSINESS DOCUMENTS</p><h1>Business Documents</h1><p>Document availability and state composition without inventing lifecycle rules.</p></div><button class="button button-secondary" type="button" (click)="announce('Document filters opened')">Filter documents</button></header><div class="document-list"><article><i class="pi pi-file-check" aria-hidden="true"></i><div><h2>SO-2026-0418 · delivery documents</h2><p>Reference document profile for Sales review.</p></div><span class="status status-attention">Pending review</span></article><article><i class="pi pi-file" aria-hidden="true"></i><div><h2>SO-2026-0416 · dispatch documents</h2><p>Available for operational consultation.</p></div><span class="status status-positive">Available</span></article></div></ng-template>
-<ng-template #profileTemplate><header class="screen-header"><div><p class="eyebrow">ACCOUNT / PROFILE</p><h1>My profile</h1><p>Lower-density account form reference.</p></div><button class="button button-primary" type="button" (click)="announce('Profile saved as reference')">Save changes</button></header><div class="profile-form"><label>Full name<input value="Diego Sandoval" /></label><label>Email<input type="email" value="diego@icisa.test" /></label><label>Language<select><option>English</option><option>Español</option></select></label><label>Notification preference<select><option>Operational updates</option><option>All updates</option></select></label></div></ng-template>
+<ng-template #documentTemplate
+  ><header class="screen-header">
+    <div>
+      <p class="eyebrow">PLATFORM / BUSINESS DOCUMENTS</p>
+      <h1>Business Documents</h1>
+      <p>Document availability and state composition without inventing lifecycle rules.</p>
+    </div>
+    <button
+      class="button button-secondary"
+      type="button"
+      (click)="announce('Document filters opened')"
+    >
+      Filter documents
+    </button>
+  </header>
+  <div class="document-list">
+    <article>
+      <i class="pi pi-file-check" aria-hidden="true"></i>
+      <div>
+        <h2>SO-2026-0418 · delivery documents</h2>
+        <p>Reference document profile for Sales review.</p>
+      </div>
+      <span class="status status-attention">Pending review</span>
+    </article>
+    <article>
+      <i class="pi pi-file" aria-hidden="true"></i>
+      <div>
+        <h2>SO-2026-0416 · dispatch documents</h2>
+        <p>Available for operational consultation.</p>
+      </div>
+      <span class="status status-positive">Available</span>
+    </article>
+  </div></ng-template
+>
+<ng-template #profileTemplate
+  ><header class="screen-header">
+    <div>
+      <p class="eyebrow">ACCOUNT / PROFILE</p>
+      <h1>My profile</h1>
+      <p>Lower-density account form reference.</p>
+    </div>
+    <button
+      class="button button-primary"
+      type="button"
+      (click)="announce('Profile saved as reference')"
+    >
+      Save changes
+    </button>
+  </header>
+  <div class="profile-form">
+    <label>Full name<input value="Diego Sandoval" /></label
+    ><label>Email<input type="email" value="diego@icisa.test" /></label
+    ><label
+      >Language<select>
+        <option>English</option>
+        <option>Español</option>
+      </select></label
+    ><label
+      >Notification preference<select>
+        <option>Operational updates</option>
+        <option>All updates</option>
+      </select></label
+    >
+  </div></ng-template
+>

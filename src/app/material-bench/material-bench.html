@@ -1,8 +1,133 @@
 <div class="material-page">
-  <header class="material-heading"><div><p class="eyebrow">TECHNICAL LAB / ANGULAR MATERIAL</p><h1>Material compatibility</h1><p>Compact specimens show where Angular Material carries behavior and where Nexa owns presentation.</p></div><span class="review-note">IMPLEMENTATION EVIDENCE<br /><b>HUMAN REVIEW REQUIRED</b></span></header>
-  <section class="specimen-group"><div class="group-heading"><div><p class="section-kicker">ACTIONS</p><h2>Buttons and tooltip</h2></div><code>MatButton · MatTooltip</code></div><div class="specimen-controls"><button mat-flat-button type="button" (click)="toggleReview()">Primary action</button><button mat-stroked-button type="button">Secondary action</button><button mat-icon-button type="button" aria-label="Open help" matTooltip="Nexa themed Material tooltip"><span aria-hidden="true">?</span></button></div><p class="implementation-note">Buttons / fields <b>Theme Material</b></p></section>
-  <section class="specimen-group"><div class="group-heading"><div><p class="section-kicker">FORMS</p><h2>Fields and status</h2></div><code>MatFormField · MatSelect</code></div><div class="form-grid"><mat-form-field appearance="outline"><mat-label>Buyer account</mat-label><input matInput value="La Cava Fría" aria-describedby="buyer-hint" /><mat-hint id="buyer-hint">Material field, Nexa density.</mat-hint></mat-form-field><mat-form-field appearance="outline"><mat-label>Workflow status</mat-label><mat-select [value]="selectedStatus()" (selectionChange)="setStatus($event.value)"><mat-option value="Awaiting review">Awaiting review</mat-option><mat-option value="In preparation">In preparation</mat-option><mat-option value="Ready for dispatch">Ready for dispatch</mat-option></mat-select></mat-form-field></div><p class="implementation-note">Current state <b>{{ selectedStatus() }}</b></p></section>
-  <section class="specimen-group"><div class="group-heading"><div><p class="section-kicker">SELECTION</p><h2>Checkbox, radio and toggle</h2></div><code>MatCheckbox · MatRadio · MatSlideToggle</code></div><div class="selection-row"><mat-checkbox [checked]="reviewEnabled()" (change)="toggleReview()">Review required</mat-checkbox><mat-radio-group value="sales" aria-label="Responsible team"><mat-radio-button value="sales">Sales</mat-radio-button><mat-radio-button value="operations">Operations</mat-radio-button></mat-radio-group><mat-slide-toggle [checked]="reviewEnabled()" (change)="toggleReview()">Notify buyer</mat-slide-toggle></div><p class="implementation-note">Checkbox / radio <b>Theme Material</b></p></section>
-  <section class="specimen-group"><div class="group-heading"><div><p class="section-kicker">FEEDBACK</p><h2>Progress and state</h2></div><code>MatProgressBar</code></div><mat-progress-bar mode="determinate" value="66" aria-label="Reference progress"></mat-progress-bar><p class="implementation-note">Loading and feedback use text plus state; no skeleton loader is introduced here.</p></section>
-  <section class="specimen-group"><div class="group-heading"><div><p class="section-kicker">OVERLAY / MENU</p><h2>Menu behavior</h2></div><code>MatMenu</code></div><button mat-button [matMenuTriggerFor]="actionMenu">More actions</button><mat-menu #actionMenu="matMenu"><button mat-menu-item type="button">Open detail</button><button mat-menu-item type="button">Assign reviewer</button></mat-menu><p class="implementation-note">Menu / tooltip <b>Keep Material</b> · shell / dashboard <b>Custom Nexa</b> · dialog <b>Under review</b></p></section>
+  <header class="material-heading">
+    <div>
+      <p class="eyebrow">TECHNICAL LAB / ANGULAR MATERIAL</p>
+      <h1>Material compatibility</h1>
+      <p>
+        Compact specimens show where Angular Material carries behavior and where Nexa owns
+        presentation.
+      </p>
+    </div>
+    <span class="review-note">IMPLEMENTATION EVIDENCE<br /><b>HUMAN REVIEW REQUIRED</b></span>
+  </header>
+  <section class="specimen-group">
+    <div class="group-heading">
+      <div>
+        <p class="section-kicker">ACTIONS</p>
+        <h2>Buttons and tooltip</h2>
+      </div>
+      <code>MatButton · MatTooltip</code>
+    </div>
+    <div class="specimen-controls">
+      <button mat-flat-button type="button" (click)="toggleReview()">Primary action</button
+      ><button mat-stroked-button type="button">Secondary action</button
+      ><button
+        mat-icon-button
+        type="button"
+        aria-label="Open help"
+        matTooltip="Nexa themed Material tooltip"
+      >
+        <span aria-hidden="true">?</span>
+      </button>
+    </div>
+    <p class="implementation-note">Buttons / fields <b>Theme Material</b></p>
+  </section>
+  <section class="specimen-group">
+    <div class="group-heading">
+      <div>
+        <p class="section-kicker">FORMS</p>
+        <h2>Fields and status</h2>
+      </div>
+      <code>native input · native select</code>
+    </div>
+    <div class="form-grid">
+      <label class="nexa-field"
+        >Buyer account<input value="La Cava Fría" aria-describedby="buyer-hint" /><small
+          id="buyer-hint"
+          >Nexa closed field, browser-native text behavior.</small
+        ></label
+      ><label class="nexa-field"
+        >Workflow status<select
+          class="nexa-native-select"
+          [value]="selectedStatus()"
+          (change)="setStatus($any($event.target).value)"
+        >
+          <option>Awaiting review</option>
+          <option>In preparation</option>
+          <option>Ready for dispatch</option></select
+        ><small>Open selection remains native to the operating system.</small></label
+      >
+    </div>
+    <p class="implementation-note">
+      Current state <b>{{ selectedStatus() }}</b> · Behavior source <b>native select</b> ·
+      Presentation owner <b>Nexa</b>
+    </p>
+  </section>
+  <section class="specimen-group">
+    <div class="group-heading">
+      <div>
+        <p class="section-kicker">SELECTION</p>
+        <h2>Checkbox, radio and toggle</h2>
+      </div>
+      <code>MatCheckbox · MatRadio · MatSlideToggle</code>
+    </div>
+    <div class="selection-row">
+      <mat-checkbox [checked]="reviewEnabled()" (change)="toggleReview()"
+        >Review required</mat-checkbox
+      ><mat-radio-group value="sales" aria-label="Responsible team"
+        ><mat-radio-button value="sales">Sales</mat-radio-button
+        ><mat-radio-button value="operations">Operations</mat-radio-button></mat-radio-group
+      ><mat-slide-toggle [checked]="reviewEnabled()" (change)="toggleReview()"
+        >Notify buyer</mat-slide-toggle
+      >
+    </div>
+    <p class="implementation-note">Checkbox / radio <b>Theme Material</b></p>
+  </section>
+  <section class="specimen-group">
+    <div class="group-heading">
+      <div>
+        <p class="section-kicker">FEEDBACK</p>
+        <h2>Progress and state</h2>
+      </div>
+      <code>MatProgressBar</code>
+    </div>
+    <mat-progress-bar
+      mode="determinate"
+      value="66"
+      aria-label="Reference progress"
+    ></mat-progress-bar>
+    <p class="implementation-note">
+      Loading and feedback use text plus state; no skeleton loader is introduced here.
+    </p>
+  </section>
+  <section class="specimen-group">
+    <div class="group-heading">
+      <div>
+        <p class="section-kicker">OVERLAY / MENU</p>
+        <h2>Menu behavior</h2>
+      </div>
+      <code>CDK-style behavior · Nexa panel</code>
+    </div>
+    <div class="nexa-menu-anchor">
+      <button
+        class="nexa-menu-trigger"
+        type="button"
+        [attr.aria-expanded]="actionMenuOpen()"
+        (click)="toggleActionMenu()"
+      >
+        More actions
+      </button>
+      @if (actionMenuOpen()) {
+        <div class="nexa-menu-panel" role="menu">
+          <button type="button" role="menuitem" (click)="closeActionMenu()">Open detail</button
+          ><button type="button" role="menuitem" (click)="closeActionMenu()">
+            Assign reviewer
+          </button>
+        </div>
+      }
+    </div>
+    <p class="implementation-note">
+      Menu behavior <b>custom Nexa panel</b> · keyboard Escape and focusable menu items preserved.
+    </p>
+  </section>
 </div>

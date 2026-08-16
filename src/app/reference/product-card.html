@@ -1,0 +1,43 @@
+<article class="nexa-product-card">
+  <div class="product-media">
+    @if (product().brandLogo) {
+      <img class="product-brand-logo" [src]="product().brandLogo" [alt]="product().brand" />
+    }
+    <img class="product-photo" [src]="product().image" [alt]="product().name" />
+  </div>
+  <div class="product-card-body">
+    <div class="product-title-row">
+      <div class="product-title-copy">
+        <h2>{{ product().name }}</h2>
+        <code>{{ product().sku }}</code>
+      </div>
+      <button
+        class="product-add"
+        type="button"
+        [attr.aria-label]="'Add ' + product().name + ' to request'"
+        (click)="add()"
+      >
+        <i class="pi pi-plus" aria-hidden="true"></i>
+      </button>
+    </div>
+    <span class="product-brand-pill">Brand: {{ product().brand }}</span>
+    <strong class="product-presentation">{{ product().presentation }}</strong>
+    <div class="product-badges">
+      <span class="product-badge product-badge-cold"
+        ><b aria-hidden="true">•</b> {{ product().coldType || 'Chilled' }}</span
+      >
+      <span class="product-badge product-badge-temp">{{
+        product().temperatureRange || '0°C - 5°C'
+      }}</span>
+      <span
+        class="product-badge product-badge-stock"
+        [class.product-badge-low]="product().stockStatus === 'Low stock'"
+        ><b aria-hidden="true">•</b> {{ product().stockStatus || 'Available' }}</span
+      >
+    </div>
+    <div class="product-card-footer">
+      <strong>{{ product().price }}</strong>
+      <span>{{ product().availability }}</span>
+    </div>
+  </div>
+</article>

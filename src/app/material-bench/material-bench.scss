@@ -1,2 +1,202 @@
-:host { display: block; }.material-page { width: min(100% - 40px, 980px); margin: 0 auto; padding: clamp(30px, 5vw, 68px) 0 80px; }.material-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 30px; padding-bottom: 38px; border-bottom: 1px solid var(--nexa-color-border-structural); }.eyebrow, .section-kicker { margin: 0 0 9px; color: var(--nexa-color-primary-700); font-size: 10px; font-weight: 700; letter-spacing: .1em; }.material-heading h1 { margin: 0; color: var(--nexa-color-text-primary); font-family: var(--nexa-font-family-display); font-size: clamp(30px, 4vw, 46px); letter-spacing: -.055em; line-height: 1.08; }.material-heading p:not(.eyebrow) { max-width: 620px; margin: 14px 0 0; color: var(--nexa-color-text-secondary); font-size: 15px; line-height: 1.55; }.review-note { color: var(--nexa-color-neutral-500); font-family: var(--nexa-font-family-mono); font-size: 10px; line-height: 1.5; text-align: right; }.review-note b { color: var(--nexa-color-primary-700); font-weight: 500; }.specimen-group { display: grid; gap: 18px; padding: 28px 0; border-bottom: 1px solid var(--nexa-color-border-structural); }.group-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; }.group-heading h2 { margin: 0; color: var(--nexa-color-text-primary); font-family: var(--nexa-font-family-display); font-size: 20px; letter-spacing: -.03em; }.group-heading code { color: var(--nexa-color-neutral-600); font-family: var(--nexa-font-family-mono); font-size: 10px; }.specimen-controls, .selection-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start; }.form-grid mat-form-field { width: 100%; }.selection-row mat-radio-group { display: flex; flex-wrap: wrap; gap: 12px; }.implementation-note { margin: 0; color: var(--nexa-color-text-secondary); font-size: 11px; }.implementation-note b { color: var(--nexa-color-text-primary); font-weight: 600; }.specimen-group mat-progress-bar { max-width: 520px; }
-@media (max-width: 640px) { .material-page { width: min(100% - 32px, 980px); }.material-heading { display: block; }.review-note { margin-top: 18px; text-align: left; }.group-heading { display: block; }.group-heading code { display: block; margin-top: 8px; }.form-grid { grid-template-columns: 1fr; } }
+:host {
+  display: block;
+}
+.material-page {
+  width: min(100% - 40px, 980px);
+  margin: 0 auto;
+  padding: clamp(30px, 5vw, 68px) 0 80px;
+}
+.material-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
+  padding-bottom: 38px;
+  border-bottom: 1px solid var(--nexa-color-border-structural);
+}
+.eyebrow,
+.section-kicker {
+  margin: 0 0 9px;
+  color: var(--nexa-color-primary-700);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.material-heading h1 {
+  margin: 0;
+  color: var(--nexa-color-text-primary);
+  font-family: var(--nexa-font-family-display);
+  font-size: clamp(30px, 4vw, 46px);
+  letter-spacing: -0.055em;
+  line-height: 1.08;
+}
+.material-heading p:not(.eyebrow) {
+  max-width: 620px;
+  margin: 14px 0 0;
+  color: var(--nexa-color-text-secondary);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.review-note {
+  color: var(--nexa-color-neutral-500);
+  font-family: var(--nexa-font-family-mono);
+  font-size: 10px;
+  line-height: 1.5;
+  text-align: right;
+}
+.review-note b {
+  color: var(--nexa-color-primary-700);
+  font-weight: 500;
+}
+.specimen-group {
+  display: grid;
+  gap: 18px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--nexa-color-border-structural);
+}
+.group-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+}
+.group-heading h2 {
+  margin: 0;
+  color: var(--nexa-color-text-primary);
+  font-family: var(--nexa-font-family-display);
+  font-size: 20px;
+  letter-spacing: -0.03em;
+}
+.group-heading code {
+  color: var(--nexa-color-neutral-600);
+  font-family: var(--nexa-font-family-mono);
+  font-size: 10px;
+}
+.specimen-controls,
+.selection-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+.form-grid mat-form-field {
+  width: 100%;
+}
+.selection-row mat-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.implementation-note {
+  margin: 0;
+  color: var(--nexa-color-text-secondary);
+  font-size: 11px;
+}
+.implementation-note b {
+  color: var(--nexa-color-text-primary);
+  font-weight: 600;
+}
+.specimen-group mat-progress-bar {
+  max-width: 520px;
+}
+@media (max-width: 640px) {
+  .material-page {
+    width: min(100% - 32px, 980px);
+  }
+  .material-heading {
+    display: block;
+  }
+  .review-note {
+    margin-top: 18px;
+    text-align: left;
+  }
+  .group-heading {
+    display: block;
+  }
+  .group-heading code {
+    display: block;
+    margin-top: 8px;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nexa-field {
+  display: grid;
+  gap: 8px;
+  color: var(--nexa-color-text-primary);
+  font-size: 12px;
+  font-weight: 600;
+}
+.nexa-field input,
+.nexa-native-select {
+  width: 100%;
+  min-height: 44px;
+  box-sizing: border-box;
+  padding: 0 12px;
+  border: 1px solid var(--nexa-color-border-interactive);
+  border-radius: var(--nexa-radius-control);
+  background: #fff;
+  color: var(--nexa-color-text-primary);
+  font: inherit;
+}
+.nexa-field small {
+  color: var(--nexa-color-text-secondary);
+  font-size: 11px;
+  font-weight: 400;
+}
+.nexa-field input:focus-visible,
+.nexa-native-select:focus-visible,
+.nexa-menu-trigger:focus-visible,
+.nexa-menu-panel button:focus-visible {
+  outline: 0;
+  box-shadow: var(--nexa-focus-ring);
+}
+.nexa-menu-anchor {
+  position: relative;
+  width: fit-content;
+}
+.nexa-menu-trigger {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--nexa-color-border-interactive);
+  border-radius: var(--nexa-radius-control);
+  background: #fff;
+  color: var(--nexa-color-neutral-700);
+  cursor: pointer;
+}
+.nexa-menu-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 10;
+  display: grid;
+  width: 180px;
+  padding: 6px;
+  border: 1px solid #dbe5f2;
+  border-radius: var(--nexa-radius-overlay);
+  background: #fff;
+  box-shadow: var(--nexa-shadow-overlay);
+}
+.nexa-menu-panel button {
+  min-height: 36px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--nexa-color-neutral-700);
+  cursor: pointer;
+  text-align: left;
+}
+.nexa-menu-panel button:hover,
+.nexa-menu-panel button:focus-visible {
+  background: var(--nexa-color-primary-50);
+  color: var(--nexa-color-primary-700);
+}
