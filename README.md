@@ -2,7 +2,7 @@
 
 <br />
 
-<img src="https://raw.githubusercontent.com/nexa-suite/api/develop/docs/assets/nexa.svg" alt="Nexa" width="240" />
+<img src="./public/brand/nexa.svg" alt="Nexa" width="240" />
 
 # Nexa Design Lab
 
