@@ -1,63 +1,130 @@
-# NEXA DESIGN LAB v0.2
+<div align="center">
 
-Normalized Design Foundation. Experimental. Not production. Not canonical Blueprint.
+<br />
 
-Design Lab is executable design evidence for reviewing Nexa visual foundations, component behavior and representative B2B workflows. It preserves valuable historical visual DNA while removing obsolete terminology, accidental semantic coupling and inaccessible defaults.
+<img src="https://raw.githubusercontent.com/nexa-suite/api/develop/docs/assets/nexa.svg" alt="Nexa" width="240" />
 
-## Scope
+# Nexa Design Lab
 
-- `v0.1`: reconstructed visual baseline and legacy provenance.
-- `v0.2`: normalized design foundation candidate.
-- Angular 22 standalone application with Angular Material 22, CDK-compatible patterns and SCSS.
-- Sales Dashboard, Contrast Lab, OKLCH blue scale, Material compatibility bench, catalog anatomy and Sales Orders table.
-- No production API, authentication, tenant provisioning, routing contract or business operation.
+**Internal visual engineering studio for Nexa foundations, screens and workflow evidence.**
 
-Design Lab does not independently define Product semantics. Blueprint becomes durable design specification only after human approval. Production repositories remain implementation authority for shipped behavior.
+![Status](https://img.shields.io/badge/status-experimental-7C3AED?style=flat-square) ![Angular](https://img.shields.io/badge/Angular-22-DD0031?style=flat-square&logo=angular&logoColor=white) ![Material](https://img.shields.io/badge/Angular%20Material-22-757575?style=flat-square&logo=materialdesign&logoColor=white) ![Vitest](https://img.shields.io/badge/Vitest-tests-6E9F18?style=flat-square&logo=vitest&logoColor=white)
+
+[Run](#run) · [Visual foundations](#visual-foundations) · [Reference library](#reference-screen-library) · [Review workflow](#review-workflow)
+
+</div>
+
+---
+
+## Purpose
+
+Design Lab is Nexa's executable visual laboratory. It holds design evidence, component behavior and representative B2B workflow experiments for human review.
+
+Current state: v0.5.0-rc.1 product-quality convergence candidate. Experimental, not production, not canonical Blueprint.
+
+## Design workspace
+
+- Visual foundations: typography, color, spacing, surfaces, shape and motion.
+- Accessibility, contrast and responsive behavior experiments.
+- Angular Material compatibility comparisons.
+- Routed Platform, Buyer Portal and Authentication reference screens using synthetic data.
+- Catalog anatomy, Inventory Control and representative Sales Orders views.
+- Brand and product assets used only as local design evidence.
+
+## What belongs here
+
+- Inspectable visual experiments.
+- Reusable component and screen references.
+- Design-system rules awaiting human approval.
+- Traceability from visual question to evidence and decision.
+
+## What does not belong here
+
+- Production API, authentication, tenant provisioning or routing contracts.
+- Final product semantics or accepted domain decisions.
+- Claims that an experiment is production-ready.
+- Legacy source copied as implementation authority.
+
+Blueprint becomes durable design specification only after human approval. Production repositories remain authority for shipped behavior.
+
+## Visual foundations
+
+- Brand blue: #2563EB, represented through primitive OKLCH scale.
+- Plus Jakarta Sans for display, Inter for operational UI, native/system monospace for identifiers.
+- 4px spacing rhythm, restrained 6–16px radii and low-shadow surfaces.
+- White/light shell with pale blue canvas.
+- Accessible drawer navigation at narrow widths; sidebar is not silently removed.
+
+## Reference Screen Library
+
+<table>
+<tr><td width="50%" valign="top"><strong>Foundations and Contrast</strong><br />Typography, spacing, surfaces, motion, icon comparison and WCAG contrast results.</td><td width="50%" valign="top"><strong>Material Compatibility</strong><br />Buttons, fields, select, checkbox, radio, toggle, menu, tooltip and progress.</td></tr>
+<tr><td valign="top"><strong>Operational Reference</strong><br />Sales Orders and Inventory Control tables with state, density and overflow contracts.</td><td valign="top"><strong>Product Reference</strong><br />Platform Sales/Logistics, Buyer Portal request flows and Authentication screens.</td></tr>
+</table>
+
+## Current stack
+
+| Concern | Technology |
+| --- | --- |
+| Framework | Angular 22 standalone |
+| Components | Angular Material 22 and CDK-compatible patterns |
+| Styling | SCSS |
+| Tests | Vitest |
+| Language | TypeScript 6 |
+| Package manager | npm 11.17.0 |
+| Experimental dependencies | Google Fonts and PrimeIcons CDN |
+
+No DTCG compiler, token package, Storybook, Tailwind, Nx, dark mode or theme engine is present.
 
 ## Run
 
-```bash
-npm ci
-npm start -- --host 127.0.0.1 --port 4301
-```
+    npm ci
+    npm start -- --host 127.0.0.1 --port 4301
 
-Open `http://127.0.0.1:4301/`.
+Open http://127.0.0.1:4301/.
 
-## Validate
+## Validation
 
-```bash
-npm run build
-npm test -- --watch=false
-npm audit --omit=dev --audit-level=high
-```
+    npm run build
+    npm test -- --watch=false
+    npm audit --omit=dev --audit-level=high
 
-Browser review checkpoints: `320px`, `768px`, `1024px`, `1440px`.
+Browser review checkpoints: 320px, 768px, 1024px and 1440px.
 
-## Foundations
+## Repository structure
 
-- Brand blue remains `#2563EB` and is represented in primitive OKLCH scale.
-- Semantic roles separate brand action, workflow status, Sales responsibility and cold-chain classification.
-- Plus Jakarta Sans is display type; Inter is operational UI text; JetBrains Mono is selective identifier type.
-- 4px spacing rhythm; restrained 6–16px radii; low-shadow surfaces.
-- White/light shell and pale blue page canvas preserve Nexa character.
-- Mobile uses an accessible navigation drawer; sidebar is never silently removed without replacement.
+    src/                         Angular application
+    public/                      Local brand and catalog assets
+    IMPLEMENTATION-REPORT-v0.4.md
+    TRACEABILITY-v0.4.md
+    IMPLEMENTATION-REPORT-v0.5.md
+    TRACEABILITY-v0.5.md
+    RESEARCH-v0.5.md
+    STYLE-GUIDELINES-v0.5.md
+    VISUALIZATION-DECISION-v0.5.md
+    NORMALIZATION-REPORT-v0.2.md
+    package.json
+    angular.json
 
-## Review surfaces
+## Review workflow
 
-- Foundations: typography, spacing, surfaces, shape, motion and icon comparison.
-- Contrast Lab: active foreground/background pairs with ratio, AA result and known failures.
-- Angular Material Compatibility: buttons, fields, select, checkbox, radio, toggle, menu, tooltip and progress.
-- Operational reference: semantic Sales Orders table with overflow strategy and loading/error/empty guidance.
-- Reference catalog: white media surface, scan-path contract and safe seed-shaped data.
+1. Define visual question and evidence boundary.
+2. Build smallest inspectable experiment.
+3. Check keyboard, contrast, responsive states and content density.
+4. Compare against current Nexa identity and production constraints.
+5. Record decision, unresolved question or rejection.
+6. Promote only after human approval and production-repository ownership is clear.
 
-## Boundaries
+## Relationship to products
 
-- This repository is separate from Blueprint, Platform, Portal, Website and API.
-- Legacy Vue/FLOW material is provenance/evidence only; no screenshots are embedded.
-- PrimeIcons remains a human-review candidate. Material Icons are exercised for comparison, not silently adopted.
-- No DTCG compiler, token package, Storybook, Tailwind, Nx, dark mode or theme engine.
-- External Google Fonts and PrimeIcons CDN are documented experimental dependencies, not final production strategy.
+Design Lab supports Website, Platform, Portal, API documentation and future Mobile decisions. It does not publish product behavior, replace Blueprint authority or alter application source.
 
-## Source and research
+## Security and publication boundary
 
-Historical visual evidence informed the v0.1 baseline. v0.2 decisions follow current official Angular, Angular Material, Sass, W3C WCAG, CSS Color, ARIA APG and Design Tokens references listed in `NORMALIZATION-REPORT-v0.2.md`.
+Do not report vulnerabilities through public issues. No standalone Security Policy exists in this checkout. Experiments remain local design evidence until approved; publication does not imply production readiness.
+
+## Legal
+
+Copyright © 2026 Nexa. All rights reserved. No open-source license is selected by this README.
+
+<div align="center"><br />Nexa · Visual decisions made inspectable</div>
