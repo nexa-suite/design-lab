@@ -20,10 +20,11 @@
 
 Design Lab is Nexa's executable visual laboratory. It holds design evidence, component behavior and representative B2B workflow experiments for human review.
 
-Current state: v0.5.0-rc.1 product-quality convergence candidate. Experimental, not production, not canonical Blueprint.
+Current state: v0.6.0-rc.1 design-documentation candidate. Experimental, not production, not canonical Blueprint.
 
 ## Design workspace
 
+- Routed v0.6 documentation: foundations, component contracts, patterns, quality and engineering mapping.
 - Visual foundations: typography, color, spacing, surfaces, shape and motion.
 - Accessibility, contrast and responsive behavior experiments.
 - Angular Material compatibility comparisons.
@@ -64,15 +65,15 @@ Blueprint becomes durable design specification only after human approval. Produc
 
 ## Current stack
 
-| Concern | Technology |
-| --- | --- |
-| Framework | Angular 22 standalone |
-| Components | Angular Material 22 and CDK-compatible patterns |
-| Styling | SCSS |
-| Tests | Vitest |
-| Language | TypeScript 6 |
-| Package manager | npm 11.17.0 |
-| Experimental dependencies | Google Fonts and PrimeIcons CDN |
+| Concern                   | Technology                                      |
+| ------------------------- | ----------------------------------------------- |
+| Framework                 | Angular 22 standalone                           |
+| Components                | Angular Material 22 and CDK-compatible patterns |
+| Styling                   | SCSS                                            |
+| Tests                     | Vitest                                          |
+| Language                  | TypeScript 6                                    |
+| Package manager           | npm 11.17.0                                     |
+| Experimental dependencies | Google Fonts and PrimeIcons CDN                 |
 
 No DTCG compiler, token package, Storybook, Tailwind, Nx, dark mode or theme engine is present.
 
@@ -95,8 +96,17 @@ Browser review checkpoints: 320px, 768px, 1024px and 1440px.
 
     src/                         Angular application
     public/                      Local brand and catalog assets
-    IMPLEMENTATION-REPORT-v0.4.md
-    TRACEABILITY-v0.4.md
+    IMPLEMENTATION-REPORT-v0.6.md
+    TRACEABILITY-v0.6.md
+    RESEARCH-v0.6.md
+    DESIGN-PRINCIPLES-v0.6.md
+    DESIGN-SYSTEM-INVENTORY-v0.6.md
+    LEGACY-VISUAL-DNA-v0.6.md
+    FLOW-PARITY-AUDIT-v0.6.md
+    HEURISTIC-AUDIT-v0.6.md
+    ACCESSIBILITY-AUDIT-v0.6.md
+    STYLE-GUIDELINES-v0.6.md
+    FIGMA-HANDOFF-v0.6.md
     IMPLEMENTATION-REPORT-v0.5.md
     TRACEABILITY-v0.5.md
     RESEARCH-v0.5.md

@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.6.0-rc.1] - 2026-08-17
+
+### Added
+
+- Routed documentation system for foundations, component contracts, patterns, quality and engineering mapping.
+- Vue/FLOW research, Legacy visual DNA, complete FLOW inventory, Nielsen heuristic audit, accessibility audit, Figma handoff and rebuilt traceability records.
+- Functional documentation search, grouped disclosure navigation and mobile drawer focus restoration.
+
+### Changed
+
+- Lazy-loaded documentation and reference routes to reduce the initial bundle.
+- Restored the Vue/FLOW active navigation geometry with an approximately 8px row, pale-blue selected surface and inset blue edge.
+- Updated the candidate package version to 0.6.0-rc.1.
+
+### Status
+
+- Experimental release candidate. Not production. Not Blueprint authority. Human design review required.
+
 ## [0.5.0-rc.1] - 2026-08-17
 
 ### Added
