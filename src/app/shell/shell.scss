@@ -190,7 +190,7 @@
   text-align: center;
 }
 .search-empty {
-  margin: -6px 12px 0;
+  margin: var(--nexa-space-1) var(--nexa-space-3) 0;
   color: var(--nexa-color-text-secondary);
   font-size: 12px;
   line-height: 1.45;

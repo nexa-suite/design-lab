@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { NexaStateSequence, type NexaSequencePhase } from '../shared/nexa-state-sequence';
-import { NexaLogo } from '../shared/nexa-logo';
-import { NexaStatusChip } from '../shared/nexa-status-chip';
-import { evaluateContrast, type ContrastResult } from '../shared/contrast';
-import type { DocumentationPage } from './documentation-registry';
-import { APPROVED_CONTRAST_PAIRS, BLUE_SCALE, COLOR_FAMILIES, NEUTRAL_SCALE, RADIUS_ROWS, SURFACE_ROWS, TYPE_ROWS } from './documentation-data';
+import { NexaStateSequence, type NexaSequencePhase } from '../../lab/evidence/state-sequence/nexa-state-sequence';
+import { NexaLogo } from '../../design-system/brand/nexa-logo';
+import { NexaStatusChip } from '../../design-system/status/nexa-status-chip';
+import { evaluateContrast, type ContrastResult } from '../../lab/quality/contrast';
+import type { DocumentationPage } from '../models/documentation-page';
+import { APPROVED_CONTRAST_PAIRS, BLUE_SCALE, COLOR_FAMILIES, NEUTRAL_SCALE, RADIUS_ROWS, SURFACE_ROWS, TYPE_ROWS } from '../content/documentation-data';
 
 @Component({
   selector: 'nexa-foundation-documentation',
   imports: [NexaLogo, NexaStateSequence, NexaStatusChip],
-  templateUrl: './documentation-foundations.html',
-  styleUrl: './documentation-foundations.scss',
+  templateUrl: './foundation-documentation.html',
+  styleUrl: './foundation-documentation.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NexaFoundationDocumentation {

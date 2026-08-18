@@ -1,23 +1,23 @@
 import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NexaButton } from '../shared/nexa-button';
-import { evaluateContrast, type ContrastResult } from '../shared/contrast';
-import { NexaLabEvaluation } from '../shared/lab-evaluation';
-import { NexaSegmentedControl, type NexaSegmentOption } from '../shared/nexa-segmented-control';
-import { NexaStateSequence, type NexaSequencePhase } from '../shared/nexa-state-sequence';
-import { NexaStatusChip } from '../shared/nexa-status-chip';
-import { NexaTextField } from '../shared/nexa-text-field';
-import { NexaToggle } from '../shared/nexa-toggle';
-import type { DocumentationGroup, DocumentationPage } from './documentation-registry';
-import { APPROVED_CONTRAST_PAIRS, HEURISTIC_ROWS, MATURITY_ROWS } from './documentation-data';
+import { NexaButton } from '../../design-system/button/nexa-button';
+import { evaluateContrast, type ContrastResult } from '../../lab/quality/contrast';
+import { NexaLabEvaluation } from '../../lab/evaluation/lab-evaluation';
+import { NexaSegmentedControl, type NexaSegmentOption } from '../../design-system/segmented-control/nexa-segmented-control';
+import { NexaStateSequence, type NexaSequencePhase } from '../../lab/evidence/state-sequence/nexa-state-sequence';
+import { NexaStatusChip } from '../../design-system/status/nexa-status-chip';
+import { NexaTextField } from '../../design-system/text-field/nexa-text-field';
+import { NexaToggle } from '../../design-system/toggle/nexa-toggle';
+import type { DocumentationGroup, DocumentationPage } from '../models/documentation-page';
+import { APPROVED_CONTRAST_PAIRS, HEURISTIC_ROWS, MATURITY_ROWS } from '../content/documentation-data';
 
 interface AuditRow { readonly component: string; readonly keyboard: string; readonly focus: string; readonly contrast: string; readonly nonColor: string; readonly target: string; readonly motion: string; readonly resize: string; }
 
 @Component({
   selector: 'nexa-context-documentation',
   imports: [NexaButton, NexaSegmentedControl, NexaStateSequence, NexaStatusChip, NexaTextField, NexaToggle, RouterLink],
-  templateUrl: './documentation-context.html',
-  styleUrl: './documentation-context.scss',
+  templateUrl: './context-documentation.html',
+  styleUrl: './context-documentation.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NexaContextDocumentation {
@@ -34,8 +34,7 @@ export class NexaContextDocumentation {
   protected readonly patternSegment = signal('orders');
   protected readonly emptyMode = signal<'empty' | 'loading' | 'error' | 'success'>('empty');
   protected readonly stateModes: readonly ('empty' | 'loading' | 'error' | 'success')[] = ['empty', 'loading', 'error', 'success'];
-  protected readonly authNotice = signal('Sign in to continue.');
-  protected readonly authEmail = signal('');
+  protected readonly patternLatencyMs = signal<number | null>(null);
   protected readonly auditRows: readonly AuditRow[] = [
     { component: 'Button', keyboard: 'Verified', focus: 'Verified', contrast: 'Verified', nonColor: 'Verified', target: 'Verified', motion: 'Verified', resize: 'Verified' },
     { component: 'Text Field', keyboard: 'Verified', focus: 'Verified', contrast: 'Verified', nonColor: 'Verified', target: 'Verified', motion: 'N/A', resize: 'Verified' },
@@ -59,7 +58,11 @@ export class NexaContextDocumentation {
   protected setFormValue(value: string): void { this.formValue.set(value); this.formValid.set(false); }
   protected validateForm(): void { this.formValid.set(this.formValue().trim().length > 2); }
   protected setEmptyMode(mode: 'empty' | 'loading' | 'error' | 'success'): void { this.emptyMode.set(mode); }
-  protected signIn(): void { this.authNotice.set(this.authEmail() ? 'Credentials ready; next step is server authentication.' : 'Enter a work email to continue.'); }
+  protected selectPatternSegment(value: string): void {
+    const startedAt = performance.now();
+    this.patternSegment.set(value);
+    requestAnimationFrame(() => this.patternLatencyMs.set(Number((performance.now() - startedAt).toFixed(2))));
+  }
   protected contrast(pairId: string): ContrastResult {
     const pair = this.contrastPairs.find((candidate) => candidate.id === pairId) ?? this.contrastPairs[0];
     return evaluateContrast(pair.foreground, pair.background, pair.gate);

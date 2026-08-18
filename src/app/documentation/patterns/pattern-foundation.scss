@@ -1,0 +1,24 @@
+:host { display: block; }
+.pattern-section { padding: var(--nexa-layout-section-gap) 0; border-bottom: 1px solid var(--nexa-color-border-structural); }
+.evidence-first { padding-top: 0; }
+.section-heading { position: relative; display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: var(--nexa-space-3); align-items: start; margin-bottom: var(--nexa-space-6); }
+.pattern-section:not(:first-child) .section-heading { padding-top: var(--nexa-space-5); }
+.pattern-section:not(:first-child) .section-heading::before { position: absolute; inset: 0 0 auto; height: 1px; content: ''; background: var(--nexa-color-border-decorative); }
+.section-index { color: var(--nexa-color-primary-600); font: 700 var(--nexa-font-size-sm)/1.4 var(--nexa-font-family-mono); }
+.section-kicker, .proof-label { margin: 0 0 var(--nexa-space-2); color: var(--nexa-color-primary-700); font-size: var(--nexa-font-size-2xs); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+h2 { margin: 0; font: 720 clamp(22px, 3vw, 32px)/1.14 var(--nexa-font-family-display); letter-spacing: -.04em; }
+.section-intro { max-width: 760px; margin: var(--nexa-space-2) 0 0; color: var(--nexa-color-text-secondary); line-height: var(--nexa-line-height-relaxed); }
+.pattern-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--nexa-space-2); }
+.demo-status { margin: var(--nexa-space-4) 0 0; color: var(--nexa-color-text-secondary); font-size: var(--nexa-font-size-sm); line-height: var(--nexa-line-height-normal); }
+.pattern-note { display: flex; gap: var(--nexa-space-3); align-items: flex-start; margin-top: var(--nexa-space-5); padding: var(--nexa-space-4); border: 1px solid var(--nexa-color-primary-200); border-radius: var(--nexa-radius-card); color: var(--nexa-color-primary-700); background: var(--nexa-surface-info); }
+.pattern-note > i { margin-top: 2px; }
+.pattern-note span { display: grid; gap: var(--nexa-space-1); }
+.pattern-note small { color: var(--nexa-color-text-secondary); line-height: 1.45; }
+.danger-note { border-color: var(--nexa-color-danger-subtle-border); color: var(--nexa-color-danger-standard-text); background: var(--nexa-color-danger-subtle-background); }
+.danger-note small { color: var(--nexa-color-text-secondary); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; clip-path: inset(50%); }
+
+@media (max-width: 440px) {
+  .section-heading { grid-template-columns: 30px minmax(0, 1fr); gap: var(--nexa-space-2); }
+  .pattern-actions .demo-status { flex-basis: 100%; }
+}

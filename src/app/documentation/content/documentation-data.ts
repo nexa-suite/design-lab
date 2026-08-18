@@ -1,4 +1,4 @@
-import type { DocumentationPage } from './documentation-registry';
+import type { DocumentationPage } from '../models/documentation-page';
 
 export interface DocRow { readonly name: string; readonly value: string; readonly note: string; }
 export interface DocAnswer { readonly title: string; readonly copy: string; }

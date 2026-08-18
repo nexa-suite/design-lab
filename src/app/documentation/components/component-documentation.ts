@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
-import { NexaButton } from '../shared/nexa-button';
-import { NexaActionMenu, type NexaActionMenuItem } from '../shared/nexa-action-menu';
-import { NexaTooltip } from '../shared/nexa-tooltip';
-import { NexaNumericStepper } from '../shared/nexa-numeric-stepper';
-import { NexaRangeSlider } from '../shared/nexa-range-slider';
-import { NexaSegmentedControl, type NexaSegmentOption } from '../shared/nexa-segmented-control';
-import { NexaStateSequence, type NexaSequencePhase } from '../shared/nexa-state-sequence';
-import { NexaStatusChip, type NexaStatusTone } from '../shared/nexa-status-chip';
-import { NexaTextField } from '../shared/nexa-text-field';
-import { NexaToggle } from '../shared/nexa-toggle';
-import type { DocumentationPage } from './documentation-registry';
-import { COMPONENT_STATES, componentAnswers } from './documentation-data';
+import { NexaButton } from '../../design-system/button/nexa-button';
+import { NexaActionMenu, type NexaActionMenuItem } from '../../design-system/action-menu/nexa-action-menu';
+import { NexaTooltip } from '../../design-system/tooltip/nexa-tooltip';
+import { NexaNumericStepper } from '../../design-system/numeric-stepper/nexa-numeric-stepper';
+import { NexaRangeSlider } from '../../design-system/range-slider/nexa-range-slider';
+import { NexaSegmentedControl, type NexaSegmentOption } from '../../design-system/segmented-control/nexa-segmented-control';
+import { NexaStateSequence, type NexaSequencePhase } from '../../lab/evidence/state-sequence/nexa-state-sequence';
+import { NexaStatusChip, type NexaStatusTone } from '../../design-system/status/nexa-status-chip';
+import { NexaTextField } from '../../design-system/text-field/nexa-text-field';
+import { NexaToggle } from '../../design-system/toggle/nexa-toggle';
+import type { DocumentationPage } from '../models/documentation-page';
+import { COMPONENT_STATES, componentAnswers } from '../content/documentation-data';
 
 type ButtonState = 'idle' | 'processing' | 'success' | 'error';
 type TableStatus = 'Awaiting review' | 'Completed' | 'Blocked';
@@ -32,8 +32,8 @@ const NAV_ITEMS: readonly NavItem[] = [
 @Component({
   selector: 'nexa-component-documentation',
   imports: [NexaActionMenu, NexaButton, NexaNumericStepper, NexaRangeSlider, NexaSegmentedControl, NexaStateSequence, NexaStatusChip, NexaTextField, NexaToggle, NexaTooltip],
-  templateUrl: './documentation-components.html',
-  styleUrl: './documentation-components.scss',
+  templateUrl: './component-documentation.html',
+  styleUrl: './component-documentation.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '(document:keydown.escape)': 'closeLayers()' },
 })
@@ -54,6 +54,7 @@ export class NexaComponentDocumentation {
   protected readonly selectedFeatures = signal<readonly string[]>(['cold-chain']);
   protected readonly toggleEnabled = signal(true);
   protected readonly selectedSegment = signal('open');
+  protected readonly segmentedLatencyMs = signal<number | null>(null);
   protected readonly statusNotice = signal('Submitted');
   protected readonly alertVisible = signal(true);
   protected readonly alertNotice = signal('');
@@ -119,9 +120,21 @@ export class NexaComponentDocumentation {
     { label: 'Critical', tone: 'danger', icon: 'pi-shield', emphasis: 'strong' },
   ];
   protected readonly operationPhases: readonly NexaSequencePhase[] = [
-    { id: 'ready', label: 'Ready', detail: 'Create order is available.', tone: 'neutral' },
-    { id: 'processing', label: 'Processing', detail: 'Creating order…', tone: 'info' },
-    { id: 'success', label: 'Success', detail: 'Order created; adjacent feedback remains.', tone: 'success' },
+    { id: 'ready', label: 'Ready', detail: 'Create order is available.', tone: 'neutral', durationMs: 700 },
+    { id: 'processing', label: 'Processing', detail: 'Creating order.', tone: 'info', durationMs: 900 },
+    { id: 'success', label: 'Success', detail: 'Order created; adjacent feedback remains.', tone: 'success', terminal: true },
+  ];
+  protected readonly searchPhases: readonly NexaSequencePhase[] = [
+    { id: 'query', label: 'Query', detail: 'A search term is available.', tone: 'neutral', durationMs: 700 },
+    { id: 'searching', label: 'Searching', detail: 'The query is being evaluated.', tone: 'info', durationMs: 900 },
+    { id: 'results', label: 'Results', detail: 'Matching products are visible.', tone: 'success', terminal: true },
+    { id: 'error', label: 'Error', detail: 'Search failed without losing the query.', tone: 'danger', terminal: true },
+  ];
+  protected readonly progressPhases: readonly NexaSequencePhase[] = [
+    { id: 'determinate', label: 'Determinate', detail: 'Known completion amount.', tone: 'info', durationMs: 700 },
+    { id: 'paused', label: 'Paused', detail: 'Progress is intentionally paused.', tone: 'warning', durationMs: 700 },
+    { id: 'complete', label: 'Complete', detail: 'The operation reached its terminal result.', tone: 'success', terminal: true },
+    { id: 'error', label: 'Error', detail: 'The operation needs recovery.', tone: 'danger', terminal: true },
   ];
 
   protected readonly searchResults = computed(() => {
@@ -165,6 +178,18 @@ export class NexaComponentDocumentation {
   protected setPlan(event: Event): void { const target = event.target; if (target instanceof HTMLInputElement) this.selectedPlan.set(target.value); }
   protected toggleFeature(feature: string): void { this.selectedFeatures.update((current) => current.includes(feature) ? current.filter((item) => item !== feature) : [...current, feature]); }
   protected setStatus(status: string): void { this.statusNotice.set(status); }
+  protected selectSegment(value: string): void {
+    const startedAt = performance.now();
+    this.selectedSegment.set(value);
+    requestAnimationFrame(() => this.segmentedLatencyMs.set(Number((performance.now() - startedAt).toFixed(2))));
+  }
+  protected hasTemporalEvidence(): boolean { return ['buttons', 'search-fields', 'progress-indicators'].includes(this.page().id); }
+  protected processPhases(): readonly NexaSequencePhase[] {
+    return this.page().id === 'search-fields' ? this.searchPhases : this.page().id === 'progress-indicators' ? this.progressPhases : this.operationPhases;
+  }
+  protected processEvidenceTitle(): string {
+    return this.page().id === 'search-fields' ? 'Search operation' : this.page().id === 'progress-indicators' ? 'Progress lifecycle' : 'Button operation';
+  }
   protected toneForStatus(status: string): NexaStatusTone { return status === 'Completed' ? 'success' : status === 'Blocked' ? 'danger' : status === 'Awaiting review' ? 'warning' : 'info'; }
   protected dismissAlert(): void { this.alertVisible.set(false); this.alertNotice.set('Alert dismissed. The recovery action restores it.'); }
   protected restoreAlert(): void { this.alertVisible.set(true); this.alertNotice.set(''); }

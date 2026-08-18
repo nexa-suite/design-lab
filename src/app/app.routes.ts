@@ -1,11 +1,22 @@
+import type { Type } from '@angular/core';
 import { Routes } from '@angular/router';
 
 const loadLabShell = () =>
   import('./shell/shell').then(({ NexaDesignLabShell }) => NexaDesignLabShell);
-const loadDocumentationPage = () =>
-  import('./guidelines/documentation-page').then(
-    ({ NexaDocumentationPage }) => NexaDocumentationPage,
-  );
+const loadContextPage = () =>
+  import('./documentation/context/context-page').then(({ NexaContextPage }) => NexaContextPage);
+const loadFoundationPage = () =>
+  import('./documentation/foundations/foundation-page').then(({ NexaFoundationPage }) => NexaFoundationPage);
+const loadComponentPage = () =>
+  import('./documentation/components/component-page').then(({ NexaComponentPage }) => NexaComponentPage);
+const loadPatternPage = () =>
+  import('./documentation/patterns/other/pattern-page').then(({ NexaPatternPage }) => NexaPatternPage);
+const loadAuthenticationPage = () =>
+  import('./documentation/patterns/authentication/authentication-page').then(({ NexaAuthenticationPage }) => NexaAuthenticationPage);
+const loadAnalyticsPage = () =>
+  import('./documentation/patterns/analytics/analytics-page').then(({ NexaAnalyticsPage }) => NexaAnalyticsPage);
+const loadDispatchBoardPage = () =>
+  import('./documentation/patterns/dispatch-board/dispatch-board-page').then(({ NexaDispatchBoardPage }) => NexaDispatchBoardPage);
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'guidelines/overview' },
@@ -13,74 +24,75 @@ export const routes: Routes = [
     path: 'guidelines',
     loadComponent: loadLabShell,
     children: [
-      { path: 'overview', loadComponent: loadDocumentationPage, data: { page: 'overview' } },
-      { path: 'principles', loadComponent: loadDocumentationPage, data: { page: 'principles' } },
-      { path: 'maturity', loadComponent: loadDocumentationPage, data: { page: 'maturity' } },
+      ...pageRoutes(loadContextPage, [
+        ['overview', 'overview'],
+        ['principles', 'principles'],
+        ['maturity', 'maturity'],
+      ]),
       { path: 'foundations', pathMatch: 'full', redirectTo: 'foundations/color' },
-      ...documentationRoutes('foundations', [
-        ['color', 'color'],
-        ['brand-logo', 'brand-logo'],
-        ['typography', 'typography'],
-        ['layout-spacing', 'layout-spacing'],
-        ['shape-radius', 'shape-radius'],
-        ['surfaces', 'surfaces'],
-        ['iconography', 'iconography'],
-        ['motion', 'motion'],
+      ...pageRoutes(loadFoundationPage, [
+        ['foundations/color', 'color'],
+        ['foundations/brand-logo', 'brand-logo'],
+        ['foundations/typography', 'typography'],
+        ['foundations/layout-spacing', 'layout-spacing'],
+        ['foundations/shape-radius', 'shape-radius'],
+        ['foundations/surfaces', 'surfaces'],
+        ['foundations/iconography', 'iconography'],
+        ['foundations/motion', 'motion'],
       ]),
       { path: 'components', pathMatch: 'full', redirectTo: 'components/buttons' },
-      ...documentationRoutes('components', [
-        ['buttons', 'buttons'],
-        ['text-fields', 'text-fields'],
-        ['search-fields', 'search-fields'],
-        ['select-combobox', 'select-combobox'],
-        ['checkbox', 'checkbox'],
-        ['radio', 'radio'],
-        ['toggle', 'toggle'],
-        ['segmented-control', 'segmented-control'],
-        ['status-badges', 'status-badges'],
-        ['alerts-feedback', 'alerts-feedback'],
-        ['menus', 'menus'],
-        ['tooltips', 'tooltips'],
-        ['dialogs-overlays', 'dialogs-overlays'],
-        ['cards-surfaces', 'cards-surfaces'],
-        ['lists-tables', 'lists-tables'],
-        ['progress-indicators', 'progress-indicators'],
-        ['workflow-steps', 'workflow-steps'],
-        ['numeric-stepper', 'numeric-stepper'],
-        ['slider', 'slider'],
-        ['navigation-sidebars', 'navigation-sidebars'],
+      ...pageRoutes(loadComponentPage, [
+        ['components/buttons', 'buttons'],
+        ['components/text-fields', 'text-fields'],
+        ['components/search-fields', 'search-fields'],
+        ['components/select-combobox', 'select-combobox'],
+        ['components/checkbox', 'checkbox'],
+        ['components/radio', 'radio'],
+        ['components/toggle', 'toggle'],
+        ['components/segmented-control', 'segmented-control'],
+        ['components/status-badges', 'status-badges'],
+        ['components/alerts-feedback', 'alerts-feedback'],
+        ['components/menus', 'menus'],
+        ['components/tooltips', 'tooltips'],
+        ['components/dialogs-overlays', 'dialogs-overlays'],
+        ['components/cards-surfaces', 'cards-surfaces'],
+        ['components/lists-tables', 'lists-tables'],
+        ['components/progress-indicators', 'progress-indicators'],
+        ['components/workflow-steps', 'workflow-steps'],
+        ['components/numeric-stepper', 'numeric-stepper'],
+        ['components/slider', 'slider'],
+        ['components/navigation-sidebars', 'navigation-sidebars'],
       ]),
       { path: 'patterns', pathMatch: 'full', redirectTo: 'patterns/forms' },
-      ...documentationRoutes('patterns', [
-        ['forms', 'forms'],
-        ['search-filtering', 'search-filtering'],
-        ['async-operations', 'async-operations'],
-        ['empty-loading-error', 'empty-loading-error'],
-        ['authentication', 'authentication'],
-        ['legal-content', 'legal-content'],
-        ['payments', 'payments'],
-        ['analytics', 'analytics'],
-        ['dispatch-board', 'dispatch-board'],
-        ['data-dense-operations', 'data-dense-operations'],
-        ['responsive', 'responsive'],
+      ...pageRoutes(loadPatternPage, [
+        ['patterns/forms', 'forms'],
+        ['patterns/search-filtering', 'search-filtering'],
+        ['patterns/async-operations', 'async-operations'],
+        ['patterns/empty-loading-error', 'empty-loading-error'],
+        ['patterns/legal-content', 'legal-content'],
+        ['patterns/payments', 'payments'],
+        ['patterns/data-dense-operations', 'data-dense-operations'],
+        ['patterns/responsive', 'responsive'],
       ]),
+      ...pageRoutes(loadAuthenticationPage, [['patterns/authentication', 'authentication']]),
+      ...pageRoutes(loadAnalyticsPage, [['patterns/analytics', 'analytics']]),
+      ...pageRoutes(loadDispatchBoardPage, [['patterns/dispatch-board', 'dispatch-board']]),
       { path: 'quality', pathMatch: 'full', redirectTo: 'quality/accessibility-lab' },
-      ...documentationRoutes('quality', [
-        ['accessibility-lab', 'accessibility-lab'],
-        ['contrast-lab', 'contrast-lab'],
-        ['heuristics', 'heuristics'],
-        ['input-modality', 'input-modality'],
-        ['component-maturity', 'component-maturity'],
+      ...pageRoutes(loadContextPage, [
+        ['quality/accessibility-lab', 'accessibility-lab'],
+        ['quality/contrast-lab', 'contrast-lab'],
+        ['quality/heuristics', 'heuristics'],
+        ['quality/input-modality', 'input-modality'],
+        ['quality/component-maturity', 'component-maturity'],
       ]),
       { path: 'engineering', pathMatch: 'full', redirectTo: 'engineering/angular-architecture' },
-      ...documentationRoutes('engineering', [
-        ['angular-architecture', 'angular-architecture'],
-        ['design-tokens', 'design-tokens'],
-        ['component-apis', 'component-apis'],
-        ['testing', 'testing'],
-        ['figma-mapping', 'figma-mapping'],
+      ...pageRoutes(loadContextPage, [
+        ['engineering/angular-architecture', 'angular-architecture'],
+        ['engineering/design-tokens', 'design-tokens'],
+        ['engineering/component-apis', 'component-apis'],
+        ['engineering/testing', 'testing'],
+        ['engineering/figma-mapping', 'figma-mapping'],
       ]),
-      // Incoming RC2 links keep resolving without recreating any retired runtime screen.
       { path: 'foundations/materials', pathMatch: 'full', redirectTo: 'foundations/surfaces' },
       { path: 'components/select-combo', pathMatch: 'full', redirectTo: 'components/select-combobox' },
       { path: 'components/selection', pathMatch: 'full', redirectTo: 'components/checkbox' },
@@ -96,13 +108,9 @@ export const routes: Routes = [
   { path: '**', redirectTo: 'guidelines/overview' },
 ];
 
-function documentationRoutes(
-  section: string,
+function pageRoutes(
+  loadComponent: () => Promise<Type<unknown>>,
   pages: readonly (readonly [string, string])[],
 ): Routes {
-  return pages.map(([path, page]) => ({
-    path: `${section}/${path}`,
-    loadComponent: loadDocumentationPage,
-    data: { page },
-  }));
+  return pages.map(([path, page]) => ({ path, loadComponent, data: { page } }));
 }

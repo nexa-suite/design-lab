@@ -12,11 +12,10 @@ import {
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import {
   DOCUMENTATION_GROUPS,
-  type DocumentationGroup,
-  type DocumentationPage,
-} from '../guidelines/documentation-registry';
-import { NexaLabEvaluation } from '../shared/lab-evaluation';
-import { NexaLogo } from '../shared/nexa-logo';
+} from '../documentation/navigation/documentation-registry';
+import type { DocumentationGroup, DocumentationPageMetadata } from '../documentation/models/documentation-page';
+import { NexaLabEvaluation } from '../lab/evaluation/lab-evaluation';
+import { NexaLogo } from '../design-system/brand/nexa-logo';
 
 @Component({
   selector: 'nexa-shell',
@@ -75,7 +74,7 @@ export class NexaDesignLabShell {
     return `documentation-group-${group.label.toLocaleLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
   }
 
-  protected navigationLink(item: DocumentationPage): string {
+  protected navigationLink(item: DocumentationPageMetadata): string {
     return `/guidelines/${item.path}`;
   }
 
@@ -96,11 +95,8 @@ export class NexaDesignLabShell {
     this.closeMobileNav();
   }
 
-  private matchesSearch(item: DocumentationPage, term: string): boolean {
-    return [item.label, item.title, item.eyebrow, item.kind, item.group, ...item.keywords]
-      .join(' ')
-      .toLocaleLowerCase()
-      .includes(term);
+  private matchesSearch(item: DocumentationPageMetadata, term: string): boolean {
+    return item.searchText.toLocaleLowerCase().includes(term);
   }
 
   private afterRender(callback: () => void): void {
