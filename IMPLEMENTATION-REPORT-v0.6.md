@@ -2,6 +2,8 @@
 
 Release candidate: v0.6.0-rc.1  
 Branch: design/v0.6-design-documentation-system  
+Tag: v0.6.0-rc.1  
+Release: https://github.com/nexa-suite/design-lab/releases/tag/v0.6.0-rc.1  
 Scope: Design Lab only  
 Date: 2026-08-17
 
@@ -35,7 +37,7 @@ Vue is read-only visual evidence. FLOW remains external evidence and is not copi
 | npm audit --omit=dev --audit-level=high           | PASS; 0 vulnerabilities reported                                                                              |
 | git diff --check                                  | PASS                                                                                                          |
 | Browser route/search/keyboard/responsive evidence | PASS; representative routes, search, disclosure, focus restoration, 1440/390/320 checks and no console errors |
-| Matched Vue/Angular visual captures               | PENDING; required before parity claim                                                                         |
+| Matched Vue/Angular visual captures               | PENDING; no parity claim made                                                                                 |
 | Human design audit                                | NOT PERFORMED                                                                                                 |
 
 ## Design decision boundary
@@ -44,4 +46,4 @@ The release is experimental and candidate-only. It must not be described as Desi
 
 ## Next
 
-Run audit and browser gates, capture representative desktop/mobile evidence, inspect bundle/a11y findings, then publish the RC branch/tag only if all requested release gates are verified.
+The RC is published with the documented caveats. Next audit step is a human review with matched Vue/Angular captures at the same route and viewport, plus manual screen-reader, contrast and 320px/400% reflow evidence. Do not promote this candidate to approved, production or Blueprint authority.
