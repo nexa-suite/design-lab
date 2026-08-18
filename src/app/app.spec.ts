@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { App } from './app';
 import { routes } from './app.routes';
 
-describe('Nexa Design Lab v0.4 routes', () => {
+describe('Nexa Design Lab v0.5 routes', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
@@ -44,11 +44,11 @@ describe('Nexa Design Lab v0.4 routes', () => {
   it('renders real Material and authentication reference routes', async () => {
     const material = await navigate('/guidelines/material');
     expect(material.querySelector('h1')?.textContent).toContain('Material compatibility');
-    expect(material.querySelectorAll('.nexa-field').length).toBe(2);
-    expect(material.querySelector('select.nexa-native-select')).toBeTruthy();
+    expect(material.querySelectorAll('nexa-native-select').length).toBe(1);
+    expect(material.querySelector('nexa-native-select select')).toBeTruthy();
 
     const auth = await navigate('/reference/auth/login');
-    expect(auth.querySelector('h1')?.textContent).toContain('Sign in to Nexa');
+    expect(auth.querySelector('h2')?.textContent).toContain('Sign in to your workspace');
     expect(auth.querySelector('form')).toBeTruthy();
   });
 });

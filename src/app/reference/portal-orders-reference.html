@@ -1,0 +1,89 @@
+<div class="portal-orders-page">
+  <nexa-page-header
+    eyebrow="BUYER PORTAL / ACTIVITY"
+    title="My Orders"
+    description="Follow active deliveries, documents and recent order activity."
+    ><nexa-button routerLink="/reference/portal/request-builder"
+      >New Request</nexa-button
+    ></nexa-page-header
+  >
+  <div class="portal-kpis">
+    <nexa-surface
+      ><span class="kpi-label">Active orders</span><strong>0</strong
+      ><small>No orders in transit</small></nexa-surface
+    ><nexa-surface
+      ><span class="kpi-label">Pending documents</span><strong>0</strong
+      ><small>All documents ready</small></nexa-surface
+    ><nexa-surface tone="soft"
+      ><span class="kpi-label">Latest activity</span><strong class="latest">{{ order.id }}</strong
+      ><small>{{ order.status }} · {{ order.date }}</small></nexa-surface
+    >
+  </div>
+  <div class="orders-layout">
+    <nexa-table-shell
+      ><div class="table-heading">
+        <div>
+          <p class="kicker">ORDER HISTORY</p>
+          <h2>Recent orders</h2>
+        </div>
+        <span class="subtle">1 order</span>
+      </div>
+      <div class="order-list">
+        <button type="button" class="order-row selected" (click)="selectOrder(order.id)">
+          <span
+            ><strong>{{ order.id }}</strong
+            ><small>{{ order.date }} · {{ order.items }}</small></span
+          ><nexa-status-chip tone="success">{{ order.status }}</nexa-status-chip
+          ><b>{{ order.total }}</b></button
+        ><button type="button" class="order-row" (click)="selectOrder('ORD-2026-0000')">
+          <span><strong>ORD-2026-0000</strong><small>12 Aug 2026 · 2 items</small></span
+          ><nexa-status-chip tone="neutral">Closed</nexa-status-chip><b>PEN 1,240.00</b>
+        </button>
+      </div></nexa-table-shell
+    ><nexa-surface class="order-detail"
+      ><div class="detail-heading">
+        <div>
+          <p class="kicker">ORDER DETAIL</p>
+          <h2>{{ order.id }}</h2>
+        </div>
+        <nexa-status-chip tone="success">{{ order.status }}</nexa-status-chip>
+      </div>
+      <div class="detail-grid">
+        <div>
+          <small>Dispatch ID</small><strong>{{ order.dispatch }}</strong>
+        </div>
+        <div>
+          <small>Delivery date</small><strong>{{ order.date }}</strong>
+        </div>
+        <div><small>Warehouse</small><strong>Warehouse 01</strong></div>
+        <div>
+          <small>Tracking route</small><strong>{{ order.route }}</strong>
+        </div>
+      </div>
+      <div class="tracking-heading">
+        <h3>Delivery tracking</h3>
+        <span>9 checkpoints</span>
+      </div>
+      <ol class="tracking-list">
+        @for (item of tracking; track item; let index = $index) {
+          <li class="complete">
+            <span>{{ index + 1 }}</span
+            ><small>{{ item }}</small>
+          </li>
+        }
+      </ol></nexa-surface
+    >
+  </div>
+  <div class="context-grid">
+    <nexa-surface
+      ><span>Documents</span><strong>1 / 1 ready</strong
+      ><nexa-status-chip tone="success">Ready</nexa-status-chip></nexa-surface
+    ><nexa-surface
+      ><span>Temperature</span><strong>Monitored</strong
+      ><nexa-status-chip tone="info">No alerts</nexa-status-chip></nexa-surface
+    ><nexa-surface
+      ><span>Delivery address</span><strong>{{ order.address }}</strong
+      ><nexa-status-chip tone="neutral">Confirmed</nexa-status-chip></nexa-surface
+    >
+  </div>
+</div>

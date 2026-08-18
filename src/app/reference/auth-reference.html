@@ -1,0 +1,88 @@
+<div class="auth-reference">
+  <section class="auth-brand-panel">
+    <img src="/brand/nexa-white.svg" alt="nexa" class="auth-logo" />
+    <div class="brand-copy">
+      <p class="kicker">B2B COLD-CHAIN OPERATIONS</p>
+      <h1>Cold-chain operations, finally in order.</h1>
+      <p>
+        One workspace for catalog, orders, dispatch and every document that keeps the route moving.
+      </p>
+      <div class="brand-pills">
+        <span>Catalog control</span><span>Order visibility</span><span>Dispatch-ready</span
+        ><span>Temperature-aware</span>
+      </div>
+    </div>
+    <small class="brand-footer">NEXA · ICISA REFERENCE FLOW · 2026</small>
+  </section>
+  <main class="auth-form-panel">
+    <div class="language-pills">
+      <button type="button">ES</button><button type="button" class="active">EN</button>
+    </div>
+    <div class="auth-form-content">
+      <p class="kicker">{{ isOrganization() ? 'WORKSPACE SETUP' : 'WELCOME BACK' }}</p>
+      <h2>{{ isOrganization() ? 'Set up your organization' : 'Sign in to your workspace' }}</h2>
+      <p class="auth-intro">
+        {{
+          isOrganization()
+            ? 'Create the workspace identity used by your operations team.'
+            : 'Use your Nexa workspace credentials to continue.'
+        }}
+      </p>
+      @if (!isOrganization()) {
+        <button
+          type="button"
+          class="workspace-card"
+          [class.selected]="workspace()"
+          (click)="chooseWorkspace()"
+        >
+          <span class="workspace-icon">▦</span
+          ><span
+            ><strong>{{ workspace() ? 'ICISA Distribuciones' : 'Select a workspace' }}</strong
+            ><small>{{
+              workspace()
+                ? 'icisa.nexa.com.pe · Standard workspace'
+                : 'Choose where you want to work'
+            }}</small></span
+          ><span class="workspace-chevron">›</span>
+        </button>
+      }
+      @if (isWorkspace()) {
+        <nexa-surface tone="soft" class="workspace-preview"
+          ><p class="kicker">WORKSPACE PREVIEW</p>
+          <h3>ICISA Distribuciones</h3>
+          <p>icisa.nexa.com.pe</p>
+          <div>
+            <nexa-status-chip tone="info">Standard</nexa-status-chip
+            ><nexa-status-chip tone="success">Active</nexa-status-chip>
+          </div></nexa-surface
+        >
+      }
+      <form (submit)="$event.preventDefault(); submit()">
+        <label
+          >Corporate email<input
+            type="email"
+            [value]="email()"
+            (input)="email.set($any($event.target).value)"
+            placeholder="name@company.com"
+            required /></label
+        ><label
+          >Password<span class="password-field"
+            ><input
+              type="password"
+              [value]="password()"
+              (input)="password.set($any($event.target).value)"
+              placeholder="Enter your password"
+              required
+            /><button type="button" aria-label="Show password">◉</button></span
+          ></label
+        ><a href="/guidelines/overview" class="forgot">Forgot password?</a
+        ><nexa-button type="submit" [disabled]="!email() || !password()">{{
+          submitted() ? 'Signed in' : 'Continue to workspace'
+        }}</nexa-button>
+      </form>
+      <p class="auth-footer">
+        New to Nexa? <a href="/reference/auth/organization-setup">Create an organization</a>
+      </p>
+    </div>
+  </main>
+</div>

@@ -46,17 +46,12 @@
           id="buyer-hint"
           >Nexa closed field, browser-native text behavior.</small
         ></label
-      ><label class="nexa-field"
-        >Workflow status<select
-          class="nexa-native-select"
-          [value]="selectedStatus()"
-          (change)="setStatus($any($event.target).value)"
-        >
-          <option>Awaiting review</option>
-          <option>In preparation</option>
-          <option>Ready for dispatch</option></select
-        ><small>Open selection remains native to the operating system.</small></label
-      >
+      ><nexa-native-select
+        label="Workflow status"
+        [options]="['Awaiting review', 'In preparation', 'Ready for dispatch']"
+        [value]="selectedStatus()"
+        (changed)="setStatus($event)"
+      ></nexa-native-select>
     </div>
     <p class="implementation-note">
       Current state <b>{{ selectedStatus() }}</b> · Behavior source <b>native select</b> ·
@@ -108,26 +103,10 @@
       </div>
       <code>CDK-style behavior · Nexa panel</code>
     </div>
-    <div class="nexa-menu-anchor">
-      <button
-        class="nexa-menu-trigger"
-        type="button"
-        [attr.aria-expanded]="actionMenuOpen()"
-        (click)="toggleActionMenu()"
-      >
-        More actions
-      </button>
-      @if (actionMenuOpen()) {
-        <div class="nexa-menu-panel" role="menu">
-          <button type="button" role="menuitem" (click)="closeActionMenu()">Open detail</button
-          ><button type="button" role="menuitem" (click)="closeActionMenu()">
-            Assign reviewer
-          </button>
-        </div>
-      }
-    </div>
+    <nexa-action-menu [items]="menuItems" (selected)="selectMenuAction($event)"></nexa-action-menu>
     <p class="implementation-note">
-      Menu behavior <b>custom Nexa panel</b> · keyboard Escape and focusable menu items preserved.
+      Menu behavior <b>Angular Aria + CDK Overlay</b> · Nexa owns presentation; keyboard Escape and
+      focus remain supported.
     </p>
   </section>
 </div>

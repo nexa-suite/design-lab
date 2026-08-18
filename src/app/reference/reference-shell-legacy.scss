@@ -35,7 +35,7 @@
   min-height: 40px;
   padding-inline: 11px;
   border-left-width: 3px;
-  border-radius: 0 var(--nexa-radius-lg) var(--nexa-radius-lg) 0;
+  border-radius: var(--nexa-radius-nav-active);
   font-size: 13px;
 }
 .reference-nav-item i {

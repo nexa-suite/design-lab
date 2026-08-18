@@ -53,6 +53,12 @@
   --nexa-surface-card: var(--nexa-primitive-white);
   --nexa-surface-inset: var(--nexa-primitive-slate-100);
   --nexa-surface-overlay: rgb(15 23 42 / 48%);
+  --nexa-surface-nav-active: var(--nexa-primitive-blue-50);
+  --nexa-surface-info: var(--nexa-primitive-blue-50);
+  --nexa-surface-success: var(--nexa-primitive-green-50);
+  --nexa-surface-warning: var(--nexa-primitive-amber-50);
+  --nexa-surface-danger: var(--nexa-primitive-red-50);
+  --nexa-surface-table-header: var(--nexa-primitive-slate-50);
   --nexa-space-1: var(--nexa-primitive-space-1);
   --nexa-space-2: var(--nexa-primitive-space-2);
   --nexa-space-3: var(--nexa-primitive-space-3);
@@ -75,9 +81,11 @@
   --nexa-radius-overlay: 18px;
   --nexa-radius-dialog: 24px;
   --nexa-radius-pill: var(--nexa-primitive-radius-pill);
+  --nexa-radius-nav-active: 18px;
   --nexa-shadow-xs: var(--nexa-primitive-shadow-xs);
   --nexa-shadow-sm: var(--nexa-primitive-shadow-sm);
   --nexa-shadow-overlay: 0 22px 60px rgb(15 23 42 / 18%);
+  --nexa-shadow-menu: 0 14px 32px rgb(15 23 42 / 14%);
   --nexa-font-family-display: var(--nexa-primitive-font-display);
   --nexa-font-family-body: var(--nexa-primitive-font-body);
   --nexa-font-family-mono: var(--nexa-primitive-font-mono);

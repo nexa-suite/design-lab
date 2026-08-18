@@ -1,0 +1,73 @@
+<div class="portal-home-page">
+  <nexa-page-header
+    eyebrow="BUYER PORTAL / ICISA DISTRIBUCIONES"
+    title="Good morning, Carlos"
+    description="Keep today’s cold-chain requests moving with one clear workspace view."
+    ><nexa-button routerLink="/reference/portal/request-builder"
+      >New Request</nexa-button
+    ></nexa-page-header
+  >
+  <div class="home-grid">
+    <nexa-surface tone="soft" class="next-action"
+      ><div>
+        <p class="kicker">NEXT ACTION</p>
+        <h2>Review your latest delivery</h2>
+        <p>Order ORD-2026-0001 is delivered. One document is ready to download.</p>
+        <a routerLink="/reference/portal/orders"
+          >Open order detail <span aria-hidden="true">›</span></a
+        >
+      </div>
+      <span class="action-orb">↗</span></nexa-surface
+    ><nexa-surface class="request-card"
+      ><p class="kicker">REQUEST BUILDER</p>
+      <h2>Start from your catalog</h2>
+      <p>Find refrigerated products, add quantities and send a request to Sales.</p>
+      <nexa-button variant="secondary" routerLink="/reference/portal/catalog"
+        >Browse catalog</nexa-button
+      ></nexa-surface
+    >
+  </div>
+  <div class="home-columns">
+    <nexa-surface class="activity-surface"
+      ><div class="surface-heading">
+        <div>
+          <p class="kicker">RECENT ACTIVITY</p>
+          <h2>Workspace pulse</h2>
+        </div>
+        <nexa-status-chip tone="success">All systems ready</nexa-status-chip>
+      </div>
+      <div class="activity-row">
+        <span class="activity-icon">✓</span
+        ><span
+          ><strong>ORD-2026-0001 delivered</strong
+          ><small>15 Aug 2026 · Lima Este Cold Route</small></span
+        ><b>PEN 2,980.00</b>
+      </div>
+      <div class="activity-row">
+        <span class="activity-icon blue">+</span
+        ><span
+          ><strong>Request builder is ready</strong
+          ><small>8 products available for your workspace</small></span
+        ><a routerLink="/reference/portal/request-builder">Continue</a>
+      </div></nexa-surface
+    ><nexa-surface class="commercial-card"
+      ><p class="kicker">COMMERCIAL CONTEXT</p>
+      <h2>Account at a glance</h2>
+      <dl>
+        <div>
+          <dt>Credit terms</dt>
+          <dd>Net 30</dd>
+        </div>
+        <div>
+          <dt>Open requests</dt>
+          <dd>0</dd>
+        </div>
+        <div>
+          <dt>Documents ready</dt>
+          <dd>1</dd>
+        </div>
+      </dl>
+      <a routerLink="/reference/portal/profile">View profile</a></nexa-surface
+    >
+  </div>
+</div>

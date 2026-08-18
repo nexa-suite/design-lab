@@ -7,6 +7,11 @@ import { NexaGuidelinePage } from './guidelines/guideline-page';
 import { NexaPlatformShell, NexaPortalShell, NexaAuthShell } from './reference/reference-shell';
 import { NexaReferenceScreen } from './reference/reference-screen';
 import { NexaInventoryReference } from './reference/inventory-reference';
+import { NexaManualOrderReference } from './reference/manual-order-reference';
+import { NexaAnalyticsReference } from './reference/analytics-reference';
+import { NexaPortalOrdersReference } from './reference/portal-orders-reference';
+import { NexaPortalHomeReference } from './reference/portal-home-reference';
+import { NexaAuthReference } from './reference/auth-reference';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'guidelines/overview' },
@@ -45,11 +50,11 @@ export const routes: Routes = [
     path: 'reference/auth',
     component: NexaAuthShell,
     children: [
-      { path: 'login', component: NexaReferenceScreen, data: { screen: 'auth-login' } },
-      { path: 'workspace', component: NexaReferenceScreen, data: { screen: 'auth-workspace' } },
+      { path: 'login', component: NexaAuthReference, data: { screen: 'auth-login' } },
+      { path: 'workspace', component: NexaAuthReference, data: { screen: 'auth-workspace' } },
       {
         path: 'organization-setup',
-        component: NexaReferenceScreen,
+        component: NexaAuthReference,
         data: { screen: 'auth-organization-setup' },
       },
     ],
@@ -86,7 +91,18 @@ function referenceRoutes(scope: 'platform' | 'portal'): Routes {
 
   return screens.map(([path, screen]) => ({
     path,
-    component: path === 'inventory' ? NexaInventoryReference : NexaReferenceScreen,
+    component:
+      path === 'inventory'
+        ? NexaInventoryReference
+        : path === 'manual-order-entry'
+          ? NexaManualOrderReference
+          : path === 'analytics'
+            ? NexaAnalyticsReference
+            : scope === 'portal' && path === 'home'
+              ? NexaPortalHomeReference
+              : scope === 'portal' && path === 'orders'
+                ? NexaPortalOrdersReference
+                : NexaReferenceScreen,
     data: { screen },
   }));
 }

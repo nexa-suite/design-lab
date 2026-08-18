@@ -5,6 +5,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NexaActionMenu } from '../shared/action-menu';
+import { NexaNativeSelect } from '../shared/ui-contracts';
 
 @Component({
   selector: 'nexa-material-bench',
@@ -15,16 +17,20 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatRadioModule,
     MatSlideToggleModule,
     MatTooltipModule,
+    NexaActionMenu,
+    NexaNativeSelect,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './material-bench.html',
   styleUrl: './material-bench.scss',
-  host: { '(document:keydown.escape)': 'closeActionMenu()' },
 })
 export class NexaMaterialBench {
   protected readonly selectedStatus = signal('Awaiting review');
   protected readonly reviewEnabled = signal(true);
-  protected readonly actionMenuOpen = signal(false);
+  protected readonly menuItems = [
+    { id: 'detail', label: 'Open detail' },
+    { id: 'assign', label: 'Assign reviewer' },
+  ];
 
   protected setStatus(status: string): void {
     this.selectedStatus.set(status);
@@ -34,11 +40,7 @@ export class NexaMaterialBench {
     this.reviewEnabled.update((enabled) => !enabled);
   }
 
-  protected toggleActionMenu(): void {
-    this.actionMenuOpen.update((open) => !open);
-  }
-
-  protected closeActionMenu(): void {
-    this.actionMenuOpen.set(false);
+  protected selectMenuAction(action: string): void {
+    this.selectedStatus.set(action === 'detail' ? 'Detail opened' : 'Reviewer assigned');
   }
 }

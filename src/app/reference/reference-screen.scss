@@ -590,37 +590,13 @@ tbody tr:hover {
 .dispatch-board article .button {
   justify-self: start;
 }
-.chart-placeholder {
-  display: flex;
-  height: 240px;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 20px;
-  padding: 30px;
-  border-top: 1px solid var(--nexa-color-border-structural);
-}
-.chart-placeholder .bar {
-  width: 36px;
-  background: var(--nexa-color-primary-300);
-}
-.bar-1 {
-  height: 32%;
-}
-.bar-2 {
-  height: 54%;
-}
-.bar-3 {
-  height: 42%;
-}
-.bar-4 {
-  height: 76%;
-}
-.bar-5 {
-  height: 62%;
-}
-.chart-placeholder p {
-  align-self: flex-start;
+.reference-note {
+  margin-top: 18px;
+  border: 1px solid var(--nexa-color-border-default);
+  border-radius: var(--nexa-radius-panel);
+  padding: 20px;
   color: var(--nexa-color-text-secondary);
+  background: var(--nexa-surface-card);
   font-size: 12px;
 }
 .client-list,
