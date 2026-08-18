@@ -11,6 +11,7 @@ export interface NexaSequencePhase { readonly id: string; readonly label: string
 export class NexaStateSequence {
   readonly title = input.required<string>();
   readonly phases = input.required<readonly NexaSequencePhase[]>();
+  readonly retryLabel = input('');
   protected readonly currentIndex = signal(0);
   protected readonly playing = signal(false);
   private readonly destroyRef = inject(DestroyRef);
@@ -23,6 +24,11 @@ export class NexaStateSequence {
   protected current(): NexaSequencePhase { return this.phases()[this.currentIndex()] ?? this.phases()[0]; }
   protected next(): void { this.currentIndex.update((index) => (index + 1) % this.phases().length); }
   protected reset(): void { this.stop(); this.currentIndex.set(0); }
+  protected retry(): void {
+    const retryIndex = this.phases().findIndex((phase) => phase.id === 'retry' || phase.id === 'processing');
+    this.stop();
+    this.currentIndex.set(retryIndex >= 0 ? retryIndex : 0);
+  }
   protected play(): void {
     if (this.playing()) { this.stop(); return; }
     this.playing.set(true);

@@ -1,4 +1,18 @@
 @switch (page().id) {
+  @case ('brand-logo') {
+    <section class="foundation-section evidence-first">
+      <div class="section-heading"><span class="section-index">01</span><div><p class="section-kicker">PRIMARY USAGE</p><h2>Use the supplied mark; never redraw the wordmark</h2><p class="section-intro">The canonical blue SVG is rendered directly from the versioned <code>logo-nexa/</code> evidence folder.</p></div></div>
+      <div class="brand-logo-grid"><article><p class="proof-label">LIGHT SURFACE / PRIMARY BLUE</p><div class="logo-stage light-logo"><nexa-logo alt="Nexa" /></div><small>Preferred on the light canonical appearance.</small></article><article class="inverse-logo-card"><p class="proof-label">DEEP SURFACE / INVERSE WHITE</p><div class="logo-stage dark-logo"><nexa-logo variant="inverse" alt="Nexa" /></div><small>Use only where the supplied inverse asset remains legible.</small></article></div>
+    </section>
+    <section class="foundation-section">
+      <div class="section-heading"><span class="section-index">02</span><div><p class="section-kicker">SIZE / SAFE SPACE</p><h2>Scale the asset without changing its geometry</h2><p class="section-intro">The dashed boundary is a documentation aid for clear space; it is not part of the logo.</p></div></div>
+      <div class="logo-size-grid"><article><p class="proof-label">COMPACT</p><div class="logo-safe-space compact-logo"><nexa-logo alt="Nexa" /></div><small>Navigation and dense utility use.</small></article><article><p class="proof-label">STANDARD</p><div class="logo-safe-space standard-logo"><nexa-logo alt="Nexa" /></div><small>Documentation and branded surfaces.</small></article><article><p class="proof-label">INVERSE</p><div class="logo-safe-space inverse-safe"><nexa-logo variant="inverse" alt="Nexa" /></div><small>Deep blue brand plane only.</small></article></div>
+    </section>
+    <section class="foundation-section">
+      <div class="section-heading"><span class="section-index">03</span><div><p class="section-kicker">IMPLEMENTATION RULES</p><h2>Only two supplied variants are currently supported</h2></div></div>
+      <div class="logo-rules"><div><i class="pi pi-check-circle" aria-hidden="true"></i><strong>Primary blue</strong><span>Use the supplied logo-nexa.svg asset.</span></div><div><i class="pi pi-check-circle" aria-hidden="true"></i><strong>Inverse white</strong><span>Use the supplied Documento.svg asset.</span></div><div><i class="pi pi-ban" aria-hidden="true"></i><strong>No fabricated monochrome</strong><span>Do not derive or recolor a variant until the source supports it.</span></div></div>
+    </section>
+  }
   @case ('color') {
     <section class="foundation-section evidence-first">
       <div class="section-heading"><span class="section-index">01</span><div><p class="section-kicker">VISUAL SCALE</p><h2>Blue has a usable range, not one lucky hex</h2><p class="section-intro">Each swatch shows token, value, role and a candidate foreground pairing.</p></div></div>

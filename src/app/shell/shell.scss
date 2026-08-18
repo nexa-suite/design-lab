@@ -26,12 +26,8 @@
   color: inherit;
   text-decoration: none;
 }
-.brand-wordmark {
-  color: var(--nexa-color-primary-600);
-  font-size: 31px;
-  font-weight: 500;
-  letter-spacing: -0.09em;
-  line-height: 0.8;
+.lab-brand nexa-logo {
+  width: 86px;
 }
 .lab-brand > span:last-child {
   color: var(--nexa-color-neutral-500);
@@ -327,6 +323,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 10px 22px;
+}
+.mobile-drawer-heading nexa-logo {
+  width: 86px;
 }
 .mobile-drawer .icon-button {
   display: grid;

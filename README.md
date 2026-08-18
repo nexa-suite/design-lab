@@ -1,20 +1,23 @@
-# Nexa Design Lab v0.7
+# Nexa Design Lab v0.8
 
 Visual evidence laboratory for Nexa foundations, reusable components, interaction states and accessibility review.
 
-`0.7.0-rc.1` is an Angular-only design-system candidate. It is not a production package, a product application, a Blueprint baseline or a completed Figma library.
+`0.8.0-rc.1` is an Angular-only design-system candidate. It is not a production package, a product application, a Blueprint baseline or a completed Figma library.
 
 ## Purpose
 
-v0.7 changes the lab from description-first documentation to evidence-first review:
+v0.8 preserves the v0.7 evidence-first foundation and adds semantic depth:
 
 - every important rule has a rendered specimen;
 - states can be seen, triggered, compared and reset;
 - color and contrast use a shared deterministic gate;
 - accessibility modes expose focus, target, resize and motion behavior;
-- component maturity separates human-frozen direction from open exploration.
+- component maturity separates human-frozen direction from open exploration;
+- canonical supplied logo assets, semantic status emphasis and reusable Action Menu / Tooltip behavior are rendered;
+- Async Operations, Authentication, Legal Content, Payments, Analytics, Dispatch Board and Data-Dense Operations are candidate patterns;
+- Increased Contrast and Reduced Motion are root-level functional evaluation modes.
 
-The active lab contains documentation pages and composition specimens only. Authentication remains available under `Patterns / Authentication` as a design-system composition specimen.
+The active lab contains documentation pages and composition specimens only. Product patterns remain design evidence; they do not define accepted domain behavior or production contracts.
 
 ## Run
 
@@ -30,9 +33,9 @@ Open `http://127.0.0.1:4301/guidelines/overview`.
 | Area | Evidence |
 | --- | --- |
 | Start here | Overview, principles, maturity/freeze |
-| Foundations | Color, typography, layout, shape, surfaces, iconography, motion |
+| Foundations | Color, Brand / Logo, typography, layout, shape, surfaces, iconography, motion |
 | Components | Buttons, text fields, search, choice controls, status, feedback, menus, overlays, data, progress, workflow, quantity, navigation |
-| Patterns | Forms, search/filtering, async operations, empty/loading/error, authentication, responsive behavior |
+| Patterns | Forms, search/filtering, async operations, authentication, legal content, payments, analytics, dispatch board, data-dense operations, responsive behavior |
 | Quality | Accessibility Lab, Contrast Lab, heuristics, input modality, maturity |
 | Engineering | Angular architecture, tokens, APIs, testing, Figma mapping |
 
@@ -47,6 +50,8 @@ All documentation pages are lazy-loaded through the Angular router. There is no 
 - PrimeIcons remain the candidate icon system.
 - White structural surfaces sit on a cool light canvas; elevation is restrained and purposeful.
 - Rounded geometry is semantic: controls, cards, panels and compact status do not share one universal radius.
+- The supplied `logo-nexa/logo-nexa.svg` and `logo-nexa/Documento.svg` files are the canonical rendered logo sources; the wordmark is never redrawn in CSS or text.
+- Dark mode is intentionally deferred. Increased Contrast is an evaluation mode over the same light foundation.
 
 ## Quality evidence
 
@@ -83,20 +88,16 @@ Reusable controls own their public API and native semantics. Documentation speci
 
 ## Documentation
 
-- [Style guidelines](./STYLE-GUIDELINES-v0.7.md)
-- [Component inventory](./COMPONENT-INVENTORY-v0.7.md)
-- [Component maturity](./COMPONENT-MATURITY-v0.7.md)
-- [Accessibility evidence](./ACCESSIBILITY-EVIDENCE-v0.7.md)
-- [Contrast audit](./CONTRAST-AUDIT-v0.7.md)
-- [Angular architecture](./ANGULAR-ARCHITECTURE-v0.7.md)
-- [Figma handoff](./FIGMA-HANDOFF-v0.7.md)
-- [Freeze](./FREEZE-v0.7.md)
-- [Implementation report](./IMPLEMENTATION-REPORT-v0.7.md)
+- [Style guidelines v0.8](./STYLE-GUIDELINES-v0.8.md)
+- [Component maturity v0.8](./COMPONENT-MATURITY-v0.8.md)
+- [Accessibility evidence v0.8](./ACCESSIBILITY-EVIDENCE-v0.8.md)
+- [Freeze v0.8](./FREEZE-v0.8.md)
+- [Implementation report v0.8](./IMPLEMENTATION-REPORT-v0.8.md)
 
-The v0.7 documents supersede earlier candidate notes for the active lab. Historical notes remain in Git for provenance and are not runtime authority.
+Historical v0.7 evidence remains in Git for provenance and is not runtime authority: [style guidelines](./STYLE-GUIDELINES-v0.7.md), [component inventory](./COMPONENT-INVENTORY-v0.7.md), [contrast audit](./CONTRAST-AUDIT-v0.7.md), [Angular architecture](./ANGULAR-ARCHITECTURE-v0.7.md) and [Figma handoff](./FIGMA-HANDOFF-v0.7.md).
 
 ## Boundary
 
-Design Lab changes are local to this repository. No production application, API, Blueprint, mobile repository or deployment is modified by this release candidate. No push, tag or final release is part of v0.7.
+Design Lab changes are local to this repository. No production application, API, Blueprint, mobile repository or deployment is modified by this release candidate. v0.8 publishes its feature branch and prerelease tag only; it does not merge to `main` or create a final release.
 
 Copyright © 2026 Nexa. All rights reserved.

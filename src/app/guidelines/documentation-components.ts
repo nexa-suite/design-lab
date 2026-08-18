@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
 import { NexaButton } from '../shared/nexa-button';
+import { NexaActionMenu, type NexaActionMenuItem } from '../shared/nexa-action-menu';
+import { NexaTooltip } from '../shared/nexa-tooltip';
 import { NexaNumericStepper } from '../shared/nexa-numeric-stepper';
 import { NexaRangeSlider } from '../shared/nexa-range-slider';
 import { NexaSegmentedControl, type NexaSegmentOption } from '../shared/nexa-segmented-control';
@@ -29,7 +31,7 @@ const NAV_ITEMS: readonly NavItem[] = [
 
 @Component({
   selector: 'nexa-component-documentation',
-  imports: [NexaButton, NexaNumericStepper, NexaRangeSlider, NexaSegmentedControl, NexaStateSequence, NexaStatusChip, NexaTextField, NexaToggle],
+  imports: [NexaActionMenu, NexaButton, NexaNumericStepper, NexaRangeSlider, NexaSegmentedControl, NexaStateSequence, NexaStatusChip, NexaTextField, NexaToggle, NexaTooltip],
   templateUrl: './documentation-components.html',
   styleUrl: './documentation-components.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -68,6 +70,32 @@ export class NexaComponentDocumentation {
   protected readonly quantity = signal(2);
   protected readonly threshold = signal(4);
   protected readonly tooltipVisible = signal(false);
+  protected readonly actionMenuItems: readonly NexaActionMenuItem[] = [
+    { id: 'open', label: 'Open request', icon: 'pi-external-link', shortcut: 'Enter' },
+    { id: 'duplicate', label: 'Duplicate', icon: 'pi-copy' },
+    { id: 'archive', label: 'Archive', icon: 'pi-folder', destructive: true, separatorBefore: true },
+    { id: 'disabled', label: 'Unavailable command', icon: 'pi-lock', disabled: true },
+  ];
+  protected readonly compactActionMenuItems: readonly NexaActionMenuItem[] = [
+    { id: 'compact-review', label: 'Review', icon: 'pi-search' },
+    { id: 'compact-copy', label: 'Copy link', icon: 'pi-copy' },
+  ];
+  protected readonly groupedActionMenuItems: readonly NexaActionMenuItem[] = [
+    { id: 'group-open', label: 'Open request', icon: 'pi-external-link', shortcut: 'Enter' },
+    { id: 'group-duplicate', label: 'Duplicate', icon: 'pi-copy' },
+    { id: 'group-archive', label: 'Archive', icon: 'pi-folder', separatorBefore: true },
+    { id: 'group-delete', label: 'Delete draft', icon: 'pi-trash', destructive: true, separatorBefore: true },
+  ];
+  protected readonly longActionMenuItems: readonly NexaActionMenuItem[] = [
+    { id: 'long-01', label: 'Open request', icon: 'pi-external-link' },
+    { id: 'long-02', label: 'Review documents', icon: 'pi-file' },
+    { id: 'long-03', label: 'Assign owner', icon: 'pi-user' },
+    { id: 'long-04', label: 'Duplicate request', icon: 'pi-copy' },
+    { id: 'long-05', label: 'Export summary', icon: 'pi-download', separatorBefore: true },
+    { id: 'long-06', label: 'Archive request', icon: 'pi-folder' },
+    { id: 'long-07', label: 'Unavailable command', icon: 'pi-lock', disabled: true },
+    { id: 'long-08', label: 'Cancel request', icon: 'pi-ban', destructive: true, separatorBefore: true },
+  ];
 
   protected readonly segmentOptions: readonly NexaSegmentOption[] = [
     { value: 'open', label: 'Open' },
@@ -75,11 +103,20 @@ export class NexaComponentDocumentation {
     { value: 'closed', label: 'Closed' },
     { value: 'disabled', label: 'Archived', disabled: true },
   ];
-  protected readonly statusExamples: readonly { label: string; tone: NexaStatusTone; icon: string }[] = [
+  protected readonly statusExamples: readonly { label: string; tone: NexaStatusTone; icon: string; emphasis?: 'subtle' | 'standard' | 'strong' }[] = [
     { label: 'Active', tone: 'success', icon: 'pi-check-circle' },
+    { label: 'Inactive', tone: 'neutral', icon: 'pi-minus-circle' },
+    { label: 'Available', tone: 'success', icon: 'pi-check' },
+    { label: 'Unavailable', tone: 'neutral', icon: 'pi-ban' },
     { label: 'Processing', tone: 'info', icon: 'pi-sync' },
-    { label: 'Warning', tone: 'warning', icon: 'pi-exclamation-triangle' },
-    { label: 'Blocked', tone: 'danger', icon: 'pi-ban' },
+    { label: 'Pending', tone: 'warning', icon: 'pi-clock' },
+    { label: 'Awaiting review', tone: 'warning', icon: 'pi-search' },
+    { label: 'Completed', tone: 'success', icon: 'pi-check-circle', emphasis: 'standard' },
+    { label: 'Blocked', tone: 'danger', icon: 'pi-ban', emphasis: 'standard' },
+    { label: 'Cancelled', tone: 'neutral', icon: 'pi-times-circle' },
+    { label: 'Error', tone: 'danger', icon: 'pi-exclamation-circle', emphasis: 'standard' },
+    { label: 'Warning', tone: 'warning', icon: 'pi-exclamation-triangle', emphasis: 'standard' },
+    { label: 'Critical', tone: 'danger', icon: 'pi-shield', emphasis: 'strong' },
   ];
   protected readonly operationPhases: readonly NexaSequencePhase[] = [
     { id: 'ready', label: 'Ready', detail: 'Create order is available.', tone: 'neutral' },

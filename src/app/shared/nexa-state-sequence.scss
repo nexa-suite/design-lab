@@ -17,8 +17,15 @@ h3 { margin: 0; font: 700 18px/1.25 var(--nexa-font-family-display); }
 .phase-list strong, .phase-list small { display: block; }
 .phase-list strong { font-size: var(--nexa-font-size-sm); }
 .phase-list small { margin-top: 5px; color: var(--nexa-color-text-secondary); font-size: var(--nexa-font-size-xs); line-height: 1.4; }
-.sequence-current { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; color: var(--nexa-color-text-secondary); font-size: var(--nexa-font-size-sm); }
+.sequence-feedback { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.sequence-current { display: flex; flex: 1 1 260px; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; color: var(--nexa-color-text-secondary); font-size: var(--nexa-font-size-sm); }
+.sequence-recovery { min-height: 34px; border: 1px solid var(--nexa-color-danger-standard-border); border-radius: var(--nexa-radius-control); padding-inline: var(--nexa-space-3); color: var(--nexa-color-danger-standard-text); background: var(--nexa-surface-card); font: 600 var(--nexa-font-size-xs)/1 var(--nexa-font-family-body); cursor: pointer; }
+.sequence-recovery:hover { background: var(--nexa-surface-danger); }
+.sequence-recovery:focus-visible { outline: none; box-shadow: var(--nexa-focus-ring); }
 .sequence-tone { width: 8px; height: 8px; border-radius: 50%; background: var(--nexa-color-neutral-500); }
 .sequence-tone.info { background: var(--nexa-color-primary-600); } .sequence-tone.success { background: var(--nexa-color-success-700); } .sequence-tone.warning { background: var(--nexa-color-warning-600); } .sequence-tone.danger { background: var(--nexa-color-danger-600); }
+.phase-list li.current.phase-warning { border-color: var(--nexa-color-warning-600); background: var(--nexa-surface-warning); }
+.phase-list li.current.phase-danger { border-color: var(--nexa-color-danger-standard-border); background: var(--nexa-color-danger-subtle-background); }
+.phase-list li.current.phase-success { border-color: var(--nexa-color-success-border); background: var(--nexa-surface-success); }
 @media (max-width: 700px) { .sequence-heading { flex-direction: column; } .phase-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 420px) { .phase-list { grid-template-columns: 1fr; } }

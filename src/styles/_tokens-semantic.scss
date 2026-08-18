@@ -45,10 +45,25 @@
   --nexa-color-warning-50: var(--nexa-primitive-amber-50);
   --nexa-color-warning-600: var(--nexa-primitive-amber-600);
   --nexa-color-warning-text: var(--nexa-primitive-amber-800);
+  --nexa-color-warning-subtle-background: var(--nexa-surface-warning);
+  --nexa-color-warning-subtle-border: var(--nexa-primitive-amber-600);
+  --nexa-color-warning-subtle-text: var(--nexa-color-warning-text);
+  --nexa-color-warning-emphasized-background: var(--nexa-primitive-amber-800);
+  --nexa-color-warning-emphasized-border: var(--nexa-primitive-amber-800);
+  --nexa-color-warning-emphasized-text: var(--nexa-color-text-inverse);
   --nexa-color-danger-50: var(--nexa-primitive-red-50);
   --nexa-color-danger-200: var(--nexa-primitive-red-200);
   --nexa-color-danger-600: var(--nexa-primitive-red-600);
   --nexa-color-danger-text: var(--nexa-primitive-red-800);
+  --nexa-color-danger-subtle-background: var(--nexa-surface-danger);
+  --nexa-color-danger-subtle-border: var(--nexa-color-danger-200);
+  --nexa-color-danger-subtle-text: var(--nexa-color-danger-text);
+  --nexa-color-danger-standard-background: var(--nexa-surface-danger);
+  --nexa-color-danger-standard-border: var(--nexa-color-danger-600);
+  --nexa-color-danger-standard-text: var(--nexa-color-danger-text);
+  --nexa-color-danger-strong-background: var(--nexa-primitive-red-800);
+  --nexa-color-danger-strong-border: var(--nexa-primitive-red-800);
+  --nexa-color-danger-strong-text: var(--nexa-color-text-inverse);
   --nexa-color-attention-500: var(--nexa-primitive-orange-500);
   --nexa-color-cold-refrigerated: var(--nexa-primitive-sky-600);
   --nexa-color-cold-refrigerated-text: var(--nexa-primitive-sky-800);
@@ -97,7 +112,7 @@
   --nexa-font-family-mono: var(--nexa-primitive-font-mono);
 }
 
-:where([data-contrast-mode='increased']) {
+:root[data-contrast-mode='increased'] {
   --nexa-mode-text-secondary: var(--nexa-primitive-slate-700);
   --nexa-mode-text-muted: var(--nexa-primitive-slate-600);
   --nexa-mode-border-interactive: var(--nexa-primitive-slate-500);

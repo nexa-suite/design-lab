@@ -16,10 +16,11 @@ import {
   type DocumentationPage,
 } from '../guidelines/documentation-registry';
 import { NexaLabEvaluation } from '../shared/lab-evaluation';
+import { NexaLogo } from '../shared/nexa-logo';
 
 @Component({
   selector: 'nexa-shell',
-  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [NexaLogo, RouterLink, RouterLinkActive, RouterOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './shell.html',
   styleUrl: './shell.scss',

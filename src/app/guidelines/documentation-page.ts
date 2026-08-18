@@ -3,11 +3,12 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { NexaComponentDocumentation } from './documentation-components';
 import { NexaContextDocumentation } from './documentation-context';
 import { NexaFoundationDocumentation } from './documentation-foundations';
+import { NexaPatternDocumentation } from './documentation-patterns';
 import { ALL_DOCUMENTATION_PAGES, DOCUMENTATION_PAGE_MAP, type DocumentationPage } from './documentation-registry';
 
 @Component({
   selector: 'nexa-documentation-page',
-  imports: [NexaComponentDocumentation, NexaContextDocumentation, NexaFoundationDocumentation, RouterLink],
+  imports: [NexaComponentDocumentation, NexaContextDocumentation, NexaFoundationDocumentation, NexaPatternDocumentation, RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './documentation-page.html',
   styleUrl: './documentation-page.scss',
@@ -19,4 +20,5 @@ export class NexaDocumentationPage {
   protected statusClass(): string { return this.page.status.toLowerCase().replaceAll(' ', '-'); }
   protected relatedPages(): readonly DocumentationPage[] { return this.allPages.filter((candidate) => candidate.id !== this.page.id && candidate.kind === this.page.kind).slice(0, 4); }
   protected pageUrl(candidate: DocumentationPage): string { return `/guidelines/${candidate.path}`; }
+  protected isV08Pattern(): boolean { return ['async-operations', 'authentication', 'legal-content', 'payments', 'analytics', 'dispatch-board', 'data-dense-operations'].includes(this.page.id); }
 }

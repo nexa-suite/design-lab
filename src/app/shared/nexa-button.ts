@@ -39,7 +39,7 @@ export type NexaButtonSize = 'compact' | 'standard' | 'large';
       .danger { color: var(--nexa-color-danger-text); background: var(--nexa-surface-danger); border-color: var(--nexa-primitive-red-200); }
       .danger:hover:not(:disabled) { background: color-mix(in oklab, var(--nexa-surface-danger) 82%, var(--nexa-primitive-red-200)); }
       .nexa-button:disabled { cursor: not-allowed; opacity: 0.48; }
-      .spinner { width: 14px; height: 14px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: nexa-spin 700ms linear infinite; }
+      .spinner { width: 14px; height: 14px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: nexa-spin var(--nexa-motion-spinner) linear infinite; }
       @keyframes nexa-spin { to { transform: rotate(360deg); } }
       @media (prefers-reduced-motion: reduce) { .nexa-button { transition: none; } .spinner { animation: none; border-right-color: currentColor; } }
     `,

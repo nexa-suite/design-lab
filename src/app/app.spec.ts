@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { App } from './app';
 import { routes } from './app.routes';
 
-describe('Nexa Design Lab v0.7 routes', () => {
+describe('Nexa Design Lab v0.8 routes', () => {
   let activeFixture: ComponentFixture<App>;
 
   beforeEach(async () => {
@@ -41,7 +41,7 @@ describe('Nexa Design Lab v0.7 routes', () => {
 
     const contrast = await navigate('/guidelines/quality/contrast-lab');
     expect(contrast.querySelector('h1')?.textContent).toContain('Contrast ratios');
-    expect(contrast.querySelectorAll('.contrast-matrix article')).toHaveLength(12);
+    expect(contrast.querySelectorAll('.contrast-matrix article')).toHaveLength(14);
 
     const architecture = await navigate('/guidelines/engineering/angular-architecture');
     expect(architecture.querySelector('h1')?.textContent).toContain('Feature areas');
@@ -82,5 +82,46 @@ describe('Nexa Design Lab v0.7 routes', () => {
     toggleInput.click();
     activeFixture.detectChanges();
     expect(toggleInput.checked).toBe(!before);
+  });
+
+  it('keeps the checkbox gallery native across state and focus contracts', async () => {
+    const checkboxPage = await navigate('/guidelines/components/checkbox');
+    const playground = checkboxPage.querySelector('.selection-playground') as HTMLElement;
+    const inputs = playground.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+
+    expect(inputs).toHaveLength(4);
+    expect(inputs[0].checked).toBe(true);
+    expect(inputs[1].checked).toBe(false);
+    expect(inputs[2].indeterminate).toBe(true);
+    expect(inputs[3].disabled).toBe(true);
+    inputs[1].focus();
+    expect(document.activeElement).toBe(inputs[1]);
+    inputs[1].click();
+    activeFixture.detectChanges();
+    expect(inputs[1].checked).toBe(true);
+  });
+
+  it('renders the v0.8 maturity patterns without introducing product routes', async () => {
+    const brand = await navigate('/guidelines/foundations/brand-logo');
+    expect(brand.querySelector('nexa-logo img')?.getAttribute('src')).toContain('/brand/canonical/logo-nexa.svg');
+    expect(brand.querySelectorAll('.brand-logo-grid nexa-logo img')).toHaveLength(2);
+    expect(brand.querySelectorAll('.logo-size-grid nexa-logo img')).toHaveLength(3);
+
+    const patterns = [
+      ['/guidelines/patterns/async-operations', 'Error keeps context and retry nearby'],
+      ['/guidelines/patterns/authentication', 'Authentication feels like Nexa before it asks for access'],
+      ['/guidelines/patterns/legal-content', 'Readable policy structure without inventing policy'],
+      ['/guidelines/patterns/payments', 'Payment patterns show safe states, not a Stripe implementation'],
+      ['/guidelines/patterns/analytics', 'Every visualization answers a question'],
+      ['/guidelines/patterns/dispatch-board', 'Dispatch composition keeps cards readable across columns'],
+      ['/guidelines/patterns/data-dense-operations', 'Density carries operational signal without becoming a production route'],
+    ] as const;
+
+    for (const [path, heading] of patterns) {
+      const page = await navigate(path);
+      expect(page.querySelector('h1')).toBeTruthy();
+      expect(page.textContent).toContain(heading);
+      expect(page.querySelector('.pattern-section')).toBeTruthy();
+    }
   });
 });

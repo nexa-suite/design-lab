@@ -27,6 +27,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "*.svg",
+                "input": "logo-nexa",
+                "output": "brand/canonical"
               }
             ],
             "styles": [

@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.8.0-rc.1] - 2026-08-18
+
+### Added
+
+- Semantic tone and emphasis states for operational status evidence.
+- Canonical `NexaLogo`, reusable Action Menu and reusable Tooltip contracts.
+- Async recovery, Authentication, Legal Content, Payments, Analytics, Dispatch Board and Data-Dense Operations pattern pages.
+- Nielsen heuristic visual proofs and expanded checkbox, menu and tooltip state galleries.
+- Root-level Increased Contrast, Reduced Motion, text-scale and target-overlay evaluation behavior.
+- v0.8 style, maturity, accessibility and freeze evidence documents.
+
+### Changed
+
+- Preserved the recovered v0.7 sidebar, text-field, light-surface and Action Menu direction while adding interaction depth.
+- Replaced the shell wordmark approximation with the supplied canonical Nexa assets.
+- Normalized section rhythm, focus ownership, semantic status tokens and viewport-safe overlays.
+
+### Status
+
+- Experimental release candidate. Human visual, content, keyboard and assistive-technology review required. No production readiness, Figma completion or final release claim.
+
 ## [0.7.0-rc.1] - 2026-08-18
 
 ### Added

@@ -1,6 +1,6 @@
 {
   "name": "nexa-design-lab",
-  "version": "0.7.0-rc.1",
+  "version": "0.8.0-rc.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

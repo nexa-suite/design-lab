@@ -1,4 +1,7 @@
 export * from './nexa-button';
+export * from './nexa-logo';
+export * from './nexa-action-menu';
+export * from './nexa-tooltip';
 export * from './nexa-status-chip';
 export * from './nexa-surface';
 export * from './nexa-text-field';

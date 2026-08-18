@@ -1,11 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { NexaButton } from './nexa-button';
+import { NexaActionMenu, type NexaActionMenuItem } from './nexa-action-menu';
 import { NexaNumericStepper } from './nexa-numeric-stepper';
 import { NexaRangeSlider } from './nexa-range-slider';
 import { NexaSegmentedControl } from './nexa-segmented-control';
 import { NexaStateSequence } from './nexa-state-sequence';
 import { NexaTextField } from './nexa-text-field';
 import { NexaToggle } from './nexa-toggle';
+import { NexaTooltip } from './nexa-tooltip';
 
 describe('Nexa candidate controls', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -17,6 +19,8 @@ describe('Nexa candidate controls', () => {
       NexaTextField,
       NexaToggle,
       NexaButton,
+      NexaActionMenu,
+      NexaTooltip,
     ],
   }));
 
@@ -110,5 +114,121 @@ describe('Nexa candidate controls', () => {
     (fixture.nativeElement.querySelectorAll('button')[2] as HTMLButtonElement).click();
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('[role="status"]')?.textContent).toContain('Ready');
+  });
+
+  it('recovers a failed state sequence through its explicit retry action', () => {
+    const fixture = TestBed.createComponent(NexaStateSequence);
+    fixture.componentRef.setInput('title', 'Recover order');
+    fixture.componentRef.setInput('retryLabel', 'Retry operation');
+    fixture.componentRef.setInput('phases', [
+      { id: 'ready', label: 'Ready', detail: 'Available.' },
+      { id: 'processing', label: 'Processing', detail: 'Working.', tone: 'info' as const },
+      { id: 'error', label: 'Error', detail: 'Failed safely.', tone: 'danger' as const },
+    ]);
+    fixture.detectChanges();
+    const next = fixture.nativeElement.querySelectorAll('.sequence-actions button')[1] as HTMLButtonElement;
+    next.click();
+    next.click();
+    fixture.detectChanges();
+
+    const retry = fixture.nativeElement.querySelector('.sequence-recovery') as HTMLButtonElement;
+    expect(retry).toBeTruthy();
+    retry.click();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('[role="status"]')?.textContent).toContain('Processing');
+  });
+
+  it('keeps action menu selection, disabled items and keyboard escape truthful', async () => {
+    const items: readonly NexaActionMenuItem[] = [
+      { id: 'review', label: 'Review request', shortcut: 'Enter' },
+      { id: 'disabled', label: 'Unavailable command', disabled: true },
+      { id: 'cancel', label: 'Cancel request', destructive: true },
+    ];
+    const fixture = TestBed.createComponent(NexaActionMenu);
+    fixture.componentRef.setInput('triggerId', 'test-menu');
+    fixture.componentRef.setInput('triggerLabel', 'Commands');
+    fixture.componentRef.setInput('menuLabel', 'Request commands');
+    fixture.componentRef.setInput('items', items);
+    let selected = '';
+    fixture.componentInstance.selected.subscribe((id) => selected = id);
+    fixture.detectChanges();
+
+    const trigger = fixture.nativeElement.querySelector('.menu-trigger') as HTMLButtonElement;
+    trigger.click();
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+    const menuItems = fixture.nativeElement.querySelectorAll('.menu-item') as NodeListOf<HTMLButtonElement>;
+    expect(fixture.nativeElement.querySelector('[role="menu"]')).toBeTruthy();
+    expect(menuItems[1].disabled).toBe(true);
+    expect(document.activeElement).toBe(menuItems[0]);
+
+    menuItems[0].click();
+    fixture.detectChanges();
+    expect(selected).toBe('review');
+    expect(fixture.nativeElement.querySelector('[role="menu"]')).toBeNull();
+
+    trigger.click();
+    fixture.detectChanges();
+    const openMenu = fixture.nativeElement.querySelector('[role="menu"]') as HTMLElement;
+    openMenu.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+    const reopenedItems = fixture.nativeElement.querySelectorAll('.menu-item') as NodeListOf<HTMLButtonElement>;
+    expect(document.activeElement).toBe(reopenedItems[2]);
+    openMenu.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('[role="menu"]')).toBeNull();
+    expect(document.activeElement).toBe(trigger);
+  });
+
+  it('renders compact long menus with disabled and destructive command states', async () => {
+    const items: readonly NexaActionMenuItem[] = Array.from({ length: 10 }, (_, index) => ({
+      id: `command-${index}`,
+      label: `Command ${index + 1}`,
+      disabled: index === 7,
+      destructive: index === 8,
+      separatorBefore: index === 5,
+    }));
+    const fixture = TestBed.createComponent(NexaActionMenu);
+    fixture.componentRef.setInput('triggerId', 'long-menu');
+    fixture.componentRef.setInput('triggerLabel', 'Long commands');
+    fixture.componentRef.setInput('menuLabel', 'Long command list');
+    fixture.componentRef.setInput('size', 'compact');
+    fixture.componentRef.setInput('items', items);
+    fixture.detectChanges();
+
+    const trigger = fixture.nativeElement.querySelector('.menu-trigger') as HTMLButtonElement;
+    trigger.click();
+    fixture.detectChanges();
+    const menu = fixture.nativeElement.querySelector('[role="menu"]') as HTMLElement;
+
+    expect(fixture.nativeElement.querySelector('.menu-anchor.compact')).toBeTruthy();
+    expect(menu).toBeTruthy();
+    expect(menu.querySelectorAll('.menu-item')).toHaveLength(10);
+    expect(menu.querySelectorAll('.menu-separator')).toHaveLength(1);
+    expect(menu.querySelector<HTMLButtonElement>('[disabled]')?.textContent).toContain('Command 8');
+    expect(menu.querySelector('.destructive')?.textContent).toContain('Command 9');
+  });
+
+  it('exposes tooltip semantics only while the tooltip is visible and restores focus on escape', async () => {
+    const fixture = TestBed.createComponent(NexaTooltip);
+    fixture.componentRef.setInput('id', 'test-tooltip');
+    fixture.componentRef.setInput('triggerLabel', 'Explain status');
+    fixture.componentRef.setInput('content', 'This status needs review.');
+    fixture.detectChanges();
+    const trigger = fixture.nativeElement.querySelector('.tooltip-trigger') as HTMLButtonElement;
+    expect(trigger.getAttribute('aria-describedby')).toBeNull();
+
+    trigger.focus();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('[role="tooltip"]')).toBeTruthy();
+    expect(trigger.getAttribute('aria-describedby')).toBe('test-tooltip');
+
+    trigger.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('[role="tooltip"]')).toBeNull();
+    expect(trigger.getAttribute('aria-describedby')).toBeNull();
+    expect(document.activeElement).toBe(trigger);
   });
 });

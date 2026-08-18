@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { NexaStateSequence, type NexaSequencePhase } from '../shared/nexa-state-sequence';
+import { NexaLogo } from '../shared/nexa-logo';
 import { NexaStatusChip } from '../shared/nexa-status-chip';
 import { evaluateContrast, type ContrastResult } from '../shared/contrast';
 import type { DocumentationPage } from './documentation-registry';
@@ -7,7 +8,7 @@ import { APPROVED_CONTRAST_PAIRS, BLUE_SCALE, COLOR_FAMILIES, NEUTRAL_SCALE, RAD
 
 @Component({
   selector: 'nexa-foundation-documentation',
-  imports: [NexaStateSequence, NexaStatusChip],
+  imports: [NexaLogo, NexaStateSequence, NexaStatusChip],
   templateUrl: './documentation-foundations.html',
   styleUrl: './documentation-foundations.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
