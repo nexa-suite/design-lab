@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.5.0-rc.1] - 2026-08-17
+
+### Added
+
+- Product-quality convergence candidate for visual parity review.
+- Shared Nexa UI contracts, Angular Aria action menu, workflow steps and operational table shell.
+- Dedicated auth, manual-order, analytics and Buyer Portal reference screens from Vue/FLOW evidence.
+- Research, traceability and visualization decision records.
+
+### Changed
+
+- Restored rounded Platform active navigation capsule and corrected historical auth source traceability.
+- Replaced placeholder analytics CSS bars with accessible SVG and visible data equivalents.
+
+### Status
+
+- Experimental release candidate. Not production. Not Blueprint authority. Human design review required.
+
 ## v0.4.0-rc.1 — Legacy Visual Parity Restoration
 
 - Restored the Legacy Platform shell, workspace identity, role treatment, navigation and PrimeIcons visual weight.

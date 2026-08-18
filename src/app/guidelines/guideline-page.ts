@@ -17,10 +17,10 @@ export class NexaGuidelinePage {
     { eyebrow: string; title: string; intro: string }
   > = {
     overview: {
-      eyebrow: 'NEXA DESIGN LAB / v0.4',
-      title: 'Legacy visual contracts, normalized for Angular',
+      eyebrow: 'NEXA DESIGN LAB / v0.5.0-RC.1',
+      title: 'Legacy visual contracts, converged for Angular',
       intro:
-        'Historical FLOW/Vue specimens are the source. These guidelines record the contracts after parity implementation.',
+        'Human decisions and Legacy Vue/FLOW remain visual authority. These guidelines record current reusable contracts after product-quality convergence.',
     },
     foundations: {
       eyebrow: '01 / FOUNDATIONS',
