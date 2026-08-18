@@ -1,11 +1,15 @@
 # NEXA DESIGN LAB v0.6 — DESIGN DOCUMENTATION SYSTEM REPORT
 
-Release candidate: v0.6.0-rc.1  
-Branch: design/v0.6-design-documentation-system  
-Tag: v0.6.0-rc.1  
-Release: https://github.com/nexa-suite/design-lab/releases/tag/v0.6.0-rc.1  
+Release candidate: v0.6.0-rc.2
+Branch: design/v0.6-interaction-engineering-freeze
+Tag: not created for RC2
+Previous release: https://github.com/nexa-suite/design-lab/releases/tag/v0.6.0-rc.1
 Scope: Design Lab only  
-Date: 2026-08-17
+Date: 2026-08-18
+
+## RC2 delta
+
+RC2 consolidates the documentation shell and Angular engineering boundary. It fixes the typography token collision, field focus ownership, universal control pills, missing red border primitive and generic component specimens. It adds a complete blue 50–950 specimen, typed shared contracts, truthful Auth locale/interaction behavior, strict templates and token integrity validation. Reference screens remain regression-only; FLOW/Vue are functional evidence, not pixel-parity authority.
 
 ## Outcome
 
@@ -20,7 +24,7 @@ The v0.6 candidate rebuilds the Design Lab as a routed documentation system with
 - Normalized the revoked 18px active-nav token to the 8px primitive radius.
 - Removed unused v0.5 guideline and Material bench source files.
 - Added research, principles, inventory, Legacy DNA, FLOW parity, heuristic, accessibility, style, Figma and traceability records.
-- Updated package version to 0.6.0-rc.1.
+- Updated package version to 0.6.0-rc.2.
 
 ## Source boundary
 

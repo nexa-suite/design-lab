@@ -2,9 +2,9 @@
   <aside class="lab-sidebar" aria-label="Design Lab navigation">
     <a class="lab-brand" routerLink="/guidelines/overview" (click)="navigate()">
       <span class="brand-wordmark">nexa</span>
-      <span>DESIGN LAB <b>v0.6</b></span>
+      <span>DESIGN LAB <b>v0.7</b></span>
     </a>
-    <p class="lab-context">Design documentation, evidence and implementation contracts</p>
+    <p class="lab-context">Design foundations, live component evidence and quality contracts</p>
 
     <div class="lab-search">
       <label for="desktop-documentation-search">Search documentation</label>
@@ -19,12 +19,7 @@
           (input)="setSearch($event)"
         />
         @if (searchTerm()) {
-          <button
-            type="button"
-            class="clear-search"
-            aria-label="Clear documentation search"
-            (click)="clearSearch()"
-          >
+          <button type="button" class="clear-search" aria-label="Clear documentation search" (click)="clearSearch()">
             <i class="pi pi-times" aria-hidden="true"></i>
           </button>
         }
@@ -43,23 +38,12 @@
             (click)="toggleGroup(group)"
           >
             <span class="nav-section">{{ group.label }}</span>
-            <i
-              class="pi"
-              [class.pi-chevron-down]="groupOpen(group)"
-              [class.pi-chevron-right]="!groupOpen(group)"
-              aria-hidden="true"
-            ></i>
+            <i class="pi" [class.pi-chevron-down]="groupOpen(group)" [class.pi-chevron-right]="!groupOpen(group)" aria-hidden="true"></i>
           </button>
           @if (groupOpen(group)) {
             <div class="lab-nav-items" [id]="groupId(group) + '-items'">
               @for (item of group.items; track item.id) {
-                <a
-                  class="lab-nav-item"
-                  [routerLink]="navigationLink(item)"
-                  routerLinkActive="active"
-                  [routerLinkActiveOptions]="{ exact: true }"
-                  (click)="navigate()"
-                >
+                <a class="lab-nav-item" [routerLink]="navigationLink(item)" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="navigate()">
                   <i class="pi {{ item.icon }}" aria-hidden="true"></i>
                   <span>{{ item.label }}</span>
                 </a>
@@ -71,55 +55,32 @@
       @if (searchTerm() && !hasSearchResults()) {
         <p class="search-empty">No documentation matches “{{ searchTerm() }}”.</p>
       }
-
-      <section
-        class="lab-nav-group reference-group"
-        [attr.aria-labelledby]="groupId(referenceGroup)"
-      >
-        <p class="nav-section static-section" [id]="groupId(referenceGroup)">
-          {{ referenceGroup.label }}
-        </p>
-        <div class="lab-nav-items">
-          @for (item of referenceGroup.items; track item.id) {
-            <a
-              class="lab-nav-item"
-              [routerLink]="navigationLink(item)"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="navigate()"
-            >
-              <i class="pi {{ item.icon }}" aria-hidden="true"></i>
-              <span>{{ item.label }}</span>
-            </a>
-          }
-        </div>
-      </section>
     </nav>
 
     <div class="lab-footer">
       <span class="status-dot" aria-hidden="true"></span>
-      <span
-        ><strong>Experimental candidate</strong
-        ><small>Not production or Blueprint authority</small></span
-      >
+      <span><strong>Visual evidence candidate</strong><small>Not production or approval authority</small></span>
     </div>
   </aside>
 
   <div class="lab-main">
     <header class="lab-topbar">
-      <button
-        class="mobile-menu-button"
-        type="button"
-        aria-label="Open Design Lab navigation"
-        [attr.aria-expanded]="mobileNavOpen()"
-        (click)="openMobileNav()"
-      >
+      <button class="mobile-menu-button" type="button" aria-label="Open Design Lab navigation" [attr.aria-expanded]="mobileNavOpen()" (click)="openMobileNav()">
         <i class="pi pi-bars" aria-hidden="true"></i>
       </button>
-      <span>Design documentation · v0.6</span>
-      <a class="topbar-reference" routerLink="/reference/platform/dashboard"
-        >Open reference screens</a
-      >
+      <span>Design documentation · v0.7</span>
+      <div class="evaluation-controls" aria-label="Design Lab evaluation modes">
+        <span class="evaluation-label">Evaluate</span>
+        <div class="segmented-evaluation" role="group" aria-label="Contrast mode">
+          <button type="button" [class.selected]="evaluation.contrastMode() === 'standard'" (click)="evaluation.setContrastMode('standard')">Standard</button>
+          <button type="button" [class.selected]="evaluation.contrastMode() === 'increased'" (click)="evaluation.setContrastMode('increased')">Increased contrast</button>
+        </div>
+        <div class="segmented-evaluation" role="group" aria-label="Motion mode">
+          <button type="button" [class.selected]="evaluation.motionMode() === 'motion'" (click)="evaluation.setMotionMode('motion')">Motion</button>
+          <button type="button" [class.selected]="evaluation.motionMode() === 'reduced'" (click)="evaluation.setMotionMode('reduced')">Reduced motion</button>
+        </div>
+      </div>
+      <span class="topbar-review">Human review pending</span>
     </header>
     <div class="lab-content"><router-outlet /></div>
   </div>
@@ -127,27 +88,11 @@
 
 @if (mobileNavOpen()) {
   <div class="mobile-navigation-layer">
-    <button
-      class="drawer-backdrop"
-      type="button"
-      aria-label="Close Design Lab navigation"
-      (click)="closeMobileNav()"
-    ></button>
-    <aside
-      class="mobile-drawer"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="mobile-drawer-title"
-    >
+    <button class="drawer-backdrop" type="button" aria-label="Close Design Lab navigation" (click)="closeMobileNav()"></button>
+    <aside class="mobile-drawer" role="dialog" aria-modal="true" aria-labelledby="mobile-drawer-title">
       <div class="mobile-drawer-heading">
         <span id="mobile-drawer-title" class="brand-wordmark">nexa</span>
-        <button
-          #drawerClose
-          class="icon-button"
-          type="button"
-          aria-label="Close Design Lab navigation"
-          (click)="closeMobileNav()"
-        >
+        <button #drawerClose class="icon-button" type="button" aria-label="Close Design Lab navigation" (click)="closeMobileNav()">
           <i class="pi pi-times" aria-hidden="true"></i>
         </button>
       </div>
@@ -155,79 +100,28 @@
         <label for="mobile-documentation-search">Search documentation</label>
         <div class="search-control">
           <i class="pi pi-search" aria-hidden="true"></i>
-          <input
-            id="mobile-documentation-search"
-            type="search"
-            autocomplete="off"
-            placeholder="Search documentation"
-            [value]="searchTerm()"
-            (input)="setSearch($event)"
-          />
+          <input id="mobile-documentation-search" type="search" autocomplete="off" placeholder="Search documentation" [value]="searchTerm()" (input)="setSearch($event)" />
           @if (searchTerm()) {
-            <button
-              type="button"
-              class="clear-search"
-              aria-label="Clear documentation search"
-              (click)="clearSearch()"
-            >
-              <i class="pi pi-times" aria-hidden="true"></i>
-            </button>
+            <button type="button" class="clear-search" aria-label="Clear documentation search" (click)="clearSearch()"><i class="pi pi-times" aria-hidden="true"></i></button>
           }
         </div>
       </div>
       <nav class="lab-nav mobile-nav" aria-label="Mobile Design Lab navigation">
         @for (group of filteredDocumentationGroups(); track group.label) {
           <section class="lab-nav-group" [attr.aria-labelledby]="'mobile-' + groupId(group)">
-            <button
-              class="nav-section-button"
-              type="button"
-              [id]="'mobile-' + groupId(group)"
-              [attr.aria-expanded]="groupOpen(group)"
-              [attr.aria-controls]="'mobile-' + groupId(group) + '-items'"
-              (click)="toggleGroup(group)"
-            >
+            <button class="nav-section-button" type="button" [id]="'mobile-' + groupId(group)" [attr.aria-expanded]="groupOpen(group)" [attr.aria-controls]="'mobile-' + groupId(group) + '-items'" (click)="toggleGroup(group)">
               <span class="nav-section">{{ group.label }}</span>
-              <i
-                class="pi"
-                [class.pi-chevron-down]="groupOpen(group)"
-                [class.pi-chevron-right]="!groupOpen(group)"
-                aria-hidden="true"
-              ></i>
+              <i class="pi" [class.pi-chevron-down]="groupOpen(group)" [class.pi-chevron-right]="!groupOpen(group)" aria-hidden="true"></i>
             </button>
             @if (groupOpen(group)) {
               <div class="lab-nav-items" [id]="'mobile-' + groupId(group) + '-items'">
                 @for (item of group.items; track item.id) {
-                  <a
-                    class="lab-nav-item"
-                    [routerLink]="navigationLink(item)"
-                    routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }"
-                    (click)="navigate()"
-                  >
-                    <i class="pi {{ item.icon }}" aria-hidden="true"></i
-                    ><span>{{ item.label }}</span>
-                  </a>
+                  <a class="lab-nav-item" [routerLink]="navigationLink(item)" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="navigate()"><i class="pi {{ item.icon }}" aria-hidden="true"></i><span>{{ item.label }}</span></a>
                 }
               </div>
             }
           </section>
         }
-        <section class="lab-nav-group reference-group">
-          <p class="nav-section static-section">{{ referenceGroup.label }}</p>
-          <div class="lab-nav-items">
-            @for (item of referenceGroup.items; track item.id) {
-              <a
-                class="lab-nav-item"
-                [routerLink]="navigationLink(item)"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="navigate()"
-              >
-                <i class="pi {{ item.icon }}" aria-hidden="true"></i><span>{{ item.label }}</span>
-              </a>
-            }
-          </div>
-        </section>
       </nav>
     </aside>
   </div>

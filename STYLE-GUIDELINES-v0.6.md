@@ -1,6 +1,8 @@
 # NEXA DESIGN LAB v0.6 — Complete Style Guidelines
 
-Status: CANDIDATE. Human design approval is required. This document is the current Design Lab candidate reference; it is not Blueprint authority or a production component library.
+Status: CANDIDATE / RC2. Human design approval is required. This document is the current Design Lab candidate reference; it is not Blueprint authority or a production component library.
+
+RC2 implementation boundary: use the complete blue 50–950 scale, typed semantic/component tokens, control radii for buttons/menus/navigation, and actual component states. Do not use generic fallback specimens, fake locale controls, square inner focus rings or universal pills.
 
 ## 1. Scope and authority
 

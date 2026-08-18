@@ -1,3 +1,8 @@
 :focus-visible { outline: 3px solid var(--nexa-color-primary-600); outline-offset: 3px; }
+[data-target-overlay='true'] button,
+[data-target-overlay='true'] input,
+[data-target-overlay='true'] select,
+[data-target-overlay='true'] [role='switch'],
+[data-target-overlay='true'] [role='slider'] { outline: 1px dashed var(--nexa-color-primary-400); outline-offset: 4px; }
 .skip-link { position: fixed; z-index: 10; top: 8px; left: 8px; padding: 8px 12px; border-radius: var(--nexa-radius-md); background: var(--nexa-color-primary-700); color: var(--nexa-color-text-inverse); font-weight: var(--nexa-font-weight-semibold); transform: translateY(-180%); transition: transform var(--nexa-motion-standard); }
 .skip-link:focus { transform: translateY(0); }

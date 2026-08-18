@@ -1,6 +1,8 @@
 # NEXA DESIGN LAB v0.6 — Accessibility Audit
 
-Status: CANDIDATE. WCAG 2.2 AA is the target for design and implementation review; this document is not a certification.
+Status: CANDIDATE / RC2. WCAG 2.2 AA is the target for design and implementation review; this document is not a certification.
+
+RC2 engineering note: field focus is owned by the visible container, native controls remain the default, strict Angular templates are enabled, and interactive documentation specimens expose keyboard/recovery states. Browser and assistive-technology evidence remain manual gates.
 
 ## Audit matrix
 

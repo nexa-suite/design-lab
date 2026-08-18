@@ -20,18 +20,23 @@
   --nexa-color-neutral-700: var(--nexa-primitive-slate-700);
   --nexa-color-neutral-950: var(--nexa-primitive-slate-900);
   --nexa-color-text-primary: var(--nexa-primitive-slate-900);
-  --nexa-color-text-secondary: var(--nexa-primitive-slate-500);
-  --nexa-color-text-muted: var(--nexa-primitive-slate-400);
+  --nexa-mode-text-secondary: var(--nexa-primitive-slate-500);
+  --nexa-mode-text-muted: var(--nexa-primitive-slate-400);
+  --nexa-mode-border-interactive: var(--nexa-primitive-slate-300);
+  --nexa-mode-focus-ring: var(--nexa-primitive-blue-600);
+  --nexa-color-text-secondary: var(--nexa-mode-text-secondary);
+  --nexa-color-text-muted: var(--nexa-mode-text-muted);
   --nexa-color-text-inverse: var(--nexa-primitive-white);
   --nexa-color-border-default: var(--nexa-primitive-slate-200);
   --nexa-color-border-strong: var(--nexa-primitive-slate-300);
   --nexa-color-border-decorative: var(--nexa-primitive-slate-200);
   --nexa-color-border-structural: var(--nexa-primitive-slate-200);
-  --nexa-color-border-interactive: var(--nexa-primitive-slate-300);
-  --nexa-color-focus-ring: var(--nexa-primitive-blue-600);
+  --nexa-color-border-interactive: var(--nexa-mode-border-interactive);
+  --nexa-color-focus-ring: var(--nexa-mode-focus-ring);
   --nexa-color-info-50: var(--nexa-primitive-blue-50);
   --nexa-color-info-700: var(--nexa-primitive-blue-700);
   --nexa-color-success-50: var(--nexa-primitive-green-50);
+  --nexa-color-success-200: var(--nexa-primitive-green-200);
   --nexa-color-success-border: var(--nexa-primitive-green-200);
   --nexa-color-success-700: var(--nexa-primitive-green-700);
   --nexa-color-role-sales-surface: var(--nexa-primitive-green-50);
@@ -41,6 +46,7 @@
   --nexa-color-warning-600: var(--nexa-primitive-amber-600);
   --nexa-color-warning-text: var(--nexa-primitive-amber-800);
   --nexa-color-danger-50: var(--nexa-primitive-red-50);
+  --nexa-color-danger-200: var(--nexa-primitive-red-200);
   --nexa-color-danger-600: var(--nexa-primitive-red-600);
   --nexa-color-danger-text: var(--nexa-primitive-red-800);
   --nexa-color-attention-500: var(--nexa-primitive-orange-500);
@@ -75,11 +81,11 @@
   --nexa-radius-lg: var(--nexa-primitive-radius-lg);
   --nexa-radius-xl: var(--nexa-primitive-radius-xl);
   --nexa-radius-full: var(--nexa-primitive-radius-pill);
-  --nexa-radius-control: 10px;
-  --nexa-radius-card: 16px;
-  --nexa-radius-panel: 18px;
-  --nexa-radius-overlay: 18px;
-  --nexa-radius-dialog: 24px;
+  --nexa-radius-control: var(--nexa-primitive-radius-control);
+  --nexa-radius-card: var(--nexa-primitive-radius-card);
+  --nexa-radius-panel: var(--nexa-primitive-radius-panel);
+  --nexa-radius-overlay: var(--nexa-primitive-radius-overlay);
+  --nexa-radius-dialog: var(--nexa-primitive-radius-dialog);
   --nexa-radius-pill: var(--nexa-primitive-radius-pill);
   --nexa-radius-nav-active: var(--nexa-primitive-radius-md);
   --nexa-shadow-xs: var(--nexa-primitive-shadow-xs);
@@ -89,4 +95,11 @@
   --nexa-font-family-display: var(--nexa-primitive-font-display);
   --nexa-font-family-body: var(--nexa-primitive-font-body);
   --nexa-font-family-mono: var(--nexa-primitive-font-mono);
+}
+
+:where([data-contrast-mode='increased']) {
+  --nexa-mode-text-secondary: var(--nexa-primitive-slate-700);
+  --nexa-mode-text-muted: var(--nexa-primitive-slate-600);
+  --nexa-mode-border-interactive: var(--nexa-primitive-slate-500);
+  --nexa-mode-focus-ring: var(--nexa-primitive-blue-800);
 }

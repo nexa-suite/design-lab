@@ -1,0 +1,16 @@
+:host { display: block; }
+.toggle { display: flex; min-height: 44px; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; }
+.toggle-copy { display: grid; gap: 3px; }
+.toggle-copy strong { color: var(--nexa-color-text-primary); font-size: var(--nexa-font-size-sm); }
+.toggle-copy small { color: var(--nexa-color-text-secondary); font-size: var(--nexa-font-size-xs); }
+.toggle-control { position: relative; display: grid; width: 46px; height: 28px; flex: 0 0 46px; place-items: center; }
+input { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+input:focus-visible + .track { box-shadow: var(--nexa-focus-ring); }
+.track { display: block; width: 46px; height: 26px; border: 1px solid var(--nexa-color-border-strong); border-radius: var(--nexa-radius-pill); background: var(--nexa-color-neutral-200); transition: background var(--nexa-motion-standard), border-color var(--nexa-motion-standard); }
+.thumb { display: block; width: 20px; height: 20px; margin: 2px; border-radius: 50%; background: var(--nexa-surface-card); box-shadow: var(--nexa-shadow-xs); transition: transform var(--nexa-motion-standard); }
+input:checked + .track { border-color: var(--nexa-color-primary-600); background: var(--nexa-color-primary-600); }
+input:checked + .track .thumb { transform: translateX(20px); }
+.disabled { cursor: not-allowed; }
+.disabled .toggle-copy { color: var(--nexa-color-text-muted); }
+.disabled .track { opacity: .7; }
+@media (prefers-reduced-motion: reduce) { .track, .thumb { transition: none; } }

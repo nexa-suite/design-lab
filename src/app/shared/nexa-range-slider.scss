@@ -1,0 +1,10 @@
+:host { display: block; }
+.range { display: grid; gap: 10px; color: var(--nexa-color-text-primary); cursor: pointer; }
+.range-heading, .range-scale { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.range-heading strong { font-size: var(--nexa-font-size-sm); }
+.range-heading output { color: var(--nexa-color-primary-700); font: 700 var(--nexa-font-size-md)/1 var(--nexa-font-family-mono); }
+input { width: 100%; height: 6px; accent-color: var(--nexa-color-primary-600); cursor: pointer; }
+input:focus-visible { outline: 3px solid var(--nexa-color-primary-600); outline-offset: 4px; }
+.range-scale { color: var(--nexa-color-text-muted); font-size: var(--nexa-font-size-xs); }
+.disabled { color: var(--nexa-color-text-muted); cursor: not-allowed; }
+.disabled input { cursor: not-allowed; }

@@ -1,5 +1,50 @@
 # Changelog
 
+## [0.7.0-rc.1] - 2026-08-18
+
+### Added
+
+- Visual evidence laboratory for foundations, 20 component pages, patterns, quality labs and Angular engineering evidence.
+- Reusable signal-first Text Field, Toggle, Segmented Control, Numeric Stepper, Slider, Surface and State Sequence contracts.
+- State galleries and deterministic Play/Next/Reset operation sequences without autoplay.
+- Blue and neutral visual ramps, semantic support families and a mechanically derived 12-pair Contrast Lab.
+- Standard/Increased Contrast, Motion/Reduced Motion, target-overlay and text-scale evaluation modes.
+- v0.7 style, inventory, maturity, accessibility, contrast, architecture, Figma mapping, freeze and implementation documents.
+
+### Changed
+
+- Documentation is now visual-evidence-first; state prose is paired with rendered and interactive evidence.
+- The current sidebar and text-field directions remain frozen while shared component contracts are extracted around them.
+- Authentication remains as a Patterns composition specimen rather than a screen-library route.
+
+### Retired
+
+- The experimental screen-library subsystem, its routes, shells, dead components and runtime-only data imports.
+
+### Status
+
+- Experimental release candidate. Human visual and accessibility review required. No production readiness, Figma completion or final release claim.
+
+## [0.6.0-rc.2] - 2026-08-18
+
+### Added
+
+- RC2 freeze covering the documentation-shell IA, light direction, PrimeIcons, blue scale and Auth boundary.
+- Focused foundation, component and context documentation components with live token, typography and interaction specimens.
+- Interactive specimens for buttons, fields, search, selection, status, alerts, menus, tooltips, overlays, tables, progress, navigation and panels.
+- Strict TypeScript/template checks and a token integrity validation script.
+
+### Changed
+
+- Replaced the documentation-page god component with focused foundation, component and context concepts.
+- Replaced the generic component specimen and `Inspect behavior` fallback with component-specific behavior.
+- Split shared UI contracts into focused standalone files; buttons and action-menu triggers use control radii instead of universal pills.
+- Made Auth ES/EN controls, workspace selection, password visibility, validation and loading feedback truthful; removed fake locale buttons from reference shells.
+
+### Status
+
+- Experimental release candidate. Documentation-shell direction is frozen for human review. No design approval or production readiness claim.
+
 ## [0.6.0-rc.1] - 2026-08-17
 
 ### Added

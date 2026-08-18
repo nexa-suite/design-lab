@@ -1,140 +1,102 @@
-<div align="center">
+# Nexa Design Lab v0.7
 
-<br />
+Visual evidence laboratory for Nexa foundations, reusable components, interaction states and accessibility review.
 
-<img src="./public/brand/nexa.svg" alt="Nexa" width="240" />
-
-# Nexa Design Lab
-
-**Internal visual engineering studio for Nexa foundations, screens and workflow evidence.**
-
-![Status](https://img.shields.io/badge/status-experimental-7C3AED?style=flat-square) ![Angular](https://img.shields.io/badge/Angular-22-DD0031?style=flat-square&logo=angular&logoColor=white) ![Material](https://img.shields.io/badge/Angular%20Material-22-757575?style=flat-square&logo=materialdesign&logoColor=white) ![Vitest](https://img.shields.io/badge/Vitest-tests-6E9F18?style=flat-square&logo=vitest&logoColor=white)
-
-[Run](#run) · [Visual foundations](#visual-foundations) · [Reference library](#reference-screen-library) · [Review workflow](#review-workflow)
-
-</div>
-
----
+`0.7.0-rc.1` is an Angular-only design-system candidate. It is not a production package, a product application, a Blueprint baseline or a completed Figma library.
 
 ## Purpose
 
-Design Lab is Nexa's executable visual laboratory. It holds design evidence, component behavior and representative B2B workflow experiments for human review.
+v0.7 changes the lab from description-first documentation to evidence-first review:
 
-Current state: v0.6.0-rc.1 design-documentation candidate. Experimental, not production, not canonical Blueprint.
+- every important rule has a rendered specimen;
+- states can be seen, triggered, compared and reset;
+- color and contrast use a shared deterministic gate;
+- accessibility modes expose focus, target, resize and motion behavior;
+- component maturity separates human-frozen direction from open exploration.
 
-## Design workspace
-
-- Routed v0.6 documentation: foundations, component contracts, patterns, quality and engineering mapping.
-- Visual foundations: typography, color, spacing, surfaces, shape and motion.
-- Accessibility, contrast and responsive behavior experiments.
-- Angular Material compatibility comparisons.
-- Routed Platform, Buyer Portal and Authentication reference screens using synthetic data.
-- Catalog anatomy, Inventory Control and representative Sales Orders views.
-- Brand and product assets used only as local design evidence.
-
-## What belongs here
-
-- Inspectable visual experiments.
-- Reusable component and screen references.
-- Design-system rules awaiting human approval.
-- Traceability from visual question to evidence and decision.
-
-## What does not belong here
-
-- Production API, authentication, tenant provisioning or routing contracts.
-- Final product semantics or accepted domain decisions.
-- Claims that an experiment is production-ready.
-- Legacy source copied as implementation authority.
-
-Blueprint becomes durable design specification only after human approval. Production repositories remain authority for shipped behavior.
-
-## Visual foundations
-
-- Brand blue: #2563EB, represented through primitive OKLCH scale.
-- Plus Jakarta Sans for display, Inter for operational UI, native/system monospace for identifiers.
-- 4px spacing rhythm, restrained 6–16px radii and low-shadow surfaces.
-- White/light shell with pale blue canvas.
-- Accessible drawer navigation at narrow widths; sidebar is not silently removed.
-
-## Reference Screen Library
-
-<table>
-<tr><td width="50%" valign="top"><strong>Foundations and Contrast</strong><br />Typography, spacing, surfaces, motion, icon comparison and WCAG contrast results.</td><td width="50%" valign="top"><strong>Material Compatibility</strong><br />Buttons, fields, select, checkbox, radio, toggle, menu, tooltip and progress.</td></tr>
-<tr><td valign="top"><strong>Operational Reference</strong><br />Sales Orders and Inventory Control tables with state, density and overflow contracts.</td><td valign="top"><strong>Product Reference</strong><br />Platform Sales/Logistics, Buyer Portal request flows and Authentication screens.</td></tr>
-</table>
-
-## Current stack
-
-| Concern                   | Technology                                      |
-| ------------------------- | ----------------------------------------------- |
-| Framework                 | Angular 22 standalone                           |
-| Components                | Angular Material 22 and CDK-compatible patterns |
-| Styling                   | SCSS                                            |
-| Tests                     | Vitest                                          |
-| Language                  | TypeScript 6                                    |
-| Package manager           | npm 11.17.0                                     |
-| Experimental dependencies | Google Fonts and PrimeIcons CDN                 |
-
-No DTCG compiler, token package, Storybook, Tailwind, Nx, dark mode or theme engine is present.
+The active lab contains documentation pages and composition specimens only. Authentication remains available under `Patterns / Authentication` as a design-system composition specimen.
 
 ## Run
 
-    npm ci
-    npm start -- --host 127.0.0.1 --port 4301
+```bash
+npm ci
+npm start -- --host 127.0.0.1 --port 4301
+```
 
-Open http://127.0.0.1:4301/.
+Open `http://127.0.0.1:4301/guidelines/overview`.
 
-## Validation
+## Route map
 
-    npm run build
-    npm test -- --watch=false
-    npm audit --omit=dev --audit-level=high
+| Area | Evidence |
+| --- | --- |
+| Start here | Overview, principles, maturity/freeze |
+| Foundations | Color, typography, layout, shape, surfaces, iconography, motion |
+| Components | Buttons, text fields, search, choice controls, status, feedback, menus, overlays, data, progress, workflow, quantity, navigation |
+| Patterns | Forms, search/filtering, async operations, empty/loading/error, authentication, responsive behavior |
+| Quality | Accessibility Lab, Contrast Lab, heuristics, input modality, maturity |
+| Engineering | Angular architecture, tokens, APIs, testing, Figma mapping |
 
-Browser review checkpoints: 320px, 768px, 1024px and 1440px.
+All documentation pages are lazy-loaded through the Angular router. There is no active screen-library route.
 
-## Repository structure
+## Frozen candidate direction
 
-    src/                         Angular application
-    public/                      Local brand and catalog assets
-    IMPLEMENTATION-REPORT-v0.6.md
-    TRACEABILITY-v0.6.md
-    RESEARCH-v0.6.md
-    DESIGN-PRINCIPLES-v0.6.md
-    DESIGN-SYSTEM-INVENTORY-v0.6.md
-    LEGACY-VISUAL-DNA-v0.6.md
-    FLOW-PARITY-AUDIT-v0.6.md
-    HEURISTIC-AUDIT-v0.6.md
-    ACCESSIBILITY-AUDIT-v0.6.md
-    STYLE-GUIDELINES-v0.6.md
-    FIGMA-HANDOFF-v0.6.md
-    IMPLEMENTATION-REPORT-v0.5.md
-    TRACEABILITY-v0.5.md
-    RESEARCH-v0.5.md
-    STYLE-GUIDELINES-v0.5.md
-    VISUALIZATION-DECISION-v0.5.md
-    NORMALIZATION-REPORT-v0.2.md
-    package.json
-    angular.json
+- Light appearance is canonical.
+- The current sidebar geometry, grouping, search, active row and mobile drawer behavior remain frozen.
+- The current text-field geometry remains frozen and is now reusable through `NexaTextField`.
+- Plus Jakarta Sans, Inter and JetBrains/system mono remain the candidate type families.
+- PrimeIcons remain the candidate icon system.
+- White structural surfaces sit on a cool light canvas; elevation is restrained and purposeful.
+- Rounded geometry is semantic: controls, cards, panels and compact status do not share one universal radius.
 
-## Review workflow
+## Quality evidence
 
-1. Define visual question and evidence boundary.
-2. Build smallest inspectable experiment.
-3. Check keyboard, contrast, responsive states and content density.
-4. Compare against current Nexa identity and production constraints.
-5. Record decision, unresolved question or rejection.
-6. Promote only after human approval and production-repository ownership is clear.
+```bash
+npm run build
+npm run validate:tokens
+npm run validate:contrast
+npm test -- --watch=false
+npm audit --omit=dev --audit-level=high
+git diff --check
+```
 
-## Relationship to products
+The Contrast Lab derives ratios from token color values. The required gates are WCAG 2.2: 4.5:1 for normal text, 3:1 for large text and 3:1 for essential non-text UI. The lab also exposes Standard/Increased Contrast, Motion/Reduced Motion and target-overlay review modes.
 
-Design Lab supports Website, Platform, Portal, API documentation and future Mobile decisions. It does not publish product behavior, replace Blueprint authority or alter application source.
+Browser review covers the required pages and 1440, 1024, 768, 390 and 320px viewports. Manual assistive-technology review remains a human handoff item unless explicitly recorded in the implementation report.
 
-## Security and publication boundary
+## Angular structure
 
-Do not report vulnerabilities through public issues. No standalone Security Policy exists in this checkout. Experiments remain local design evidence until approved; publication does not imply production readiness.
+```text
+src/app/
+  shell/                 documentation navigation shell
+  guidelines/            focused route/page composition features
+  shared/                reusable candidate controls and deterministic utilities
+src/styles/
+  _tokens-primitives.scss
+  _tokens-semantic.scss
+  _tokens-components.scss
+  _motion.scss
+  _accessibility.scss
+tooling/scripts/         token and contrast gates
+```
 
-## Legal
+Reusable controls own their public API and native semantics. Documentation specimens own simulation state, galleries and evidence composition. Strict templates and signal-first state are required.
 
-Copyright © 2026 Nexa. All rights reserved. No open-source license is selected by this README.
+## Documentation
 
-<div align="center"><br />Nexa · Visual decisions made inspectable</div>
+- [Style guidelines](./STYLE-GUIDELINES-v0.7.md)
+- [Component inventory](./COMPONENT-INVENTORY-v0.7.md)
+- [Component maturity](./COMPONENT-MATURITY-v0.7.md)
+- [Accessibility evidence](./ACCESSIBILITY-EVIDENCE-v0.7.md)
+- [Contrast audit](./CONTRAST-AUDIT-v0.7.md)
+- [Angular architecture](./ANGULAR-ARCHITECTURE-v0.7.md)
+- [Figma handoff](./FIGMA-HANDOFF-v0.7.md)
+- [Freeze](./FREEZE-v0.7.md)
+- [Implementation report](./IMPLEMENTATION-REPORT-v0.7.md)
+
+The v0.7 documents supersede earlier candidate notes for the active lab. Historical notes remain in Git for provenance and are not runtime authority.
+
+## Boundary
+
+Design Lab changes are local to this repository. No production application, API, Blueprint, mobile repository or deployment is modified by this release candidate. No push, tag or final release is part of v0.7.
+
+Copyright © 2026 Nexa. All rights reserved.

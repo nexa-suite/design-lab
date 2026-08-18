@@ -25,9 +25,10 @@
   --nexa-control-height-sm: 34px;
   --nexa-control-height-md: 40px;
   --nexa-control-height-lg: 48px;
-  --nexa-focus-ring: 0 0 0 3px rgb(37 99 235 / 24%);
+  --nexa-focus-ring: 0 0 0 3px color-mix(in oklab, var(--nexa-color-focus-ring) 24%, transparent);
   --nexa-shadow-toast: 0 12px 28px rgb(15 23 42 / 12%);
   --nexa-component-sidebar-width: var(--nexa-layout-sidebar-width);
   --nexa-component-drawer-width: min(320px, 88vw);
   --nexa-component-table-row-height: 56px;
+  --nexa-doc-text-scale: 1;
 }

@@ -199,11 +199,6 @@
   font-size: 12px;
   line-height: 1.45;
 }
-.reference-group {
-  padding-top: 2px;
-  border-top: 1px solid var(--nexa-color-border-decorative);
-}
-
 .lab-footer {
   display: flex;
   gap: 9px;
@@ -250,11 +245,52 @@
   color: var(--nexa-color-text-secondary);
   font-size: 12px;
 }
-.topbar-reference {
+.topbar-review {
   color: var(--nexa-color-primary-700);
   font-weight: 600;
   text-decoration: none;
 }
+.evaluation-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-inline: auto;
+}
+.evaluation-label {
+  color: var(--nexa-color-text-muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.segmented-evaluation {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--nexa-color-border-default);
+  border-radius: var(--nexa-radius-control);
+  background: var(--nexa-surface-inset);
+}
+.segmented-evaluation button {
+  min-height: 26px;
+  border: 0;
+  border-radius: var(--nexa-radius-sm);
+  padding: 0 7px;
+  color: var(--nexa-color-text-secondary);
+  background: transparent;
+  font-size: 10px;
+  cursor: pointer;
+}
+.segmented-evaluation button.selected {
+  color: var(--nexa-color-primary-700);
+  background: var(--nexa-surface-card);
+  box-shadow: var(--nexa-shadow-xs);
+  font-weight: 700;
+}
+.segmented-evaluation button:focus-visible { outline: none; box-shadow: var(--nexa-focus-ring); }
 .mobile-menu-button,
 .icon-button {
   display: none;
@@ -316,7 +352,7 @@
 .mobile-drawer .search-control:focus-within,
 .mobile-menu-button:focus-visible,
 .lab-nav-item:focus-visible,
-.topbar-reference:focus-visible,
+.topbar-review:focus-visible,
 .lab-brand:focus-visible,
 .clear-search:focus-visible {
   outline: 0;
@@ -337,6 +373,16 @@
   .mobile-navigation-layer {
     display: block;
   }
+  .lab-topbar { min-height: 64px; flex-wrap: wrap; padding-block: 8px; }
+  .evaluation-controls { order: 3; width: 100%; justify-content: flex-start; }
+  .topbar-review { margin-left: auto; }
+}
+
+@media (max-width: 540px) {
+  .lab-topbar > span:first-of-type { font-size: 11px; }
+  .topbar-review { display: none; }
+  .evaluation-controls { align-items: flex-start; flex-direction: column; }
+  .evaluation-label { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,9 +1,11 @@
 import { provideRouter, Router } from '@angular/router';
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { App } from './app';
 import { routes } from './app.routes';
 
-describe('Nexa Design Lab v0.6 routes', () => {
+describe('Nexa Design Lab v0.7 routes', () => {
+  let activeFixture: ComponentFixture<App>;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
@@ -13,6 +15,7 @@ describe('Nexa Design Lab v0.6 routes', () => {
 
   async function navigate(path: string): Promise<HTMLElement> {
     const fixture = TestBed.createComponent(App);
+    activeFixture = fixture;
     const router = TestBed.inject(Router);
     await router.navigateByUrl(path);
     fixture.detectChanges();
@@ -21,41 +24,63 @@ describe('Nexa Design Lab v0.6 routes', () => {
     return fixture.nativeElement as HTMLElement;
   }
 
-  it('creates the application with the documented route tree', () => {
+  it('creates the application with the evidence route tree', () => {
     expect(TestBed.createComponent(App).componentInstance).toBeTruthy();
   });
 
-  it('renders the routed documentation system and keeps reference shells separate', async () => {
-    const guidelines = await navigate('/guidelines/foundations/color');
-    expect(guidelines.querySelector('nexa-shell')).toBeTruthy();
-    expect(guidelines.querySelector('h1')?.textContent).toContain('Color communicates');
+  it('renders foundations, components, quality and engineering evidence', async () => {
+    const color = await navigate('/guidelines/foundations/color');
+    expect(color.querySelector('nexa-shell')).toBeTruthy();
+    expect(color.querySelector('h1')?.textContent).toContain('Color communicates');
+    expect(color.querySelectorAll('.blue-token-card')).toHaveLength(11);
 
     const buttons = await navigate('/guidelines/components/buttons');
     expect(buttons.querySelector('h1')?.textContent).toContain('Buttons make one next action');
     expect(buttons.querySelector('.specimen-board')).toBeTruthy();
+    expect(buttons.querySelector('nexa-state-sequence')).toBeTruthy();
 
-    const engineering = await navigate('/guidelines/engineering/angular-compatibility');
-    expect(engineering.querySelector('h1')?.textContent).toContain(
-      'Behavior source and visual owner',
-    );
+    const contrast = await navigate('/guidelines/quality/contrast-lab');
+    expect(contrast.querySelector('h1')?.textContent).toContain('Contrast ratios');
+    expect(contrast.querySelectorAll('.contrast-matrix article')).toHaveLength(12);
 
-    const platform = await navigate('/reference/platform/inventory');
-    expect(platform.querySelector('nexa-platform-shell')).toBeTruthy();
-    expect(platform.querySelector('h1')?.textContent).toContain('Inventory Control');
-
-    const portal = await navigate('/reference/portal/request-builder');
-    expect(portal.querySelector('nexa-portal-shell')).toBeTruthy();
-    expect(portal.querySelector('h1')?.textContent).toContain('Build a purchase request');
+    const architecture = await navigate('/guidelines/engineering/angular-architecture');
+    expect(architecture.querySelector('h1')?.textContent).toContain('Feature areas');
+    expect(architecture.textContent).toContain('signal / computed / model');
   });
 
-  it('keeps the compatibility alias and authentication reference route usable', async () => {
-    const materialAlias = await navigate('/guidelines/material');
-    expect(materialAlias.querySelector('h1')?.textContent).toContain(
-      'Behavior source and visual owner',
-    );
+  it('keeps RC2 documentation aliases inside the active lab', async () => {
+    const alias = await navigate('/guidelines/components/selection');
+    expect(alias.querySelector('h1')?.textContent).toContain('Checkbox supports');
+    expect(alias.querySelector('nexa-platform-shell')).toBeNull();
+    expect(alias.textContent).not.toContain('Reference Screen');
+  });
 
-    const auth = await navigate('/reference/auth/login');
-    expect(auth.querySelector('h2')?.textContent).toContain('Sign in to your workspace');
-    expect(auth.querySelector('form')).toBeTruthy();
+  it('keeps grouped documentation links aligned with their lazy routes', async () => {
+    const overview = await navigate('/guidelines/overview');
+    expect(overview.querySelector('a[href="/guidelines/foundations/color"]')).toBeTruthy();
+    expect(overview.querySelector('a[href="/guidelines/components/buttons"]')).toBeTruthy();
+    expect(overview.querySelector('a[href="/guidelines/quality/contrast-lab"]')).toBeTruthy();
+    expect(overview.querySelector('a[href="/guidelines/engineering/angular-architecture"]')).toBeTruthy();
+  });
+
+  it('keeps search, menu and toggle specimens interactive', async () => {
+    const search = await navigate('/guidelines/components/search-fields');
+    const searchInput = search.querySelector('nexa-text-field input[type="search"]') as HTMLInputElement;
+    searchInput.value = 'not-a-product';
+    searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+    activeFixture.detectChanges();
+    expect(search.textContent).toContain('No products found');
+
+    const menu = await navigate('/guidelines/components/menus');
+    menu.querySelector<HTMLButtonElement>('.menu-trigger')?.click();
+    activeFixture.detectChanges();
+    expect(menu.querySelector('[role="menu"]')).toBeTruthy();
+
+    const toggle = await navigate('/guidelines/components/toggle');
+    const toggleInput = toggle.querySelector('nexa-toggle input[role="switch"]') as HTMLInputElement;
+    const before = toggleInput.checked;
+    toggleInput.click();
+    activeFixture.detectChanges();
+    expect(toggleInput.checked).toBe(!before);
   });
 });

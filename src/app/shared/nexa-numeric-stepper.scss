@@ -1,0 +1,10 @@
+:host { display: block; }
+.stepper { display: flex; min-height: 44px; align-items: center; justify-content: space-between; gap: 16px; }
+.stepper-label { color: var(--nexa-color-text-primary); font-size: var(--nexa-font-size-sm); font-weight: 600; }
+.stepper-control { display: inline-flex; align-items: center; gap: 3px; padding: 3px; border: 1px solid var(--nexa-color-border-interactive); border-radius: var(--nexa-radius-control); background: var(--nexa-surface-card); }
+button { display: grid; width: 34px; height: 34px; place-items: center; border: 0; border-radius: var(--nexa-radius-sm); color: var(--nexa-color-primary-700); background: transparent; cursor: pointer; }
+button:hover:not(:disabled) { background: var(--nexa-color-primary-50); }
+button:focus-visible { outline: none; box-shadow: var(--nexa-focus-ring); }
+button:disabled { color: var(--nexa-color-text-muted); cursor: not-allowed; }
+output { display: grid; min-width: 42px; place-items: center; color: var(--nexa-color-text-primary); font: 700 var(--nexa-font-size-md)/1 var(--nexa-font-family-mono); }
+.disabled { color: var(--nexa-color-text-muted); }

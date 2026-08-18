@@ -12,10 +12,10 @@ import {
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import {
   DOCUMENTATION_GROUPS,
-  REFERENCE_GROUP,
   type DocumentationGroup,
   type DocumentationPage,
 } from '../guidelines/documentation-registry';
+import { NexaLabEvaluation } from '../shared/lab-evaluation';
 
 @Component({
   selector: 'nexa-shell',
@@ -30,7 +30,7 @@ export class NexaDesignLabShell {
   protected readonly drawerClose = viewChild<ElementRef<HTMLButtonElement>>('drawerClose');
   protected readonly searchTerm = signal('');
   protected readonly documentationGroups = DOCUMENTATION_GROUPS;
-  protected readonly referenceGroup = REFERENCE_GROUP;
+  protected readonly evaluation = inject(NexaLabEvaluation);
   protected readonly expandedGroups = signal<Record<string, boolean>>(
     Object.fromEntries(DOCUMENTATION_GROUPS.map((group) => [this.groupId(group), true])),
   );
@@ -75,7 +75,7 @@ export class NexaDesignLabShell {
   }
 
   protected navigationLink(item: DocumentationPage): string {
-    return item.kind === 'reference' ? `/${item.path}` : `/guidelines/${item.path}`;
+    return `/guidelines/${item.path}`;
   }
 
   protected openMobileNav(): void {

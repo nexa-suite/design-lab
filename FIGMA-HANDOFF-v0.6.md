@@ -1,6 +1,8 @@
 # NEXA DESIGN LAB v0.6 — Figma Handoff Contract
 
-Status: CANDIDATE. This is a future reconstruction map; no Figma file, component library or design approval was created.
+Status: CANDIDATE / RC2. This is a future reconstruction map; no Figma file, component library or design approval was created.
+
+RC2 handoff note: component properties must map to typed Angular inputs and the live documentation specimens. Human review still owns final geometry, naming, variables and library publication.
 
 ## Variable collections
 

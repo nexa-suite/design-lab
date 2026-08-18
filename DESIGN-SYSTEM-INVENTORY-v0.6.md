@@ -1,6 +1,8 @@
 # NEXA DESIGN LAB v0.6 — Design-System Inventory
 
-Status: CANDIDATE. Inventory means documented and traceable; it does not mean approved or production-complete.
+Status: CANDIDATE / RC2. Inventory means documented and traceable; it does not mean approved or production-complete.
+
+RC2 extraction: the former documentation-page monolith is split into shell, foundation, component and context concepts. Each major component route now has a component-specific interactive specimen; generic fallback specimens are rejected.
 
 ## Information architecture
 
