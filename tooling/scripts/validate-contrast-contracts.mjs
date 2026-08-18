@@ -1,5 +1,5 @@
-import { APPROVED_CONTRAST_PAIRS } from '../../src/app/guidelines/documentation-data.ts';
-import { evaluateContrast } from '../../src/app/shared/contrast.ts';
+import { APPROVED_CONTRAST_PAIRS } from '../../src/app/documentation/content/documentation-data.ts';
+import { evaluateContrast } from '../../src/app/lab/quality/contrast.ts';
 
 const results = APPROVED_CONTRAST_PAIRS.map((pair) => ({
   ...pair,

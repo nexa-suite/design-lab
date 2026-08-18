@@ -1,12 +1,12 @@
-# Nexa Design Lab v0.8
+# Nexa Design Lab v0.9
 
 Visual evidence laboratory for Nexa foundations, reusable components, interaction states and accessibility review.
 
-`0.8.0-rc.1` is an Angular-only design-system candidate. It is not a production package, a product application, a Blueprint baseline or a completed Figma library.
+`0.9.0-rc.1` is an Angular-only design-system candidate. It is not a production package, a product application, a Blueprint baseline or a completed Figma library.
 
 ## Purpose
 
-v0.8 preserves the v0.7 evidence-first foundation and adds semantic depth:
+v0.9 preserves the v0.8 visual foundation and hardens its architecture:
 
 - every important rule has a rendered specimen;
 - states can be seen, triggered, compared and reset;
@@ -16,6 +16,10 @@ v0.8 preserves the v0.7 evidence-first foundation and adds semantic depth:
 - canonical supplied logo assets, semantic status emphasis and reusable Action Menu / Tooltip behavior are rendered;
 - Async Operations, Authentication, Legal Content, Payments, Analytics, Dispatch Board and Data-Dense Operations are candidate patterns;
 - Increased Contrast and Reduced Motion are root-level functional evaluation modes.
+- reusable candidates live under `design-system`, while Lab-only evidence lives under `lab`;
+- Authentication, Analytics and Dispatch Board own focused documentation features and explicit lazy routes;
+- StateSequence playback has configurable phase timing, terminal states and explicit recovery;
+- architecture, token and contrast gates protect the source structure and geometry contracts.
 
 The active lab contains documentation pages and composition specimens only. Product patterns remain design evidence; they do not define accepted domain behavior or production contracts.
 
@@ -57,6 +61,7 @@ All documentation pages are lazy-loaded through the Angular router. There is no 
 
 ```bash
 npm run build
+npm run validate:architecture
 npm run validate:tokens
 npm run validate:contrast
 npm test -- --watch=false
@@ -73,8 +78,9 @@ Browser review covers the required pages and 1440, 1024, 768, 390 and 320px view
 ```text
 src/app/
   shell/                 documentation navigation shell
-  guidelines/            focused route/page composition features
-  shared/                reusable candidate controls and deterministic utilities
+  design-system/         reusable candidate controls and brand primitives
+  lab/                   evaluation, evidence and quality infrastructure
+  documentation/         route features, page content and navigation metadata
 src/styles/
   _tokens-primitives.scss
   _tokens-semantic.scss
@@ -98,6 +104,6 @@ Historical v0.7 evidence remains in Git for provenance and is not runtime author
 
 ## Boundary
 
-Design Lab changes are local to this repository. No production application, API, Blueprint, mobile repository or deployment is modified by this release candidate. v0.8 publishes its feature branch and prerelease tag only; it does not merge to `main` or create a final release.
+Design Lab changes are local to this repository. No production application, API, Blueprint, mobile repository or deployment is modified by this release candidate. v0.9 publishes its feature branch and prerelease tag only; it does not merge to `main` or create a final release.
 
 Copyright © 2026 Nexa. All rights reserved.

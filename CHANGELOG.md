@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.9.0-rc.1] - 2026-08-18
+
+### Added
+
+- Feature-oriented Design System, Lab and Documentation ownership under `src/app`.
+- Explicit lazy page features for Authentication, Analytics and Dispatch Board.
+- `validate:architecture` gate for token boundaries, forbidden CSS, dependency direction, FLOW assets and retired imports.
+- StateSequence terminal/recovery semantics, configurable phase durations and tone-independent visited states.
+- Reusable EN/ES locale switcher, progress evidence variants and measured Segmented Control response evidence.
+
+### Changed
+
+- Reduced the documentation registry to navigation metadata and co-located substantial page content by documentation group.
+- Moved candidate component tests beside their implementations and removed the broad shared component test file.
+- Preserved the Action Menu presentation while repairing keyboard focus/activation behavior; removed the unused Angular Aria direct dependency.
+- Added explicit accessible Text Field labelling and responsive/reflow evidence for high-risk feature pages.
+
+### Status
+
+- Experimental release candidate. Human visual, content, keyboard and assistive-technology review required. No production readiness, Figma completion or final release claim.
+
 ## [0.8.0-rc.1] - 2026-08-18
 
 ### Added

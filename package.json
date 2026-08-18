@@ -1,10 +1,11 @@
 {
   "name": "nexa-design-lab",
-  "version": "0.8.0-rc.1",
+  "version": "0.9.0-rc.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "validate:architecture": "node tooling/scripts/validate-architecture.mjs",
     "validate:tokens": "node tooling/scripts/validate-design-tokens.mjs",
     "validate:contrast": "node --no-warnings --experimental-strip-types tooling/scripts/validate-contrast-contracts.mjs",
     "watch": "ng build --watch --configuration development",
@@ -13,7 +14,6 @@
   "private": true,
   "packageManager": "npm@11.17.0",
   "dependencies": {
-    "@angular/aria": "^22.1.2",
     "@angular/cdk": "^22.1.2",
     "@angular/common": "^22.1.0",
     "@angular/compiler": "^22.1.0",
