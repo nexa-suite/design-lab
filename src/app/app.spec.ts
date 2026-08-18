@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { App } from './app';
 import { routes } from './app.routes';
 
-describe('Nexa Design Lab v0.5 routes', () => {
+describe('Nexa Design Lab v0.6 routes', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
@@ -25,11 +25,18 @@ describe('Nexa Design Lab v0.5 routes', () => {
     expect(TestBed.createComponent(App).componentInstance).toBeTruthy();
   });
 
-  it('separates Design Lab documentation from Platform and Portal shells', async () => {
-    const guidelines = await navigate('/guidelines/foundations');
+  it('renders the routed documentation system and keeps reference shells separate', async () => {
+    const guidelines = await navigate('/guidelines/foundations/color');
     expect(guidelines.querySelector('nexa-shell')).toBeTruthy();
-    expect(guidelines.querySelector('h1')?.textContent).toContain(
-      'The rules extracted from Legacy',
+    expect(guidelines.querySelector('h1')?.textContent).toContain('Color communicates');
+
+    const buttons = await navigate('/guidelines/components/buttons');
+    expect(buttons.querySelector('h1')?.textContent).toContain('Buttons make one next action');
+    expect(buttons.querySelector('.specimen-board')).toBeTruthy();
+
+    const engineering = await navigate('/guidelines/engineering/angular-compatibility');
+    expect(engineering.querySelector('h1')?.textContent).toContain(
+      'Behavior source and visual owner',
     );
 
     const platform = await navigate('/reference/platform/inventory');
@@ -41,11 +48,11 @@ describe('Nexa Design Lab v0.5 routes', () => {
     expect(portal.querySelector('h1')?.textContent).toContain('Build a purchase request');
   });
 
-  it('renders real Material and authentication reference routes', async () => {
-    const material = await navigate('/guidelines/material');
-    expect(material.querySelector('h1')?.textContent).toContain('Material compatibility');
-    expect(material.querySelectorAll('nexa-native-select').length).toBe(1);
-    expect(material.querySelector('nexa-native-select select')).toBeTruthy();
+  it('keeps the compatibility alias and authentication reference route usable', async () => {
+    const materialAlias = await navigate('/guidelines/material');
+    expect(materialAlias.querySelector('h1')?.textContent).toContain(
+      'Behavior source and visual owner',
+    );
 
     const auth = await navigate('/reference/auth/login');
     expect(auth.querySelector('h2')?.textContent).toContain('Sign in to your workspace');
