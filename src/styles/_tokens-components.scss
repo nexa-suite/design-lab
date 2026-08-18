@@ -25,6 +25,15 @@
   --nexa-control-height-sm: 34px;
   --nexa-control-height-md: 40px;
   --nexa-control-height-lg: 48px;
+  --nexa-control-padding-inline: var(--nexa-space-4);
+  --nexa-control-padding-inline-compact: var(--nexa-space-3);
+  --nexa-control-gap: var(--nexa-space-1);
+  --nexa-panel-padding: var(--nexa-layout-card-padding);
+  --nexa-card-padding: var(--nexa-space-4);
+  --nexa-surface-gap: var(--nexa-space-4);
+  --nexa-radius-interactive: var(--nexa-radius-control);
+  --nexa-focus-width: 3px;
+  --nexa-focus-offset: 3px;
   --nexa-focus-ring: 0 0 0 3px color-mix(in oklab, var(--nexa-color-focus-ring) 24%, transparent);
   --nexa-shadow-toast: 0 12px 28px rgb(15 23 42 / 12%);
   --nexa-component-sidebar-width: var(--nexa-layout-sidebar-width);

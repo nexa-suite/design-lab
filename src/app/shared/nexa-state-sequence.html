@@ -1,9 +1,0 @@
-<section class="sequence" [attr.aria-label]="title()">
-  <div class="sequence-heading"><div><p class="sequence-kicker">STATE SEQUENCE</p><h3>{{ title() }}</h3></div><div class="sequence-actions"><button type="button" (click)="play()" [attr.aria-label]="playing() ? 'Pause sequence' : 'Play sequence'"><i class="pi" [class.pi-pause]="playing()" [class.pi-play]="!playing()" aria-hidden="true"></i>{{ playing() ? 'Pause' : 'Play' }}</button><button type="button" (click)="next()">Next state</button><button type="button" (click)="reset()">Reset</button></div></div>
-  <ol class="phase-list">
-    @for (phase of phases(); track phase.id; let index = $index) {
-      <li [class.current]="currentIndex() === index" [class.complete]="currentIndex() > index" [class]="'phase-' + (phase.tone ?? 'neutral')" [attr.aria-current]="currentIndex() === index ? 'step' : null"><span class="phase-marker"><i class="pi" [class.pi-check]="currentIndex() > index" [class.pi-circle-fill]="currentIndex() <= index" aria-hidden="true"></i></span><span><strong>{{ phase.label }}</strong><small>{{ phase.detail }}</small></span></li>
-    }
-  </ol>
-  <div class="sequence-feedback"><p class="sequence-current" role="status"><span class="sequence-tone" [class]="current().tone ?? 'neutral'" aria-hidden="true"></span><strong>{{ current().label }}</strong><span>{{ current().detail }}</span></p>@if (retryLabel() && current().id === 'error') { <button class="sequence-recovery" type="button" (click)="retry()"><i class="pi pi-refresh" aria-hidden="true"></i>{{ retryLabel() }}</button> }</div>
-</section>

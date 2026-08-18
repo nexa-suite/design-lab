@@ -1,6 +1,8 @@
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
+  EnvironmentInjector,
   ElementRef,
   QueryList,
   ViewChildren,
@@ -40,6 +42,7 @@ export class NexaActionMenu {
   readonly selected = output<string>();
   protected readonly open = signal(false);
   private readonly host = inject(ElementRef<HTMLElement>);
+  private readonly environmentInjector = inject(EnvironmentInjector);
 
   @ViewChildren('menuItem')
   private readonly menuItems!: QueryList<ElementRef<HTMLButtonElement>>;
@@ -50,7 +53,7 @@ export class NexaActionMenu {
       return;
     }
     this.open.set(true);
-    queueMicrotask(() => this.focusItem(0));
+    this.scheduleFocus(0);
   }
 
   protected activate(item: NexaActionMenuItem): void {
@@ -63,7 +66,7 @@ export class NexaActionMenu {
     if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp' && event.key !== 'Enter' && event.key !== ' ') return;
     event.preventDefault();
     this.open.set(true);
-    queueMicrotask(() => this.focusItem(event.key === 'ArrowUp' ? this.lastEnabledIndex() : 0));
+    this.scheduleFocus(event.key === 'ArrowUp' ? this.lastEnabledIndex() : 0);
   }
 
   protected handleDocumentKeydown(event: KeyboardEvent): void {
@@ -94,6 +97,12 @@ export class NexaActionMenu {
     }
   }
 
+  protected handleItemKeydown(event: KeyboardEvent, item: NexaActionMenuItem): void {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    this.activate(item);
+  }
+
   protected close(restoreFocus = true): void {
     if (!this.open()) return;
     this.open.set(false);
@@ -107,6 +116,12 @@ export class NexaActionMenu {
   private focusItem(index: number): void {
     const item = this.menuItems?.get(index)?.nativeElement;
     item?.focus();
+  }
+
+  private scheduleFocus(index: number): void {
+    afterNextRender(() => {
+      if (this.open()) this.focusItem(index);
+    }, { injector: this.environmentInjector });
   }
 
   private triggerElement(): HTMLButtonElement | null {

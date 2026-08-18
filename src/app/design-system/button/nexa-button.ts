@@ -9,7 +9,7 @@ export type NexaButtonSize = 'compact' | 'standard' | 'large';
   imports: [RouterLink],
   template: `
     @if (routerLink(); as link) {
-      <a class="nexa-button" [class]="classes()" [routerLink]="link" [attr.aria-busy]="loading()" [attr.aria-disabled]="disabled() || loading() ? 'true' : null" [attr.tabindex]="disabled() || loading() ? -1 : null">
+      <a class="nexa-button" [class]="classes()" [routerLink]="linkDisabled() ? null : link" [attr.aria-busy]="loading()" [attr.aria-disabled]="linkDisabled() ? 'true' : null" [attr.tabindex]="linkDisabled() ? -1 : null" (click)="guardLink($event)" (keydown.enter)="guardLink($event)" (keydown.space)="guardLink($event)">
         @if (loading()) { <span class="spinner" aria-hidden="true"></span> }
         <ng-content />
       </a>
@@ -55,4 +55,10 @@ export class NexaButton {
   readonly routerLink = input<string | undefined>(undefined);
 
   protected classes(): string { return `${this.variant()} ${this.size()}${this.fullWidth() ? ' full-width' : ''}`; }
+  protected linkDisabled(): boolean { return this.disabled() || this.loading(); }
+  protected guardLink(event: Event): void {
+    if (!this.linkDisabled()) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }
 }
