@@ -15,6 +15,12 @@ export class NexaDocumentationFrame {
 
   protected statusClass(): string { return this.page().status.toLowerCase().replaceAll(' ', '-'); }
   protected relatedPages(): readonly DocumentationPage[] {
+    const relatedPageIds = this.page().relatedPageIds;
+    if (relatedPageIds?.length) {
+      return relatedPageIds
+        .map((id) => this.allPages().find((candidate) => candidate.id === id))
+        .filter((candidate): candidate is DocumentationPage => Boolean(candidate));
+    }
     return this.allPages().filter((candidate) => candidate.id !== this.page().id && candidate.kind === this.page().kind).slice(0, 4);
   }
   protected pageUrl(candidate: DocumentationPage): string { return `/guidelines/${candidate.path}`; }

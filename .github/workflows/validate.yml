@@ -30,5 +30,6 @@ jobs:
       - run: npm run test:library -- --watch=false
       - run: npm test -- --watch=false
       - run: npm run build:library
+      - run: npm run validate:package
       - run: npm run build
       - run: git diff --check

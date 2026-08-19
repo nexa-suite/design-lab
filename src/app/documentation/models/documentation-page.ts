@@ -18,6 +18,7 @@ export interface DocumentationPageMetadata {
   readonly kind: DocumentationKind;
   readonly status: DocumentationStatus;
   readonly searchText: string;
+  readonly relatedPageIds?: readonly string[];
 }
 
 export interface DocumentationPageContent {
@@ -42,10 +43,10 @@ export interface DocumentationPage extends DocumentationPageContent {
   readonly path: string;
   readonly status: DocumentationStatus;
   readonly searchText: string;
+  readonly relatedPageIds?: readonly string[];
 }
 
 export interface DocumentationGroup {
   readonly label: string;
   readonly items: readonly DocumentationPageMetadata[];
 }
-

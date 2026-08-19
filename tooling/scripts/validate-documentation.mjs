@@ -20,8 +20,32 @@ const ids = [...registry.matchAll(/\bid:\s*'([^']+)'/g)].map((match) => match[1]
 const paths = [...registry.matchAll(/\bpath:\s*'([^']+)'/g)].map((match) => match[1]);
 if (new Set(ids).size !== ids.length) violations.push('documentation registry contains duplicate ids');
 if (new Set(paths).size !== paths.length) violations.push('documentation registry contains duplicate paths');
+const registryEntries = registry.split('\n').filter((line) => /^\s*\{ id:/.test(line));
+const validKinds = new Set(['overview', 'principles', 'foundation', 'component', 'pattern', 'quality', 'engineering']);
+const validStatuses = new Set(['FROZEN', 'CANDIDATE', 'EXPERIMENTAL', 'DEPRECATED']);
+if (registryEntries.length !== ids.length) violations.push('documentation registry contains an entry that is not shaped as explicit route metadata');
+for (const entry of registryEntries) {
+  const field = (name) => entry.match(new RegExp(`${name}: '([^']+)'`))?.[1];
+  const id = field('id') ?? 'unknown';
+  for (const required of ['id', 'path', 'label', 'icon', 'group', 'kind', 'status', 'searchText']) {
+    if (!field(required)) violations.push(`documentation metadata is missing ${required} for ${id}`);
+  }
+  if (field('kind') && !validKinds.has(field('kind'))) violations.push(`documentation metadata has an unknown kind for ${id}`);
+  if (field('status') && !validStatuses.has(field('status'))) violations.push(`documentation metadata has an unknown maturity status for ${id}`);
+  const related = entry.match(/relatedPageIds:\s*\[([^\]]*)\]/)?.[1]?.match(/'([^']+)'/g)?.map((value) => value.slice(1, -1)) ?? [];
+  for (const relatedId of related) {
+    if (!ids.includes(relatedId)) violations.push(`broken related-page reference ${id} -> ${relatedId}`);
+  }
+}
 for (const path of paths) {
   if (!routes.includes(`'${path}'`)) violations.push(`registered documentation path has no Angular route: ${path}`);
+}
+const routePageIds = [
+  ...[...routes.matchAll(/\[\s*'[^']+'\s*,\s*'([^']+)'\s*\]/g)].map((match) => match[1]),
+  ...[...routes.matchAll(/data:\s*\{\s*page:\s*'([^']+)'/g)].map((match) => match[1]),
+];
+for (const pageId of routePageIds) {
+  if (!ids.includes(pageId)) violations.push(`Angular route has no documentation metadata: ${pageId}`);
 }
 if (/figma-mapping/.test(registry)) violations.push('retired Figma Mapping remains in primary navigation metadata');
 if (!/design-adoption/.test(registry) || !/Design Adoption/.test(registry)) violations.push('Design Adoption & Handoff is missing from primary navigation');
@@ -30,6 +54,11 @@ const generatedTokenReference = join(root, 'src', 'app', 'documentation', 'conte
 if (!existsSync(generatedTokenReference) || !readFileSync(generatedTokenReference, 'utf8').startsWith('/* Generated from tokens/*.tokens.json')) {
   violations.push('documentation token reference is not generated from canonical token sources');
 }
+const contentFiles = ['start-here-content.ts', 'foundations-content.ts', 'components-content.ts', 'patterns-content.ts', 'quality-content.ts', 'engineering-content.ts'];
+const contentIds = contentFiles.flatMap((file) => [...readFileSync(join(root, 'src', 'app', 'documentation', 'content', file), 'utf8').matchAll(/\bid:\s*'([^']+)'/g)].map((match) => match[1]));
+if (new Set(contentIds).size !== contentIds.length) violations.push('documentation content contains duplicate ids');
+for (const id of ids) if (!contentIds.includes(id)) violations.push(`documentation route metadata has no substantive content: ${id}`);
+for (const id of contentIds) if (!ids.includes(id)) violations.push(`documentation content is not reachable from navigation metadata: ${id}`);
 if (/patterns\/other|loadPatternPage/.test(routes)) violations.push('catch-all pattern renderer remains in routing');
 if (!/import\('\.\/documentation\/patterns\/analytics\/analytics-page'/.test(routes)) violations.push('Analytics route does not use an explicit feature import');
 if (!/import\('\.\/documentation\/patterns\/authentication\/authentication-page'/.test(routes)) violations.push('Authentication route does not use an explicit feature import');

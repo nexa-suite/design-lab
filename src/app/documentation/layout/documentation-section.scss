@@ -1,51 +1,13 @@
+@use './documentation-heading' as docs;
+
 :host {
   display: block;
   padding: var(--nexa-layout-section-gap) 0;
   border-bottom: 1px solid var(--nexa-color-border-structural);
 }
 
+@include docs.shared-heading;
+
 :host(.evidence-first) {
   padding-top: 0;
-}
-
-.section-heading {
-  display: grid;
-  grid-template-columns: 38px minmax(0, 1fr);
-  gap: var(--nexa-space-3);
-  align-items: start;
-  margin-bottom: var(--nexa-space-6);
-}
-
-.section-index {
-  color: var(--nexa-color-primary-600);
-  font: 700 var(--nexa-font-size-sm) / 1.4 var(--nexa-font-family-mono);
-}
-
-.section-kicker {
-  margin: 0 0 var(--nexa-space-2);
-  color: var(--nexa-color-primary-700);
-  font-size: var(--nexa-font-size-2xs);
-  font-weight: 800;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-
-h2 {
-  margin: 0;
-  font: 720 clamp(22px, 3vw, 32px) / 1.14 var(--nexa-font-family-display);
-  letter-spacing: -.04em;
-}
-
-.section-intro {
-  max-width: 760px;
-  margin: var(--nexa-space-2) 0 0;
-  color: var(--nexa-color-text-secondary);
-  line-height: var(--nexa-line-height-relaxed);
-}
-
-@media (max-width: 440px) {
-  .section-heading {
-    grid-template-columns: 30px minmax(0, 1fr);
-    gap: var(--nexa-space-2);
-  }
 }

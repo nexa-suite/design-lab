@@ -1,11 +1,9 @@
+@use '../layout/documentation-heading' as docs;
+
 :host { display: block; }
 .component-doc-section { padding: 42px 0; border-bottom: 1px solid var(--nexa-color-border-structural); }
 .evidence-first { padding-top: 0; }
-.section-heading { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 14px; align-items: start; margin-bottom: 24px; }
-.section-index { color: var(--nexa-color-primary-600); font: 700 13px/1.4 var(--nexa-font-family-mono); }
-.section-kicker, .proof-label { margin: 0 0 7px; color: var(--nexa-color-primary-700); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
-h2 { margin: 0; font: 720 clamp(22px, 3vw, 32px)/1.14 var(--nexa-font-family-display); letter-spacing: -.04em; }
-.section-intro { max-width: 760px; margin: 10px 0 0; color: var(--nexa-color-text-secondary); line-height: 1.6; }
+@include docs.shared-heading;
 .specimen-board { min-height: 220px; display: grid; align-items: center; padding: clamp(18px, 3vw, 30px); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-panel); background: var(--nexa-surface-inset); }
 .playground-stack, .field-playground, .search-playground, .selection-playground, .toggle-playground, .segmented-playground, .status-playground, .feedback-playground, .menu-playground, .tooltip-playground, .overlay-playground, .table-playground, .progress-playground, .workflow-playground, .numeric-playground, .slider-playground, .navigation-playground { width: min(100%, 760px); }
 .table-playground, .table-scroll { min-width: 0; max-width: 100%; }

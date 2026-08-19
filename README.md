@@ -76,6 +76,7 @@ npm run validate:documentation
 npm run validate:public-api
 npm run validate:visual
 npm run validate:contrast
+npm run validate:package
 npm run audit:visual
 npm test -- --watch=false
 npm run test:library -- --watch=false

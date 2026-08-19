@@ -16,6 +16,7 @@
     "validate:visual": "node tooling/scripts/validate-visual-evidence.mjs",
     "audit:visual": "node tooling/scripts/generate-visual-audit.mjs",
     "validate:contrast": "node --no-warnings --experimental-strip-types tooling/scripts/validate-contrast-contracts.mjs",
+    "validate:package": "node tooling/scripts/validate-package.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test nexa-design-lab",
     "test:library": "ng test nexa-ui --watch=false"

@@ -124,5 +124,15 @@ describe('Nexa Design Lab v0.10 routes', () => {
       expect(page.textContent).toContain(heading);
       expect(page.querySelector('.pattern-section')).toBeTruthy();
     }
+
+    const map = await navigate('/guidelines/patterns/map-location');
+    expect(map.textContent).toContain('Location evidence answers where and why');
+    expect(map.querySelector('.map-composition')).toBeTruthy();
+    map.querySelector<HTMLButtonElement>('.map-mode-switcher button:nth-child(3)')?.click();
+    activeFixture.detectChanges();
+    expect(map.textContent).toContain('Map surface unavailable');
+    map.querySelector<HTMLButtonElement>('.map-stop.stop-origin')?.click();
+    activeFixture.detectChanges();
+    expect(map.querySelector('.location-summary')?.textContent).toContain('Dispatch origin');
   });
 });

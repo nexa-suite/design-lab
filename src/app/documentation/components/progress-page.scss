@@ -1,13 +1,10 @@
 @use '../patterns/pattern-foundation';
+@use '../layout/documentation-heading' as docs;
 
 :host { display: block; }
 .component-section { padding: var(--nexa-layout-section-gap) 0; border-bottom: 1px solid var(--nexa-color-border-structural); }
 .evidence-first { padding-top: 0; }
-.section-heading { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: var(--nexa-space-3); align-items: start; margin-bottom: var(--nexa-space-6); }
-.section-index { color: var(--nexa-color-primary-600); font: 700 var(--nexa-font-size-sm)/1.4 var(--nexa-font-family-mono); }
-.section-kicker { margin: 0 0 var(--nexa-space-2); color: var(--nexa-color-primary-700); font-size: var(--nexa-font-size-2xs); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
-h2 { margin: 0; font: 720 clamp(22px, 3vw, 32px)/1.14 var(--nexa-font-family-display); letter-spacing: -.04em; }
-.section-intro { max-width: 760px; margin: var(--nexa-space-2) 0 0; color: var(--nexa-color-text-secondary); line-height: var(--nexa-line-height-relaxed); }
+@include docs.shared-heading;
 .progress-family { display: grid; gap: var(--nexa-space-4); padding: clamp(var(--nexa-space-5), 3vw, var(--nexa-space-8)); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-panel); background: var(--nexa-surface-inset); }
 .progress-row { display: grid; grid-template-columns: 190px minmax(160px, 1fr) 70px; gap: var(--nexa-space-3); align-items: center; }
 .progress-row div:first-child { display: grid; gap: var(--nexa-space-1); }
