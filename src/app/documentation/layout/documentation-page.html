@@ -10,5 +10,5 @@
   @if (relatedPages().length > 0) {
     <section class="related-pages"><div><p class="section-kicker">CONTINUE</p><h2>Related {{ page().kind }} pages</h2></div><nav class="related-links" aria-label="Related documentation">@for (candidate of relatedPages(); track candidate.id) { <a [routerLink]="pageUrl(candidate)"><i class="pi {{ candidate.icon }}" aria-hidden="true"></i><span>{{ candidate.label }}</span><small>{{ candidate.status }}</small></a> }</nav></section>
   }
-  <section class="provenance-section"><div class="provenance-grid"><div><b>Angular contract</b><p>{{ page().angularContract }}</p></div><div><b>Figma mapping</b><p>{{ page().figmaMapping }}</p></div><div><b>Human review gate</b><p>Visual direction, interaction quality and accessibility evidence remain open for human approval.</p></div></div></section>
+  <section class="provenance-section"><div class="provenance-grid"><div><b>Angular contract</b><p>{{ page().angularContract }}</p></div><div><b>Design adoption</b><p>{{ page().adoptionMapping }}</p></div><div><b>Human review gate</b><p>Visual direction, interaction quality and accessibility evidence remain open for human approval.</p></div></div></section>
 </main>

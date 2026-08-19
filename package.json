@@ -13,6 +13,7 @@
     "validate:icons": "node tooling/scripts/validate-icons.mjs",
     "validate:documentation": "node tooling/scripts/validate-documentation.mjs",
     "validate:public-api": "node tooling/scripts/validate-public-api.mjs",
+    "validate:visual": "node tooling/scripts/validate-visual-evidence.mjs",
     "validate:contrast": "node --no-warnings --experimental-strip-types tooling/scripts/validate-contrast-contracts.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test nexa-design-lab",

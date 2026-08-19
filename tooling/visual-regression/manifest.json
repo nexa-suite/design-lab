@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "sourceSha": "git-head-at-capture",
+  "evidenceRoot": "tmp/visual-regression",
+  "registryCoverage": "all-documentation-pages",
+  "requiredViewports": [1440, 390],
+  "layoutViewports": [1024, 768, 320],
+  "highRiskStates": ["default", "hover", "focus", "pressed", "selected", "disabled", "loading", "error", "expanded-open"],
+  "canonicalRoutes": [
+    { "path": "overview", "area": "START HERE", "states": ["default", "focus"] },
+    { "path": "foundations/color", "area": "FOUNDATIONS", "states": ["default", "selected", "focus"] },
+    { "path": "foundations/motion", "area": "FOUNDATIONS", "states": ["standard", "reduced"] },
+    { "path": "components/buttons", "area": "COMPONENTS", "states": ["default", "hover", "focus", "pressed", "disabled", "loading", "success", "error"] },
+    { "path": "components/progress-indicators", "area": "COMPONENTS", "states": ["determinate", "indeterminate", "paused", "complete", "error", "skeleton"] },
+    { "path": "patterns/authentication", "area": "PATTERNS", "states": ["default", "focus", "invalid", "authenticating", "credentials", "workspace", "success"] },
+    { "path": "patterns/analytics", "area": "PATTERNS", "states": ["ready", "loading", "empty", "error"] },
+    { "path": "patterns/dispatch-board", "area": "PATTERNS", "states": ["empty", "selected", "source", "destination", "completed", "warning", "critical", "blocked"] },
+    { "path": "patterns/catalog", "area": "PATTERNS", "states": ["default", "selected", "detail"] },
+    { "path": "patterns/responsive", "area": "PATTERNS", "states": ["desktop", "tablet", "mobile", "reflow"] },
+    { "path": "quality/accessibility-lab", "area": "QUALITY", "states": ["focus", "contrast", "text-200", "reflow-400", "reduced-motion"] },
+    { "path": "engineering/component-apis", "area": "ENGINEERING", "states": ["inventory", "boundary"] }
+  ],
+  "artifactTemplate": "{evidenceRoot}/{sourceSha}/{route}/{viewport}/{state}.json",
+  "testResultFields": ["route", "viewport", "state", "artifact", "result", "sourceSha"]
+}

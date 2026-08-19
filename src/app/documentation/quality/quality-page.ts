@@ -38,12 +38,16 @@ export class NexaQualityPage {
     { component: 'Button', keyboard: 'Verified', focus: 'Verified', contrast: 'Verified', nonColor: 'Verified', target: 'Verified', motion: 'Verified', resize: 'Verified' },
     { component: 'Text Field', keyboard: 'Verified', focus: 'Verified', contrast: 'Verified', nonColor: 'Verified', target: 'Verified', motion: 'N/A', resize: 'Verified' },
     { component: 'Toggle', keyboard: 'Verified', focus: 'Verified', contrast: 'Verified', nonColor: 'Verified', target: 'Verified', motion: 'Partial', resize: 'N/A' },
-    { component: 'Dialog', keyboard: 'Partial', focus: 'Partial', contrast: 'Verified', nonColor: 'Verified', target: 'Verified', motion: 'Partial', resize: 'Partial' },
+    { component: 'Segmented Control', keyboard: 'Verified', focus: 'Verified', contrast: 'Verified', nonColor: 'Verified', target: 'Verified', motion: 'N/A', resize: 'Verified' },
+    { component: 'Action Menu', keyboard: 'Verified', focus: 'Manual review', contrast: 'Verified', nonColor: 'Verified', target: 'Verified', motion: 'N/A', resize: 'Verified' },
+    { component: 'Tooltip', keyboard: 'Verified', focus: 'Manual review', contrast: 'Verified', nonColor: 'Verified', target: 'Verified', motion: 'N/A', resize: 'Verified' },
+    { component: 'Dialog', keyboard: 'Manual review', focus: 'Manual review', contrast: 'Verified', nonColor: 'Verified', target: 'Verified', motion: 'Partial', resize: 'Partial' },
+    { component: 'Progress', keyboard: 'Verified', focus: 'Verified', contrast: 'Verified', nonColor: 'Verified', target: 'Verified', motion: 'Verified', resize: 'Verified' },
   ];
 
   protected contrast(pairId: string): ContrastResult {
     const pair = this.contrastPairs.find((candidate) => candidate.id === pairId) ?? this.contrastPairs[0];
     return evaluateContrast(pair.foreground, pair.background, pair.gate);
   }
-  protected statusTone(status: string): 'success' | 'warning' | 'danger' | 'info' { return status === 'Verified' ? 'success' : status === 'Partial' ? 'warning' : status === 'Pending' ? 'danger' : 'info'; }
+  protected statusTone(status: string): 'success' | 'warning' | 'danger' | 'info' { return status === 'Verified' ? 'success' : status === 'Partial' || status === 'Manual review' ? 'warning' : status === 'Pending' ? 'danger' : 'info'; }
 }

@@ -1,11 +1,13 @@
 import type { DocumentationPage } from '../models/documentation-page';
+import { COMPONENT_GUIDANCE } from './component-guidance';
+export { APPROVED_CONTRAST_PAIRS } from './contrast-contracts';
+export type { ContrastPair } from './contrast-contracts';
 
 export interface DocRow { readonly name: string; readonly value: string; readonly note: string; }
 export interface DocAnswer { readonly title: string; readonly copy: string; }
 export interface BlueToken { readonly shade: number; readonly token: string; readonly value: string; readonly usage: string; readonly foreground: string; }
 export interface TypeToken { readonly role: string; readonly family: string; readonly size: string; readonly weight: string; readonly leading: string; readonly tracking: string; readonly usage: string; }
 export interface ColorFamily { readonly name: string; readonly surface: string; readonly border: string; readonly foreground: string; readonly icon: string; readonly example: string; }
-export interface ContrastPair { readonly id: string; readonly label: string; readonly foregroundToken: string; readonly foreground: string; readonly backgroundToken: string; readonly background: string; readonly gate: 'normal' | 'large' | 'non-text'; }
 
 export const BLUE_SCALE: readonly BlueToken[] = [
   { shade: 50, token: '--nexa-primitive-blue-50', value: 'oklch(96.9% 0.014 264.5)', usage: 'Canvas tint and selected surface', foreground: 'Slate 900' },
@@ -104,23 +106,6 @@ export const OPERATION_PHASES = [
   { id: 'success', label: 'Success', detail: 'Operation completed.', tone: 'success' as const },
 ];
 
-export const APPROVED_CONTRAST_PAIRS: readonly ContrastPair[] = [
-  { id: 'text-primary-canvas', label: 'Primary text on canvas', foregroundToken: '--nexa-color-text-primary', foreground: '#0f172a', backgroundToken: '--nexa-surface-page', background: '#f6faff', gate: 'normal' },
-  { id: 'text-primary-card', label: 'Primary text on card', foregroundToken: '--nexa-color-text-primary', foreground: '#0f172a', backgroundToken: '--nexa-surface-card', background: '#ffffff', gate: 'normal' },
-  { id: 'text-secondary-card', label: 'Secondary text on card', foregroundToken: '--nexa-color-text-secondary', foreground: '#64748b', backgroundToken: '--nexa-surface-card', background: '#ffffff', gate: 'normal' },
-  { id: 'text-tertiary-card', label: 'Tertiary text on card', foregroundToken: '--nexa-color-neutral-600', foreground: '#475569', backgroundToken: '--nexa-surface-card', background: '#ffffff', gate: 'normal' },
-  { id: 'action-label-primary', label: 'Action label on primary', foregroundToken: '--nexa-color-text-inverse', foreground: '#ffffff', backgroundToken: '--nexa-color-primary-600', background: 'oklch(54.6% 0.215 262.9)', gate: 'normal' },
-  { id: 'link-on-card', label: 'Link on card', foregroundToken: '--nexa-color-primary-700', foreground: 'oklch(48% 0.19 262.9)', backgroundToken: '--nexa-surface-card', background: '#ffffff', gate: 'normal' },
-  { id: 'success-card', label: 'Success text on success surface', foregroundToken: '--nexa-color-success-700', foreground: '#15803d', backgroundToken: '--nexa-surface-success', background: '#f0fdf4', gate: 'normal' },
-  { id: 'warning-card', label: 'Warning text on warning surface', foregroundToken: '--nexa-color-warning-text', foreground: '#92400e', backgroundToken: '--nexa-surface-warning', background: '#fffbeb', gate: 'normal' },
-  { id: 'warning-emphasized', label: 'Warning inverse text on emphasized surface', foregroundToken: '--nexa-color-warning-emphasized-text', foreground: '#ffffff', backgroundToken: '--nexa-color-warning-emphasized-background', background: '#92400e', gate: 'normal' },
-  { id: 'danger-card', label: 'Danger text on danger surface', foregroundToken: '--nexa-color-danger-text', foreground: '#991b1b', backgroundToken: '--nexa-surface-danger', background: '#fef2f2', gate: 'normal' },
-  { id: 'danger-strong', label: 'Danger inverse text on strong surface', foregroundToken: '--nexa-color-danger-strong-text', foreground: '#ffffff', backgroundToken: '--nexa-color-danger-strong-background', background: '#991b1b', gate: 'normal' },
-  { id: 'focus-canvas', label: 'Focus ring against canvas', foregroundToken: '--nexa-color-focus-ring', foreground: 'oklch(54.6% 0.215 262.9)', backgroundToken: '--nexa-surface-page', background: '#f6faff', gate: 'non-text' },
-  { id: 'input-border-card', label: 'Focused input border against card', foregroundToken: '--nexa-color-primary-500', foreground: 'oklch(60% 0.199 262.8)', backgroundToken: '--nexa-surface-card', background: '#ffffff', gate: 'non-text' },
-  { id: 'selected-border', label: 'Selected border against selected surface', foregroundToken: '--nexa-color-primary-600', foreground: 'oklch(54.6% 0.215 262.9)', backgroundToken: '--nexa-surface-nav-active', background: 'oklch(96.9% 0.014 264.5)', gate: 'non-text' },
-];
-
 export const MATURITY_ROWS: readonly DocRow[] = [
   { name: 'EXPERIMENTAL', value: 'Exploring', note: 'Useful evidence; API or direction may change.' },
   { name: 'CANDIDATE', value: 'Reviewable', note: 'Behavior and visual contract shown; human review open.' },
@@ -129,12 +114,7 @@ export const MATURITY_ROWS: readonly DocRow[] = [
 ];
 
 export function componentAnswers(page: DocumentationPage): readonly DocAnswer[] {
-  return [
-    { title: 'Overview', copy: `${page.title} is a candidate Nexa contract with visible purpose, state and recovery.` },
-    { title: 'Anatomy', copy: 'Context, primary content, state, recovery and assistive name stay inspectable.' },
-    { title: 'Variants', copy: 'Intent, density and state variants follow consequence, not decoration.' },
-    { title: 'Accessibility', copy: 'Name, role, value, focus, contrast, non-color cue and target are evidence.' },
-    { title: 'Tokens', copy: 'Primitive scale feeds semantic roles; component tokens appear only when intent needs them.' },
-    { title: 'Usage', copy: page.decision },
-  ];
+  const guidance = COMPONENT_GUIDANCE[page.id];
+  if (!guidance) throw new Error(`Missing component guidance for ${page.id}`);
+  return [{ title: 'Purpose', copy: page.intro }, ...guidance];
 }

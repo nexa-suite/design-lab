@@ -73,8 +73,11 @@ npm run validate:colors
 npm run validate:icons
 npm run validate:documentation
 npm run validate:public-api
+npm run validate:visual
 npm run validate:contrast
 npm test -- --watch=false
+npm run test:library -- --watch=false
+npm run build:all
 npm audit --omit=dev --audit-level=high
 git diff --check
 ```
@@ -88,7 +91,7 @@ Browser review covers the required pages and 1440, 1024, 768, 390 and 320px view
 ```text
 src/app/
   shell/                 documentation navigation shell
-  projects/nexa-ui/      reusable candidate library and explicit public API
+projects/nexa-ui/         reusable candidate library and explicit public API
   lab/                   evaluation, evidence and quality infrastructure
   documentation/         route features, page content and navigation metadata
 src/styles/

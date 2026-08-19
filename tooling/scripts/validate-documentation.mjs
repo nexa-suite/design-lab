@@ -4,9 +4,17 @@ import { join, relative } from 'node:path';
 const root = process.cwd();
 const registryPath = join(root, 'src', 'app', 'documentation', 'navigation', 'documentation-registry.ts');
 const routesPath = join(root, 'src', 'app', 'app.routes.ts');
+const visualManifestPath = join(root, 'tooling', 'visual-regression', 'manifest.json');
 const registry = readFileSync(registryPath, 'utf8');
 const routes = readFileSync(routesPath, 'utf8');
 const violations = [];
+function filesUnder(directory) {
+  if (!existsSync(directory)) return [];
+  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const path = join(directory, entry.name);
+    return entry.isDirectory() ? filesUnder(path) : /\.(?:ts|html|scss)$/.test(entry.name) ? [path] : [];
+  });
+}
 
 const ids = [...registry.matchAll(/\bid:\s*'([^']+)'/g)].map((match) => match[1]);
 const paths = [...registry.matchAll(/\bpath:\s*'([^']+)'/g)].map((match) => match[1]);
@@ -14,6 +22,7 @@ if (new Set(ids).size !== ids.length) violations.push('documentation registry co
 if (new Set(paths).size !== paths.length) violations.push('documentation registry contains duplicate paths');
 if (/figma-mapping/.test(registry)) violations.push('retired Figma Mapping remains in primary navigation metadata');
 if (!/design-adoption/.test(registry) || !/Design Adoption/.test(registry)) violations.push('Design Adoption & Handoff is missing from primary navigation');
+if (!existsSync(visualManifestPath)) violations.push('visual evidence manifest is missing');
 if (/patterns\/other|loadPatternPage/.test(routes)) violations.push('catch-all pattern renderer remains in routing');
 if (!/import\('\.\/documentation\/patterns\/analytics\/analytics-page'/.test(routes)) violations.push('Analytics route does not use an explicit feature import');
 if (!/import\('\.\/documentation\/patterns\/authentication\/authentication-page'/.test(routes)) violations.push('Authentication route does not use an explicit feature import');
@@ -55,6 +64,19 @@ if (statSync(catchAll, { throwIfNoEntry: false }) && readdirSync(catchAll).some(
 const componentHtml = readFileSync(join(root, 'src', 'app', 'documentation', 'components', 'component-documentation.html'), 'utf8');
 if (/generic process evidence/i.test(componentHtml)) violations.push('generic Process Evidence filler remains in component documentation');
 if (!/hasTemporalEvidence/.test(componentHtml)) violations.push('component documentation does not gate temporal evidence by component behavior');
+const componentContent = readFileSync(join(root, 'src', 'app', 'documentation', 'content', 'components-content.ts'), 'utf8');
+const componentGuidance = readFileSync(join(root, 'src', 'app', 'documentation', 'content', 'component-guidance.ts'), 'utf8');
+for (const [, id] of componentContent.matchAll(/id:\s*'([^']+)'[^\n]+kind:\s*'component'/g)) {
+  const guidanceKeyPresent = [`${id}: [`, `'${id}': [`, `"${id}": [`].some((key) => componentGuidance.includes(key));
+  if (!guidanceKeyPresent) {
+    violations.push(`component guidance is missing for ${id}`);
+  }
+}
+for (const file of filesUnder(join(root, 'src', 'app', 'documentation'))) {
+  const text = readFileSync(file, 'utf8');
+  if (/figmaMapping|\bFigma mapping\b/i.test(text)) violations.push(`${relative(root, file)} retains retired Figma Mapping terminology`);
+  if (/^\s*<h1\b/m.test(text) && !/<(?:article|button|table|svg|nexa-)/.test(text)) violations.push(`${relative(root, file)} appears to be a heading-only documentation page`);
+}
 for (const stylesheet of [
   'documentation/foundations/foundation-documentation.scss',
   'documentation/context/context-documentation.scss',

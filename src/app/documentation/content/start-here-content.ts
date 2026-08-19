@@ -10,7 +10,7 @@ export const START_HERE_CONTENT: readonly DocumentationPageContent[] = [
             decision: 'v0.10 converges the evidence-first lab with a consumable library boundary, truthful state semantics and release gates.',
             foundation: 'Cool light canvas, white structural surfaces, controlled Nexa blue and slate hierarchy.',
             angularContract: 'Standalone lazy routes, strict templates and signal-first specimens.',
-            figmaMapping: 'Page anatomy maps to Overview, Anatomy, Variants, States and Quality sections.',
+            adoptionMapping: 'Page anatomy maps to Overview, Anatomy, Variants, States and Quality sections.',
   },
   {
     id: 'principles', label: 'Principles', icon: 'pi-compass', group: 'START HERE', kind: 'principles',
@@ -21,7 +21,7 @@ export const START_HERE_CONTENT: readonly DocumentationPageContent[] = [
             decision: 'Context, action, status and recovery remain visible together.',
             foundation: 'Quiet borders, deliberate padding, restrained elevation and readable state cues.',
             angularContract: 'Encode principles as semantic tokens, native semantics and interaction tests.',
-            figmaMapping: 'Principle cards become reusable review criteria, not production components.',
+            adoptionMapping: 'Principle cards become reusable review criteria, not production components.',
   },
   {
     id: 'maturity', label: 'Maturity / Freeze', icon: 'pi-bookmark', group: 'START HERE', kind: 'overview',
@@ -32,7 +32,7 @@ export const START_HERE_CONTENT: readonly DocumentationPageContent[] = [
             decision: 'Sidebar, text field language, typography families, blue identity, light appearance and canonical logo usage are frozen.',
             foundation: 'Component candidates prove behavior before any production package is approved.',
             angularContract: 'Each candidate owns a focused API, tests user behavior and stays independently reusable.',
-            figmaMapping: 'Maturity maps to library status and open review questions; no library is published here.',
+            adoptionMapping: 'Maturity maps to library status and open review questions; no library is published here.',
             status: 'FROZEN',
   },
 ];

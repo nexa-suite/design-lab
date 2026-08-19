@@ -111,7 +111,7 @@ describe('Nexa Design Lab v0.10 routes', () => {
       ['/guidelines/patterns/async-operations', 'Error keeps context and retry nearby'],
       ['/guidelines/patterns/authentication', 'Authentication feels like Nexa before it asks for access'],
       ['/guidelines/patterns/legal-content', 'Readable policy structure without inventing policy'],
-      ['/guidelines/patterns/payments', 'Payment states are provider-neutral and user-safe'],
+      ['/guidelines/patterns/payments', 'Payment presentation stays safe before provider behavior exists'],
       ['/guidelines/patterns/analytics', 'Every visualization answers a question'],
       ['/guidelines/patterns/dispatch-board', 'Dispatch composition keeps cards readable across columns'],
       ['/guidelines/patterns/data-dense-operations', 'Density carries operational signal without becoming a production route'],

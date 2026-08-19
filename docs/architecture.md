@@ -37,6 +37,8 @@ Token source is organized as primitive, semantic, component and data-visualizati
 
 Documentation registry metadata owns discovery only. Substantial page copy and behavior live with the feature. Product patterns preserve the distinction between catalog browsing, cart, draft request and order; the cart never reserves inventory. Provider-neutral map, payment and delivery evidence names deferred production ownership rather than inventing contracts.
 
+The shared documentation layout owns the repeated section heading and divider primitive in `src/app/documentation/layout/documentation-section.*`. It is intentionally a section primitive, not a generic `Box`; projected specimens retain ownership of their feature-specific layout styles.
+
 ## Verification boundary
 
 The automated gates are intentionally small and understandable: architecture, token, color, icon, documentation, public API and contrast validation plus library/application tests and builds. Human visual, content, browser, responsive, reduced-motion, increased-contrast and assistive-technology review remain explicit handoff items until recorded.

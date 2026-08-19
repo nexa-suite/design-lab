@@ -34,7 +34,7 @@ export interface DocumentationPageContent {
   readonly decision: string;
   readonly foundation: string;
   readonly angularContract: string;
-  readonly figmaMapping: string;
+  readonly adoptionMapping: string;
   readonly status?: DocumentationStatus;
 }
 

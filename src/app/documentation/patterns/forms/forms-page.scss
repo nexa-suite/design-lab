@@ -1,5 +1,7 @@
 .form-composition { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: var(--nexa-space-5); padding: var(--nexa-panel-padding); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-panel); background: var(--nexa-surface-inset); }
 .form-fields, .form-composition aside { display: grid; gap: var(--nexa-space-3); }
+.field-group-heading { display: flex; justify-content: space-between; gap: var(--nexa-space-3); align-items: center; }
+.field-group-heading span { color: var(--nexa-color-danger-text); font: 700 var(--nexa-font-size-xs)/1.2 var(--nexa-font-family-mono); text-transform: uppercase; }
 .form-composition aside { align-content: start; padding: var(--nexa-card-padding); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-card); background: var(--nexa-surface-card); }
 .form-composition aside p, .form-status { margin: 0; color: var(--nexa-color-text-secondary); font-size: var(--nexa-font-size-sm); line-height: var(--nexa-line-height-normal); }
 .form-actions { display: flex; flex-wrap: wrap; gap: var(--nexa-space-2); }
@@ -14,4 +16,10 @@
 .form-summary div { display: grid; gap: var(--nexa-space-1); }
 .form-summary strong { color: var(--nexa-color-text-muted); font-size: var(--nexa-font-size-xs); }
 .form-summary span { color: var(--nexa-color-text-primary); font-weight: 600; }
+.submission-tabs { display: flex; flex-wrap: wrap; gap: var(--nexa-space-1); margin-bottom: var(--nexa-space-3); }
+.submission-tabs button { min-height: var(--nexa-control-height-sm); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-interactive, var(--nexa-radius-control)); padding-inline: var(--nexa-space-3); color: var(--nexa-color-text-secondary); background: var(--nexa-surface-card); cursor: pointer; }
+.submission-tabs button.selected, .submission-tabs button:hover { color: var(--nexa-color-primary-700); border-color: var(--nexa-color-primary-300); background: var(--nexa-surface-info); }
+.submission-tabs button:focus-visible { outline: none; box-shadow: var(--nexa-focus-ring); }
+.submission-result { display: flex; grid-column: 1 / -1; gap: var(--nexa-space-3); align-items: center; padding-top: var(--nexa-space-3); border-top: 1px solid var(--nexa-color-border-subtle); }
+.submission-result span { color: var(--nexa-color-text-secondary); font-weight: 400; }
 @media (max-width: 700px) { .form-composition, .form-state-grid, .form-summary { grid-template-columns: 1fr; } }

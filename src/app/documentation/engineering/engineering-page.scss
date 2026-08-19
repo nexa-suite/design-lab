@@ -1,2 +1,4 @@
 :host { display: block; }
 .api-grid article { min-height: 220px; }
+.api-meta { display: grid; gap: 3px; color: var(--nexa-color-text-secondary); font-size: 10px; line-height: 1.4; }
+.api-meta strong { color: var(--nexa-color-text-muted); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
