@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { NexaButton, NexaSegmentedControl, NexaStatusChip, NexaTextField, type NexaSegmentOption } from 'nexa-ui';
 import { NexaDocumentationFrame } from '../../layout/documentation-page';
 import { injectDocumentationRouteContext } from '../../layout/page-context';
@@ -17,6 +17,8 @@ interface SearchResult { readonly id: string; readonly label: string; readonly s
 })
 export class NexaSearchFilteringPage {
   protected readonly context = injectDocumentationRouteContext();
+  private readonly destroyRef = inject(DestroyRef);
+  private retryTimer: number | undefined;
   protected readonly query = signal('');
   protected readonly scope = signal('orders');
   protected readonly mode = signal<SearchMode>('query');
@@ -48,6 +50,19 @@ export class NexaSearchFilteringPage {
   protected setSort(value: string): void { this.sort.set(value as ResultSort); this.mode.set('query'); }
   protected search(): void { this.mode.set(this.visibleResults().length ? 'results' : 'empty'); }
   protected setMode(mode: SearchMode): void { this.mode.set(mode); }
-  protected retry(): void { this.mode.set('searching'); this.mode.set(this.visibleResults().length ? 'results' : 'empty'); }
+  protected retry(): void {
+    if (this.retryTimer !== undefined) window.clearTimeout(this.retryTimer);
+    this.mode.set('searching');
+    this.retryTimer = window.setTimeout(() => {
+      this.retryTimer = undefined;
+      this.mode.set(this.visibleResults().length ? 'results' : 'empty');
+    }, 260);
+  }
   protected clear(): void { this.query.set(''); this.statusFilter.set('all'); this.sort.set('relevance'); this.mode.set('query'); }
+
+  constructor() {
+    this.destroyRef.onDestroy(() => {
+      if (this.retryTimer !== undefined) window.clearTimeout(this.retryTimer);
+    });
+  }
 }
