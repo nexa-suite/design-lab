@@ -352,6 +352,15 @@ async function activateCanonicalState(page, route, state) {
 }
 
 async function captureCanonicalState(page, route, viewport, state) {
+  const consoleIssues = [];
+  const pageIssues = [];
+  const onConsole = (message) => {
+    if (message.type() === 'error') consoleIssues.push(message.text());
+  };
+  const onPageError = (error) => pageIssues.push(error.message);
+  page.on('console', onConsole);
+  page.on('pageerror', onPageError);
+
   try {
     await visitEvidenceRoute(page, route, viewport);
     await activateCanonicalState(page, route, state);
@@ -371,16 +380,21 @@ async function captureCanonicalState(page, route, viewport, state) {
     assert(evidence.contentTextLength > 80, 'canonical state content is empty');
     assert(evidence.scrollWidth <= evidence.clientWidth + 1, `canonical state overflow ${evidence.scrollWidth - evidence.clientWidth}px`);
     if (state === 'focus') assert(evidence.activeInsideContent, 'focus state did not focus a content control');
+    assert(consoleIssues.length === 0, `canonical state console errors: ${consoleIssues.join(' | ')}`);
+    assert(pageIssues.length === 0, `canonical state page errors: ${pageIssues.join(' | ')}`);
     writeResult(route, viewport, state, {
       status: 'pass',
-      checks: { route: true, viewport: true, state: true, noOverflow: true, artifactBinding: true },
+      checks: { route: true, viewport: true, state: true, noOverflow: true, console: true, pageErrors: true, artifactBinding: true },
       evidence,
     });
     capturedStates.push(`${route.path}:${viewport.width}:${state}`);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     failures.push(`${route.path} @ ${viewport.width}px [${state}]: ${message}`);
-    writeResult(route, viewport, state, { status: 'fail', error: message });
+    writeResult(route, viewport, state, { status: 'fail', error: message, consoleIssues, pageIssues });
+  } finally {
+    page.off('console', onConsole);
+    page.off('pageerror', onPageError);
   }
 }
 

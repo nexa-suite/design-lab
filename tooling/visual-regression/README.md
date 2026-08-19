@@ -31,7 +31,8 @@ registered route at 1440, 1024, 768, 390 and 320 px, writes ignored evidence
 artifacts bound to the current source SHA, and fails on empty content, missing
 headings, inactive navigation, horizontal overflow, console errors or page
 errors. Canonical product matrices activate their real evidence controls and
-assert the resulting state copy before recording an artifact. It also
+assert the resulting state copy, state-level console cleanliness and page
+errors before recording an artifact. It also
 exercises representative analytics recovery, authentication locale/error,
 search retry, dispatch movement, reduced-motion, text-spacing and manual
 stepping paths. CI

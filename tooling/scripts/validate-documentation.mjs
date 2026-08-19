@@ -131,9 +131,7 @@ for (const [relativePath, markers] of evidenceContracts) {
 }
 
 const catchAll = join(root, 'src', 'app', 'documentation', 'patterns', 'other');
-if (statSync(catchAll, { throwIfNoEntry: false }) && readdirSync(catchAll).some((entry) => /\.(?:ts|html|scss)$/.test(entry))) {
-  violations.push('patterns/other still contains renderer files');
-}
+if (statSync(catchAll, { throwIfNoEntry: false })) violations.push('patterns/other catch-all ownership directory remains');
 const componentHtml = readFileSync(join(root, 'src', 'app', 'documentation', 'components', 'component-documentation.html'), 'utf8');
 if (/generic process evidence/i.test(componentHtml)) violations.push('generic Process Evidence filler remains in component documentation');
 if (!/hasTemporalEvidence/.test(componentHtml)) violations.push('component documentation does not gate temporal evidence by component behavior');
