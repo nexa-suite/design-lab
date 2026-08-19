@@ -182,6 +182,16 @@ async function activateCanonicalState(page, route, state) {
       if (state === 'error') await assertVisibleText(page, 'Review evidence could not load');
       break;
     }
+    case 'patterns/search-filtering': {
+      const labels = { query: 'Query', searching: 'Searching', results: 'Results', empty: 'Empty', error: 'Error' };
+      await page.getByRole('button', { name: labels[state], exact: true }).click();
+      if (state === 'query') await assertVisibleText(page, 'Ready to search');
+      if (state === 'searching') await assertVisibleText(page, 'Searching orders');
+      if (state === 'results') await assertVisibleText(page, 'La Cava Fría');
+      if (state === 'empty') await assertVisibleText(page, 'No results in this scope');
+      if (state === 'error') await assertVisibleText(page, 'Search could not complete');
+      break;
+    }
     case 'patterns/dispatch-board':
       if (state === 'empty') await assertVisibleText(page, 'No cards in this column.');
       if (state === 'selected') {
@@ -214,8 +224,14 @@ async function activateCanonicalState(page, route, state) {
       break;
     case 'quality/accessibility-lab':
       if (state === 'focus') await page.locator('.lab-content button[autofocus], .lab-content button, .lab-content input').first().focus();
-      if (state === 'contrast') await page.locator('[aria-label="Contrast mode"]').getByRole('button', { name: 'Increased contrast', exact: true }).click();
+      if (state === 'contrast') await page.locator('#documentation-content [aria-label="Contrast mode"]').getByRole('button', { name: 'Increased contrast', exact: true }).click();
       if (state === 'text-200') await page.getByRole('button', { name: '200%', exact: true }).click();
+      if (state === 'text-spacing') {
+        await page.locator('[aria-label="Text spacing"]').getByRole('button', { name: 'Increased', exact: true }).click();
+        await assertVisibleText(page, 'Increased text spacing active');
+        const spacing = await page.evaluate(() => document.documentElement.dataset['textSpacing']);
+        assert(spacing === 'increased', `text spacing mode did not apply: ${spacing}`);
+      }
       if (state === 'reflow-400') {
         await page.getByRole('button', { name: '400% reflow', exact: true }).click();
         await assertVisibleText(page, '400% reflow active');
@@ -392,14 +408,16 @@ async function runInteractionSmoke(page) {
   await smokeInteraction(page, 'quality/accessibility-lab', async () => {
     await page.getByRole('button', { name: 'Increased contrast', exact: true }).last().click();
     await page.getByRole('button', { name: '200%', exact: true }).click();
+    await page.locator('[aria-label="Text spacing"]').getByRole('button', { name: 'Increased', exact: true }).click();
     await page.getByRole('button', { name: 'Reduced motion', exact: true }).click();
     const modes = await page.evaluate(() => ({
       contrast: document.documentElement.dataset['contrastMode'],
       motion: document.documentElement.dataset['motionMode'],
       scale: document.documentElement.style.getPropertyValue('--nexa-doc-text-scale'),
+      spacing: document.documentElement.dataset['textSpacing'],
     }));
-    assert(modes.contrast === 'increased' && modes.motion === 'reduced' && modes.scale === '2', 'evaluation modes did not apply');
-    checks.push('increased contrast + text scale + reduced motion');
+    assert(modes.contrast === 'increased' && modes.motion === 'reduced' && modes.scale === '2' && modes.spacing === 'increased', 'evaluation modes did not apply');
+    checks.push('increased contrast + text scale + text spacing + reduced motion');
   });
 
   await smokeInteraction(page, 'foundations/motion', async () => {

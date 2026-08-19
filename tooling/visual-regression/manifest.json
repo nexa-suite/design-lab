@@ -14,10 +14,11 @@
     { "path": "components/progress-indicators", "area": "COMPONENTS", "states": ["determinate", "indeterminate", "paused", "complete", "error", "skeleton"] },
     { "path": "patterns/authentication", "area": "PATTERNS", "states": ["default", "focus", "invalid", "authenticating", "credentials", "workspace", "success"] },
     { "path": "patterns/analytics", "area": "PATTERNS", "states": ["ready", "loading", "empty", "error"] },
+    { "path": "patterns/search-filtering", "area": "PATTERNS", "states": ["query", "searching", "results", "empty", "error"] },
     { "path": "patterns/dispatch-board", "area": "PATTERNS", "states": ["empty", "selected", "source", "destination", "completed", "warning", "critical", "blocked"] },
     { "path": "patterns/catalog", "area": "PATTERNS", "states": ["default", "selected", "detail"] },
     { "path": "patterns/responsive", "area": "PATTERNS", "states": ["desktop", "tablet", "mobile", "reflow"] },
-    { "path": "quality/accessibility-lab", "area": "QUALITY", "states": ["focus", "contrast", "text-200", "reflow-400", "reduced-motion"] },
+    { "path": "quality/accessibility-lab", "area": "QUALITY", "states": ["focus", "contrast", "text-200", "text-spacing", "reflow-400", "reduced-motion"] },
     { "path": "engineering/component-apis", "area": "ENGINEERING", "states": ["inventory", "boundary"] }
   ],
   "artifactTemplate": "{evidenceRoot}/{sourceSha}/{route}/{viewport}/{state}.json",

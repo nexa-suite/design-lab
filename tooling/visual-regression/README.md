@@ -18,7 +18,7 @@ The required matrix is:
 - layout/no-overflow checks at 1024, 768 and 320 px;
 - high-risk selected, focus, pressed, disabled, loading, error and open
   states;
-- targeted 200% text and 400% reflow checks (the accessibility route records
+- targeted 200% text, increased text-spacing and 400% reflow checks (the accessibility route records
   the review state; the browser gate verifies the route remains usable).
 
 `npm run validate:visual` validates the manifest, registry coverage and
@@ -28,5 +28,5 @@ registered route at 1440, 1024, 768, 390 and 320 px, writes ignored evidence
 artifacts bound to the current source SHA, and fails on empty content, missing
 headings, inactive navigation, horizontal overflow, console errors or page
 errors. It also exercises representative analytics recovery, authentication
-locale/error, dispatch movement, reduced-motion and manual stepping paths. CI
+locale/error, search retry, dispatch movement, reduced-motion, text-spacing and manual stepping paths. CI
 installs Chromium and runs this gate after the production build.
