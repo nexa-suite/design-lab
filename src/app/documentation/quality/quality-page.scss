@@ -12,5 +12,7 @@
 .interaction-safety-grid small { color: var(--nexa-color-text-secondary); line-height: 1.45; }
 .interaction-safety-grid button { width: fit-content; min-height: var(--nexa-control-height-sm); border: 1px solid var(--nexa-color-border-interactive); border-radius: var(--nexa-radius-interactive); padding-inline: var(--nexa-control-padding-inline-compact); color: var(--nexa-color-primary-700); background: var(--nexa-surface-card); font: 600 var(--nexa-font-size-xs)/1 var(--nexa-font-family-body); cursor: pointer; }
 .interaction-safety-grid button:focus-visible { outline: none; box-shadow: var(--nexa-focus-ring); }
+.reflow-status { display: flex; gap: var(--nexa-space-2); align-items: flex-start; margin: var(--nexa-space-3) 0 0; padding: var(--nexa-space-3); border: 1px solid var(--nexa-color-primary-300); border-radius: var(--nexa-radius-control); background: var(--nexa-surface-info); color: var(--nexa-color-primary-800); font-size: var(--nexa-font-size-xs); line-height: 1.5; }
+.reflow-status i { flex: 0 0 auto; margin-top: 2px; }
 @media (max-width: 1000px) { .quality-evidence-grid, .interaction-safety-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .quality-evidence-grid, .interaction-safety-grid { grid-template-columns: 1fr; } }

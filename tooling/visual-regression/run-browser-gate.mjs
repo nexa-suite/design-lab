@@ -216,7 +216,12 @@ async function activateCanonicalState(page, route, state) {
       if (state === 'focus') await page.locator('.lab-content button[autofocus], .lab-content button, .lab-content input').first().focus();
       if (state === 'contrast') await page.locator('[aria-label="Contrast mode"]').getByRole('button', { name: 'Increased contrast', exact: true }).click();
       if (state === 'text-200') await page.getByRole('button', { name: '200%', exact: true }).click();
-      if (state === 'reflow-400') await assertVisibleText(page, '400% reflow');
+      if (state === 'reflow-400') {
+        await page.getByRole('button', { name: '400% reflow', exact: true }).click();
+        await assertVisibleText(page, '400% reflow active');
+        const activeScale = await page.evaluate(() => document.documentElement.style.getPropertyValue('--nexa-doc-text-scale'));
+        assert(activeScale === '4', `400% reflow did not set the text scale: ${activeScale}`);
+      }
       if (state === 'reduced-motion') await assertVisibleText(page, 'Reduced motion');
       break;
     case 'engineering/component-apis':

@@ -3,12 +3,13 @@ import { inject, Injectable, signal } from '@angular/core';
 
 export type ContrastMode = 'standard' | 'increased';
 export type MotionMode = 'motion' | 'reduced';
+export type TextScale = 1 | 1.5 | 2 | 4;
 
 @Injectable({ providedIn: 'root' })
 export class NexaLabEvaluation {
   readonly contrastMode = signal<ContrastMode>('standard');
   readonly motionMode = signal<MotionMode>('motion');
-  readonly textScale = signal<1 | 1.5 | 2>(1);
+  readonly textScale = signal<TextScale>(1);
   readonly targetOverlay = signal(false);
 
   private readonly document = inject(DOCUMENT);
@@ -17,6 +18,7 @@ export class NexaLabEvaluation {
     this.document.documentElement.dataset['contrastMode'] = 'standard';
     this.document.documentElement.dataset['motionMode'] = 'motion';
     this.document.documentElement.dataset['targetOverlay'] = 'false';
+    this.document.documentElement.dataset['reflowMode'] = 'false';
   }
 
   setContrastMode(mode: ContrastMode): void {
@@ -29,9 +31,10 @@ export class NexaLabEvaluation {
     this.document.documentElement.dataset['motionMode'] = mode;
   }
 
-  setTextScale(scale: 1 | 1.5 | 2): void {
+  setTextScale(scale: TextScale): void {
     this.textScale.set(scale);
     this.document.documentElement.style.setProperty('--nexa-doc-text-scale', String(scale));
+    this.document.documentElement.dataset['reflowMode'] = String(scale === 4);
   }
 
   setTargetOverlay(enabled: boolean): void {
