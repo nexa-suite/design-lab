@@ -25,6 +25,7 @@ jobs:
       - run: npm run validate:documentation
       - run: npm run validate:public-api
       - run: npm run validate:visual
+      - run: npm run audit:visual
       - run: npm run validate:contrast
       - run: npm run test:library -- --watch=false
       - run: npm test -- --watch=false

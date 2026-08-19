@@ -73,10 +73,33 @@ if (/generic process evidence/i.test(componentHtml)) violations.push('generic Pr
 if (!/hasTemporalEvidence/.test(componentHtml)) violations.push('component documentation does not gate temporal evidence by component behavior');
 const componentContent = readFileSync(join(root, 'src', 'app', 'documentation', 'content', 'components-content.ts'), 'utf8');
 const componentGuidance = readFileSync(join(root, 'src', 'app', 'documentation', 'content', 'component-guidance.ts'), 'utf8');
+const requiredComponentFields = ['title', 'intro', 'summary', 'decision', 'foundation', 'angularContract', 'adoptionMapping'];
+const requiredGuidanceTitles = ['Anatomy', 'States', 'Accessibility', 'Tokens', 'Use it when'];
+function componentEntry(id) {
+  const marker = `id: '${id}'`;
+  const start = componentContent.lastIndexOf('{', componentContent.indexOf(marker));
+  const end = componentContent.indexOf('\n  },', componentContent.indexOf(marker));
+  return start >= 0 && end >= 0 ? componentContent.slice(start, end) : '';
+}
+function guidanceEntry(id) {
+  const markers = [`${id}: [`, `'${id}': [`];
+  const start = markers.map((marker) => componentGuidance.indexOf(marker)).find((index) => index >= 0);
+  if (start === undefined) return '';
+  const end = componentGuidance.indexOf('\n  ],', start);
+  return end >= 0 ? componentGuidance.slice(start, end) : '';
+}
 for (const [, id] of componentContent.matchAll(/id:\s*'([^']+)'[^\n]+kind:\s*'component'/g)) {
-  const guidanceKeyPresent = [`${id}: [`, `'${id}': [`, `"${id}": [`].some((key) => componentGuidance.includes(key));
-  if (!guidanceKeyPresent) {
+  const entry = componentEntry(id);
+  for (const field of requiredComponentFields) {
+    if (!new RegExp(`\\b${field}:`).test(entry)) violations.push(`component metadata is missing ${field} for ${id}`);
+  }
+  const guidance = guidanceEntry(id);
+  if (!guidance) {
     violations.push(`component guidance is missing for ${id}`);
+    continue;
+  }
+  for (const title of requiredGuidanceTitles) {
+    if (!guidance.includes(`title: '${title}'`)) violations.push(`component guidance is missing ${title} evidence for ${id}`);
   }
 }
 for (const file of filesUnder(join(root, 'src', 'app', 'documentation'))) {
