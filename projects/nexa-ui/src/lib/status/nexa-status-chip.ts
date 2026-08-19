@@ -5,26 +5,9 @@ export type NexaStatusEmphasis = 'subtle' | 'standard' | 'strong';
 
 @Component({
   selector: 'nexa-status-chip',
-  template: '<span class="nexa-status-chip" [class]="classes()"><span class="status-dot" aria-hidden="true"></span><span><ng-content /></span></span>',
+  templateUrl: './nexa-status-chip.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [
-    `
-      :host { display: inline-flex; }
-      .nexa-status-chip { display: inline-flex; align-items: center; gap: var(--nexa-space-2); min-height: 26px; padding: 0 10px; border-radius: var(--nexa-radius-pill); font: 600 var(--nexa-font-size-xs)/1 var(--nexa-font-family-body); }
-      .status-dot { width: 6px; height: 6px; flex: 0 0 6px; border-radius: 50%; background: currentColor; }
-      .success { color: var(--nexa-color-success-700); background: var(--nexa-surface-success); }
-      .info { color: var(--nexa-color-info-700); background: var(--nexa-surface-info); }
-      .warning { color: var(--nexa-color-warning-text); background: var(--nexa-surface-warning); }
-      .danger { color: var(--nexa-color-danger-text); background: var(--nexa-surface-danger); }
-      .neutral { color: var(--nexa-color-neutral-700); background: var(--nexa-surface-inset); }
-      .success.standard { border: 1px solid var(--nexa-color-success-border); }
-      .warning.standard { border: 1px solid var(--nexa-color-warning-600); }
-      .danger.standard { border: 1px solid var(--nexa-color-danger-standard-border); }
-      .warning.strong { color: var(--nexa-color-warning-emphasized-text); background: var(--nexa-color-warning-emphasized-background); }
-      .danger.strong { color: var(--nexa-color-danger-strong-text); background: var(--nexa-color-danger-strong-background); }
-      .danger.strong .status-dot, .warning.strong .status-dot { background: currentColor; }
-    `,
-  ],
+  styleUrl: './nexa-status-chip.scss',
 })
 export class NexaStatusChip {
   readonly tone = input<NexaStatusTone>('neutral');

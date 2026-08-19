@@ -6,7 +6,7 @@ export type NexaLocale = 'en' | 'es';
 @Component({
   selector: 'nexa-locale-switcher',
   imports: [NexaSegmentedControl],
-  template: '<nexa-segmented-control [label]="label()" [options]="options" [selected]="locale()" (selectedChange)="choose($event)" size="compact" />',
+  templateUrl: './nexa-locale-switcher.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NexaLocaleSwitcher {

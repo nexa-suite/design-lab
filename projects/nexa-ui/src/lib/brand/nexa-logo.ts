@@ -4,14 +4,9 @@ export type NexaLogoVariant = 'primary' | 'inverse';
 
 @Component({
   selector: 'nexa-logo',
-  template: '<img [src]="source()" [attr.alt]="decorative() ? \'\' : alt()" [attr.aria-hidden]="decorative() ? \'true\' : null" />',
+  templateUrl: './nexa-logo.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [
-    `
-      :host { display: inline-flex; min-width: 0; }
-      img { display: block; width: 100%; height: auto; }
-    `,
-  ],
+  styleUrl: './nexa-logo.scss',
 })
 export class NexaLogo {
   readonly variant = input<NexaLogoVariant>('primary');
