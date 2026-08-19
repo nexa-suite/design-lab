@@ -181,6 +181,31 @@
     "$value": "0 0 0 3px color-mix(in oklab, var(--nexa-color-focus-ring) 24%, transparent)",
     "$description": "Nexa component token nexa-focus-ring."
   },
+  "nexa-focus-preview-ring": {
+    "$type": "shadow",
+    "$value": "inset 0 0 0 3px color-mix(in oklab, var(--nexa-color-focus-ring) 24%, transparent)",
+    "$description": "Documentation-only inset focus specimen ring; preserves the candidate focus geometry without duplicating a derived color."
+  },
+  "nexa-auth-grid-line": {
+    "$type": "color",
+    "$value": "color-mix(in oklab, var(--nexa-color-text-inverse) 13%, transparent)",
+    "$description": "Authentication brand-plane grid line; pattern evidence token, not a general surface color."
+  },
+  "nexa-auth-brand-copy": {
+    "$type": "color",
+    "$value": "color-mix(in oklab, var(--nexa-color-text-inverse) 86%, transparent)",
+    "$description": "Authentication brand-plane supporting copy color."
+  },
+  "nexa-auth-brand-muted": {
+    "$type": "color",
+    "$value": "color-mix(in oklab, var(--nexa-color-text-inverse) 72%, transparent)",
+    "$description": "Authentication brand-plane tertiary copy color."
+  },
+  "nexa-auth-mark-border": {
+    "$type": "color",
+    "$value": "color-mix(in oklab, var(--nexa-color-text-inverse) 45%, transparent)",
+    "$description": "Authentication brand mark supporting border color."
+  },
   "nexa-shadow-toast": {
     "$type": "shadow",
     "$value": "0 12px 28px rgb(15 23 42 / 12%)",

@@ -2,6 +2,7 @@ import { provideRouter, Router } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { App } from './app';
 import { routes } from './app.routes';
+import { APPROVED_CONTRAST_PAIRS } from './documentation/content/contrast-contracts';
 
 describe('Nexa Design Lab v0.10 routes', () => {
   let activeFixture: ComponentFixture<App>;
@@ -41,7 +42,7 @@ describe('Nexa Design Lab v0.10 routes', () => {
 
     const contrast = await navigate('/guidelines/quality/contrast-lab');
     expect(contrast.querySelector('h1')?.textContent).toContain('Contrast ratios');
-    expect(contrast.querySelectorAll('.contrast-matrix article')).toHaveLength(14);
+    expect(contrast.querySelectorAll('.contrast-matrix article')).toHaveLength(APPROVED_CONTRAST_PAIRS.length);
 
     const architecture = await navigate('/guidelines/engineering/angular-architecture');
     expect(architecture.querySelector('h1')?.textContent).toContain('Feature areas');

@@ -237,6 +237,11 @@ export const NEXA_TOKEN_VALUES: Readonly<Record<string, string>> = {
   "--nexa-focus-width": "3px",
   "--nexa-focus-offset": "3px",
   "--nexa-focus-ring": "0 0 0 3px color-mix(in oklab, oklch(54.6% 0.215 262.9) 24%, transparent)",
+  "--nexa-focus-preview-ring": "inset 0 0 0 3px color-mix(in oklab, oklch(54.6% 0.215 262.9) 24%, transparent)",
+  "--nexa-auth-grid-line": "color-mix(in oklab, #ffffff 13%, transparent)",
+  "--nexa-auth-brand-copy": "color-mix(in oklab, #ffffff 86%, transparent)",
+  "--nexa-auth-brand-muted": "color-mix(in oklab, #ffffff 72%, transparent)",
+  "--nexa-auth-mark-border": "color-mix(in oklab, #ffffff 45%, transparent)",
   "--nexa-shadow-toast": "0 12px 28px rgb(15 23 42 / 12%)",
   "--nexa-component-sidebar-width": "284px",
   "--nexa-component-drawer-width": "min(320px, 88vw)",
@@ -251,7 +256,8 @@ export const NEXA_TOKEN_VALUES: Readonly<Record<string, string>> = {
   "--nexa-viz-sequential-low": "oklch(92.9% 0.034 263.6)",
   "--nexa-viz-sequential-high": "oklch(48% 0.19 262.9)",
   "--nexa-viz-grid": "#e2e8f0",
-  "--nexa-viz-axis-text": "#64748b"
+  "--nexa-viz-axis-text": "#64748b",
+  "--nexa-viz-area-fill": "color-mix(in oklab, oklch(54.6% 0.215 262.9) 16%, transparent)"
 };
 
 export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
@@ -2080,6 +2086,46 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "description": "Nexa component token nexa-focus-ring."
   },
   {
+    "name": "--nexa-focus-preview-ring",
+    "layer": "component",
+    "type": "shadow",
+    "sourceValue": "inset 0 0 0 3px color-mix(in oklab, var(--nexa-color-focus-ring) 24%, transparent)",
+    "value": "inset 0 0 0 3px color-mix(in oklab, oklch(54.6% 0.215 262.9) 24%, transparent)",
+    "description": "Documentation-only inset focus specimen ring; preserves the candidate focus geometry without duplicating a derived color."
+  },
+  {
+    "name": "--nexa-auth-grid-line",
+    "layer": "component",
+    "type": "color",
+    "sourceValue": "color-mix(in oklab, var(--nexa-color-text-inverse) 13%, transparent)",
+    "value": "color-mix(in oklab, #ffffff 13%, transparent)",
+    "description": "Authentication brand-plane grid line; pattern evidence token, not a general surface color."
+  },
+  {
+    "name": "--nexa-auth-brand-copy",
+    "layer": "component",
+    "type": "color",
+    "sourceValue": "color-mix(in oklab, var(--nexa-color-text-inverse) 86%, transparent)",
+    "value": "color-mix(in oklab, #ffffff 86%, transparent)",
+    "description": "Authentication brand-plane supporting copy color."
+  },
+  {
+    "name": "--nexa-auth-brand-muted",
+    "layer": "component",
+    "type": "color",
+    "sourceValue": "color-mix(in oklab, var(--nexa-color-text-inverse) 72%, transparent)",
+    "value": "color-mix(in oklab, #ffffff 72%, transparent)",
+    "description": "Authentication brand-plane tertiary copy color."
+  },
+  {
+    "name": "--nexa-auth-mark-border",
+    "layer": "component",
+    "type": "color",
+    "sourceValue": "color-mix(in oklab, var(--nexa-color-text-inverse) 45%, transparent)",
+    "value": "color-mix(in oklab, #ffffff 45%, transparent)",
+    "description": "Authentication brand mark supporting border color."
+  },
+  {
     "name": "--nexa-shadow-toast",
     "layer": "component",
     "type": "shadow",
@@ -2198,17 +2244,25 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "sourceValue": "{nexa-color-text-secondary}",
     "value": "#64748b",
     "description": "Chart axis and supporting labels."
+  },
+  {
+    "name": "--nexa-viz-area-fill",
+    "layer": "data-visualization",
+    "type": "color",
+    "sourceValue": "color-mix(in oklab, var(--nexa-viz-series-1) 16%, transparent)",
+    "value": "color-mix(in oklab, oklch(54.6% 0.215 262.9) 16%, transparent)",
+    "description": "Documented low-opacity fill for area-trend evidence; data visualization only."
   }
 ];
 
 export const NEXA_TOKEN_SUMMARY = {
-  "declarations": 243,
-  "references": 137,
+  "declarations": 249,
+  "references": 143,
   "layerCounts": {
     "primitive": 71,
     "semantic": 121,
-    "component": 41,
-    "data-visualization": 10
+    "component": 46,
+    "data-visualization": 11
   }
 } as const;
 

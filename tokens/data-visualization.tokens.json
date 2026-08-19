@@ -50,5 +50,10 @@
     "$type": "color",
     "$value": "{nexa-color-text-secondary}",
     "$description": "Chart axis and supporting labels."
+  },
+  "nexa-viz-area-fill": {
+    "$type": "color",
+    "$value": "color-mix(in oklab, var(--nexa-viz-series-1) 16%, transparent)",
+    "$description": "Documented low-opacity fill for area-trend evidence; data visualization only."
   }
 }

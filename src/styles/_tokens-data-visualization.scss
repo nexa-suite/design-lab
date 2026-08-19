@@ -10,4 +10,5 @@
   --nexa-viz-sequential-high: var(--nexa-color-primary-700);
   --nexa-viz-grid: var(--nexa-color-neutral-200);
   --nexa-viz-axis-text: var(--nexa-color-text-secondary);
+  --nexa-viz-area-fill: color-mix(in oklab, var(--nexa-viz-series-1) 16%, transparent);
 }

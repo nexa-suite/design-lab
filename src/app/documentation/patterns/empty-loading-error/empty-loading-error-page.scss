@@ -7,7 +7,7 @@
 .state-card h3 { margin: 0; font: 700 var(--nexa-font-size-lg)/1.25 var(--nexa-font-family-display); }
 .state-card p { margin: 0 0 var(--nexa-space-2); color: var(--nexa-color-text-secondary); line-height: 1.5; }
 .state-card small { max-width: 72ch; color: var(--nexa-color-text-secondary); line-height: 1.45; }
-.state-card.state-error, .state-card.state-permission, .state-card.state-cancelled { border-color: var(--nexa-color-danger-subtle-border); background: var(--nexa-surface-danger); }
+.state-card.state-error, .state-card.state-non-retryable, .state-card.state-permission, .state-card.state-cancelled { border-color: var(--nexa-color-danger-subtle-border); background: var(--nexa-surface-danger); }
 .state-card.state-success { border-color: var(--nexa-color-success-border); background: var(--nexa-surface-success); }
 .state-card.state-warning, .state-card.state-conflict, .state-card.state-partial { border-color: var(--nexa-color-warning-border); background: var(--nexa-surface-warning); }
 .large-spinner { display: block; width: 26px; height: 26px; border: 3px solid var(--nexa-color-primary-200); border-top-color: var(--nexa-color-primary-600); border-radius: 50%; animation: state-spin .75s linear infinite; }

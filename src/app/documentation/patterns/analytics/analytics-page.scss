@@ -63,7 +63,7 @@
 .legend-series-1 { background: var(--nexa-viz-series-1); }.legend-series-2 { background: var(--nexa-viz-series-2); }.legend-series-3 { background: var(--nexa-viz-series-3); }
 .analytics-sparkline, .analytics-area { width: 100%; min-height: 90px; overflow: visible; color: var(--nexa-viz-series-2); }
 .analytics-sparkline polyline, .analytics-area polyline { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4; }
-.analytics-area { color: var(--nexa-viz-series-1); }.analytics-area .area-fill { fill: color-mix(in oklab, var(--nexa-viz-series-1) 16%, transparent); stroke: none; }
+.analytics-area { color: var(--nexa-viz-series-1); }.analytics-area .area-fill { fill: var(--nexa-viz-area-fill); stroke: none; }
 
 @media (prefers-reduced-motion: reduce) { .analytics-state .pi-spin { animation: none; } }
 @media (max-width: 1000px) { .analytics-question { grid-template-columns: 1fr 1fr; } .analytics-question article:last-child { grid-column: 1 / -1; } }

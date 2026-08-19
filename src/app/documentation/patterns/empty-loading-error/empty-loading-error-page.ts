@@ -3,7 +3,7 @@ import { NexaButton, NexaStatusChip, type NexaStatusTone } from 'nexa-ui';
 import { NexaDocumentationFrame } from '../../layout/documentation-page';
 import { injectDocumentationRouteContext } from '../../layout/page-context';
 
-type StateMode = 'first-use' | 'no-results' | 'filtered' | 'loading' | 'progress' | 'partial' | 'unavailable' | 'permission' | 'conflict' | 'warning' | 'error' | 'success' | 'cancelled' | 'read-only' | 'disabled';
+type StateMode = 'first-use' | 'no-results' | 'filtered' | 'loading' | 'progress' | 'partial' | 'unavailable' | 'permission' | 'conflict' | 'warning' | 'error' | 'non-retryable' | 'success' | 'cancelled' | 'read-only' | 'disabled';
 interface StateDefinition { readonly label: string; readonly title: string; readonly explanation: string; readonly next: string; readonly icon: string; readonly tone: NexaStatusTone; readonly action?: string; }
 
 const STATE_DEFINITIONS: Readonly<Record<StateMode, StateDefinition>> = {
@@ -18,6 +18,7 @@ const STATE_DEFINITIONS: Readonly<Record<StateMode, StateDefinition>> = {
   conflict: { label: 'Conflict', title: 'A newer request version exists', explanation: 'Another change arrived before this action completed.', next: 'Review the latest version before continuing.', icon: 'pi-exclamation-triangle', tone: 'warning', action: 'Review latest' },
   warning: { label: 'Warning', title: 'Documents need attention', explanation: 'The task can continue, but a condition should be understood first.', next: 'Review the warning before confirming the next action.', icon: 'pi-flag', tone: 'warning', action: 'Review warning' },
   error: { label: 'Retryable error', title: 'Requests could not load', explanation: 'The failure is recoverable and the current context remains available.', next: 'Retry locally; do not expose provider diagnostics.', icon: 'pi-exclamation-circle', tone: 'danger', action: 'Retry' },
+  'non-retryable': { label: 'Non-retryable error', title: 'This request cannot continue', explanation: 'The failure requires a different decision or owner; repeating the same action would not help.', next: 'Review the cause or contact the workspace owner before starting a new path.', icon: 'pi-times-circle', tone: 'danger', action: 'Return safely' },
   success: { label: 'Success', title: 'Request submitted', explanation: 'The current action completed successfully.', next: 'Sales owns the next review step.', icon: 'pi-check-circle', tone: 'success', action: 'View queue' },
   cancelled: { label: 'Cancelled', title: 'Operation cancelled', explanation: 'The operation stopped and no further automatic work will occur.', next: 'Start again only through an explicit action.', icon: 'pi-ban', tone: 'danger', action: 'Start again' },
   'read-only': { label: 'Read-only', title: 'This context is view-only', explanation: 'The information remains available but mutation is not allowed.', next: 'Return to an editable context if a change is required.', icon: 'pi-eye', tone: 'info' },

@@ -4,6 +4,7 @@ import { join, relative } from 'node:path';
 const root = process.cwd();
 const violations = [];
 const colorPattern = /#[0-9a-f]{3,8}\b|\b(?:rgb|rgba|hsl|hsla|oklch)\s*\(/gi;
+const derivedColorPattern = /\bcolor-mix\s*\(/gi;
 
 function filesUnder(directory) {
   if (!statSync(directory, { throwIfNoEntry: false })) return [];
@@ -21,6 +22,12 @@ function scan(directory, { allowEvidence = false } = {}) {
       const generatedTokenReference = fileName === 'src/app/documentation/content/token-reference.generated.ts';
       if (allowEvidence && (generatedTokenReference || fileName.startsWith('src/app/lab/quality/'))) continue;
       violations.push(`${fileName}:${match.index + 1} raw color ${match[0]} is outside the token/evidence layer`);
+    }
+    for (const match of source.matchAll(derivedColorPattern)) {
+      const fileName = relative(root, file);
+      const generatedTokenReference = fileName === 'src/app/documentation/content/token-reference.generated.ts';
+      if (allowEvidence && (generatedTokenReference || fileName.startsWith('src/app/lab/quality/'))) continue;
+      violations.push(`${fileName}:${match.index + 1} derived color ${match[0]} is outside canonical token sources`);
     }
   }
 }

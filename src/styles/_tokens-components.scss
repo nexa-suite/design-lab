@@ -36,6 +36,11 @@
   --nexa-focus-width: 3px;
   --nexa-focus-offset: 3px;
   --nexa-focus-ring: 0 0 0 3px color-mix(in oklab, var(--nexa-color-focus-ring) 24%, transparent);
+  --nexa-focus-preview-ring: inset 0 0 0 3px color-mix(in oklab, var(--nexa-color-focus-ring) 24%, transparent);
+  --nexa-auth-grid-line: color-mix(in oklab, var(--nexa-color-text-inverse) 13%, transparent);
+  --nexa-auth-brand-copy: color-mix(in oklab, var(--nexa-color-text-inverse) 86%, transparent);
+  --nexa-auth-brand-muted: color-mix(in oklab, var(--nexa-color-text-inverse) 72%, transparent);
+  --nexa-auth-mark-border: color-mix(in oklab, var(--nexa-color-text-inverse) 45%, transparent);
   --nexa-shadow-toast: 0 12px 28px rgb(15 23 42 / 12%);
   --nexa-component-sidebar-width: var(--nexa-layout-sidebar-width);
   --nexa-component-drawer-width: min(320px, 88vw);

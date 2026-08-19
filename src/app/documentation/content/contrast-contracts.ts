@@ -41,4 +41,10 @@ export const APPROVED_CONTRAST_PAIRS: readonly ContrastPair[] = [
   pair('focus-canvas', 'Focus ring against canvas', '--nexa-color-focus-ring', '--nexa-surface-page', 'non-text'),
   pair('input-border-card', 'Focused input border against card', '--nexa-color-primary-500', '--nexa-surface-card', 'non-text'),
   pair('selected-border', 'Selected border against selected surface', '--nexa-color-primary-600', '--nexa-surface-nav-active', 'non-text'),
+  pair('viz-axis-text-card', 'Visualization supporting label on card', '--nexa-viz-axis-text', '--nexa-surface-card', 'normal'),
+  pair('viz-series-primary-card', 'Primary data series against card', '--nexa-viz-series-1', '--nexa-surface-card', 'non-text'),
+  pair('viz-series-sky-card', 'Sky data series against card', '--nexa-viz-series-2', '--nexa-surface-card', 'non-text'),
+  pair('viz-series-indigo-card', 'Indigo data series against card', '--nexa-viz-series-3', '--nexa-surface-card', 'non-text'),
+  pair('viz-series-success-card', 'Success data series against card', '--nexa-viz-series-5', '--nexa-surface-card', 'non-text'),
+  pair('viz-series-warning-card', 'Warning data series against card', '--nexa-viz-series-6', '--nexa-surface-card', 'non-text'),
 ];
