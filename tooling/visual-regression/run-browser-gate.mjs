@@ -82,12 +82,19 @@ async function inspectRoute(page, route, viewport) {
       const root = document.documentElement;
       const content = document.querySelector('.lab-content');
       const heading = content?.querySelector('h1, h2, [role="heading"]');
+      const icons = [...document.querySelectorAll('i.pi')];
+      const renderedIcons = icons.filter((icon) => {
+        const content = getComputedStyle(icon, '::before').content;
+        return content && content !== 'none' && content !== '""';
+      });
       return {
         clientWidth: root.clientWidth,
         scrollWidth: root.scrollWidth,
         contentTextLength: content?.textContent?.trim().length ?? 0,
         heading: heading?.textContent?.trim() ?? '',
         activeNavigation: document.querySelectorAll('.lab-nav-item.active').length,
+        iconCount: icons.length,
+        renderedIconCount: renderedIcons.length,
       };
     });
 
@@ -95,12 +102,13 @@ async function inspectRoute(page, route, viewport) {
     assert(evidence.heading.length > 0, 'documentation page has no visible heading');
     assert(evidence.scrollWidth <= evidence.clientWidth + 1, `horizontal overflow ${evidence.scrollWidth - evidence.clientWidth}px`);
     assert(evidence.activeNavigation > 0, 'documentation route has no active navigation item');
+    assert(evidence.iconCount === evidence.renderedIconCount, `PrimeIcons missing rendered glyphs (${evidence.renderedIconCount}/${evidence.iconCount})`);
     assert(consoleIssues.length === 0, `console errors: ${consoleIssues.join(' | ')}`);
     assert(pageIssues.length === 0, `page errors: ${pageIssues.join(' | ')}`);
 
     writeResult(route, viewport, 'default', {
       status: 'pass',
-      checks: { content: true, heading: true, activeNavigation: true, noOverflow: true, console: true, pageErrors: true },
+      checks: { content: true, heading: true, activeNavigation: true, icons: true, noOverflow: true, console: true, pageErrors: true },
       evidence,
     });
   } catch (error) {

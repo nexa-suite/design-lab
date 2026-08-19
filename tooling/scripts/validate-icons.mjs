@@ -5,6 +5,10 @@ const root = process.cwd();
 const manifest = JSON.parse(readFileSync(join(root, 'tokens', 'icons.tokens.json'), 'utf8'));
 const catalogPath = join(root, 'src', 'app', 'documentation', 'foundations', 'icon-catalog.ts');
 const catalog = readFileSync(catalogPath, 'utf8');
+const globalStyles = readFileSync(join(root, 'src', 'styles.scss'), 'utf8');
+const angularConfig = JSON.parse(readFileSync(join(root, 'angular.json'), 'utf8'));
+const primeIconsStylesheet = readFileSync(join(root, 'node_modules', 'primeicons', 'primeicons.css'), 'utf8');
+const renderableIcons = new Set([...primeIconsStylesheet.matchAll(/\.((?:pi)-[a-z0-9-]+):before/g)].map((match) => match[1]));
 const allowed = new Set(manifest.icons);
 const violations = [];
 
@@ -22,6 +26,7 @@ for (const directory of roots) {
     const text = readFileSync(file, 'utf8');
     for (const match of text.matchAll(/\bpi-[a-z0-9-]+\b/g)) {
       if (!allowed.has(match[0])) violations.push(`${relative(root, file)} uses unapproved ${match[0]}`);
+      if (match[0] !== 'pi-spin' && !renderableIcons.has(match[0])) violations.push(`${relative(root, file)} uses a PrimeIcon class missing from the pinned stylesheet: ${match[0]}`);
     }
     if (/material-(?:icons|symbols)|unpkg\.com\/primeicons|fonts\.googleapis\.com\/icon/.test(text)) {
       violations.push(`${relative(root, file)} references a non-canonical icon font or remote PrimeIcons asset`);
@@ -32,6 +37,19 @@ for (const directory of roots) {
 const packageJson = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
 if (packageJson.dependencies?.primeicons !== '8.0.0') {
   violations.push('package.json must pin primeicons to 8.0.0');
+}
+
+if (!/@use\s+['"]primeicons\/primeicons\.css['"]\s*;/.test(globalStyles)) {
+  violations.push('src/styles.scss must load the pinned local PrimeIcons stylesheet');
+}
+
+const appStyles = angularConfig.projects?.['nexa-design-lab']?.architect?.build?.options?.styles ?? [];
+if (appStyles.some((style) => String(style).includes('primeicons/primeicons.css'))) {
+  violations.push('PrimeIcons must be loaded through src/styles.scss, not as a second global stylesheet entry');
+}
+
+for (const icon of manifest.icons) {
+  if (icon !== 'pi-spin' && !renderableIcons.has(icon)) violations.push(`tokens/icons.tokens.json lists a class missing from the pinned stylesheet: ${icon}`);
 }
 
 if (new Set(manifest.icons).size !== manifest.icons.length) {

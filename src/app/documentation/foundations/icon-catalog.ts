@@ -53,10 +53,10 @@ const CANONICAL_PRIME_ICON_NAMES = [
   'pi-briefcase', 'pi-calendar', 'pi-chart-bar', 'pi-check', 'pi-check-circle', 'pi-check-square', 'pi-chevron-down', 'pi-chevron-right',
   'pi-circle', 'pi-circle-fill', 'pi-clock', 'pi-code', 'pi-compass', 'pi-copy', 'pi-credit-card', 'pi-desktop', 'pi-directions', 'pi-download',
   'pi-ellipsis-h', 'pi-exclamation-circle', 'pi-exclamation-triangle', 'pi-external-link', 'pi-eye', 'pi-file', 'pi-file-edit', 'pi-filter',
-  'pi-flag', 'pi-flask', 'pi-folder', 'pi-grid', 'pi-hand-pointer', 'pi-image', 'pi-inbox', 'pi-info-circle', 'pi-keyboard', 'pi-list', 'pi-lock',
-  'pi-minus', 'pi-minus-circle', 'pi-mobile', 'pi-mouse', 'pi-palette', 'pi-pause', 'pi-pencil', 'pi-play', 'pi-plus', 'pi-plus-minus',
+  'pi-flag', 'pi-microchip', 'pi-folder', 'pi-grid-2', 'pi-mobile', 'pi-image', 'pi-inbox', 'pi-info-circle', 'pi-key', 'pi-list', 'pi-lock',
+  'pi-minus', 'pi-minus-circle', 'pi-palette', 'pi-pause', 'pi-pencil', 'pi-play', 'pi-plus',
   'pi-power-off', 'pi-question-circle', 'pi-refresh', 'pi-search', 'pi-shield', 'pi-sign-in', 'pi-sign-out', 'pi-shopping-cart', 'pi-sitemap',
-  'pi-sliders-h', 'pi-snowflake', 'pi-sort-amount-down', 'pi-sort-amount-up', 'pi-spin', 'pi-spinner', 'pi-stop', 'pi-stop-circle', 'pi-sun',
+  'pi-sliders-h', 'pi-cloud', 'pi-sort-amount-down', 'pi-sort-amount-up', 'pi-spin', 'pi-spinner', 'pi-stop', 'pi-stop-circle', 'pi-sun',
   'pi-sync', 'pi-table', 'pi-tag', 'pi-th-large', 'pi-times', 'pi-times-circle', 'pi-trash', 'pi-truck', 'pi-undo', 'pi-user', 'pi-users',
   'pi-window-maximize',
 ] as const;
@@ -68,10 +68,10 @@ function iconLabel(name: string): string {
 }
 
 function inferredCategory(name: string): NexaIconCategory {
-  if (['pi-bars', 'pi-chevron-down', 'pi-chevron-right', 'pi-compass', 'pi-directions', 'pi-grid', 'pi-mobile', 'pi-sitemap', 'pi-table', 'pi-th-large', 'pi-window-maximize'].includes(name)) return 'navigation';
-  if (['pi-align-left', 'pi-filter', 'pi-mouse', 'pi-search', 'pi-sliders-h', 'pi-sort-amount-down', 'pi-sort-amount-up'].includes(name)) return 'input';
+  if (['pi-bars', 'pi-chevron-down', 'pi-chevron-right', 'pi-compass', 'pi-directions', 'pi-grid-2', 'pi-mobile', 'pi-sitemap', 'pi-table', 'pi-th-large', 'pi-window-maximize'].includes(name)) return 'navigation';
+  if (['pi-align-left', 'pi-filter', 'pi-desktop', 'pi-search', 'pi-sliders-h', 'pi-sort-amount-down', 'pi-sort-amount-up'].includes(name)) return 'input';
   if (['pi-ban', 'pi-check', 'pi-check-circle', 'pi-check-square', 'pi-circle', 'pi-circle-fill', 'pi-clock', 'pi-exclamation-circle', 'pi-exclamation-triangle', 'pi-info-circle', 'pi-minus-circle', 'pi-shield', 'pi-sun', 'pi-tag', 'pi-times-circle'].includes(name)) return 'status';
-  if (['pi-box', 'pi-briefcase', 'pi-calendar', 'pi-chart-bar', 'pi-credit-card', 'pi-file', 'pi-file-edit', 'pi-folder', 'pi-inbox', 'pi-lock', 'pi-snowflake', 'pi-shopping-cart', 'pi-truck', 'pi-user', 'pi-users'].includes(name)) return 'domain';
+  if (['pi-box', 'pi-briefcase', 'pi-calendar', 'pi-chart-bar', 'pi-credit-card', 'pi-file', 'pi-file-edit', 'pi-folder', 'pi-inbox', 'pi-lock', 'pi-cloud', 'pi-shopping-cart', 'pi-truck', 'pi-user', 'pi-users'].includes(name)) return 'domain';
   return 'action';
 }
 

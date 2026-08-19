@@ -41,7 +41,7 @@ export const COLOR_FAMILIES: readonly ColorFamily[] = [
   { name: 'Attention amber', surface: tokenValue('--nexa-surface-warning'), border: tokenValue('--nexa-color-warning-border'), foreground: tokenValue('--nexa-color-warning-text'), icon: 'pi-clock', example: 'Awaiting review' },
   { name: 'Danger red', surface: tokenValue('--nexa-surface-danger'), border: tokenValue('--nexa-color-danger-subtle-border'), foreground: tokenValue('--nexa-color-danger-text'), icon: 'pi-ban', example: 'Blocked request' },
   { name: 'Operational orange', surface: tokenValue('--nexa-color-attention-surface'), border: tokenValue('--nexa-color-attention-border'), foreground: tokenValue('--nexa-color-attention-text'), icon: 'pi-flag', example: 'High priority' },
-  { name: 'Refrigerated sky', surface: tokenValue('--nexa-color-cold-refrigerated-soft'), border: tokenValue('--nexa-color-cold-refrigerated-border'), foreground: tokenValue('--nexa-color-cold-refrigerated-text'), icon: 'pi-snowflake', example: 'Refrigerated' },
+  { name: 'Refrigerated sky', surface: tokenValue('--nexa-color-cold-refrigerated-soft'), border: tokenValue('--nexa-color-cold-refrigerated-border'), foreground: tokenValue('--nexa-color-cold-refrigerated-text'), icon: 'pi-cloud', example: 'Refrigerated' },
   { name: 'Frozen indigo', surface: tokenValue('--nexa-color-cold-frozen-soft'), border: tokenValue('--nexa-color-cold-frozen-border'), foreground: tokenValue('--nexa-color-cold-frozen-text'), icon: 'pi-box', example: 'Frozen' },
 ];
 
