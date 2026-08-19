@@ -77,6 +77,7 @@ npm run validate:public-api
 npm run validate:visual
 npm run validate:contrast
 npm run validate:package
+npm run validate:browser
 npm run audit:visual
 npm test -- --watch=false
 npm run test:library -- --watch=false
@@ -87,7 +88,7 @@ git diff --check
 
 The Contrast Lab derives ratios from token color values. The required gates are WCAG 2.2: 4.5:1 for normal text, 3:1 for large text and 3:1 for essential non-text UI. The lab also exposes Standard/Increased Contrast, Motion/Reduced Motion and target-overlay review modes.
 
-Browser review covers the required pages and 1440, 1024, 768, 390 and 320px viewports. Manual assistive-technology review remains a human handoff item unless explicitly recorded in the implementation report.
+The browser gate covers every registered page at 1440, 1024, 768, 390 and 320px, plus representative state and recovery interactions. Screenshot capture remains an optional review artifact; the committed contract records route, viewport, state and source SHA without generated images. Manual visual judgment and assistive-technology review remain human handoff items.
 
 ## Angular structure
 

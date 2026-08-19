@@ -2,7 +2,8 @@
 
 The Design Lab does not commit generated screenshots or copy them into the
 Blueprint. `manifest.json` is the small, reviewable contract for the browser
-evidence workflow.
+evidence workflow. `npm run validate:browser` executes that contract against
+the real Angular application with a pinned Playwright runner.
 
 The browser runner records one result per route, viewport and state under the
 ignored `tmp/visual-regression/<source-sha>/` directory. Each result includes
@@ -17,9 +18,15 @@ The required matrix is:
 - layout/no-overflow checks at 1024, 768 and 320 px;
 - high-risk selected, focus, pressed, disabled, loading, error and open
   states;
-- targeted 200% text and 400% reflow checks.
+- targeted 200% text and 400% reflow checks (the accessibility route records
+  the review state; the browser gate verifies the route remains usable).
 
 `npm run validate:visual` validates the manifest, registry coverage and
-artifact contract in CI. Browser execution remains a local/release evidence
-step because the repository deliberately does not add a second browser
-automation dependency for this documentation-only laboratory.
+artifact contract. `npm run validate:browser` starts the production Angular
+serve target when no `NEXA_BROWSER_BASE_URL` is supplied, visits every
+registered route at 1440, 1024, 768, 390 and 320 px, writes ignored evidence
+artifacts bound to the current source SHA, and fails on empty content, missing
+headings, inactive navigation, horizontal overflow, console errors or page
+errors. It also exercises representative analytics recovery, authentication
+locale/error, dispatch movement, reduced-motion and manual stepping paths. CI
+installs Chromium and runs this gate after the production build.

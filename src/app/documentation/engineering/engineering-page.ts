@@ -52,7 +52,7 @@ export class NexaEngineeringPage {
     { name: 'Architecture', value: 'npm run validate:architecture', note: 'Boundaries, forbidden CSS, retired imports and tracked FLOW assets.' },
     { name: 'Design tokens', value: 'npm run validate:tokens', note: 'Generation parity, references, duplicates and cycles.' },
     { name: 'Visual contract', value: 'npm run validate:visual', note: 'Canonical route matrix, viewport set, state metadata and artifact schema.' },
-    { name: 'Browser evidence', value: 'Local / release gate', note: 'Route interactions and console checks are exercised in the browser; CI keeps the deterministic manifest gate without adding an unapproved browser dependency.' },
+    { name: 'Browser evidence', value: 'CI + local / release gate', note: 'Playwright visits every registered route at the required viewport matrix, checks geometry and console cleanliness, and exercises representative interaction paths.' },
     { name: 'Behavior', value: 'npm test + library tests', note: 'Application and reusable candidate contracts remain separately testable.' },
     { name: 'Build', value: 'npm run build:all', note: 'Strict Angular templates, library package and route chunk generation.' },
     { name: 'Human review', value: 'Pending / explicit', note: 'Visual direction, content, screen reader and final adoption remain human decisions.' },

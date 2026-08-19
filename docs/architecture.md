@@ -43,4 +43,4 @@ The shared documentation layout owns the repeated section heading and divider pr
 
 ## Verification boundary
 
-The automated gates are intentionally small and understandable: architecture, token, color, icon, documentation, public API and contrast validation plus library/application tests and builds. Human visual, content, browser, responsive, reduced-motion, increased-contrast and assistive-technology review remain explicit handoff items until recorded.
+The automated gates are intentionally small and understandable: architecture, token, color, icon, documentation, public API, contrast and browser validation plus library/application tests and builds. The browser gate visits every registry route across the required viewport matrix and exercises representative interaction paths. Human visual judgment, content, responsive interpretation and assistive-technology review remain explicit handoff items.

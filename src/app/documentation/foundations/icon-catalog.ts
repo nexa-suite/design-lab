@@ -8,7 +8,7 @@ export interface NexaIconSpec {
   readonly tone: 'primary' | 'success' | 'warning' | 'danger' | 'neutral';
 }
 
-export const NEXA_ICON_CATALOG: readonly NexaIconSpec[] = [
+const CURATED_ICON_CATALOG: readonly NexaIconSpec[] = [
   { name: 'pi-th-large', label: 'Overview', category: 'navigation', usage: 'Workspace overview and dashboard entry.', tone: 'primary' },
   { name: 'pi-bars', label: 'Menu', category: 'navigation', usage: 'Open or collapse navigation.', tone: 'neutral' },
   { name: 'pi-chevron-right', label: 'Forward', category: 'navigation', usage: 'Move through a hierarchy or step.', tone: 'neutral' },
@@ -34,6 +34,51 @@ export const NEXA_ICON_CATALOG: readonly NexaIconSpec[] = [
   { name: 'pi-ellipsis-h', label: 'More actions', category: 'action', usage: 'Open an action menu with a visible label.', tone: 'neutral' },
   { name: 'pi-sign-out', label: 'Sign out', category: 'action', usage: 'Leave the current authenticated session.', tone: 'danger' },
 ];
+
+const CANONICAL_PRIME_ICON_NAMES = [
+  'pi-align-left', 'pi-arrow-right', 'pi-arrows-alt', 'pi-ban', 'pi-bars', 'pi-bell', 'pi-bolt', 'pi-book', 'pi-bookmark', 'pi-box',
+  'pi-briefcase', 'pi-calendar', 'pi-chart-bar', 'pi-check', 'pi-check-circle', 'pi-check-square', 'pi-chevron-down', 'pi-chevron-right',
+  'pi-circle', 'pi-circle-fill', 'pi-clock', 'pi-code', 'pi-compass', 'pi-copy', 'pi-credit-card', 'pi-desktop', 'pi-directions', 'pi-download',
+  'pi-ellipsis-h', 'pi-exclamation-circle', 'pi-exclamation-triangle', 'pi-external-link', 'pi-eye', 'pi-file', 'pi-file-edit', 'pi-filter',
+  'pi-flag', 'pi-flask', 'pi-folder', 'pi-grid', 'pi-hand-pointer', 'pi-image', 'pi-inbox', 'pi-info-circle', 'pi-keyboard', 'pi-list', 'pi-lock',
+  'pi-minus', 'pi-minus-circle', 'pi-mobile', 'pi-mouse', 'pi-palette', 'pi-pause', 'pi-pencil', 'pi-play', 'pi-plus', 'pi-plus-minus',
+  'pi-power-off', 'pi-question-circle', 'pi-refresh', 'pi-search', 'pi-shield', 'pi-sign-in', 'pi-sign-out', 'pi-shopping-cart', 'pi-sitemap',
+  'pi-sliders-h', 'pi-snowflake', 'pi-sort-amount-down', 'pi-sort-amount-up', 'pi-spin', 'pi-spinner', 'pi-stop', 'pi-stop-circle', 'pi-sun',
+  'pi-sync', 'pi-table', 'pi-tag', 'pi-th-large', 'pi-times', 'pi-times-circle', 'pi-trash', 'pi-truck', 'pi-undo', 'pi-user', 'pi-users',
+  'pi-window-maximize',
+] as const;
+
+const CURATED_ICON_BY_NAME = new Map(CURATED_ICON_CATALOG.map((icon) => [icon.name, icon]));
+
+function iconLabel(name: string): string {
+  return name.replace(/^pi-/, '').split('-').map((part) => part.charAt(0).toLocaleUpperCase() + part.slice(1)).join(' ');
+}
+
+function inferredCategory(name: string): NexaIconCategory {
+  if (['pi-bars', 'pi-chevron-down', 'pi-chevron-right', 'pi-compass', 'pi-directions', 'pi-grid', 'pi-mobile', 'pi-sitemap', 'pi-table', 'pi-th-large', 'pi-window-maximize'].includes(name)) return 'navigation';
+  if (['pi-align-left', 'pi-filter', 'pi-mouse', 'pi-search', 'pi-sliders-h', 'pi-sort-amount-down', 'pi-sort-amount-up'].includes(name)) return 'input';
+  if (['pi-ban', 'pi-check', 'pi-check-circle', 'pi-check-square', 'pi-circle', 'pi-circle-fill', 'pi-clock', 'pi-exclamation-circle', 'pi-exclamation-triangle', 'pi-info-circle', 'pi-minus-circle', 'pi-shield', 'pi-sun', 'pi-tag', 'pi-times-circle'].includes(name)) return 'status';
+  if (['pi-box', 'pi-briefcase', 'pi-calendar', 'pi-chart-bar', 'pi-credit-card', 'pi-file', 'pi-file-edit', 'pi-folder', 'pi-inbox', 'pi-lock', 'pi-snowflake', 'pi-shopping-cart', 'pi-truck', 'pi-user', 'pi-users'].includes(name)) return 'domain';
+  return 'action';
+}
+
+function inferredTone(name: string): NexaIconSpec['tone'] {
+  if (name.includes('check') || name === 'pi-sun') return 'success';
+  if (name.includes('clock') || name.includes('warning') || name.includes('exclamation-triangle')) return 'warning';
+  if (name.includes('ban') || name.includes('trash') || name.includes('times')) return 'danger';
+  if (inferredCategory(name) === 'navigation' || inferredCategory(name) === 'input') return 'primary';
+  return 'neutral';
+}
+
+export const NEXA_ICON_CATALOG: readonly NexaIconSpec[] = CANONICAL_PRIME_ICON_NAMES
+  .filter((name) => name !== 'pi-spin')
+  .map((name) => CURATED_ICON_BY_NAME.get(name) ?? {
+    name,
+    label: iconLabel(name),
+    category: inferredCategory(name),
+    usage: 'Available PrimeIcon in the local Nexa catalog.',
+    tone: inferredTone(name),
+  });
 
 export const NEXA_ICON_CATEGORIES: readonly { readonly value: 'all' | NexaIconCategory; readonly label: string }[] = [
   { value: 'all', label: 'All icons' },
