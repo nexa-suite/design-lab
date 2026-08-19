@@ -217,6 +217,9 @@ export const NEXA_TOKEN_VALUES: Readonly<Record<string, string>> = {
   "--nexa-line-height-tight": "1.18",
   "--nexa-line-height-normal": "1.5",
   "--nexa-line-height-relaxed": "1.65",
+  "--nexa-a11y-text-spacing-line-height": "1.8",
+  "--nexa-a11y-text-spacing-letter": "0.12em",
+  "--nexa-a11y-text-spacing-word": "0.16em",
   "--nexa-layout-sidebar-width": "284px",
   "--nexa-layout-toolbar-height": "56px",
   "--nexa-layout-content-max": "1280px",
@@ -1926,6 +1929,30 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "description": "Nexa component token nexa-line-height-relaxed."
   },
   {
+    "name": "--nexa-a11y-text-spacing-line-height",
+    "layer": "component",
+    "type": "number",
+    "sourceValue": "1.8",
+    "value": "1.8",
+    "description": "Line height used by the Lab increased text-spacing evaluation mode."
+  },
+  {
+    "name": "--nexa-a11y-text-spacing-letter",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "0.12em",
+    "value": "0.12em",
+    "description": "Letter spacing used by the Lab increased text-spacing evaluation mode."
+  },
+  {
+    "name": "--nexa-a11y-text-spacing-word",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "0.16em",
+    "value": "0.16em",
+    "description": "Word spacing used by the Lab increased text-spacing evaluation mode."
+  },
+  {
     "name": "--nexa-layout-sidebar-width",
     "layer": "component",
     "type": "dimension",
@@ -2256,12 +2283,12 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
 ];
 
 export const NEXA_TOKEN_SUMMARY = {
-  "declarations": 249,
+  "declarations": 252,
   "references": 143,
   "layerCounts": {
     "primitive": 71,
     "semantic": 121,
-    "component": 46,
+    "component": 49,
     "data-visualization": 11
   }
 } as const;

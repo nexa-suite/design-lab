@@ -9,12 +9,14 @@ describe('Nexa evaluation modes', () => {
     evaluation.setContrastMode('increased');
     evaluation.setMotionMode('reduced');
     evaluation.setTextScale(2);
+    evaluation.setTextSpacing('increased');
     evaluation.setTargetOverlay(true);
 
     expect(root.dataset['contrastMode']).toBe('increased');
     expect(root.dataset['motionMode']).toBe('reduced');
     expect(root.dataset['targetOverlay']).toBe('true');
     expect(root.dataset['reflowMode']).toBe('false');
+    expect(root.dataset['textSpacing']).toBe('increased');
     expect(root.style.getPropertyValue('--nexa-doc-text-scale')).toBe('2');
 
     evaluation.setTextScale(4);
@@ -24,6 +26,8 @@ describe('Nexa evaluation modes', () => {
     evaluation.setContrastMode('standard');
     evaluation.setMotionMode('motion');
     evaluation.setTextScale(1);
+    evaluation.setTextSpacing('standard');
     evaluation.setTargetOverlay(false);
+    expect(root.dataset['textSpacing']).toBe('standard');
   });
 });

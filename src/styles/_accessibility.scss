@@ -14,5 +14,10 @@
 :root[data-reflow-mode='true'] .documentation-page p,
 :root[data-reflow-mode='true'] .documentation-page code,
 :root[data-reflow-mode='true'] .documentation-page small { overflow-wrap: anywhere; }
+:root[data-text-spacing='increased'] .documentation-page :where(p, li, label, button, th, td, small, code, [role='status']) {
+  line-height: var(--nexa-a11y-text-spacing-line-height);
+  letter-spacing: var(--nexa-a11y-text-spacing-letter);
+  word-spacing: var(--nexa-a11y-text-spacing-word);
+}
 .skip-link { position: fixed; z-index: 10; top: 8px; left: 8px; padding: 8px 12px; border-radius: var(--nexa-radius-md); background: var(--nexa-color-primary-700); color: var(--nexa-color-text-inverse); font-weight: var(--nexa-font-weight-semibold); transform: translateY(-180%); transition: transform var(--nexa-motion-standard); }
 .skip-link:focus { transform: translateY(0); }
