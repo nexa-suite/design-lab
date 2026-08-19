@@ -231,6 +231,11 @@
     "$value": "var(--nexa-primitive-amber-800)",
     "$description": "Nexa semantic token nexa-color-warning-text."
   },
+  "nexa-color-warning-border": {
+    "$type": "color",
+    "$value": "var(--nexa-primitive-amber-200)",
+    "$description": "Subtle warning boundary for documented attention states."
+  },
   "nexa-color-warning-subtle-background": {
     "$type": "color",
     "$value": "var(--nexa-surface-warning)",
@@ -331,6 +336,21 @@
     "$value": "var(--nexa-primitive-orange-500)",
     "$description": "Nexa semantic token nexa-color-attention-500."
   },
+  "nexa-color-attention-surface": {
+    "$type": "color",
+    "$value": "var(--nexa-primitive-orange-50)",
+    "$description": "Subtle operational attention surface."
+  },
+  "nexa-color-attention-border": {
+    "$type": "color",
+    "$value": "var(--nexa-primitive-orange-200)",
+    "$description": "Subtle operational attention boundary."
+  },
+  "nexa-color-attention-text": {
+    "$type": "color",
+    "$value": "var(--nexa-primitive-orange-800)",
+    "$description": "Operational attention text role."
+  },
   "nexa-color-sky-600": {
     "$type": "color",
     "$value": "var(--nexa-primitive-sky-600)",
@@ -361,6 +381,11 @@
     "$value": "var(--nexa-primitive-sky-50)",
     "$description": "Nexa semantic token nexa-color-cold-refrigerated-soft."
   },
+  "nexa-color-cold-refrigerated-border": {
+    "$type": "color",
+    "$value": "var(--nexa-primitive-sky-200)",
+    "$description": "Cold-chain refrigerated boundary role."
+  },
   "nexa-color-cold-frozen": {
     "$type": "color",
     "$value": "var(--nexa-primitive-indigo-600)",
@@ -370,6 +395,16 @@
     "$type": "color",
     "$value": "var(--nexa-primitive-indigo-50)",
     "$description": "Nexa semantic token nexa-color-cold-frozen-soft."
+  },
+  "nexa-color-cold-frozen-border": {
+    "$type": "color",
+    "$value": "var(--nexa-primitive-indigo-200)",
+    "$description": "Cold-chain frozen boundary role."
+  },
+  "nexa-color-cold-frozen-text": {
+    "$type": "color",
+    "$value": "var(--nexa-primitive-indigo-800)",
+    "$description": "Cold-chain frozen text role."
   },
   "nexa-surface-page": {
     "$type": "color",

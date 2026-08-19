@@ -46,6 +46,7 @@
   --nexa-color-warning-50: var(--nexa-primitive-amber-50);
   --nexa-color-warning-600: var(--nexa-primitive-amber-600);
   --nexa-color-warning-text: var(--nexa-primitive-amber-800);
+  --nexa-color-warning-border: var(--nexa-primitive-amber-200);
   --nexa-color-warning-subtle-background: var(--nexa-surface-warning);
   --nexa-color-warning-subtle-border: var(--nexa-primitive-amber-600);
   --nexa-color-warning-subtle-text: var(--nexa-color-warning-text);
@@ -66,14 +67,20 @@
   --nexa-color-danger-strong-border: var(--nexa-primitive-red-800);
   --nexa-color-danger-strong-text: var(--nexa-color-text-inverse);
   --nexa-color-attention-500: var(--nexa-primitive-orange-500);
+  --nexa-color-attention-surface: var(--nexa-primitive-orange-50);
+  --nexa-color-attention-border: var(--nexa-primitive-orange-200);
+  --nexa-color-attention-text: var(--nexa-primitive-orange-800);
   --nexa-color-sky-600: var(--nexa-primitive-sky-600);
   --nexa-color-indigo-600: var(--nexa-primitive-indigo-600);
   --nexa-color-orange-500: var(--nexa-primitive-orange-500);
   --nexa-color-cold-refrigerated: var(--nexa-primitive-sky-600);
   --nexa-color-cold-refrigerated-text: var(--nexa-primitive-sky-800);
   --nexa-color-cold-refrigerated-soft: var(--nexa-primitive-sky-50);
+  --nexa-color-cold-refrigerated-border: var(--nexa-primitive-sky-200);
   --nexa-color-cold-frozen: var(--nexa-primitive-indigo-600);
   --nexa-color-cold-frozen-soft: var(--nexa-primitive-indigo-50);
+  --nexa-color-cold-frozen-border: var(--nexa-primitive-indigo-200);
+  --nexa-color-cold-frozen-text: var(--nexa-primitive-indigo-800);
   --nexa-surface-page: var(--nexa-primitive-canvas);
   --nexa-surface-card: var(--nexa-primitive-white);
   --nexa-surface-inset: var(--nexa-primitive-slate-100);

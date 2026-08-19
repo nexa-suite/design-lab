@@ -30,6 +30,15 @@ const allSourceFiles = [...appFiles, ...reusableFiles];
 for (const { relative: file, text } of reusableFiles) {
   const rawColor = text.match(/#[0-9a-f]{3,8}\b|\b(?:rgb|rgba|hsl|hsla|oklch)\s*\(/i);
   if (rawColor) add(file, 'raw design color outside token layer', rawColor);
+
+  const primitiveReference = text.match(/--nexa-primitive-[a-z0-9-]+/i);
+  if (primitiveReference) add(file, 'reusable component must consume semantic/component tokens, not primitives', primitiveReference);
+
+  const rawRadius = [...text.matchAll(/border-radius\s*:\s*([^;{}]+)/gi)].find((match) => {
+    const value = match[1].trim();
+    return !value.startsWith('var(--nexa-radius-') && value !== 'inherit' && value !== '50%';
+  });
+  if (rawRadius) add(file, 'reusable geometry must use a radius token, inherit or circular geometry', rawRadius);
 }
 
 for (const { relative: file, text } of allSourceFiles) {
@@ -66,4 +75,4 @@ if (violations.length > 0) {
 }
 
 console.log('Architecture validation passed.');
-console.log('Checked reusable token boundaries, forbidden CSS, dependency direction, tracked FLOW assets and retired imports.');
+console.log('Checked reusable token boundaries, geometry integrity, forbidden CSS, dependency direction, tracked FLOW assets and retired imports.');

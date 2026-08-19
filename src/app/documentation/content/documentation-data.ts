@@ -1,5 +1,6 @@
 import type { DocumentationPage } from '../models/documentation-page';
 import { COMPONENT_GUIDANCE } from './component-guidance';
+import { tokenValue } from './token-reference.generated';
 export { APPROVED_CONTRAST_PAIRS } from './contrast-contracts';
 export type { ContrastPair } from './contrast-contracts';
 
@@ -10,38 +11,38 @@ export interface TypeToken { readonly role: string; readonly family: string; rea
 export interface ColorFamily { readonly name: string; readonly surface: string; readonly border: string; readonly foreground: string; readonly icon: string; readonly example: string; }
 
 export const BLUE_SCALE: readonly BlueToken[] = [
-  { shade: 50, token: '--nexa-primitive-blue-50', value: 'oklch(96.9% 0.014 264.5)', usage: 'Canvas tint and selected surface', foreground: 'Slate 900' },
-  { shade: 100, token: '--nexa-primitive-blue-100', value: 'oklch(92.9% 0.034 263.6)', usage: 'Soft selection and focus halo', foreground: 'Slate 900' },
-  { shade: 200, token: '--nexa-primitive-blue-200', value: 'oklch(86% 0.068 262.1)', usage: 'Quiet border and active cue', foreground: 'Slate 900' },
-  { shade: 300, token: '--nexa-primitive-blue-300', value: 'oklch(77% 0.117 262.4)', usage: 'Interactive border emphasis', foreground: 'Slate 900' },
-  { shade: 400, token: '--nexa-primitive-blue-400', value: 'oklch(68% 0.168 262.9)', usage: 'Hover and supporting action', foreground: 'Slate 900' },
-  { shade: 500, token: '--nexa-primitive-blue-500', value: 'oklch(60% 0.199 262.8)', usage: 'Focus and active control edge', foreground: 'White' },
-  { shade: 600, token: '--nexa-primitive-blue-600', value: 'oklch(54.6% 0.215 262.9)', usage: 'Primary action and current step', foreground: 'White' },
-  { shade: 700, token: '--nexa-primitive-blue-700', value: 'oklch(48% 0.19 262.9)', usage: 'Action text and hover fill', foreground: 'White' },
-  { shade: 800, token: '--nexa-primitive-blue-800', value: 'oklch(41% 0.15 262.7)', usage: 'High-emphasis text on light surfaces', foreground: 'White' },
-  { shade: 900, token: '--nexa-primitive-blue-900', value: 'oklch(34.1% 0.11 262.6)', usage: 'Strong blue text and inverse support', foreground: 'White' },
-  { shade: 950, token: '--nexa-primitive-blue-950', value: 'oklch(24.9% 0.075 263)', usage: 'Deep contrast sample', foreground: 'White' },
+  { shade: 50, token: '--nexa-primitive-blue-50', value: tokenValue('--nexa-primitive-blue-50'), usage: 'Canvas tint and selected surface', foreground: 'Slate 900' },
+  { shade: 100, token: '--nexa-primitive-blue-100', value: tokenValue('--nexa-primitive-blue-100'), usage: 'Soft selection and focus halo', foreground: 'Slate 900' },
+  { shade: 200, token: '--nexa-primitive-blue-200', value: tokenValue('--nexa-primitive-blue-200'), usage: 'Quiet border and active cue', foreground: 'Slate 900' },
+  { shade: 300, token: '--nexa-primitive-blue-300', value: tokenValue('--nexa-primitive-blue-300'), usage: 'Interactive border emphasis', foreground: 'Slate 900' },
+  { shade: 400, token: '--nexa-primitive-blue-400', value: tokenValue('--nexa-primitive-blue-400'), usage: 'Hover and supporting action', foreground: 'Slate 900' },
+  { shade: 500, token: '--nexa-primitive-blue-500', value: tokenValue('--nexa-primitive-blue-500'), usage: 'Focus and active control edge', foreground: 'White' },
+  { shade: 600, token: '--nexa-primitive-blue-600', value: tokenValue('--nexa-primitive-blue-600'), usage: 'Primary action and current step', foreground: 'White' },
+  { shade: 700, token: '--nexa-primitive-blue-700', value: tokenValue('--nexa-primitive-blue-700'), usage: 'Action text and hover fill', foreground: 'White' },
+  { shade: 800, token: '--nexa-primitive-blue-800', value: tokenValue('--nexa-primitive-blue-800'), usage: 'High-emphasis text on light surfaces', foreground: 'White' },
+  { shade: 900, token: '--nexa-primitive-blue-900', value: tokenValue('--nexa-primitive-blue-900'), usage: 'Strong blue text and inverse support', foreground: 'White' },
+  { shade: 950, token: '--nexa-primitive-blue-950', value: tokenValue('--nexa-primitive-blue-950'), usage: 'Deep contrast sample', foreground: 'White' },
 ];
 
 export const NEUTRAL_SCALE: readonly DocRow[] = [
-  { name: 'Slate 50', value: '#f8fafc', note: 'Grouped surface and table header' },
-  { name: 'Slate 100', value: '#f1f5f9', note: 'Inset plane and disabled surface' },
-  { name: 'Slate 200', value: '#e2e8f0', note: 'Default and structural border' },
-  { name: 'Slate 300', value: '#cbd5e1', note: 'Strong border and input boundary' },
-  { name: 'Slate 400', value: '#94a3b8', note: 'Muted metadata; never sole critical cue' },
-  { name: 'Slate 500', value: '#64748b', note: 'Secondary text and supporting copy' },
-  { name: 'Slate 600', value: '#475569', note: 'Dense navigation and tertiary text' },
-  { name: 'Slate 700', value: '#334155', note: 'Quiet action and strong secondary text' },
-  { name: 'Slate 900', value: '#0f172a', note: 'Primary text and headings' },
+  { name: 'Slate 50', value: tokenValue('--nexa-primitive-slate-50'), note: 'Grouped surface and table header' },
+  { name: 'Slate 100', value: tokenValue('--nexa-primitive-slate-100'), note: 'Inset plane and disabled surface' },
+  { name: 'Slate 200', value: tokenValue('--nexa-primitive-slate-200'), note: 'Default and structural border' },
+  { name: 'Slate 300', value: tokenValue('--nexa-primitive-slate-300'), note: 'Strong border and input boundary' },
+  { name: 'Slate 400', value: tokenValue('--nexa-primitive-slate-400'), note: 'Muted metadata; never sole critical cue' },
+  { name: 'Slate 500', value: tokenValue('--nexa-primitive-slate-500'), note: 'Secondary text and supporting copy' },
+  { name: 'Slate 600', value: tokenValue('--nexa-primitive-slate-600'), note: 'Dense navigation and tertiary text' },
+  { name: 'Slate 700', value: tokenValue('--nexa-primitive-slate-700'), note: 'Quiet action and strong secondary text' },
+  { name: 'Slate 900', value: tokenValue('--nexa-primitive-slate-900'), note: 'Primary text and headings' },
 ];
 
 export const COLOR_FAMILIES: readonly ColorFamily[] = [
-  { name: 'Success green', surface: '#f0fdf4', border: '#bbf7d0', foreground: '#15803d', icon: 'pi-check-circle', example: 'Completed order' },
-  { name: 'Attention amber', surface: '#fffbeb', border: '#fcd34d', foreground: '#92400e', icon: 'pi-clock', example: 'Awaiting review' },
-  { name: 'Danger red', surface: '#fef2f2', border: '#fecaca', foreground: '#991b1b', icon: 'pi-ban', example: 'Blocked request' },
-  { name: 'Operational orange', surface: '#fff7ed', border: '#fed7aa', foreground: '#9a3412', icon: 'pi-flag', example: 'High priority' },
-  { name: 'Refrigerated sky', surface: '#f0f9ff', border: '#bae6fd', foreground: '#075985', icon: 'pi-snowflake', example: 'Refrigerated' },
-  { name: 'Frozen indigo', surface: '#eef2ff', border: '#c7d2fe', foreground: '#3730a3', icon: 'pi-box', example: 'Frozen' },
+  { name: 'Success green', surface: tokenValue('--nexa-surface-success'), border: tokenValue('--nexa-color-success-border'), foreground: tokenValue('--nexa-color-success-700'), icon: 'pi-check-circle', example: 'Completed order' },
+  { name: 'Attention amber', surface: tokenValue('--nexa-surface-warning'), border: tokenValue('--nexa-color-warning-border'), foreground: tokenValue('--nexa-color-warning-text'), icon: 'pi-clock', example: 'Awaiting review' },
+  { name: 'Danger red', surface: tokenValue('--nexa-surface-danger'), border: tokenValue('--nexa-color-danger-subtle-border'), foreground: tokenValue('--nexa-color-danger-text'), icon: 'pi-ban', example: 'Blocked request' },
+  { name: 'Operational orange', surface: tokenValue('--nexa-color-attention-surface'), border: tokenValue('--nexa-color-attention-border'), foreground: tokenValue('--nexa-color-attention-text'), icon: 'pi-flag', example: 'High priority' },
+  { name: 'Refrigerated sky', surface: tokenValue('--nexa-color-cold-refrigerated-soft'), border: tokenValue('--nexa-color-cold-refrigerated-border'), foreground: tokenValue('--nexa-color-cold-refrigerated-text'), icon: 'pi-snowflake', example: 'Refrigerated' },
+  { name: 'Frozen indigo', surface: tokenValue('--nexa-color-cold-frozen-soft'), border: tokenValue('--nexa-color-cold-frozen-border'), foreground: tokenValue('--nexa-color-cold-frozen-text'), icon: 'pi-box', example: 'Frozen' },
 ];
 
 export const TYPE_ROWS: readonly TypeToken[] = [
@@ -68,11 +69,11 @@ export const SURFACE_ROWS: readonly DocRow[] = [
 ];
 
 export const RADIUS_ROWS: readonly DocRow[] = [
-  { name: 'Small control', value: 'radius-sm · 6px', note: 'Compact action and dense cue' },
-  { name: 'Control', value: 'radius-control · 10px', note: 'Button, input and toolbar group' },
-  { name: 'Card', value: 'radius-card · 16px', note: 'Bounded object and specimen surface' },
-  { name: 'Panel', value: 'radius-panel · 18px', note: 'Larger working region' },
-  { name: 'Pill', value: 'radius-pill · 999px', note: 'Compact status only' },
+  { name: 'Small control', value: `radius-sm · ${tokenValue('--nexa-radius-sm')}`, note: 'Compact action and dense cue' },
+  { name: 'Control', value: `radius-control · ${tokenValue('--nexa-radius-control')}`, note: 'Button, input and toolbar group' },
+  { name: 'Card', value: `radius-card · ${tokenValue('--nexa-radius-card')}`, note: 'Bounded object and specimen surface' },
+  { name: 'Panel', value: `radius-panel · ${tokenValue('--nexa-radius-panel')}`, note: 'Larger working region' },
+  { name: 'Pill', value: `radius-pill · ${tokenValue('--nexa-radius-pill')}`, note: 'Compact status only' },
 ];
 
 export const COMPONENT_STATES: readonly DocRow[] = [

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NexaStatusChip } from 'nexa-ui';
 import { NexaDocumentationFrame } from '../layout/documentation-page';
 import { injectDocumentationRouteContext } from '../layout/page-context';
+import { NEXA_TOKEN_SUMMARY } from '../content/token-reference.generated';
 
 interface PublicApiRow {
   readonly name: string;
@@ -32,8 +33,9 @@ export class NexaEngineeringPage {
     { name: 'Renderer boundary', value: 'Long-tail only', note: 'The generic component renderer is not used by focused lifecycle features.' },
   ];
   protected readonly tokenFacts: readonly EvidenceRow[] = [
-    { name: 'Generated declarations', value: '235', note: 'Primitive, semantic, component and data-visualization source layers are represented.' },
-    { name: 'Token references', value: '149', note: 'References resolve without unknown aliases, duplicates or cycles.' },
+    { name: 'Canonical declarations', value: String(NEXA_TOKEN_SUMMARY.declarations), note: 'Primitive, semantic, component and data-visualization source layers are generated from JSON.' },
+    { name: 'Source references', value: String(NEXA_TOKEN_SUMMARY.references), note: 'Source aliases resolve before SCSS parity and cycle checks run.' },
+    { name: 'Layer inventory', value: `${NEXA_TOKEN_SUMMARY.layerCounts.primitive} / ${NEXA_TOKEN_SUMMARY.layerCounts.semantic} / ${NEXA_TOKEN_SUMMARY.layerCounts.component} / ${NEXA_TOKEN_SUMMARY.layerCounts['data-visualization']}`, note: 'Primitive / semantic / component / data-visualization declarations.' },
     { name: 'Modes', value: 'Standard + Increased Contrast', note: 'Mode overrides stay semantic; component geometry remains stable.' },
     { name: 'Source boundary', value: 'tokens/*.tokens.json', note: 'Generated SCSS artifacts are checked and are not hand-authored.' },
   ];

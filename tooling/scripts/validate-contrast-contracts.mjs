@@ -1,5 +1,23 @@
-import { APPROVED_CONTRAST_PAIRS } from '../../src/app/documentation/content/contrast-contracts.ts';
+import { readFile } from 'node:fs/promises';
+import { stripTypeScriptTypes } from 'node:module';
+import { resolve } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { evaluateContrast } from '../../src/app/lab/quality/contrast.ts';
+
+const repositoryRoot = resolve(fileURLToPath(new URL('../..', import.meta.url)));
+const contractsPath = resolve(repositoryRoot, 'src/app/documentation/content/contrast-contracts.ts');
+const tokenReferencePath = resolve(repositoryRoot, 'src/app/documentation/content/token-reference.generated.ts');
+const contractsSource = await readFile(contractsPath, 'utf8');
+const executableContracts = stripTypeScriptTypes(
+  contractsSource.replace(
+    "from './token-reference.generated';",
+    `from '${pathToFileURL(tokenReferencePath).href}';`,
+  ),
+  { mode: 'strip' },
+);
+const { APPROVED_CONTRAST_PAIRS } = await import(
+  `data:text/javascript;charset=utf-8,${encodeURIComponent(executableContracts)}`,
+);
 
 const results = APPROVED_CONTRAST_PAIRS.map((pair) => ({
   ...pair,

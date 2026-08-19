@@ -20,6 +20,7 @@ v0.10 converges the v0.9 visual foundation into an executable, consumable and re
 - Authentication, Analytics and Dispatch Board own focused documentation features and explicit lazy routes;
 - StateSequence playback has configurable phase timing, terminal states and explicit recovery;
 - architecture, token and contrast gates protect the source structure and geometry contracts.
+- the generated token reference feeds documentation and contrast evidence from the same canonical JSON source;
 - DTCG-ish token sources generate primitive, semantic, component and data-visualization layers;
 - PrimeIcons are pinned locally and exposed through an audited explorer;
 - `projects/nexa-ui` is the real Angular library boundary with an explicit public API;
@@ -118,6 +119,6 @@ The archive preserves prior reports for provenance. It is not runtime authority 
 
 ## Boundary
 
-Design Lab changes are local to this repository. No production application, API, mobile repository or deployment is modified by this release candidate. The v0.10 branch and prerelease tag are published without merging to `main` or creating a final release. The Blueprint baseline is updated only in its isolated design branch.
+Design Lab changes are local to this repository. No production application, API, mobile repository or deployment is modified by this release candidate. The v0.10 branch is prepared without merging to `main` or creating a final release. The pre-existing `v0.10.0-rc.1` tag is not moved or rewritten; SCM must reconcile its stale tag target before calling this branch a release candidate. The Blueprint baseline is updated only in its isolated design branch.
 
 Copyright © 2026 Nexa. All rights reserved.

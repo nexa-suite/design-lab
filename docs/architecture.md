@@ -17,6 +17,8 @@ tokens/*.tokens.json
   primitive -> semantic -> component/data source
 src/styles/_tokens-*.scss
   generated runtime artifacts; never edit directly
+src/app/documentation/content/token-reference.generated.ts
+  generated typed evidence catalog; never edit directly
 ```
 
 ## Routing boundary
@@ -31,7 +33,7 @@ The build is the first lazy-loading proof: it emits named `button-page`, `progre
 
 ## Token and geometry laws
 
-Token source is organized as primitive, semantic, component and data-visualization layers. Generated SCSS must stay synchronized. Semantic status roles are not categorical chart series. Reusable controls use focused aliases for control padding, panel/card padding, gaps, interactive radius and focus geometry. Selected, focus, pressed and loading layers inherit the base shape; documentation sections own their divider once.
+Token source is organized as primitive, semantic, component and data-visualization layers. Generated SCSS and the typed documentation reference must stay synchronized. Semantic status roles are not categorical chart series. Reusable controls use focused aliases for control padding, panel/card padding, gaps, interactive radius and focus geometry. Selected, focus, pressed and loading layers inherit the base shape; documentation sections own their divider once. The architecture gate rejects reusable primitive references and arbitrary reusable radii.
 
 ## Feature content
 

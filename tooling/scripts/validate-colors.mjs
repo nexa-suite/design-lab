@@ -18,7 +18,8 @@ function scan(directory, { allowEvidence = false } = {}) {
     const source = readFileSync(file, 'utf8');
     for (const match of source.matchAll(colorPattern)) {
       const fileName = relative(root, file);
-      if (allowEvidence && (fileName === 'src/app/documentation/content/documentation-data.ts' || fileName === 'src/app/documentation/content/contrast-contracts.ts' || fileName.startsWith('src/app/lab/quality/'))) continue;
+      const generatedTokenReference = fileName === 'src/app/documentation/content/token-reference.generated.ts';
+      if (allowEvidence && (generatedTokenReference || fileName.startsWith('src/app/lab/quality/'))) continue;
       violations.push(`${fileName}:${match.index + 1} raw color ${match[0]} is outside the token/evidence layer`);
     }
   }

@@ -131,6 +131,11 @@
     "$value": "#fffbeb",
     "$description": "Nexa primitive token nexa-primitive-amber-50."
   },
+  "nexa-primitive-amber-200": {
+    "$type": "color",
+    "$value": "#fcd34d",
+    "$description": "Nexa primitive token nexa-primitive-amber-200."
+  },
   "nexa-primitive-amber-600": {
     "$type": "color",
     "$value": "#d97706",
@@ -145,6 +150,21 @@
     "$type": "color",
     "$value": "#f97316",
     "$description": "Nexa primitive token nexa-primitive-orange-500."
+  },
+  "nexa-primitive-orange-50": {
+    "$type": "color",
+    "$value": "#fff7ed",
+    "$description": "Nexa primitive token nexa-primitive-orange-50."
+  },
+  "nexa-primitive-orange-200": {
+    "$type": "color",
+    "$value": "#fed7aa",
+    "$description": "Nexa primitive token nexa-primitive-orange-200."
+  },
+  "nexa-primitive-orange-800": {
+    "$type": "color",
+    "$value": "#9a3412",
+    "$description": "Nexa primitive token nexa-primitive-orange-800."
   },
   "nexa-primitive-red-50": {
     "$type": "color",
@@ -171,6 +191,11 @@
     "$value": "#f0f9ff",
     "$description": "Nexa primitive token nexa-primitive-sky-50."
   },
+  "nexa-primitive-sky-200": {
+    "$type": "color",
+    "$value": "#bae6fd",
+    "$description": "Nexa primitive token nexa-primitive-sky-200."
+  },
   "nexa-primitive-sky-600": {
     "$type": "color",
     "$value": "#0284c7",
@@ -186,10 +211,20 @@
     "$value": "#eef2ff",
     "$description": "Nexa primitive token nexa-primitive-indigo-50."
   },
+  "nexa-primitive-indigo-200": {
+    "$type": "color",
+    "$value": "#c7d2fe",
+    "$description": "Nexa primitive token nexa-primitive-indigo-200."
+  },
   "nexa-primitive-indigo-600": {
     "$type": "color",
     "$value": "#4f46e5",
     "$description": "Nexa primitive token nexa-primitive-indigo-600."
+  },
+  "nexa-primitive-indigo-800": {
+    "$type": "color",
+    "$value": "#3730a3",
+    "$description": "Nexa primitive token nexa-primitive-indigo-800."
   },
   "nexa-primitive-space-1": {
     "$type": "dimension",

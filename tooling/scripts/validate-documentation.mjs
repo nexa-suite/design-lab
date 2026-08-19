@@ -20,9 +20,16 @@ const ids = [...registry.matchAll(/\bid:\s*'([^']+)'/g)].map((match) => match[1]
 const paths = [...registry.matchAll(/\bpath:\s*'([^']+)'/g)].map((match) => match[1]);
 if (new Set(ids).size !== ids.length) violations.push('documentation registry contains duplicate ids');
 if (new Set(paths).size !== paths.length) violations.push('documentation registry contains duplicate paths');
+for (const path of paths) {
+  if (!routes.includes(`'${path}'`)) violations.push(`registered documentation path has no Angular route: ${path}`);
+}
 if (/figma-mapping/.test(registry)) violations.push('retired Figma Mapping remains in primary navigation metadata');
 if (!/design-adoption/.test(registry) || !/Design Adoption/.test(registry)) violations.push('Design Adoption & Handoff is missing from primary navigation');
 if (!existsSync(visualManifestPath)) violations.push('visual evidence manifest is missing');
+const generatedTokenReference = join(root, 'src', 'app', 'documentation', 'content', 'token-reference.generated.ts');
+if (!existsSync(generatedTokenReference) || !readFileSync(generatedTokenReference, 'utf8').startsWith('/* Generated from tokens/*.tokens.json')) {
+  violations.push('documentation token reference is not generated from canonical token sources');
+}
 if (/patterns\/other|loadPatternPage/.test(routes)) violations.push('catch-all pattern renderer remains in routing');
 if (!/import\('\.\/documentation\/patterns\/analytics\/analytics-page'/.test(routes)) violations.push('Analytics route does not use an explicit feature import');
 if (!/import\('\.\/documentation\/patterns\/authentication\/authentication-page'/.test(routes)) violations.push('Authentication route does not use an explicit feature import');
