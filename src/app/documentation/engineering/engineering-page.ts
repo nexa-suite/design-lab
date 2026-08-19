@@ -27,10 +27,12 @@ interface EvidenceRow { readonly name: string; readonly value: string; readonly 
 export class NexaEngineeringPage {
   protected readonly context = injectDocumentationRouteContext();
   protected readonly architectureEvidence: readonly EvidenceRow[] = [
-    { name: 'Named lazy chunks', value: '11 feature chunks', note: 'Analytics, Authentication, Dispatch, Buttons, Progress, Quality and Engineering are independently analyzable.' },
+    { name: 'Named lazy chunks', value: 'Explicit feature imports', note: 'Analytics, Authentication, Dispatch, Buttons, Progress, Quality and Engineering are independently analyzable.' },
     { name: 'Change detection', value: 'OnPush', note: 'Reusable candidates and route features use explicit local signal/model state.' },
     { name: 'Dependency direction', value: 'Library ← app', note: 'nexa-ui never imports documentation or Lab infrastructure.' },
     { name: 'Renderer boundary', value: 'Long-tail only', note: 'The generic component renderer is not used by focused lifecycle features.' },
+    { name: 'Action Menu spike', value: 'KEEP / v0.10', note: 'The manual implementation preserves the frozen presentation and passes keyboard, Escape, outside-click and focus restoration evidence; Angular Aria/CDK remains a bounded future evaluation.' },
+    { name: 'Tooltip boundary', value: 'Separate semantics', note: 'Tooltip and Menu are not merged. Shared positioning infrastructure remains a later refinement only if it removes duplication without changing either contract.' },
   ];
   protected readonly tokenFacts: readonly EvidenceRow[] = [
     { name: 'Canonical declarations', value: String(NEXA_TOKEN_SUMMARY.declarations), note: 'Primitive, semantic, component and data-visualization source layers are generated from JSON.' },
@@ -43,13 +45,14 @@ export class NexaEngineeringPage {
     { name: 'Architecture', value: 'npm run validate:architecture', note: 'Boundaries, forbidden CSS, retired imports and tracked FLOW assets.' },
     { name: 'Design tokens', value: 'npm run validate:tokens', note: 'Generation parity, references, duplicates and cycles.' },
     { name: 'Visual contract', value: 'npm run validate:visual', note: 'Canonical route matrix, viewport set, state metadata and artifact schema.' },
+    { name: 'Browser evidence', value: 'Local / release gate', note: 'Route interactions and console checks are exercised in the browser; CI keeps the deterministic manifest gate without adding an unapproved browser dependency.' },
     { name: 'Behavior', value: 'npm test + library tests', note: 'Application and reusable candidate contracts remain separately testable.' },
     { name: 'Build', value: 'npm run build:all', note: 'Strict Angular templates, library package and route chunk generation.' },
     { name: 'Human review', value: 'Pending / explicit', note: 'Visual direction, content, screen reader and final adoption remain human decisions.' },
   ];
   protected readonly publicApi: readonly PublicApiRow[] = [
     { name: 'Action Menu', exportName: 'NexaActionMenu', selector: '<nexa-action-menu>', contract: 'items · open · selection · keyboard', tokens: 'menu surface · focus ring · control radius', tests: 'keyboard / escape', note: 'Frozen presentation; behavior remains owned by the component.', icon: 'pi-list' },
-    { name: 'Button', exportName: 'NexaButton', selector: '<nexa-button>', contract: 'variant · size · disabled · loading · routerLink', tokens: 'control height · action colors · focus geometry', tests: 'state / link safety', note: 'Native button or guarded link semantics.', icon: 'pi-external-link' },
+    { name: 'Button', exportName: 'NexaButton', selector: '<nexa-button>', contract: 'variant · size · disabled · loading · routerLink · ariaLabel · fullWidth', tokens: 'control height · action colors · focus geometry', tests: 'state / link safety / accessible name', note: 'Native button or guarded link semantics.', icon: 'pi-external-link' },
     { name: 'Logo', exportName: 'NexaLogo', selector: '<nexa-logo>', contract: 'variant · alt · decorative', tokens: 'brand asset', tests: 'alt / source', note: 'Canonical Nexa brand asset.', icon: 'pi-image' },
     { name: 'Numeric Stepper', exportName: 'NexaNumericStepper', selector: '<nexa-numeric-stepper>', contract: 'value/model · min · max · step · unit', tokens: 'control padding · interactive radius', tests: 'clamp / increment', note: 'Quantity changes remain bounded and announced.', icon: 'pi-plus-minus' },
     { name: 'Range Slider', exportName: 'NexaRangeSlider', selector: '<nexa-range-slider>', contract: 'value/model · min · max · step · unit', tokens: 'focus ring · control geometry', tests: 'value / unit', note: 'Continuous value input with a visible textual value.', icon: 'pi-sliders-h' },

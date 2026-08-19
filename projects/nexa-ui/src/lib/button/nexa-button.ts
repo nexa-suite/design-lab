@@ -19,6 +19,7 @@ export class NexaButton {
   readonly loading = input(false);
   readonly fullWidth = input(false);
   readonly routerLink = input<string | undefined>(undefined);
+  readonly ariaLabel = input<string | undefined>(undefined);
 
   protected classes(): string { return `${this.variant()} ${this.size()}${this.fullWidth() ? ' full-width' : ''}`; }
   protected linkDisabled(): boolean { return this.disabled() || this.loading(); }

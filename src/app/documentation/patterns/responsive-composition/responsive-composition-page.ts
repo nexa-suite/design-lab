@@ -15,10 +15,10 @@ interface ViewportEvidence { readonly width: number; readonly label: string; rea
 export class NexaResponsiveCompositionPage {
   protected readonly context = injectDocumentationRouteContext();
   protected readonly viewports: readonly ViewportEvidence[] = [
-    { width: 1440, label: 'Desktop browser', behavior: 'Full navigation, two-column work area.', className: 'wide' },
-    { width: 1024, label: 'Laptop browser', behavior: 'Gutters contract; hierarchy unchanged.', className: 'laptop' },
-    { width: 768, label: 'Tablet landscape', behavior: 'Secondary column moves below primary.', className: 'tablet' },
-    { width: 390, label: 'Phone portrait', behavior: 'Controls stack; data scrolls locally.', className: 'mobile' },
-    { width: 320, label: 'Compact phone', behavior: 'No page overflow; actions remain reachable.', className: 'small' },
+    { width: 1440, label: 'MacBook / desktop', behavior: 'Full navigation, two-column work area.', className: 'desktop' },
+    { width: 1024, label: 'iPad landscape', behavior: 'Gutters contract; hierarchy unchanged.', className: 'ipad-landscape' },
+    { width: 768, label: 'iPad portrait', behavior: 'Secondary column moves below primary.', className: 'ipad-portrait' },
+    { width: 390, label: 'iPhone portrait', behavior: 'Controls stack; data scrolls locally.', className: 'iphone' },
+    { width: 320, label: 'Compact iPhone', behavior: 'No page overflow; actions remain reachable.', className: 'iphone-compact' },
   ];
 }

@@ -11,8 +11,8 @@
 .mini-body { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
 .mini-body span { display: block; min-height: 14px; border-radius: var(--nexa-radius-sm); background: var(--nexa-color-neutral-200); }
 .mini-body span:first-child { grid-column: 1 / -1; min-height: 26px; background: var(--nexa-color-primary-100); }
-.mini-dashboard.tablet .mini-body, .mini-dashboard.mobile .mini-body, .mini-dashboard.small .mini-body { grid-template-columns: 1fr; }
-.mini-dashboard.mobile, .mini-dashboard.small { min-height: 112px; }
+.mini-dashboard.ipad-portrait .mini-body, .mini-dashboard.iphone .mini-body, .mini-dashboard.iphone-compact .mini-body { grid-template-columns: 1fr; }
+.mini-dashboard.iphone, .mini-dashboard.iphone-compact { min-height: 112px; }
 .overflow-result { display: inline-flex; gap: var(--nexa-space-1); align-items: center; color: var(--nexa-color-success-700); font-size: 10px; font-weight: 700; }
 .responsive-contract { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--nexa-space-3); }
 .responsive-contract div { display: grid; gap: var(--nexa-space-2); padding: var(--nexa-card-padding); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-card); background: var(--nexa-surface-card); }
@@ -26,10 +26,10 @@
 .device-gallery { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--nexa-space-3); align-items: end; }
 .device-card { display: grid; gap: var(--nexa-space-2); min-width: 0; }
 .device-frame { display: grid; gap: 4px; min-height: 196px; padding: 8px; border: 1px solid var(--nexa-color-border-strong); border-radius: var(--nexa-radius-panel); background: var(--nexa-color-neutral-900); box-shadow: var(--nexa-shadow-sm); }
-.device-frame.wide, .device-frame.laptop { min-height: 154px; border-radius: var(--nexa-radius-control); }
-.device-frame.tablet { min-height: 182px; border-radius: var(--nexa-radius-card); }
-.device-frame.mobile, .device-frame.small { width: 78%; min-height: 220px; justify-self: center; border-radius: var(--nexa-radius-panel); }
-.device-frame.small { width: 68%; min-height: 236px; }
+.device-frame.desktop, .device-frame.ipad-landscape { min-height: 154px; border-radius: var(--nexa-radius-control); }
+.device-frame.ipad-portrait { min-height: 182px; border-radius: var(--nexa-radius-card); }
+.device-frame.iphone, .device-frame.iphone-compact { width: 78%; min-height: 220px; justify-self: center; border-radius: var(--nexa-radius-panel); }
+.device-frame.iphone-compact { width: 68%; min-height: 236px; }
 .device-browser { display: flex; gap: 4px; align-items: center; min-width: 0; padding-inline: 4px; color: var(--nexa-color-neutral-400); font-size: 8px; }
 .browser-dot { width: 5px; height: 5px; flex: 0 0 auto; border-radius: 50%; background: var(--nexa-color-neutral-500); }
 .browser-url { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

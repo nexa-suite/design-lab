@@ -17,6 +17,15 @@ describe('NexaButton', () => {
     expect(button.querySelector('.spinner')).toBeTruthy();
   });
 
+  it('forwards an accessible name to the native action', () => {
+    const fixture = TestBed.createComponent(NexaButton);
+    fixture.componentRef.setInput('ariaLabel', 'Open request actions');
+    fixture.detectChanges();
+
+    const button = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
+    expect(button.getAttribute('aria-label')).toBe('Open request actions');
+  });
+
   it('does not navigate when a router link is disabled or loading', async () => {
     const router = TestBed.inject(Router);
     await router.navigateByUrl('/');

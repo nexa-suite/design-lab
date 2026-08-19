@@ -28,7 +28,20 @@
   </section>
 
   <section class="component-section">
-    <div class="section-heading"><span class="section-index">04</span><div><p class="section-kicker">CONSUMER CONTRACT</p><h2>Intent, size and safety are explicit</h2></div></div>
+    <div class="section-heading"><span class="section-index">04</span><div><p class="section-kicker">VARIANTS / SIZES / CONTENT</p><h2>Geometry adapts to intent without changing the action model</h2><p class="section-intro">The public candidate supports the approved variants, three control sizes, icon placement, icon-only naming, full-width composition and safe navigation links.</p></div></div>
+    <div class="button-variant-grid">
+      <article><span>Compact</span><nexa-button size="compact">Compact action</nexa-button><code>size="compact"</code></article>
+      <article><span>Standard</span><nexa-button>Standard action</nexa-button><code>size="standard"</code></article>
+      <article><span>Large</span><nexa-button size="large">Large action</nexa-button><code>size="large"</code></article>
+      <article><span>Leading icon</span><nexa-button><i class="pi pi-plus" aria-hidden="true"></i>Add request</nexa-button><code>projected icon + label</code></article>
+      <article><span>Icon-only</span><nexa-button variant="quiet" [ariaLabel]="'Open request actions'"><i class="pi pi-ellipsis-h" aria-hidden="true"></i></nexa-button><code>ariaLabel="Open request actions"</code></article>
+      <article class="full-width-cell"><span>Full width</span><nexa-button [fullWidth]="true">Continue review</nexa-button><code>[fullWidth]="true"</code></article>
+      <article><span>Navigation</span><nexa-button variant="secondary" routerLink="/guidelines/overview">Back to overview</nexa-button><code>routerLink + guard</code></article>
+    </div>
+  </section>
+
+  <section class="component-section">
+    <div class="section-heading"><span class="section-index">05</span><div><p class="section-kicker">CONSUMER CONTRACT</p><h2>Intent, size and safety are explicit</h2></div></div>
     <div class="button-contract"><article><strong>Primary</strong><p>Use for the single next action in a local context.</p><code>variant="primary"</code></article><article><strong>Secondary / Quiet</strong><p>Use for alternatives without competing with the primary action.</p><code>variant="secondary | quiet"</code></article><article><strong>Danger</strong><p>Use only for an explicitly destructive or recovery action.</p><code>variant="danger"</code></article><article><strong>Disabled / Loading</strong><p>Preserve geometry, prevent duplicate activation and expose busy state.</p><code>[disabled] · [loading]</code></article></div>
   </section>
 </nexa-documentation-frame>

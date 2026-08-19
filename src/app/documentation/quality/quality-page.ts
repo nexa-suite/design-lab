@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { NexaStatusChip, NexaTextField, NexaToggle } from 'nexa-ui';
 import { NexaLabEvaluation } from '../../lab/evaluation/lab-evaluation';
 import { evaluateContrast, type ContrastResult } from '../../lab/quality/contrast';
@@ -22,6 +22,7 @@ export class NexaQualityPage {
   protected readonly contrastPairs = APPROVED_CONTRAST_PAIRS;
   protected readonly heuristicRows = HEURISTIC_ROWS;
   protected readonly maturityRows = MATURITY_ROWS;
+  protected readonly liveEvidence = signal('No request selected.');
   protected readonly heuristicOutcomes: Readonly<Record<string, string>> = {
     H1: 'Weak: silent work → Improved: visible phase → Outcome: user knows the operation is active.',
     H2: 'Weak: generic entity → Improved: buyer and request vocabulary → Outcome: context is recognizable.',
@@ -50,4 +51,5 @@ export class NexaQualityPage {
     return evaluateContrast(pair.foreground, pair.background, pair.gate);
   }
   protected statusTone(status: string): 'success' | 'warning' | 'danger' | 'info' { return status === 'Verified' ? 'success' : status === 'Partial' || status === 'Manual review' ? 'warning' : status === 'Pending' ? 'danger' : 'info'; }
+  protected announceLiveEvidence(): void { this.liveEvidence.set('Request selected. The status changed without relying on color.'); }
 }

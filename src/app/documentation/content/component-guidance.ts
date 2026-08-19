@@ -4,7 +4,7 @@ export const COMPONENT_GUIDANCE: Readonly<Record<string, readonly DocAnswer[]>> 
   buttons: [
     { title: 'Anatomy', copy: 'Intent, label, optional icon, busy state and adjacent outcome form one activation contract.' },
     { title: 'States', copy: 'Rest, hover, focus, pressed, disabled, processing, success and failure stay geometrically stable.' },
-    { title: 'Accessibility', copy: 'Use a native button for actions; a disabled or loading link must not navigate by pointer or keyboard.' },
+    { title: 'Accessibility', copy: 'Use a native button for actions; a disabled or loading link must not navigate by pointer or keyboard. Icon-only content requires the public ariaLabel input.' },
     { title: 'Tokens', copy: 'Action intent uses semantic blue, quiet, danger and focus aliases; no state adds a hard corner.' },
     { title: 'Use it when', copy: 'There is one clear next action. Use a menu for commands and a segmented control for a small value choice.' },
   ],
