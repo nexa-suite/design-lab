@@ -1,14 +1,19 @@
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
-import { NexaButton } from '../../design-system/button/nexa-button';
-import { NexaActionMenu, type NexaActionMenuItem } from '../../design-system/action-menu/nexa-action-menu';
-import { NexaTooltip } from '../../design-system/tooltip/nexa-tooltip';
-import { NexaNumericStepper } from '../../design-system/numeric-stepper/nexa-numeric-stepper';
-import { NexaRangeSlider } from '../../design-system/range-slider/nexa-range-slider';
-import { NexaSegmentedControl, type NexaSegmentOption } from '../../design-system/segmented-control/nexa-segmented-control';
+import {
+  NexaActionMenu,
+  NexaButton,
+  NexaNumericStepper,
+  NexaRangeSlider,
+  NexaSegmentedControl,
+  NexaStatusChip,
+  NexaTextField,
+  NexaToggle,
+  NexaTooltip,
+  type NexaActionMenuItem,
+  type NexaSegmentOption,
+  type NexaStatusTone,
+} from 'nexa-ui';
 import { NexaStateSequence, type NexaSequencePhase } from '../../lab/evidence/state-sequence/nexa-state-sequence';
-import { NexaStatusChip, type NexaStatusTone } from '../../design-system/status/nexa-status-chip';
-import { NexaTextField } from '../../design-system/text-field/nexa-text-field';
-import { NexaToggle } from '../../design-system/toggle/nexa-toggle';
 import type { DocumentationPage } from '../models/documentation-page';
 import { COMPONENT_STATES, componentAnswers } from '../content/documentation-data';
 

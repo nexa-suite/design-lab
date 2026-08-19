@@ -1,0 +1,24 @@
+.payment-layout { display: grid; grid-template-columns: minmax(260px, .8fr) minmax(0, 1fr); gap: var(--nexa-space-4); align-items: stretch; }
+.payment-card, .payment-summary, .diagnostic-grid article { display: grid; gap: var(--nexa-space-3); padding: var(--nexa-card-padding); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-panel); background: var(--nexa-surface-card); }
+.payment-card { min-height: 190px; align-content: space-between; color: var(--nexa-color-text-inverse); background: var(--nexa-color-primary-800); }
+.payment-card-top, .payment-card-bottom { display: flex; justify-content: space-between; gap: var(--nexa-space-3); align-items: center; }
+.payment-card-top i { font-size: 22px; }
+.payment-brand, .payment-card-bottom { font: 700 var(--nexa-font-size-xs)/1.3 var(--nexa-font-family-mono); letter-spacing: .12em; }
+.payment-card > strong { font: 700 26px/1 var(--nexa-font-family-mono); letter-spacing: .1em; }
+.payment-card-bottom { color: var(--nexa-color-primary-100); font-size: 9px; }
+.payment-summary { align-content: center; }
+.payment-summary > strong { font: 700 var(--nexa-font-size-lg)/1.25 var(--nexa-font-family-display); }
+.payment-summary p, .diagnostic-grid p { margin: 0; color: var(--nexa-color-text-secondary); line-height: 1.5; }
+.payment-value { color: var(--nexa-color-primary-700); font: 700 28px/1 var(--nexa-font-family-mono); }
+.payment-state-tabs { display: flex; flex-wrap: wrap; gap: var(--nexa-space-1); width: fit-content; margin-bottom: var(--nexa-space-4); padding: var(--nexa-space-1); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-control); background: var(--nexa-surface-inset); }
+.payment-state-tabs button { min-height: var(--nexa-control-height-sm); border: 0; border-radius: var(--nexa-radius-sm); padding-inline: var(--nexa-space-3); color: var(--nexa-color-text-secondary); background: transparent; cursor: pointer; }
+.payment-state-tabs button.selected { color: var(--nexa-color-primary-700); background: var(--nexa-surface-card); box-shadow: var(--nexa-shadow-xs); font-weight: 700; }
+.payment-placeholder { display: flex; gap: var(--nexa-space-4); align-items: flex-start; padding: var(--nexa-panel-padding); border: 1px dashed var(--nexa-color-border-strong); border-radius: var(--nexa-radius-card); background: var(--nexa-surface-inset); }
+.payment-placeholder > i { color: var(--nexa-color-primary-600); font-size: 22px; }
+.payment-placeholder.unavailable { border-color: var(--nexa-color-danger-subtle-border); background: var(--nexa-color-danger-subtle-background); }
+.payment-placeholder.unavailable > i { color: var(--nexa-color-danger-standard-text); }
+.payment-placeholder p { margin: var(--nexa-space-1) 0 0; color: var(--nexa-color-text-secondary); line-height: 1.5; }
+.diagnostic-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--nexa-space-3); }
+.diagnostic-grid article { align-content: start; }
+.diagnostic-grid code { padding: var(--nexa-space-2); border-radius: var(--nexa-radius-control); color: var(--nexa-color-danger-standard-text); background: var(--nexa-surface-danger); overflow-wrap: anywhere; }
+@media (max-width: 700px) { .payment-layout, .diagnostic-grid { grid-template-columns: 1fr; } }

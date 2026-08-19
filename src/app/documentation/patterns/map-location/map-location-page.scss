@@ -1,0 +1,27 @@
+.map-composition { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: var(--nexa-space-4); }
+.map-stage { position: relative; min-height: 360px; overflow: hidden; border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-panel); background: var(--nexa-surface-inset); }
+.map-grid-lines { position: absolute; inset: 0; opacity: .45; background-image: linear-gradient(var(--nexa-color-border-default) 1px, transparent 1px), linear-gradient(90deg, var(--nexa-color-border-default) 1px, transparent 1px); background-size: 42px 42px; }
+.map-route { position: absolute; display: block; height: 4px; border-radius: var(--nexa-radius-pill); background: var(--nexa-color-primary-400); transform-origin: left center; }
+.route-one { top: 48%; left: 20%; width: 60%; transform: rotate(-18deg); }
+.route-two { top: 56%; left: 20%; width: 62%; transform: rotate(16deg); background: var(--nexa-color-primary-600); }
+.map-stop { position: absolute; display: grid; width: 44px; height: 44px; place-items: center; border: 2px solid var(--nexa-surface-card); border-radius: 50%; color: var(--nexa-color-text-inverse); background: var(--nexa-color-primary-600); box-shadow: var(--nexa-shadow-sm); cursor: pointer; }
+.map-stop:focus-visible { outline: none; box-shadow: var(--nexa-focus-ring); }
+.stop-origin { top: 35%; left: 16%; }
+.stop-destination { top: 49%; right: 15%; background: var(--nexa-color-success-700); }
+.map-label { position: absolute; padding: var(--nexa-space-1) var(--nexa-space-2); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-sm); color: var(--nexa-color-text-primary); background: var(--nexa-surface-card); font-size: var(--nexa-font-size-xs); }
+.origin-label { top: 28%; left: 8%; }
+.destination-label { top: 66%; right: 7%; }
+.location-summary { display: grid; align-content: start; gap: var(--nexa-space-3); padding: var(--nexa-panel-padding); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-panel); background: var(--nexa-surface-card); }
+.location-summary h3 { margin: 0; font: 700 var(--nexa-font-size-lg)/1.25 var(--nexa-font-family-display); }
+.location-summary dl { display: grid; gap: var(--nexa-space-2); margin: 0; padding-block: var(--nexa-space-3); border-block: 1px solid var(--nexa-color-border-decorative); }
+.location-summary dl div { display: grid; gap: var(--nexa-space-1); }
+.location-summary dt { color: var(--nexa-color-text-muted); font-size: var(--nexa-font-size-xs); }
+.location-summary dd { margin: 0; font-size: var(--nexa-font-size-sm); }
+.location-list { display: grid; gap: var(--nexa-space-2); }
+.location-list > div { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: var(--nexa-space-3); align-items: center; padding: var(--nexa-card-padding); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-card); background: var(--nexa-surface-card); }
+.location-list i { color: var(--nexa-color-primary-600); }
+.location-list span { display: grid; gap: var(--nexa-space-1); }
+.location-list small { color: var(--nexa-color-text-secondary); }
+.location-list button { min-height: var(--nexa-control-height-sm); border: 1px solid var(--nexa-color-border-interactive); border-radius: var(--nexa-radius-control); padding-inline: var(--nexa-space-3); color: var(--nexa-color-primary-700); background: var(--nexa-surface-card); cursor: pointer; }
+@media (max-width: 800px) { .map-composition { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .map-stage { min-height: 280px; } .location-list > div { grid-template-columns: 30px minmax(0, 1fr); } .location-list button { grid-column: 2; justify-self: start; } }

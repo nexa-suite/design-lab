@@ -1,9 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { NexaLogo } from '../../../design-system/brand/nexa-logo';
-import { NexaButton } from '../../../design-system/button/nexa-button';
-import { NexaLocaleSwitcher, type NexaLocale } from '../../../design-system/segmented-control/nexa-locale-switcher';
-import { NexaSegmentedControl, type NexaSegmentOption } from '../../../design-system/segmented-control/nexa-segmented-control';
-import { NexaTextField } from '../../../design-system/text-field/nexa-text-field';
+import { NexaButton, NexaLocaleSwitcher, NexaLogo, NexaSegmentedControl, NexaTextField, type NexaLocale, type NexaSegmentOption } from 'nexa-ui';
 import { NexaDocumentationFrame } from '../../layout/documentation-page';
 import { injectDocumentationRouteContext } from '../../layout/page-context';
 

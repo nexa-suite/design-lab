@@ -1,0 +1,34 @@
+<nexa-documentation-frame [page]="context.page" [allPages]="context.allPages">
+  <section class="component-section evidence-first">
+    <div class="section-heading"><span class="section-index">01</span><div><p class="section-kicker">ACTION CONTRACT</p><h2>Buttons make one next action obvious</h2><p class="section-intro">The reusable button keeps semantic elements, intent, geometry and feedback separate. Processing never changes the control into a different shape.</p></div></div>
+    <div class="button-playground">
+      <div class="button-actions"><nexa-button (click)="run('success')"><i class="pi pi-plus" aria-hidden="true"></i>{{ label() }}</nexa-button><nexa-button variant="secondary" [loading]="outcome() === 'processing'" (click)="run('success')">Save as draft</nexa-button><nexa-button variant="danger" (click)="run('error')">Simulate failure</nexa-button><nexa-button variant="quiet" (click)="reset()">Reset</nexa-button></div>
+      <p class="demo-status" role="status">{{ notice() }}</p>
+      @if (outcome() !== 'idle') { <nexa-status-chip [tone]="outcome() === 'error' ? 'danger' : outcome() === 'success' ? 'success' : 'info'">{{ outcome() }}</nexa-status-chip> }
+    </div>
+  </section>
+
+  <section class="component-section">
+    <div class="section-heading"><span class="section-index">02</span><div><p class="section-kicker">STATE MATRIX</p><h2>Rest, hover, focus, pressed and terminal outcomes remain legible</h2><p class="section-intro">Forced cells document visual states; the interactive specimen above proves the behavior path.</p></div></div>
+    <div class="button-state-grid">
+      <article><span>Default</span><nexa-button>Continue</nexa-button></article>
+      <article class="forced-hover"><span>Hover</span><nexa-button variant="secondary">Continue</nexa-button></article>
+      <article class="forced-focus"><span>Focus-visible</span><nexa-button>Continue</nexa-button></article>
+      <article class="forced-pressed"><span>Pressed</span><nexa-button>Continue</nexa-button></article>
+      <article><span>Disabled</span><nexa-button [disabled]="true">Continue</nexa-button></article>
+      <article><span>Loading</span><nexa-button [loading]="true">Continue</nexa-button></article>
+      <article class="success-cell"><span>Success feedback</span><i class="pi pi-check-circle" aria-hidden="true"></i><strong>Created</strong></article>
+      <article class="error-cell"><span>Error recovery</span><i class="pi pi-exclamation-circle" aria-hidden="true"></i><strong>Retry</strong></article>
+    </div>
+  </section>
+
+  <section class="component-section">
+    <div class="section-heading"><span class="section-index">03</span><div><p class="section-kicker">TEMPORAL EVIDENCE</p><h2>Button lifecycle has explicit terminal semantics</h2><p class="section-intro">Timed evidence stops at Success or Error. Retry is a recovery action, not an automatic loop.</p></div></div>
+    <nexa-state-sequence title="Create order" retryLabel="Retry operation" [phases]="phases" />
+  </section>
+
+  <section class="component-section">
+    <div class="section-heading"><span class="section-index">04</span><div><p class="section-kicker">CONSUMER CONTRACT</p><h2>Intent, size and safety are explicit</h2></div></div>
+    <div class="button-contract"><article><strong>Primary</strong><p>Use for the single next action in a local context.</p><code>variant="primary"</code></article><article><strong>Secondary / Quiet</strong><p>Use for alternatives without competing with the primary action.</p><code>variant="secondary | quiet"</code></article><article><strong>Danger</strong><p>Use only for an explicitly destructive or recovery action.</p><code>variant="danger"</code></article><article><strong>Disabled / Loading</strong><p>Preserve geometry, prevent duplicate activation and expose busy state.</p><code>[disabled] · [loading]</code></article></div>
+  </section>
+</nexa-documentation-frame>

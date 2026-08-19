@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.10.0-rc.1] - 2026-08-19
+
+### Added
+
+- Consumable `nexa-ui` Angular library boundary with explicit public exports and colocated component tests.
+- Primitive, semantic, component and data-visualization token sources with synchronized generated artifacts.
+- Focused Buttons, Progress, Authentication, Analytics and Dispatch documentation features with independent lazy chunks.
+- Color, icon, documentation and public-API validation gates, plus Blueprint v1 design-system guidance.
+
+### Changed
+
+- Reduced renderer and registry concentration by moving substantial page content into its owning documentation features.
+- Preserved the accepted Nexa sidebar, Action Menu, PrimeIcons, typography hierarchy and light visual direction while correcting geometry and state evidence.
+- Expanded analytics, progress, recovery and interaction-modality evidence without introducing a chart dependency or production authentication behavior.
+
+### Status
+
+- Release candidate for Design System v1 convergence. Automated local gates pass; human visual/accessibility review and the Blueprint Structurizr export remain explicit release conditions.
+
 ## [0.9.0-rc.1] - 2026-08-18
 
 ### Added

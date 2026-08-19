@@ -4,6 +4,7 @@ import { join, relative } from 'node:path';
 
 const root = process.cwd();
 const sourceRoot = join(root, 'src', 'app');
+const libraryRoot = join(root, 'projects', 'nexa-ui', 'src', 'lib');
 const violations = [];
 
 function filesUnder(directory) {
@@ -23,14 +24,15 @@ function add(file, rule, match) {
 }
 
 const appFiles = source(filesUnder(sourceRoot));
-const reusableFiles = source(filesUnder(join(sourceRoot, 'design-system')));
+const reusableFiles = source(filesUnder(libraryRoot));
+const allSourceFiles = [...appFiles, ...reusableFiles];
 
 for (const { relative: file, text } of reusableFiles) {
   const rawColor = text.match(/#[0-9a-f]{3,8}\b|\b(?:rgb|rgba|hsl|hsla|oklch)\s*\(/i);
   if (rawColor) add(file, 'raw design color outside token layer', rawColor);
 }
 
-for (const { relative: file, text } of appFiles) {
+for (const { relative: file, text } of allSourceFiles) {
   const deep = text.match(/::ng-deep/);
   if (deep) add(file, '::ng-deep is forbidden', deep);
 

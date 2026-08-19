@@ -32,4 +32,24 @@ describe('NexaButton', () => {
     await fixture.whenStable();
     expect(router.url).toBe('/');
   });
+
+  it('blocks keyboard activation of a disabled link-style action', async () => {
+    const router = TestBed.inject(Router);
+    await router.navigateByUrl('/');
+    const fixture = TestBed.createComponent(NexaButton);
+    fixture.componentRef.setInput('routerLink', '/keyboard-blocked');
+    fixture.componentRef.setInput('loading', true);
+    fixture.detectChanges();
+
+    const link = fixture.nativeElement.querySelector('a') as HTMLAnchorElement;
+    const enter = new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true });
+    const space = new KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true });
+    link.dispatchEvent(enter);
+    link.dispatchEvent(space);
+    await fixture.whenStable();
+
+    expect(enter.defaultPrevented).toBe(true);
+    expect(space.defaultPrevented).toBe(true);
+    expect(router.url).toBe('/');
+  });
 });

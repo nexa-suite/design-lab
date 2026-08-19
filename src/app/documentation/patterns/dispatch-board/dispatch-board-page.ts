@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { NexaActionMenu, type NexaActionMenuItem } from '../../../design-system/action-menu/nexa-action-menu';
-import { NexaButton } from '../../../design-system/button/nexa-button';
-import { NexaStatusChip, type NexaStatusEmphasis, type NexaStatusTone } from '../../../design-system/status/nexa-status-chip';
+import { NexaActionMenu, NexaButton, NexaStatusChip, type NexaActionMenuItem, type NexaStatusEmphasis, type NexaStatusTone } from 'nexa-ui';
 import { NexaDocumentationFrame } from '../../layout/documentation-page';
 import { injectDocumentationRouteContext } from '../../layout/page-context';
 

@@ -15,7 +15,7 @@ import {
 } from '../documentation/navigation/documentation-registry';
 import type { DocumentationGroup, DocumentationPageMetadata } from '../documentation/models/documentation-page';
 import { NexaLabEvaluation } from '../lab/evaluation/lab-evaluation';
-import { NexaLogo } from '../design-system/brand/nexa-logo';
+import { NexaLogo } from 'nexa-ui';
 
 @Component({
   selector: 'nexa-shell',

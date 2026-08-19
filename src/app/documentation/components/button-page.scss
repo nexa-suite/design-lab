@@ -1,0 +1,30 @@
+@use '../patterns/pattern-foundation';
+
+:host { display: block; }
+.component-section { padding: var(--nexa-layout-section-gap) 0; border-bottom: 1px solid var(--nexa-color-border-structural); }
+.evidence-first { padding-top: 0; }
+.section-heading { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: var(--nexa-space-3); align-items: start; margin-bottom: var(--nexa-space-6); }
+.section-index { color: var(--nexa-color-primary-600); font: 700 var(--nexa-font-size-sm)/1.4 var(--nexa-font-family-mono); }
+.section-kicker { margin: 0 0 var(--nexa-space-2); color: var(--nexa-color-primary-700); font-size: var(--nexa-font-size-2xs); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+h2 { margin: 0; font: 720 clamp(22px, 3vw, 32px)/1.14 var(--nexa-font-family-display); letter-spacing: -.04em; }
+.section-intro { max-width: 760px; margin: var(--nexa-space-2) 0 0; color: var(--nexa-color-text-secondary); line-height: var(--nexa-line-height-relaxed); }
+.button-playground { display: grid; gap: var(--nexa-space-4); align-items: start; padding: clamp(var(--nexa-space-5), 3vw, var(--nexa-space-8)); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-panel); background: var(--nexa-surface-inset); }
+.button-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--nexa-space-2); }
+.demo-status { margin: 0; color: var(--nexa-color-text-secondary); font-size: var(--nexa-font-size-sm); line-height: var(--nexa-line-height-normal); }
+.button-state-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--nexa-space-3); }
+.button-state-grid article { display: grid; min-width: 0; min-height: 122px; align-content: start; gap: var(--nexa-space-3); padding: var(--nexa-card-padding); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-card); background: var(--nexa-surface-card); }
+.button-state-grid article > span { color: var(--nexa-color-text-muted); font: 700 var(--nexa-font-size-2xs)/1.3 var(--nexa-font-family-mono); text-transform: uppercase; }
+.forced-hover { border-color: var(--nexa-color-primary-400); background: var(--nexa-color-primary-50); }
+.forced-focus { box-shadow: inset 0 0 0 var(--nexa-focus-width) color-mix(in oklab, var(--nexa-color-focus-ring) 24%, transparent); }
+.forced-pressed { transform: translateY(1px); }
+.success-cell, .error-cell { justify-items: start; }
+.success-cell { border-color: var(--nexa-color-success-border); color: var(--nexa-color-success-700); background: var(--nexa-surface-success); }
+.error-cell { border-color: var(--nexa-color-danger-subtle-border); color: var(--nexa-color-danger-standard-text); background: var(--nexa-surface-danger); }
+.success-cell i, .error-cell i { font-size: var(--nexa-font-size-xl); }
+.button-contract { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--nexa-space-3); }
+.button-contract article { display: grid; gap: var(--nexa-space-2); padding: var(--nexa-card-padding); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-card); background: var(--nexa-surface-card); }
+.button-contract p { margin: 0; color: var(--nexa-color-text-secondary); font-size: var(--nexa-font-size-sm); line-height: 1.5; }
+.button-contract code { color: var(--nexa-color-primary-700); font: 500 var(--nexa-font-size-xs)/1.4 var(--nexa-font-family-mono); overflow-wrap: anywhere; }
+@media (max-width: 900px) { .button-state-grid, .button-contract { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .section-heading { grid-template-columns: 30px minmax(0, 1fr); gap: var(--nexa-space-2); } .button-state-grid, .button-contract { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .forced-pressed { transform: none; } }

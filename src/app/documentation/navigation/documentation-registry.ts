@@ -43,6 +43,11 @@ const DOCUMENTATION_PAGE_METADATA: readonly DocumentationPageMetadata[] = [
   { id: 'dispatch-board', path: 'patterns/dispatch-board', label: 'Dispatch Board', icon: 'pi-truck', group: 'PATTERNS', kind: 'pattern', status: 'CANDIDATE', searchText: 'Dispatch Board dispatch-board PATTERNS pattern' },
   { id: 'data-dense-operations', path: 'patterns/data-dense-operations', label: 'Data-Dense Operations', icon: 'pi-table', group: 'PATTERNS', kind: 'pattern', status: 'CANDIDATE', searchText: 'Data-Dense Operations data-dense-operations PATTERNS pattern' },
   { id: 'responsive', path: 'patterns/responsive', label: 'Responsive Composition', icon: 'pi-mobile', group: 'PATTERNS', kind: 'pattern', status: 'CANDIDATE', searchText: 'Responsive Composition responsive PATTERNS pattern' },
+  { id: 'catalog', path: 'patterns/catalog', label: 'Catalog Browsing', icon: 'pi-box', group: 'PATTERNS', kind: 'pattern', status: 'CANDIDATE', searchText: 'Catalog Browsing catalog product card detail PATTERNS pattern' },
+  { id: 'request-builder', path: 'patterns/request-builder', label: 'Request Builder', icon: 'pi-shopping-cart', group: 'PATTERNS', kind: 'pattern', status: 'CANDIDATE', searchText: 'Request Builder cart draft request PATTERNS pattern' },
+  { id: 'order-flow', path: 'patterns/order-flow', label: 'Order Flow', icon: 'pi-check-circle', group: 'PATTERNS', kind: 'pattern', status: 'CANDIDATE', searchText: 'Order Flow confirmation status business documents PATTERNS pattern' },
+  { id: 'delivery-pod', path: 'patterns/delivery-pod', label: 'Delivery / Proof', icon: 'pi-truck', group: 'PATTERNS', kind: 'pattern', status: 'CANDIDATE', searchText: 'Delivery proof of delivery POD PATTERNS pattern' },
+  { id: 'map-location', path: 'patterns/map-location', label: 'Map / Location', icon: 'pi-directions', group: 'PATTERNS', kind: 'pattern', status: 'CANDIDATE', searchText: 'Map Location provider agnostic PATTERNS pattern' },
   { id: 'accessibility-lab', path: 'quality/accessibility-lab', label: 'Accessibility Lab', icon: 'pi-shield', group: 'QUALITY', kind: 'quality', status: 'CANDIDATE', searchText: 'Accessibility Lab accessibility-lab QUALITY quality' },
   { id: 'contrast-lab', path: 'quality/contrast-lab', label: 'Contrast Lab', icon: 'pi-eye', group: 'QUALITY', kind: 'quality', status: 'CANDIDATE', searchText: 'Contrast Lab contrast-lab QUALITY quality' },
   { id: 'heuristics', path: 'quality/heuristics', label: 'Nielsen Heuristics', icon: 'pi-check-circle', group: 'QUALITY', kind: 'quality', status: 'CANDIDATE', searchText: 'Nielsen Heuristics heuristics QUALITY quality' },
@@ -52,7 +57,7 @@ const DOCUMENTATION_PAGE_METADATA: readonly DocumentationPageMetadata[] = [
   { id: 'design-tokens', path: 'engineering/design-tokens', label: 'Design Tokens', icon: 'pi-sliders-h', group: 'ENGINEERING', kind: 'engineering', status: 'CANDIDATE', searchText: 'Design Tokens design-tokens ENGINEERING engineering' },
   { id: 'component-apis', path: 'engineering/component-apis', label: 'Component APIs', icon: 'pi-code', group: 'ENGINEERING', kind: 'engineering', status: 'CANDIDATE', searchText: 'Component APIs component-apis ENGINEERING engineering' },
   { id: 'testing', path: 'engineering/testing', label: 'Testing', icon: 'pi-check-square', group: 'ENGINEERING', kind: 'engineering', status: 'CANDIDATE', searchText: 'Testing testing ENGINEERING engineering' },
-  { id: 'figma-mapping', path: 'engineering/figma-mapping', label: 'Figma Mapping', icon: 'pi-pencil', group: 'ENGINEERING', kind: 'engineering', status: 'CANDIDATE', searchText: 'Figma Mapping figma-mapping ENGINEERING engineering' },
+  { id: 'design-adoption', path: 'engineering/design-adoption', label: 'Design Adoption & Handoff', icon: 'pi-briefcase', group: 'ENGINEERING', kind: 'engineering', status: 'CANDIDATE', searchText: 'Design Adoption Handoff design-adoption ENGINEERING engineering' },
 ];
 
 export const DOCUMENTATION_GROUPS: readonly DocumentationGroup[] = [

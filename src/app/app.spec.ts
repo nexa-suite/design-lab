@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { App } from './app';
 import { routes } from './app.routes';
 
-describe('Nexa Design Lab v0.8 routes', () => {
+describe('Nexa Design Lab v0.10 routes', () => {
   let activeFixture: ComponentFixture<App>;
 
   beforeEach(async () => {
@@ -36,7 +36,7 @@ describe('Nexa Design Lab v0.8 routes', () => {
 
     const buttons = await navigate('/guidelines/components/buttons');
     expect(buttons.querySelector('h1')?.textContent).toContain('Buttons make one next action');
-    expect(buttons.querySelector('.specimen-board')).toBeTruthy();
+    expect(buttons.querySelector('.button-playground')).toBeTruthy();
     expect(buttons.querySelector('nexa-state-sequence')).toBeTruthy();
 
     const contrast = await navigate('/guidelines/quality/contrast-lab');
@@ -101,7 +101,7 @@ describe('Nexa Design Lab v0.8 routes', () => {
     expect(inputs[1].checked).toBe(true);
   });
 
-  it('renders the v0.8 maturity patterns without introducing product routes', async () => {
+  it('renders the v0.10 maturity patterns without introducing product routes', async () => {
     const brand = await navigate('/guidelines/foundations/brand-logo');
     expect(brand.querySelector('nexa-logo img')?.getAttribute('src')).toContain('/brand/canonical/logo-nexa.svg');
     expect(brand.querySelectorAll('.brand-logo-grid nexa-logo img')).toHaveLength(2);
@@ -111,7 +111,7 @@ describe('Nexa Design Lab v0.8 routes', () => {
       ['/guidelines/patterns/async-operations', 'Error keeps context and retry nearby'],
       ['/guidelines/patterns/authentication', 'Authentication feels like Nexa before it asks for access'],
       ['/guidelines/patterns/legal-content', 'Readable policy structure without inventing policy'],
-      ['/guidelines/patterns/payments', 'Payment patterns show safe states, not a Stripe implementation'],
+      ['/guidelines/patterns/payments', 'Payment states are provider-neutral and user-safe'],
       ['/guidelines/patterns/analytics', 'Every visualization answers a question'],
       ['/guidelines/patterns/dispatch-board', 'Dispatch composition keeps cards readable across columns'],
       ['/guidelines/patterns/data-dense-operations', 'Density carries operational signal without becoming a production route'],

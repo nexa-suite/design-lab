@@ -1,12 +1,12 @@
-# Nexa Design Lab v0.9
+# Nexa Design Lab v0.10
 
 Visual evidence laboratory for Nexa foundations, reusable components, interaction states and accessibility review.
 
-`0.9.0-rc.1` is an Angular-only design-system candidate. It is not a production package, a product application, a Blueprint baseline or a completed Figma library.
+`0.10.0-rc.1` is an Angular-only design-system candidate. It is not a production package, a product application, a Blueprint baseline or a completed design-library publication.
 
 ## Purpose
 
-v0.9 preserves the v0.8 visual foundation and hardens its architecture:
+v0.10 converges the v0.9 visual foundation into an executable, consumable and reviewable baseline:
 
 - every important rule has a rendered specimen;
 - states can be seen, triggered, compared and reset;
@@ -20,6 +20,11 @@ v0.9 preserves the v0.8 visual foundation and hardens its architecture:
 - Authentication, Analytics and Dispatch Board own focused documentation features and explicit lazy routes;
 - StateSequence playback has configurable phase timing, terminal states and explicit recovery;
 - architecture, token and contrast gates protect the source structure and geometry contracts.
+- DTCG-ish token sources generate primitive, semantic, component and data-visualization layers;
+- PrimeIcons are pinned locally and exposed through an audited explorer;
+- `projects/nexa-ui` is the real Angular library boundary with an explicit public API;
+- Buttons and Progress own focused route features instead of depending on the broad component renderer;
+- Blueprint documentation is the normative design-system baseline; this repository is executable evidence.
 
 The active lab contains documentation pages and composition specimens only. Product patterns remain design evidence; they do not define accepted domain behavior or production contracts.
 
@@ -41,7 +46,7 @@ Open `http://127.0.0.1:4301/guidelines/overview`.
 | Components | Buttons, text fields, search, choice controls, status, feedback, menus, overlays, data, progress, workflow, quantity, navigation |
 | Patterns | Forms, search/filtering, async operations, authentication, legal content, payments, analytics, dispatch board, data-dense operations, responsive behavior |
 | Quality | Accessibility Lab, Contrast Lab, heuristics, input modality, maturity |
-| Engineering | Angular architecture, tokens, APIs, testing, Figma mapping |
+| Engineering | Angular architecture, tokens, APIs, testing, Design Adoption & Handoff |
 
 All documentation pages are lazy-loaded through the Angular router. There is no active screen-library route.
 
@@ -61,8 +66,13 @@ All documentation pages are lazy-loaded through the Angular router. There is no 
 
 ```bash
 npm run build
+npm run build:library
 npm run validate:architecture
 npm run validate:tokens
+npm run validate:colors
+npm run validate:icons
+npm run validate:documentation
+npm run validate:public-api
 npm run validate:contrast
 npm test -- --watch=false
 npm audit --omit=dev --audit-level=high
@@ -78,13 +88,14 @@ Browser review covers the required pages and 1440, 1024, 768, 390 and 320px view
 ```text
 src/app/
   shell/                 documentation navigation shell
-  design-system/         reusable candidate controls and brand primitives
+  projects/nexa-ui/      reusable candidate library and explicit public API
   lab/                   evaluation, evidence and quality infrastructure
   documentation/         route features, page content and navigation metadata
 src/styles/
   _tokens-primitives.scss
   _tokens-semantic.scss
   _tokens-components.scss
+  _tokens-data-visualization.scss
   _motion.scss
   _accessibility.scss
 tooling/scripts/         token and contrast gates
@@ -94,16 +105,16 @@ Reusable controls own their public API and native semantics. Documentation speci
 
 ## Documentation
 
-- [Style guidelines v0.8](./STYLE-GUIDELINES-v0.8.md)
-- [Component maturity v0.8](./COMPONENT-MATURITY-v0.8.md)
-- [Accessibility evidence v0.8](./ACCESSIBILITY-EVIDENCE-v0.8.md)
-- [Freeze v0.8](./FREEZE-v0.8.md)
-- [Implementation report v0.8](./IMPLEMENTATION-REPORT-v0.8.md)
+- [Architecture](./docs/architecture.md)
+- [Consuming Nexa UI](./docs/consuming-nexa-ui.md)
+- [Release validation](./docs/release-validation.md)
+- [Design adoption ADR](./docs/adr/0001-blueprint-authority-and-lab-evidence.md)
+- [Historical v0.x archive](./docs/archive/v0.x/)
 
-Historical v0.7 evidence remains in Git for provenance and is not runtime authority: [style guidelines](./STYLE-GUIDELINES-v0.7.md), [component inventory](./COMPONENT-INVENTORY-v0.7.md), [contrast audit](./CONTRAST-AUDIT-v0.7.md), [Angular architecture](./ANGULAR-ARCHITECTURE-v0.7.md) and [Figma handoff](./FIGMA-HANDOFF-v0.7.md).
+The archive preserves prior reports for provenance. It is not runtime authority and does not override the Blueprint design-system baseline.
 
 ## Boundary
 
-Design Lab changes are local to this repository. No production application, API, Blueprint, mobile repository or deployment is modified by this release candidate. v0.9 publishes its feature branch and prerelease tag only; it does not merge to `main` or create a final release.
+Design Lab changes are local to this repository. No production application, API, mobile repository or deployment is modified by this release candidate. The v0.10 branch and prerelease tag are published without merging to `main` or creating a final release. The Blueprint baseline is updated only in its isolated design branch.
 
 Copyright © 2026 Nexa. All rights reserved.

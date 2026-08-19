@@ -1,0 +1,209 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$description": "Canonical Nexa component design tokens. Values are source data for generated SCSS artifacts.",
+  "nexa-font-size-xs": {
+    "$type": "dimension",
+    "$value": "12px",
+    "$description": "Nexa component token nexa-font-size-xs."
+  },
+  "nexa-font-size-sm": {
+    "$type": "dimension",
+    "$value": "13px",
+    "$description": "Nexa component token nexa-font-size-sm."
+  },
+  "nexa-font-size-base": {
+    "$type": "dimension",
+    "$value": "14px",
+    "$description": "Nexa component token nexa-font-size-base."
+  },
+  "nexa-font-size-md": {
+    "$type": "dimension",
+    "$value": "16px",
+    "$description": "Nexa component token nexa-font-size-md."
+  },
+  "nexa-font-size-lg": {
+    "$type": "dimension",
+    "$value": "18px",
+    "$description": "Nexa component token nexa-font-size-lg."
+  },
+  "nexa-font-size-xl": {
+    "$type": "dimension",
+    "$value": "20px",
+    "$description": "Nexa component token nexa-font-size-xl."
+  },
+  "nexa-font-size-2xl": {
+    "$type": "dimension",
+    "$value": "24px",
+    "$description": "Nexa component token nexa-font-size-2xl."
+  },
+  "nexa-font-size-3xl": {
+    "$type": "dimension",
+    "$value": "30px",
+    "$description": "Nexa component token nexa-font-size-3xl."
+  },
+  "nexa-font-size-5xl": {
+    "$type": "dimension",
+    "$value": "clamp(36px, 5vw, 64px)",
+    "$description": "Nexa component token nexa-font-size-5xl."
+  },
+  "nexa-font-weight-medium": {
+    "$type": "number",
+    "$value": "500",
+    "$description": "Nexa component token nexa-font-weight-medium."
+  },
+  "nexa-font-weight-semibold": {
+    "$type": "number",
+    "$value": "600",
+    "$description": "Nexa component token nexa-font-weight-semibold."
+  },
+  "nexa-font-weight-bold": {
+    "$type": "number",
+    "$value": "700",
+    "$description": "Nexa component token nexa-font-weight-bold."
+  },
+  "nexa-font-weight-extrabold": {
+    "$type": "number",
+    "$value": "800",
+    "$description": "Nexa component token nexa-font-weight-extrabold."
+  },
+  "nexa-line-height-tight": {
+    "$type": "number",
+    "$value": "1.18",
+    "$description": "Nexa component token nexa-line-height-tight."
+  },
+  "nexa-line-height-normal": {
+    "$type": "number",
+    "$value": "1.5",
+    "$description": "Nexa component token nexa-line-height-normal."
+  },
+  "nexa-line-height-relaxed": {
+    "$type": "number",
+    "$value": "1.65",
+    "$description": "Nexa component token nexa-line-height-relaxed."
+  },
+  "nexa-layout-sidebar-width": {
+    "$type": "dimension",
+    "$value": "284px",
+    "$description": "Nexa component token nexa-layout-sidebar-width."
+  },
+  "nexa-layout-toolbar-height": {
+    "$type": "dimension",
+    "$value": "56px",
+    "$description": "Nexa component token nexa-layout-toolbar-height."
+  },
+  "nexa-layout-content-max": {
+    "$type": "dimension",
+    "$value": "1280px",
+    "$description": "Nexa component token nexa-layout-content-max."
+  },
+  "nexa-layout-page-gutter": {
+    "$type": "dimension",
+    "$value": "clamp(18px, 2.2vw, 34px)",
+    "$description": "Nexa component token nexa-layout-page-gutter."
+  },
+  "nexa-layout-section-gap": {
+    "$type": "dimension",
+    "$value": "48px",
+    "$description": "Nexa component token nexa-layout-section-gap."
+  },
+  "nexa-layout-card-padding": {
+    "$type": "dimension",
+    "$value": "20px",
+    "$description": "Nexa component token nexa-layout-card-padding."
+  },
+  "nexa-layout-nav-item-height": {
+    "$type": "dimension",
+    "$value": "38px",
+    "$description": "Nexa component token nexa-layout-nav-item-height."
+  },
+  "nexa-control-height-sm": {
+    "$type": "dimension",
+    "$value": "34px",
+    "$description": "Nexa component token nexa-control-height-sm."
+  },
+  "nexa-control-height-md": {
+    "$type": "dimension",
+    "$value": "40px",
+    "$description": "Nexa component token nexa-control-height-md."
+  },
+  "nexa-control-height-lg": {
+    "$type": "dimension",
+    "$value": "48px",
+    "$description": "Nexa component token nexa-control-height-lg."
+  },
+  "nexa-control-padding-inline": {
+    "$type": "dimension",
+    "$value": "var(--nexa-space-4)",
+    "$description": "Nexa component token nexa-control-padding-inline."
+  },
+  "nexa-control-padding-inline-compact": {
+    "$type": "dimension",
+    "$value": "var(--nexa-space-3)",
+    "$description": "Nexa component token nexa-control-padding-inline-compact."
+  },
+  "nexa-control-gap": {
+    "$type": "dimension",
+    "$value": "var(--nexa-space-1)",
+    "$description": "Nexa component token nexa-control-gap."
+  },
+  "nexa-panel-padding": {
+    "$type": "dimension",
+    "$value": "var(--nexa-layout-card-padding)",
+    "$description": "Nexa component token nexa-panel-padding."
+  },
+  "nexa-card-padding": {
+    "$type": "dimension",
+    "$value": "var(--nexa-space-4)",
+    "$description": "Nexa component token nexa-card-padding."
+  },
+  "nexa-surface-gap": {
+    "$type": "dimension",
+    "$value": "var(--nexa-space-4)",
+    "$description": "Nexa component token nexa-surface-gap."
+  },
+  "nexa-radius-interactive": {
+    "$type": "dimension",
+    "$value": "var(--nexa-radius-control)",
+    "$description": "Nexa component token nexa-radius-interactive."
+  },
+  "nexa-focus-width": {
+    "$type": "dimension",
+    "$value": "3px",
+    "$description": "Nexa component token nexa-focus-width."
+  },
+  "nexa-focus-offset": {
+    "$type": "dimension",
+    "$value": "3px",
+    "$description": "Nexa component token nexa-focus-offset."
+  },
+  "nexa-focus-ring": {
+    "$type": "shadow",
+    "$value": "0 0 0 3px color-mix(in oklab, var(--nexa-color-focus-ring) 24%, transparent)",
+    "$description": "Nexa component token nexa-focus-ring."
+  },
+  "nexa-shadow-toast": {
+    "$type": "shadow",
+    "$value": "0 12px 28px rgb(15 23 42 / 12%)",
+    "$description": "Nexa component token nexa-shadow-toast."
+  },
+  "nexa-component-sidebar-width": {
+    "$type": "dimension",
+    "$value": "var(--nexa-layout-sidebar-width)",
+    "$description": "Nexa component token nexa-component-sidebar-width."
+  },
+  "nexa-component-drawer-width": {
+    "$type": "dimension",
+    "$value": "min(320px, 88vw)",
+    "$description": "Nexa component token nexa-component-drawer-width."
+  },
+  "nexa-component-table-row-height": {
+    "$type": "dimension",
+    "$value": "56px",
+    "$description": "Nexa component token nexa-component-table-row-height."
+  },
+  "nexa-doc-text-scale": {
+    "$type": "number",
+    "$value": "1",
+    "$description": "Nexa component token nexa-doc-text-scale."
+  }
+}
