@@ -182,6 +182,50 @@ async function activateCanonicalState(page, route, state) {
       if (state === 'error') await assertVisibleText(page, 'Review evidence could not load');
       break;
     }
+    case 'patterns/forms': {
+      const labels = { idle: 'idle', submitting: 'submitting', success: 'success', error: 'error', conflict: 'conflict' };
+      await page.getByRole('group', { name: 'Form submission evidence' }).getByRole('button', { name: labels[state], exact: true }).click();
+      const outcomes = {
+        idle: 'No submission outcome selected.',
+        submitting: 'Submission is in progress.',
+        success: 'Buyer identity accepted.',
+        error: 'Submission failed safely; fields remain available.',
+        conflict: 'A newer draft exists; review before continuing.',
+      };
+      await assertVisibleText(page, outcomes[state]);
+      break;
+    }
+    case 'patterns/async-operations': {
+      const sequence = page.locator('nexa-state-sequence');
+      if (state === 'error-terminal') {
+        const next = sequence.nth(1).getByRole('button', { name: 'Next state', exact: true });
+        await next.click();
+        await next.click();
+        await sequence.nth(1).getByRole('status').getByText('Error', { exact: true }).waitFor({ state: 'visible' });
+      }
+      if (state === 'cancelled-terminal') {
+        const next = sequence.nth(2).getByRole('button', { name: 'Next state', exact: true });
+        for (let index = 0; index < 4; index += 1) await next.click();
+        await sequence.nth(2).getByRole('status').getByText('Cancelled', { exact: true }).waitFor({ state: 'visible' });
+      }
+      break;
+    }
+    case 'patterns/empty-loading-error': {
+      const labels = {
+        'first-use': 'First use', 'no-results': 'No results', filtered: 'Filtered empty', loading: 'Loading', progress: 'Determinate',
+        partial: 'Partial data', unavailable: 'Unavailable', permission: 'Permission denied', conflict: 'Conflict', warning: 'Warning',
+        error: 'Retryable error', 'non-retryable': 'Non-retryable error', success: 'Success', cancelled: 'Cancelled', 'read-only': 'Read-only', disabled: 'Disabled',
+      };
+      const titles = {
+        'first-use': 'Start with a buyer request', 'no-results': 'No requests match this search', filtered: 'No requests in this filter', loading: 'Loading purchase requests',
+        progress: 'Preparing request documents', partial: 'Some documents are available', unavailable: 'The request service is unavailable', permission: 'Access is not available here',
+        conflict: 'A newer request version exists', warning: 'Documents need attention', error: 'Requests could not load', 'non-retryable': 'This request cannot continue',
+        success: 'Request submitted', cancelled: 'Operation cancelled', 'read-only': 'This context is view-only', disabled: 'Continue is unavailable',
+      };
+      await page.getByRole('group', { name: 'State example' }).getByRole('button', { name: labels[state], exact: true }).click();
+      await assertVisibleText(page, titles[state]);
+      break;
+    }
     case 'patterns/search-filtering': {
       const labels = { query: 'Query', searching: 'Searching', results: 'Results', empty: 'Empty', error: 'Error' };
       await page.getByRole('button', { name: labels[state], exact: true }).click();
@@ -190,6 +234,64 @@ async function activateCanonicalState(page, route, state) {
       if (state === 'results') await assertVisibleText(page, 'La Cava Fría');
       if (state === 'empty') await assertVisibleText(page, 'No results in this scope');
       if (state === 'error') await assertVisibleText(page, 'Search could not complete');
+      break;
+    }
+    case 'patterns/payments': {
+      const labels = { none: 'No saved method', processing: 'Processing', saved: 'Saved / default', invalid: 'Invalid entry', declined: 'Declined-style', unavailable: 'Unavailable' };
+      const titles = { none: 'No saved method', processing: 'Processing method', saved: 'Saved method', invalid: 'Invalid entry', declined: 'User-safe decline', unavailable: 'Method unavailable' };
+      await page.getByRole('tablist', { name: 'Payment method evidence state' }).getByRole('tab', { name: labels[state], exact: true }).click();
+      await assertVisibleText(page, titles[state]);
+      break;
+    }
+    case 'patterns/request-builder': {
+      if (state === 'editable') await assertVisibleText(page, 'Cart is a working set, not an order');
+      if (state === 'quantity') {
+        await page.getByRole('button', { name: 'Increase quantity', exact: true }).click();
+        await assertVisibleText(page, '4 lines');
+      }
+      if (state === 'submitted') {
+        await page.getByRole('button', { name: 'Create draft request', exact: true }).click();
+        await assertVisibleText(page, 'Draft request created; the order does not exist yet.');
+      }
+      break;
+    }
+    case 'patterns/order-flow': {
+      const sequence = page.locator('nexa-state-sequence').first();
+      if (state === 'submitted') await sequence.getByRole('status').getByText('Submitted', { exact: true }).waitFor({ state: 'visible' });
+      if (state === 'validated') {
+        await sequence.getByRole('button', { name: 'Next state', exact: true }).click();
+        await sequence.getByRole('status').getByText('Validated', { exact: true }).waitFor({ state: 'visible' });
+      }
+      if (state === 'confirmed') {
+        const next = sequence.getByRole('button', { name: 'Next state', exact: true });
+        await next.click();
+        await next.click();
+        await sequence.getByRole('status').getByText('Order confirmed', { exact: true }).waitFor({ state: 'visible' });
+      }
+      if (state === 'documents') {
+        await page.getByRole('button', { name: 'Attach', exact: true }).click();
+        await assertVisibleText(page, 'Attached');
+      }
+      break;
+    }
+    case 'patterns/delivery-pod':
+      if (state === 'pending') await assertVisibleText(page, 'Awaiting proof');
+      if (state === 'received') {
+        await page.getByRole('button', { name: 'Record proof', exact: true }).click();
+        await assertVisibleText(page, 'Proof received');
+      }
+      break;
+    case 'patterns/map-location': {
+      const labels = { ready: 'Location ready', 'no-geolocation': 'No geolocation', 'provider-unavailable': 'Provider unavailable', 'address-fallback': 'Address fallback' };
+      const titles = { ready: 'Location context is available', 'no-geolocation': 'Device location is unavailable', 'provider-unavailable': 'Map provider is unavailable', 'address-fallback': 'Use the written address' };
+      await page.getByRole('group', { name: 'Location evidence state' }).getByRole('button', { name: labels[state], exact: true }).click();
+      await assertVisibleText(page, titles[state]);
+      break;
+    }
+    case 'patterns/data-dense-operations': {
+      await page.getByRole('group', { name: 'Table state' }).getByRole('button', { name: state === 'rows' ? 'Rows' : state.charAt(0).toUpperCase() + state.slice(1), exact: true }).click();
+      const content = { rows: 'LOT-2041', loading: 'Loading operational rows', error: 'Rows could not load', empty: 'No rows in this scope' };
+      await assertVisibleText(page, content[state]);
       break;
     }
     case 'patterns/dispatch-board':

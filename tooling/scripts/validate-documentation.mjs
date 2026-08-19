@@ -68,14 +68,21 @@ const requiredPages = [
   'documentation/context/context-documentation.html',
   'documentation/foundations/foundation-documentation.html',
   'documentation/components/component-documentation.html',
+  'documentation/components/button-page.html',
+  'documentation/components/progress-page.html',
   'documentation/patterns/forms/forms-page.html',
   'documentation/patterns/search-filtering/search-filtering-page.html',
+  'documentation/patterns/async-operations/async-operations-page.html',
   'documentation/patterns/empty-loading-error/empty-loading-error-page.html',
+  'documentation/patterns/legal-content/legal-content-page.html',
   'documentation/patterns/responsive-composition/responsive-composition-page.html',
   'documentation/patterns/authentication/authentication-page.html',
   'documentation/patterns/catalog/catalog-page.html',
   'documentation/patterns/request-builder/request-builder-page.html',
   'documentation/patterns/order-flow/order-flow-page.html',
+  'documentation/patterns/delivery-pod/delivery-pod-page.html',
+  'documentation/patterns/map-location/map-location-page.html',
+  'documentation/patterns/data-dense-operations/data-dense-operations-page.html',
   'documentation/patterns/payments/payments-page.html',
   'documentation/patterns/analytics/analytics-page.html',
   'documentation/patterns/dispatch-board/dispatch-board-page.html',
@@ -89,8 +96,38 @@ for (const page of requiredPages) {
     continue;
   }
   const html = readFileSync(path, 'utf8');
-  if (!/<h2\b/.test(html)) violations.push(`${page} has no substantive heading`);
+  if (!/<h2\b/.test(html) && !/<nexa-documentation-section\b[^>]*\btitle=/.test(html)) violations.push(`${page} has no substantive heading`);
   if (!/<(?:article|button|table|svg|nexa-)/.test(html)) violations.push(`${page} has no rendered evidence or interaction`);
+}
+
+const evidenceContracts = [
+  ['documentation/components/button-page.html', ['ACTION CONTRACT', 'STATE MATRIX', 'TEMPORAL EVIDENCE']],
+  ['documentation/components/progress-page.html', ['PROGRESS FAMILY', 'Reduced Motion', 'Content skeleton']],
+  ['documentation/patterns/forms/forms-page.html', ['FIELD GROUP', 'SUBMISSION CONTRACT', 'submissionStates']],
+  ['documentation/patterns/search-filtering/search-filtering-page.html', ['QUERY / SCOPE / FILTER GROUPS', 'RESULT STATES', 'Retry']],
+  ['documentation/patterns/async-operations/async-operations-page.html', ['HAPPY PATH', 'FAILURE / RECOVERY', 'WARNING / CANCELLATION']],
+  ['documentation/patterns/empty-loading-error/empty-loading-error-page.html', ['STATE COMPOSITION', 'STATE TAXONOMY', 'Cancelled']],
+  ['documentation/patterns/legal-content/legal-content-page.html', ['LEGAL CONTENT REQUIRES FORMAL APPROVAL.', 'SYNTHETIC DOCUMENT / REVIEW ONLY', 'Document contents']],
+  ['documentation/patterns/responsive-composition/responsive-composition-page.html', ['VIEWPORT MATRIX', 'SAME COMPOSITION / DEVICE FRAMES', '200% and 400% checks']],
+  ['documentation/patterns/authentication/authentication-page.html', ['BRAND PLANE', 'STATE COVERAGE', 'nexa-locale-switcher']],
+  ['documentation/patterns/catalog/catalog-page.html', ['CATALOG BROWSING', 'PRODUCT DETAIL', 'Browsing never reserves inventory']],
+  ['documentation/patterns/request-builder/request-builder-page.html', ['CART / DRAFT', 'REQUEST BUILDER', 'Cart ≠ request ≠ order']],
+  ['documentation/patterns/order-flow/order-flow-page.html', ['ORDER / TRACKING STATUS', 'BUSINESS DOCUMENTS', 'nexa-state-sequence']],
+  ['documentation/patterns/delivery-pod/delivery-pod-page.html', ['DELIVERY / POD', 'RECEIPT DETAILS', 'Driver and mobile execution remain runway evidence']],
+  ['documentation/patterns/map-location/map-location-page.html', ['MAP / LOCATION', 'ACCESSIBLE ALTERNATIVE', 'provider-unavailable']],
+  ['documentation/patterns/data-dense-operations/data-dense-operations-page.html', ['DATA-DENSE OPERATIONS', 'Table state', '<table']],
+  ['documentation/patterns/payments/payments-page.html', ['PAYMENT COMPOSITION', 'SYNTHETIC ENTRY', 'USER-SAFE FAILURE']],
+  ['documentation/patterns/analytics/analytics-page.html', ['VISUALIZATION GRAMMAR', '<table', 'Analytics evidence state']],
+  ['documentation/patterns/dispatch-board/dispatch-board-page.html', ['MOVEMENT', 'dispatch-card-select', 'Move selected card']],
+  ['documentation/quality/quality-page.html', ['EVALUATION MODES', 'SEMANTIC INTERACTION EVIDENCE', 'SCREEN READER']],
+  ['documentation/engineering/engineering-page.html', ['FEATURE AREAS', 'TOKEN GRAPH', 'PUBLIC CONTRACTS']],
+];
+for (const [relativePath, markers] of evidenceContracts) {
+  const path = join(root, 'src', 'app', relativePath);
+  const html = readFileSync(path, 'utf8');
+  for (const marker of markers) {
+    if (!html.includes(marker)) violations.push(`${relativePath} is missing substantive evidence marker: ${marker}`);
+  }
 }
 
 const catchAll = join(root, 'src', 'app', 'documentation', 'patterns', 'other');

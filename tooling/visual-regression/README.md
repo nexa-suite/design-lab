@@ -18,6 +18,9 @@ The required matrix is:
 - layout/no-overflow checks at 1024, 768 and 320 px;
 - high-risk selected, focus, pressed, disabled, loading, error and open
   states;
+- product composition state families for forms, async recovery, empty/loading/
+  error, payments, request building, order tracking, delivery proof, map
+  fallback and data-dense operations;
 - targeted 200% text, increased text-spacing and 400% reflow checks (the accessibility route records
   the review state; the browser gate verifies the route remains usable).
 
@@ -27,6 +30,9 @@ serve target when no `NEXA_BROWSER_BASE_URL` is supplied, visits every
 registered route at 1440, 1024, 768, 390 and 320 px, writes ignored evidence
 artifacts bound to the current source SHA, and fails on empty content, missing
 headings, inactive navigation, horizontal overflow, console errors or page
-errors. It also exercises representative analytics recovery, authentication
-locale/error, search retry, dispatch movement, reduced-motion, text-spacing and manual stepping paths. CI
+errors. Canonical product matrices activate their real evidence controls and
+assert the resulting state copy before recording an artifact. It also
+exercises representative analytics recovery, authentication locale/error,
+search retry, dispatch movement, reduced-motion, text-spacing and manual
+stepping paths. CI
 installs Chromium and runs this gate after the production build.
