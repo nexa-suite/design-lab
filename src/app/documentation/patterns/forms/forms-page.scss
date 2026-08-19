@@ -2,6 +2,7 @@
 .form-fields, .form-composition aside { display: grid; gap: var(--nexa-space-3); }
 .field-group-heading { display: flex; justify-content: space-between; gap: var(--nexa-space-3); align-items: center; }
 .field-group-heading span { color: var(--nexa-color-danger-text); font: 700 var(--nexa-font-size-xs)/1.2 var(--nexa-font-family-mono); text-transform: uppercase; }
+.field-group-heading .dirty-marker { color: var(--nexa-color-warning-text); }
 .form-composition aside { align-content: start; padding: var(--nexa-card-padding); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-card); background: var(--nexa-surface-card); }
 .form-composition aside p, .form-status { margin: 0; color: var(--nexa-color-text-secondary); font-size: var(--nexa-font-size-sm); line-height: var(--nexa-line-height-normal); }
 .form-actions { display: flex; flex-wrap: wrap; gap: var(--nexa-space-2); }
