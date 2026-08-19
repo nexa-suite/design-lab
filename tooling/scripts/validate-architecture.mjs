@@ -64,6 +64,26 @@ for (const { relative: file, text } of reusableFiles) {
 }
 
 const trackedFiles = execFileSync('git', ['ls-files'], { cwd: root, encoding: 'utf8' }).split('\n').filter(Boolean);
+const trackedPackageManifests = trackedFiles.filter((file) => /(?:^|\/)package\.json$/.test(file));
+const trackedLockfiles = trackedFiles.filter((file) => /(?:package-lock\.json|npm-shrinkwrap\.json)$/.test(file));
+const expectedPackageManifests = new Set(['package.json', 'projects/nexa-ui/package.json']);
+const expectedLockfiles = new Set(['package-lock.json']);
+for (const file of trackedPackageManifests) {
+  if (!expectedPackageManifests.has(file)) add(file, 'duplicate package source of truth');
+}
+for (const file of trackedLockfiles) {
+  if (!expectedLockfiles.has(file)) add(file, 'duplicate package lock source of truth');
+}
+if (![...expectedPackageManifests].every((file) => trackedPackageManifests.includes(file))) add('package.json', 'canonical package manifest is missing');
+if (![...expectedLockfiles].every((file) => trackedLockfiles.includes(file))) add('package-lock.json', 'canonical package lock is missing');
+try {
+  const rootPackage = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
+  const libraryPackage = JSON.parse(readFileSync(join(root, 'projects', 'nexa-ui', 'package.json'), 'utf8'));
+  if (rootPackage.version !== libraryPackage.version) add('projects/nexa-ui/package.json', 'library and workspace package versions diverge');
+  if (libraryPackage.name !== 'nexa-ui') add('projects/nexa-ui/package.json', 'published library package identity is not canonical');
+} catch (error) {
+  add('package.json', `package manifest cannot be parsed: ${error.message}`);
+}
 for (const file of trackedFiles) {
   if (/(^|\/)FLOW(\/|\.|$)/.test(file)) add(file, 'tracked FLOW asset', { index: 0 });
 }
@@ -75,4 +95,4 @@ if (violations.length > 0) {
 }
 
 console.log('Architecture validation passed.');
-console.log('Checked reusable token boundaries, geometry integrity, forbidden CSS, dependency direction, tracked FLOW assets and retired imports.');
+console.log('Checked reusable token boundaries, geometry integrity, forbidden CSS, dependency direction, package-source singularity, tracked FLOW assets and retired imports.');

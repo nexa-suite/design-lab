@@ -1,4 +1,8 @@
 export type NexaIconCategory = 'navigation' | 'action' | 'status' | 'domain' | 'input';
+export type NexaIconRole = 'semantic' | 'decorative';
+export type NexaIconLabelPolicy = 'visible-label' | 'aria-label' | 'decorative';
+export type NexaIconAlignment = 'leading' | 'trailing' | 'centered' | 'inline';
+export type NexaIconSize = '12px' | '16px' | '20px';
 
 export interface NexaIconSpec {
   readonly name: string;
@@ -6,9 +10,18 @@ export interface NexaIconSpec {
   readonly category: NexaIconCategory;
   readonly usage: string;
   readonly tone: 'primary' | 'success' | 'warning' | 'danger' | 'neutral';
+  readonly render: 'PrimeIcon <i>';
+  readonly role: NexaIconRole;
+  readonly size: NexaIconSize;
+  readonly alignment: NexaIconAlignment;
+  readonly labelPolicy: NexaIconLabelPolicy;
+  readonly semanticColor: string;
+  readonly hitTarget: '44px when interactive' | 'not interactive';
 }
 
-const CURATED_ICON_CATALOG: readonly NexaIconSpec[] = [
+type NexaIconSeed = Omit<NexaIconSpec, 'render' | 'role' | 'size' | 'alignment' | 'labelPolicy' | 'semanticColor' | 'hitTarget'>;
+
+const CURATED_ICON_CATALOG: readonly NexaIconSeed[] = [
   { name: 'pi-th-large', label: 'Overview', category: 'navigation', usage: 'Workspace overview and dashboard entry.', tone: 'primary' },
   { name: 'pi-bars', label: 'Menu', category: 'navigation', usage: 'Open or collapse navigation.', tone: 'neutral' },
   { name: 'pi-chevron-right', label: 'Forward', category: 'navigation', usage: 'Move through a hierarchy or step.', tone: 'neutral' },
@@ -70,14 +83,31 @@ function inferredTone(name: string): NexaIconSpec['tone'] {
   return 'neutral';
 }
 
+function iconContract(name: string, category: NexaIconCategory, tone: NexaIconSpec['tone']): Pick<NexaIconSpec, 'render' | 'role' | 'size' | 'alignment' | 'labelPolicy' | 'semanticColor' | 'hitTarget'> {
+  const decorative = ['pi-arrow-right', 'pi-chevron-down', 'pi-chevron-right', 'pi-circle', 'pi-circle-fill', 'pi-sort-amount-down', 'pi-sort-amount-up'].includes(name);
+  const interactive = ['navigation', 'action', 'input'].includes(category);
+  return {
+    render: 'PrimeIcon <i>',
+    role: decorative ? 'decorative' : 'semantic',
+    size: category === 'status' ? '16px' : category === 'domain' ? '20px' : '16px',
+    alignment: category === 'navigation' || category === 'status' ? 'leading' : interactive ? 'inline' : 'centered',
+    labelPolicy: decorative ? 'decorative' : interactive ? 'visible-label' : 'aria-label',
+    semanticColor: tone === 'neutral' ? 'currentColor' : `status/${tone}`,
+    hitTarget: interactive ? '44px when interactive' : 'not interactive',
+  };
+}
+
 export const NEXA_ICON_CATALOG: readonly NexaIconSpec[] = CANONICAL_PRIME_ICON_NAMES
   .filter((name) => name !== 'pi-spin')
-  .map((name) => CURATED_ICON_BY_NAME.get(name) ?? {
-    name,
-    label: iconLabel(name),
-    category: inferredCategory(name),
-    usage: 'Available PrimeIcon in the local Nexa catalog.',
-    tone: inferredTone(name),
+  .map((name) => {
+    const seed = CURATED_ICON_BY_NAME.get(name) ?? {
+      name,
+      label: iconLabel(name),
+      category: inferredCategory(name),
+      usage: 'Available PrimeIcon in the local Nexa catalog.',
+      tone: inferredTone(name),
+    };
+    return { ...seed, ...iconContract(name, seed.category, seed.tone) };
   });
 
 export const NEXA_ICON_CATEGORIES: readonly { readonly value: 'all' | NexaIconCategory; readonly label: string }[] = [

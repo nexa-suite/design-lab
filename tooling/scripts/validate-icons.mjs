@@ -3,6 +3,8 @@ import { join, relative } from 'node:path';
 
 const root = process.cwd();
 const manifest = JSON.parse(readFileSync(join(root, 'tokens', 'icons.tokens.json'), 'utf8'));
+const catalogPath = join(root, 'src', 'app', 'documentation', 'foundations', 'icon-catalog.ts');
+const catalog = readFileSync(catalogPath, 'utf8');
 const allowed = new Set(manifest.icons);
 const violations = [];
 
@@ -35,6 +37,11 @@ if (packageJson.dependencies?.primeicons !== '8.0.0') {
 if (new Set(manifest.icons).size !== manifest.icons.length) {
   violations.push('tokens/icons.tokens.json contains duplicate icon names');
 }
+
+for (const field of ['render', 'role', 'size', 'alignment', 'labelPolicy', 'semanticColor', 'hitTarget']) {
+  if (!catalog.includes(`${field}:`)) violations.push(`icon explorer contract is missing ${field} metadata`);
+}
+if (!catalog.includes('function iconContract')) violations.push('icon explorer does not centralize render and accessibility metadata');
 
 if (violations.length) {
   console.error('Icon validation failed.');

@@ -15,7 +15,7 @@ v0.10 converges the v0.9 visual foundation into an executable, consumable and re
 - component maturity separates human-frozen direction from open exploration;
 - canonical supplied logo assets, semantic status emphasis and reusable Action Menu / Tooltip behavior are rendered;
 - Async Operations, Authentication, Legal Content, Payments, Analytics, Dispatch Board and Data-Dense Operations are candidate patterns;
-- Increased Contrast and Reduced Motion are root-level functional evaluation modes.
+- Increased Contrast, Reduced Motion and an explicit 400% reflow evaluation mode are root-level functional evaluation modes.
 - reusable candidates live under `design-system`, while Lab-only evidence lives under `lab`;
 - Authentication, Analytics and Dispatch Board own focused documentation features and explicit lazy routes;
 - StateSequence playback has configurable phase timing, terminal states and explicit recovery;
@@ -23,6 +23,7 @@ v0.10 converges the v0.9 visual foundation into an executable, consumable and re
 - the generated token reference feeds documentation and contrast evidence from the same canonical JSON source;
 - DTCG-ish token sources generate primitive, semantic, component and data-visualization layers;
 - PrimeIcons are pinned locally and exposed through an audited explorer;
+- the icon explorer exposes render, role, size, alignment, label policy, semantic color and hit-target evidence;
 - `projects/nexa-ui` is the real Angular library boundary with an explicit public API;
 - Buttons and Progress own focused route features instead of depending on the broad component renderer;
 - Blueprint documentation is the normative design-system baseline; this repository is executable evidence.

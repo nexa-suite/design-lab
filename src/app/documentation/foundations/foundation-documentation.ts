@@ -4,7 +4,7 @@ import { NexaLogo, NexaStatusChip } from 'nexa-ui';
 import { evaluateContrast, type ContrastResult } from '../../lab/quality/contrast';
 import type { DocumentationPage } from '../models/documentation-page';
 import { APPROVED_CONTRAST_PAIRS, BLUE_SCALE, COLOR_FAMILIES, NEUTRAL_SCALE, RADIUS_ROWS, SURFACE_ROWS, TYPE_ROWS } from '../content/documentation-data';
-import { NEXA_ICON_CATEGORIES, NEXA_ICON_CATALOG, type NexaIconCategory } from './icon-catalog';
+import { NEXA_ICON_CATEGORIES, NEXA_ICON_CATALOG, type NexaIconCategory, type NexaIconRole } from './icon-catalog';
 
 @Component({
   selector: 'nexa-foundation-documentation',
@@ -26,13 +26,21 @@ export class NexaFoundationDocumentation {
   protected readonly iconCategories = NEXA_ICON_CATEGORIES;
   protected readonly iconQuery = signal('');
   protected readonly iconCategory = signal<'all' | NexaIconCategory>('all');
+  protected readonly iconRoles: readonly { readonly value: 'all' | NexaIconRole; readonly label: string }[] = [
+    { value: 'all', label: 'All roles' },
+    { value: 'semantic', label: 'Semantic' },
+    { value: 'decorative', label: 'Decorative' },
+  ];
+  protected readonly iconRole = signal<'all' | NexaIconRole>('all');
   protected readonly filteredIcons = computed(() => {
     const query = this.iconQuery().trim().toLocaleLowerCase();
     const category = this.iconCategory();
+    const role = this.iconRole();
     return this.iconCatalog.filter((icon) => {
       const matchesCategory = category === 'all' || icon.category === category;
+      const matchesRole = role === 'all' || icon.role === role;
       const haystack = `${icon.name} ${icon.label} ${icon.usage}`.toLocaleLowerCase();
-      return matchesCategory && (!query || haystack.includes(query));
+      return matchesCategory && matchesRole && (!query || haystack.includes(query));
     });
   });
   protected readonly motionMode = signal<'standard' | 'reduced'>('standard');
@@ -49,6 +57,7 @@ export class NexaFoundationDocumentation {
   }
 
   protected setIconCategory(value: string): void { this.iconCategory.set(value as 'all' | NexaIconCategory); }
+  protected setIconRole(value: string): void { this.iconRole.set(value as 'all' | NexaIconRole); }
 
   protected textStyle(row: (typeof TYPE_ROWS)[number]): Record<string, string> {
     return {

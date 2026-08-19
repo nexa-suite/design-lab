@@ -27,6 +27,8 @@ Major features use explicit analyzable dynamic imports in `src/app/app.routes.ts
 
 The build is the first lazy-loading proof: it emits named `button-page`, `progress-page`, `analytics-page`, `authentication-page`, `dispatch-board-page`, `quality-page` and `engineering-page` chunks. A route-evidence manifest records route, viewport, state, artifact and source SHA under ignored `tmp/` evidence.
 
+The workspace has one tracked application manifest, one tracked `nexa-ui` package manifest and one root lockfile. The architecture gate rejects additional package manifests or lockfiles and verifies that the library version matches the workspace release candidate.
+
 ## Design-system versus Lab
 
 `nexa-ui` is a real Angular package boundary. Its `src/public-api.ts` uses explicit exports for reusable candidates and does not export documentation or Lab infrastructure. The Action Menu, Tooltip and control components preserve the accepted Nexa presentation. `NexaStateSequence`, contrast parsing and evaluation modes remain Lab-owned because they demonstrate evidence rather than define production APIs.
