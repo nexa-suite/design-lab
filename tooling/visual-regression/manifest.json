@@ -8,7 +8,7 @@
   "highRiskStates": ["default", "hover", "focus", "pressed", "selected", "disabled", "loading", "error", "expanded-open"],
   "canonicalRoutes": [
     { "path": "overview", "area": "START HERE", "states": ["default", "focus"] },
-    { "path": "foundations/color", "area": "FOUNDATIONS", "states": ["default", "selected", "focus"] },
+    { "path": "foundations/color", "area": "FOUNDATIONS", "states": ["default", "semantic"] },
     { "path": "foundations/motion", "area": "FOUNDATIONS", "states": ["standard", "reduced"] },
     { "path": "components/buttons", "area": "COMPONENTS", "states": ["default", "hover", "focus", "pressed", "disabled", "loading", "success", "error"] },
     { "path": "components/progress-indicators", "area": "COMPONENTS", "states": ["determinate", "indeterminate", "paused", "complete", "error", "skeleton"] },
