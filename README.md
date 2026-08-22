@@ -1,12 +1,12 @@
-# Nexa Design Lab v0.10
+# Nexa Design Lab v1.0.1
 
 Visual evidence laboratory for Nexa foundations, reusable components, interaction states and accessibility review.
 
-`0.10.0-rc.1` is an Angular-only design-system candidate. It is not a production package, a product application, a Blueprint baseline or a completed design-library publication.
+`1.0.1` is the current released Angular-only design-system baseline. It is a metadata-correction patch over `v1.0.0`; it is not a production product application, domain contract or accessibility certification.
 
 ## Purpose
 
-v0.10 converges the v0.9 visual foundation into an executable, consumable and reviewable baseline:
+v1.0.0 establishes an executable, consumable and reviewable design-system baseline:
 
 - every important rule has a rendered specimen;
 - states can be seen, triggered, compared and reset;
@@ -50,7 +50,7 @@ Open `http://127.0.0.1:4301/guidelines/overview`.
 
 All documentation pages are lazy-loaded through the Angular router. There is no active screen-library route.
 
-## Frozen candidate direction
+## Frozen design direction
 
 - Light appearance is canonical.
 - The current sidebar geometry, grouping, search, active row and mobile drawer behavior remain frozen.
@@ -121,6 +121,6 @@ The archive preserves prior reports for provenance. It is not runtime authority 
 
 ## Boundary
 
-Design Lab changes are local to this repository. No production application, API, mobile repository or deployment is modified by this release candidate. The v0.10 branch is prepared without merging to `main` or creating a final release. The pre-existing `v0.10.0-rc.1` tag is not moved or rewritten; SCM must reconcile its stale tag target before calling this branch a release candidate. The Blueprint baseline is updated only in its isolated design branch.
+Design Lab changes are local to this repository. No production application, API, mobile repository or deployment is modified by this release. This `v1.0.1` release is executable design evidence; Blueprint remains normative for design-system governance, while product patterns remain non-production evidence.
 
 Copyright © 2026 Nexa. All rights reserved.

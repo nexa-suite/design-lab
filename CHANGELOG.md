@@ -1,5 +1,36 @@
 # Changelog
 
+## [1.0.1] - 2026-08-22
+
+### Changed
+
+- Corrected package, library and release documentation metadata so the published patch baseline matches the repository release state.
+
+### Status
+
+- Stable metadata-correction patch over `v1.0.0`.
+
+## [1.0.0] - 2026-08-22
+
+### Added
+
+- Released the consumable `nexa-ui` Angular library boundary with explicit public exports.
+- Released synchronized primitive, semantic, component and data-visualization token sources.
+- Released focused documentation features, accessibility evidence, responsive validation and visual-regression foundations.
+
+### Changed
+
+- Promoted the v0.10 design-system convergence candidate to the stable Nexa Design Lab v1 baseline.
+- Preserved the frozen Nexa sidebar, light visual direction, PrimeIcons, typography hierarchy and component geometry contracts.
+
+### Status
+
+- Stable design-system baseline before the `v1.0.1` metadata correction. Human visual, content, keyboard, assistive-technology and accessibility certification remain separate review activities.
+
+## Historical release candidate: 0.10.0-rc.1
+
+The candidate was promoted to published `v1.0.0`; no separate final release is implied by this entry.
+
 ## [0.10.0-rc.1] - 2026-08-19
 
 ### Added

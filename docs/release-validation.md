@@ -1,4 +1,4 @@
-# v0.10 release validation
+# v1.0.0 release validation
 
 ## Deterministic gates
 
@@ -31,4 +31,4 @@ The deterministic contract lives in `tooling/visual-regression/manifest.json` an
 
 The Accessibility Lab exposes actual 100%, 150%, 200% and 400% reflow controls plus a reversible increased text-spacing mode. The 400% mode sets a root evaluation state and constrains the documentation frame for a targeted no-overflow/reflow review; it does not claim screen-reader or human visual certification.
 
-Deterministic commands do not replace human visual, content, browser or assistive-technology review. Do not publish a final v1 claim from an RC branch.
+Deterministic commands do not replace human visual, content, browser or assistive-technology review. The published v1.0.0 baseline does not claim accessibility certification or production product readiness.
