@@ -30,6 +30,29 @@
     { "path": "quality/accessibility-lab", "area": "QUALITY", "states": ["focus", "contrast", "text-200", "text-spacing", "reflow-400", "reduced-motion"] },
     { "path": "engineering/component-apis", "area": "ENGINEERING", "states": ["inventory", "boundary"] }
   ],
+  "screenshotEvidence": [
+    { "path": "overview", "state": "default", "purpose": "canonical overview" },
+    { "path": "foundations/brand-logo", "state": "default", "purpose": "canonical Nexa brand" },
+    { "path": "foundations/color", "state": "semantic", "purpose": "semantic color map" },
+    { "path": "foundations/typography", "state": "default", "purpose": "type hierarchy" },
+    { "path": "components/buttons", "state": "focus", "purpose": "real button focus geometry" },
+    { "path": "components/text-fields", "state": "focus", "purpose": "real input focus geometry" },
+    { "path": "components/checkbox", "state": "focus", "purpose": "native checkbox focus geometry" },
+    { "path": "components/radio", "state": "focus", "purpose": "native radio focus geometry" },
+    { "path": "components/menus", "state": "open", "purpose": "action menu overlay" },
+    { "path": "components/tooltips", "state": "open", "purpose": "tooltip viewport placement" },
+    { "path": "components/progress-indicators", "state": "indeterminate", "purpose": "progress activity evidence" },
+    { "path": "patterns/authentication", "state": "success", "purpose": "authentication success composition" },
+    { "path": "patterns/payments", "state": "saved", "purpose": "restrained payment evidence" },
+    { "path": "patterns/analytics", "state": "ready", "purpose": "analytics grammar" },
+    { "path": "patterns/dispatch-board", "state": "selected", "purpose": "dispatch movement source" },
+    { "path": "patterns/data-dense-operations", "state": "rows", "purpose": "data-dense table" },
+    { "path": "patterns/responsive", "state": "reflow", "purpose": "responsive composition" },
+    { "path": "quality/accessibility-lab", "state": "contrast", "purpose": "increased contrast mode" },
+    { "path": "quality/contrast-lab", "state": "default", "purpose": "contrast evidence" },
+    { "path": "engineering/component-apis", "state": "inventory", "purpose": "public adoption boundary" }
+  ],
   "artifactTemplate": "{evidenceRoot}/{sourceSha}/{route}/{viewport}/{state}.json",
-  "testResultFields": ["route", "viewport", "state", "artifact", "result", "sourceSha"]
+  "screenshotArtifactTemplate": "{evidenceRoot}/{sourceSha}/{route}/{viewport}/{state}.png",
+  "testResultFields": ["route", "viewport", "state", "artifact", "screenshot", "result", "sourceSha"]
 }

@@ -38,6 +38,7 @@ function writeResult(route, viewport, state, result) {
     viewport: viewport.width,
     state,
     artifact: relativeArtifact,
+    screenshot: result?.evidence?.screenshot ?? null,
     result,
     sourceSha,
   }, null, 2)}\n`, 'utf8');
@@ -59,6 +60,79 @@ async function waitForServer(url) {
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
+}
+
+async function assertGeometryInvariants(page, { focusRequired = false, overlayRequired = false } = {}) {
+  const evidence = await page.evaluate(({ focusRequired: requiresFocus, overlayRequired: requiresOverlay }) => {
+    const root = document.documentElement;
+    const rhythm = getComputedStyle(root).getPropertyValue('--nexa-layout-section-gap').trim() || '48px';
+    const sections = [...document.querySelectorAll('.pattern-section, .foundation-section, .context-section, .component-doc-section, .component-section, nexa-documentation-section')];
+    const sectionRhythm = sections.map((section) => {
+      const style = getComputedStyle(section);
+      return {
+        paddingTop: style.paddingTop,
+        paddingBottom: style.paddingBottom,
+        borderBottom: style.borderBottomWidth,
+        borderTop: style.borderTopWidth,
+      };
+    });
+    const validSectionRhythm = sectionRhythm.every((section) => (
+      (section.paddingTop === '0px' || section.paddingTop === rhythm) &&
+      section.paddingBottom === rhythm &&
+      section.borderBottom === '1px' &&
+      section.borderTop === '0px'
+    ));
+    const focusTarget = document.activeElement;
+    const focusWrapper = focusTarget instanceof HTMLElement ? focusTarget.closest('.forced-focus') : null;
+    const focusRingVisible = focusTarget instanceof HTMLElement && [focusTarget, focusTarget.parentElement, focusTarget.parentElement?.parentElement]
+      .filter((element) => element instanceof HTMLElement)
+      .some((element) => {
+        const style = getComputedStyle(element);
+        return style.boxShadow !== 'none' || style.outlineStyle !== 'none';
+      });
+    const selectedGeometry = [...document.querySelectorAll('.selected, [aria-selected="true"], [aria-pressed="true"]')]
+      .filter((element) => element instanceof HTMLElement)
+      .map((element) => getComputedStyle(element).borderRadius)
+      .every((radius) => radius !== '0px' && radius !== 'none');
+    const visibleOverlays = [...document.querySelectorAll('[role="tooltip"], [role="menu"]')]
+      .filter((element) => element instanceof HTMLElement && getComputedStyle(element).display !== 'none' && getComputedStyle(element).visibility !== 'hidden')
+      .map((element) => {
+        const rect = element.getBoundingClientRect();
+        return { left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom };
+      });
+    const overlaysInViewport = visibleOverlays.every((rect) => rect.left >= 0 && rect.top >= 0 && rect.right <= window.innerWidth && rect.bottom <= window.innerHeight);
+    return {
+      clientWidth: root.clientWidth,
+      scrollWidth: root.scrollWidth,
+      sectionCount: sections.length,
+      sectionRhythm,
+      validSectionRhythm,
+      selectedGeometry,
+      focusElement: focusTarget instanceof HTMLElement ? focusTarget.tagName.toLowerCase() : '',
+      focusIsActualControl: Boolean(focusTarget instanceof HTMLElement && (focusTarget.matches('button, input, select, textarea, [role="button"]') || focusTarget.closest('button, input, select, textarea, [role="button"]'))),
+      focusInsideForcedSpecimen: Boolean(focusWrapper),
+      forcedWrapperShadow: focusWrapper ? getComputedStyle(focusWrapper).boxShadow : 'none',
+      focusRingVisible,
+      visibleOverlays,
+      overlaysInViewport,
+      requiresFocus,
+      requiresOverlay,
+      activeInsideContent: Boolean(document.querySelector('.lab-content')?.contains(focusTarget)),
+    };
+  }, { focusRequired, overlayRequired });
+  assert(evidence.scrollWidth <= evidence.clientWidth + 1, `geometry overflow ${evidence.scrollWidth - evidence.clientWidth}px`);
+  assert(evidence.validSectionRhythm, `section rhythm/divider invariant failed: ${JSON.stringify(evidence.sectionRhythm)}`);
+  assert(evidence.selectedGeometry, 'selected control introduced a hard square radius');
+  assert(evidence.overlaysInViewport, `overlay escaped viewport: ${JSON.stringify(evidence.visibleOverlays)}`);
+  if (focusRequired) {
+    assert(evidence.activeInsideContent, 'focus evidence is outside documentation content');
+    assert(evidence.focusIsActualControl, `focus landed on a wrapper instead of a control: ${evidence.focusElement}`);
+    assert(evidence.focusInsideForcedSpecimen, 'focus evidence did not target the marked specimen');
+    assert(evidence.forcedWrapperShadow === 'none', 'focus evidence still paints a wrapper-level ring');
+    assert(evidence.focusRingVisible, 'focused control has no visible focus geometry');
+  }
+  if (overlayRequired) assert(evidence.visibleOverlays.length > 0, 'overlay evidence did not render an overlay');
+  return evidence;
 }
 
 async function inspectRoute(page, route, viewport) {
@@ -103,13 +177,14 @@ async function inspectRoute(page, route, viewport) {
     assert(evidence.scrollWidth <= evidence.clientWidth + 1, `horizontal overflow ${evidence.scrollWidth - evidence.clientWidth}px`);
     assert(evidence.activeNavigation > 0, 'documentation route has no active navigation item');
     assert(evidence.iconCount === evidence.renderedIconCount, `PrimeIcons missing rendered glyphs (${evidence.renderedIconCount}/${evidence.iconCount})`);
+    const geometry = await assertGeometryInvariants(page);
     assert(consoleIssues.length === 0, `console errors: ${consoleIssues.join(' | ')}`);
     assert(pageIssues.length === 0, `page errors: ${pageIssues.join(' | ')}`);
 
     writeResult(route, viewport, 'default', {
       status: 'pass',
       checks: { content: true, heading: true, activeNavigation: true, icons: true, noOverflow: true, console: true, pageErrors: true },
-      evidence,
+      evidence: { ...evidence, geometry },
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
@@ -142,6 +217,7 @@ async function assertVisibleText(page, text, message = text) {
 }
 
 async function activateCanonicalState(page, route, state) {
+  if (state === 'default') return;
   switch (route.path) {
     case 'overview':
       if (state === 'focus') await page.locator('.lab-content a, .lab-content button, .lab-content input').first().focus();
@@ -155,13 +231,32 @@ async function activateCanonicalState(page, route, state) {
       break;
     case 'components/buttons':
       if (state === 'focus') {
-        await page.locator('.forced-focus .nexa-button').first().focus();
+        await page.locator('.state-gallery .forced-focus button').first().focus();
         return;
       }
       await assertVisibleText(page, state === 'pressed' ? 'Pressed' : state === 'success' ? 'Success feedback' : state === 'error' ? 'Error recovery' : state.charAt(0).toLocaleUpperCase() + state.slice(1));
       break;
     case 'components/progress-indicators':
       await assertVisibleText(page, state === 'determinate' ? 'Linear determinate' : state === 'indeterminate' ? 'Linear indeterminate' : state === 'skeleton' ? 'Content skeleton' : state.charAt(0).toLocaleUpperCase() + state.slice(1));
+      break;
+    case 'components/text-fields':
+    case 'components/checkbox':
+    case 'components/radio':
+    case 'components/toggle':
+    case 'components/segmented-control':
+      if (state === 'focus') await page.locator('.state-gallery .forced-focus button, .state-gallery .forced-focus input').first().focus();
+      break;
+    case 'components/menus':
+      if (state === 'open') {
+        await page.locator('nexa-action-menu .menu-trigger').first().click();
+        await page.getByRole('menu').waitFor({ state: 'visible' });
+      }
+      break;
+    case 'components/tooltips':
+      if (state === 'open') {
+        await page.locator('nexa-tooltip .tooltip-trigger').first().focus();
+        await page.getByRole('tooltip').waitFor({ state: 'visible' });
+      }
       break;
     case 'patterns/authentication': {
       const labels = {
@@ -351,7 +446,7 @@ async function activateCanonicalState(page, route, state) {
       if (state === 'reduced-motion') await assertVisibleText(page, 'Reduced motion');
       break;
     case 'engineering/component-apis':
-      if (state === 'inventory') await assertVisibleText(page, 'Public candidate');
+      if (state === 'inventory') await assertVisibleText(page, 'PUBLIC COMPONENT');
       if (state === 'boundary') await assertVisibleText(page, 'Lab-only evidence');
       break;
     default:
@@ -372,6 +467,7 @@ async function captureCanonicalState(page, route, viewport, state) {
   try {
     await visitEvidenceRoute(page, route, viewport);
     await activateCanonicalState(page, route, state);
+    const geometry = await assertGeometryInvariants(page, { focusRequired: state === 'focus', overlayRequired: state === 'open' });
     const evidence = await page.evaluate((expectedState) => {
       const root = document.documentElement;
       const content = document.querySelector('.lab-content');
@@ -393,12 +489,47 @@ async function captureCanonicalState(page, route, viewport, state) {
     writeResult(route, viewport, state, {
       status: 'pass',
       checks: { route: true, viewport: true, state: true, noOverflow: true, console: true, pageErrors: true, artifactBinding: true },
-      evidence,
+      evidence: { ...evidence, geometry },
     });
     capturedStates.push(`${route.path}:${viewport.width}:${state}`);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     failures.push(`${route.path} @ ${viewport.width}px [${state}]: ${message}`);
+    writeResult(route, viewport, state, { status: 'fail', error: message, consoleIssues, pageIssues });
+  } finally {
+    page.off('console', onConsole);
+    page.off('pageerror', onPageError);
+  }
+}
+
+async function captureScreenshotEvidence(page, route, viewport, state) {
+  const consoleIssues = [];
+  const pageIssues = [];
+  const onConsole = (message) => { if (message.type() === 'error') consoleIssues.push(message.text()); };
+  const onPageError = (error) => pageIssues.push(error.message);
+  page.on('console', onConsole);
+  page.on('pageerror', onPageError);
+
+  try {
+    await visitEvidenceRoute(page, route, viewport);
+    await activateCanonicalState(page, route, state);
+    await page.waitForTimeout(120);
+    const geometry = await assertGeometryInvariants(page, { focusRequired: state === 'focus', overlayRequired: state === 'open' });
+    const relativeScreenshot = artifactPath(route, viewport, state).replace(/\.json$/, '.png');
+    const absoluteScreenshot = join(root, relativeScreenshot);
+    mkdirSync(dirname(absoluteScreenshot), { recursive: true });
+    await page.screenshot({ path: absoluteScreenshot, fullPage: true });
+    assert(consoleIssues.length === 0, `screenshot console errors: ${consoleIssues.join(' | ')}`);
+    assert(pageIssues.length === 0, `screenshot page errors: ${pageIssues.join(' | ')}`);
+    writeResult(route, viewport, state, {
+      status: 'pass',
+      checks: { route: true, viewport: true, state: true, geometry: true, screenshot: true, console: true, pageErrors: true, artifactBinding: true },
+      evidence: { geometry, screenshot: relativeScreenshot, sourceSha },
+    });
+    capturedStates.push(`screenshot:${route.path}:${viewport.width}:${state}`);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    failures.push(`${route.path} @ ${viewport.width}px [screenshot:${state}]: ${message}`);
     writeResult(route, viewport, state, { status: 'fail', error: message, consoleIssues, pageIssues });
   } finally {
     page.off('console', onConsole);
@@ -458,10 +589,13 @@ async function runInteractionSmoke(page) {
   });
 
   await smokeInteraction(page, 'patterns/authentication', async () => {
+    assert(await page.locator('.auth-evidence-controls').evaluate((element) => !element.closest('.auth-pattern')), 'authentication evidence controller is inside the product frame');
     await page.getByRole('button', { name: 'Form invalid', exact: true }).click();
     await page.getByText('Enter a work email to continue.', { exact: true }).waitFor({ state: 'visible' });
     await page.getByRole('button', { name: 'ES', exact: true }).click();
     await page.getByText('Ingresa a tu workspace', { exact: true }).waitFor({ state: 'visible' });
+    await page.getByRole('button', { name: 'Workspace detected', exact: true }).click();
+    await page.locator('.workspace-preview[aria-label="Synthetic workspace preview"]').waitFor({ state: 'visible' });
     checks.push('authentication invalid + locale');
   });
 
@@ -494,6 +628,21 @@ async function runInteractionSmoke(page) {
     const trigger = page.locator('nexa-tooltip .tooltip-trigger');
     await trigger.focus();
     await page.getByRole('tooltip').waitFor({ state: 'visible' });
+    await page.locator('nexa-tooltip').evaluate((element) => {
+      const host = element;
+      host.style.position = 'fixed';
+      host.style.right = '0px';
+      host.style.bottom = '0px';
+      host.style.left = 'auto';
+      host.style.top = 'auto';
+    });
+    await trigger.focus();
+    const tooltipEdge = await page.getByRole('tooltip').evaluate((element) => {
+      const rect = element.getBoundingClientRect();
+      return { placement: element.getAttribute('class'), left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom };
+    });
+    const viewport = await page.evaluate(() => ({ width: window.innerWidth, height: window.innerHeight }));
+    assert(tooltipEdge.left >= 0 && tooltipEdge.top >= 0 && tooltipEdge.right <= viewport.width && tooltipEdge.bottom <= viewport.height, `tooltip edge collision: ${JSON.stringify(tooltipEdge)}`);
     await page.keyboard.press('Escape');
     await page.getByRole('tooltip').waitFor({ state: 'hidden' });
     checks.push('tooltip focus + escape');
@@ -585,10 +734,29 @@ try {
     }
   }
 
+  for (const screenshot of manifest.screenshotEvidence ?? []) {
+    const route = routesByPath.get(screenshot.path);
+    assert(route, `screenshot evidence route is not registered: ${screenshot.path}`);
+    for (const viewport of viewports) await captureScreenshotEvidence(page, route, viewport, screenshot.state);
+  }
+
   const interactionChecks = await runInteractionSmoke(page);
   const summaryPath = join(root, 'tmp', 'visual-regression', sourceSha, 'browser-gate.json');
+  const reviewPackPath = join(root, 'tmp', 'visual-regression', sourceSha, 'review-pack.json');
   mkdirSync(dirname(summaryPath), { recursive: true });
-  writeFileSync(summaryPath, `${JSON.stringify({ sourceSha, routes: routes.length, viewports: viewports.map(({ width }) => width), canonicalStates: capturedStates, interactionChecks, failures }, null, 2)}\n`, 'utf8');
+  const reviewPack = {
+    schemaVersion: 1,
+    sourceSha,
+    branch: execFileSync('git', ['branch', '--show-current'], { cwd: root, encoding: 'utf8' }).trim(),
+    humanApprovalRequired: true,
+    visualEvidenceIsNotCertification: true,
+    viewports: viewports.map(({ width }) => width),
+    screenshotEvidence: manifest.screenshotEvidence ?? [],
+    artifactRoot: `tmp/visual-regression/${sourceSha}`,
+    screenshotTemplate: manifest.screenshotArtifactTemplate,
+  };
+  writeFileSync(reviewPackPath, `${JSON.stringify(reviewPack, null, 2)}\n`, 'utf8');
+  writeFileSync(summaryPath, `${JSON.stringify({ sourceSha, routes: routes.length, viewports: viewports.map(({ width }) => width), canonicalStates: capturedStates, interactionChecks, screenshotEvidence: reviewPack.screenshotEvidence.length, reviewPack: `tmp/visual-regression/${sourceSha}/review-pack.json`, failures }, null, 2)}\n`, 'utf8');
 
   if (failures.length) {
     console.error(`Browser visual gate failed with ${failures.length} failure(s).`);

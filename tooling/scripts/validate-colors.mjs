@@ -49,6 +49,9 @@ const dataVisualization = JSON.parse(readFileSync(join(root, 'tokens', 'data-vis
 if (!Object.keys(dataVisualization).some((name) => name.includes('series'))) {
   violations.push('tokens/data-visualization.tokens.json must define a documented series palette');
 }
+for (const status of ['success', 'warning', 'danger', 'info']) {
+  if (!dataVisualization[`nexa-viz-status-${status}`]) violations.push(`tokens/data-visualization.tokens.json must define semantic status alias ${status}`);
+}
 
 if (violations.length) {
   console.error('Color validation failed.');

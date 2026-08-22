@@ -39,6 +39,17 @@ for (const { relative: file, text } of reusableFiles) {
     return !value.startsWith('var(--nexa-radius-') && value !== 'inherit' && value !== '50%';
   });
   if (rawRadius) add(file, 'reusable geometry must use a radius token, inherit or circular geometry', rawRadius);
+
+  const geometryRules = [
+    { pattern: /\bmin-height\s*:\s*44px\b/i, rule: 'reusable target geometry must use a component token' },
+    { pattern: /\bgap\s*:\s*16px\b/i, rule: 'reusable control gap must use a component/semantic token' },
+    { pattern: /\b(?:width|height)\s*:\s*(?:14|20|26|28|46)px\b/i, rule: 'reusable repeated geometry must use a focused component token' },
+    { pattern: /\b(?:outline|outline-offset)\s*:\s*(?:3|4)px\b/i, rule: 'reusable focus geometry must use focus tokens' },
+  ];
+  for (const { pattern, rule } of geometryRules) {
+    const rawGeometry = text.match(pattern);
+    if (rawGeometry) add(file, rule, rawGeometry);
+  }
 }
 
 for (const { relative: file, text } of allSourceFiles) {
