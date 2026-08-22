@@ -59,7 +59,7 @@ All documentation pages are lazy-loaded through the Angular router. There is no 
 - PrimeIcons remain the candidate icon system.
 - White structural surfaces sit on a cool light canvas; elevation is restrained and purposeful.
 - Rounded geometry is semantic: controls, cards, panels and compact status do not share one universal radius.
-- The supplied `logo-nexa/logo-nexa.svg` and `logo-nexa/Documento.svg` files are the canonical rendered logo sources; the wordmark is never redrawn in CSS or text.
+- The supplied logo assets are the canonical rendered logo sources; the wordmark is never redrawn in CSS or text.
 - Dark mode is intentionally deferred. Increased Contrast is an evaluation mode over the same light foundation.
 
 ## Quality evidence
