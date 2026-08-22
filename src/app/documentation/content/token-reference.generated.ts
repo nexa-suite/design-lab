@@ -116,10 +116,21 @@ export const NEXA_TOKEN_VALUES: Readonly<Record<string, string>> = {
   "--nexa-color-focus-ring": "oklch(54.6% 0.215 262.9)",
   "--nexa-color-info-50": "oklch(96.9% 0.014 264.5)",
   "--nexa-color-info-700": "oklch(48% 0.19 262.9)",
+  "--nexa-color-info-standard-background": "oklch(96.9% 0.014 264.5)",
+  "--nexa-color-info-standard-border": "oklch(77% 0.117 262.4)",
+  "--nexa-color-info-standard-text": "oklch(48% 0.19 262.9)",
+  "--nexa-color-info-emphasized-background": "oklch(48% 0.19 262.9)",
+  "--nexa-color-info-emphasized-border": "oklch(48% 0.19 262.9)",
+  "--nexa-color-info-emphasized-text": "#ffffff",
   "--nexa-color-success-50": "#f0fdf4",
   "--nexa-color-success-200": "#bbf7d0",
   "--nexa-color-success-border": "#bbf7d0",
   "--nexa-color-success-700": "#15803d",
+  "--nexa-color-success-standard-background": "#f0fdf4",
+  "--nexa-color-success-standard-text": "#15803d",
+  "--nexa-color-success-emphasized-background": "#15803d",
+  "--nexa-color-success-emphasized-border": "#15803d",
+  "--nexa-color-success-emphasized-text": "#ffffff",
   "--nexa-color-role-sales-surface": "#f0fdf4",
   "--nexa-color-role-sales-border": "#bbf7d0",
   "--nexa-color-role-sales-text": "#15803d",
@@ -133,6 +144,8 @@ export const NEXA_TOKEN_VALUES: Readonly<Record<string, string>> = {
   "--nexa-color-warning-emphasized-background": "#92400e",
   "--nexa-color-warning-emphasized-border": "#92400e",
   "--nexa-color-warning-emphasized-text": "#ffffff",
+  "--nexa-color-warning-standard-background": "#fffbeb",
+  "--nexa-color-warning-standard-text": "#92400e",
   "--nexa-color-danger-50": "#fef2f2",
   "--nexa-color-danger-200": "#fecaca",
   "--nexa-color-danger-600": "#dc2626",
@@ -146,6 +159,12 @@ export const NEXA_TOKEN_VALUES: Readonly<Record<string, string>> = {
   "--nexa-color-danger-strong-background": "#991b1b",
   "--nexa-color-danger-strong-border": "#991b1b",
   "--nexa-color-danger-strong-text": "#ffffff",
+  "--nexa-color-neutral-standard-background": "#f1f5f9",
+  "--nexa-color-neutral-standard-border": "#cbd5e1",
+  "--nexa-color-neutral-standard-text": "#334155",
+  "--nexa-color-neutral-emphasized-background": "#334155",
+  "--nexa-color-neutral-emphasized-border": "#334155",
+  "--nexa-color-neutral-emphasized-text": "#ffffff",
   "--nexa-color-attention-500": "#f97316",
   "--nexa-color-attention-surface": "#fff7ed",
   "--nexa-color-attention-border": "#fed7aa",
@@ -233,6 +252,26 @@ export const NEXA_TOKEN_VALUES: Readonly<Record<string, string>> = {
   "--nexa-control-padding-inline": "16px",
   "--nexa-control-padding-inline-compact": "12px",
   "--nexa-control-gap": "4px",
+  "--nexa-control-label-gap": "4px",
+  "--nexa-target-size-min": "44px",
+  "--nexa-field-action-size": "30px",
+  "--nexa-status-height": "26px",
+  "--nexa-status-padding-inline": "10px",
+  "--nexa-status-dot-size": "6px",
+  "--nexa-toggle-width": "46px",
+  "--nexa-toggle-control-height": "28px",
+  "--nexa-toggle-height": "26px",
+  "--nexa-toggle-thumb-size": "20px",
+  "--nexa-toggle-thumb-inset": "2px",
+  "--nexa-button-spinner-size": "14px",
+  "--nexa-button-spinner-border": "2px",
+  "--nexa-stepper-gap": "16px",
+  "--nexa-stepper-button-size": "34px",
+  "--nexa-stepper-output-width": "42px",
+  "--nexa-stepper-control-gap": "3px",
+  "--nexa-slider-gap": "10px",
+  "--nexa-slider-heading-gap": "12px",
+  "--nexa-slider-track-size": "6px",
   "--nexa-panel-padding": "20px",
   "--nexa-card-padding": "16px",
   "--nexa-surface-gap": "16px",
@@ -256,6 +295,10 @@ export const NEXA_TOKEN_VALUES: Readonly<Record<string, string>> = {
   "--nexa-viz-series-4": "#f97316",
   "--nexa-viz-series-5": "#15803d",
   "--nexa-viz-series-6": "#d97706",
+  "--nexa-viz-status-success": "#15803d",
+  "--nexa-viz-status-warning": "#d97706",
+  "--nexa-viz-status-danger": "#dc2626",
+  "--nexa-viz-status-info": "oklch(48% 0.19 262.9)",
   "--nexa-viz-sequential-low": "oklch(92.9% 0.034 263.6)",
   "--nexa-viz-sequential-high": "oklch(48% 0.19 262.9)",
   "--nexa-viz-grid": "#e2e8f0",
@@ -1121,6 +1164,54 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "description": "Nexa semantic token nexa-color-info-700."
   },
   {
+    "name": "--nexa-color-info-standard-background",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-surface-info)",
+    "value": "oklch(96.9% 0.014 264.5)",
+    "description": "Standard information status background."
+  },
+  {
+    "name": "--nexa-color-info-standard-border",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-color-primary-300)",
+    "value": "oklch(77% 0.117 262.4)",
+    "description": "Standard information status boundary."
+  },
+  {
+    "name": "--nexa-color-info-standard-text",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-color-info-700)",
+    "value": "oklch(48% 0.19 262.9)",
+    "description": "Standard information status text."
+  },
+  {
+    "name": "--nexa-color-info-emphasized-background",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-color-info-700)",
+    "value": "oklch(48% 0.19 262.9)",
+    "description": "Strong information status background."
+  },
+  {
+    "name": "--nexa-color-info-emphasized-border",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-color-info-700)",
+    "value": "oklch(48% 0.19 262.9)",
+    "description": "Strong information status boundary."
+  },
+  {
+    "name": "--nexa-color-info-emphasized-text",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-color-text-inverse)",
+    "value": "#ffffff",
+    "description": "Strong information status text."
+  },
+  {
     "name": "--nexa-color-success-50",
     "layer": "semantic",
     "type": "color",
@@ -1151,6 +1242,46 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "sourceValue": "var(--nexa-primitive-green-700)",
     "value": "#15803d",
     "description": "Nexa semantic token nexa-color-success-700."
+  },
+  {
+    "name": "--nexa-color-success-standard-background",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-surface-success)",
+    "value": "#f0fdf4",
+    "description": "Standard success status background."
+  },
+  {
+    "name": "--nexa-color-success-standard-text",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-color-success-700)",
+    "value": "#15803d",
+    "description": "Standard success status text."
+  },
+  {
+    "name": "--nexa-color-success-emphasized-background",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-color-success-700)",
+    "value": "#15803d",
+    "description": "Strong success status background."
+  },
+  {
+    "name": "--nexa-color-success-emphasized-border",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-color-success-700)",
+    "value": "#15803d",
+    "description": "Strong success status boundary."
+  },
+  {
+    "name": "--nexa-color-success-emphasized-text",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-color-text-inverse)",
+    "value": "#ffffff",
+    "description": "Strong success status text."
   },
   {
     "name": "--nexa-color-role-sales-surface",
@@ -1257,6 +1388,22 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "description": "Nexa semantic token nexa-color-warning-emphasized-text."
   },
   {
+    "name": "--nexa-color-warning-standard-background",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-surface-warning)",
+    "value": "#fffbeb",
+    "description": "Standard warning status background."
+  },
+  {
+    "name": "--nexa-color-warning-standard-text",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-color-warning-text)",
+    "value": "#92400e",
+    "description": "Standard warning status text."
+  },
+  {
     "name": "--nexa-color-danger-50",
     "layer": "semantic",
     "type": "color",
@@ -1359,6 +1506,54 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "sourceValue": "var(--nexa-color-text-inverse)",
     "value": "#ffffff",
     "description": "Nexa semantic token nexa-color-danger-strong-text."
+  },
+  {
+    "name": "--nexa-color-neutral-standard-background",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-surface-inset)",
+    "value": "#f1f5f9",
+    "description": "Standard neutral status background."
+  },
+  {
+    "name": "--nexa-color-neutral-standard-border",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-color-neutral-300)",
+    "value": "#cbd5e1",
+    "description": "Standard neutral status boundary."
+  },
+  {
+    "name": "--nexa-color-neutral-standard-text",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-color-neutral-700)",
+    "value": "#334155",
+    "description": "Standard neutral status text."
+  },
+  {
+    "name": "--nexa-color-neutral-emphasized-background",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-color-neutral-700)",
+    "value": "#334155",
+    "description": "Strong neutral status background."
+  },
+  {
+    "name": "--nexa-color-neutral-emphasized-border",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-color-neutral-700)",
+    "value": "#334155",
+    "description": "Strong neutral status boundary."
+  },
+  {
+    "name": "--nexa-color-neutral-emphasized-text",
+    "layer": "semantic",
+    "type": "color",
+    "sourceValue": "var(--nexa-color-text-inverse)",
+    "value": "#ffffff",
+    "description": "Strong neutral status text."
   },
   {
     "name": "--nexa-color-attention-500",
@@ -2057,6 +2252,166 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "description": "Nexa component token nexa-control-gap."
   },
   {
+    "name": "--nexa-control-label-gap",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "var(--nexa-space-1)",
+    "value": "4px",
+    "description": "Gap between a reusable control label and its control surface."
+  },
+  {
+    "name": "--nexa-target-size-min",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "44px",
+    "value": "44px",
+    "description": "Minimum interactive target used by documented evaluation controls."
+  },
+  {
+    "name": "--nexa-field-action-size",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "30px",
+    "value": "30px",
+    "description": "Circular trailing action target inside a text field."
+  },
+  {
+    "name": "--nexa-status-height",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "26px",
+    "value": "26px",
+    "description": "Status chip minimum height."
+  },
+  {
+    "name": "--nexa-status-padding-inline",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "10px",
+    "value": "10px",
+    "description": "Status chip inline padding."
+  },
+  {
+    "name": "--nexa-status-dot-size",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "6px",
+    "value": "6px",
+    "description": "Status chip dot diameter."
+  },
+  {
+    "name": "--nexa-toggle-width",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "46px",
+    "value": "46px",
+    "description": "Toggle track width."
+  },
+  {
+    "name": "--nexa-toggle-control-height",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "28px",
+    "value": "28px",
+    "description": "Toggle control hit-area height."
+  },
+  {
+    "name": "--nexa-toggle-height",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "26px",
+    "value": "26px",
+    "description": "Toggle track height."
+  },
+  {
+    "name": "--nexa-toggle-thumb-size",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "20px",
+    "value": "20px",
+    "description": "Toggle thumb diameter."
+  },
+  {
+    "name": "--nexa-toggle-thumb-inset",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "2px",
+    "value": "2px",
+    "description": "Toggle thumb inset within its track."
+  },
+  {
+    "name": "--nexa-button-spinner-size",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "14px",
+    "value": "14px",
+    "description": "Button loading indicator diameter."
+  },
+  {
+    "name": "--nexa-button-spinner-border",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "2px",
+    "value": "2px",
+    "description": "Button loading indicator stroke."
+  },
+  {
+    "name": "--nexa-stepper-gap",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "var(--nexa-space-4)",
+    "value": "16px",
+    "description": "Spacing between a numeric stepper label and its control."
+  },
+  {
+    "name": "--nexa-stepper-button-size",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "var(--nexa-control-height-sm)",
+    "value": "34px",
+    "description": "Numeric stepper button square size."
+  },
+  {
+    "name": "--nexa-stepper-output-width",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "42px",
+    "value": "42px",
+    "description": "Numeric stepper value readout width."
+  },
+  {
+    "name": "--nexa-stepper-control-gap",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "3px",
+    "value": "3px",
+    "description": "Numeric stepper control inset and internal gap."
+  },
+  {
+    "name": "--nexa-slider-gap",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "10px",
+    "value": "10px",
+    "description": "Vertical spacing within a reusable range slider."
+  },
+  {
+    "name": "--nexa-slider-heading-gap",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "var(--nexa-space-3)",
+    "value": "12px",
+    "description": "Inline spacing between range slider heading values."
+  },
+  {
+    "name": "--nexa-slider-track-size",
+    "layer": "component",
+    "type": "dimension",
+    "sourceValue": "6px",
+    "value": "6px",
+    "description": "Range slider track thickness."
+  },
+  {
     "name": "--nexa-panel-padding",
     "layer": "component",
     "type": "dimension",
@@ -2241,6 +2596,38 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "description": "Amber categorical series."
   },
   {
+    "name": "--nexa-viz-status-success",
+    "layer": "data-visualization",
+    "type": "color",
+    "sourceValue": "{nexa-color-success-700}",
+    "value": "#15803d",
+    "description": "Semantic success status for analytics states; never a categorical series alias."
+  },
+  {
+    "name": "--nexa-viz-status-warning",
+    "layer": "data-visualization",
+    "type": "color",
+    "sourceValue": "{nexa-color-warning-600}",
+    "value": "#d97706",
+    "description": "Semantic warning status for analytics states; never a categorical series alias."
+  },
+  {
+    "name": "--nexa-viz-status-danger",
+    "layer": "data-visualization",
+    "type": "color",
+    "sourceValue": "{nexa-color-danger-600}",
+    "value": "#dc2626",
+    "description": "Semantic danger status for analytics states; never a categorical series alias."
+  },
+  {
+    "name": "--nexa-viz-status-info",
+    "layer": "data-visualization",
+    "type": "color",
+    "sourceValue": "{nexa-color-info-700}",
+    "value": "oklch(48% 0.19 262.9)",
+    "description": "Semantic information status for analytics states; never a categorical series alias."
+  },
+  {
     "name": "--nexa-viz-sequential-low",
     "layer": "data-visualization",
     "type": "color",
@@ -2283,13 +2670,13 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
 ];
 
 export const NEXA_TOKEN_SUMMARY = {
-  "declarations": 252,
-  "references": 143,
+  "declarations": 295,
+  "references": 170,
   "layerCounts": {
     "primitive": 71,
-    "semantic": 121,
-    "component": 49,
-    "data-visualization": 11
+    "semantic": 140,
+    "component": 69,
+    "data-visualization": 15
   }
 } as const;
 

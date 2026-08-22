@@ -161,6 +161,106 @@
     "$value": "var(--nexa-space-1)",
     "$description": "Nexa component token nexa-control-gap."
   },
+  "nexa-control-label-gap": {
+    "$type": "dimension",
+    "$value": "var(--nexa-space-1)",
+    "$description": "Gap between a reusable control label and its control surface."
+  },
+  "nexa-target-size-min": {
+    "$type": "dimension",
+    "$value": "44px",
+    "$description": "Minimum interactive target used by documented evaluation controls."
+  },
+  "nexa-field-action-size": {
+    "$type": "dimension",
+    "$value": "30px",
+    "$description": "Circular trailing action target inside a text field."
+  },
+  "nexa-status-height": {
+    "$type": "dimension",
+    "$value": "26px",
+    "$description": "Status chip minimum height."
+  },
+  "nexa-status-padding-inline": {
+    "$type": "dimension",
+    "$value": "10px",
+    "$description": "Status chip inline padding."
+  },
+  "nexa-status-dot-size": {
+    "$type": "dimension",
+    "$value": "6px",
+    "$description": "Status chip dot diameter."
+  },
+  "nexa-toggle-width": {
+    "$type": "dimension",
+    "$value": "46px",
+    "$description": "Toggle track width."
+  },
+  "nexa-toggle-control-height": {
+    "$type": "dimension",
+    "$value": "28px",
+    "$description": "Toggle control hit-area height."
+  },
+  "nexa-toggle-height": {
+    "$type": "dimension",
+    "$value": "26px",
+    "$description": "Toggle track height."
+  },
+  "nexa-toggle-thumb-size": {
+    "$type": "dimension",
+    "$value": "20px",
+    "$description": "Toggle thumb diameter."
+  },
+  "nexa-toggle-thumb-inset": {
+    "$type": "dimension",
+    "$value": "2px",
+    "$description": "Toggle thumb inset within its track."
+  },
+  "nexa-button-spinner-size": {
+    "$type": "dimension",
+    "$value": "14px",
+    "$description": "Button loading indicator diameter."
+  },
+  "nexa-button-spinner-border": {
+    "$type": "dimension",
+    "$value": "2px",
+    "$description": "Button loading indicator stroke."
+  },
+  "nexa-stepper-gap": {
+    "$type": "dimension",
+    "$value": "var(--nexa-space-4)",
+    "$description": "Spacing between a numeric stepper label and its control."
+  },
+  "nexa-stepper-button-size": {
+    "$type": "dimension",
+    "$value": "var(--nexa-control-height-sm)",
+    "$description": "Numeric stepper button square size."
+  },
+  "nexa-stepper-output-width": {
+    "$type": "dimension",
+    "$value": "42px",
+    "$description": "Numeric stepper value readout width."
+  },
+  "nexa-stepper-control-gap": {
+    "$type": "dimension",
+    "$value": "3px",
+    "$description": "Numeric stepper control inset and internal gap."
+  },
+  "nexa-slider-gap": {
+    "$type": "dimension",
+    "$value": "10px",
+    "$description": "Vertical spacing within a reusable range slider."
+  },
+  "nexa-slider-heading-gap": {
+    "$type": "dimension",
+    "$value": "var(--nexa-space-3)",
+    "$description": "Inline spacing between range slider heading values."
+  },
+  "nexa-slider-track-size": {
+    "$type": "dimension",
+    "$value": "6px",
+    "$description": "Range slider track thickness."
+  },
   "nexa-panel-padding": {
     "$type": "dimension",
     "$value": "var(--nexa-layout-card-padding)",

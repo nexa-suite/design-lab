@@ -17,8 +17,8 @@
 .tooltip {
   position: absolute;
   z-index: 5;
-  inset-block-start: calc(100% + var(--nexa-space-2));
-  inset-inline-start: 0;
+  inset-block-start: var(--nexa-tooltip-top, calc(100% + var(--nexa-space-2)));
+  inset-inline-start: var(--nexa-tooltip-left, 0px);
   width: max-content;
   max-width: min(320px, calc(100vw - 24px));
   padding: var(--nexa-space-2) var(--nexa-space-3);
@@ -28,7 +28,4 @@
   box-shadow: var(--nexa-shadow-menu);
   font-size: var(--nexa-font-size-xs);
   line-height: 1.4;
-}
-@media (max-width: 420px) {
-  .tooltip { inset-inline-start: 0; inset-inline-end: auto; }
 }

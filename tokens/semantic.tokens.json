@@ -181,6 +181,36 @@
     "$value": "var(--nexa-primitive-blue-700)",
     "$description": "Nexa semantic token nexa-color-info-700."
   },
+  "nexa-color-info-standard-background": {
+    "$type": "color",
+    "$value": "var(--nexa-surface-info)",
+    "$description": "Standard information status background."
+  },
+  "nexa-color-info-standard-border": {
+    "$type": "color",
+    "$value": "var(--nexa-color-primary-300)",
+    "$description": "Standard information status boundary."
+  },
+  "nexa-color-info-standard-text": {
+    "$type": "color",
+    "$value": "var(--nexa-color-info-700)",
+    "$description": "Standard information status text."
+  },
+  "nexa-color-info-emphasized-background": {
+    "$type": "color",
+    "$value": "var(--nexa-color-info-700)",
+    "$description": "Strong information status background."
+  },
+  "nexa-color-info-emphasized-border": {
+    "$type": "color",
+    "$value": "var(--nexa-color-info-700)",
+    "$description": "Strong information status boundary."
+  },
+  "nexa-color-info-emphasized-text": {
+    "$type": "color",
+    "$value": "var(--nexa-color-text-inverse)",
+    "$description": "Strong information status text."
+  },
   "nexa-color-success-50": {
     "$type": "color",
     "$value": "var(--nexa-primitive-green-50)",
@@ -200,6 +230,31 @@
     "$type": "color",
     "$value": "var(--nexa-primitive-green-700)",
     "$description": "Nexa semantic token nexa-color-success-700."
+  },
+  "nexa-color-success-standard-background": {
+    "$type": "color",
+    "$value": "var(--nexa-surface-success)",
+    "$description": "Standard success status background."
+  },
+  "nexa-color-success-standard-text": {
+    "$type": "color",
+    "$value": "var(--nexa-color-success-700)",
+    "$description": "Standard success status text."
+  },
+  "nexa-color-success-emphasized-background": {
+    "$type": "color",
+    "$value": "var(--nexa-color-success-700)",
+    "$description": "Strong success status background."
+  },
+  "nexa-color-success-emphasized-border": {
+    "$type": "color",
+    "$value": "var(--nexa-color-success-700)",
+    "$description": "Strong success status boundary."
+  },
+  "nexa-color-success-emphasized-text": {
+    "$type": "color",
+    "$value": "var(--nexa-color-text-inverse)",
+    "$description": "Strong success status text."
   },
   "nexa-color-role-sales-surface": {
     "$type": "color",
@@ -266,6 +321,16 @@
     "$value": "var(--nexa-color-text-inverse)",
     "$description": "Nexa semantic token nexa-color-warning-emphasized-text."
   },
+  "nexa-color-warning-standard-background": {
+    "$type": "color",
+    "$value": "var(--nexa-surface-warning)",
+    "$description": "Standard warning status background."
+  },
+  "nexa-color-warning-standard-text": {
+    "$type": "color",
+    "$value": "var(--nexa-color-warning-text)",
+    "$description": "Standard warning status text."
+  },
   "nexa-color-danger-50": {
     "$type": "color",
     "$value": "var(--nexa-primitive-red-50)",
@@ -330,6 +395,36 @@
     "$type": "color",
     "$value": "var(--nexa-color-text-inverse)",
     "$description": "Nexa semantic token nexa-color-danger-strong-text."
+  },
+  "nexa-color-neutral-standard-background": {
+    "$type": "color",
+    "$value": "var(--nexa-surface-inset)",
+    "$description": "Standard neutral status background."
+  },
+  "nexa-color-neutral-standard-border": {
+    "$type": "color",
+    "$value": "var(--nexa-color-neutral-300)",
+    "$description": "Standard neutral status boundary."
+  },
+  "nexa-color-neutral-standard-text": {
+    "$type": "color",
+    "$value": "var(--nexa-color-neutral-700)",
+    "$description": "Standard neutral status text."
+  },
+  "nexa-color-neutral-emphasized-background": {
+    "$type": "color",
+    "$value": "var(--nexa-color-neutral-700)",
+    "$description": "Strong neutral status background."
+  },
+  "nexa-color-neutral-emphasized-border": {
+    "$type": "color",
+    "$value": "var(--nexa-color-neutral-700)",
+    "$description": "Strong neutral status boundary."
+  },
+  "nexa-color-neutral-emphasized-text": {
+    "$type": "color",
+    "$value": "var(--nexa-color-text-inverse)",
+    "$description": "Strong neutral status text."
   },
   "nexa-color-attention-500": {
     "$type": "color",

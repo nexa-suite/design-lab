@@ -47,4 +47,8 @@ export const APPROVED_CONTRAST_PAIRS: readonly ContrastPair[] = [
   pair('viz-series-indigo-card', 'Indigo data series against card', '--nexa-viz-series-3', '--nexa-surface-card', 'non-text'),
   pair('viz-series-success-card', 'Success data series against card', '--nexa-viz-series-5', '--nexa-surface-card', 'non-text'),
   pair('viz-series-warning-card', 'Warning data series against card', '--nexa-viz-series-6', '--nexa-surface-card', 'non-text'),
+  pair('viz-status-success-card', 'Semantic success status against card', '--nexa-viz-status-success', '--nexa-surface-card', 'non-text'),
+  pair('viz-status-warning-card', 'Semantic warning status against card', '--nexa-viz-status-warning', '--nexa-surface-card', 'non-text'),
+  pair('viz-status-danger-card', 'Semantic danger status against card', '--nexa-viz-status-danger', '--nexa-surface-card', 'non-text'),
+  pair('viz-status-info-card', 'Semantic information status against card', '--nexa-viz-status-info', '--nexa-surface-card', 'non-text'),
 ];

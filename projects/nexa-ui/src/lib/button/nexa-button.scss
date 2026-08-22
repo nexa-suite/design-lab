@@ -14,6 +14,6 @@
 .danger { color: var(--nexa-color-danger-text); background: var(--nexa-surface-danger); border-color: var(--nexa-color-danger-subtle-border); }
 .danger:hover:not(:disabled):not([aria-disabled="true"]) { background: var(--nexa-color-danger-200); }
 .nexa-button:disabled, .nexa-button[aria-disabled="true"] { cursor: not-allowed; opacity: 0.48; }
-.spinner { width: 14px; height: 14px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: nexa-spin var(--nexa-motion-spinner) linear infinite; }
+.spinner { width: var(--nexa-button-spinner-size); height: var(--nexa-button-spinner-size); border: var(--nexa-button-spinner-border) solid currentColor; border-right-color: transparent; border-radius: 50%; animation: nexa-spin var(--nexa-motion-spinner) linear infinite; }
 @keyframes nexa-spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .nexa-button { transition: none; } .spinner { animation: none; border-right-color: currentColor; } }

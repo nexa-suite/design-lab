@@ -31,6 +31,26 @@
     "$value": "{nexa-color-warning-600}",
     "$description": "Amber categorical series."
   },
+  "nexa-viz-status-success": {
+    "$type": "color",
+    "$value": "{nexa-color-success-700}",
+    "$description": "Semantic success status for analytics states; never a categorical series alias."
+  },
+  "nexa-viz-status-warning": {
+    "$type": "color",
+    "$value": "{nexa-color-warning-600}",
+    "$description": "Semantic warning status for analytics states; never a categorical series alias."
+  },
+  "nexa-viz-status-danger": {
+    "$type": "color",
+    "$value": "{nexa-color-danger-600}",
+    "$description": "Semantic danger status for analytics states; never a categorical series alias."
+  },
+  "nexa-viz-status-info": {
+    "$type": "color",
+    "$value": "{nexa-color-info-700}",
+    "$description": "Semantic information status for analytics states; never a categorical series alias."
+  },
   "nexa-viz-sequential-low": {
     "$type": "color",
     "$value": "{nexa-color-primary-100}",

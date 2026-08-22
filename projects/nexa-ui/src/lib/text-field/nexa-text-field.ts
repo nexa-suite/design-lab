@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, input, model, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, model, output } from '@angular/core';
+import type { FormValueControl } from '@angular/forms/signals';
 
 export type NexaTextFieldType = 'text' | 'search' | 'email' | 'password';
 
@@ -8,7 +9,7 @@ export type NexaTextFieldType = 'text' | 'search' | 'email' | 'password';
   styleUrl: './nexa-text-field.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NexaTextField {
+export class NexaTextField implements FormValueControl<string> {
   readonly id = input.required<string>();
   readonly label = input.required<string>();
   readonly value = model('');
@@ -22,6 +23,8 @@ export class NexaTextField {
   readonly leadingIcon = input('');
   readonly trailingActionLabel = input('');
   readonly trailingAction = output<void>();
+  readonly touch = output<void>();
+  private readonly host = inject(ElementRef<HTMLElement>);
 
   protected readonly describedBy = computed(() => {
     const ids = [] as string[];
@@ -36,4 +39,10 @@ export class NexaTextField {
   }
 
   protected emitTrailingAction(): void { this.trailingAction.emit(); }
+
+  focus(options?: FocusOptions): void {
+    (this.host.nativeElement as HTMLElement).querySelector<HTMLInputElement>('input')?.focus(options);
+  }
+
+  reset(): void { this.value.set(''); }
 }
