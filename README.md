@@ -1,8 +1,8 @@
-# Nexa Design Lab v1.0.0
+# Nexa Design Lab v1.0.1
 
 Visual evidence laboratory for Nexa foundations, reusable components, interaction states and accessibility review.
 
-`1.0.0` is the released Angular-only design-system baseline. It is not a production product application, domain contract or accessibility certification.
+`1.0.1` is the current released Angular-only design-system baseline. It is a metadata-correction patch over `v1.0.0`; it is not a production product application, domain contract or accessibility certification.
 
 ## Purpose
 
@@ -121,6 +121,6 @@ The archive preserves prior reports for provenance. It is not runtime authority 
 
 ## Boundary
 
-Design Lab changes are local to this repository. No production application, API, mobile repository or deployment is modified by this release. This `v1.0.0` release is executable design evidence; Blueprint remains normative for design-system governance, while product patterns remain non-production evidence.
+Design Lab changes are local to this repository. No production application, API, mobile repository or deployment is modified by this release. This `v1.0.1` release is executable design evidence; Blueprint remains normative for design-system governance, while product patterns remain non-production evidence.
 
 Copyright © 2026 Nexa. All rights reserved.

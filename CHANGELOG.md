@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.1] - 2026-08-22
+
+### Changed
+
+- Corrected package, library and release documentation metadata so the published patch baseline matches the repository release state.
+
+### Status
+
+- Stable metadata-correction patch over `v1.0.0`.
+
 ## [1.0.0] - 2026-08-22
 
 ### Added
@@ -15,7 +25,7 @@
 
 ### Status
 
-- Stable design-system baseline. Human visual, content, keyboard, assistive-technology and accessibility certification remain separate review activities.
+- Stable design-system baseline before the `v1.0.1` metadata correction. Human visual, content, keyboard, assistive-technology and accessibility certification remain separate review activities.
 
 ## Historical release candidate: 0.10.0-rc.1
 
