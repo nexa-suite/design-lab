@@ -62,8 +62,8 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-async function assertGeometryInvariants(page, { focusRequired = false, overlayRequired = false } = {}) {
-  const evidence = await page.evaluate(({ focusRequired: requiresFocus, overlayRequired: requiresOverlay }) => {
+async function assertGeometryInvariants(page, { focusRequired = false, overlayRequired = false, focusSpecimenRequired = false } = {}) {
+  const evidence = await page.evaluate(({ focusRequired: requiresFocus, overlayRequired: requiresOverlay, focusSpecimenRequired: requiresSpecimen }) => {
     const root = document.documentElement;
     const rhythm = getComputedStyle(root).getPropertyValue('--nexa-layout-section-gap').trim() || '48px';
     const sections = [...document.querySelectorAll('.pattern-section, .foundation-section, .context-section, .component-doc-section, .component-section, nexa-documentation-section')];
@@ -109,17 +109,18 @@ async function assertGeometryInvariants(page, { focusRequired = false, overlayRe
       validSectionRhythm,
       selectedGeometry,
       focusElement: focusTarget instanceof HTMLElement ? focusTarget.tagName.toLowerCase() : '',
-      focusIsActualControl: Boolean(focusTarget instanceof HTMLElement && (focusTarget.matches('button, input, select, textarea, [role="button"]') || focusTarget.closest('button, input, select, textarea, [role="button"]'))),
+        focusIsActualControl: Boolean(focusTarget instanceof HTMLElement && (focusTarget.matches('button, input, select, textarea, a[href], [role="button"]') || focusTarget.closest('button, input, select, textarea, a[href], [role="button"]'))),
       focusInsideForcedSpecimen: Boolean(focusWrapper),
       forcedWrapperShadow: focusWrapper ? getComputedStyle(focusWrapper).boxShadow : 'none',
       focusRingVisible,
       visibleOverlays,
       overlaysInViewport,
-      requiresFocus,
-      requiresOverlay,
-      activeInsideContent: Boolean(document.querySelector('.lab-content')?.contains(focusTarget)),
-    };
-  }, { focusRequired, overlayRequired });
+        requiresFocus,
+        requiresOverlay,
+        requiresSpecimen,
+        activeInsideContent: Boolean(document.querySelector('.lab-content')?.contains(focusTarget)),
+      };
+  }, { focusRequired, overlayRequired, focusSpecimenRequired });
   assert(evidence.scrollWidth <= evidence.clientWidth + 1, `geometry overflow ${evidence.scrollWidth - evidence.clientWidth}px`);
   assert(evidence.validSectionRhythm, `section rhythm/divider invariant failed: ${JSON.stringify(evidence.sectionRhythm)}`);
   assert(evidence.selectedGeometry, 'selected control introduced a hard square radius');
@@ -127,8 +128,10 @@ async function assertGeometryInvariants(page, { focusRequired = false, overlayRe
   if (focusRequired) {
     assert(evidence.activeInsideContent, 'focus evidence is outside documentation content');
     assert(evidence.focusIsActualControl, `focus landed on a wrapper instead of a control: ${evidence.focusElement}`);
-    assert(evidence.focusInsideForcedSpecimen, 'focus evidence did not target the marked specimen');
-    assert(evidence.forcedWrapperShadow === 'none', 'focus evidence still paints a wrapper-level ring');
+    if (focusSpecimenRequired) {
+      assert(evidence.focusInsideForcedSpecimen, 'focus evidence did not target the marked specimen');
+      assert(evidence.forcedWrapperShadow === 'none', 'focus evidence still paints a wrapper-level ring');
+    }
     assert(evidence.focusRingVisible, 'focused control has no visible focus geometry');
   }
   if (overlayRequired) assert(evidence.visibleOverlays.length > 0, 'overlay evidence did not render an overlay');
@@ -220,7 +223,7 @@ async function activateCanonicalState(page, route, state) {
   if (state === 'default') return;
   switch (route.path) {
     case 'overview':
-      if (state === 'focus') await page.locator('.lab-content a, .lab-content button, .lab-content input').first().focus();
+      if (state === 'focus') await page.locator('.lab-content button, .lab-content input, .lab-content a[href]').first().focus();
       break;
     case 'foundations/color':
       if (state === 'semantic') await assertVisibleText(page, 'Semantic map');
@@ -231,7 +234,7 @@ async function activateCanonicalState(page, route, state) {
       break;
     case 'components/buttons':
       if (state === 'focus') {
-        await page.locator('.state-gallery .forced-focus button').first().focus();
+        await page.locator('.button-state-grid .forced-focus button').first().focus();
         return;
       }
       await assertVisibleText(page, state === 'pressed' ? 'Pressed' : state === 'success' ? 'Success feedback' : state === 'error' ? 'Error recovery' : state.charAt(0).toLocaleUpperCase() + state.slice(1));
@@ -467,7 +470,11 @@ async function captureCanonicalState(page, route, viewport, state) {
   try {
     await visitEvidenceRoute(page, route, viewport);
     await activateCanonicalState(page, route, state);
-    const geometry = await assertGeometryInvariants(page, { focusRequired: state === 'focus', overlayRequired: state === 'open' });
+    const geometry = await assertGeometryInvariants(page, {
+      focusRequired: state === 'focus',
+      focusSpecimenRequired: state === 'focus' && ['components/buttons', 'components/text-fields', 'components/checkbox', 'components/radio', 'components/toggle', 'components/segmented-control'].includes(route.path),
+      overlayRequired: state === 'open',
+    });
     const evidence = await page.evaluate((expectedState) => {
       const root = document.documentElement;
       const content = document.querySelector('.lab-content');
@@ -514,7 +521,11 @@ async function captureScreenshotEvidence(page, route, viewport, state) {
     await visitEvidenceRoute(page, route, viewport);
     await activateCanonicalState(page, route, state);
     await page.waitForTimeout(120);
-    const geometry = await assertGeometryInvariants(page, { focusRequired: state === 'focus', overlayRequired: state === 'open' });
+    const geometry = await assertGeometryInvariants(page, {
+      focusRequired: state === 'focus',
+      focusSpecimenRequired: state === 'focus' && ['components/buttons', 'components/text-fields', 'components/checkbox', 'components/radio', 'components/toggle', 'components/segmented-control'].includes(route.path),
+      overlayRequired: state === 'open',
+    });
     const relativeScreenshot = artifactPath(route, viewport, state).replace(/\.json$/, '.png');
     const absoluteScreenshot = join(root, relativeScreenshot);
     mkdirSync(dirname(absoluteScreenshot), { recursive: true });

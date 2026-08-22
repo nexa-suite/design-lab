@@ -1,7 +1,7 @@
 .catalog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--nexa-space-3); }
 .product-card { display: grid; gap: var(--nexa-space-3); padding: var(--nexa-space-3); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-card); background: var(--nexa-surface-card); }
 .product-card.selected { border-color: var(--nexa-color-primary-600); box-shadow: var(--nexa-focus-ring); }
-.product-select { display: grid; gap: var(--nexa-space-2); min-width: 0; border: 0; padding: 0; color: inherit; background: transparent; text-align: start; cursor: pointer; }
+.product-select { display: grid; gap: var(--nexa-space-2); min-width: 0; border: 0; border-radius: var(--nexa-radius-card); padding: 0; color: inherit; background: transparent; text-align: start; cursor: pointer; }
 .product-select:focus-visible { outline: none; box-shadow: var(--nexa-focus-ring); border-radius: var(--nexa-radius-card); }
 .product-art { display: grid; min-height: 148px; place-items: center; border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-card); color: var(--nexa-color-primary-600); background: var(--nexa-surface-card); font-size: 42px; }
 .product-family, .product-meta { color: var(--nexa-color-text-secondary); font-size: var(--nexa-font-size-sm); }
