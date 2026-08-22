@@ -2,8 +2,6 @@
 @use '../layout/documentation-heading' as docs;
 
 :host { display: block; }
-.component-section { padding: var(--nexa-layout-section-gap) 0; border-bottom: 1px solid var(--nexa-color-border-structural); }
-.evidence-first { padding-top: 0; }
 @include docs.shared-heading;
 .button-playground { display: grid; gap: var(--nexa-space-4); align-items: start; padding: clamp(var(--nexa-space-5), 3vw, var(--nexa-space-8)); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-panel); background: var(--nexa-surface-inset); }
 .button-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--nexa-space-2); }
@@ -12,7 +10,6 @@
 .button-state-grid article { display: grid; min-width: 0; min-height: 122px; align-content: start; gap: var(--nexa-space-3); padding: var(--nexa-card-padding); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-card); background: var(--nexa-surface-card); }
 .button-state-grid article > span { color: var(--nexa-color-text-muted); font: 700 var(--nexa-font-size-2xs)/1.3 var(--nexa-font-family-mono); text-transform: uppercase; }
 .forced-hover { border-color: var(--nexa-color-primary-400); background: var(--nexa-color-primary-50); }
-.forced-focus { box-shadow: var(--nexa-focus-preview-ring); }
 .forced-pressed { transform: translateY(1px); }
 .success-cell, .error-cell { justify-items: start; }
 .success-cell { border-color: var(--nexa-color-success-border); color: var(--nexa-color-success-700); background: var(--nexa-surface-success); }

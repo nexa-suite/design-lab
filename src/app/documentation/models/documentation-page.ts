@@ -8,6 +8,7 @@ export type DocumentationKind =
   | 'engineering';
 
 export type DocumentationStatus = 'FROZEN' | 'CANDIDATE' | 'EXPERIMENTAL' | 'DEPRECATED';
+export type DocumentationAdoption = 'PUBLIC COMPONENT' | 'DOCUMENTED NATIVE PATTERN' | 'COMPOSITION PATTERN' | 'LAB EVIDENCE ONLY' | 'DEFERRED / NOT PRODUCT READY';
 
 export interface DocumentationPageMetadata {
   readonly id: string;
@@ -42,6 +43,7 @@ export interface DocumentationPageContent {
 export interface DocumentationPage extends DocumentationPageContent {
   readonly path: string;
   readonly status: DocumentationStatus;
+  readonly adoption: DocumentationAdoption;
   readonly searchText: string;
   readonly relatedPageIds?: readonly string[];
 }

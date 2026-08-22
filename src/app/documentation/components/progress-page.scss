@@ -2,8 +2,6 @@
 @use '../layout/documentation-heading' as docs;
 
 :host { display: block; }
-.component-section { padding: var(--nexa-layout-section-gap) 0; border-bottom: 1px solid var(--nexa-color-border-structural); }
-.evidence-first { padding-top: 0; }
 @include docs.shared-heading;
 .progress-family { display: grid; gap: var(--nexa-space-4); padding: clamp(var(--nexa-space-5), 3vw, var(--nexa-space-8)); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-panel); background: var(--nexa-surface-inset); }
 .progress-row { display: grid; grid-template-columns: 190px minmax(160px, 1fr) 70px; gap: var(--nexa-space-3); align-items: center; }
@@ -17,6 +15,7 @@ progress { width: 100%; height: 8px; accent-color: var(--nexa-color-primary-600)
 .progress-ring { display: grid; width: 76px; aspect-ratio: 1; place-items: center; margin-inline: auto; border-radius: 50%; }
 .progress-ring::before { grid-area: 1 / 1; width: 54px; aspect-ratio: 1; border-radius: 50%; background: var(--nexa-surface-card); content: ''; }
 .progress-ring span { z-index: 1; grid-area: 1 / 1; color: var(--nexa-color-primary-700); font: 700 var(--nexa-font-size-xs)/1 var(--nexa-font-family-mono); }
+.progress-label { display: block; color: var(--nexa-color-text-secondary); font-size: var(--nexa-font-size-xs); text-align: center; }
 .progress-ring-determinate { background: conic-gradient(var(--nexa-viz-series-1) 0 72%, var(--nexa-viz-grid) 72% 100%); }
 .progress-ring-indeterminate { background: conic-gradient(var(--nexa-viz-series-1) 0 28%, var(--nexa-viz-grid) 28% 100%); animation: progress-ring-rotate 1.1s linear infinite; }
 .inline-activity { display: inline-flex; gap: var(--nexa-space-2); align-items: center; color: var(--nexa-color-primary-700); font-size: var(--nexa-font-size-sm); }

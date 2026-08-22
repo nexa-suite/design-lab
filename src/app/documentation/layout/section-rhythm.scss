@@ -1,0 +1,19 @@
+/* Single owner for documentation section spacing and separators. */
+.pattern-section,
+.context-section,
+.foundation-section,
+.component-doc-section,
+.component-section,
+nexa-documentation-section {
+  padding-block: var(--nexa-layout-section-gap);
+  border-bottom: 1px solid var(--nexa-color-border-structural);
+}
+
+.pattern-section.evidence-first,
+.context-section.evidence-first,
+.foundation-section.evidence-first,
+.component-doc-section.evidence-first,
+.component-section.evidence-first,
+nexa-documentation-section.evidence-first {
+  padding-top: 0;
+}

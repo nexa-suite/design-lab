@@ -1,10 +1,7 @@
 @use '../layout/documentation-heading' as docs;
 
 :host { display: block; }
-.foundation-section { padding: 42px 0; border-bottom: 1px solid var(--nexa-color-border-structural); }
-.evidence-first { padding-top: 0; }
 @include docs.shared-heading;
-.foundation-section:not(:first-child) .section-heading { padding-top: var(--nexa-space-5); }
 .brand-logo-grid, .logo-size-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .brand-logo-grid article, .logo-size-grid article { display: grid; gap: 10px; padding: 18px; border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-card); background: var(--nexa-surface-card); }
 .logo-stage { display: grid; min-height: 180px; place-items: center; padding: 28px; border-radius: var(--nexa-radius-panel); }

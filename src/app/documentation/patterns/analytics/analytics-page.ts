@@ -3,14 +3,14 @@ import { NexaButton } from 'nexa-ui';
 import { NexaDocumentationFrame } from '../../layout/documentation-page';
 import { injectDocumentationRouteContext } from '../../layout/page-context';
 
-type AnalyticsTone = 'success' | 'warning' | 'danger';
+type AnalyticsStatus = 'success' | 'warning' | 'danger';
 type AnalyticsState = 'ready' | 'loading' | 'empty' | 'error';
 
 interface AnalyticsBar {
   readonly label: string;
   readonly value: string;
   readonly width: number;
-  readonly tone: AnalyticsTone;
+  readonly status: AnalyticsStatus;
 }
 
 @Component({
@@ -24,9 +24,9 @@ export class NexaAnalyticsPage {
   protected readonly context = injectDocumentationRouteContext();
   protected readonly analyticsState = signal<AnalyticsState>('ready');
   protected readonly analyticsBars: readonly AnalyticsBar[] = [
-    { label: 'Completed', value: '64%', width: 64, tone: 'success' },
-    { label: 'Awaiting review', value: '22%', width: 22, tone: 'warning' },
-    { label: 'Blocked', value: '14%', width: 14, tone: 'danger' },
+    { label: 'Completed', value: '64%', width: 64, status: 'success' },
+    { label: 'Awaiting review', value: '22%', width: 22, status: 'warning' },
+    { label: 'Blocked', value: '14%', width: 14, status: 'danger' },
   ];
 
   protected setAnalyticsState(state: AnalyticsState): void { this.analyticsState.set(state); }

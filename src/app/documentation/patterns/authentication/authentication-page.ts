@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { NexaButton, NexaLocaleSwitcher, NexaLogo, NexaSegmentedControl, NexaTextField, type NexaLocale, type NexaSegmentOption } from 'nexa-ui';
+import { NexaButton, NexaLocaleSwitcher, NexaLogo, NexaSegmentedControl, NexaStatusChip, NexaTextField, type NexaLocale, type NexaSegmentOption } from 'nexa-ui';
 import { NexaDocumentationFrame } from '../../layout/documentation-page';
 import { injectDocumentationRouteContext } from '../../layout/page-context';
 
@@ -13,7 +13,7 @@ const AUTH_COPY: Readonly<Record<NexaLocale, AuthCopy>> = {
 
 @Component({
   selector: 'nexa-authentication-page',
-  imports: [NexaButton, NexaDocumentationFrame, NexaLocaleSwitcher, NexaLogo, NexaSegmentedControl, NexaTextField],
+  imports: [NexaButton, NexaDocumentationFrame, NexaLocaleSwitcher, NexaLogo, NexaSegmentedControl, NexaStatusChip, NexaTextField],
   templateUrl: './authentication-page.html',
   styleUrl: './authentication-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

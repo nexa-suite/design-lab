@@ -16,8 +16,8 @@ export class NexaProgressPage {
   protected readonly context = injectDocumentationRouteContext();
   protected readonly view = signal<ProgressView>('standard');
   protected readonly phases: readonly NexaSequencePhase[] = [
-    { id: 'determinate', label: 'Determinate', detail: 'Known completion amount.', tone: 'info', durationMs: 500 },
-    { id: 'paused', label: 'Paused', detail: 'Progress is intentionally paused.', tone: 'warning', durationMs: 600 },
+    { id: 'determinate', label: 'Determinate', detail: 'Known completion amount.', tone: 'info', durationMs: 1000 },
+    { id: 'paused', label: 'Paused', detail: 'Progress is intentionally paused.', tone: 'warning', durationMs: 1600 },
     { id: 'complete', label: 'Complete', detail: 'The operation reached its terminal result.', tone: 'success', terminal: true },
     { id: 'error', label: 'Error', detail: 'The operation needs explicit recovery.', tone: 'danger', terminal: true },
   ];

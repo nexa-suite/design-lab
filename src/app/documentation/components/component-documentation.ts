@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, signal } from '@angular/core';
 import {
   NexaActionMenu,
   NexaButton,
@@ -43,6 +43,7 @@ const NAV_ITEMS: readonly NavItem[] = [
   host: { '(document:keydown.escape)': 'closeLayers()' },
 })
 export class NexaComponentDocumentation {
+  private readonly host = inject(ElementRef<HTMLElement>);
   readonly page = input.required<DocumentationPage>();
   protected readonly componentStates = COMPONENT_STATES;
   protected readonly navItems = NAV_ITEMS;
@@ -103,6 +104,10 @@ export class NexaComponentDocumentation {
     { id: 'long-08', label: 'Cancel request', icon: 'pi-ban', destructive: true, separatorBefore: true },
   ];
 
+  constructor() {
+    afterNextRender(() => this.focusActualSpecimen());
+  }
+
   protected readonly segmentOptions: readonly NexaSegmentOption[] = [
     { value: 'open', label: 'Open' },
     { value: 'review', label: 'In review' },
@@ -125,19 +130,19 @@ export class NexaComponentDocumentation {
     { label: 'Critical', tone: 'danger', icon: 'pi-shield', emphasis: 'strong' },
   ];
   protected readonly operationPhases: readonly NexaSequencePhase[] = [
-    { id: 'ready', label: 'Ready', detail: 'Create order is available.', tone: 'neutral', durationMs: 700 },
-    { id: 'processing', label: 'Processing', detail: 'Creating order.', tone: 'info', durationMs: 900 },
+    { id: 'ready', label: 'Ready', detail: 'Create order is available.', tone: 'neutral', durationMs: 1000 },
+    { id: 'processing', label: 'Processing', detail: 'Creating order.', tone: 'info', durationMs: 1400 },
     { id: 'success', label: 'Success', detail: 'Order created; adjacent feedback remains.', tone: 'success', terminal: true },
   ];
   protected readonly searchPhases: readonly NexaSequencePhase[] = [
-    { id: 'query', label: 'Query', detail: 'A search term is available.', tone: 'neutral', durationMs: 700 },
-    { id: 'searching', label: 'Searching', detail: 'The query is being evaluated.', tone: 'info', durationMs: 900 },
+    { id: 'query', label: 'Query', detail: 'A search term is available.', tone: 'neutral', durationMs: 1000 },
+    { id: 'searching', label: 'Searching', detail: 'The query is being evaluated.', tone: 'info', durationMs: 1400 },
     { id: 'results', label: 'Results', detail: 'Matching products are visible.', tone: 'success', terminal: true },
     { id: 'error', label: 'Error', detail: 'Search failed without losing the query.', tone: 'danger', terminal: true },
   ];
   protected readonly progressPhases: readonly NexaSequencePhase[] = [
-    { id: 'determinate', label: 'Determinate', detail: 'Known completion amount.', tone: 'info', durationMs: 700 },
-    { id: 'paused', label: 'Paused', detail: 'Progress is intentionally paused.', tone: 'warning', durationMs: 700 },
+    { id: 'determinate', label: 'Determinate', detail: 'Known completion amount.', tone: 'info', durationMs: 1000 },
+    { id: 'paused', label: 'Paused', detail: 'Progress is intentionally paused.', tone: 'warning', durationMs: 1600 },
     { id: 'complete', label: 'Complete', detail: 'The operation reached its terminal result.', tone: 'success', terminal: true },
     { id: 'error', label: 'Error', detail: 'The operation needs recovery.', tone: 'danger', terminal: true },
   ];
@@ -210,4 +215,8 @@ export class NexaComponentDocumentation {
   protected nextStep(): void { this.currentStep.update((step) => Math.min(4, step + 1)); }
   protected selectNav(id: string, event: Event): void { event.preventDefault(); this.activeNav.set(id); }
   protected progressPercentage(): number { return (this.currentStep() / 4) * 100; }
+
+  private focusActualSpecimen(): void {
+    (this.host.nativeElement as HTMLElement).querySelector<HTMLElement>('.state-gallery .forced-focus button, .state-gallery .forced-focus input')?.focus({ preventScroll: true });
+  }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, ElementRef, inject, signal } from '@angular/core';
 import { NexaButton, NexaStatusChip } from 'nexa-ui';
 import { NexaDocumentationFrame } from '../layout/documentation-page';
 import { injectDocumentationRouteContext } from '../layout/page-context';
@@ -14,15 +14,20 @@ type ButtonOutcome = 'idle' | 'processing' | 'success' | 'error';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NexaButtonPage {
+  private readonly host = inject(ElementRef<HTMLElement>);
   protected readonly context = injectDocumentationRouteContext();
   protected readonly outcome = signal<ButtonOutcome>('idle');
   protected readonly notice = signal('Choose an outcome to inspect button feedback.');
   protected readonly phases: readonly NexaSequencePhase[] = [
-    { id: 'idle', label: 'Idle', detail: 'The action is available.', tone: 'neutral', durationMs: 500 },
-    { id: 'processing', label: 'Processing', detail: 'Duplicate activation is blocked.', tone: 'info', durationMs: 700 },
+    { id: 'idle', label: 'Idle', detail: 'The action is available.', tone: 'neutral', durationMs: 1000 },
+    { id: 'processing', label: 'Processing', detail: 'Duplicate activation is blocked.', tone: 'info', durationMs: 1400 },
     { id: 'success', label: 'Success', detail: 'The result is confirmed next to the action.', tone: 'success', terminal: true },
     { id: 'error', label: 'Error', detail: 'Retry preserves the current context.', tone: 'danger', terminal: true },
   ];
+
+  constructor() {
+    afterNextRender(() => (this.host.nativeElement as HTMLElement).querySelector<HTMLElement>('.button-state-grid .forced-focus button')?.focus({ preventScroll: true }));
+  }
 
   protected run(outcome: 'success' | 'error'): void {
     if (this.outcome() === 'processing') return;

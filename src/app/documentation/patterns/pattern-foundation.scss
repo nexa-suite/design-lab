@@ -1,11 +1,8 @@
 @use '../layout/documentation-heading' as docs;
 
 :host { display: block; }
-.pattern-section { padding: var(--nexa-layout-section-gap) 0; border-bottom: 1px solid var(--nexa-color-border-structural); }
-.evidence-first { padding-top: 0; }
 @include docs.shared-heading;
 .section-heading { position: relative; }
-.pattern-section:not(:first-child) .section-heading { padding-top: var(--nexa-space-5); }
 .pattern-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--nexa-space-2); }
 .demo-status { margin: var(--nexa-space-4) 0 0; color: var(--nexa-color-text-secondary); font-size: var(--nexa-font-size-sm); line-height: var(--nexa-line-height-normal); }
 .pattern-note { display: flex; gap: var(--nexa-space-3); align-items: flex-start; margin-top: var(--nexa-space-5); padding: var(--nexa-space-4); border: 1px solid var(--nexa-color-primary-200); border-radius: var(--nexa-radius-card); color: var(--nexa-color-primary-700); background: var(--nexa-surface-info); }

@@ -15,8 +15,8 @@ export class NexaOrderFlowPage {
   protected readonly context = injectDocumentationRouteContext();
   protected readonly documentState = signal<'missing' | 'ready'>('missing');
   protected readonly phases: readonly NexaSequencePhase[] = [
-    { id: 'submitted', label: 'Submitted', detail: 'Buyer request received.', tone: 'info', durationMs: 700 },
-    { id: 'validated', label: 'Validated', detail: 'Sales checks request details.', tone: 'success', durationMs: 700 },
+    { id: 'submitted', label: 'Submitted', detail: 'Buyer request received.', tone: 'info', durationMs: 1000 },
+    { id: 'validated', label: 'Validated', detail: 'Sales checks request details.', tone: 'success', durationMs: 1000 },
     { id: 'confirmed', label: 'Order confirmed', detail: 'Confirmation is visible to the buyer.', tone: 'success', terminal: true },
   ];
 }

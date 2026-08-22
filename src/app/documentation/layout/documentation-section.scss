@@ -2,12 +2,6 @@
 
 :host {
   display: block;
-  padding: var(--nexa-layout-section-gap) 0;
-  border-bottom: 1px solid var(--nexa-color-border-structural);
 }
 
 @include docs.shared-heading;
-
-:host(.evidence-first) {
-  padding-top: 0;
-}

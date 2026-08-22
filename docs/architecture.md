@@ -41,7 +41,7 @@ Token source is organized as primitive, semantic, component and data-visualizati
 
 Documentation registry metadata owns discovery only. Substantial page copy and behavior live with the feature. Product patterns preserve the distinction between catalog browsing, cart, draft request and order; the cart never reserves inventory. Provider-neutral map, payment and delivery evidence names deferred production ownership rather than inventing contracts.
 
-The shared documentation layout owns the repeated section heading and divider primitive in `src/app/documentation/layout/documentation-section.*`. It is intentionally a section primitive, not a generic `Box`; projected specimens retain ownership of their feature-specific layout styles.
+`src/app/documentation/layout/section-rhythm.scss` is the single global owner of documentation section spacing and structural separators. `nexa-documentation-section` remains a focused heading/content primitive, not a generic `Box`; projected specimens retain ownership of their feature-specific layout styles. Feature styles no longer add a second divider or a 42px section rhythm.
 
 ## Verification boundary
 
