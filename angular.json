@@ -27,11 +27,14 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "*.svg",
+                "input": "logo-nexa",
+                "output": "brand/canonical"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ]
+            "styles": ["src/styles.scss"]
           },
           "configurations": {
             "production": {
@@ -71,6 +74,32 @@
         },
         "test": {
           "builder": "@angular/build:unit-test"
+        }
+      }
+    },
+    "nexa-ui": {
+      "projectType": "library",
+      "root": "projects/nexa-ui",
+      "sourceRoot": "projects/nexa-ui/src",
+      "prefix": "nexa",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/nexa-ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/nexa-ui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/nexa-ui/tsconfig.spec.json"
+          }
         }
       }
     }

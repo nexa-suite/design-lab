@@ -1,130 +1,126 @@
-<div align="center">
+# Nexa Design Lab v0.10
 
-<br />
+Visual evidence laboratory for Nexa foundations, reusable components, interaction states and accessibility review.
 
-<img src="./public/brand/nexa.svg" alt="Nexa" width="240" />
-
-# Nexa Design Lab
-
-**Internal visual engineering studio for Nexa foundations, screens and workflow evidence.**
-
-![Status](https://img.shields.io/badge/status-experimental-7C3AED?style=flat-square) ![Angular](https://img.shields.io/badge/Angular-22-DD0031?style=flat-square&logo=angular&logoColor=white) ![Material](https://img.shields.io/badge/Angular%20Material-22-757575?style=flat-square&logo=materialdesign&logoColor=white) ![Vitest](https://img.shields.io/badge/Vitest-tests-6E9F18?style=flat-square&logo=vitest&logoColor=white)
-
-[Run](#run) · [Visual foundations](#visual-foundations) · [Reference library](#reference-screen-library) · [Review workflow](#review-workflow)
-
-</div>
-
----
+`0.10.0-rc.1` is an Angular-only design-system candidate. It is not a production package, a product application, a Blueprint baseline or a completed design-library publication.
 
 ## Purpose
 
-Design Lab is Nexa's executable visual laboratory. It holds design evidence, component behavior and representative B2B workflow experiments for human review.
+v0.10 converges the v0.9 visual foundation into an executable, consumable and reviewable baseline:
 
-Current state: v0.5.0-rc.1 product-quality convergence candidate. Experimental, not production, not canonical Blueprint.
+- every important rule has a rendered specimen;
+- states can be seen, triggered, compared and reset;
+- color and contrast use a shared deterministic gate;
+- accessibility modes expose focus, target, resize and motion behavior;
+- component maturity separates human-frozen direction from open exploration;
+- canonical supplied logo assets, semantic status emphasis and reusable Action Menu / Tooltip behavior are rendered;
+- Async Operations, Authentication, Legal Content, Payments, Analytics, Dispatch Board and Data-Dense Operations are candidate patterns;
+- Increased Contrast, Reduced Motion and an explicit 400% reflow evaluation mode are root-level functional evaluation modes.
+- reusable candidates live under `design-system`, while Lab-only evidence lives under `lab`;
+- Authentication, Analytics and Dispatch Board own focused documentation features and explicit lazy routes;
+- StateSequence playback has configurable phase timing, terminal states and explicit recovery;
+- architecture, token and contrast gates protect the source structure and geometry contracts.
+- the generated token reference feeds documentation and contrast evidence from the same canonical JSON source;
+- DTCG-ish token sources generate primitive, semantic, component and data-visualization layers;
+- PrimeIcons are pinned locally and exposed through an audited explorer;
+- the icon explorer exposes render, role, size, alignment, label policy, semantic color and hit-target evidence;
+- `projects/nexa-ui` is the real Angular library boundary with an explicit public API;
+- Buttons and Progress own focused route features instead of depending on the broad component renderer;
+- Blueprint documentation is the normative design-system baseline; this repository is executable evidence.
 
-## Design workspace
-
-- Visual foundations: typography, color, spacing, surfaces, shape and motion.
-- Accessibility, contrast and responsive behavior experiments.
-- Angular Material compatibility comparisons.
-- Routed Platform, Buyer Portal and Authentication reference screens using synthetic data.
-- Catalog anatomy, Inventory Control and representative Sales Orders views.
-- Brand and product assets used only as local design evidence.
-
-## What belongs here
-
-- Inspectable visual experiments.
-- Reusable component and screen references.
-- Design-system rules awaiting human approval.
-- Traceability from visual question to evidence and decision.
-
-## What does not belong here
-
-- Production API, authentication, tenant provisioning or routing contracts.
-- Final product semantics or accepted domain decisions.
-- Claims that an experiment is production-ready.
-- Legacy source copied as implementation authority.
-
-Blueprint becomes durable design specification only after human approval. Production repositories remain authority for shipped behavior.
-
-## Visual foundations
-
-- Brand blue: #2563EB, represented through primitive OKLCH scale.
-- Plus Jakarta Sans for display, Inter for operational UI, native/system monospace for identifiers.
-- 4px spacing rhythm, restrained 6–16px radii and low-shadow surfaces.
-- White/light shell with pale blue canvas.
-- Accessible drawer navigation at narrow widths; sidebar is not silently removed.
-
-## Reference Screen Library
-
-<table>
-<tr><td width="50%" valign="top"><strong>Foundations and Contrast</strong><br />Typography, spacing, surfaces, motion, icon comparison and WCAG contrast results.</td><td width="50%" valign="top"><strong>Material Compatibility</strong><br />Buttons, fields, select, checkbox, radio, toggle, menu, tooltip and progress.</td></tr>
-<tr><td valign="top"><strong>Operational Reference</strong><br />Sales Orders and Inventory Control tables with state, density and overflow contracts.</td><td valign="top"><strong>Product Reference</strong><br />Platform Sales/Logistics, Buyer Portal request flows and Authentication screens.</td></tr>
-</table>
-
-## Current stack
-
-| Concern | Technology |
-| --- | --- |
-| Framework | Angular 22 standalone |
-| Components | Angular Material 22 and CDK-compatible patterns |
-| Styling | SCSS |
-| Tests | Vitest |
-| Language | TypeScript 6 |
-| Package manager | npm 11.17.0 |
-| Experimental dependencies | Google Fonts and PrimeIcons CDN |
-
-No DTCG compiler, token package, Storybook, Tailwind, Nx, dark mode or theme engine is present.
+The active lab contains documentation pages and composition specimens only. Product patterns remain design evidence; they do not define accepted domain behavior or production contracts.
 
 ## Run
 
     npm ci
     npm start -- --host 127.0.0.1 --port 4301
 
-Open http://127.0.0.1:4301/.
+Open `http://127.0.0.1:4301/guidelines/overview`.
 
-## Validation
+## Route map
 
-    npm run build
-    npm test -- --watch=false
-    npm audit --omit=dev --audit-level=high
+| Area | Evidence |
+| --- | --- |
+| Start here | Overview, principles, maturity/freeze |
+| Foundations | Color, Brand / Logo, typography, layout, shape, surfaces, iconography, motion |
+| Components | Buttons, text fields, search, choice controls, status, feedback, menus, overlays, data, progress, workflow, quantity, navigation |
+| Patterns | Forms, search/filtering, async operations, authentication, legal content, payments, analytics, dispatch board, data-dense operations, responsive behavior |
+| Quality | Accessibility Lab, Contrast Lab, heuristics, input modality, maturity |
+| Engineering | Angular architecture, tokens, APIs, testing, Design Adoption & Handoff |
 
-Browser review checkpoints: 320px, 768px, 1024px and 1440px.
+All documentation pages are lazy-loaded through the Angular router. There is no active screen-library route.
 
-## Repository structure
+## Frozen candidate direction
 
-    src/                         Angular application
-    public/                      Local brand and catalog assets
-    IMPLEMENTATION-REPORT-v0.4.md
-    TRACEABILITY-v0.4.md
-    IMPLEMENTATION-REPORT-v0.5.md
-    TRACEABILITY-v0.5.md
-    RESEARCH-v0.5.md
-    STYLE-GUIDELINES-v0.5.md
-    VISUALIZATION-DECISION-v0.5.md
-    NORMALIZATION-REPORT-v0.2.md
-    package.json
-    angular.json
+- Light appearance is canonical.
+- The current sidebar geometry, grouping, search, active row and mobile drawer behavior remain frozen.
+- The current text-field geometry remains frozen and is now reusable through `NexaTextField`.
+- Plus Jakarta Sans, Inter and JetBrains/system mono remain the candidate type families.
+- PrimeIcons remain the candidate icon system.
+- White structural surfaces sit on a cool light canvas; elevation is restrained and purposeful.
+- Rounded geometry is semantic: controls, cards, panels and compact status do not share one universal radius.
+- The supplied `logo-nexa/logo-nexa.svg` and `logo-nexa/Documento.svg` files are the canonical rendered logo sources; the wordmark is never redrawn in CSS or text.
+- Dark mode is intentionally deferred. Increased Contrast is an evaluation mode over the same light foundation.
 
-## Review workflow
+## Quality evidence
 
-1. Define visual question and evidence boundary.
-2. Build smallest inspectable experiment.
-3. Check keyboard, contrast, responsive states and content density.
-4. Compare against current Nexa identity and production constraints.
-5. Record decision, unresolved question or rejection.
-6. Promote only after human approval and production-repository ownership is clear.
+```bash
+npm run build
+npm run build:library
+npm run validate:architecture
+npm run validate:tokens
+npm run validate:colors
+npm run validate:icons
+npm run validate:documentation
+npm run validate:public-api
+npm run validate:visual
+npm run validate:contrast
+npm run validate:package
+npm run validate:browser
+npm run audit:visual
+npm test -- --watch=false
+npm run test:library -- --watch=false
+npm run build:all
+npm audit --omit=dev --audit-level=high
+git diff --check
+```
 
-## Relationship to products
+The Contrast Lab derives ratios from token color values. The required gates are WCAG 2.2: 4.5:1 for normal text, 3:1 for large text and 3:1 for essential non-text UI. The lab also exposes Standard/Increased Contrast, Motion/Reduced Motion and target-overlay review modes.
 
-Design Lab supports Website, Platform, Portal, API documentation and future Mobile decisions. It does not publish product behavior, replace Blueprint authority or alter application source.
+The browser gate covers every registered page at 1440, 1024, 768, 390 and 320px, plus representative state and recovery interactions. Screenshot capture remains an optional review artifact; the committed contract records route, viewport, state and source SHA without generated images. Manual visual judgment and assistive-technology review remain human handoff items.
 
-## Security and publication boundary
+## Angular structure
 
-Do not report vulnerabilities through public issues. No standalone Security Policy exists in this checkout. Experiments remain local design evidence until approved; publication does not imply production readiness.
+```text
+src/app/
+  shell/                 documentation navigation shell
+projects/nexa-ui/         reusable candidate library and explicit public API
+  lab/                   evaluation, evidence and quality infrastructure
+  documentation/         route features, page content and navigation metadata
+src/styles/
+  _tokens-primitives.scss
+  _tokens-semantic.scss
+  _tokens-components.scss
+  _tokens-data-visualization.scss
+  _motion.scss
+  _accessibility.scss
+tooling/scripts/         token and contrast gates
+```
 
-## Legal
+Reusable controls own their public API and native semantics. Documentation specimens own simulation state, galleries and evidence composition. Strict templates and signal-first state are required.
 
-Copyright © 2026 Nexa. All rights reserved. No open-source license is selected by this README.
+## Documentation
 
-<div align="center"><br />Nexa · Visual decisions made inspectable</div>
+- [Architecture](./docs/architecture.md)
+- [Consuming Nexa UI](./docs/consuming-nexa-ui.md)
+- [Release validation](./docs/release-validation.md)
+- [Design adoption ADR](./docs/adr/0001-blueprint-authority-and-lab-evidence.md)
+- [Historical v0.x archive](./docs/archive/v0.x/)
+
+The archive preserves prior reports for provenance. It is not runtime authority and does not override the Blueprint design-system baseline.
+
+## Boundary
+
+Design Lab changes are local to this repository. No production application, API, mobile repository or deployment is modified by this release candidate. The v0.10 branch is prepared without merging to `main` or creating a final release. The pre-existing `v0.10.0-rc.1` tag is not moved or rewritten; SCM must reconcile its stale tag target before calling this branch a release candidate. The Blueprint baseline is updated only in its isolated design branch.
+
+Copyright © 2026 Nexa. All rights reserved.

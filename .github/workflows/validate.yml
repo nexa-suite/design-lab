@@ -1,0 +1,37 @@
+name: Design Lab validation
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.3
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run validate:architecture
+      - run: npm run validate:tokens
+      - run: npm run validate:colors
+      - run: npm run validate:icons
+      - run: npm run validate:documentation
+      - run: npm run validate:public-api
+      - run: npm run validate:visual
+      - run: npm run audit:visual
+      - run: npm run validate:contrast
+      - run: npm run test:library -- --watch=false
+      - run: npm test -- --watch=false
+      - run: npm run build:library
+      - run: npm run validate:package
+      - run: npm run build
+      - run: npm run validate:browser
+      - run: git diff --check

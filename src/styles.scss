@@ -1,8 +1,10 @@
+@use 'primeicons/primeicons.css';
 @use './styles/tokens';
 @use './styles/typography';
 @use './styles/motion';
 @use './styles/material-theme';
 @use './styles/accessibility';
+@use './app/documentation/layout/section-rhythm';
 
 * { box-sizing: border-box; }
 

@@ -1,0 +1,52 @@
+<nexa-documentation-frame [page]="context.page" [allPages]="context.allPages">
+  <nexa-documentation-section index="01" kicker="MAP / LOCATION" title="Location evidence answers where and why" intro="This provider-agnostic composition uses a static accessible map surface. Coordinates, provider SDKs and driver contracts stay outside the Lab." [first]="true">
+    <div class="map-mode-switcher" role="group" aria-label="Location evidence state">
+      @for (mode of mapModes; track mode) {
+        <button type="button" [class.selected]="mapMode() === mode" [attr.aria-pressed]="mapMode() === mode" (click)="setMapMode(mode)">{{ mapModeLabel(mode) }}</button>
+      }
+    </div>
+
+    <div class="map-composition">
+      <div class="map-stage" [class.map-unavailable]="mapMode() === 'provider-unavailable'" role="img" aria-label="Schematic map showing the delivery route from the cold-chain warehouse to ICISA Distribuciones">
+        <div class="map-grid-lines" aria-hidden="true"></div>
+        <span class="map-route route-one" aria-hidden="true"></span>
+        <span class="map-route route-two" aria-hidden="true"></span>
+        <button type="button" class="map-stop stop-origin" [class.selected]="selectedStop() === 'origin'" aria-label="Origin: cold-chain warehouse" [attr.aria-pressed]="selectedStop() === 'origin'" (click)="selectStop('origin')"><i class="pi pi-box" aria-hidden="true"></i></button>
+        <button type="button" class="map-stop stop-destination" [class.selected]="selectedStop() === 'destination'" aria-label="Destination: ICISA Distribuciones" [attr.aria-pressed]="selectedStop() === 'destination'" (click)="selectStop('destination')"><i class="pi pi-flag" aria-hidden="true"></i></button>
+        <span class="map-label origin-label">Cold-chain warehouse</span>
+        <span class="map-label destination-label">ICISA Distribuciones</span>
+        @if (mapMode() === 'provider-unavailable') {
+          <div class="map-state-overlay"><i class="pi pi-directions" aria-hidden="true"></i><strong>Map surface unavailable</strong><span>Use the location list below.</span></div>
+        }
+      </div>
+
+      <aside class="location-summary" aria-live="polite">
+        <p class="proof-label">SELECTED STOP</p>
+        <h3>{{ location().label }}</h3>
+        <nexa-status-chip [tone]="mapModeDefinition().tone">{{ mapModeDefinition().label }}</nexa-status-chip>
+        <strong class="location-state-title">{{ mapModeDefinition().title }}</strong>
+        <p class="location-explanation">{{ mapModeDefinition().explanation }}</p>
+        <dl>
+          <div><dt>Purpose</dt><dd>{{ location().purpose }}</dd></div>
+          <div><dt>Address</dt><dd>{{ location().address }}</dd></div>
+          <div><dt>Next action</dt><dd>{{ location().next }}</dd></div>
+        </dl>
+        <nexa-button size="compact" variant="secondary" (click)="openDirections()">Open directions</nexa-button>
+        <p class="direction-notice" role="status">{{ directionNotice() }}</p>
+      </aside>
+    </div>
+  </nexa-documentation-section>
+
+  <nexa-documentation-section index="02" kicker="ACCESSIBLE ALTERNATIVE" title="The map is never the only route to the information" intro="The same stops are available as native controls. Selecting a row updates the summary and the map marker together.">
+    <div class="location-list">
+      @for (stop of stops; track stop) {
+        <div [class.selected]="selectedStop() === stop">
+          <i class="pi" [class.pi-box]="stop === 'origin'" [class.pi-flag]="stop === 'destination'" aria-hidden="true"></i>
+          <span><strong>{{ locationFor(stop).label }}</strong><small>{{ locationFor(stop).detail }}</small></span>
+          <button type="button" [attr.aria-pressed]="selectedStop() === stop" (click)="selectStop(stop)">View details</button>
+        </div>
+      }
+    </div>
+    <p class="pattern-note"><i class="pi pi-info-circle" aria-hidden="true"></i><span><strong>Provider boundary</strong><small>Geolocation permissions, map SDK choice and route persistence remain explicit integration decisions.</small></span></p>
+  </nexa-documentation-section>
+</nexa-documentation-frame>

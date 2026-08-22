@@ -1,0 +1,30 @@
+<nexa-documentation-frame [page]="context.page" [allPages]="context.allPages">
+  <section class="component-section evidence-first">
+    <div class="section-heading"><span class="section-index">01</span><div><p class="section-kicker">PROGRESS FAMILY</p><h2>Progress explains how much work is known</h2><p class="section-intro">Determinate, indeterminate, inline, step, paused, complete, error and skeleton states answer different questions. Skeleton is never the universal loading treatment.</p></div></div>
+    <div class="progress-family">
+      <article class="progress-row"><div><strong>Linear determinate</strong><span>How much work is complete?</span></div><progress value="64" max="100">64%</progress><b>64%</b></article>
+      <article class="progress-row"><div><strong>Linear indeterminate</strong><span>Duration is unknown.</span></div><div class="indeterminate-progress" role="progressbar" aria-label="Loading order data" aria-valuetext="Loading"><span></span></div><b>Loading</b></article>
+      <div class="progress-variant-grid">
+        <article><strong>Circular determinate</strong><div class="progress-ring progress-ring-determinate" role="progressbar" aria-label="Circular completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="72"><span>72%</span></div></article>
+        <article><strong>Circular indeterminate</strong><div class="progress-ring progress-ring-indeterminate" role="progressbar" aria-label="Circular activity" aria-valuetext="Activity in progress"><span aria-hidden="true"><i class="pi pi-spinner"></i></span></div><span class="progress-label">Activity in progress</span></article>
+        <article><strong>Inline activity</strong><span class="inline-activity" role="status"><i class="pi pi-spin pi-spinner" aria-hidden="true"></i>Syncing</span></article>
+        <article><strong>Step progress</strong><ol class="mini-progress-steps"><li class="complete">Request</li><li class="current">Review</li><li>Dispatch</li></ol></article>
+        <article class="progress-state progress-paused"><strong>Paused</strong><span>Resume is explicit.</span></article>
+        <article class="progress-state progress-complete"><strong>Complete</strong><span>Outcome is terminal.</span></article>
+        <article class="progress-state progress-error"><strong>Error</strong><span>Retry is local.</span></article>
+        <article class="skeleton-card" aria-label="Loading content placeholder"><strong>Content skeleton</strong><span></span><span></span><span></span></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="component-section">
+    <div class="section-heading"><span class="section-index">02</span><div><p class="section-kicker">MOTION COMPARISON</p><h2>Reduced Motion preserves comprehension</h2><p class="section-intro">The specimen compares presentation modes. In reduced mode, state, labels and progress remain visible without relying on animation.</p></div></div>
+    <div class="mode-switch" role="group" aria-label="Progress motion evidence"><button type="button" [class.selected]="view() === 'standard'" (click)="setView('standard')">Standard</button><button type="button" [class.selected]="view() === 'reduced'" (click)="setView('reduced')">Reduced</button></div>
+    <div class="motion-card" [class.reduced]="view() === 'reduced'"><div class="motion-sample"><span class="motion-line"><i></i></span><strong>{{ view() === 'reduced' ? 'Activity remains labeled and stable' : 'Activity may use a short meaningful transition' }}</strong></div><p>{{ view() === 'reduced' ? 'No rotation is required to understand that work is active.' : 'Motion supports change without replacing the text and semantic progress cue.' }}</p></div>
+  </section>
+
+  <section class="component-section">
+    <div class="section-heading"><span class="section-index">03</span><div><p class="section-kicker">TEMPORAL EVIDENCE</p><h2>Progress has terminal and recovery meaning</h2><p class="section-intro">Playback stops at Complete or Error. The Lab evidence does not loop and does not imply that every paused phase is failure.</p></div></div>
+    <nexa-state-sequence title="Review processing" retryLabel="Retry progress" [phases]="phases" />
+  </section>
+</nexa-documentation-frame>

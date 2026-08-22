@@ -1,0 +1,14 @@
+<a class="skip-link" href="#documentation-content">Skip to documentation content</a>
+<main id="documentation-content" class="documentation-page">
+  <header class="documentation-header">
+    <div class="breadcrumb-row"><a routerLink="/guidelines/overview">Design Lab</a><span aria-hidden="true">/</span><span>{{ page().group }}</span><span aria-hidden="true">/</span><span>{{ page().label }}</span></div>
+    <div class="header-grid"><div><p class="eyebrow">{{ page().eyebrow }}</p><h1>{{ page().title }}</h1><p class="intro">{{ page().intro }}</p></div><aside class="status-panel"><span class="status-label">MATURITY</span><strong class="design-status" [class]="statusClass()">{{ page().status }}</strong><span class="status-label">ADOPTION</span><strong class="adoption-status">{{ page().adoption }}</strong><span>{{ page().summary }}</span></aside></div>
+    <div class="header-meta"><span><i class="pi pi-code" aria-hidden="true"></i>Angular 22 · standalone</span><span><i class="pi pi-sun" aria-hidden="true"></i>Light canonical direction</span><span><i class="pi pi-eye" aria-hidden="true"></i>Visual evidence first</span></div>
+  </header>
+  <section class="document-lede"><div><p class="section-kicker">EVIDENCE MODEL</p><h2>See the rule before reading the rationale.</h2><p>Each page puts live specimens, state comparisons, interaction controls and quality evidence before concise implementation guidance.</p></div><div class="provenance-strip"><span><b>Decision</b>{{ page().decision }}</span><span><b>Foundation</b>{{ page().foundation }}</span><span><b>Review</b>Candidate until human approval</span></div></section>
+  <ng-content />
+  @if (relatedPages().length > 0) {
+    <section class="related-pages"><div><p class="section-kicker">CONTINUE</p><h2>Related {{ page().kind }} pages</h2></div><nav class="related-links" aria-label="Related documentation">@for (candidate of relatedPages(); track candidate.id) { <a [routerLink]="pageUrl(candidate)"><i class="pi {{ candidate.icon }}" aria-hidden="true"></i><span>{{ candidate.label }}</span><small>{{ candidate.status }}</small></a> }</nav></section>
+  }
+  <section class="provenance-section"><div class="provenance-grid"><div><b>Angular contract</b><p>{{ page().angularContract }}</p></div><div><b>Design adoption</b><p>{{ page().adoptionMapping }}</p></div><div><b>Human review gate</b><p>Visual direction, interaction quality and accessibility evidence remain open for human approval.</p></div></div></section>
+</main>

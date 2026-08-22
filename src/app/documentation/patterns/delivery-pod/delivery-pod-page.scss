@@ -1,0 +1,10 @@
+.delivery-card { display: grid; grid-template-columns: 46px minmax(0, 1fr) auto auto; gap: var(--nexa-space-4); align-items: center; padding: var(--nexa-panel-padding); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-panel); background: var(--nexa-surface-card); }
+.delivery-marker { display: grid; width: 46px; height: 46px; place-items: center; border-radius: 50%; color: var(--nexa-color-primary-700); background: var(--nexa-surface-info); font-size: 22px; }
+.delivery-card h3 { margin: 0; font: 700 var(--nexa-font-size-lg)/1.25 var(--nexa-font-family-display); }
+.delivery-card p:not(.proof-label) { margin: var(--nexa-space-1) 0 0; color: var(--nexa-color-text-secondary); line-height: 1.45; }
+.pod-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--nexa-space-3); }
+.pod-grid > div { display: flex; gap: var(--nexa-space-3); align-items: flex-start; padding: var(--nexa-card-padding); border: 1px solid var(--nexa-color-border-default); border-radius: var(--nexa-radius-card); background: var(--nexa-surface-card); }
+.pod-grid i { color: var(--nexa-color-primary-600); font-size: 18px; }
+.pod-grid span { display: grid; gap: var(--nexa-space-1); }
+.pod-grid small { color: var(--nexa-color-text-secondary); line-height: 1.45; }
+@media (max-width: 800px) { .delivery-card { grid-template-columns: 46px minmax(0, 1fr); } .delivery-card nexa-status-chip, .delivery-card nexa-button { grid-column: 2; justify-self: start; } .pod-grid { grid-template-columns: 1fr; } }

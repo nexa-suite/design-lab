@@ -1,0 +1,18 @@
+@use '../layout/documentation-heading' as docs;
+
+:host { display: block; }
+@include docs.shared-heading;
+.section-heading { position: relative; }
+.pattern-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--nexa-space-2); }
+.demo-status { margin: var(--nexa-space-4) 0 0; color: var(--nexa-color-text-secondary); font-size: var(--nexa-font-size-sm); line-height: var(--nexa-line-height-normal); }
+.pattern-note { display: flex; gap: var(--nexa-space-3); align-items: flex-start; margin-top: var(--nexa-space-5); padding: var(--nexa-space-4); border: 1px solid var(--nexa-color-primary-200); border-radius: var(--nexa-radius-card); color: var(--nexa-color-primary-700); background: var(--nexa-surface-info); }
+.pattern-note > i { margin-top: 2px; }
+.pattern-note span { display: grid; gap: var(--nexa-space-1); }
+.pattern-note small { color: var(--nexa-color-text-secondary); line-height: 1.45; }
+.danger-note { border-color: var(--nexa-color-danger-subtle-border); color: var(--nexa-color-danger-standard-text); background: var(--nexa-color-danger-subtle-background); }
+.danger-note small { color: var(--nexa-color-text-secondary); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; clip-path: inset(50%); }
+
+@media (max-width: 440px) {
+  .pattern-actions .demo-status { flex-basis: 100%; }
+}

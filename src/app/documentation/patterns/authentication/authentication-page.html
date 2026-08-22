@@ -1,0 +1,23 @@
+<nexa-documentation-frame [page]="context.page" [allPages]="context.allPages">
+  <section class="pattern-section evidence-first">
+    <div class="section-heading"><span class="section-index">01</span><div><p class="section-kicker">BRAND PLANE</p><h2>Authentication feels like Nexa before it asks for access</h2><p class="section-intro">A restrained brand plane, canonical logo and comfortable negative space support the frozen form language.</p></div></div>
+    <div class="auth-evidence-controls"><div><p class="proof-label">LAB EVIDENCE CONTROLLER</p><p>Change the documented state without placing test controls inside the product entry surface.</p></div><nexa-segmented-control label="Authentication state" [options]="authStateOptions" [selected]="authState()" (selectedChange)="setAuthState($event)" /></div>
+    <div class="auth-pattern">
+      <aside class="auth-brand-plane"><nexa-logo variant="inverse" alt="Nexa" /><p>Operational clarity for teams that need a trustworthy next step.</p><div class="auth-grid-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></div><small>Cold-chain specialization remains a capability, not the definition of Nexa.</small></aside>
+      <form class="auth-form" (submit)="$event.preventDefault(); authenticate()">
+        <div class="auth-form-heading"><p class="proof-label">WORKSPACE ACCESS</p><nexa-locale-switcher [locale]="authLocale()" (localeChange)="setAuthLocale($event)" /></div>
+        <h3>{{ authCopy().title }}</h3><p>{{ authCopy().notice }}</p>
+        <nexa-text-field id="auth-email-v09" label="Work email" type="email" placeholder="name@company.com" [value]="authEmail()" [error]="authState() === 'invalid' ? 'Enter a work email to continue.' : authState() === 'credentials' ? 'The credentials could not be verified. Try again.' : ''" (valueChange)="authEmail.set($event)" />
+        <nexa-text-field id="auth-password-v09" label="Password" type="password" value="candidate-password" />
+        @if (authState() === 'workspace') { <aside class="workspace-preview" aria-label="Synthetic workspace preview"><div><span class="proof-label">WORKSPACE PREVIEW</span><nexa-status-chip tone="info" emphasis="standard">Detected</nexa-status-chip></div><strong>ICISA Distribuciones</strong><span>icisa.nexa.com.pe</span><small>Synthetic evidence only; no provisioning or backend lookup occurs.</small></aside> }
+        <nexa-button type="submit" [fullWidth]="true" [loading]="authState() === 'authenticating'">{{ authState() === 'success' ? 'Continue to workspace' : authCopy().action }}</nexa-button>
+        <p class="demo-status" role="status">{{ authState() === 'workspace' ? 'Workspace detected; continue keeps the selected context.' : authState() === 'success' ? 'Success; next step is available.' : authState() === 'authenticating' ? 'Authenticating specimen state.' : 'Pattern only; no backend authentication is performed.' }}</p>
+      </form>
+    </div>
+  </section>
+  <section class="pattern-section">
+    <div class="section-heading"><span class="section-index">02</span><div><p class="section-kicker">STATE COVERAGE</p><h2>Every auth state remains product-safe</h2></div></div>
+    <div class="auth-state-list">@for (state of authStateOptions; track state.value) { <button type="button" [class.selected]="authState() === state.value" (click)="setAuthState(state.value)"><span>{{ state.label }}</span><small>{{ state.value === 'credentials' ? 'User-safe recovery copy' : state.value === 'workspace' ? 'Context detected; no provisioning implied' : 'Inspectable composition state' }}</small></button> }</div>
+    <div class="pattern-note"><i class="pi pi-info-circle" aria-hidden="true"></i><span><strong>Semantic boundary</strong><small>No organization registration, self-service tenant provisioning or role assumptions are introduced by this pattern.</small></span></div>
+  </section>
+</nexa-documentation-frame>

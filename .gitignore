@@ -39,7 +39,9 @@ testem.log
 /typings
 __screenshots__/
 /.playwright-cli/
+/output/playwright/
 /*.png
+/FLOW/
 
 # System files
 .DS_Store

@@ -1,0 +1,7 @@
+@use './documentation-heading' as docs;
+
+:host {
+  display: block;
+}
+
+@include docs.shared-heading;

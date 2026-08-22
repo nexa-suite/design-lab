@@ -1,3 +1,23 @@
 :focus-visible { outline: 3px solid var(--nexa-color-primary-600); outline-offset: 3px; }
+[data-target-overlay='true'] button,
+[data-target-overlay='true'] input,
+[data-target-overlay='true'] select,
+[data-target-overlay='true'] [role='switch'],
+[data-target-overlay='true'] [role='slider'] { outline: 1px dashed var(--nexa-color-primary-400); outline-offset: 4px; }
+:root[data-reflow-mode='true'] .documentation-page { width: min(calc(100% - 28px), 720px); }
+:root[data-reflow-mode='true'] .documentation-page .header-grid,
+:root[data-reflow-mode='true'] .documentation-page .document-lede,
+:root[data-reflow-mode='true'] .documentation-page .related-pages { grid-template-columns: 1fr; }
+:root[data-reflow-mode='true'] .documentation-page h1,
+:root[data-reflow-mode='true'] .documentation-page h2,
+:root[data-reflow-mode='true'] .documentation-page h3,
+:root[data-reflow-mode='true'] .documentation-page p,
+:root[data-reflow-mode='true'] .documentation-page code,
+:root[data-reflow-mode='true'] .documentation-page small { overflow-wrap: anywhere; }
+:root[data-text-spacing='increased'] .documentation-page :where(p, li, label, button, th, td, small, code, [role='status']) {
+  line-height: var(--nexa-a11y-text-spacing-line-height);
+  letter-spacing: var(--nexa-a11y-text-spacing-letter);
+  word-spacing: var(--nexa-a11y-text-spacing-word);
+}
 .skip-link { position: fixed; z-index: 10; top: 8px; left: 8px; padding: 8px 12px; border-radius: var(--nexa-radius-md); background: var(--nexa-color-primary-700); color: var(--nexa-color-text-inverse); font-weight: var(--nexa-font-weight-semibold); transform: translateY(-180%); transition: transform var(--nexa-motion-standard); }
 .skip-link:focus { transform: translateY(0); }
