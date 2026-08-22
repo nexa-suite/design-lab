@@ -626,8 +626,6 @@ async function runInteractionSmoke(page) {
 
   await smokeInteraction(page, 'components/tooltips', async () => {
     const trigger = page.locator('nexa-tooltip .tooltip-trigger');
-    await trigger.focus();
-    await page.getByRole('tooltip').waitFor({ state: 'visible' });
     await page.locator('nexa-tooltip').evaluate((element) => {
       const host = element;
       host.style.position = 'fixed';
@@ -637,6 +635,8 @@ async function runInteractionSmoke(page) {
       host.style.top = 'auto';
     });
     await trigger.focus();
+    await page.getByRole('tooltip').waitFor({ state: 'visible' });
+    await page.waitForTimeout(40);
     const tooltipEdge = await page.getByRole('tooltip').evaluate((element) => {
       const rect = element.getBoundingClientRect();
       return { placement: element.getAttribute('class'), left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom };
