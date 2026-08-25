@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.0.2] - 2026-08-24
+
+### Changed
+
+- Converted repository-owned validation, token, visual-audit and browser-gate tooling from `.mjs` to `.ts`.
+- Kept Node execution dependency-free through native TypeScript type stripping.
+- Updated workspace and `nexa-ui` package versions to `1.0.2`.
+- Updated the README and active Engineering evidence without changing the visual foundation.
+
+### Validation
+
+- GitHub Actions validation, Angular library/application builds, library/application tests and browser gate passed.
+- Browser gate covered 57 routes, 5 viewports and 13 interaction checks.
+
+### Status
+
+- Stable tooling and release-metadata patch over `v1.0.1`.
+
 ## [1.0.1] - 2026-08-22
 
 ### Changed
