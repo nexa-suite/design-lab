@@ -2,7 +2,7 @@
 
 The JSON files in this directory are the canonical source for the executable
 Design Lab token layers. SCSS artifacts under `src/styles/` are generated with
-`node tooling/scripts/generate-design-tokens.mjs` and must not be edited by
+`npm run validate:tokens` and must not be edited by
 hand.
 
 ## Layers
