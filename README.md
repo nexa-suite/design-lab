@@ -1,8 +1,8 @@
-# Nexa Design Lab v1.0.1
+# Nexa Design Lab v1.0.2
 
 Visual evidence laboratory for Nexa foundations, reusable components, interaction states and accessibility review.
 
-`1.0.1` is the current released Angular-only design-system baseline. It is a metadata-correction patch over `v1.0.0`; it is not a production product application, domain contract or accessibility certification.
+`1.0.2` is the current released Angular-only design-system baseline. It is a tooling and repository-experience patch over `v1.0.1`; it does not redesign the visual foundation and is not a production product application, domain contract or accessibility certification.
 
 ## Purpose
 
@@ -26,6 +26,7 @@ v1.0.0 establishes an executable, consumable and reviewable design-system baseli
 - the icon explorer exposes render, role, size, alignment, label policy, semantic color and hit-target evidence;
 - `projects/nexa-ui` is the real Angular library boundary with an explicit public API;
 - Buttons and Progress own focused route features instead of depending on the broad component renderer;
+- repository validation tooling is authored as TypeScript and executed with Node's native type stripping; no JavaScript-like tooling source is versioned in this repository;
 - Blueprint documentation is the normative design-system baseline; this repository is executable evidence.
 
 The active lab contains documentation pages and composition specimens only. Product patterns remain design evidence; they do not define accepted domain behavior or production contracts.
@@ -121,6 +122,6 @@ The archive preserves prior reports for provenance. It is not runtime authority 
 
 ## Boundary
 
-Design Lab changes are local to this repository. No production application, API, mobile repository or deployment is modified by this release. This `v1.0.1` release is executable design evidence; Blueprint remains normative for design-system governance, while product patterns remain non-production evidence.
+Design Lab changes are local to this repository. No production application, API, mobile repository or deployment is modified by this release. This `v1.0.2` release is executable design evidence; Blueprint remains normative for design-system governance, while product patterns remain non-production evidence.
 
 Copyright © 2026 Nexa. All rights reserved.
