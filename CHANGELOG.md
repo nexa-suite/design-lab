@@ -153,6 +153,9 @@ The candidate was promoted to published `v1.0.0`; no separate final release is i
 
 ### Status
 
+- Unreleased historical candidate: no Git tag or GitHub Release exists for RC2.
+- This entry preserves implementation evidence only; it is not a published
+  release record.
 - Experimental release candidate. Documentation-shell direction is frozen for human review. No design approval or production readiness claim.
 
 ## [0.6.0-rc.1] - 2026-08-17
