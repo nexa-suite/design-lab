@@ -1,8 +1,20 @@
-# Nexa Design Lab v1.0.2
+<div align="center">
+
+<img src="./public/brand/nexa.svg" alt="Nexa" width="240" />
+
+# Nexa Design Lab
+
+**Executable design-system evidence, separate from production Product implementation.**
+
+![Angular](https://img.shields.io/badge/Angular-22.1.2-DD0031?style=flat-square&logo=angular&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-6.0.3-3178C6?style=flat-square&logo=typescript&logoColor=white) ![Design evidence](https://img.shields.io/badge/design-evidence-64748B?style=flat-square) ![Latest Git tag](https://img.shields.io/github/v/tag/nexa-suite/design-lab?sort=semver&style=flat-square&label=latest%20Git%20tag)
+
+[Run](#run) · [Route map](#route-map) · [Quality evidence](#quality-evidence) · [Architecture boundary](#architecture-boundary)
+
+</div>
 
 Visual evidence laboratory for Nexa foundations, reusable components, interaction states and accessibility review.
 
-`1.0.2` is the current released Angular-only design-system baseline. It is a tooling and repository-experience patch over `v1.0.1`; it does not redesign the visual foundation and is not a production product application, domain contract or accessibility certification.
+The repository tag identifies a Git baseline, while the package version remains independently declared in `package.json`. The lab is executable design evidence, not a production Product application, Domain contract or accessibility certification.
 
 ## Nexa Product Ecosystem
 
@@ -150,8 +162,8 @@ Reusable controls own their public API and native semantics. Documentation speci
 
 The archive preserves prior reports for provenance. It is not runtime authority and does not override the Blueprint design-system baseline.
 
-## Boundary
+## Architecture boundary
 
-Design Lab changes are local to this repository. No production application, API, mobile repository or deployment is modified by this release. This `v1.0.2` release is executable design evidence; Blueprint remains normative for design-system governance, while product patterns remain non-production evidence.
+Design Lab changes are local to this repository. No production application, API, mobile repository or deployment is modified by the lab. Blueprint remains normative for design-system governance, while product patterns remain non-production evidence.
 
 Copyright © 2026 Nexa. All rights reserved.
