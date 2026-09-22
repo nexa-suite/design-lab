@@ -4,6 +4,23 @@ Visual evidence laboratory for Nexa foundations, reusable components, interactio
 
 `1.0.2` is the current released Angular-only design-system baseline. It is a tooling and repository-experience patch over `v1.0.1`; it does not redesign the visual foundation and is not a production product application, domain contract or accessibility certification.
 
+## Nexa Product Ecosystem
+
+<table>
+<tr>
+<td><strong><a href="https://github.com/nexa-suite/mobile-report">Mobile Report</a></strong><br>Academic and product research evidence.</td>
+<td><strong><a href="https://github.com/nexa-suite/mobile">Mobile</a></strong><br>Accepted mobile projections and implementation workspace.</td>
+</tr>
+<tr>
+<td><strong><a href="https://github.com/nexa-suite/api">API</a></strong><br>Shared backend and domain integration surface.</td>
+<td><strong><a href="https://github.com/nexa-suite/website">Website</a></strong><br>Public acquisition and product context.</td>
+</tr>
+<tr>
+<td><strong><a href="https://github.com/nexa-suite/portal">Buyer Portal</a></strong><br>Buyer-facing web experience.</td>
+<td><strong><a href="https://github.com/nexa-suite/platform">Platform</a></strong><br>Operations and platform web experience.</td>
+</tr>
+</table>
+
 ## Purpose
 
 v1.0.0 establishes an executable, consumable and reviewable design-system baseline:
@@ -89,6 +106,19 @@ git diff --check
 The Contrast Lab derives ratios from token color values. The required gates are WCAG 2.2: 4.5:1 for normal text, 3:1 for large text and 3:1 for essential non-text UI. The lab also exposes Standard/Increased Contrast, Motion/Reduced Motion and target-overlay review modes.
 
 The browser gate covers every registered page at 1440, 1024, 768, 390 and 320px, plus representative state and recovery interactions. Screenshot capture remains an optional review artifact; the committed contract records route, viewport, state and source SHA without generated images. Manual visual judgment and assistive-technology review remain human handoff items.
+
+## Nexa Engineering & Documentation
+
+<table>
+<tr>
+<td><strong><a href="https://github.com/nexa-suite/blueprint">Blueprint</a></strong><br>Canonical architecture and decision records.</td>
+<td><strong><a href="https://github.com/nexa-suite/web-report">Web Report</a></strong><br>Structured report and documentation workspace.</td>
+</tr>
+<tr>
+<td><strong><a href="https://github.com/nexa-suite/complementary">Complementary</a></strong><br>Supporting research and reproducible utilities.</td>
+<td><strong><a href="https://github.com/nexa-suite/design-lab">Design Lab</a></strong><br>Executable design-system evidence.</td>
+</tr>
+</table>
 
 ## Angular structure
 
