@@ -1,0 +1,373 @@
+---
+/**
+ * MOBILE STYLE — MASTER GUIDELINES & INTERACTIVE DEVICE SIMULATOR
+ * Dedicated design authority for Nexa Android (Jetpack Compose) and Flutter mobile applications.
+ */
+import 'primeicons/primeicons.css';
+import '../styles/mobile-tokens.css';
+import MobileNavHeader from '../components/layout/MobileNavHeader.astro';
+import DeviceFrame from '../components/simulator/DeviceFrame.astro';
+import CodeSnippetsTabs from '../components/spec/CodeSnippetsTabs.astro';
+---
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Style · Nexa Mobile Guidelines & Simulator (Android & Flutter)</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" 
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--nexa-mobile-surface-bg, #f8fafc);
+      color: var(--nexa-mobile-text-primary, #0f172a);
+      font-family: var(--nexa-mobile-font-family, sans-serif);
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .main-layout {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 440px;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 1080px) {
+      .main-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .guidelines-column {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .intro-header {
+      border-bottom: 1px solid var(--nexa-mobile-border, #e2e8f0);
+      padding-bottom: 1.5rem;
+    }
+
+    .main-title {
+      font-family: var(--nexa-mobile-font-family-display, sans-serif);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--nexa-mobile-text-primary, #0f172a);
+      margin-bottom: 0.5rem;
+    }
+
+    .main-desc {
+      color: var(--nexa-mobile-text-secondary, #64748b);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* Spec Cards */
+    .spec-card {
+      background: var(--nexa-mobile-surface-card, #ffffff);
+      border: 1px solid var(--nexa-mobile-border, #e2e8f0);
+      border-radius: 16px;
+      padding: 1.75rem;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .card-header-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .card-badge-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--nexa-mobile-primary-container, #e8f0fe);
+      color: var(--nexa-mobile-primary, #2a67d9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .card-title {
+      font-family: var(--nexa-mobile-font-family-display, sans-serif);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--nexa-mobile-text-primary, #0f172a);
+    }
+
+    .card-text {
+      color: var(--nexa-mobile-text-secondary, #64748b);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .metrics-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-top: 0.5rem;
+    }
+
+    .metrics-table th {
+      text-align: left;
+      padding: 8px;
+      background: var(--nexa-mobile-surface-tint, #f1f5f9);
+      color: var(--nexa-mobile-text-secondary, #64748b);
+      font-weight: 700;
+      border-bottom: 1px solid var(--nexa-mobile-border, #e2e8f0);
+    }
+
+    .metrics-table td {
+      padding: 8px;
+      border-bottom: 1px solid var(--nexa-mobile-border, #f1f5f9);
+      color: var(--nexa-mobile-text-primary, #0f172a);
+    }
+
+    .code-tag {
+      font-family: var(--nexa-mobile-font-family-mono, monospace);
+      font-size: 11px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    /* Simulator Sticky Container */
+    .simulator-column {
+      position: sticky;
+      top: 70px;
+    }
+
+    /* Footer */
+    .mobile-footer {
+      background: var(--nexa-mobile-surface-card, #ffffff);
+      border-top: 1px solid var(--nexa-mobile-border, #e2e8f0);
+      padding: 1rem 1.5rem;
+      font-size: 12px;
+      color: var(--nexa-mobile-text-secondary, #64748b);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <MobileNavHeader />
+
+  <div class="main-layout">
+    <!-- Left Column: Guidelines & Specs -->
+    <div class="guidelines-column">
+      <div class="intro-header">
+        <h1 class="main-title">Directrices de Diseño Móvil (Android & Flutter)</h1>
+        <p class="main-desc">
+          Especificación canónica del sistema de diseño móvil para <strong>Nexa Suite</strong>. Define las reglas de ergonomía táctil, elevación Material 3, escalado tipográfico en <code>sp</code> y contratos de interacción móvil validados frente a WCAG 2.2 AA.
+        </p>
+      </div>
+
+      <!-- 1. Regla de Oro: Objetivos Táctiles de 48dp -->
+      <div class="spec-card">
+        <div class="card-header-row">
+          <div class="card-badge-icon"><i class="pi pi-hand"></i></div>
+          <h2 class="card-title">1. Ergonomía Táctil: Mínimo 48×48dp</h2>
+        </div>
+        <p class="card-text">
+          Todo elemento interactivo (botones, iconos, campos de formulario, chips de filtro y selectores) debe tener un cuadro delimitador mínimo de <strong>48×48dp</strong> de objetivo táctil accesible, garantizando operabilidad fiable con una sola mano y reduciendo toques accidentales.
+        </p>
+        <table class="metrics-table">
+          <thead>
+            <tr>
+              <th>Componente</th>
+              <th>Altura Mínima</th>
+              <th>Zona Táctil (Bounding Box)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Botón Principal / CTA</td>
+              <td><span class="code-tag">48dp</span></td>
+              <td>100% ancho × 48dp</td>
+            </tr>
+            <tr>
+              <td>Iconos de App Bar</td>
+              <td><span class="code-tag">24dp</span> visual</td>
+              <td><span class="code-tag">48×48dp</span> táctil</td>
+            </tr>
+            <tr>
+              <td>Chips de Filtro</td>
+              <td><span class="code-tag">36dp</span> visual</td>
+              <td><span class="code-tag">48dp</span> táctil con hit-slop</td>
+            </tr>
+            <tr>
+              <td>Items de Bottom Navigation</td>
+              <td><span class="code-tag">60dp</span> barra</td>
+              <td><span class="code-tag">64×48dp</span> por destino</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 2. Cuadrícula Espacial de 8dp -->
+      <div class="spec-card">
+        <div class="card-header-row">
+          <div class="card-badge-icon"><i class="pi pi-th-large"></i></div>
+          <h2 class="card-title">2. Cuadrícula Espacial Móvil de 8dp</h2>
+        </div>
+        <p class="card-text">
+          La interfaz móvil se basa en múltiplos de 8dp para márgenes y espaciados internos. Los márgenes laterales de pantalla son de <strong>16dp</strong> en teléfonos compactos (360-390dp) y el espacio vertical entre tarjetas es de <strong>12dp</strong>.
+        </p>
+        <table class="metrics-table">
+          <thead>
+            <tr>
+              <th>Token</th>
+              <th>Valor (dp)</th>
+              <th>Uso Recomendado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="code-tag">margin.screen</span></td>
+              <td>16dp</td>
+              <td>Márgenes laterales del viewport</td>
+            </tr>
+            <tr>
+              <td><span class="code-tag">gutter.cards</span></td>
+              <td>12dp</td>
+              <td>Espaciado entre tarjetas y bloques de lista</td>
+            </tr>
+            <tr>
+              <td><span class="code-tag">radius.card</span></td>
+              <td>16dp</td>
+              <td>Bordes redondeados de tarjetas de despacho y catálogo</td>
+            </tr>
+            <tr>
+              <td><span class="code-tag">radius.sheet</span></td>
+              <td>24dp</td>
+              <td>Esquinas superiores de modal bottom sheets</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 3. Elevación Material 3 y Surface Tint -->
+      <div class="spec-card">
+        <div class="card-header-row">
+          <div class="card-badge-icon"><i class="pi pi-clone"></i></div>
+          <h2 class="card-title">3. Elevaciones y Tintado de Superficie M3</h2>
+        </div>
+        <p class="card-text">
+          En lugar de sombras pesadas o bordes agresivos, la jerarquía de capas se logra mediante elevaciones Material 3 con tintado de superficie en Azul Nexa (<code>#2a67d9</code>) proporcional a la cercanía con el usuario.
+        </p>
+        <table class="metrics-table">
+          <thead>
+            <tr>
+              <th>Nivel</th>
+              <th>Elevación</th>
+              <th>Superficie Aplicada</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Nivel 0</td>
+              <td>0dp</td>
+              <td>Fondo de pantalla (Scaffold)</td>
+            </tr>
+            <tr>
+              <td>Nivel 1</td>
+              <td>1dp - 2dp</td>
+              <td>Tarjetas de conductor, equipo y rutas</td>
+            </tr>
+            <tr>
+              <td>Nivel 2</td>
+              <td>3dp</td>
+              <td>Top App Bar y Bottom Navigation Bar</td>
+            </tr>
+            <tr>
+              <td>Nivel 3</td>
+              <td>6dp</td>
+              <td>Menús desplegables y Snackbars</td>
+            </tr>
+            <tr>
+              <td>Nivel 4</td>
+              <td>8dp - 12dp</td>
+              <td>Modal Bottom Sheets y Diálogos modales</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 4. Generador de Código Nativo (Compose & Flutter) -->
+      <div class="spec-card">
+        <div class="card-header-row">
+          <div class="card-badge-icon"><i class="pi pi-code"></i></div>
+          <h2 class="card-title">4. Implementación en Código Nativo</h2>
+        </div>
+        <p class="card-text">
+          Snippets listos para producción para ingenieros de Android (Jetpack Compose) y Flutter.
+        </p>
+        <CodeSnippetsTabs />
+      </div>
+    </div>
+
+    <!-- Right Column: Interactive Hardware Simulator -->
+    <div class="simulator-column">
+      <DeviceFrame />
+    </div>
+  </div>
+
+  <footer class="mobile-footer">
+    <div>
+      <strong>Nexa Mobile Style Guidelines</strong> · Android Jetpack Compose & Flutter specifications.
+    </div>
+    <div>
+      Puerto Docker: <code>:4201</code>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Switcher for mobile-style
+    const btnTheme = document.getElementById('btn-theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const themeLabel = document.getElementById('theme-label');
+    let isDark = false;
+
+    btnTheme?.addEventListener('click', () => {
+      isDark = !isDark;
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      if (themeLabel) themeLabel.textContent = isDark ? 'Modo Claro' : 'Modo Oscuro';
+      if (themeIcon) {
+        themeIcon.classList.toggle('pi-moon', !isDark);
+        themeIcon.classList.toggle('pi-sun', isDark);
+      }
+    });
+  </script>
+</body>
+</html>

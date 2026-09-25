@@ -1,0 +1,167 @@
+---
+/**
+ * MobileNavHeader — Cross-Suite Navigation Header for Mobile Style
+ * Intercommunicates Web (:4200), Mobile (:4201), and Website (:4321).
+ */
+---
+
+<header class="mobile-top-header">
+  <div class="top-row">
+    <!-- Brand Identity & Release Tag -->
+    <div class="brand-group">
+      <div class="logo-mark">
+        <svg width="24" height="24" viewBox="0 0 40 40" fill="none">
+          <rect width="40" height="40" rx="10" fill="#2a67d9"/>
+          <path d="M12 28V12L28 28V12" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <span class="system-tag">MOBILE STYLE</span>
+        <span class="system-title">Nexa Mobile Guidelines & Interactive Simulator</span>
+      </div>
+    </div>
+
+    <!-- Monorepo Triad Switcher -->
+    <div class="monorepo-triad" aria-label="Style Monorepo Switcher">
+      <span class="triad-label">MONOREPO:</span>
+      <a href="http://localhost:4200" class="triad-pill" target="_blank" rel="noopener" title="Nexa Web Style Guidelines (Angular)">
+        <i class="pi pi-desktop" aria-hidden="true"></i> Web :4200 ↗
+      </a>
+      <span class="triad-pill active" title="Currently viewing Mobile Style">
+        <i class="pi pi-mobile" aria-hidden="true"></i> Mobile :4201
+      </span>
+      <a href="http://localhost:4321" class="triad-pill" target="_blank" rel="noopener" title="Nexa Website Style & Nexafy Living Geometry">
+        <i class="pi pi-globe" aria-hidden="true"></i> Website :4321 ↗
+      </a>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div class="actions-group">
+      <button type="button" class="btn-utility" id="btn-theme-toggle" title="Toggle Light / Dark Theme">
+        <i class="pi pi-moon" id="theme-icon" aria-hidden="true"></i>
+        <span id="theme-label">Modo Oscuro</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .mobile-top-header {
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    border-bottom: 1px solid var(--nexa-mobile-border, #e2e8f0);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 1.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .brand-group {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .logo-mark {
+    display: flex;
+    align-items: center;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .system-tag {
+    font-family: var(--nexa-mobile-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--nexa-mobile-primary, #2a67d9);
+    background: var(--nexa-mobile-primary-container, #e8f0fe);
+    border: 1px solid #b8d4fe;
+    padding: 1px 6px;
+    border-radius: 999px;
+    align-self: flex-start;
+    letter-spacing: 0.05em;
+  }
+
+  .system-title {
+    font-family: var(--nexa-mobile-font-family-display, sans-serif);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--nexa-mobile-text-primary, #0f172a);
+  }
+
+  /* Monorepo Triad Pills */
+  .monorepo-triad {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--nexa-mobile-surface-tint, #f8fafc);
+    border: 1px solid var(--nexa-mobile-border, #e2e8f0);
+    padding: 3px 8px;
+    border-radius: 8px;
+  }
+
+  .triad-label {
+    font-size: 9px;
+    font-weight: 800;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+    letter-spacing: 0.06em;
+  }
+
+  .triad-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--nexa-mobile-text-secondary, #475569);
+    border: 1px solid transparent;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: var(--nexa-mobile-surface-card, #ffffff);
+      color: var(--nexa-mobile-primary, #2563eb);
+      border-color: #cbd5e1;
+    }
+
+    &.active {
+      background: var(--nexa-mobile-primary, #2a67d9);
+      color: #ffffff;
+      font-weight: 700;
+    }
+  }
+
+  .btn-utility {
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    border: 1px solid var(--nexa-mobile-border, #cbd5e1);
+    color: var(--nexa-mobile-text-secondary, #64748b);
+    padding: 0.4rem 0.85rem;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: var(--nexa-mobile-surface-tint, #f1f5f9);
+      color: var(--nexa-mobile-text-primary, #0f172a);
+    }
+  }
+</style>

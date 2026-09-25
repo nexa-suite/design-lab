@@ -1,0 +1,197 @@
+---
+/**
+ * BottomSheetSpec — Specimen for Modal Bottom Sheet in Nexa Mobile
+ * Adheres to 24dp top-radius, 48dp drag handle target, and thumb-friendly elevation.
+ */
+---
+
+<div class="sheet-backdrop">
+  <div class="m3-bottom-sheet">
+    <!-- Drag Handle -->
+    <div class="drag-handle-container">
+      <div class="drag-handle"></div>
+    </div>
+
+    <!-- Sheet Header -->
+    <div class="sheet-header">
+      <h3 class="sheet-title">Filtrar Equipos & Disponibilidad</h3>
+      <button type="button" class="btn-close-sheet" aria-label="Cerrar"><i class="pi pi-times"></i></button>
+    </div>
+
+    <div class="sheet-body">
+      <!-- Status Filter -->
+      <span class="filter-title">ESTADO DE DISPONIBILIDAD</span>
+      <div class="sheet-chips">
+        <span class="chip-item active"><i class="pi pi-check"></i> Disponible Inmediato</span>
+        <span class="chip-item">En Tránsito</span>
+        <span class="chip-item">Próxima Devolución</span>
+      </div>
+
+      <!-- Capacity Range -->
+      <span class="filter-title">POTENCIA / CAPACIDAD</span>
+      <div class="sheet-chips">
+        <span class="chip-item">50 - 100 kVA</span>
+        <span class="chip-item active">150 - 250 kVA</span>
+        <span class="chip-item">300+ kVA</span>
+      </div>
+
+      <!-- Price Per Day Range -->
+      <span class="filter-title">TARIFA MÁXIMA DIARIA</span>
+      <div class="price-input-row">
+        <span class="currency-prefix">$</span>
+        <input type="text" class="m3-text-field" value="250.00 USD" readonly />
+      </div>
+
+      <!-- Action Button (Min 48dp) -->
+      <button type="button" class="btn-sheet-apply">
+        <span>Aplicar Filtros (14 Equipos)</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sheet-backdrop {
+    height: 100%;
+    background: rgba(15, 23, 42, 0.45);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .m3-bottom-sheet {
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    border-radius: var(--nexa-mobile-radius-sheet, 24px) var(--nexa-mobile-radius-sheet, 24px) 0 0;
+    box-shadow: var(--nexa-mobile-elevation-4);
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 24px;
+    animation: slideUp 0.25s cubic-bezier(0.1, 0.9, 0.2, 1);
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .drag-handle-container {
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+  }
+
+  .drag-handle {
+    width: 36px;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--nexa-mobile-border, #cbd5e1);
+  }
+
+  .sheet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 20px 14px;
+    border-bottom: 1px solid var(--nexa-mobile-border, #f1f5f9);
+  }
+
+  .sheet-title {
+    font-family: var(--nexa-mobile-font-family-display, sans-serif);
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .btn-close-sheet {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #f1f5f9;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .sheet-body {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .filter-title {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+  }
+
+  .sheet-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip-item {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--nexa-mobile-border, #e2e8f0);
+    background: var(--nexa-mobile-surface-bg, #f8fafc);
+    color: var(--nexa-mobile-text-secondary, #475569);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+
+    &.active {
+      background: #eff6ff;
+      color: #2563eb;
+      border-color: #93c5fd;
+      font-weight: 700;
+    }
+  }
+
+  .price-input-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .currency-prefix {
+    position: absolute;
+    left: 14px;
+    font-weight: 700;
+    color: #64748b;
+  }
+
+  .m3-text-field {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px 0 32px;
+    border-radius: 10px;
+    border: 1px solid var(--nexa-mobile-border, #cbd5e1);
+    background: var(--nexa-mobile-surface-bg, #f8fafc);
+    font-family: var(--nexa-mobile-font-family-mono, monospace);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--nexa-mobile-text-primary, #0f172a);
+  }
+
+  .btn-sheet-apply {
+    min-height: 48px;
+    background: var(--nexa-mobile-primary, #2a67d9);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--nexa-mobile-radius-button, 12px);
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+</style>

@@ -1,0 +1,341 @@
+---
+/**
+ * BuyerScreenSpec — Specimen for Nexa Buyer Mobile (Flutter)
+ * Represents the equipment catalog & rental booking flow.
+ */
+---
+
+<div class="screen-content">
+  <!-- Top App Bar -->
+  <div class="m3-top-app-bar">
+    <div class="logo-text">Nexa<b>Buyer</b></div>
+    <div class="header-actions">
+      <div class="action-icon"><i class="pi pi-search"></i></div>
+      <div class="action-icon"><i class="pi pi-shopping-bag"></i></div>
+    </div>
+  </div>
+
+  <div class="catalog-scroll-body">
+    <!-- Category Filter Chips -->
+    <div class="filter-chips-row">
+      <button type="button" class="chip active">Todos</button>
+      <button type="button" class="chip">Generadores</button>
+      <button type="button" class="chip">Elevadores</button>
+      <button type="button" class="chip">Compresores</button>
+    </div>
+
+    <!-- Equipment Card Specimen -->
+    <div class="equipment-card">
+      <div class="equipment-img-box">
+        <i class="pi pi-bolt equipment-icon"></i>
+        <span class="availability-badge">DISPONIBLE HOY</span>
+      </div>
+
+      <div class="equipment-info">
+        <div class="title-row">
+          <h3 class="equipment-title">Generador Diésel CAT 250 kVA</h3>
+          <span class="price-pill">$145 <span>/día</span></span>
+        </div>
+        <p class="equipment-desc">Insonorizado, trifásico 440/220V, autonomía de 18h a plena carga.</p>
+
+        <!-- Rental Duration Selector -->
+        <span class="duration-label">DURACIÓN ESTIMADA:</span>
+        <div class="duration-pills">
+          <button type="button" class="pill">3 días</button>
+          <button type="button" class="pill active">7 días</button>
+          <button type="button" class="pill">15 días</button>
+          <button type="button" class="pill">30 días</button>
+        </div>
+
+        <!-- Escrow Shield Notice -->
+        <div class="escrow-notice">
+          <i class="pi pi-shield"></i>
+          <span>Custodia Escrow: Fondos retenidos hasta entrega verificada</span>
+        </div>
+
+        <!-- 1-Tap Booking Button (Min 48dp) -->
+        <button type="button" class="btn-book-mobile">
+          <i class="pi pi-calendar-plus"></i>
+          <span>Solicitar Reserva (7 días)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation Bar -->
+  <div class="m3-bottom-nav">
+    <div class="nav-item active">
+      <i class="pi pi-th-large"></i>
+      <span>Catálogo</span>
+    </div>
+    <div class="nav-item">
+      <i class="pi pi-file-edit"></i>
+      <span>Solicitudes</span>
+    </div>
+    <div class="nav-item">
+      <i class="pi pi-clock"></i>
+      <span>Alquileres</span>
+    </div>
+    <div class="nav-item">
+      <i class="pi pi-user"></i>
+      <span>Cuenta</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .screen-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--nexa-mobile-surface-bg, #f8fafc);
+    color: var(--nexa-mobile-text-primary, #0f172a);
+    font-family: var(--nexa-mobile-font-family, sans-serif);
+    font-size: 14px;
+    position: relative;
+    padding-bottom: 64px;
+  }
+
+  .m3-top-app-bar {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    border-bottom: 1px solid var(--nexa-mobile-border, #e2e8f0);
+  }
+
+  .logo-text {
+    font-family: var(--nexa-mobile-font-family-display, sans-serif);
+    font-weight: 800;
+    font-size: 18px;
+    color: #0f172a;
+    b {
+      color: var(--nexa-mobile-primary, #2a67d9);
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 4px;
+  }
+
+  .action-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 17px;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+  }
+
+  .catalog-scroll-body {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow-y: auto;
+  }
+
+  .filter-chips-row {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .chip {
+    min-height: 36px;
+    padding: 0 14px;
+    border-radius: var(--nexa-mobile-radius-chip, 8px);
+    border: 1px solid var(--nexa-mobile-border, #e2e8f0);
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    color: var(--nexa-mobile-text-secondary, #64748b);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &.active {
+      background: var(--nexa-mobile-primary, #2a67d9);
+      color: #ffffff;
+      border-color: transparent;
+    }
+  }
+
+  .equipment-card {
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    border: 1px solid var(--nexa-mobile-border, #e2e8f0);
+    border-radius: var(--nexa-mobile-radius-card, 16px);
+    overflow: hidden;
+    box-shadow: var(--nexa-mobile-elevation-1);
+  }
+
+  .equipment-img-box {
+    height: 120px;
+    background: #082846;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .equipment-icon {
+    font-size: 48px;
+    color: #38c8ff;
+  }
+
+  .availability-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(16, 185, 129, 0.9);
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+  }
+
+  .equipment-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .equipment-title {
+    font-family: var(--nexa-mobile-font-family-display, sans-serif);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .price-pill {
+    font-family: var(--nexa-mobile-font-family-mono, monospace);
+    font-weight: 800;
+    font-size: 15px;
+    color: var(--nexa-mobile-primary, #2a67d9);
+    white-space: nowrap;
+    span {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--nexa-mobile-text-secondary, #64748b);
+    }
+  }
+
+  .equipment-desc {
+    font-size: 12px;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+    line-height: 1.45;
+  }
+
+  .duration-label {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+    letter-spacing: 0.05em;
+  }
+
+  .duration-pills {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+
+  .pill {
+    min-height: 38px;
+    border-radius: 8px;
+    border: 1px solid var(--nexa-mobile-border, #cbd5e1);
+    background: transparent;
+    color: var(--nexa-mobile-text-primary, #0f172a);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+
+    &.active {
+      background: #eff6ff;
+      color: #2563eb;
+      border-color: #2563eb;
+      font-weight: 700;
+    }
+  }
+
+  .escrow-notice {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    font-size: 11px;
+    color: #166534;
+    i {
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+  }
+
+  .btn-book-mobile {
+    min-height: 48px;
+    background: var(--nexa-mobile-primary, #2a67d9);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--nexa-mobile-radius-button, 12px);
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: var(--nexa-mobile-elevation-1);
+  }
+
+  .m3-bottom-nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    border-top: 1px solid var(--nexa-mobile-border, #e2e8f0);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    min-width: 48px;
+    min-height: 48px;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+    cursor: pointer;
+
+    &.active {
+      color: var(--nexa-mobile-primary, #2a67d9);
+      font-weight: 700;
+    }
+
+    i {
+      font-size: 18px;
+    }
+  }
+</style>

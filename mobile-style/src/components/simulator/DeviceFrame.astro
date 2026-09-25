@@ -1,0 +1,275 @@
+---
+/**
+ * DeviceFrame — Interactive Mobile Hardware Simulator
+ * Allows switching viewports (360dp, 412dp), screens (Operations, Buyer, Sheet), and testing touch ergonomics.
+ */
+import OperationsScreenSpec from './OperationsScreenSpec.astro';
+import BuyerScreenSpec from './BuyerScreenSpec.astro';
+import BottomSheetSpec from './BottomSheetSpec.astro';
+---
+
+<div class="simulator-wrapper">
+  <!-- Simulator Controls Bar -->
+  <div class="simulator-controls">
+    <div class="control-group">
+      <span class="control-label">DISPOSITIVO:</span>
+      <button type="button" class="btn-ctrl device-btn active" data-width="390" data-height="820">
+        <i class="pi pi-android"></i> Android Flagship (390×820dp)
+      </button>
+      <button type="button" class="btn-ctrl device-btn" data-width="360" data-height="740">
+        <i class="pi pi-mobile"></i> Compact (360×740dp)
+      </button>
+    </div>
+
+    <div class="control-group">
+      <span class="control-label">PANTALLA:</span>
+      <button type="button" class="btn-ctrl screen-btn active" data-screen="operations">
+        <i class="pi pi-truck"></i> Operaciones (Android)
+      </button>
+      <button type="button" class="btn-ctrl screen-btn" data-screen="buyer">
+        <i class="pi pi-shopping-cart"></i> Comprador (Flutter)
+      </button>
+      <button type="button" class="btn-ctrl screen-btn" data-screen="sheet">
+        <i class="pi pi-sliders-h"></i> Bottom Sheet M3
+      </button>
+    </div>
+  </div>
+
+  <!-- Physical Smartphone Hardware Chassis -->
+  <div class="phone-stand">
+    <div class="phone-chassis" id="phone-chassis" style="width: 390px; height: 820px;">
+      <!-- Speaker & Punch-hole Camera -->
+      <div class="chassis-notch">
+        <div class="punch-camera"></div>
+      </div>
+
+      <!-- Status Bar -->
+      <div class="m3-status-bar">
+        <span class="status-time">09:41</span>
+        <div class="status-icons">
+          <i class="pi pi-wifi"></i>
+          <span class="five-g">5G</span>
+          <i class="pi pi-battery"></i>
+        </div>
+      </div>
+
+      <!-- Screen Viewports -->
+      <div class="phone-screen">
+        <div class="screen-view active" id="view-operations">
+          <OperationsScreenSpec />
+        </div>
+        <div class="screen-view" id="view-buyer">
+          <BuyerScreenSpec />
+        </div>
+        <div class="screen-view" id="view-sheet">
+          <BottomSheetSpec />
+        </div>
+      </div>
+
+      <!-- Home Gesture Navigation Bar -->
+      <div class="m3-gesture-bar">
+        <div class="gesture-pill"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .simulator-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .simulator-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    border: 1px solid var(--nexa-mobile-border, #e2e8f0);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .control-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .control-label {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+    letter-spacing: 0.06em;
+  }
+
+  .btn-ctrl {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--nexa-mobile-border, #cbd5e1);
+    background: transparent;
+    color: var(--nexa-mobile-text-secondary, #475569);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: var(--nexa-mobile-surface-tint, #f1f5f9);
+      color: var(--nexa-mobile-text-primary, #0f172a);
+    }
+
+    &.active {
+      background: var(--nexa-mobile-primary, #2a67d9);
+      color: #ffffff;
+      border-color: transparent;
+      font-weight: 700;
+    }
+  }
+
+  /* Physical Phone Stand */
+  .phone-stand {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .phone-chassis {
+    background: #0f172a;
+    border-radius: 48px;
+    padding: 12px;
+    box-shadow: 0 25px 60px -12px rgba(8, 40, 70, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: width 0.3s ease, height 0.3s ease;
+  }
+
+  .chassis-notch {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 18px;
+    background: #0f172a;
+    border-radius: 999px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .punch-camera {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #020617;
+    border: 1px solid #1e293b;
+  }
+
+  .m3-status-bar {
+    height: 38px;
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    border-radius: 36px 36px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--nexa-mobile-text-primary, #0f172a);
+    z-index: 10;
+  }
+
+  .status-icons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+  }
+
+  .five-g {
+    font-size: 10px;
+    font-weight: 800;
+    font-family: var(--nexa-mobile-font-family-mono, monospace);
+  }
+
+  .phone-screen {
+    flex: 1;
+    background: var(--nexa-mobile-surface-bg, #f8fafc);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .screen-view {
+    display: none;
+    height: 100%;
+    overflow-y: auto;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  .m3-gesture-bar {
+    height: 24px;
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    border-radius: 0 0 36px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .gesture-pill {
+    width: 100px;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--nexa-mobile-border, #94a3b8);
+  }
+</style>
+
+<script>
+  // Device viewports
+  const deviceButtons = document.querySelectorAll<HTMLButtonElement>('.device-btn');
+  const chassis = document.getElementById('phone-chassis');
+
+  deviceButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      deviceButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const w = btn.getAttribute('data-width');
+      const h = btn.getAttribute('data-height');
+      if (chassis && w && h) {
+        chassis.style.width = `${w}px`;
+        chassis.style.height = `${h}px`;
+      }
+    });
+  });
+
+  // Screen Switching
+  const screenButtons = document.querySelectorAll<HTMLButtonElement>('.screen-btn');
+  const screenViews = document.querySelectorAll<HTMLElement>('.screen-view');
+
+  screenButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      screenButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const screenId = btn.getAttribute('data-screen');
+
+      screenViews.forEach(view => {
+        view.classList.toggle('active', view.id === `view-${screenId}`);
+      });
+    });
+  });
+</script>

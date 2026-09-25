@@ -1,0 +1,326 @@
+---
+/**
+ * OperationsScreenSpec — Specimen for Nexa Operations Mobile (Android / Jetpack Compose)
+ * Represents the accepted driver identification & active dispatch slice.
+ */
+---
+
+<div class="screen-content">
+  <!-- Top App Bar -->
+  <div class="m3-top-app-bar">
+    <div class="nav-icon"><i class="pi pi-bars"></i></div>
+    <span class="app-bar-title">Operaciones Nexa</span>
+    <div class="action-icon"><i class="pi pi-bell"></i></div>
+  </div>
+
+  <!-- Driver Identification Card -->
+  <div class="driver-card">
+    <div class="driver-avatar">
+      <i class="pi pi-user"></i>
+    </div>
+    <div class="driver-info">
+      <div class="driver-name-row">
+        <span class="driver-name">Carlos Mendoza</span>
+        <span class="status-chip active">EN TURNO</span>
+      </div>
+      <span class="driver-role">Conductor Autorizado · ID #4829</span>
+      <span class="driver-unit">Unidad: Camión Plataforma V-104</span>
+    </div>
+  </div>
+
+  <!-- Active Dispatch Route -->
+  <div class="section-label">DESPACHO EN CURSO</div>
+  <div class="dispatch-card">
+    <div class="dispatch-header">
+      <span class="order-id">ORD-2026-9812</span>
+      <span class="time-tag">Hace 15 min</span>
+    </div>
+
+    <div class="route-timeline">
+      <div class="timeline-step">
+        <div class="step-dot origin"></div>
+        <div class="step-details">
+          <span class="step-title">Almacén Central (Bodega A-4)</span>
+          <span class="step-sub">Carga de Generador 250 kVA</span>
+        </div>
+      </div>
+      <div class="timeline-line"></div>
+      <div class="timeline-step">
+        <div class="step-dot destination"></div>
+        <div class="step-details">
+          <span class="step-title">Obra Proyecto Altamira</span>
+          <span class="step-sub">Entrega estimada: 11:30 AM</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Button (Min 48dp touch target) -->
+    <button type="button" class="btn-primary-mobile">
+      <i class="pi pi-check-circle"></i>
+      <span>Confirmar Entrega en Sitio</span>
+    </button>
+  </div>
+
+  <!-- Bottom Navigation Bar -->
+  <div class="m3-bottom-nav">
+    <div class="nav-item active">
+      <i class="pi pi-map-marker"></i>
+      <span>Rutas</span>
+    </div>
+    <div class="nav-item">
+      <i class="pi pi-box"></i>
+      <span>Cargas</span>
+    </div>
+    <div class="nav-item">
+      <i class="pi pi-shield"></i>
+      <span>Seguridad</span>
+    </div>
+    <div class="nav-item">
+      <i class="pi pi-user"></i>
+      <span>Perfil</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .screen-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--nexa-mobile-surface-bg, #f8fafc);
+    color: var(--nexa-mobile-text-primary, #0f172a);
+    font-family: var(--nexa-mobile-font-family, sans-serif);
+    font-size: 14px;
+    position: relative;
+    padding-bottom: 64px; /* Space for bottom nav */
+  }
+
+  .m3-top-app-bar {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    border-bottom: 1px solid var(--nexa-mobile-border, #e2e8f0);
+  }
+
+  .app-bar-title {
+    font-family: var(--nexa-mobile-font-family-display, sans-serif);
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .nav-icon, .action-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+  }
+
+  .driver-card {
+    margin: 16px;
+    padding: 14px;
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    border: 1px solid var(--nexa-mobile-border, #e2e8f0);
+    border-radius: var(--nexa-mobile-radius-card, 16px);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--nexa-mobile-elevation-1);
+  }
+
+  .driver-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #e0f2fe;
+    color: #0284c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .driver-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+  }
+
+  .driver-name-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .driver-name {
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .status-chip {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    &.active {
+      background: var(--nexa-mobile-status-success-bg, #dcfce7);
+      color: var(--nexa-mobile-status-success, #15803d);
+    }
+  }
+
+  .driver-role, .driver-unit {
+    font-size: 12px;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+    margin: 8px 16px 4px;
+  }
+
+  .dispatch-card {
+    margin: 0 16px 16px;
+    padding: 16px;
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    border: 1px solid var(--nexa-mobile-border, #e2e8f0);
+    border-radius: var(--nexa-mobile-radius-card, 16px);
+    box-shadow: var(--nexa-mobile-elevation-1);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .dispatch-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .order-id {
+    font-family: var(--nexa-mobile-font-family-mono, monospace);
+    font-weight: 700;
+    color: var(--nexa-mobile-primary, #2a67d9);
+  }
+
+  .time-tag {
+    font-size: 12px;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+  }
+
+  .route-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .timeline-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .step-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+
+    &.origin {
+      background: #2563eb;
+    }
+
+    &.destination {
+      background: #16a34a;
+    }
+  }
+
+  .timeline-line {
+    width: 2px;
+    height: 18px;
+    background: #cbd5e1;
+    margin-left: 5px;
+  }
+
+  .step-details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .step-title {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .step-sub {
+    font-size: 11px;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+  }
+
+  .btn-primary-mobile {
+    min-height: 48px;
+    background: var(--nexa-mobile-primary, #2a67d9);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--nexa-mobile-radius-button, 12px);
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: var(--nexa-mobile-elevation-1);
+    transition: opacity 0.15s ease;
+
+    &:active {
+      opacity: 0.85;
+    }
+  }
+
+  .m3-bottom-nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    border-top: 1px solid var(--nexa-mobile-border, #e2e8f0);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    min-width: 48px;
+    min-height: 48px;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+    cursor: pointer;
+
+    &.active {
+      color: var(--nexa-mobile-primary, #2a67d9);
+      font-weight: 700;
+    }
+
+    i {
+      font-size: 18px;
+    }
+  }
+</style>

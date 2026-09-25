@@ -1,0 +1,201 @@
+---
+/**
+ * CodeSnippetsTabs — Dual Code Generator for Android Jetpack Compose & Flutter
+ */
+---
+
+<div class="code-snippets-box">
+  <div class="snippet-header">
+    <div class="snippet-tabs">
+      <button type="button" class="tab-code active" data-lang="compose">
+        <i class="pi pi-android"></i> Jetpack Compose (Kotlin)
+      </button>
+      <button type="button" class="tab-code" data-lang="flutter">
+        <i class="pi pi-code"></i> Flutter (Dart)
+      </button>
+    </div>
+    <span class="spec-compliance">✓ WCAG 2.2 AA & M3 Compliant</span>
+  </div>
+
+  <!-- Compose Snippet -->
+  <div class="snippet-pane active" id="pane-compose">
+    <pre is:raw><code><span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">NexaDriverDispatchCard</span>(
+    orderId: <span class="type">String</span>,
+    destination: <span class="type">String</span>,
+    onConfirmDelivery: () -&gt; <span class="type">Unit</span>,
+    modifier: <span class="type">Modifier</span> = <span class="type">Modifier</span>
+) {
+    <span class="fn">Card</span>(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = <span class="num">16.dp</span>, vertical = <span class="num">8.dp</span>),
+        shape = <span class="fn">RoundedCornerShape</span>(<span class="num">16.dp</span>),
+        colors = CardDefaults.cardColors(containerColor = NexaTokens.SurfaceCard),
+        elevation = CardDefaults.cardElevation(defaultElevation = <span class="num">2.dp</span>)
+    ) {
+        <span class="fn">Column</span>(modifier = Modifier.padding(<span class="num">16.dp</span>)) {
+            <span class="fn">Text</span>(text = orderId, style = NexaTypography.titleMedium)
+            <span class="fn">Spacer</span>(modifier = Modifier.height(<span class="num">8.dp</span>))
+            <span class="fn">Text</span>(text = destination, style = NexaTypography.bodyMedium)
+            <span class="fn">Spacer</span>(modifier = Modifier.height(<span class="num">16.dp</span>))
+            <span class="fn">Button</span>(
+                onClick = onConfirmDelivery,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = <span class="num">48.dp</span>), <span class="cmt">// 48dp minimum touch target</span>
+                shape = <span class="fn">RoundedCornerShape</span>(<span class="num">12.dp</span>),
+                colors = ButtonDefaults.buttonColors(containerColor = NexaTokens.Primary)
+            ) {
+                <span class="fn">Text</span>(<span class="str">"Confirmar Entrega en Sitio"</span>)
+            }
+        }
+    }
+}</code></pre>
+  </div>
+
+  <!-- Flutter Snippet -->
+  <div class="snippet-pane" id="pane-flutter">
+    <pre is:raw><code><span class="kw">class</span> <span class="type">NexaEquipmentRentalCard</span> <span class="kw">extends</span> <span class="type">StatelessWidget</span> {
+  <span class="kw">final</span> <span class="type">String</span> title;
+  <span class="kw">final</span> <span class="type">double</span> dailyRate;
+  <span class="kw">final</span> <span class="type">VoidCallback</span> onBook;
+
+  <span class="kw">const</span> <span class="fn">NexaEquipmentRentalCard</span>({
+    <span class="kw">super</span>.key,
+    <span class="kw">required</span> <span class="kw">this</span>.title,
+    <span class="kw">required</span> <span class="kw">this</span>.dailyRate,
+    <span class="kw">required</span> <span class="kw">this</span>.onBook,
+  });
+
+  <span class="kw">@override</span>
+  <span class="type">Widget</span> <span class="fn">build</span>(<span class="type">BuildContext</span> context) {
+    <span class="kw">return</span> <span class="fn">Card</span>(
+      elevation: <span class="num">2</span>,
+      shape: <span class="fn">RoundedRectangleBorder</span>(
+        borderRadius: <span class="fn">BorderRadius.circular</span>(<span class="num">16</span>),
+      ),
+      child: <span class="fn">Padding</span>(
+        padding: <span class="kw">const</span> <span class="fn">EdgeInsets.all</span>(<span class="num">16</span>),
+        child: <span class="fn">Column</span>(
+          crossAxisAlignment: <span class="type">CrossAxisAlignment</span>.start,
+          children: [
+            <span class="fn">Text</span>(title, style: NexaTypography.titleMedium),
+            <span class="kw">const</span> <span class="fn">SizedBox</span>(height: <span class="num">12</span>),
+            <span class="fn">SizedBox</span>(
+              width: <span class="type">double</span>.infinity,
+              height: <span class="num">48</span>, <span class="cmt">// 48dp minimum touch target</span>
+              child: <span class="fn">FilledButton.icon</span>(
+                onPressed: onBook,
+                style: <span class="fn">FilledButton.styleFrom</span>(
+                  backgroundColor: NexaColors.primary,
+                  shape: <span class="fn">RoundedRectangleBorder</span>(
+                    borderRadius: <span class="fn">BorderRadius.circular</span>(<span class="num">12</span>),
+                  ),
+                ),
+                icon: <span class="kw">const</span> <span class="fn">Icon</span>(Icons.calendar_today, size: <span class="num">18</span>),
+                label: <span class="kw">const</span> <span class="fn">Text</span>(<span class="str">'Solicitar Alquiler'</span>),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}</code></pre>
+  </div>
+</div>
+
+<style>
+  .code-snippets-box {
+    background: #0f172a;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 1rem;
+    border: 1px solid #1e293b;
+  }
+
+  .snippet-header {
+    background: #090d16;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1e293b;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .snippet-tabs {
+    display: flex;
+    gap: 6px;
+  }
+
+  .tab-code {
+    background: transparent;
+    border: 1px solid transparent;
+    color: #94a3b8;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    &.active {
+      background: #1e293b;
+      color: #38c8ff;
+      border-color: #334155;
+    }
+  }
+
+  .spec-compliance {
+    font-size: 11px;
+    color: #4ade80;
+    font-weight: 700;
+  }
+
+  .snippet-pane {
+    display: none;
+    padding: 1.25rem;
+    overflow-x: auto;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  pre {
+    margin: 0;
+    font-family: var(--nexa-mobile-font-family-mono, monospace);
+    font-size: 12px;
+    line-height: 1.6;
+    color: #e2e8f0;
+  }
+
+  .kw { color: #f43f5e; font-weight: 600; }
+  .type { color: #38bdf8; }
+  .fn { color: #818cf8; }
+  .str { color: #34d399; }
+  .num { color: #fbbf24; }
+  .cmt { color: #64748b; font-style: italic; }
+</style>
+
+<script>
+  const codeTabs = document.querySelectorAll<HTMLButtonElement>('.tab-code');
+  const codePanes = document.querySelectorAll<HTMLElement>('.snippet-pane');
+
+  codeTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      codeTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const lang = tab.getAttribute('data-lang');
+
+      codePanes.forEach(pane => {
+        pane.classList.toggle('active', pane.id === `pane-${lang}`);
+      });
+    });
+  });
+</script>
