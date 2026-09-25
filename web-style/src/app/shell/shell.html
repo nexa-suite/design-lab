@@ -2,9 +2,24 @@
   <aside class="lab-sidebar" aria-label="Design Lab navigation">
     <a class="lab-brand" routerLink="/guidelines/overview" (click)="navigate()">
       <nexa-logo alt="Nexa Design Lab" />
-      <span>DESIGN LAB <b>v0.10</b></span>
+      <span>DESIGN LAB <b>v1.0.2 · Web Style</b></span>
     </a>
-    <p class="lab-context">Design foundations, live component evidence and quality contracts</p>
+    <p class="lab-context">Web design foundations, live component evidence and quality contracts</p>
+
+    <div class="monorepo-suite-switcher" aria-label="Nexa Style Triad">
+      <span class="suite-title">STYLE MONOREPO</span>
+      <div class="suite-links">
+        <span class="suite-pill active" title="Currently viewing Web Style Guidelines">
+          <i class="pi pi-desktop" aria-hidden="true"></i> Web
+        </span>
+        <a href="http://localhost:4201" class="suite-pill link" target="_blank" rel="noopener" title="Open Mobile Style Guidelines (Android / Flutter)">
+          <i class="pi pi-mobile" aria-hidden="true"></i> Mobile ↗
+        </a>
+        <a href="http://localhost:4321" class="suite-pill link" target="_blank" rel="noopener" title="Open Website Style Guidelines & Nexafy Living Geometry">
+          <i class="pi pi-globe" aria-hidden="true"></i> Website ↗
+        </a>
+      </div>
+    </div>
 
     <div class="lab-search">
       <label for="desktop-documentation-search">Search documentation</label>
