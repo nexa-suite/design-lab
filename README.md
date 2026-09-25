@@ -1,169 +1,156 @@
 <div align="center">
 
-<img src="./public/brand/nexa.svg" alt="Nexa" width="240" />
+# Nexa Design Lab Monorepo
 
-# Nexa Design Lab
+**Universal Design Authority for the Nexa Suite: Web, Mobile, and Website (Nexafy).**
 
-**Executable design-system evidence, separate from production Product implementation.**
-
-![Angular](https://img.shields.io/badge/Angular-22.1.2-DD0031?style=flat-square&logo=angular&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-6.0.3-3178C6?style=flat-square&logo=typescript&logoColor=white) ![Design evidence](https://img.shields.io/badge/design-evidence-64748B?style=flat-square) ![Latest Git tag](https://img.shields.io/github/v/tag/nexa-suite/design-lab?sort=semver&style=flat-square&label=latest%20Git%20tag)
-
-[Run](#run) · [Route map](#route-map) · [Quality evidence](#quality-evidence) · [Architecture boundary](#architecture-boundary)
+![Architecture](https://img.shields.io/badge/Architecture-Monorepo%20Triad-2563EB?style=flat-square)
+![Web](https://img.shields.io/badge/web--style-Angular%2022-DD0031?style=flat-square)
+![Mobile](https://img.shields.io/badge/mobile--style-Android%20%2F%20Flutter-10B981?style=flat-square)
+![Website](https://img.shields.io/badge/website--style-Nexafy%20Living%20Geometry-082846?style=flat-square)
+![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker&logoColor=white)
 
 </div>
 
-Visual evidence laboratory for Nexa foundations, reusable components, interaction states and accessibility review.
+---
 
-The repository tag identifies a Git baseline, while the package version remains independently declared in `package.json`. The lab is executable design evidence, not a production Product application, Domain contract or accessibility certification.
+## 1. Monorepo Architecture Overview
 
-## Nexa Product Ecosystem
+Nexa Design Lab is the centralized source of truth for design guidelines, design tokens, component specifications, and living interactive systems across the three pillars of the Nexa Suite:
 
-<table>
-<tr>
-<td><strong><a href="https://github.com/nexa-suite/mobile-report">Mobile Report</a></strong><br>Academic and product research evidence.</td>
-<td><strong><a href="https://github.com/nexa-suite/mobile">Mobile</a></strong><br>Accepted mobile projections and implementation workspace.</td>
-</tr>
-<tr>
-<td><strong><a href="https://github.com/nexa-suite/api">API</a></strong><br>Shared backend and domain integration surface.</td>
-<td><strong><a href="https://github.com/nexa-suite/website">Website</a></strong><br>Public acquisition and product context.</td>
-</tr>
-<tr>
-<td><strong><a href="https://github.com/nexa-suite/portal">Buyer Portal</a></strong><br>Buyer-facing web experience.</td>
-<td><strong><a href="https://github.com/nexa-suite/platform">Platform</a></strong><br>Operations and platform web experience.</td>
-</tr>
-</table>
+```
+design-lab/
+├── web-style/                 # 🌐 Port 4200: Web Applications Design System
+│   ├── projects/nexa-ui/      # Reusable Angular UI component library
+│   ├── src/                   # Angular 22 documentation lab & component explorer
+│   ├── tokens/                # DTCG design tokens (primitives, semantics, components)
+│   └── Dockerfile             # Standalone production container (port 4200)
+│
+├── mobile-style/              # 📱 Port 4201: Native Mobile Guidelines & Simulator
+│   ├── src/components/        # Hardware phone simulator (Android Pixel 8 / iPhone 15)
+│   │   ├── simulator/         # Operations (Android Compose) & Buyer (Flutter) specs
+│   │   └── spec/              # 48dp touch targets, 8dp grid, M3 surface elevations
+│   └── Dockerfile             # Standalone production container (port 4201)
+│
+├── website-style/             # 🚀 Port 4321: Marketing & Landing Living Geometry (Nexafy)
+│   ├── src/components/        # Nexafy Living Geometry Engine & 28px vascular conduits
+│   │   ├── engine/            # Interactive drag-and-drop workbench & collision avoidance
+│   │   ├── nexafy/            # Modular living artifacts (Hub, Cards, Ledgers, Shields)
+│   │   └── guidelines/        # Pure solid colorimetry (#082846 & #38c8ff), 0 gradients
+│   ├── src/pages/             # Workbench (/), Artifacts (/artifacts), Landing Specs (/landing-spec)
+│   └── Dockerfile             # Standalone production container (port 4321)
+│
+├── gateway/                   # 🧭 Port 8080: Style Monorepo Hub & Gateway
+│   ├── index.html             # Unified landing portal to access all three environments
+│   └── nginx.conf             # Unified reverse proxy routes (/web/, /mobile/, /website/)
+│
+└── docker-compose.yml         # Multi-service container orchestration
+```
 
-## Purpose
+---
 
-v1.0.0 establishes an executable, consumable and reviewable design-system baseline:
+## 2. Independent Execution (Local Development)
 
-- every important rule has a rendered specimen;
-- states can be seen, triggered, compared and reset;
-- color and contrast use a shared deterministic gate;
-- accessibility modes expose focus, target, resize and motion behavior;
-- component maturity separates human-frozen direction from open exploration;
-- canonical supplied logo assets, semantic status emphasis and reusable Action Menu / Tooltip behavior are rendered;
-- Async Operations, Authentication, Legal Content, Payments, Analytics, Dispatch Board and Data-Dense Operations are candidate patterns;
-- Increased Contrast, Reduced Motion and an explicit 400% reflow evaluation mode are root-level functional evaluation modes.
-- reusable candidates live under `design-system`, while Lab-only evidence lives under `lab`;
-- Authentication, Analytics and Dispatch Board own focused documentation features and explicit lazy routes;
-- StateSequence playback has configurable phase timing, terminal states and explicit recovery;
-- architecture, token and contrast gates protect the source structure and geometry contracts.
-- the generated token reference feeds documentation and contrast evidence from the same canonical JSON source;
-- DTCG-ish token sources generate primitive, semantic, component and data-visualization layers;
-- PrimeIcons are pinned locally and exposed through an audited explorer;
-- the icon explorer exposes render, role, size, alignment, label policy, semantic color and hit-target evidence;
-- `projects/nexa-ui` is the real Angular library boundary with an explicit public API;
-- Buttons and Progress own focused route features instead of depending on the broad component renderer;
-- repository validation tooling is authored as TypeScript and executed with Node's native type stripping; no JavaScript-like tooling source is versioned in this repository;
-- Blueprint documentation is the normative design-system baseline; this repository is executable evidence.
+Each package can be developed and run independently with dedicated ports:
 
-The active lab contains documentation pages and composition specimens only. Product patterns remain design evidence; they do not define accepted domain behavior or production contracts.
+### Web Style Guidelines (`web-style`)
+```bash
+# Start Web Style Guidelines & nexa-ui library
+npm run dev:web
+# -> Open http://localhost:4200
+```
 
-## Run
+### Mobile Style Guidelines (`mobile-style`)
+```bash
+# Start Mobile Guidelines & Hardware Device Simulator
+npm run dev:mobile
+# -> Open http://localhost:4201
+```
 
-    npm ci
-    npm start -- --host 127.0.0.1 --port 4301
+### Website Style Guidelines & Nexafy (`website-style`)
+```bash
+# Start Nexafy Living Geometry Engine Workbench & Landing Specs
+npm run dev:website
+# -> Open http://localhost:4321
+```
 
-Open `http://127.0.0.1:4301/guidelines/overview`.
+---
 
-## Route map
+## 3. Docker Containerization
 
-| Area | Evidence |
-| --- | --- |
-| Start here | Overview, principles, maturity/freeze |
-| Foundations | Color, Brand / Logo, typography, layout, shape, surfaces, iconography, motion |
-| Components | Buttons, text fields, search, choice controls, status, feedback, menus, overlays, data, progress, workflow, quantity, navigation |
-| Patterns | Forms, search/filtering, async operations, authentication, legal content, payments, analytics, dispatch board, data-dense operations, responsive behavior |
-| Quality | Accessibility Lab, Contrast Lab, heuristics, input modality, maturity |
-| Engineering | Angular architecture, tokens, APIs, testing, Design Adoption & Handoff |
+Run all three environments together or spin up any service individually:
 
-All documentation pages are lazy-loaded through the Angular router. There is no active screen-library route.
+### Run Everything (All 3 Styles + Central Hub):
+```bash
+# Build and run containers in background
+docker compose up -d --build
 
-## Frozen design direction
+# Open the Central Hub Portal
+# -> http://localhost:8080
 
-- Light appearance is canonical.
-- The current sidebar geometry, grouping, search, active row and mobile drawer behavior remain frozen.
-- The current text-field geometry remains frozen and is now reusable through `NexaTextField`.
-- Plus Jakarta Sans, Inter and JetBrains/system mono remain the candidate type families.
-- PrimeIcons remain the candidate icon system.
-- White structural surfaces sit on a cool light canvas; elevation is restrained and purposeful.
-- Rounded geometry is semantic: controls, cards, panels and compact status do not share one universal radius.
-- The supplied logo assets are the canonical rendered logo sources; the wordmark is never redrawn in CSS or text.
-- Dark mode is intentionally deferred. Increased Contrast is an evaluation mode over the same light foundation.
+# Or access each service directly on its dedicated port:
+# -> Web Style:     http://localhost:4200
+# -> Mobile Style:  http://localhost:4201
+# -> Website Style: http://localhost:4321
+```
 
-## Quality evidence
+### Run a Single Container Separately:
+```bash
+# Only run Web Style
+docker compose up -d web-style
+
+# Only run Mobile Style
+docker compose up -d mobile-style
+
+# Only run Website Style (Nexafy)
+docker compose up -d website-style
+```
+
+### Stop Containers:
+```bash
+docker compose down
+```
+
+---
+
+## 4. Pillar Specifications
+
+### 🌐 `web-style`
+* **Technology**: Angular v22, TypeScript, SCSS, PrimeIcons.
+* **Component Library**: `projects/nexa-ui` public exports.
+* **Coverage**: Complete component catalog, form patterns, dense data tables, responsive layouts, and contrast gates.
+
+### 📱 `mobile-style`
+* **Technology**: Astro v5, TypeScript, Material 3 tokens.
+* **Simulator**: Interactive Pixel 8 frame with dynamic status bar, gesture bar, and theme switcher.
+* **Specs**:
+  * **48dp Ergonomics**: Minimum touch bounding box for buttons, app bars, and filter chips.
+  * **8dp Spatial Grid**: Margin, gutters, and radii specifications.
+  * **Dual Code Generator**: Production-ready code snippets in both **Android Jetpack Compose** (Kotlin) and **Flutter** (Dart).
+
+### 🚀 `website-style` (Nexafy)
+* **Technology**: Astro v5, GSAP 3, TypeScript.
+* **Rules**: Solid Nexa Dark Blue (`#082846`), Celeste (`#38c8ff`), **0 degradados**, conductos vasculares gruesos de 28px con uniones tipo fillet.
+* **Living Engine**: Interactive workbench with node dragging, continuous collision avoidance, OKLCH vision bar palette shifts, and decomposed modular cards.
+* **Pages**:
+  * `/`: Master Living Engine Workbench & Style Guidelines.
+  * `/artifacts`: Modular Living Artifacts Catalog (Hub, Store cards, Inquiries, SaaS Ledgers, Escrow Shields).
+  * `/landing-spec`: Technical specifications for Hero architecture, Bento 4-column distribution, and sculpted footers.
+
+---
+
+## 5. Global Validation & Quality Gates
+
+Run all checks across the monorepo:
 
 ```bash
-npm run build
-npm run build:library
-npm run validate:architecture
-npm run validate:tokens
-npm run validate:colors
-npm run validate:icons
-npm run validate:documentation
-npm run validate:public-api
-npm run validate:visual
-npm run validate:contrast
-npm run validate:package
-npm run validate:browser
-npm run audit:visual
-npm test -- --watch=false
-npm run test:library -- --watch=false
+# Build all packages
 npm run build:all
-npm audit --omit=dev --audit-level=high
-git diff --check
+
+# Validate tokens
+npm run validate:tokens
 ```
 
-The Contrast Lab derives ratios from token color values. The required gates are WCAG 2.2: 4.5:1 for normal text, 3:1 for large text and 3:1 for essential non-text UI. The lab also exposes Standard/Increased Contrast, Motion/Reduced Motion and target-overlay review modes.
+---
 
-The browser gate covers every registered page at 1440, 1024, 768, 390 and 320px, plus representative state and recovery interactions. Screenshot capture remains an optional review artifact; the committed contract records route, viewport, state and source SHA without generated images. Manual visual judgment and assistive-technology review remain human handoff items.
-
-## Nexa Engineering & Documentation
-
-<table>
-<tr>
-<td><strong><a href="https://github.com/nexa-suite/blueprint">Blueprint</a></strong><br>Canonical architecture and decision records.</td>
-<td><strong><a href="https://github.com/nexa-suite/web-report">Web Report</a></strong><br>Structured report and documentation workspace.</td>
-</tr>
-<tr>
-<td><strong><a href="https://github.com/nexa-suite/complementary">Complementary</a></strong><br>Supporting research and reproducible utilities.</td>
-<td><strong><a href="https://github.com/nexa-suite/design-lab">Design Lab</a></strong><br>Executable design-system evidence.</td>
-</tr>
-</table>
-
-## Angular structure
-
-```text
-src/app/
-  shell/                 documentation navigation shell
-projects/nexa-ui/         reusable candidate library and explicit public API
-  lab/                   evaluation, evidence and quality infrastructure
-  documentation/         route features, page content and navigation metadata
-src/styles/
-  _tokens-primitives.scss
-  _tokens-semantic.scss
-  _tokens-components.scss
-  _tokens-data-visualization.scss
-  _motion.scss
-  _accessibility.scss
-tooling/scripts/         token and contrast gates
-```
-
-Reusable controls own their public API and native semantics. Documentation specimens own simulation state, galleries and evidence composition. Strict templates and signal-first state are required.
-
-## Documentation
-
-- [Architecture](./docs/architecture.md)
-- [Consuming Nexa UI](./docs/consuming-nexa-ui.md)
-- [Release validation](./docs/release-validation.md)
-- [Design adoption ADR](./docs/adr/0001-blueprint-authority-and-lab-evidence.md)
-- [Historical v0.x archive](./docs/archive/v0.x/)
-
-The archive preserves prior reports for provenance. It is not runtime authority and does not override the Blueprint design-system baseline.
-
-## Architecture boundary
-
-Design Lab changes are local to this repository. No production application, API, mobile repository or deployment is modified by the lab. Blueprint remains normative for design-system governance, while product patterns remain non-production evidence.
-
-Copyright © 2026 Nexa. All rights reserved.
+*Owner: Diego Y. Sandoval · Nexa Suite Design Authority*
