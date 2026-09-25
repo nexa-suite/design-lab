@@ -1,0 +1,52 @@
+services:
+  web-style:
+    build:
+      context: ./web-style
+      dockerfile: Dockerfile
+    container_name: nexa-web-style
+    ports:
+      - "4200:4200"
+    restart: unless-stopped
+    networks:
+      - nexa-style-network
+
+  mobile-style:
+    build:
+      context: ./mobile-style
+      dockerfile: Dockerfile
+    container_name: nexa-mobile-style
+    ports:
+      - "4201:4201"
+    restart: unless-stopped
+    networks:
+      - nexa-style-network
+
+  website-style:
+    build:
+      context: ./website-style
+      dockerfile: Dockerfile
+    container_name: nexa-website-style
+    ports:
+      - "4321:4321"
+    restart: unless-stopped
+    networks:
+      - nexa-style-network
+
+  hub:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    container_name: nexa-style-hub
+    ports:
+      - "8090:80"
+    depends_on:
+      - web-style
+      - mobile-style
+      - website-style
+    restart: unless-stopped
+    networks:
+      - nexa-style-network
+
+networks:
+  nexa-style-network:
+    driver: bridge

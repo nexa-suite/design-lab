@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexa Style Monorepo Hub · Design Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" 
+    rel="stylesheet"
+  >
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #f6faff;
+      color: #0f172a;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .hub-container {
+      max-width: 1080px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .hub-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: #2a67d9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(42, 103, 217, 0.25);
+    }
+
+    .hub-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: #1b4fb8;
+      background: #e8f0fe;
+      border: 1px solid #b8d4fe;
+      padding: 2px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+    }
+
+    .hub-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: #082846;
+      letter-spacing: -0.02em;
+    }
+
+    .hub-subtitle {
+      font-size: 16px;
+      color: #64748b;
+      max-width: 680px;
+      line-height: 1.6;
+    }
+
+    /* Triad Grid */
+    .triad-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .triad-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 24px -8px rgba(8, 40, 70, 0.12);
+        border-color: #cbd5e1;
+      }
+    }
+
+    .card-stripe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .stripe-web { background: #2a67d9; }
+    .stripe-mobile { background: #10b981; }
+    .stripe-website { background: #38c8ff; }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .icon-web { background: #eff6ff; color: #2563eb; }
+    .icon-mobile { background: #ecfdf5; color: #059669; }
+    .icon-website { background: #f0f9ff; color: #0284c7; }
+
+    .port-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: #f1f5f9;
+      color: #334155;
+    }
+
+    .card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .card-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.55;
+    }
+
+    .card-tech {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 0.25rem;
+    }
+
+    .tech-pill {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #f8fafc;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+    }
+
+    .btn-launch {
+      margin-top: auto;
+      padding: 0.75rem 1.25rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.15s ease;
+    }
+
+    .btn-web {
+      background: #2a67d9;
+      color: #ffffff;
+      &:hover { background: #1b4fb8; }
+    }
+
+    .btn-mobile {
+      background: #059669;
+      color: #ffffff;
+      &:hover { background: #047857; }
+    }
+
+    .btn-website {
+      background: #082846;
+      color: #38c8ff;
+      &:hover { background: #04172a; }
+    }
+
+    .hub-footer {
+      text-align: center;
+      font-size: 13px;
+      color: #94a3b8;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="hub-container">
+    <header class="hub-header">
+      <div class="brand-mark">
+        <svg width="26" height="26" viewBox="0 0 40 40" fill="none">
+          <path d="M12 28V12L28 28V12" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="hub-tag">STYLE MONOREPO TRIAD · V2.0</span>
+      <h1 class="hub-title">Nexa Design Lab Monorepo</h1>
+      <p class="hub-subtitle">
+        Centro de autoridad de diseño para todo el ecosistema Nexa Suite. Navega de forma independiente en cada entorno o accede a través del clúster Docker.
+      </p>
+    </header>
+
+    <div class="triad-grid">
+      <!-- 1. Web Style -->
+      <div class="triad-card">
+        <div class="card-stripe stripe-web"></div>
+        <div class="card-top">
+          <div class="card-icon icon-web">🌐</div>
+          <span class="port-badge">:4200</span>
+        </div>
+        <div class="card-info">
+          <h2 class="card-title">web-style</h2>
+          <p class="card-desc">
+            Directrices de diseño para aplicaciones web de escritorio (Portal y Plataforma). Incluye la biblioteca oficial <strong>nexa-ui</strong>, tokens de diseño y catálogo de componentes interactivos.
+          </p>
+          <div class="card-tech">
+            <span class="tech-pill">Angular 22</span>
+            <span class="tech-pill">nexa-ui</span>
+            <span class="tech-pill">SCSS</span>
+            <span class="tech-pill">PrimeIcons</span>
+          </div>
+        </div>
+        <a href="http://localhost:4200" class="btn-launch btn-web" target="_blank" rel="noopener">
+          <span>Abrir Web Style Guidelines</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
+      <!-- 2. Mobile Style -->
+      <div class="triad-card">
+        <div class="card-stripe stripe-mobile"></div>
+        <div class="card-top">
+          <div class="card-icon icon-mobile">📱</div>
+          <span class="port-badge">:4201</span>
+        </div>
+        <div class="card-info">
+          <h2 class="card-title">mobile-style</h2>
+          <p class="card-desc">
+            Directrices y especificaciones para aplicaciones móviles nativas. Incluye simulador de hardware (Pixel / iPhone), ergonomía táctil de 48dp y generador de código para <strong>Android Jetpack Compose</strong> y <strong>Flutter</strong>.
+          </p>
+          <div class="card-tech">
+            <span class="tech-pill">Android Compose</span>
+            <span class="tech-pill">Flutter</span>
+            <span class="tech-pill">Material 3</span>
+            <span class="tech-pill">48dp Grid</span>
+          </div>
+        </div>
+        <a href="http://localhost:4201" class="btn-launch btn-mobile" target="_blank" rel="noopener">
+          <span>Abrir Mobile Style Guidelines</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
+      <!-- 3. Website Style (Nexafy) -->
+      <div class="triad-card">
+        <div class="card-stripe stripe-website"></div>
+        <div class="card-top">
+          <div class="card-icon icon-website">🚀</div>
+          <span class="port-badge">:4321</span>
+        </div>
+        <div class="card-info">
+          <h2 class="card-title">website-style (Nexafy)</h2>
+          <p class="card-desc">
+            Motor gráfico y directrices para páginas de marketing y landings de alta conversión. Geometría viva <strong>Nexafy</strong>, colorimetría sólida pura (Azul Oscuro <code>#082846</code> y Celeste <code>#38c8ff</code>), 0 degradados y conductos vasculares de 28px.
+          </p>
+          <div class="card-tech">
+            <span class="tech-pill">Nexafy Living Engine</span>
+            <span class="tech-pill">Astro v5</span>
+            <span class="tech-pill">OKLCH Vision</span>
+            <span class="tech-pill">0 Gradients</span>
+          </div>
+        </div>
+        <a href="http://localhost:4321" class="btn-launch btn-website" target="_blank" rel="noopener">
+          <span>Abrir Nexafy Living Geometry</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <footer class="hub-footer">
+      Nexa Suite Design Lab · Monorepo Triad Architecture · Diego Y. Sandoval
+    </footer>
+  </main>
+
+</body>
+</html>
