@@ -1,0 +1,330 @@
+---
+import { SPACING_ROWS, RADIUS_ROWS, SURFACE_ROWS } from '../../lib/nexa-guidelines/data';
+---
+
+<section id="section-geometria" class="guideline-module">
+  <div class="module-header">
+    <div class="kicker-group">
+      <span class="index-pill">03</span>
+      <span class="kicker-text">SPATIAL RHYTHM & SEMANTIC GEOMETRY</span>
+    </div>
+    <h2>Shape is semantic, not universal</h2>
+    <p class="module-intro">
+      A control, card, panel, dialog, and status chip each have mathematically distinct radii. Rounded does not mean every object is a pill or a generic high-radius AI card.
+    </p>
+  </div>
+
+  <!-- Base 4px Rhythm -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <h3 class="subsection-title">4px Spatial Rhythm Scale</h3>
+      <span class="spec-badge">Strict Multiples of 4 · Generous Operational Density</span>
+    </div>
+    <div class="spacing-board">
+      {SPACING_ROWS.map((space) => (
+        <div class="spacing-row">
+          <div class="space-meta">
+            <code>{space.token}</code>
+            <strong>{space.value}</strong>
+          </div>
+          <div class="space-bar-track">
+            <div class="space-bar-fill" style={`width: ${space.value};`}></div>
+          </div>
+          <span class="space-role">{space.role}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Semantic Radii Grid -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <h3 class="subsection-title">Semantic Radii Hierarchy</h3>
+      <span class="spec-badge">Purpose-Driven Curvatures</span>
+    </div>
+    <div class="radius-grid">
+      {RADIUS_ROWS.map((rad) => (
+        <article class="radius-card">
+          <div class="radius-specimen-box" style={`border-radius: ${rad.value};`}>
+            <span class="radius-value-tag">{rad.value}</span>
+          </div>
+          <div class="radius-meta">
+            <strong>{rad.name}</strong>
+            <code>{rad.token}</code>
+            <p>{rad.note}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <!-- Structural Surfaces Plane -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <h3 class="subsection-title">Structural Surfaces & Elevation Stack</h3>
+      <span class="spec-badge">Restrained Shadows · Layered Clarity</span>
+    </div>
+    <div class="surfaces-stack">
+      {SURFACE_ROWS.map((surf) => (
+        <div class="surface-card-row">
+          <div class="surface-swatch-chip"></div>
+          <div class="surface-info">
+            <strong>{surf.name}</strong>
+            <code>{surf.value}</code>
+            <p>{surf.note}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .guideline-module {
+    padding: var(--nexa-space-8) var(--nexa-space-6);
+    background: var(--nexa-surface-card);
+    border-radius: var(--nexa-radius-card);
+    border: 1px solid var(--nexa-color-border-default);
+    margin-bottom: var(--nexa-space-8);
+  }
+
+  .module-header {
+    margin-bottom: var(--nexa-space-8);
+    border-bottom: 1px solid var(--nexa-color-border-default);
+    padding-bottom: var(--nexa-space-6);
+  }
+
+  .kicker-group {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--nexa-space-2);
+    margin-bottom: var(--nexa-space-2);
+  }
+
+  .index-pill {
+    background: var(--nexa-color-primary-50);
+    color: var(--nexa-color-primary-700);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: var(--nexa-radius-sm);
+    font-family: var(--nexa-font-family-mono);
+  }
+
+  .kicker-text {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--nexa-color-text-secondary);
+    text-transform: uppercase;
+  }
+
+  .module-header h2 {
+    font-family: var(--nexa-font-family-display);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary);
+    line-height: 1.25;
+    margin: var(--nexa-space-2) 0 var(--nexa-space-3) 0;
+  }
+
+  .module-intro {
+    font-size: 15px;
+    color: var(--nexa-color-text-secondary);
+    line-height: 1.5;
+    max-width: 840px;
+  }
+
+  .subsection {
+    margin-bottom: var(--nexa-space-8);
+  }
+
+  .subsection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--nexa-space-4);
+    flex-wrap: wrap;
+    gap: var(--nexa-space-2);
+  }
+
+  .subsection-title {
+    font-family: var(--nexa-font-family-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary);
+  }
+
+  .spec-badge {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--nexa-color-text-secondary);
+    background: var(--nexa-surface-inset);
+    padding: 3px 10px;
+    border-radius: var(--nexa-radius-pill);
+    border: 1px solid var(--nexa-color-border-default);
+  }
+
+  /* Spacing Scale */
+  .spacing-board {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nexa-space-2);
+    border: 1px solid var(--nexa-color-border-default);
+    border-radius: var(--nexa-radius-control);
+    padding: var(--nexa-space-4);
+    background: var(--nexa-surface-card);
+  }
+
+  .spacing-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 240px;
+    align-items: center;
+    gap: var(--nexa-space-4);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--nexa-color-border-default);
+  }
+
+  .spacing-row:last-child {
+    border-bottom: none;
+  }
+
+  .space-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: var(--nexa-space-2);
+  }
+
+  .space-meta code {
+    font-family: var(--nexa-font-family-mono);
+    font-size: 12px;
+    color: var(--nexa-color-primary-700);
+  }
+
+  .space-bar-track {
+    background: var(--nexa-surface-inset);
+    border-radius: 4px;
+    height: 18px;
+    padding: 2px;
+  }
+
+  .space-bar-fill {
+    background: var(--nexa-color-primary-600);
+    height: 100%;
+    border-radius: 3px;
+    min-width: 4px;
+  }
+
+  .space-role {
+    font-size: 12px;
+    color: var(--nexa-color-text-secondary);
+  }
+
+  /* Radii Grid */
+  .radius-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--nexa-space-3);
+  }
+
+  .radius-card {
+    background: var(--nexa-surface-card);
+    border: 1px solid var(--nexa-color-border-default);
+    border-radius: var(--nexa-radius-control);
+    padding: var(--nexa-space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--nexa-space-3);
+  }
+
+  .radius-specimen-box {
+    height: 80px;
+    background: var(--nexa-color-primary-50);
+    border: 2px solid var(--nexa-color-primary-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .radius-value-tag {
+    background: #ffffff;
+    font-family: var(--nexa-font-family-mono);
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--nexa-color-primary-800);
+    padding: 2px 8px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+
+  .radius-meta strong {
+    display: block;
+    font-size: 13px;
+    color: var(--nexa-color-text-primary);
+  }
+
+  .radius-meta code {
+    font-size: 11px;
+    color: var(--nexa-color-primary-700);
+    display: block;
+    margin: 2px 0;
+  }
+
+  .radius-meta p {
+    font-size: 11px;
+    color: var(--nexa-color-text-secondary);
+    line-height: 1.35;
+  }
+
+  /* Surfaces Stack */
+  .surfaces-stack {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--nexa-space-3);
+  }
+
+  .surface-card-row {
+    background: var(--nexa-surface-card);
+    border: 1px solid var(--nexa-color-border-default);
+    border-radius: var(--nexa-radius-control);
+    padding: var(--nexa-space-3);
+    display: flex;
+    gap: var(--nexa-space-3);
+    align-items: center;
+  }
+
+  .surface-swatch-chip {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--nexa-radius-sm);
+    background: var(--nexa-primitive-canvas);
+    border: 1px solid var(--nexa-color-border-default);
+    flex-shrink: 0;
+  }
+
+  .surface-info strong {
+    display: block;
+    font-size: 13px;
+    color: var(--nexa-color-text-primary);
+  }
+
+  .surface-info code {
+    font-size: 11px;
+    color: var(--nexa-color-primary-700);
+    display: block;
+  }
+
+  .surface-info p {
+    font-size: 11px;
+    color: var(--nexa-color-text-secondary);
+    margin-top: 2px;
+  }
+
+  @media (max-width: 800px) {
+    .spacing-row {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+  }
+</style>

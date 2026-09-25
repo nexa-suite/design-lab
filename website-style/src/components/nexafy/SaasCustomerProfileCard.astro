@@ -1,0 +1,106 @@
+---
+/**
+ * SaasCustomerProfileCard Component
+ * Chapter 2 (SaaS Platform): Customer profile summary with quick actions (email/mobile).
+ */
+interface Props {
+  name?: string;
+  role?: string;
+}
+
+const {
+  name = 'John Cooper',
+  role = 'Photography Store'
+} = Astro.props;
+---
+
+<div class="saas-customer-profile-card">
+  <div class="profile-avatar-wrap">
+    <img src="/assets/synthetic/avatar-customer.svg" alt={name} width="44" height="44" class="profile-avatar-img" />
+  </div>
+  <strong class="profile-name">{name}</strong>
+  <span class="profile-role">{role}</span>
+  <div class="profile-actions-row">
+    <button type="button" class="profile-btn" aria-label={`Email ${name}`}>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </svg>
+      <span>email</span>
+    </button>
+    <button type="button" class="profile-btn" aria-label={`Call ${name}`}>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="5" y="2" width="14" height="20" rx="3"></rect>
+        <line x1="12" y1="18" x2="12.01" y2="18"></line>
+      </svg>
+      <span>mobile</span>
+    </button>
+  </div>
+</div>
+
+<style>
+  .saas-customer-profile-card {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 220px;
+    background-color: var(--stage-card);
+    border-radius: 16px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.35rem;
+    z-index: 6;
+    color: var(--stage-text);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .profile-avatar-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .profile-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .profile-name {
+    font-size: 0.9375rem;
+    font-weight: 800;
+    color: var(--stage-text);
+  }
+
+  .profile-role {
+    font-size: 0.75rem;
+    color: var(--stage-text);
+    opacity: 0.8;
+  }
+
+  .profile-actions-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .profile-btn {
+    background: var(--stage-capsule-bg);
+    color: var(--stage-capsule-text);
+    border: none;
+    font-size: 0.6875rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+</style>

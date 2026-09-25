@@ -1,0 +1,1757 @@
+---
+/**
+ * LIVING GEOMETRY GRAPHICS ENGINE & ARTIFACT WORKBENCH
+ * Interactive sandbox environment with zero-overlap collision physics,
+ * 60fps dynamic orthogonal routing, signal pulses, and multi-preset artifact scenes.
+ * Restyled with Nexa Design System visual foundations (cool canvas, crisp card surfaces, slate borders, blue accents).
+ */
+---
+
+<div class="nexafy-studio-container">
+  <!-- Studio Layout -->
+  <div class="nexafy-studio">
+
+    <!-- Left Controls Panel -->
+    <aside class="nexafy-panel">
+      
+      <!-- Preset Selector -->
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>Stage Preset (Artifact Environment)</span>
+        </div>
+        <select id="preset-selector" class="nexa-select">
+          <option value="CHANNELS" selected>Hero Chapter 01 (Channels & Security)</option>
+          <option value="DORMANT">Hero Dormant Canvas</option>
+          <option value="SAAS">Hero Chapter 02 (SaaS Morph)</option>
+          <option value="PAYMENT">Safe Renting (Payment Flow / iOS Phone)</option>
+          <option value="INSURANCE">Insurance Protection Stage</option>
+          <option value="SUSTAINABILITY">Sustainability Aerial Canvas</option>
+          <option value="ACCESS_CHANNELS">Access Channels (Beige Bento Grid)</option>
+          <option value="FOOTER_BEIGE">Global Footer (Sculpted Beige)</option>
+        </select>
+      </div>
+
+      <!-- Semantic Scene Graph Artifact Tree -->
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>Scene Graph Artifact Tree</span>
+          <span class="item-tag" id="node-count-badge">6 Nodes</span>
+        </div>
+        <div class="scene-tree-list" id="scene-node-list">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- Multi-Tier Edge Geometry Primitives -->
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>Nexafy 2.0 Edge Primitives</span>
+        </div>
+        <div class="primitives-grid">
+          <button type="button" class="primitive-btn active" data-prim="PROTRUDE">PROTRUDE</button>
+          <button type="button" class="primitive-btn" data-prim="RECESS">RECESS</button>
+          <button type="button" class="primitive-btn" data-prim="STEP">STEP</button>
+          <button type="button" class="primitive-btn" data-prim="SHELF">SHELF</button>
+          <button type="button" class="primitive-btn" data-prim="TAB">TAB</button>
+          <button type="button" class="primitive-btn" data-prim="CHANNEL">CHANNEL</button>
+          <button type="button" class="primitive-btn" data-prim="CUTOUT">CUTOUT</button>
+          <button type="button" class="primitive-btn" data-prim="ALL">CANONICAL</button>
+        </div>
+        <p style="font-size: 0.6875rem; color: var(--nexafy-muted); line-height: 1.3;" id="primitive-desc">
+          PROTRUDE: Extrudes outward from shoulder. Used for Hero top canopy headline crown.
+        </p>
+      </div>
+
+      <!-- Canvas Dimensions -->
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>Canvas Metrics</span>
+        </div>
+        <div class="control-row">
+          <div class="control-label-group">
+            <span>Width (px)</span>
+            <span class="control-value" id="val-width">1440</span>
+          </div>
+          <input type="range" id="input-width" min="320" max="1600" step="10" value="1440">
+        </div>
+        <div class="control-row">
+          <div class="control-label-group">
+            <span>Height (px)</span>
+            <span class="control-value" id="val-height">820</span>
+          </div>
+          <input type="range" id="input-height" min="400" max="1200" step="10" value="820">
+        </div>
+        <div class="control-row">
+          <div class="control-label-group">
+            <span>Base Corner Radius (px)</span>
+            <span class="control-value" id="val-base-radius">36</span>
+          </div>
+          <input type="range" id="input-base-radius" min="0" max="80" step="2" value="36">
+        </div>
+      </div>
+
+      <!-- Top Crown Controls -->
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>Top Canopy Crown</span>
+          <label class="toggle-checkbox">
+            <input type="checkbox" id="check-crown-enabled" checked>
+            <span>Enabled</span>
+          </label>
+        </div>
+        <div class="control-row">
+          <div class="control-label-group">
+            <span>Crown Width (px)</span>
+            <span class="control-value" id="val-crown-w">568</span>
+          </div>
+          <input type="range" id="input-crown-w" min="200" max="1200" step="4" value="568">
+        </div>
+        <div class="control-row">
+          <div class="control-label-group">
+            <span>Crown Drop (px)</span>
+            <span class="control-value" id="val-crown-h">105</span>
+          </div>
+          <input type="range" id="input-crown-h" min="0" max="250" step="5" value="105">
+        </div>
+        <div class="control-row">
+          <div class="control-label-group">
+            <span>Fillet Radius</span>
+            <span class="control-value" id="val-crown-fillet">36</span>
+          </div>
+          <input type="range" id="input-crown-fillet" min="0" max="60" step="2" value="36">
+        </div>
+      </div>
+
+      <!-- Bottom Shelf Controls -->
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>Bottom Shelf Notch</span>
+          <label class="toggle-checkbox">
+            <input type="checkbox" id="check-shelf-enabled" checked>
+            <span>Enabled</span>
+          </label>
+        </div>
+        <div class="control-row">
+          <div class="control-label-group">
+            <span>Shelf Width (px)</span>
+            <span class="control-value" id="val-shelf-w">888</span>
+          </div>
+          <input type="range" id="input-shelf-w" min="200" max="1400" step="4" value="888">
+        </div>
+        <div class="control-row">
+          <div class="control-label-group">
+            <span>Shelf Extend (px)</span>
+            <span class="control-value" id="val-shelf-h">85</span>
+          </div>
+          <input type="range" id="input-shelf-h" min="0" max="250" step="5" value="85">
+        </div>
+        <div class="control-row">
+          <div class="control-label-group">
+            <span>Fillet Radius</span>
+            <span class="control-value" id="val-shelf-fillet">36</span>
+          </div>
+          <input type="range" id="input-shelf-fillet" min="0" max="60" step="2" value="36">
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Center Stage Canvas -->
+    <main class="nexafy-viewport">
+      
+      <!-- Responsive Resolution Presets Toolbar -->
+      <div class="viewport-toolbar">
+        <div class="viewport-presets">
+          <button type="button" class="viewport-chip active" data-w="1440" data-h="820">1440×820 (Desktop)</button>
+          <button type="button" class="viewport-chip" data-w="1600" data-h="1200">1600×1200 (Historical)</button>
+          <button type="button" class="viewport-chip" data-w="1280" data-h="800">1280×800</button>
+          <button type="button" class="viewport-chip" data-w="1024" data-h="768">1024×768</button>
+          <button type="button" class="viewport-chip" data-w="768" data-h="1024">768×1024</button>
+          <button type="button" class="viewport-chip" data-w="390" data-h="844">390×844</button>
+          <button type="button" class="viewport-chip" data-w="320" data-h="700">320×700</button>
+        </div>
+
+        <div class="view-toggles">
+          <label class="toggle-checkbox">
+            <input type="checkbox" id="toggle-living-motion" checked>
+            <span>Living Movement</span>
+          </label>
+          <label class="toggle-checkbox">
+            <input type="checkbox" id="toggle-pulses" checked>
+            <span>Signal Pulses</span>
+          </label>
+          <label class="toggle-checkbox">
+            <input type="checkbox" id="toggle-circuit" checked>
+            <span>Vascular Circuit</span>
+          </label>
+          <label class="toggle-checkbox">
+            <input type="checkbox" id="toggle-debug-mode" checked>
+            <span>Clearance Halos</span>
+          </label>
+          <label class="toggle-checkbox">
+            <input type="checkbox" id="toggle-ref-overlay">
+            <span>Reference Frame</span>
+          </label>
+          <div class="viewport-controls-group">
+            <button type="button" class="viewport-btn-sm" id="btn-zoom-out" title="Zoom Out">−</button>
+            <button type="button" class="viewport-btn-sm" id="btn-zoom-reset" title="Reset View">100%</button>
+            <button type="button" class="viewport-btn-sm" id="btn-zoom-in" title="Zoom In">+</button>
+            <button type="button" class="viewport-btn-sm" id="btn-zoom-fit" title="Fit to Viewport">Fit</button>
+          </div>
+          <span style="font-size: 0.75rem; color: var(--nexafy-muted); margin-left: 0.25rem;">
+            Scale: <span id="scale-indicator" style="color: var(--nexafy-text); font-family: monospace; font-weight: 700;">100%</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- SVG Drawing Surface -->
+      <div class="canvas-stage-wrapper" id="stage-wrapper">
+        <div class="canvas-frame" id="canvas-frame" style="width: 720px; height: 410px;">
+          
+          <!-- Reference Frame Image -->
+          <img 
+            id="ref-overlay-img" 
+            src="/artifacts/pass6/reference/pass5_hero_baseline.png" 
+            alt="Historical Video Reference"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; pointer-events: none; z-index: 25; mix-blend-mode: normal; display: none;"
+          />
+
+          <svg 
+            id="nexafy-svg" 
+            class="canvas-svg" 
+            viewBox="0 0 1440 820"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <radialGradient id="lab-radial-glow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#005e49" stop-opacity="0.4" />
+                <stop offset="100%" stop-color="#004737" stop-opacity="0" />
+              </radialGradient>
+              <filter id="node-glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#2a67d9" flood-opacity="0.25" />
+              </filter>
+              <filter id="card-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12" />
+              </filter>
+              <filter id="pulse-glow" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#56f09f" flood-opacity="0.9" />
+              </filter>
+            </defs>
+            
+            <!-- Layer 1: Sculpted Stage Contour -->
+            <path id="sculpted-path" d="" fill="#004737" stroke="#56f09f" stroke-width="1.5" />
+            <rect id="sculpted-glow" x="0" y="0" width="1440" height="820" fill="url(#lab-radial-glow)" pointer-events="none" />
+
+            <!-- Layer 2: Living Vascular Circuit Routes (SVG Edges) -->
+            <g id="circuit-edges-layer" style="display: block;">
+              <!-- Injected dynamically via Scene Graph -->
+            </g>
+
+            <!-- Layer 2.5: Animated Signal Pulses flowing along Edges -->
+            <g id="circuit-pulses-layer" style="display: block; pointer-events: none;">
+              <!-- Injected dynamically via requestAnimationFrame -->
+            </g>
+
+            <!-- Layer 3: Semantic Nodes & Mockups (Interactive Draggable) -->
+            <g id="circuit-nodes-layer" style="display: block;">
+              <!-- Injected dynamically via Scene Graph with drag/hover handlers -->
+            </g>
+
+            <!-- Layer 4: Debug Clearance Halos, Bounds & Ports -->
+            <g id="debug-overlay-layer" style="display: block; pointer-events: none;">
+              <!-- Injected dynamically via Scene Graph -->
+            </g>
+          </svg>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Morph & Node Inspector Panel -->
+    <aside class="nexafy-panel right">
+      
+      <!-- Scene Validation HUD -->
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>Scene Validation Status</span>
+        </div>
+        <div class="validation-hud" id="validation-hud-box">
+          <div class="validation-badge" id="validation-badge-text">
+            <span>●</span>
+            <span>0 Collisions (PASS)</span>
+          </div>
+          <div style="display: flex; gap: 0.35rem;">
+            <button type="button" class="nexafy-btn sm" id="btn-run-validation">Run Audit</button>
+            <button type="button" class="nexafy-btn sm primary" id="btn-resolve-collisions" title="Enforce zero overlap across all nodes">Zero Overlap</button>
+          </div>
+        </div>
+        <p style="font-size: 0.6875rem; color: var(--nexafy-muted);" id="collision-detail-text">
+          Semantic clearance verified across all active nodes and routed orthogonal edges.
+        </p>
+      </div>
+
+      <!-- Node / Entity Inspector -->
+      <div class="panel-section" id="node-inspector-section">
+        <div class="panel-section-title">
+          <span>Entity Inspector</span>
+          <span class="item-tag" id="inspector-entity-type">NODE</span>
+        </div>
+        <div class="control-row">
+          <div class="control-label-group">
+            <span>Entity ID</span>
+            <span class="control-value" id="inspect-id">node-company</span>
+          </div>
+        </div>
+        <div class="control-row">
+          <div class="control-label-group">
+            <span>Semantic Role</span>
+            <span class="control-value" id="inspect-role">origin</span>
+          </div>
+        </div>
+        <div class="control-row">
+          <div class="control-label-group">
+            <span>Bounds [X, Y, W, H]</span>
+            <span class="control-value" id="inspect-bounds">180, 250, 220, 104</span>
+          </div>
+        </div>
+        <div class="control-row">
+          <div class="control-label-group">
+            <span>Ports Count</span>
+            <span class="control-value" id="inspect-ports">1 (source: right)</span>
+          </div>
+        </div>
+        <div class="control-row">
+          <div class="control-label-group">
+            <span>Permitted Overlaps</span>
+            <span class="control-value" id="inspect-overlap">node-trunk-edge</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reference Overlay Controls -->
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>Reference Frame Compare</span>
+        </div>
+        <div class="control-row">
+          <div class="control-label-group">
+            <span>Overlay Opacity</span>
+            <span class="control-value" id="val-ref-opacity">50%</span>
+          </div>
+          <input type="range" id="input-ref-opacity" min="0" max="100" step="5" value="50">
+        </div>
+        <div class="control-row">
+          <label style="font-size: 0.75rem; color: var(--nexafy-muted);">Blend Mode</label>
+          <select id="select-ref-blend" class="nexa-select">
+            <option value="normal">Normal</option>
+            <option value="difference" selected>Difference (Residual Highlight)</option>
+            <option value="screen">Screen</option>
+            <option value="multiply">Multiply</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Morph Compatibility Lab -->
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>Morph Compatibility Lab</span>
+        </div>
+        <div class="control-row">
+          <label style="font-size: 0.75rem; color: var(--nexafy-muted);">State A (Origin)</label>
+          <select id="morph-state-a" class="nexa-select">
+            <option value="DORMANT">DORMANT (Empty Stage)</option>
+            <option value="CHANNELS" selected>CHANNELS (Hero Chapter 01)</option>
+            <option value="SAAS">SAAS (Chapter 02 Morph)</option>
+            <option value="PAYMENT">PAYMENT (Safe Renting)</option>
+            <option value="INSURANCE">INSURANCE</option>
+            <option value="SUSTAINABILITY">SUSTAINABILITY</option>
+            <option value="ACCESS_CHANNELS">ACCESS_CHANNELS (Beige)</option>
+            <option value="FOOTER_BEIGE">FOOTER_BEIGE (Sculpted Beige)</option>
+          </select>
+        </div>
+        <div class="control-row">
+          <label style="font-size: 0.75rem; color: var(--nexafy-muted);">State B (Target)</label>
+          <select id="morph-state-b" class="nexa-select">
+            <option value="SAAS" selected>SAAS (Chapter 02 Morph)</option>
+            <option value="CHANNELS">CHANNELS (Hero Chapter 01)</option>
+            <option value="DORMANT">DORMANT (Empty Stage)</option>
+            <option value="PAYMENT">PAYMENT (Safe Renting)</option>
+            <option value="INSURANCE">INSURANCE</option>
+            <option value="SUSTAINABILITY">SUSTAINABILITY</option>
+            <option value="ACCESS_CHANNELS">ACCESS_CHANNELS (Beige)</option>
+            <option value="FOOTER_BEIGE">FOOTER_BEIGE (Sculpted Beige)</option>
+          </select>
+        </div>
+        <div class="control-row">
+          <div class="control-label-group">
+            <span>Interpolation (t)</span>
+            <span class="control-value" id="val-morph-t">0.00</span>
+          </div>
+          <input type="range" id="input-morph-t" min="0" max="1" step="0.01" value="0">
+        </div>
+        <div class="btn-group">
+          <button type="button" class="nexafy-btn primary" id="btn-play-morph">Play Morph Loop</button>
+        </div>
+      </div>
+
+      <!-- Generated SVG Path & Export -->
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>Generated SVG Path</span>
+        </div>
+        <div class="code-preview-area" id="output-svg-code">
+          M 426 0 ...
+        </div>
+        <div class="btn-group" style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
+          <button type="button" class="nexafy-btn sm" id="btn-copy-path">Copy Path</button>
+          <button type="button" class="nexafy-btn sm" id="btn-copy-json">Copy JSON</button>
+          <button type="button" class="nexafy-btn sm" id="btn-download-svg">Download SVG</button>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- Bottom Master Timeline Scrubber -->
+  <footer class="nexafy-timeline-bar">
+    <div class="timeline-controls-row">
+      <div class="timeline-playback-group">
+        <button type="button" class="nexafy-btn sm primary" id="btn-play-timeline">Play</button>
+        <button type="button" class="nexafy-btn sm" id="btn-prev-marker">◀ Prev</button>
+        <button type="button" class="nexafy-btn sm" id="btn-next-marker">Next ▶</button>
+        <button type="button" class="nexafy-btn sm" id="btn-reset-timeline">Reset</button>
+        <div class="timeline-time-display" id="timeline-time-display">00.00s / 48.15s</div>
+      </div>
+
+      <!-- Marker Pills -->
+      <div class="markers-pill-bar" id="timeline-markers-container">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+
+    <!-- Scrubber Slider -->
+    <div class="timeline-slider-wrapper">
+      <input type="range" id="input-master-timeline" class="timeline-slider" min="0" max="48.15" step="0.05" value="0">
+    </div>
+  </footer>
+</div>
+
+<style>
+  :root {
+    --nexafy-bg: #f6faff;
+    --nexafy-sidebar: #ffffff;
+    --nexafy-panel-bg: #f8fafc;
+    --nexafy-border: #e2e8f0;
+    --nexafy-border-highlight: #cbd5e1;
+    --nexafy-text: #0f172a;
+    --nexafy-muted: #64748b;
+    --nexafy-accent: #2a67d9;
+    --nexafy-accent-dark: #1b4fb8;
+    --nexafy-mint: #56f09f;
+    --nexafy-danger: #dc2626;
+    --nexafy-warning: #d97706;
+    --nexafy-info: #0284c7;
+  }
+
+  .nexafy-studio-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 120px);
+    min-height: 700px;
+    background: var(--nexafy-bg);
+    border-radius: var(--nexa-radius-card);
+    border: 1px solid var(--nexafy-border);
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+  }
+
+  .nexafy-studio {
+    display: grid;
+    grid-template-columns: 320px 1fr 320px;
+    flex: 1;
+    height: calc(100% - 58px);
+    overflow: hidden;
+  }
+
+  .nexafy-panel {
+    background: var(--nexafy-sidebar);
+    border-right: 1px solid var(--nexafy-border);
+    overflow-y: auto;
+    padding: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .nexafy-panel.right {
+    border-right: none;
+    border-left: 1px solid var(--nexafy-border);
+  }
+
+  .panel-section {
+    background: var(--nexafy-panel-bg);
+    border: 1px solid var(--nexafy-border);
+    border-radius: 8px;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .panel-section-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--nexafy-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .control-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .control-label-group {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--nexafy-muted);
+  }
+
+  .control-value {
+    color: var(--nexafy-text);
+    font-family: var(--nexa-font-family-mono);
+    font-weight: 600;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    accent-color: var(--nexafy-accent);
+    background: #cbd5e1;
+    height: 4px;
+    border-radius: 2px;
+    outline: none;
+  }
+
+  .nexa-select, input[type="text"], input[type="number"] {
+    background: #ffffff;
+    border: 1px solid var(--nexafy-border);
+    color: var(--nexafy-text);
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.8125rem;
+    outline: none;
+    width: 100%;
+  }
+
+  .nexa-select:focus, input:focus {
+    border-color: var(--nexafy-accent);
+    box-shadow: 0 0 0 2px rgba(42, 103, 217, 0.15);
+  }
+
+  .btn-group {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .nexafy-btn {
+    background: #ffffff;
+    color: var(--nexafy-text);
+    border: 1px solid var(--nexafy-border);
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    transition: all 0.15s ease;
+    flex: 1;
+    text-decoration: none;
+  }
+
+  .nexafy-btn:hover {
+    background: #f1f5f9;
+    border-color: var(--nexafy-border-highlight);
+  }
+
+  .nexafy-btn.primary {
+    background: var(--nexafy-accent);
+    color: #ffffff;
+    font-weight: 700;
+    border: none;
+  }
+
+  .nexafy-btn.primary:hover {
+    background: var(--nexafy-accent-dark);
+  }
+
+  .nexafy-btn.sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.6875rem;
+  }
+
+  /* Center Viewport */
+  .nexafy-viewport {
+    display: flex;
+    flex-direction: column;
+    background: var(--nexa-surface-page, #f6faff);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .viewport-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.4rem 0.85rem;
+    background: #ffffff;
+    border-bottom: 1px solid var(--nexafy-border);
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .viewport-presets {
+    display: flex;
+    gap: 0.3rem;
+  }
+
+  .viewport-chip {
+    background: #f1f5f9;
+    color: var(--nexafy-muted);
+    border: 1px solid var(--nexafy-border);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .viewport-chip:hover {
+    color: var(--nexafy-text);
+    background: #e2e8f0;
+  }
+
+  .viewport-chip.active {
+    background: var(--nexa-color-primary-50, #f0f5ff);
+    color: var(--nexafy-accent);
+    border-color: var(--nexafy-accent);
+  }
+
+  .view-toggles {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .toggle-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.6875rem;
+    cursor: pointer;
+    color: var(--nexafy-muted);
+    user-select: none;
+  }
+
+  .toggle-checkbox input {
+    accent-color: var(--nexafy-accent);
+    width: 14px;
+    height: 14px;
+  }
+
+  .viewport-controls-group {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: #f1f5f9;
+    padding: 0.15rem 0.35rem;
+    border-radius: 6px;
+    border: 1px solid var(--nexafy-border);
+    margin-left: 0.25rem;
+  }
+
+  .viewport-btn-sm {
+    background: transparent;
+    border: none;
+    color: var(--nexafy-text);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.45rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+  }
+
+  .viewport-btn-sm:hover {
+    background: #e2e8f0;
+    color: var(--nexafy-accent);
+  }
+
+  .canvas-stage-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    overflow: hidden;
+    background-image: radial-gradient(rgba(42, 103, 217, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+    position: relative;
+    user-select: none;
+  }
+
+  .canvas-frame {
+    position: relative;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+    background: #004737;
+    border: 1px solid var(--nexafy-border);
+    overflow: hidden;
+    transform-origin: center center;
+    transition: box-shadow 0.2s ease;
+    border-radius: 8px;
+  }
+
+  .canvas-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Scene Tree */
+  .scene-tree-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    max-height: 180px;
+    overflow-y: auto;
+  }
+
+  .scene-tree-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.35rem 0.6rem;
+    border-radius: 4px;
+    background: #ffffff;
+    border: 1px solid var(--nexafy-border);
+    cursor: pointer;
+    font-size: 0.75rem;
+    color: var(--nexafy-text);
+    transition: all 0.15s ease;
+  }
+
+  .scene-tree-item:hover {
+    background: #f1f5f9;
+    border-color: var(--nexafy-border-highlight);
+  }
+
+  .scene-tree-item.selected {
+    background: var(--nexa-color-primary-50, #f0f5ff);
+    border-color: var(--nexafy-accent);
+    color: var(--nexafy-accent);
+    font-weight: 600;
+  }
+
+  .item-tag {
+    font-size: 0.625rem;
+    padding: 0.15rem 0.35rem;
+    border-radius: 3px;
+    background: #f1f5f9;
+    color: var(--nexafy-muted);
+    font-family: var(--nexa-font-family-mono);
+  }
+
+  /* Primitives */
+  .primitives-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.3rem;
+  }
+
+  .primitive-btn {
+    background: #ffffff;
+    border: 1px solid var(--nexafy-border);
+    color: var(--nexafy-muted);
+    padding: 0.3rem 0.2rem;
+    border-radius: 4px;
+    font-size: 0.625rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s ease;
+  }
+
+  .primitive-btn:hover {
+    color: var(--nexafy-text);
+    background: #f1f5f9;
+  }
+
+  .primitive-btn.active {
+    background: var(--nexa-color-primary-50, #f0f5ff);
+    border-color: var(--nexafy-accent);
+    color: var(--nexafy-accent);
+  }
+
+  /* Validation HUD */
+  .validation-hud {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    background: var(--nexa-color-success-50, #f0fdf4);
+    border: 1px solid var(--nexa-color-success-border, #bbf7d0);
+  }
+
+  .validation-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--nexa-color-success-700, #15803d);
+  }
+
+  .validation-badge.has-error {
+    color: var(--nexafy-danger);
+  }
+
+  /* Code Preview */
+  .code-preview-area {
+    background: #ffffff;
+    border: 1px solid var(--nexafy-border);
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-family: var(--nexa-font-family-mono);
+    font-size: 0.6875rem;
+    color: var(--nexafy-muted);
+    max-height: 70px;
+    overflow-y: auto;
+    word-break: break-all;
+  }
+
+  /* Timeline Bar */
+  .nexafy-timeline-bar {
+    height: 58px;
+    background: #ffffff;
+    border-top: 1px solid var(--nexafy-border);
+    display: flex;
+    flex-direction: column;
+    padding: 0.35rem 1.25rem;
+    gap: 0.3rem;
+    flex-shrink: 0;
+  }
+
+  .timeline-controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .timeline-playback-group {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .timeline-time-display {
+    font-family: var(--nexa-font-family-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--nexafy-accent);
+    background: #f1f5f9;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--nexafy-border);
+  }
+
+  .markers-pill-bar {
+    display: flex;
+    gap: 0.25rem;
+    overflow-x: auto;
+    max-width: 60%;
+    padding-bottom: 2px;
+  }
+
+  .marker-chip {
+    background: #f1f5f9;
+    color: var(--nexafy-muted);
+    border: 1px solid var(--nexafy-border);
+    border-radius: 12px;
+    padding: 0.15rem 0.45rem;
+    font-size: 0.625rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+
+  .marker-chip:hover {
+    color: var(--nexafy-text);
+    background: #e2e8f0;
+  }
+
+  .marker-chip.active {
+    background: var(--nexafy-accent);
+    color: #ffffff;
+    border-color: var(--nexafy-accent);
+  }
+
+  .timeline-slider-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  @media (max-width: 1024px) {
+    .nexafy-studio {
+      grid-template-columns: 260px 1fr 260px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nexafy-studio {
+      display: flex;
+      flex-direction: column;
+      height: auto;
+    }
+    .nexafy-panel {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  import { generateContainerCommands, commandsToSvgPath } from '../../lib/nexafy/geometry';
+  import { NEXAFY_PRESETS } from '../../lib/nexafy/presets';
+  import { interpolateCommands } from '../../lib/nexafy/interpolation';
+  import { SceneCollisionDetector } from '../../lib/nexafy/scene-graph/collision';
+  import { createSceneForPreset } from '../../lib/nexafy/scene-graph/presets-scenes';
+  import { OrthogonalFilletRouter } from '../../lib/nexafy/scene-graph/router';
+  import type { SceneNode } from '../../lib/nexafy/scene-graph/types';
+
+  // State
+  let currentConfig = JSON.parse(JSON.stringify(NEXAFY_PRESETS.CHANNELS));
+  let scene = createSceneForPreset(currentConfig.id, currentConfig.width, currentConfig.height);
+  let selectedNodeId: string = scene.nodes[0]?.id || 'node-company';
+  let isPlayingMorph = false;
+  let morphDirection = 1;
+  let morphAnimId: number | null = null;
+
+  let isPlayingTimeline = false;
+  let timelineAnimId: number | null = null;
+  let currentTimelineTime = 0.0;
+
+  // Interactive direct manipulation state
+  let isDraggingNode = false;
+  let draggedNode: SceneNode | null = null;
+  let dragOffset = { x: 0, y: 0 };
+
+  // Viewport pan & zoom state
+  let currentZoom = 1.0;
+  let panOffset = { x: 0, y: 0 };
+  let isPanningViewport = false;
+  let panStart = { x: 0, y: 0 };
+
+  // Living motion & pulse state
+  let isLivingMotionEnabled = true;
+  let isPulsesEnabled = true;
+  let pulseProgress: Record<string, number> = {};
+  let _livingEngineAnimId: number | null = null;
+
+  const EVENT_MARKERS = [
+    { time: 0.00, label: '0.00s Stage' },
+    { time: 0.87, label: '0.87s Company' },
+    { time: 2.25, label: '2.25s Hub' },
+    { time: 3.30, label: '3.30s Trunk' },
+    { time: 6.10, label: '6.10s Inquiry' },
+    { time: 7.67, label: '7.67s Store' },
+    { time: 10.02, label: '10.02s Online' },
+    { time: 10.75, label: '10.75s Shield' },
+    { time: 14.17, label: '14.17s SaaS Morph' },
+    { time: 18.50, label: '18.50s SaaS Settle' },
+    { time: 27.50, label: '27.50s Payment' },
+    { time: 34.00, label: '34.00s Confetti' },
+    { time: 48.15, label: '48.15s Loop' },
+  ];
+
+  // DOM Elements
+  const presetSelector = document.getElementById('preset-selector') as HTMLSelectElement | null;
+  if (presetSelector) {
+    const inputW = document.getElementById('input-width') as HTMLInputElement;
+    const inputH = document.getElementById('input-height') as HTMLInputElement;
+    const inputBaseR = document.getElementById('input-base-radius') as HTMLInputElement;
+
+    const checkCrown = document.getElementById('check-crown-enabled') as HTMLInputElement;
+    const inputCrownW = document.getElementById('input-crown-w') as HTMLInputElement;
+    const inputCrownH = document.getElementById('input-crown-h') as HTMLInputElement;
+    const inputCrownFillet = document.getElementById('input-crown-fillet') as HTMLInputElement;
+
+    const checkShelf = document.getElementById('check-shelf-enabled') as HTMLInputElement;
+    const inputShelfW = document.getElementById('input-shelf-w') as HTMLInputElement;
+    const inputShelfH = document.getElementById('input-shelf-h') as HTMLInputElement;
+    const inputShelfFillet = document.getElementById('input-shelf-fillet') as HTMLInputElement;
+
+    const pathElem = document.getElementById('sculpted-path') as unknown as SVGPathElement;
+    const svgElem = document.getElementById('nexafy-svg') as unknown as SVGSVGElement;
+    const canvasFrame = document.getElementById('canvas-frame') as HTMLDivElement;
+    const stageWrapper = document.getElementById('stage-wrapper') as HTMLDivElement;
+    const outputArea = document.getElementById('output-svg-code') as HTMLDivElement;
+
+    const edgesLayer = document.getElementById('circuit-edges-layer') as unknown as SVGGElement;
+    const pulsesLayer = document.getElementById('circuit-pulses-layer') as unknown as SVGGElement;
+    const nodesLayer = document.getElementById('circuit-nodes-layer') as unknown as SVGGElement;
+    const debugLayer = document.getElementById('debug-overlay-layer') as unknown as SVGGElement;
+
+    const toggleLivingMotion = document.getElementById('toggle-living-motion') as HTMLInputElement;
+    const togglePulses = document.getElementById('toggle-pulses') as HTMLInputElement;
+    const toggleCircuit = document.getElementById('toggle-circuit') as HTMLInputElement;
+    const toggleDebug = document.getElementById('toggle-debug-mode') as HTMLInputElement;
+    const toggleRef = document.getElementById('toggle-ref-overlay') as HTMLInputElement;
+    const refImg = document.getElementById('ref-overlay-img') as HTMLImageElement;
+    const inputRefOpacity = document.getElementById('input-ref-opacity') as HTMLInputElement;
+    const selectRefBlend = document.getElementById('select-ref-blend') as HTMLSelectElement;
+
+    const btnZoomIn = document.getElementById('btn-zoom-in') as HTMLButtonElement;
+    const btnZoomOut = document.getElementById('btn-zoom-out') as HTMLButtonElement;
+    const btnZoomReset = document.getElementById('btn-zoom-reset') as HTMLButtonElement;
+    const btnZoomFit = document.getElementById('btn-zoom-fit') as HTMLButtonElement;
+    const scaleIndicator = document.getElementById('scale-indicator') as HTMLSpanElement;
+
+    const inputTimeline = document.getElementById('input-master-timeline') as HTMLInputElement;
+    const displayTimeline = document.getElementById('timeline-time-display') as HTMLDivElement;
+    const btnPlayTimeline = document.getElementById('btn-play-timeline') as HTMLButtonElement;
+    const btnResetTimeline = document.getElementById('btn-reset-timeline') as HTMLButtonElement;
+    const btnPrevMarker = document.getElementById('btn-prev-marker') as HTMLButtonElement;
+    const btnNextMarker = document.getElementById('btn-next-marker') as HTMLButtonElement;
+    const markersContainer = document.getElementById('timeline-markers-container') as HTMLDivElement;
+
+    const sceneNodeList = document.getElementById('scene-node-list') as HTMLDivElement;
+    const nodeCountBadge = document.getElementById('node-count-badge') as HTMLSpanElement;
+    const inspectId = document.getElementById('inspect-id') as HTMLSpanElement;
+    const inspectRole = document.getElementById('inspect-role') as HTMLSpanElement;
+    const inspectBounds = document.getElementById('inspect-bounds') as HTMLSpanElement;
+    const inspectPorts = document.getElementById('inspect-ports') as HTMLSpanElement;
+    const inspectOverlap = document.getElementById('inspect-overlap') as HTMLSpanElement;
+
+    const btnRunValidation = document.getElementById('btn-run-validation') as HTMLButtonElement;
+    const btnResolveCollisions = document.getElementById('btn-resolve-collisions') as HTMLButtonElement;
+    const validationBadgeText = document.getElementById('validation-badge-text') as HTMLDivElement;
+    const collisionDetailText = document.getElementById('collision-detail-text') as HTMLParagraphElement;
+
+    const morphA = document.getElementById('morph-state-a') as HTMLSelectElement;
+    const morphB = document.getElementById('morph-state-b') as HTMLSelectElement;
+    const morphT = document.getElementById('input-morph-t') as HTMLInputElement;
+    const valMorphT = document.getElementById('val-morph-t') as HTMLSpanElement;
+    const btnPlayMorph = document.getElementById('btn-play-morph') as HTMLButtonElement;
+
+    function getSvgCoordinates(e: MouseEvent): { x: number; y: number } {
+      const ctm = svgElem.getScreenCTM();
+      if (!ctm) return { x: 0, y: 0 };
+      const pt = svgElem.createSVGPoint();
+      pt.x = e.clientX;
+      pt.y = e.clientY;
+      const transformed = pt.matrixTransform(ctm.inverse());
+      return { x: transformed.x, y: transformed.y };
+    }
+
+    function setZoom(z: number) {
+      currentZoom = Math.max(0.35, Math.min(2.2, z));
+      scaleIndicator.textContent = `${Math.round(currentZoom * 100)}%`;
+      applyCanvasTransform();
+    }
+
+    function fitStageToViewport() {
+      panOffset = { x: 0, y: 0 };
+      const availW = Math.max(300, stageWrapper.clientWidth - 40);
+      const availH = Math.max(300, stageWrapper.clientHeight - 40);
+      const scale = Math.max(0.35, Math.min(availW / currentConfig.width, availH / currentConfig.height, 1.15));
+      currentZoom = scale;
+      scaleIndicator.textContent = `${Math.round(currentZoom * 100)}%`;
+      applyCanvasTransform();
+    }
+    window.addEventListener('resize', fitStageToViewport);
+
+    function resetZoom() {
+      panOffset = { x: 0, y: 0 };
+      setZoom(1.0);
+    }
+
+    function applyCanvasTransform() {
+      canvasFrame.style.width = `${currentConfig.width}px`;
+      canvasFrame.style.height = `${currentConfig.height}px`;
+      canvasFrame.style.transform = `translate(${panOffset.x}px, ${panOffset.y}px) scale(${currentZoom})`;
+    }
+
+    btnZoomIn.addEventListener('click', () => setZoom(currentZoom + 0.1));
+    btnZoomOut.addEventListener('click', () => setZoom(currentZoom - 0.1));
+    btnZoomReset.addEventListener('click', resetZoom);
+    btnZoomFit.addEventListener('click', fitStageToViewport);
+
+    stageWrapper.addEventListener('wheel', (e: WheelEvent) => {
+      e.preventDefault();
+      const delta = e.deltaY < 0 ? 0.06 : -0.06;
+      setZoom(currentZoom + delta);
+    }, { passive: false });
+
+    stageWrapper.addEventListener('mousedown', (e: MouseEvent) => {
+      if ((e.target as HTMLElement).closest('.interactive-node')) return;
+      isPanningViewport = true;
+      panStart = { x: e.clientX - panOffset.x, y: e.clientY - panOffset.y };
+      stageWrapper.style.cursor = 'grab';
+    });
+
+    window.addEventListener('mousemove', (e: MouseEvent) => {
+      if (!isPanningViewport) return;
+      panOffset.x = e.clientX - panStart.x;
+      panOffset.y = e.clientY - panStart.y;
+      applyCanvasTransform();
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isPanningViewport) {
+        isPanningViewport = false;
+        stageWrapper.style.cursor = 'default';
+      }
+    });
+
+    function initTimelineMarkers() {
+      markersContainer.innerHTML = '';
+      EVENT_MARKERS.forEach((marker, idx) => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'marker-chip';
+        chip.textContent = marker.label;
+        chip.dataset.index = idx.toString();
+        chip.addEventListener('click', () => {
+          jumpTimelineTo(marker.time);
+        });
+        markersContainer.appendChild(chip);
+      });
+    }
+
+    function jumpTimelineTo(time: number) {
+      currentTimelineTime = Math.min(Math.max(0, time), 48.15);
+      inputTimeline.value = currentTimelineTime.toFixed(2);
+      displayTimeline.textContent = `${currentTimelineTime.toFixed(2).padStart(5, '0')}s / 48.15s`;
+      applyTimelineFrame(currentTimelineTime);
+    }
+
+    btnPrevMarker.addEventListener('click', () => {
+      const prev = [...EVENT_MARKERS].reverse().find(m => m.time < currentTimelineTime - 0.1) || EVENT_MARKERS[0];
+      jumpTimelineTo(prev.time);
+    });
+
+    btnNextMarker.addEventListener('click', () => {
+      const next = EVENT_MARKERS.find(m => m.time > currentTimelineTime + 0.1) || EVENT_MARKERS[EVENT_MARKERS.length - 1];
+      jumpTimelineTo(next.time);
+    });
+
+    function applyTimelineFrame(t: number) {
+      const chips = markersContainer.querySelectorAll<HTMLButtonElement>('.marker-chip');
+      chips.forEach((c, idx) => {
+        const m = EVENT_MARKERS[idx];
+        const nextTime = EVENT_MARKERS[idx + 1]?.time ?? 48.15;
+        if (t >= m.time && t < nextTime) {
+          c.classList.add('active');
+        } else {
+          c.classList.remove('active');
+        }
+      });
+
+      scene.nodes.forEach(node => {
+        let visible = false;
+        if (node.id === 'node-company' && t >= 0.867) visible = true;
+        if (node.id === 'node-hub' && t >= 2.25) visible = true;
+        if (node.id === 'node-card-email' && t >= 6.10) visible = true;
+        if (node.id === 'node-card-store' && t >= 7.67) visible = true;
+        if (node.id === 'node-card-online' && t >= 10.02) visible = true;
+        if (node.id === 'node-shield' && t >= 10.75) visible = true;
+        if (!['node-company', 'node-hub', 'node-card-email', 'node-card-store', 'node-card-online', 'node-shield'].includes(node.id)) {
+          visible = true;
+        }
+        node.visibility = visible ? 'visible' : 'hidden';
+      });
+
+      renderCircuitLayers();
+    }
+
+    function initSceneTree() {
+      sceneNodeList.innerHTML = '';
+      nodeCountBadge.textContent = `${scene.nodes.length} Nodes`;
+      scene.nodes.forEach(node => {
+        const item = document.createElement('div');
+        item.className = `scene-tree-item ${node.id === selectedNodeId ? 'selected' : ''}`;
+        item.dataset.nodeId = node.id;
+        item.innerHTML = `
+          <span>${node.name}</span>
+          <span class="item-tag">${node.semanticRole}</span>
+        `;
+        item.addEventListener('click', () => {
+          selectNode(node.id);
+        });
+        sceneNodeList.appendChild(item);
+      });
+    }
+
+    function selectNode(id: string) {
+      selectedNodeId = id;
+      document.querySelectorAll('.scene-tree-item').forEach(el => {
+        el.classList.toggle('selected', (el as HTMLElement).dataset.nodeId === id);
+      });
+      document.querySelectorAll('.interactive-node').forEach(el => {
+        el.classList.toggle('selected', el.id === `svg-${id}`);
+      });
+      updateInspector();
+    }
+
+    function updateInspector() {
+      const node = scene.nodes.find(n => n.id === selectedNodeId);
+      if (node) {
+        inspectId.textContent = node.id;
+        inspectRole.textContent = node.semanticRole;
+        inspectBounds.textContent = `${Math.round(node.visualBounds.x)}, ${Math.round(node.visualBounds.y)}, ${node.visualBounds.width}, ${node.visualBounds.height}`;
+        inspectPorts.textContent = `${node.ports.length} (${node.ports.map(p => `${p.role}: ${p.direction}`).join(', ') || 'None'})`;
+        inspectOverlap.textContent = node.allowOverlapWith?.join(', ') || 'None (Zero Overlap Enforced)';
+      }
+    }
+
+    function startNodeDrag(node: SceneNode, e: MouseEvent) {
+      isDraggingNode = true;
+      draggedNode = node;
+      selectNode(node.id);
+
+      const svgPt = getSvgCoordinates(e);
+      dragOffset = {
+        x: svgPt.x - node.visualBounds.x,
+        y: svgPt.y - node.visualBounds.y
+      };
+
+      const g = document.getElementById(`svg-${node.id}`);
+      if (g) g.classList.add('dragging');
+    }
+
+    window.addEventListener('mousemove', (e: MouseEvent) => {
+      if (!isDraggingNode || !draggedNode) return;
+
+      const svgPt = getSvgCoordinates(e);
+      const targetX = svgPt.x - dragOffset.x;
+      const targetY = svgPt.y - dragOffset.y;
+
+      const safePos = SceneCollisionDetector.preventOverlapOnDrag(
+        draggedNode,
+        scene.nodes,
+        targetX,
+        targetY,
+        { x: 0, y: 0, width: currentConfig.width, height: currentConfig.height },
+        20
+      );
+
+      draggedNode.visualBounds.x = safePos.x;
+      draggedNode.visualBounds.y = safePos.y;
+      SceneCollisionDetector.syncNodePositions(draggedNode);
+
+      const g = document.getElementById(`svg-${draggedNode.id}`);
+      if (g) {
+        g.setAttribute('transform', `translate(${safePos.x}, ${safePos.y})`);
+      }
+
+      recomputeConnectedEdges(draggedNode);
+      updateDebugOverlays();
+      updateInspector();
+      runSceneValidation();
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDraggingNode && draggedNode) {
+        const g = document.getElementById(`svg-${draggedNode.id}`);
+        if (g) g.classList.remove('dragging');
+
+        SceneCollisionDetector.resolveCollisions(
+          scene.nodes,
+          undefined,
+          { x: 0, y: 0, width: currentConfig.width, height: currentConfig.height },
+          20
+        );
+        scene.nodes.forEach(n => recomputeConnectedEdges(n));
+
+        isDraggingNode = false;
+        draggedNode = null;
+        renderCircuitLayers();
+        runSceneValidation();
+      }
+    });
+
+    function recomputeConnectedEdges(node: SceneNode) {
+      scene.edges.forEach(edge => {
+        if (edge.sourceNodeId === node.id || edge.targetNodeId === node.id) {
+          const sNode = scene.nodes.find(n => n.id === edge.sourceNodeId);
+          const tNode = scene.nodes.find(n => n.id === edge.targetNodeId);
+          if (sNode && tNode) {
+            const sPort = sNode.ports.find(p => p.id === edge.sourcePortId);
+            const tPort = tNode.ports.find(p => p.id === edge.targetPortId);
+            if (sPort && tPort) {
+              const route = OrthogonalFilletRouter.route(sPort, tPort, 20);
+              edge.svgPathData = route.svgPathData;
+              const path = document.getElementById(`edge-path-${edge.id}`);
+              if (path) path.setAttribute('d', route.svgPathData);
+            }
+          }
+        }
+      });
+    }
+
+    function runSceneValidation() {
+      const collisions = SceneCollisionDetector.detectCollisions(scene.nodes);
+      const accidental = collisions.filter(c => !c.isPermitted);
+
+      if (accidental.length === 0) {
+        validationBadgeText.className = 'validation-badge';
+        validationBadgeText.innerHTML = `<span>●</span><span>0 Violations (PASS)</span>`;
+        collisionDetailText.textContent = `Scene clearance verified. All ${scene.nodes.length} nodes and routed edges preserve safe bounds.`;
+      } else {
+        validationBadgeText.className = 'validation-badge has-error';
+        validationBadgeText.innerHTML = `<span>▲</span><span>${accidental.length} Collision(s) Detected</span>`;
+        collisionDetailText.textContent = `Violations: ${accidental.map(c => `${c.nodeAId} & ${c.nodeBId} (${Math.round(c.overlapArea)}px²)`).join(', ')}`;
+      }
+    }
+
+    btnRunValidation.addEventListener('click', runSceneValidation);
+
+    btnResolveCollisions.addEventListener('click', () => {
+      SceneCollisionDetector.resolveCollisions(
+        scene.nodes,
+        undefined,
+        { x: 0, y: 0, width: currentConfig.width, height: currentConfig.height },
+        20
+      );
+      scene.nodes.forEach(n => recomputeConnectedEdges(n));
+      renderCircuitLayers();
+      runSceneValidation();
+    });
+
+    function renderCircuitLayers() {
+      edgesLayer.innerHTML = '';
+      scene.edges.forEach(edge => {
+        const sNode = scene.nodes.find(n => n.id === edge.sourceNodeId);
+        const tNode = scene.nodes.find(n => n.id === edge.targetNodeId);
+        if (!sNode || !tNode) return;
+        if (sNode.visibility === 'hidden' || tNode.visibility === 'hidden') return;
+
+        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        g.setAttribute('class', 'circuit-edge-group');
+
+        const pathGlow = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        pathGlow.setAttribute('d', edge.svgPathData);
+        pathGlow.setAttribute('fill', 'none');
+        pathGlow.setAttribute('stroke', '#56f09f');
+        pathGlow.setAttribute('stroke-width', '5');
+        pathGlow.setAttribute('stroke-opacity', '0.25');
+
+        const pathMain = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        pathMain.id = `edge-path-${edge.id}`;
+        pathMain.setAttribute('d', edge.svgPathData);
+        pathMain.setAttribute('fill', 'none');
+        pathMain.setAttribute('stroke', '#cbd5e1');
+        pathMain.setAttribute('stroke-width', '2');
+        pathMain.setAttribute('stroke-dasharray', 'none');
+
+        g.appendChild(pathGlow);
+        g.appendChild(pathMain);
+        edgesLayer.appendChild(g);
+      });
+
+      nodesLayer.innerHTML = '';
+      scene.nodes.forEach(node => {
+        if (node.visibility === 'hidden') return;
+
+        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        g.id = `svg-${node.id}`;
+        g.setAttribute('class', `interactive-node ${node.id === selectedNodeId ? 'selected' : ''}`);
+        g.setAttribute('transform', `translate(${node.visualBounds.x}, ${node.visualBounds.y})`);
+
+        g.addEventListener('mousedown', (e: MouseEvent) => {
+          e.stopPropagation();
+          startNodeDrag(node, e);
+        });
+
+        g.addEventListener('click', (e: MouseEvent) => {
+          e.stopPropagation();
+          selectNode(node.id);
+        });
+
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('class', 'node-card-bg');
+        rect.setAttribute('width', `${node.visualBounds.width}`);
+        rect.setAttribute('height', `${node.visualBounds.height}`);
+        rect.setAttribute('rx', '12');
+        rect.setAttribute('ry', '12');
+        rect.setAttribute('fill', '#ffffff');
+        rect.setAttribute('stroke', '#e2e8f0');
+        rect.setAttribute('stroke-width', '1.5');
+        rect.setAttribute('filter', 'url(#card-shadow)');
+        g.appendChild(rect);
+
+        const textName = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        textName.setAttribute('class', 'node-title-text');
+        textName.setAttribute('x', '16');
+        textName.setAttribute('y', '32');
+        textName.setAttribute('fill', '#0f172a');
+        textName.setAttribute('font-family', 'Plus Jakarta Sans, sans-serif');
+        textName.setAttribute('font-size', '13');
+        textName.setAttribute('font-weight', '700');
+        textName.textContent = node.name;
+        g.appendChild(textName);
+
+        const textRole = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        textRole.setAttribute('class', 'node-role-text');
+        textRole.setAttribute('x', '16');
+        textRole.setAttribute('y', '52');
+        textRole.setAttribute('fill', '#64748b');
+        textRole.setAttribute('font-family', 'Inter, sans-serif');
+        textRole.setAttribute('font-size', '11');
+        textRole.textContent = `role: ${node.semanticRole}`;
+        g.appendChild(textRole);
+
+        node.ports.forEach(port => {
+          const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          const px = port.computedAbsolutePosition ? port.computedAbsolutePosition.x - node.visualBounds.x : port.offsetRatio.x * node.visualBounds.width;
+          const py = port.computedAbsolutePosition ? port.computedAbsolutePosition.y - node.visualBounds.y : port.offsetRatio.y * node.visualBounds.height;
+          circle.setAttribute('cx', `${px}`);
+          circle.setAttribute('cy', `${py}`);
+          circle.setAttribute('r', '5');
+          circle.setAttribute('fill', port.role === 'source' ? '#2a67d9' : '#56f09f');
+          circle.setAttribute('stroke', '#ffffff');
+          circle.setAttribute('stroke-width', '2');
+          g.appendChild(circle);
+        });
+
+        nodesLayer.appendChild(g);
+      });
+
+      updateDebugOverlays();
+    }
+
+    function updateDebugOverlays() {
+      debugLayer.innerHTML = '';
+      if (!toggleDebug.checked) return;
+
+      scene.nodes.forEach(node => {
+        if (node.visibility === 'hidden') return;
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('x', `${node.visualBounds.x - 10}`);
+        rect.setAttribute('y', `${node.visualBounds.y - 10}`);
+        rect.setAttribute('width', `${node.visualBounds.width + 20}`);
+        rect.setAttribute('height', `${node.visualBounds.height + 20}`);
+        rect.setAttribute('rx', '16');
+        rect.setAttribute('ry', '16');
+        rect.setAttribute('fill', 'none');
+        rect.setAttribute('stroke', '#2a67d9');
+        rect.setAttribute('stroke-width', '1');
+        rect.setAttribute('stroke-dasharray', '3 3');
+        rect.setAttribute('stroke-opacity', '0.4');
+        debugLayer.appendChild(rect);
+      });
+    }
+
+    function startLivingEngine() {
+      let t = 0;
+      function loop() {
+        t += 0.04;
+        if (isLivingMotionEnabled && !isDraggingNode) {
+          scene.nodes.forEach((node, idx) => {
+            const el = document.getElementById(`svg-${node.id}`);
+            if (el && node.visibility !== 'hidden') {
+              const deltaY = Math.sin(t + idx * 0.8) * 1.8;
+              el.setAttribute('transform', `translate(${node.visualBounds.x}, ${node.visualBounds.y + deltaY})`);
+            }
+          });
+        }
+
+        if (isPulsesEnabled) {
+          pulsesLayer.innerHTML = '';
+          scene.edges.forEach((edge, idx) => {
+            const sNode = scene.nodes.find(n => n.id === edge.sourceNodeId);
+            const tNode = scene.nodes.find(n => n.id === edge.targetNodeId);
+            if (!sNode || !tNode || sNode.visibility === 'hidden' || tNode.visibility === 'hidden') return;
+
+            pulseProgress[edge.id] = (pulseProgress[edge.id] || (idx * 0.25)) + 0.008;
+            if (pulseProgress[edge.id] > 1) pulseProgress[edge.id] = 0;
+
+            const path = document.getElementById(`edge-path-${edge.id}`) as unknown as SVGPathElement;
+            if (path && path.getTotalLength) {
+              const len = path.getTotalLength();
+              const pt = path.getPointAtLength(len * pulseProgress[edge.id]);
+
+              const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+              circle.setAttribute('cx', `${pt.x}`);
+              circle.setAttribute('cy', `${pt.y}`);
+              circle.setAttribute('r', '4');
+              circle.setAttribute('fill', '#56f09f');
+              circle.setAttribute('filter', 'url(#pulse-glow)');
+              pulsesLayer.appendChild(circle);
+            }
+          });
+        }
+
+        _livingEngineAnimId = requestAnimationFrame(loop);
+      }
+      _livingEngineAnimId = requestAnimationFrame(loop);
+    }
+
+    function updateStagePath() {
+      const cmds = generateContainerCommands(currentConfig);
+      const d = commandsToSvgPath(cmds);
+      pathElem.setAttribute('d', d);
+      outputArea.textContent = d;
+      svgElem.setAttribute('viewBox', `0 0 ${currentConfig.width} ${currentConfig.height}`);
+      const glow = document.getElementById('sculpted-glow');
+      if (glow) {
+        glow.setAttribute('width', `${currentConfig.width}`);
+        glow.setAttribute('height', `${currentConfig.height}`);
+      }
+    }
+
+    function syncUIFromConfig() {
+      inputW.value = `${currentConfig.width}`;
+      inputH.value = `${currentConfig.height}`;
+      inputBaseR.value = `${currentConfig.baseRadius}`;
+      document.getElementById('val-width')!.textContent = `${currentConfig.width}`;
+      document.getElementById('val-height')!.textContent = `${currentConfig.height}`;
+      document.getElementById('val-base-radius')!.textContent = `${currentConfig.baseRadius}`;
+
+      checkCrown.checked = currentConfig.crown.enabled;
+      inputCrownW.value = `${currentConfig.crown.width}`;
+      document.getElementById('val-crown-w')!.textContent = `${currentConfig.crown.width}`;
+      inputCrownH.value = `${currentConfig.crown.height}`;
+      document.getElementById('val-crown-h')!.textContent = `${currentConfig.crown.height}`;
+      inputCrownFillet.value = `${currentConfig.crown.filletRadius}`;
+      document.getElementById('val-crown-fillet')!.textContent = `${currentConfig.crown.filletRadius}`;
+
+      checkShelf.checked = currentConfig.shelf.enabled;
+      inputShelfW.value = `${currentConfig.shelf.width}`;
+      document.getElementById('val-shelf-w')!.textContent = `${currentConfig.shelf.width}`;
+      inputShelfH.value = `${currentConfig.shelf.height}`;
+      document.getElementById('val-shelf-h')!.textContent = `${currentConfig.shelf.height}`;
+      inputShelfFillet.value = `${currentConfig.shelf.filletRadius}`;
+      document.getElementById('val-shelf-fillet')!.textContent = `${currentConfig.shelf.filletRadius}`;
+    }
+
+    function readUIIntoConfig() {
+      currentConfig.width = parseInt(inputW.value, 10);
+      currentConfig.height = parseInt(inputH.value, 10);
+      currentConfig.baseRadius = parseInt(inputBaseR.value, 10);
+
+      currentConfig.crown.enabled = checkCrown.checked;
+      currentConfig.crown.width = parseInt(inputCrownW.value, 10);
+      currentConfig.crown.height = parseInt(inputCrownH.value, 10);
+      currentConfig.crown.filletRadius = parseInt(inputCrownFillet.value, 10);
+
+      currentConfig.shelf.enabled = checkShelf.checked;
+      currentConfig.shelf.width = parseInt(inputShelfW.value, 10);
+      currentConfig.shelf.height = parseInt(inputShelfH.value, 10);
+      currentConfig.shelf.filletRadius = parseInt(inputShelfFillet.value, 10);
+
+      syncUIFromConfig();
+      updateStagePath();
+    }
+
+    [inputW, inputH, inputBaseR, checkCrown, inputCrownW, inputCrownH, inputCrownFillet, checkShelf, inputShelfW, inputShelfH, inputShelfFillet].forEach(input => {
+      input.addEventListener('input', readUIIntoConfig);
+    });
+
+    document.querySelectorAll('.viewport-chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.viewport-chip').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const w = parseInt(btn.getAttribute('data-w')!, 10);
+        const h = parseInt(btn.getAttribute('data-h')!, 10);
+        currentConfig.width = w;
+        currentConfig.height = h;
+        syncUIFromConfig();
+        updateStagePath();
+        fitStageToViewport();
+      });
+    });
+
+    presetSelector.addEventListener('change', () => {
+      const pKey = presetSelector.value as keyof typeof NEXAFY_PRESETS;
+      if (NEXAFY_PRESETS[pKey]) {
+        currentConfig = JSON.parse(JSON.stringify(NEXAFY_PRESETS[pKey]));
+        scene = createSceneForPreset(currentConfig.id, currentConfig.width, currentConfig.height);
+        selectedNodeId = scene.nodes[0]?.id || '';
+
+        syncUIFromConfig();
+        updateStagePath();
+        fitStageToViewport();
+        initSceneTree();
+        renderCircuitLayers();
+        runSceneValidation();
+      }
+    });
+
+    toggleLivingMotion.addEventListener('change', () => {
+      isLivingMotionEnabled = toggleLivingMotion.checked;
+    });
+
+    togglePulses.addEventListener('change', () => {
+      isPulsesEnabled = togglePulses.checked;
+      if (!isPulsesEnabled) pulsesLayer.innerHTML = '';
+    });
+
+    toggleCircuit.addEventListener('change', () => {
+      edgesLayer.style.display = toggleCircuit.checked ? 'block' : 'none';
+      pulsesLayer.style.display = toggleCircuit.checked ? 'block' : 'none';
+    });
+
+    toggleDebug.addEventListener('change', updateDebugOverlays);
+
+    toggleRef.addEventListener('change', () => {
+      refImg.style.display = toggleRef.checked ? 'block' : 'none';
+      refImg.style.opacity = toggleRef.checked ? `${parseInt(inputRefOpacity.value) / 100}` : '0';
+    });
+
+    inputRefOpacity.addEventListener('input', () => {
+      refImg.style.opacity = `${parseInt(inputRefOpacity.value) / 100}`;
+      document.getElementById('val-ref-opacity')!.textContent = `${inputRefOpacity.value}%`;
+    });
+
+    selectRefBlend.addEventListener('change', () => {
+      refImg.style.mixBlendMode = selectRefBlend.value;
+    });
+
+    // Morph Logic
+    function applyMorph(t: number) {
+      const cfgA = NEXAFY_PRESETS[morphA.value as keyof typeof NEXAFY_PRESETS] || NEXAFY_PRESETS.CHANNELS;
+      const cfgB = NEXAFY_PRESETS[morphB.value as keyof typeof NEXAFY_PRESETS] || NEXAFY_PRESETS.SAAS;
+      const cmdsA = generateContainerCommands(cfgA);
+      const cmdsB = generateContainerCommands(cfgB);
+      const morphedCmds = interpolateCommands(cmdsA, cmdsB, t);
+      const d = commandsToSvgPath(morphedCmds);
+      pathElem.setAttribute('d', d);
+      outputArea.textContent = d;
+    }
+
+    morphT.addEventListener('input', () => {
+      const t = parseFloat(morphT.value);
+      valMorphT.textContent = t.toFixed(2);
+      applyMorph(t);
+    });
+
+    function playMorphStep() {
+      if (!isPlayingMorph) return;
+      let t = parseFloat(morphT.value) + 0.012 * morphDirection;
+      if (t >= 1) {
+        t = 1;
+        morphDirection = -1;
+      } else if (t <= 0) {
+        t = 0;
+        morphDirection = 1;
+      }
+      morphT.value = t.toString();
+      valMorphT.textContent = t.toFixed(2);
+      applyMorph(t);
+      morphAnimId = requestAnimationFrame(playMorphStep);
+    }
+
+    btnPlayMorph.addEventListener('click', () => {
+      if (isPlayingMorph) {
+        isPlayingMorph = false;
+        btnPlayMorph.textContent = 'Play Morph Loop';
+        if (morphAnimId) cancelAnimationFrame(morphAnimId);
+      } else {
+        isPlayingMorph = true;
+        btnPlayMorph.textContent = 'Pause Morph Loop';
+        playMorphStep();
+      }
+    });
+
+    // Primitives description selector
+    const PRIM_DESCRIPTIONS: Record<string, string> = {
+      PROTRUDE: 'PROTRUDE: Outward plateau extrusion. Used for Hero top canopy headline crown.',
+      RECESS: 'RECESS: Inward cavity indentation. Used for top nav bar clearance & access channels.',
+      STEP: 'STEP: Terraced elevation change. Used for Sustainability aerial terrace balance.',
+      SHELF: 'SHELF: Suspended platform drop. Used for guarantee ticker shelf (CHANNELS).',
+      TAB: 'TAB: Compact protrusion for interactive anchors (Down-arrow circle, Book demo).',
+      CHANNEL: 'CHANNEL: Longitudinal wiring conduit for 28px vascular circuit docking.',
+      CUTOUT: 'CUTOUT: Subtractive relief for floating UI (Chapter tracker, chat pill).',
+      ALL: 'CANONICAL: Full 58-command loop providing 100% deterministic morphing.'
+    };
+
+    document.querySelectorAll('.primitive-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.primitive-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const prim = btn.getAttribute('data-prim') || 'PROTRUDE';
+        document.getElementById('primitive-desc')!.textContent = PRIM_DESCRIPTIONS[prim] || '';
+      });
+    });
+
+    // Copy Path
+    document.getElementById('btn-copy-path')?.addEventListener('click', () => {
+      navigator.clipboard.writeText(pathElem.getAttribute('d') || '');
+      alert('SVG Path copied to clipboard!');
+    });
+
+    // Timeline Playback
+    btnPlayTimeline.addEventListener('click', () => {
+      isPlayingTimeline = !isPlayingTimeline;
+      btnPlayTimeline.textContent = isPlayingTimeline ? 'Pause' : 'Play';
+      if (isPlayingTimeline) {
+        let lastT = performance.now();
+        function tLoop(now: number) {
+          const dt = (now - lastT) / 1000;
+          lastT = now;
+          currentTimelineTime += dt;
+          if (currentTimelineTime > 48.15) currentTimelineTime = 0;
+          inputTimeline.value = currentTimelineTime.toFixed(2);
+          displayTimeline.textContent = `${currentTimelineTime.toFixed(2).padStart(5, '0')}s / 48.15s`;
+          applyTimelineFrame(currentTimelineTime);
+          if (isPlayingTimeline) timelineAnimId = requestAnimationFrame(tLoop);
+        }
+        timelineAnimId = requestAnimationFrame(tLoop);
+      } else if (timelineAnimId) {
+        cancelAnimationFrame(timelineAnimId);
+      }
+    });
+
+    btnResetTimeline.addEventListener('click', () => {
+      if (isPlayingTimeline) {
+        isPlayingTimeline = false;
+        btnPlayTimeline.textContent = 'Play';
+        if (timelineAnimId) cancelAnimationFrame(timelineAnimId);
+      }
+      jumpTimelineTo(0.0);
+    });
+
+    inputTimeline.addEventListener('input', () => {
+      jumpTimelineTo(parseFloat(inputTimeline.value));
+    });
+
+    // Initialize
+    syncUIFromConfig();
+    updateStagePath();
+    fitStageToViewport();
+    initTimelineMarkers();
+    initSceneTree();
+    renderCircuitLayers();
+    runSceneValidation();
+    startLivingEngine();
+
+    window.addEventListener('beforeunload', () => {
+      if (_livingEngineAnimId) cancelAnimationFrame(_livingEngineAnimId);
+      if (timelineAnimId) cancelAnimationFrame(timelineAnimId);
+      if (morphAnimId) cancelAnimationFrame(morphAnimId);
+    });
+  }
+</script>

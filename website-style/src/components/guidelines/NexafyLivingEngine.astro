@@ -1,0 +1,424 @@
+---
+/**
+ * NEXAFY LIVING ENGINE — Master Modular Component Assembly
+ * Integrates all individual living geometry artifact components:
+ *  - OklchVisionBar: Live ergonomic OKLCH palette switching
+ *  - YourCompanyHub: Origin node tile
+ *  - ConduitCircuit: 28px thick vascular lines & modular mark
+ *  - ConduitBadges: 4 satellite junction badges
+ *  - PhysicalStoreCard: Channel Card 1
+ *  - CustomerInquiryCard: Channel Card 2
+ *  - OnlineStoreCard: Channel Card 3
+ *  - SaasCustomerProfileCard: Chapter 2 customer profile
+ *  - SaasItemsTableCard: Chapter 2 items table
+ *  - SaasFloatingDateCard: Chapter 2 dates card
+ *  - PaymentCircuitMethods: Chapter 3 digital payment chips
+ *  - PhoneCheckoutSimulator: Chapter 3 milestone phone screen
+ *  - EscrowGuaranteeCard: Chapter 3 protection shield
+ *  - FloatingChapterController: Interactive chapter pills
+ */
+import OklchVisionBar from '../nexafy/OklchVisionBar.astro';
+import YourCompanyHub from '../nexafy/YourCompanyHub.astro';
+import ConduitCircuit from '../nexafy/ConduitCircuit.astro';
+import ConduitBadges from '../nexafy/ConduitBadges.astro';
+import PhysicalStoreCard from '../nexafy/PhysicalStoreCard.astro';
+import CustomerInquiryCard from '../nexafy/CustomerInquiryCard.astro';
+import OnlineStoreCard from '../nexafy/OnlineStoreCard.astro';
+import SaasCustomerProfileCard from '../nexafy/SaasCustomerProfileCard.astro';
+import SaasItemsTableCard from '../nexafy/SaasItemsTableCard.astro';
+import SaasFloatingDateCard from '../nexafy/SaasFloatingDateCard.astro';
+import PaymentCircuitMethods from '../nexafy/PaymentCircuitMethods.astro';
+import PhoneCheckoutSimulator from '../nexafy/PhoneCheckoutSimulator.astro';
+import EscrowGuaranteeCard from '../nexafy/EscrowGuaranteeCard.astro';
+import FloatingChapterController from '../nexafy/FloatingChapterController.astro';
+---
+
+<div class="nexafy-stage-wrapper" id="nexafy-stage-wrapper">
+  
+  <!-- 1. OKLCH Human Vision Bar Component -->
+  <OklchVisionBar initialPreset="cashmere" />
+
+  <!-- 2. Outer Sculpted Frame Contour -->
+  <div class="nexafy-sculpted-frame" id="nexafy-frame">
+    
+    <!-- Authentic Sculpted Architectural Contour SVG -->
+    <svg 
+      class="nexafy-frame-svg" 
+      viewBox="0 0 1440 680" 
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <path 
+        class="nexafy-frame-path"
+        d="M 0 110 C 0 85 20 70 45 70 L 415 70 C 435 70 445 55 445 35 L 445 15 C 445 0 460 0 480 0 L 960 0 C 980 0 995 0 995 15 L 995 35 C 995 55 1005 70 1025 70 L 1395 70 C 1420 70 1440 85 1440 110 L 1440 570 C 1440 595 1420 610 1395 610 L 1175 610 C 1155 610 1145 625 1145 645 L 1145 665 C 1145 680 1130 680 1110 680 L 330 680 C 310 680 295 680 295 665 L 295 645 C 295 625 285 610 265 610 L 45 610 C 20 610 0 595 0 570 Z" 
+      />
+    </svg>
+
+    <!-- 3. Center Stage Container: 1130x410 Native Coordinates -->
+    <div class="nexafy-center-stage" id="nexafy-center-stage">
+      
+      <!-- CHAPTER 01: CHANNELS & SECURITY -->
+      <div class="chapter-view active" id="ch1-view">
+        <YourCompanyHub />
+        <ConduitCircuit />
+        <ConduitBadges />
+        <PhysicalStoreCard />
+        <CustomerInquiryCard />
+        <OnlineStoreCard />
+      </div>
+
+      <!-- CHAPTER 02: MODULAR SAAS DASHBOARD PLATFORM MORPH -->
+      <div class="chapter-view" id="ch2-view">
+        <div class="saas-morph-backdrop-plate" aria-hidden="true">
+          <button type="button" class="saas-send-link-btn" aria-label="Send Flecto Link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            <span>Send Flecto Link</span>
+          </button>
+        </div>
+
+        <SaasCustomerProfileCard />
+        <SaasItemsTableCard />
+        <SaasFloatingDateCard />
+      </div>
+
+      <!-- CHAPTER 03: SAFE RENTING & PAYMENT MORPH -->
+      <div class="chapter-view" id="ch3-view">
+        <PaymentCircuitMethods />
+        <PhoneCheckoutSimulator />
+        <EscrowGuaranteeCard />
+      </div>
+
+    </div>
+
+    <!-- 4. Floating Chapter Controller Component -->
+    <FloatingChapterController />
+
+  </div>
+
+</div>
+
+<style>
+  /* ==========================================================================
+     NEXAFY LIVING ENGINE STYLES — OKLCH HUMAN VISION SYSTEM (0 GRADIENTS)
+     Default Preset: Cashmere Arctic Mist (Ultra-Soft, Low Fatigue)
+     ========================================================================== */
+
+  .nexafy-stage-wrapper {
+    /* DEFAULT PRESET: Cashmere Arctic Mist (258° - Suave, sin deslumbramiento) */
+    --stage-bg: oklch(33% 0.06 258);
+    --stage-card: oklch(88% 0.045 258);
+    --stage-text: oklch(30% 0.06 258);
+    --stage-capsule-bg: oklch(28% 0.06 258);
+    --stage-capsule-text: oklch(92% 0.03 258);
+    --stage-pulse: oklch(30% 0.06 258);
+
+    width: 100%;
+    min-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem 1rem 3rem 1rem;
+    background: #f6faff;
+    overflow-x: hidden;
+    transition: --stage-bg 0.3s ease, --stage-card 0.3s ease;
+  }
+
+  /* Architectural Sculpted Container */
+  .nexafy-sculpted-frame {
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    height: 720px;
+    border-radius: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--stage-bg);
+    transition: background-color 0.3s ease;
+  }
+
+  .nexafy-frame-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .nexafy-frame-path {
+    fill: var(--stage-bg);
+    transition: fill 0.3s ease;
+  }
+
+  /* Center Stage native coordinates: 1130px x 410px */
+  .nexafy-center-stage {
+    position: relative;
+    width: 1130px;
+    height: 410px;
+    z-index: 5;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  /* Responsive Scaling for smaller screens without horizontal overflow */
+  @media (max-width: 1240px) {
+    .nexafy-center-stage {
+      transform: scale(0.85);
+      transform-origin: center center;
+    }
+    .nexafy-sculpted-frame {
+      height: 640px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .nexafy-center-stage {
+      transform: scale(0.72);
+      transform-origin: center center;
+    }
+    .nexafy-sculpted-frame {
+      height: 560px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nexafy-center-stage {
+      transform: scale(0.52);
+      transform-origin: center center;
+    }
+    .nexafy-sculpted-frame {
+      height: 480px;
+      border-radius: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .nexafy-center-stage {
+      transform: scale(0.38);
+      transform-origin: center center;
+    }
+    .nexafy-sculpted-frame {
+      height: 420px;
+      border-radius: 16px;
+    }
+  }
+
+  /* Chapter Views */
+  .chapter-view {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: scale(0.98);
+  }
+
+  .chapter-view.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+  }
+
+  /* SaaS Chapter 2 Plate */
+  #ch2-view {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .saas-morph-backdrop-plate {
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    transform: translate(-50%, -50%);
+    width: 630px;
+    height: 380px;
+    background-color: var(--stage-card);
+    border-radius: 18px;
+    z-index: 1;
+    transition: background-color 0.3s ease;
+  }
+
+  .saas-send-link-btn {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--stage-card);
+    border: 1.5px solid var(--stage-text);
+    color: var(--stage-text);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+
+  /* Chapter 3 Container */
+  #ch3-view {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+  }
+</style>
+
+<script>
+  // OKLCH Palette Configurations
+  const OKLCH_PRESETS = {
+    cashmere: {
+      bg: 'oklch(33% 0.06 258)',
+      card: 'oklch(88% 0.045 258)',
+      text: 'oklch(30% 0.06 258)',
+      capsuleBg: 'oklch(28% 0.06 258)',
+      capsuleText: 'oklch(92% 0.03 258)',
+      pulse: 'oklch(30% 0.06 258)'
+    },
+    oceanic: {
+      bg: 'oklch(31% 0.07 245)',
+      card: 'oklch(83% 0.06 230)',
+      text: 'oklch(28% 0.07 245)',
+      capsuleBg: 'oklch(25% 0.07 245)',
+      capsuleText: 'oklch(88% 0.04 230)',
+      pulse: 'oklch(28% 0.07 245)'
+    },
+    calibrated: {
+      bg: 'oklch(30% 0.08 262.6)',
+      card: 'oklch(85% 0.065 262.1)',
+      text: 'oklch(28% 0.08 262.6)',
+      capsuleBg: 'oklch(25% 0.08 262.6)',
+      capsuleText: 'oklch(88% 0.05 262.1)',
+      pulse: 'oklch(28% 0.08 262.6)'
+    },
+    ceramic: {
+      bg: 'oklch(29% 0.085 265)',
+      card: 'oklch(86% 0.05 268)',
+      text: 'oklch(26% 0.085 265)',
+      capsuleBg: 'oklch(24% 0.085 265)',
+      capsuleText: 'oklch(90% 0.04 268)',
+      pulse: 'oklch(26% 0.085 265)'
+    }
+  };
+
+  function initLivingEngine() {
+    const wrapper = document.getElementById('nexafy-stage-wrapper');
+    const metricCardVal = document.getElementById('metric-card-val');
+    const metricBgVal = document.getElementById('metric-bg-val');
+
+    // Preset Chip Buttons
+    const presetChips = document.querySelectorAll('.oklch-chip');
+    presetChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        presetChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+
+        const key = chip.getAttribute('data-preset') as keyof typeof OKLCH_PRESETS;
+        const p = OKLCH_PRESETS[key] || OKLCH_PRESETS.cashmere;
+
+        if (wrapper) {
+          wrapper.style.setProperty('--stage-bg', p.bg);
+          wrapper.style.setProperty('--stage-card', p.card);
+          wrapper.style.setProperty('--stage-text', p.text);
+          wrapper.style.setProperty('--stage-capsule-bg', p.capsuleBg);
+          wrapper.style.setProperty('--stage-capsule-text', p.capsuleText);
+          wrapper.style.setProperty('--stage-pulse', p.pulse);
+        }
+
+        if (metricCardVal) metricCardVal.textContent = p.card;
+        if (metricBgVal) metricBgVal.textContent = p.bg;
+      });
+    });
+
+    // Chapter Switching Logic
+    const btnCh1 = document.getElementById('btn-ch1');
+    const btnCh2 = document.getElementById('btn-ch2');
+    const btnCh3 = document.getElementById('btn-ch3');
+    const ch1View = document.getElementById('ch1-view');
+    const ch2View = document.getElementById('ch2-view');
+    const ch3View = document.getElementById('ch3-view');
+    const btnPlayLoop = document.getElementById('btn-play-loop');
+    const btnReset = document.getElementById('btn-reset-scene');
+    const playIcon = document.getElementById('play-icon');
+    const playText = document.getElementById('play-text');
+
+    let currentChapter = 1;
+    let isLooping = false;
+    let loopTimer: any = null;
+
+    function setChapter(ch: number) {
+      currentChapter = ch;
+      
+      [btnCh1, btnCh2, btnCh3].forEach((btn, idx) => {
+        if (!btn) return;
+        const active = (idx + 1) === ch;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+
+      if (ch1View) ch1View.classList.toggle('active', ch === 1);
+      if (ch2View) ch2View.classList.toggle('active', ch === 2);
+      if (ch3View) ch3View.classList.toggle('active', ch === 3);
+    }
+
+    btnCh1?.addEventListener('click', () => { stopLoop(); setChapter(1); });
+    btnCh2?.addEventListener('click', () => { stopLoop(); setChapter(2); });
+    btnCh3?.addEventListener('click', () => { stopLoop(); setChapter(3); });
+
+    function startLoop() {
+      isLooping = true;
+      if (playIcon) playIcon.textContent = '⏸';
+      if (playText) playText.textContent = 'Pause';
+      
+      function nextStep() {
+        if (!isLooping) return;
+        let next = currentChapter + 1;
+        if (next > 3) next = 1;
+        setChapter(next);
+        loopTimer = setTimeout(nextStep, 4500);
+      }
+      loopTimer = setTimeout(nextStep, 4500);
+    }
+
+    function stopLoop() {
+      isLooping = false;
+      if (loopTimer) clearTimeout(loopTimer);
+      if (playIcon) playIcon.textContent = '▶';
+      if (playText) playText.textContent = 'Auto Loop';
+    }
+
+    btnPlayLoop?.addEventListener('click', () => {
+      if (isLooping) {
+        stopLoop();
+      } else {
+        startLoop();
+      }
+    });
+
+    btnReset?.addEventListener('click', () => {
+      stopLoop();
+      setChapter(1);
+    });
+
+    window.addEventListener('beforeunload', () => {
+      if (loopTimer) clearTimeout(loopTimer);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLivingEngine);
+  } else {
+    initLivingEngine();
+  }
+</script>

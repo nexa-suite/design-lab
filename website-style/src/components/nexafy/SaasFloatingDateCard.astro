@@ -1,0 +1,88 @@
+---
+/**
+ * SaasFloatingDateCard Component
+ * Chapter 2 (SaaS Platform): Floating rental dates card with calendar scheduling toggle.
+ */
+interface Props {
+  duration?: string;
+  range?: string;
+}
+
+const {
+  duration = '5-day rental',
+  range = '20/03/2022 - 24/03/2022'
+} = Astro.props;
+---
+
+<div class="saas-floating-date-card">
+  <span class="date-card-label">Dates</span>
+  <span class="date-card-duration">{duration}</span>
+  <div class="date-card-range text-mono">
+    <span>{range}</span>
+    <span class="date-arrow" aria-hidden="true">∨</span>
+  </div>
+  <div class="date-toggle-row">
+    <span class="toggle-pill-switch" aria-hidden="true"></span>
+    <span class="toggle-label-text">Schedule Delivery & Pick up on my Calendar</span>
+  </div>
+</div>
+
+<style>
+  .saas-floating-date-card {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 240px;
+    background-color: var(--stage-card);
+    border-radius: 16px;
+    padding: 1rem;
+    z-index: 6;
+    color: var(--stage-text);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .date-card-label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .date-card-duration {
+    font-size: 0.875rem;
+    font-weight: 800;
+    display: block;
+    margin: 0.2rem 0;
+  }
+
+  .date-card-range {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    background: #ffffff;
+    padding: 6px 10px;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+    font-weight: 600;
+    color: #0f172a;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .date-toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.6875rem;
+    line-height: 1.2;
+  }
+
+  .toggle-pill-switch {
+    width: 24px;
+    height: 14px;
+    background: var(--stage-capsule-bg);
+    border-radius: 999px;
+    flex-shrink: 0;
+    transition: background-color 0.3s ease;
+  }
+</style>

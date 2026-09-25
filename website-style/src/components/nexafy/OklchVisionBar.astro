@@ -1,0 +1,182 @@
+---
+/**
+ * OKLCH Vision Bar Component
+ * Provides live ergonomic human vision palette switching and formula inspectability.
+ */
+interface Props {
+  initialPreset?: 'cashmere' | 'oceanic' | 'calibrated' | 'ceramic';
+}
+
+const { initialPreset = 'cashmere' } = Astro.props;
+---
+
+<div class="oklch-vision-bar" id="oklch-vision-bar">
+  <div class="vision-bar-left">
+    <span class="vision-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+      <span>Visión Humana (OKLCH Ergonomics)</span>
+    </span>
+
+    <div class="oklch-presets-chips" role="group" aria-label="Variaciones de color OKLCH">
+      <button 
+        type="button" 
+        class={`oklch-chip ${initialPreset === 'cashmere' ? 'active' : ''}`} 
+        data-preset="cashmere"
+        title="Cashmere Arctic Mist (Bajo contraste, máxima comodidad visual)"
+      >
+        <span class="chip-dot"></span>
+        <span>❄️ Cashmere Arctic Mist (Recomendado)</span>
+      </button>
+      <button 
+        type="button" 
+        class={`oklch-chip ${initialPreset === 'oceanic' ? 'active' : ''}`} 
+        data-preset="oceanic"
+        title="Oceanic Sage Blue (Equilibrio costero y frescura Flecto)"
+      >
+        <span class="chip-dot"></span>
+        <span>🌊 Oceanic Sage Blue</span>
+      </button>
+      <button 
+        type="button" 
+        class={`oklch-chip ${initialPreset === 'calibrated' ? 'active' : ''}`} 
+        data-preset="calibrated"
+        title="Calibrado Nexa 262° (Monocromático suave)"
+      >
+        <span class="chip-dot"></span>
+        <span>🌿 Calibrado Suave (262°)</span>
+      </button>
+      <button 
+        type="button" 
+        class={`oklch-chip ${initialPreset === 'ceramic' ? 'active' : ''}`} 
+        data-preset="ceramic"
+        title="Ceramic Azure (Modernista y armónico)"
+      >
+        <span class="chip-dot"></span>
+        <span>🏛️ Ceramic Azure</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="vision-bar-right">
+    <div class="oklch-metric-pill" title="Fórmula OKLCH activa para cards">
+      <span class="metric-label">Card:</span>
+      <code class="metric-val" id="metric-card-val">oklch(88% 0.045 258)</code>
+    </div>
+    <div class="oklch-metric-pill" title="Fórmula OKLCH activa para fondo">
+      <span class="metric-label">Stage:</span>
+      <code class="metric-val" id="metric-bg-val">oklch(33% 0.06 258)</code>
+    </div>
+  </div>
+</div>
+
+<style>
+  .oklch-vision-bar {
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.5rem 0.85rem;
+    margin-bottom: 0.75rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .vision-bar-left {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .vision-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #1e293b;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .oklch-presets-chips {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .oklch-chip {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.15s ease;
+  }
+
+  .oklch-chip:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+  }
+
+  .oklch-chip.active {
+    background: #0284c7;
+    color: #ffffff;
+    border-color: transparent;
+  }
+
+  .chip-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .vision-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .oklch-metric-pill {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.6875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .metric-label {
+    color: #64748b;
+    font-weight: 600;
+  }
+
+  .metric-val {
+    color: #0284c7;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .oklch-vision-bar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

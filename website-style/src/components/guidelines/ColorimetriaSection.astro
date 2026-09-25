@@ -1,0 +1,522 @@
+---
+import { BLUE_SCALE, NEUTRAL_SCALE, COLOR_FAMILIES, CONTRAST_CONTRACTS } from '../../lib/nexa-guidelines/data';
+---
+
+<section id="section-colorimetria" class="guideline-module">
+  <div class="module-header">
+    <div class="kicker-group">
+      <span class="index-pill">01</span>
+      <span class="kicker-text">FOUNDATIONAL COLORIMETRY</span>
+    </div>
+    <h2>Blue has a usable range, not one lucky hex</h2>
+    <p class="module-intro">
+      The token model follows <code class="mono-pill">primitive &rarr; semantic &rarr; component</code>.
+      Color is an informational instrument that expresses state, reading hierarchy, and consequence — never gratuitous decoration.
+    </p>
+  </div>
+
+  <!-- Blue OKLCH Scale -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <h3 class="subsection-title">Primary Blue Scale (OKLCH Perception Model)</h3>
+      <span class="spec-badge">11 Calibrated Tones · 262.9° Hue Arc</span>
+    </div>
+    <div class="blue-scale-grid">
+      {BLUE_SCALE.map((token) => (
+        <article class="color-token-card">
+          <div class="swatch-preview" style={`background: ${token.value};`}>
+            <span class={`swatch-label ${token.shade >= 500 ? 'text-light' : 'text-dark'}`}>
+              Blue {token.shade}
+            </span>
+          </div>
+          <div class="token-meta">
+            <div class="token-title-row">
+              <strong>Blue {token.shade}</strong>
+              <span class="pair-pill">{token.foreground}</span>
+            </div>
+            <code class="token-name">{token.token}</code>
+            <small class="token-value">{token.value}</small>
+            <p class="token-usage">{token.usage}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <!-- Neutral Slate Ramp -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <h3 class="subsection-title">Neutral Slate Ramp (Reading Hierarchy & Surfaces)</h3>
+      <span class="spec-badge">Slate 50 to 900 · Architectural Foundation</span>
+    </div>
+    <div class="neutral-ramp-grid">
+      {NEUTRAL_SCALE.map((token) => (
+        <article class="neutral-card">
+          <div class="neutral-swatch" style={`background: ${token.value};`}></div>
+          <div class="neutral-meta">
+            <strong>{token.name}</strong>
+            <code class="token-name">{token.value}</code>
+            <p class="neutral-note">{token.note}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <!-- Semantic Color Families -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <h3 class="subsection-title">Semantic Status Families (Surface + Border + Foreground)</h3>
+      <span class="spec-badge">Six Operational Roles</span>
+    </div>
+    <div class="family-grid">
+      {COLOR_FAMILIES.map((fam) => (
+        <article class="family-card" style={`--fam-surf: ${fam.surface}; --fam-border: ${fam.border}; --fam-fg: ${fam.foreground};`}>
+          <div class="family-swatch-box" style={`background: ${fam.surface}; border: 1px solid ${fam.border}; color: ${fam.foreground};`}>
+            <i class={`pi ${fam.icon} family-icon`} aria-hidden="true"></i>
+            <span class="family-example-label">{fam.example}</span>
+          </div>
+          <div class="family-details">
+            <h4 class="family-name">{fam.name}</h4>
+            <div class="family-specs">
+              <div class="spec-row">
+                <span class="spec-key">Surface:</span>
+                <code>{fam.surface}</code>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Border:</span>
+                <code>{fam.border}</code>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Foreground:</span>
+                <code>{fam.foreground}</code>
+              </div>
+            </div>
+            <div class="status-chip-preview" style={`background: ${fam.surface}; border: 1px solid ${fam.border}; color: ${fam.foreground};`}>
+              <span class="dot-indicator" style={`background: ${fam.foreground};`}></span>
+              <span>{fam.example}</span>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <!-- Contrast Contracts & WCAG Ratios -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <h3 class="subsection-title">Contrast Contracts Matrix (WCAG AA/AAA Audited)</h3>
+      <span class="spec-badge">0 Failures · Guaranteed Legibility</span>
+    </div>
+    <div class="contrast-table-container">
+      <table class="contrast-table">
+        <thead>
+          <tr>
+            <th>Specimen</th>
+            <th>Contract Name</th>
+            <th>Foreground Token</th>
+            <th>Background Token</th>
+            <th>Required Gate</th>
+            <th>Measured Ratio</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {CONTRAST_CONTRACTS.map((contract) => (
+            <tr>
+              <td>
+                <span class="contrast-sample-chip" style={`background: ${contract.background}; color: ${contract.foreground};`}>
+                  Aa
+                </span>
+              </td>
+              <td><strong>{contract.label}</strong></td>
+              <td><code>{contract.foregroundToken}</code></td>
+              <td><code>{contract.backgroundToken}</code></td>
+              <td><span class="gate-tag">{contract.gate}</span></td>
+              <td class="ratio-cell"><strong>{contract.ratio.toFixed(1)}:1</strong></td>
+              <td>
+                <span class="status-pass-badge">
+                  <i class="pi pi-check" aria-hidden="true"></i> PASS
+                </span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<style>
+  .guideline-module {
+    padding: var(--nexa-space-8) var(--nexa-space-6);
+    background: var(--nexa-surface-card);
+    border-radius: var(--nexa-radius-card);
+    border: 1px solid var(--nexa-color-border-default);
+    margin-bottom: var(--nexa-space-8);
+  }
+
+  .module-header {
+    margin-bottom: var(--nexa-space-8);
+    border-bottom: 1px solid var(--nexa-color-border-default);
+    padding-bottom: var(--nexa-space-6);
+  }
+
+  .kicker-group {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--nexa-space-2);
+    margin-bottom: var(--nexa-space-2);
+  }
+
+  .index-pill {
+    background: var(--nexa-color-primary-50);
+    color: var(--nexa-color-primary-700);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: var(--nexa-radius-sm);
+    font-family: var(--nexa-font-family-mono);
+  }
+
+  .kicker-text {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--nexa-color-text-secondary);
+    text-transform: uppercase;
+  }
+
+  .module-header h2 {
+    font-family: var(--nexa-font-family-display);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary);
+    line-height: 1.25;
+    margin: var(--nexa-space-2) 0 var(--nexa-space-3) 0;
+  }
+
+  .module-intro {
+    font-size: 15px;
+    color: var(--nexa-color-text-secondary);
+    line-height: 1.5;
+    max-width: 840px;
+  }
+
+  .mono-pill {
+    background: var(--nexa-surface-inset);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: var(--nexa-font-family-mono);
+    font-size: 13px;
+    color: var(--nexa-color-primary-700);
+  }
+
+  .subsection {
+    margin-bottom: var(--nexa-space-8);
+  }
+
+  .subsection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--nexa-space-4);
+    flex-wrap: wrap;
+    gap: var(--nexa-space-2);
+  }
+
+  .subsection-title {
+    font-family: var(--nexa-font-family-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary);
+  }
+
+  .spec-badge {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--nexa-color-text-secondary);
+    background: var(--nexa-surface-inset);
+    padding: 3px 10px;
+    border-radius: var(--nexa-radius-pill);
+    border: 1px solid var(--nexa-color-border-default);
+  }
+
+  /* Blue Scale Grid */
+  .blue-scale-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--nexa-space-3);
+  }
+
+  .color-token-card {
+    background: var(--nexa-surface-card);
+    border: 1px solid var(--nexa-color-border-default);
+    border-radius: var(--nexa-radius-control);
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .color-token-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--nexa-primitive-shadow-sm);
+  }
+
+  .swatch-preview {
+    height: 64px;
+    padding: var(--nexa-space-2) var(--nexa-space-3);
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .swatch-label {
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .text-light {
+    color: #ffffff;
+  }
+
+  .text-dark {
+    color: #0f172a;
+  }
+
+  .token-meta {
+    padding: var(--nexa-space-3);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .token-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .pair-pill {
+    font-size: 10px;
+    font-weight: 600;
+    background: var(--nexa-surface-inset);
+    color: var(--nexa-color-text-secondary);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+
+  .token-name {
+    font-family: var(--nexa-font-family-mono);
+    font-size: 11px;
+    color: var(--nexa-color-text-secondary);
+  }
+
+  .token-value {
+    font-family: var(--nexa-font-family-mono);
+    font-size: 10px;
+    color: var(--nexa-color-text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .token-usage {
+    font-size: 11px;
+    color: var(--nexa-color-text-secondary);
+    margin-top: 2px;
+    line-height: 1.35;
+  }
+
+  /* Neutral Ramp */
+  .neutral-ramp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: var(--nexa-space-2);
+  }
+
+  .neutral-card {
+    background: var(--nexa-surface-card);
+    border: 1px solid var(--nexa-color-border-default);
+    border-radius: var(--nexa-radius-control);
+    padding: var(--nexa-space-2);
+    display: flex;
+    flex-direction: column;
+    gap: var(--nexa-space-2);
+  }
+
+  .neutral-swatch {
+    height: 40px;
+    border-radius: var(--nexa-radius-sm);
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .neutral-meta strong {
+    display: block;
+    font-size: 12px;
+    color: var(--nexa-color-text-primary);
+  }
+
+  .neutral-meta .token-name {
+    font-size: 11px;
+    display: block;
+  }
+
+  .neutral-note {
+    font-size: 11px;
+    color: var(--nexa-color-text-secondary);
+    margin-top: 4px;
+    line-height: 1.3;
+  }
+
+  /* Semantic Families */
+  .family-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--nexa-space-4);
+  }
+
+  .family-card {
+    background: var(--nexa-surface-card);
+    border: 1px solid var(--nexa-color-border-default);
+    border-radius: var(--nexa-radius-card);
+    padding: var(--nexa-space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--nexa-space-3);
+  }
+
+  .family-swatch-box {
+    border-radius: var(--nexa-radius-control);
+    padding: var(--nexa-space-3);
+    display: flex;
+    align-items: center;
+    gap: var(--nexa-space-2);
+  }
+
+  .family-icon {
+    font-size: 18px;
+  }
+
+  .family-example-label {
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .family-name {
+    font-family: var(--nexa-font-family-display);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary);
+    margin-bottom: var(--nexa-space-2);
+  }
+
+  .family-specs {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 11px;
+    margin-bottom: var(--nexa-space-3);
+  }
+
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .spec-key {
+    color: var(--nexa-color-text-secondary);
+  }
+
+  .spec-row code {
+    font-family: var(--nexa-font-family-mono);
+    color: var(--nexa-color-text-primary);
+  }
+
+  .status-chip-preview {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: var(--nexa-status-height);
+    padding: 0 var(--nexa-status-padding-inline);
+    border-radius: var(--nexa-radius-pill);
+    font-size: 12px;
+    font-weight: 600;
+    align-self: flex-start;
+  }
+
+  .dot-indicator {
+    width: var(--nexa-status-dot-size);
+    height: var(--nexa-status-dot-size);
+    border-radius: 50%;
+  }
+
+  /* Contrast Table */
+  .contrast-table-container {
+    overflow-x: auto;
+    border: 1px solid var(--nexa-color-border-default);
+    border-radius: var(--nexa-radius-control);
+  }
+
+  .contrast-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    text-align: left;
+  }
+
+  .contrast-table th {
+    background: var(--nexa-surface-table-header);
+    color: var(--nexa-color-text-secondary);
+    padding: 10px 12px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--nexa-color-border-default);
+  }
+
+  .contrast-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--nexa-color-border-default);
+    color: var(--nexa-color-text-primary);
+  }
+
+  .contrast-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .contrast-sample-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--nexa-radius-sm);
+    font-weight: 700;
+    font-size: 13px;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .gate-tag {
+    background: var(--nexa-surface-inset);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: var(--nexa-font-family-mono);
+  }
+
+  .ratio-cell {
+    font-family: var(--nexa-font-family-mono);
+    color: var(--nexa-color-primary-700);
+  }
+
+  .status-pass-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--nexa-color-success-50);
+    color: var(--nexa-color-success-700);
+    border: 1px solid var(--nexa-color-success-border);
+    padding: 2px 8px;
+    border-radius: var(--nexa-radius-pill);
+    font-size: 11px;
+    font-weight: 700;
+  }
+</style>

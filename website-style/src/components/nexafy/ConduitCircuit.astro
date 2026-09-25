@@ -1,0 +1,112 @@
+---
+/**
+ * ConduitCircuit Component
+ * 28px thick vascular circuit conduits + central modular Flecto logo mark + real-time animated signal pulses.
+ */
+---
+
+<svg 
+  class="circuit-svg" 
+  viewBox="0 0 1130 410" 
+  fill="none" 
+  xmlns="http://www.w3.org/2000/svg" 
+  preserveAspectRatio="xMidYMid meet"
+  aria-hidden="true"
+>
+  <!-- 1. Main Trunk Line connecting directly from YOUR COMPANY to central modular mark -->
+  <path 
+    class="circuit-pipe pipe-trunk" 
+    d="M 150 195 L 485 195" 
+    stroke-width="28" 
+    stroke-linecap="square"
+  />
+
+  <!-- 2. Authentic Central Flecto Modular Mark (Exact Forensic Geometry) -->
+  <path 
+    class="circuit-pipe pipe-mark" 
+    d="M 557 106 L 556 107 L 554 107 L 553 109 L 552 111 L 552 142 L 549 145 L 506 145 L 502 147 L 501 150 L 501 178 L 499 180 L 497 181 L 450 181 L 450 208 L 499 208 L 501 207 L 501 204 L 502 189 L 503 186 L 506 183 L 549 183 L 552 186 L 552 217 L 550 219 L 548 220 L 505 220 L 503 221 L 502 222 L 501 224 L 501 241 L 497 245 L 461 246 L 460 245 L 458 246 L 457 248 L 457 259 L 468 259 L 470 257 L 489 257 L 490 259 L 502 259 L 502 252 L 503 249 L 505 247 L 507 246 L 551 246 L 553 244 L 553 241 L 554 240 L 554 238 L 553 237 L 553 233 L 554 225 L 557 222 L 559 221 L 610 221 L 613 222 L 615 224 L 616 226 L 616 259 L 659 259 L 658 220 L 621 220 L 619 219 L 618 218 L 617 216 L 617 184 L 615 182 L 613 182 L 611 181 L 557 181 L 554 178 L 553 174 L 553 153 L 554 150 L 557 147 L 560 146 L 609 146 L 613 147 L 615 149 L 616 151 L 616 169 L 617 171 L 619 172 L 659 172 L 659 145 L 620 145 L 618 143 L 617 141 L 617 110 L 616 108 L 612 106 Z" 
+  />
+
+  <!-- 3. Branch 1: Steps down to Physical Store POS -->
+  <path 
+    class="circuit-pipe pipe-store" 
+    d="M 502 208 L 502 245 L 460 245 L 460 260" 
+    stroke-width="28" 
+    stroke-linejoin="round"
+  />
+
+  <!-- 4. Branch 2: Center step down to John Cooper Inquiry -->
+  <path 
+    class="circuit-pipe pipe-email" 
+    d="M 616 220 L 638 220 L 638 235" 
+    stroke-width="28" 
+    stroke-linejoin="round"
+  />
+
+  <!-- 5. Branch 3: Steps UP to Online Store -->
+  <path 
+    class="circuit-pipe pipe-online" 
+    d="M 616 159 L 787 159 L 787 185" 
+    stroke-width="28" 
+    stroke-linejoin="round"
+  />
+
+  <!-- 6. Branch 4: Extends out right to Escrow Shield -->
+  <path 
+    class="circuit-pipe pipe-shield" 
+    d="M 800 200 L 1090 200" 
+    stroke-width="28" 
+    stroke-linejoin="round"
+  />
+
+  <!-- Animated Signal Pulses flowing along conduits in real-time -->
+  <g class="circuit-pulses-group">
+    <circle class="pulse-particle pulse-1" cx="0" cy="0" r="6" />
+    <circle class="pulse-particle pulse-2" cx="0" cy="0" r="6" />
+    <circle class="pulse-particle pulse-3" cx="0" cy="0" r="6" />
+    <circle class="pulse-particle pulse-4" cx="0" cy="0" r="6" />
+  </g>
+</svg>
+
+<style>
+  .circuit-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .circuit-pipe {
+    stroke: var(--stage-card);
+    fill: none;
+    transition: stroke 0.3s ease, fill 0.3s ease;
+  }
+
+  .circuit-pipe.pipe-mark {
+    fill: var(--stage-card);
+    stroke: none;
+  }
+
+  /* Animated Pulses */
+  .pulse-particle {
+    fill: var(--stage-pulse);
+    opacity: 0.85;
+    animation: flowPulse 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    transition: fill 0.3s ease;
+  }
+
+  .pulse-1 { animation-delay: 0s; }
+  .pulse-2 { animation-delay: 0.75s; }
+  .pulse-3 { animation-delay: 1.5s; }
+  .pulse-4 { animation-delay: 2.25s; }
+
+  @keyframes flowPulse {
+    0% { transform: translate(150px, 195px); opacity: 0; }
+    10% { opacity: 0.9; }
+    50% { transform: translate(550px, 195px); opacity: 0.9; }
+    75% { transform: translate(780px, 160px); opacity: 0.9; }
+    100% { transform: translate(1090px, 200px); opacity: 0; }
+  }
+</style>

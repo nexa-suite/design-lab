@@ -1,0 +1,68 @@
+---
+/**
+ * EscrowGuaranteeCard Component
+ * Chapter 3 (Safe Renting & Payments): Escrow Protection Guarantee card with shield emblem.
+ */
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = '100% Escrow Guarantee',
+  description = 'Automatic deposit pre-authorization with instant claimless release upon gear return.'
+} = Astro.props;
+---
+
+<div class="ch3-right-protection">
+  <div class="escrow-shield-card">
+    <div class="shield-icon-bubble">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+      </svg>
+    </div>
+    <strong class="shield-title">{title}</strong>
+    <p class="shield-body">{description}</p>
+  </div>
+</div>
+
+<style>
+  .ch3-right-protection {
+    width: 280px;
+  }
+
+  .escrow-shield-card {
+    background: var(--stage-card);
+    border-radius: 18px;
+    padding: 1.25rem;
+    color: var(--stage-text);
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .shield-icon-bubble {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #ffffff;
+    margin: 0 auto 0.75rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--stage-text);
+    transition: color 0.3s ease;
+  }
+
+  .shield-title {
+    font-size: 0.9375rem;
+    font-weight: 800;
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+
+  .shield-body {
+    font-size: 0.75rem;
+    line-height: 1.35;
+    opacity: 0.85;
+  }
+</style>

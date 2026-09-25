@@ -1,0 +1,250 @@
+---
+/**
+ * WEBSITE STYLE — LANDING & MARKETING ARCHITECTURE SPEC
+ * Technical and artistic guidelines for engineering high-conversion marketing pages with Nexa visual authority.
+ */
+import 'primeicons/primeicons.css';
+import '../styles/tokens.css';
+import MonorepoNavHeader from '../components/layout/MonorepoNavHeader.astro';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Architecture & Bento Spec · Nexafy (Website Style)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" 
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--nexa-surface-page, #f6faff);
+      color: var(--nexa-color-text-primary, #0f172a);
+      font-family: var(--nexa-font-family-body, 'Inter', sans-serif);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .spec-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    .spec-header {
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--nexa-color-border-default, #e2e8f0);
+      padding-bottom: 1.5rem;
+    }
+
+    .spec-title {
+      font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--nexa-color-text-primary, #0f172a);
+      margin-bottom: 0.5rem;
+    }
+
+    .spec-desc {
+      color: var(--nexa-color-text-secondary, #64748b);
+      font-size: 15px;
+      max-width: 820px;
+      line-height: 1.6;
+    }
+
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 1.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .spec-card {
+      background: #ffffff;
+      border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+      border-radius: 12px;
+      padding: 1.75rem;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: #eff6ff;
+      color: #2563eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .card-title {
+      font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--nexa-color-text-primary, #0f172a);
+    }
+
+    .card-body {
+      font-size: 14px;
+      color: var(--nexa-color-text-secondary, #64748b);
+      line-height: 1.6;
+    }
+
+    .card-code {
+      background: #0f172a;
+      color: #38c8ff;
+      padding: 0.85rem;
+      border-radius: 8px;
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-size: 12px;
+      overflow-x: auto;
+    }
+
+    .rule-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      align-self: flex-start;
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .rule-badge.strict {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .rule-badge.optimal {
+      background: #dcfce7;
+      color: #166534;
+    }
+  </style>
+</head>
+<body>
+
+  <MonorepoNavHeader currentSection="landing-spec" />
+
+  <main class="spec-container">
+    <div class="spec-header">
+      <h1 class="spec-title">Especificaciones de Arquitectura de Landing & Bento</h1>
+      <p class="spec-desc">
+        Directrices canónicas para diseñar y construir páginas de producto y marketing dentro de Nexa Suite. Estas reglas aseguran coherencia estética, rendimiento óptimo y eliminación de patrones genéricos o inconsistentes.
+      </p>
+    </div>
+
+    <div class="spec-grid">
+      <!-- 1. Regla de Oro: Colorimetría Sólida -->
+      <div class="spec-card">
+        <div class="card-icon"><i class="pi pi-palette"></i></div>
+        <span class="rule-badge strict">NORMA ESTRICTA</span>
+        <h2 class="card-title">1. Colorimetría Sólida (0 Degradados)</h2>
+        <p class="card-body">
+          Las superficies de marketing y landing de Nexa deben rechazar gradientes decorativos o difuminados de fondo. Las piezas geométricas se estructuran en dos tonos sólidos principales de alto impacto: <strong>Azul Oscuro Nexa (<code>#082846</code>)</strong> para el fondo arquitectónico y <strong>Celeste Nexa (<code>#38c8ff</code>)</strong> para los conductos vasculares y las tarjetas principales.
+        </p>
+        <div class="card-code">
+          --nexa-brand-dark-blue: #082846; /* Canvas */<br>
+          --nexa-brand-celeste:   #38c8ff; /* Conduits */<br>
+          /* 0 gradients permitidos */
+        </div>
+      </div>
+
+      <!-- 2. Conductos Vasculares de 28px -->
+      <div class="spec-card">
+        <div class="card-icon"><i class="pi pi-share-alt"></i></div>
+        <span class="rule-badge strict">SISTEMA ESPACIAL</span>
+        <h2 class="card-title">2. Conductos Vasculares de 28px con Fillets</h2>
+        <p class="card-body">
+          Los elementos de una landing no flotan aislados. Se interconectan mediante un sistema vascular de 28px de grosor que guía la atención del usuario a través de un recorrido narrativo continuo. Las curvas de unión emplean esquinas redondeadas tipo <em>fillet</em> arquitectónico en lugar de ángulos rectos cortantes.
+        </p>
+        <div class="card-code">
+          stroke-width: 28px;<br>
+          stroke-linejoin: round;<br>
+          stroke-linecap: round;
+        </div>
+      </div>
+
+      <!-- 3. Tipografía Fluida con clamp() -->
+      <div class="spec-card">
+        <div class="card-icon"><i class="pi pi-align-left"></i></div>
+        <span class="rule-badge optimal">RESPONSIVE FLUIDO</span>
+        <h2 class="card-title">3. Tipografía Cinética Fluida</h2>
+        <p class="card-body">
+          Para evitar saltos bruscos entre puntos de interrupción, los encabezados principales del Hero utilizan escalado tipográfico continuo mediante <code>clamp()</code>, manteniendo la legibilidad sin desbordamientos horizontales desde pantallas de 320px hasta 1440px+.
+        </p>
+        <div class="card-code">
+          font-size: clamp(2.5rem, 5vw + 1rem, 5.5rem);<br>
+          line-height: 1.05;<br>
+          letter-spacing: -0.03em;
+        </div>
+      </div>
+
+      <!-- 4. Cuadrícula Bento de 4 Columnas -->
+      <div class="spec-card">
+        <div class="card-icon"><i class="pi pi-th-large"></i></div>
+        <span class="rule-badge optimal">ESTRUCTURA DE DISTRIBUCIÓN</span>
+        <h2 class="card-title">4. Distribución Omnicanal Bento</h2>
+        <p class="card-body">
+          La sección de canales comerciales se organiza en una cuadrícula Bento asimétrica: tarjetas de tienda física, cotizaciones automatizadas e-commerce y pedidos en línea. Cada tarjeta cuenta con métricas honestas, sin contadores ficticios ni estadísticas infladas.
+        </p>
+        <div class="card-code">
+          grid-template-columns: repeat(4, 1fr);<br>
+          gap: var(--nexa-spacing-lg, 24px);
+        </div>
+      </div>
+
+      <!-- 5. Superficies de Confianza y Escrow -->
+      <div class="spec-card">
+        <div class="card-icon"><i class="pi pi-shield"></i></div>
+        <span class="rule-badge strict">VERIFICACIÓN Y SEGURIDAD</span>
+        <h2 class="card-title">5. Superficies de Conversión & Escrow</h2>
+        <p class="card-body">
+          Toda propuesta comercial incluye evidencia tangible de seguridad: depósito en custodia transparente, verificación de identidad en 1 toque y cálculo de cobertura en tiempo real.
+        </p>
+        <div class="card-code">
+          border-radius: var(--nexa-radius-card, 16px);<br>
+          background: #ffffff;<br>
+          box-shadow: 0 4px 12px rgba(8, 40, 70, 0.08);
+        </div>
+      </div>
+
+      <!-- 6. Footer Arquitectónico Esculpido -->
+      <div class="spec-card">
+        <div class="card-icon"><i class="pi pi-compass"></i></div>
+        <span class="rule-badge optimal">ARQUITECTURA DE CIERRE</span>
+        <h2 class="card-title">6. Footer Arquitectónico Esculpido</h2>
+        <p class="card-body">
+          La transición hacia el pie de página utiliza una silueta SVG esculpida en tono crema/beige cálido (`#fffbec`) o azul corporativo profundo, reemplazando la clásica línea recta horizontal por un contorno con muescas geométricas.
+        </p>
+        <div class="card-code">
+          viewBox: 0 0 1440 680;<br>
+          path: M 0 110 C 0 85 ... Z;
+        </div>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>

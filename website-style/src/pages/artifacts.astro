@@ -1,0 +1,400 @@
+---
+/**
+ * WEBSITE STYLE — LIVING ARTIFACTS CATALOG (NEXAFY)
+ * Detailed component catalog showcasing every isolated living artifact, its spatial role, and code structure.
+ */
+import 'primeicons/primeicons.css';
+import '../styles/tokens.css';
+import MonorepoNavHeader from '../components/layout/MonorepoNavHeader.astro';
+import YourCompanyHub from '../components/nexafy/YourCompanyHub.astro';
+import PhysicalStoreCard from '../components/nexafy/PhysicalStoreCard.astro';
+import CustomerInquiryCard from '../components/nexafy/CustomerInquiryCard.astro';
+import OnlineStoreCard from '../components/nexafy/OnlineStoreCard.astro';
+import SaasCustomerProfileCard from '../components/nexafy/SaasCustomerProfileCard.astro';
+import SaasItemsTableCard from '../components/nexafy/SaasItemsTableCard.astro';
+import SaasFloatingDateCard from '../components/nexafy/SaasFloatingDateCard.astro';
+import PaymentCircuitMethods from '../components/nexafy/PaymentCircuitMethods.astro';
+import PhoneCheckoutSimulator from '../components/nexafy/PhoneCheckoutSimulator.astro';
+import EscrowGuaranteeCard from '../components/nexafy/EscrowGuaranteeCard.astro';
+import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Artefactos Vivos · Nexafy (Website Style)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" 
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--nexa-surface-page, #f6faff);
+      color: var(--nexa-color-text-primary, #0f172a);
+      font-family: var(--nexa-font-family-body, 'Inter', sans-serif);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .catalog-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    .catalog-header {
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--nexa-color-border-default, #e2e8f0);
+      padding-bottom: 1.5rem;
+    }
+
+    .catalog-title {
+      font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--nexa-color-text-primary, #0f172a);
+      margin-bottom: 0.5rem;
+    }
+
+    .catalog-desc {
+      color: var(--nexa-color-text-secondary, #64748b);
+      font-size: 15px;
+      max-width: 800px;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--nexa-color-primary-700, #1b4fb8);
+      margin: 2.5rem 0 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .artifacts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .artifact-card {
+      background: #ffffff;
+      border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(15, 23, 42, 0.04);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .artifact-preview-stage {
+      background: #082846; /* Nexa Dark Blue Canvas */
+      padding: 2rem 1.5rem;
+      min-height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .artifact-info {
+      padding: 1.25rem 1.5rem;
+      background: #ffffff;
+      border-top: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
+    }
+
+    .artifact-name {
+      font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--nexa-color-text-primary, #0f172a);
+      margin-bottom: 0.35rem;
+    }
+
+    .artifact-meta {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .tag-role {
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-size: 10px;
+      font-weight: 700;
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .artifact-details {
+      font-size: 13px;
+      color: var(--nexa-color-text-secondary, #64748b);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <MonorepoNavHeader currentSection="artifacts" />
+
+  <main class="catalog-container">
+    <div class="catalog-header">
+      <h1 class="catalog-title">Catálogo Modular de Artefactos Vivos (Nexafy)</h1>
+      <p class="catalog-desc">
+        Inventario exhaustivo de componentes geométricos vivos de Nexafy. Cada artefacto está diseñado bajo la regla de <strong>cero degradados</strong>, utilizando colorimetría sólida pura (Fondo Azul Oscuro <code>#082846</code> y relleno de tarjeta Celeste Nexa <code>#38c8ff</code>) y conductos vasculares gruesos de 28px con redondeos arquitectónicos.
+      </p>
+    </div>
+
+    <!-- Capítulo 1: Canales & Origen -->
+    <h2 class="section-title">
+      <i class="pi pi-compass"></i> Capítulo 01: Origen & Red de Canales Comerciales
+    </h2>
+
+    <div class="artifacts-grid">
+      <!-- Your Company Hub -->
+      <div class="artifact-card">
+        <div class="artifact-preview-stage">
+          <div style="position: relative; width: 170px; height: 95px;">
+            <YourCompanyHub />
+          </div>
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">YourCompanyHub</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Origen Central</span>
+            <span class="tag-role">SVG + CSS</span>
+          </div>
+          <p class="artifact-details">
+            Nodo raíz del grafo de escena donde se originan todos los conductos vasculares. Cuenta con identificador corporativo y puertos de conexión norte, sur, este y oeste.
+          </p>
+        </div>
+      </div>
+
+      <!-- Physical Store Card -->
+      <div class="artifact-card">
+        <div class="artifact-preview-stage">
+          <div style="position: relative; width: 180px; height: 140px;">
+            <PhysicalStoreCard />
+          </div>
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">PhysicalStoreCard</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Canal POS</span>
+            <span class="tag-role">Canal 01</span>
+          </div>
+          <p class="artifact-details">
+            Representación de la tienda física y punto de venta presencial. Incluye contador de unidades disponibles y estado de sincronización de terminal.
+          </p>
+        </div>
+      </div>
+
+      <!-- Customer Inquiry Card -->
+      <div class="artifact-card">
+        <div class="artifact-preview-stage">
+          <div style="position: relative; width: 200px; height: 140px;">
+            <CustomerInquiryCard />
+          </div>
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">CustomerInquiryCard</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Inbound Leads</span>
+            <span class="tag-role">Canal 02</span>
+          </div>
+          <p class="artifact-details">
+            Tarjeta interactiva que simula la recepción y respuesta de cotizaciones en tiempo real por correo o mensajería corporativa.
+          </p>
+        </div>
+      </div>
+
+      <!-- Online Store Card -->
+      <div class="artifact-card">
+        <div class="artifact-preview-stage">
+          <div style="position: relative; width: 185px; height: 140px;">
+            <OnlineStoreCard />
+          </div>
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">OnlineStoreCard</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">E-commerce Sync</span>
+            <span class="tag-role">Canal 03</span>
+          </div>
+          <p class="artifact-details">
+            Visualización de canal digital e-commerce con selector de cantidad, precio de reserva por período y estado activo.
+          </p>
+        </div>
+      </div>
+
+      <!-- Conduit Badges & Satellites -->
+      <div class="artifact-card">
+        <div class="artifact-preview-stage">
+          <div style="position: relative; width: 220px; height: 140px;">
+            <ConduitBadges />
+          </div>
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">ConduitBadges</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Satélites Vasculares</span>
+            <span class="tag-role">4 Insignias</span>
+          </div>
+          <p class="artifact-details">
+            Insignias satélites que marcan los puertos clave del circuito vascular (Norte, Sur, Este y Oeste) con iconos de estado y telemetría.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Capítulo 2: Dashboard SaaS Modular -->
+    <h2 class="section-title">
+      <i class="pi pi-table"></i> Capítulo 02: Plataforma SaaS & Dashboard Morph
+    </h2>
+
+    <div class="artifacts-grid">
+      <!-- Customer Profile -->
+      <div class="artifact-card">
+        <div class="artifact-preview-stage">
+          <div style="position: relative; width: 220px; height: 160px;">
+            <SaasCustomerProfileCard />
+          </div>
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">SaasCustomerProfileCard</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Identidad & KYC</span>
+            <span class="tag-role">SaaS Core</span>
+          </div>
+          <p class="artifact-details">
+            Tarjeta de validación biométrica y perfil de cliente con badge de verificación y cálculo de nivel de riesgo.
+          </p>
+        </div>
+      </div>
+
+      <!-- Items Table -->
+      <div class="artifact-card">
+        <div class="artifact-preview-stage">
+          <div style="position: relative; width: 320px; height: 180px;">
+            <SaasItemsTableCard />
+          </div>
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">SaasItemsTableCard</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Libro de Órdenes</span>
+            <span class="tag-role">Live Ledger</span>
+          </div>
+          <p class="artifact-details">
+            Tabla condensada de reservas activas con ID de activos, estatus dinámico de entrega y fechas contractuales.
+          </p>
+        </div>
+      </div>
+
+      <!-- Floating Dates -->
+      <div class="artifact-card">
+        <div class="artifact-preview-stage">
+          <div style="position: relative; width: 200px; height: 120px;">
+            <SaasFloatingDateCard />
+          </div>
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">SaasFloatingDateCard</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Control Temporal</span>
+            <span class="tag-role">Despacho</span>
+          </div>
+          <p class="artifact-details">
+            Insignia flotante de calendario que sincroniza las fechas estimadas de entrega y devolución de activos alquilados.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Capítulo 3: Checkout Seguro & Custodia Escrow -->
+    <h2 class="section-title">
+      <i class="pi pi-shield"></i> Capítulo 03: Checkout Seguro & Custodia Escrow
+    </h2>
+
+    <div class="artifacts-grid">
+      <!-- Phone Checkout Simulator -->
+      <div class="artifact-card">
+        <div class="artifact-preview-stage">
+          <div style="position: relative; width: 220px; height: 220px;">
+            <PhoneCheckoutSimulator />
+          </div>
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">PhoneCheckoutSimulator</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Checkout Móvil</span>
+            <span class="tag-role">100% SVG/CSS</span>
+          </div>
+          <p class="artifact-details">
+            Chasis simulado de smartphone con verificación de pago en 1 toque y confirmación de custodia de fondos.
+          </p>
+        </div>
+      </div>
+
+      <!-- Escrow Guarantee -->
+      <div class="artifact-card">
+        <div class="artifact-preview-stage">
+          <div style="position: relative; width: 220px; height: 150px;">
+            <EscrowGuaranteeCard />
+          </div>
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">EscrowGuaranteeCard</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Protección Escrow</span>
+            <span class="tag-role">Escudo de Seguridad</span>
+          </div>
+          <p class="artifact-details">
+            Escudo y certificación de fondos en custodia, protegiendo tanto al propietario del activo como al arrendador.
+          </p>
+        </div>
+      </div>
+
+      <!-- Payment Circuit Methods -->
+      <div class="artifact-card">
+        <div class="artifact-preview-stage">
+          <div style="position: relative; width: 240px; height: 140px;">
+            <PaymentCircuitMethods />
+          </div>
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">PaymentCircuitMethods</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Nodos de Pago</span>
+            <span class="tag-role">Dispersión</span>
+          </div>
+          <p class="artifact-details">
+            Chips de procesamiento multicanal que representan tarjetas de crédito, transferencias directas y débitos programados.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
