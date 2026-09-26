@@ -1,338 +1,491 @@
 ---
 /**
  * DriverRouteStory.astro
- * Canonical Mobile Specification for Driver Delivery Execution
+ * Canonical Mobile Specification for Driver Delivery Execution & Proof of Delivery (POD)
  * Blueprint Traceability: MOB-US-026..035, MOB-US-062..066 (MOBILE-EPIC-04 & 09)
- * Persona: Diego — Conductor de Flota y Operador de Entrega en Terreno
+ * Canonical Persona: Diego Morales — Conductor Flota C-250 (Placa WKN-892)
+ * Canonical Client: ICISA Distribuciones (Av. Argentina 1240 · Callao/Lima)
+ * Domain: Wholesale Cold-Chain B2B Logistics (2°C – 6°C)
  */
 ---
 
 <div class="story-screen-container" id="story-conductor">
   
-  <!-- Story Header -->
-  <header class="story-header">
-    <div class="story-meta-badge">
-      <i class="pi pi-truck"></i>
-      <span>BLUEPRINT MOBILE-EPIC-04 & 09 · HISTORIAS MOB-US-026..035, 062..066</span>
+  <!-- Web-Style Documentation Heading (Section Index + Kicker + Display H2) -->
+  <header class="section-heading-block">
+    <div class="section-heading">
+      <span class="section-index">01</span>
+      <div>
+        <p class="section-kicker">DELIVERY / POD · BLUEPRINT MOBILE-EPIC-04 & 09</p>
+        <h2>Diego Morales — Hoja de Ruta y Prueba de Entrega Digital (POD)</h2>
+        <p class="section-intro">
+          Especificación canónica nativa en <strong>Android Jetpack Compose</strong> para la jornada de distribución en frío. Garantiza objetivos táctiles de 56dp para manipulación con guantes térmicos, integración con intención GPS externa (<code>geo:0,0?q=lat,lng</code>), detector de geovalla (200m), selector trifásico de resultado, captura de firma con suavizado Bézier, visor CameraX con metadatos EXIF criptográficos, verificación OTP de 6 dígitos y sincronización Room DB / WorkManager offline-first.
+        </p>
+      </div>
     </div>
-    <h2 class="story-title">Diego — Ejecución de Ruta y Prueba de Entrega (POD)</h2>
-    <p class="story-desc">
-      Diseño nativo en <strong>Android Jetpack Compose</strong> para la jornada del conductor. Incluye ordenamiento de paradas, apertura de navegación GPS externa, registro de arribo, selector trifásico de resultado, firma táctil digital (Canvas POD), verificación de código OTP y resiliencia offline con WorkManager.
-    </p>
+
+    <!-- Quick Meta Chips -->
+    <div class="heading-meta-chips">
+      <span class="doc-chip tone-info"><i class="pi pi-truck" aria-hidden="true"></i> Ruta R-402 · Flota C-250 (WKN-892)</span>
+      <span class="doc-chip tone-neutral"><i class="pi pi-map-marker" aria-hidden="true"></i> Av. Argentina 1240 · Callao/Lima</span>
+      <span class="doc-chip tone-info"><i class="pi pi-snowflake" aria-hidden="true"></i> Manejo Refrigerado (2°C – 6°C)</span>
+      <span class="doc-chip tone-success"><i class="pi pi-check-circle" aria-hidden="true"></i> Orden Canónica SO-2026-0018</span>
+    </div>
   </header>
 
-  <!-- Interactive Story Workbench (Side-by-side or clean stacked responsive view) -->
+  <!-- Interactive Story Workbench: 2-Column Responsive Layout -->
   <div class="story-workbench-layout">
     
-    <!-- Left: Step Flow & Functional Blueprint Details -->
+    <!-- Left: Step Flow & Functional Blueprint Details matching Web-Style Evidence Cards -->
     <div class="story-details-col">
       
       <!-- Interactive Phase Navigation -->
-      <div class="phase-selector-bar" role="tablist">
+      <nav class="phase-selector-bar" role="tablist" aria-label="Fases de Entrega POD">
         <button type="button" class="phase-btn active" data-phase="route">
-          <span>1. Parada Activa</span>
+          <span class="phase-badge">01</span>
+          <span>Parada Activa</span>
         </button>
         <button type="button" class="phase-btn" data-phase="arrival">
-          <span>2. Arribo & GPS</span>
+          <span class="phase-badge">02</span>
+          <span>Arribo & GPS</span>
         </button>
         <button type="button" class="phase-btn" data-phase="outcome">
-          <span>3. Resultado</span>
+          <span class="phase-badge">03</span>
+          <span>Resultado</span>
         </button>
         <button type="button" class="phase-btn" data-phase="pod">
-          <span>4. Firma POD</span>
+          <span class="phase-badge">04</span>
+          <span>Firma POD</span>
         </button>
         <button type="button" class="phase-btn" data-phase="otp">
-          <span>5. Código OTP</span>
+          <span class="phase-badge">05</span>
+          <span>Código OTP</span>
         </button>
         <button type="button" class="phase-btn" data-phase="offline">
-          <span>6. Cola Offline</span>
+          <span class="phase-badge">06</span>
+          <span>Cola Offline</span>
         </button>
-      </div>
+      </nav>
 
       <!-- Phase 1: Active Stop Details -->
       <div class="phase-panel active" id="panel-phase-route">
-        <div class="panel-card">
-          <div class="panel-card-header">
-            <span class="step-num">PASO 1</span>
-            <h3>Visualización de Hoja de Ruta Asignada (MOB-US-026, 027)</h3>
+        <article class="evidence-card">
+          <div class="card-kicker-row">
+            <span class="card-step-badge">FASE 01</span>
+            <span class="card-mono-id">SO-2026-0018 · PARADA 2 DE 4</span>
           </div>
-          <p>
-            El conductor visualiza su secuencia optimizada de paradas. Los objetivos táctiles de cada tarjeta miden mínimo <strong>56dp</strong> de alto para permitir pulsar con guantes de conducción.
+          <h3 class="card-title">Parada Activa: ICISA Distribuciones</h3>
+          <p class="card-desc">
+            Visualización secuencial priorizada por ventana horaria de entrega en frío. La tarjeta de parada expone controles táctiles de <strong>56dp</strong> diseñados para uso con guantes industriales y badges semánticos de cadena de frío.
           </p>
-          <ul class="story-spec-list">
-            <li><strong>Parada Activa:</strong> Constructora Bolivar · Parada 2 de 4.</li>
-            <li><strong>Materiales:</strong> 2x Generadores 250 kVA + 1x Tablero Eléctrico IP65.</li>
-            <li><strong>Ventana Horaria:</strong> 11:00 AM – 12:30 PM (ETA estimado en vivo con tráfico).</li>
-            <li><strong>Contacto en Sitio:</strong> Arq. Roberto Gómez (+57 310 982 1234).</li>
-          </ul>
-        </div>
+          
+          <div class="evidence-grid">
+            <div class="evidence-item">
+              <i class="pi pi-building text-primary" aria-hidden="true"></i>
+              <div>
+                <strong>Destinatario Mayorista</strong>
+                <p>ICISA Distribuciones (RUC 20489123841)</p>
+              </div>
+            </div>
+            <div class="evidence-item">
+              <i class="pi pi-map-marker text-primary" aria-hidden="true"></i>
+              <div>
+                <strong>Dirección de Entrega</strong>
+                <p>Av. Argentina 1240 · Callao/Lima (Muelle 2 Descarga)</p>
+              </div>
+            </div>
+            <div class="evidence-item">
+              <i class="pi pi-box text-primary" aria-hidden="true"></i>
+              <div>
+                <strong>Carga Consignada</strong>
+                <p>24x Salmón Salar Congelado 4-5kg (SKU ALM-LMO-982)<br/>12x Merluza Austral Filete 10kg</p>
+              </div>
+            </div>
+            <div class="evidence-item">
+              <i class="pi pi-snowflake text-info" aria-hidden="true"></i>
+              <div>
+                <strong>Protocolo Térmico</strong>
+                <p>Sensor calibrado 3.8°C (Rango exigido: 2.0°C – 6.0°C)</p>
+              </div>
+            </div>
+          </div>
+        </article>
       </div>
 
       <!-- Phase 2: Arrival & GPS -->
       <div class="phase-panel" id="panel-phase-arrival">
-        <div class="panel-card">
-          <div class="panel-card-header">
-            <span class="step-num">PASO 2</span>
-            <h3>Lanzador GPS y Notificación de Arribo (MOB-US-028, 062)</h3>
+        <article class="evidence-card">
+          <div class="card-kicker-row">
+            <span class="card-step-badge">FASE 02</span>
+            <span class="card-mono-id">GEO-INTENT · -12.046374, -77.042793</span>
           </div>
-          <p>
-            Integración de un solo toque con <code>geo:0,0?q=lat,lng</code> para abrir Google Maps o Waze sin bloquear la sesión nativa de Nexa.
+          <h3 class="card-title">Lanzador GPS y Notificación de Arribo en Geovalla</h3>
+          <p class="card-desc">
+            Integración de un solo toque con <code>geo:0,0?q=-12.046374,-77.042793(ICISA+Distribuciones)</code>. Permite abrir Google Maps o Waze mediante un Intent implícito de Android sin interrumpir el ciclo de vida del ViewModel.
           </p>
-          <ul class="story-spec-list">
-            <li><strong>Intención de Navegación:</strong> Intent implícito <code>ACTION_VIEW</code> respetando el gestor de mapas preferido del conductor.</li>
-            <li><strong>Baliza de Arribo:</strong> Al llegar al geofence (200m), el botón cambia a verde fluorescente: <em>"Registrar Arribo en Sitio"</em>.</li>
-            <li><strong>Auditoría GPS:</strong> Captura silenciosa de precisión satelital, timestamp UTC y nivel de batería para trazabilidad.</li>
-          </ul>
-        </div>
+          <div class="evidence-grid">
+            <div class="evidence-item">
+              <i class="pi pi-compass text-primary" aria-hidden="true"></i>
+              <div>
+                <strong>Intent URI Android</strong>
+                <code>geo:0,0?q=-12.046374,-77.042793</code>
+              </div>
+            </div>
+            <div class="evidence-item">
+              <i class="pi pi-map text-success" aria-hidden="true"></i>
+              <div>
+                <strong>Baliza Geovalla (Geofencing)</strong>
+                <p>Radio activo de 200m. Transición automática a <em>"En Sitio de Entrega"</em> al cruzar el umbral.</p>
+              </div>
+            </div>
+          </div>
+        </article>
       </div>
 
       <!-- Phase 3: Delivery Outcome -->
       <div class="phase-panel" id="panel-phase-outcome">
-        <div class="panel-card">
-          <div class="panel-card-header">
-            <span class="step-num">PASO 3</span>
-            <h3>Registro de Estado de Entrega (MOB-US-031, 032)</h3>
+        <article class="evidence-card">
+          <div class="card-kicker-row">
+            <span class="card-step-badge">FASE 03</span>
+            <span class="card-mono-id">TRI-STATE OUTCOME · EXHAUSTIVE DISPATCH</span>
           </div>
-          <p>
-            Selector visual trifásico que no permite ambigüedad operativa. Si la entrega no es 100% conforme, se habilitan los campos de faltantes y motivo de rechazo.
+          <h3 class="card-title">Selector Trifásico de Resultado de Entrega</h3>
+          <p class="card-desc">
+            Arquitectura de decisión sin ambigüedad en campo. Cada opción fija un contrato operacional inmutable para el inventario de la bodega y el remito electrónico.
           </p>
-          <div class="outcome-pill-demo">
-            <div class="pill ok">✔ Entregado Completo (3/3 ítems conformes)</div>
-            <div class="pill warn">⚠️ Entrega Parcial (Faltante 1 ítem con acta)</div>
-            <div class="pill error">❌ Rechazado (Cliente ausente / Daño en tránsito)</div>
+          <div class="outcome-grid-specs">
+            <div class="outcome-spec-row ok">
+              <span class="outcome-tag success"><i class="pi pi-check"></i> ENTREGADO CONFORME</span>
+              <p>24x Salmón Salar Congelado + 12x Merluza Austral recibidos a 3.8°C sin observación.</p>
+            </div>
+            <div class="outcome-spec-row warn">
+              <span class="outcome-tag warning"><i class="pi pi-exclamation-triangle"></i> ENTREGA PARCIAL</span>
+              <p>Faltante documentado con acta de discrepancia firmada y foto de caja dañada.</p>
+            </div>
+            <div class="outcome-spec-row danger">
+              <span class="outcome-tag danger"><i class="pi pi-ban"></i> RECHAZADO EN MUELLE</span>
+              <p>Ruptura de cadena de frío (&gt; 6.0°C) o cliente ausente fuera de horario comercial.</p>
+            </div>
           </div>
-        </div>
+        </article>
       </div>
 
       <!-- Phase 4: Proof of Delivery (POD) -->
       <div class="phase-panel" id="panel-phase-pod">
-        <div class="panel-card">
-          <div class="panel-card-header">
-            <span class="step-num">PASO 4</span>
-            <h3>Prueba Digital de Entrega - Firma y Foto (MOB-US-033)</h3>
+        <article class="evidence-card">
+          <div class="card-kicker-row">
+            <span class="card-step-badge">FASE 04</span>
+            <span class="card-mono-id">POD-2026-0018.PDF · SIGNATURE + EXIF</span>
           </div>
-          <p>
-            Módulo dual de evidencia física: pad de firma táctil con suavizado Bézier nativo en Canvas Compose + captura fotográfica mediante CameraX.
+          <h3 class="card-title">Prueba Digital de Entrega: Firma Bézier y Cámara CameraX</h3>
+          <p class="card-desc">
+            Registro con validez jurídica y de auditoría B2B. El canvas táctil interpola los puntos de contacto con curvas Bézier cúbicas; CameraX captura el remito físico y la lectura del termómetro digital con metadatos incrustados.
           </p>
-          <ul class="story-spec-list">
-            <li><strong>Firma Táctil:</strong> Canvas interactivo con <code>pointerInput</code>, anti-aliasing y botón de borrado rápido.</li>
-            <li><strong>Fotografía de Obra:</strong> Visor CameraX para registrar el equipo posicionado en terreno y el remito físico firmado.</li>
-            <li><strong>Metadatos Incrustados:</strong> EXIF con coordenadas GPS y hash criptográfico SHA-256 en la firma.</li>
-          </ul>
-        </div>
+          <div class="evidence-grid">
+            <div class="evidence-item">
+              <i class="pi pi-pencil text-primary" aria-hidden="true"></i>
+              <div>
+                <strong>Lienzo Táctil (Bézier Smoothing)</strong>
+                <p>Canvas Compose de 180dp con muestreo de velocidad y botón de borrado inmediato.</p>
+              </div>
+            </div>
+            <div class="evidence-item">
+              <i class="pi pi-camera text-primary" aria-hidden="true"></i>
+              <div>
+                <strong>Evidencia Visual CameraX</strong>
+                <p>Resolución 1920x1080 con metadatos EXIF (coordenadas GPS, timestamp UTC y Hash SHA-256).</p>
+              </div>
+            </div>
+          </div>
+        </article>
       </div>
 
       <!-- Phase 5: Handoff OTP -->
       <div class="phase-panel" id="panel-phase-otp">
-        <div class="panel-card">
-          <div class="panel-card-header">
-            <span class="step-num">PASO 5</span>
-            <h3>Validación de Código OTP del Comprador (MOB-US-034, 047)</h3>
+        <article class="evidence-card">
+          <div class="card-kicker-row">
+            <span class="card-step-badge">FASE 05</span>
+            <span class="card-mono-id">CUSTOMER-HANDOFF · 6-DIGIT OTP</span>
           </div>
-          <p>
-            El receptor autorizado debe presentar un código de 6 dígitos emitido en su app de Comprador para prevenir entregas a terceros no autorizados.
+          <h3 class="card-title">Código OTP de Custodia Emitido por Comprador</h3>
+          <p class="card-desc">
+            El receptor de almacén de <code>ICISA Distribuciones</code> (Carlos Mendoza) presenta un código de seguridad de 6 dígitos generado en su terminal para garantizar la entrega al responsable legítimo.
           </p>
-          <ul class="story-spec-list">
-            <li><strong>Teclado Numérico Accesible:</strong> Botones gigantes de 64dp para evitar equivocaciones bajo luz solar directa.</li>
-            <li><strong>Criptografía Local:</strong> Verificación mediante HMAC token acotado temporalmente a 30 minutos.</li>
-          </ul>
-        </div>
+          <div class="otp-token-preview">
+            <div class="otp-slot">8</div>
+            <div class="otp-slot">4</div>
+            <div class="otp-slot">9</div>
+            <div class="otp-slot">2</div>
+            <div class="otp-slot">1</div>
+            <div class="otp-slot">0</div>
+          </div>
+        </article>
       </div>
 
       <!-- Phase 6: Offline Resilience -->
       <div class="phase-panel" id="panel-phase-offline">
-        <div class="panel-card">
-          <div class="panel-card-header">
-            <span class="step-num">PASO 6</span>
-            <h3>Cola de Sincronización Offline WorkManager (MOB-US-035, 066)</h3>
+        <article class="evidence-card">
+          <div class="card-kicker-row">
+            <span class="card-step-badge">FASE 06</span>
+            <span class="card-mono-id">WORKMANAGER · COROUTINEWORKER + ROOM</span>
           </div>
-          <p>
-            En sótanos u obras sin cobertura celular, la entrega se sella localmente en SQLite/Room y se programa un <code>CoroutineWorker</code> con backoff exponencial.
+          <h3 class="card-title">Garantía Offline-First: Cola Local Persistente</h3>
+          <p class="card-desc">
+            En muelles subterráneos o cámaras frigoríficas aisladas electromagnéticamente, la prueba de entrega se sella en SQLite (Room) con clave UUID idempotente y se sincroniza al recuperar red.
           </p>
-          <ul class="story-spec-list">
-            <li><strong>Idempotencia:</strong> Cabecera <code>X-Correlation-ID: uuid</code> persistente para evitar duplicación de remitos.</li>
-            <li><strong>Indicador Visual:</strong> Pill ámbar en la cabecera: <em>"1 Remito Pendiente de Sincronización"</em>.</li>
-          </ul>
-        </div>
+          <div class="status-banner-offline">
+            <i class="pi pi-check-circle" aria-hidden="true"></i>
+            <div>
+              <strong>Sincronizado con Room DB · 0 en cola</strong>
+              <small>Todas las evidencias locales han sido replicadas al cluster de Nexa.</small>
+            </div>
+          </div>
+        </article>
       </div>
 
       <!-- Jetpack Compose Production Code Sample -->
-      <div class="compose-code-snippet">
-        <div class="snippet-header">
-          <span class="code-tag">Kotlin · Jetpack Compose</span>
-          <span class="code-file">apps/operations-android/.../DriverDeliveryScreen.kt</span>
+      <section class="compose-code-container">
+        <div class="code-card-header">
+          <div class="code-title-group">
+            <i class="pi pi-android" aria-hidden="true"></i>
+            <span class="code-tag">Android Jetpack Compose · Material 3</span>
+          </div>
+          <span class="code-path">:apps:operations-android/delivery/DriverRouteScreen.kt</span>
         </div>
-        <pre><code><span class="kw">@Composable</span>
+        <pre class="compose-code"><code><span class="kw">@Composable</span>
 <span class="kw">fun</span> <span class="fn">DriverDeliveryScreen</span>(
-    state: <span class="type">DeliveryUiState</span>,
+    state: <span class="type">DriverDeliveryUiState</span>,
     onNavigateGps: (destination: <span class="type">LatLng</span>) -&gt; <span class="type">Unit</span>,
     onConfirmArrival: () -&gt; <span class="type">Unit</span>,
-    onCapturePodSignature: (bitmap: <span class="type">Bitmap</span>) -&gt; <span class="type">Unit</span>,
-    onVerifyOtp: (code: <span class="type">String</span>) -&gt; <span class="type">Unit</span>
+    onSelectOutcome: (outcome: <span class="type">DeliveryOutcome</span>) -&gt; <span class="type">Unit</span>,
+    onCapturePodSignature: (signatureBytes: <span class="type">ByteArray</span>) -&gt; <span class="type">Unit</span>,
+    onVerifyOtp: (otpCode: <span class="type">String</span>) -&gt; <span class="type">Unit</span>,
+    modifier: <span class="type">Modifier</span> = <span class="type">Modifier</span>
 ) &#123;
-    <span class="type">LazyColumn</span>(
-        modifier = <span class="type">Modifier</span>.<span class="fn">fillMaxSize</span>().<span class="fn">padding</span>(horizontal = <span class="num">16</span>.dp),
-        verticalArrangement = <span class="type">Arrangement</span>.<span class="fn">spacedBy</span>(<span class="num">16</span>.dp)
-    ) &#123;
-        item &#123;
-            <span class="type">ActiveDeliveryHeaderCard</span>(
-                orderNumber = state.orderId,
-                clientName = state.clientName,
-                eta = state.estimatedArrival,
-                onGpsClick = &#123; onNavigateGps(state.coordinates) &#125;
+    <span class="type">Scaffold</span>(
+        topBar = &#123;
+            <span class="type">TopAppBar</span>(
+                title = &#123; <span class="type">Text</span>(<span class="str">"Ruta R-402 · Flota C-250 (WKN-892)"</span>) &#125;,
+                colors = <span class="type">TopAppBarDefaults</span>.<span class="fn">topAppBarColors</span>(
+                    containerColor = <span class="type">NexaTheme</span>.colors.surfaceCard
+                )
             )
         &#125;
-        item &#123;
-            <span class="type">PodSignaturePad</span>(
-                modifier = <span class="type">Modifier</span>.<span class="fn">fillMaxWidth</span>().<span class="fn">height</span>(<span class="num">180</span>.dp),
-                onSignatureComplete = onCapturePodSignature
-            )
+    ) &#123; innerPadding -&gt;
+        <span class="type">LazyColumn</span>(
+            modifier = modifier.<span class="fn">padding</span>(innerPadding).<span class="fn">fillMaxSize</span>(),
+            contentPadding = <span class="type">PaddingValues</span>(<span class="num">16</span>.dp),
+            verticalArrangement = <span class="type">Arrangement</span>.<span class="fn">spacedBy</span>(<span class="num">16</span>.dp)
+        ) &#123;
+            item &#123;
+                <span class="type">ActiveDeliveryStopCard</span>(
+                    orderId = state.activeOrder.<span class="fn">id</span>, <span class="cmt">// "SO-2026-0018"</span>
+                    clientName = state.activeOrder.<span class="fn">buyer</span>, <span class="cmt">// "ICISA Distribuciones"</span>
+                    address = state.activeOrder.<span class="fn">destination</span>, <span class="cmt">// "Av. Argentina 1240 · Lima"</span>
+                    temperatureRange = <span class="str">"2.0°C – 6.0°C"</span>,
+                    currentTemp = <span class="num">3.8f</span>,
+                    minTouchTarget = <span class="num">56</span>.dp,
+                    onGpsClick = &#123; onNavigateGps(state.activeOrder.coordinates) &#125;
+                )
+            &#125;
+            item &#123;
+                <span class="type">DeliveryOutcomeSelector</span>(
+                    selected = state.outcome,
+                    onSelect = onSelectOutcome,
+                    targetHeight = <span class="num">56</span>.dp
+                )
+            &#125;
+            item &#123;
+                <span class="type">PodSignaturePad</span>(
+                    modifier = <span class="type">Modifier</span>.<span class="fn">fillMaxWidth</span>().<span class="fn">height</span>(<span class="num">180</span>.dp),
+                    onCompleted = onCapturePodSignature
+                )
+            &#125;
         &#125;
     &#125;
 &#125;</code></pre>
-      </div>
+      </section>
 
     </div>
 
-    <!-- Right: Smartphone Hardware Simulator Frame showing the interactive Driver Screen -->
+    <!-- Right: Smartphone Hardware Simulator Frame showing the High-Fidelity Compose Mockup -->
     <div class="story-preview-col">
-      <div class="mini-device-stand">
-        <div class="mini-chassis">
+      <div class="device-chassis-shell">
+        
+        <!-- Status Bar (Android Material 3: 14:20, 5G, Battery) -->
+        <div class="android-status-bar">
+          <span class="status-clock">14:20</span>
+          <div class="status-icons-cluster">
+            <span class="conn-tag">5G</span>
+            <i class="pi pi-wifi" aria-hidden="true"></i>
+            <span class="battery-pct">88%</span>
+            <i class="pi pi-bolt battery-icon" aria-hidden="true"></i>
+          </div>
+        </div>
+
+        <!-- Android Native App Viewport (Compose) -->
+        <div class="compose-screen-viewport">
           
-          <!-- Top Notch & Speaker -->
-          <div class="mini-notch">
-            <div class="mini-camera"></div>
-          </div>
-
-          <!-- Status Bar -->
-          <div class="mini-status-bar">
-            <span>09:42</span>
-            <div class="status-right">
-              <i class="pi pi-wifi"></i>
-              <span>4G</span>
-              <i class="pi pi-battery"></i>
+          <!-- Top App Bar (Material 3 Small TopAppBar) -->
+          <div class="compose-top-app-bar">
+            <button type="button" class="btn-app-icon" title="Volver a ruta">
+              <i class="pi pi-arrow-left" aria-hidden="true"></i>
+            </button>
+            <div class="appbar-title-block">
+              <span class="appbar-headline">Ruta R-402 · Flota C-250</span>
+              <span class="appbar-sub">Placa WKN-892 · Diego Morales</span>
             </div>
+            <span class="status-sync-chip" title="WorkManager sincronizado">
+              <i class="pi pi-check" aria-hidden="true"></i>
+            </span>
           </div>
 
-          <!-- Inner Interactive Driver App Viewport -->
-          <div class="driver-app-content">
+          <!-- Offline Sync Banner (WorkManager Room DB) -->
+          <div class="workmanager-sync-banner">
+            <i class="pi pi-shield text-success" aria-hidden="true"></i>
+            <span>Sincronizado con Room DB · 0 en cola</span>
+          </div>
+
+          <!-- Scrollable Screen Content -->
+          <div class="compose-scroll-content">
             
-            <!-- App Top Bar -->
-            <div class="app-topbar">
-              <i class="pi pi-bars"></i>
-              <span class="topbar-title">Ruta Activa · Parada 2/4</span>
-              <span class="offline-pill" id="app-offline-indicator" title="Cola offline sincronizada">
-                <i class="pi pi-check"></i>
-              </span>
-            </div>
-
-            <!-- Scrollable Body inside Phone -->
-            <div class="app-scroll-body">
-              
-              <!-- Active Stop Card -->
-              <div class="app-order-card">
-                <div class="order-top-row">
-                  <span class="order-id">ORD-2026-9812</span>
-                  <span class="eta-badge">ETA 11:20 AM</span>
-                </div>
-                <h4 class="client-name">Constructora Bolivar S.A.</h4>
-                <p class="address-text"><i class="pi pi-map-marker"></i> Av. Industrial 402, Obra Altamira Torre 3</p>
-                <div class="cargo-items-box">
-                  <span>📦 <b>2x</b> Generador Diésel 250 kVA</span>
-                  <span>⚡ <b>1x</b> Tablero Transferencia IP65</span>
-                </div>
-
-                <!-- GPS Trigger Button (48dp height minimum) -->
-                <button type="button" class="btn-app-action btn-gps">
-                  <i class="pi pi-directions"></i>
-                  <span>Navegar con Google Maps</span>
-                </button>
+            <!-- Step 1: Delivery Stop Card (56dp target, cold-chain chip) -->
+            <div class="compose-card delivery-stop-card">
+              <div class="card-header-line">
+                <span class="order-tag">ORDEN SO-2026-0018</span>
+                <span class="cold-chip"><i class="pi pi-snowflake" aria-hidden="true"></i> 2°C – 6°C</span>
               </div>
+              <h4 class="buyer-heading">ICISA Distribuciones</h4>
+              <p class="destination-line">
+                <i class="pi pi-map-marker" aria-hidden="true"></i>
+                Av. Argentina 1240 · Callao/Lima · Muelle 2
+              </p>
 
-              <!-- Arrival Action Card -->
-              <div class="app-arrival-card">
-                <div class="arrival-status-row">
-                  <span class="status-dot green"></span>
-                  <span>Dentro de zona de obra (140m)</span>
+              <div class="cargo-manifest-box">
+                <div class="manifest-item">
+                  <span class="sku-dot"></span>
+                  <span class="sku-name">24x Salmón Salar Congelado 4-5kg</span>
+                  <span class="sku-code">ALM-LMO-982</span>
                 </div>
-                <button type="button" class="btn-app-action btn-arrival" id="btn-mock-arrived">
-                  <i class="pi pi-check-circle"></i>
-                  <span>Marcar Arribo en Sitio</span>
-                </button>
-              </div>
-
-              <!-- Interactive Outcome Selector -->
-              <div class="app-outcome-selector">
-                <span class="selector-label">RESULTADO DE ENTREGA:</span>
-                <div class="outcome-btn-group">
-                  <button type="button" class="outcome-choice active">
-                    <i class="pi pi-check"></i> Completo
-                  </button>
-                  <button type="button" class="outcome-choice">
-                    <i class="pi pi-exclamation-triangle"></i> Parcial
-                  </button>
-                  <button type="button" class="outcome-choice">
-                    <i class="pi pi-times"></i> Rechazado
-                  </button>
+                <div class="manifest-item">
+                  <span class="sku-dot"></span>
+                  <span class="sku-name">12x Merluza Austral Filete 10kg</span>
+                  <span class="sku-code">ALM-MRZ-104</span>
                 </div>
               </div>
 
-              <!-- Proof of Delivery (POD) Pad -->
-              <div class="app-pod-card">
-                <div class="pod-header">
-                  <span class="pod-label"><i class="pi pi-pencil"></i> FIRMA DEL RECEPTOR</span>
-                  <button type="button" class="btn-clear-sig">Limpiar</button>
-                </div>
-                <div class="signature-canvas-mock">
-                  <svg viewBox="0 0 260 70" class="mock-sig-svg">
-                    <path d="M 20 45 Q 60 10 90 40 T 160 30 T 220 50" fill="none" stroke="#1d4ed8" stroke-width="2.5" stroke-linecap="round"/>
-                  </svg>
-                  <span class="sig-placeholder">Roberto Gómez (Receptor Obra)</span>
-                </div>
-              </div>
-
-              <!-- Customer OTP Verification -->
-              <div class="app-otp-card">
-                <span class="otp-label">CÓDIGO DE TRASPASO DEL COMPRADOR (OTP):</span>
-                <div class="otp-input-mock">
-                  <span class="otp-digit">8</span>
-                  <span class="otp-digit">4</span>
-                  <span class="otp-digit">9</span>
-                  <span class="otp-digit">2</span>
-                  <span class="otp-digit">1</span>
-                  <span class="otp-digit">0</span>
-                </div>
-              </div>
-
-              <!-- Final Confirm Button -->
-              <button type="button" class="btn-app-action btn-confirm-delivery">
-                <i class="pi pi-shield"></i>
-                <span>Completar Entrega y Emitir Remito</span>
+              <!-- Step 2: External GPS Intent (56dp touch target) -->
+              <button type="button" class="btn-glove-primary btn-gps" id="btn-mock-gps">
+                <i class="pi pi-compass" aria-hidden="true"></i>
+                <span>Navegar GPS (geo:0,0?q=-12.046374,-77.042793)</span>
               </button>
 
+              <div class="geofence-alert-box">
+                <span class="geofence-pulse"></span>
+                <span>Dentro de geovalla (140m de Muelle 2)</span>
+              </div>
             </div>
 
-            <!-- Bottom Navigation -->
-            <div class="app-bottom-nav">
-              <div class="nav-tab active">
-                <i class="pi pi-map"></i>
-                <span>Ruta</span>
-              </div>
-              <div class="nav-tab">
-                <i class="pi pi-list"></i>
-                <span>Paradas</span>
-              </div>
-              <div class="nav-tab">
-                <i class="pi pi-sync"></i>
-                <span>Offline</span>
+            <!-- Step 3: Tri-State Delivery Outcome -->
+            <div class="compose-card outcome-selector-card">
+              <span class="card-subhead">RESULTADO DE ENTREGA (56dp GLOVE CONTROLS):</span>
+              <div class="tri-state-button-stack">
+                <button type="button" class="tri-outcome-btn active">
+                  <i class="pi pi-check-circle" aria-hidden="true"></i>
+                  <div class="outcome-btn-text">
+                    <strong>Entregado Conforme</strong>
+                    <small>24x Salmón + 12x Merluza a 3.8°C</small>
+                  </div>
+                </button>
+                <button type="button" class="tri-outcome-btn">
+                  <i class="pi pi-exclamation-triangle" aria-hidden="true"></i>
+                  <div class="outcome-btn-text">
+                    <strong>Entrega Parcial</strong>
+                    <small>Faltante documentado con acta</small>
+                  </div>
+                </button>
+                <button type="button" class="tri-outcome-btn">
+                  <i class="pi pi-times-circle" aria-hidden="true"></i>
+                  <div class="outcome-btn-text">
+                    <strong>Rechazado</strong>
+                    <small>Ruptura cadena de frío (&gt;6°C)</small>
+                  </div>
+                </button>
               </div>
             </div>
+
+            <!-- Step 4: Digital POD (Bézier Signature & CameraX) -->
+            <div class="compose-card pod-signature-card">
+              <div class="pod-card-header">
+                <span class="card-subhead">PRUEBA DIGITAL DE ENTREGA (POD):</span>
+                <button type="button" class="btn-clear-canvas">Limpiar</button>
+              </div>
+
+              <div class="signature-canvas-area">
+                <svg viewBox="0 0 320 80" class="bezier-signature-svg" preserveAspectRatio="none">
+                  <path d="M 25 55 Q 70 12 110 48 T 190 35 T 260 58 T 300 40" fill="none" stroke="#1d4ed8" stroke-width="2.8" stroke-linecap="round"/>
+                </svg>
+                <div class="signature-meta-tag">
+                  <span>Receptor: Carlos Mendoza (Jefe de Almacén)</span>
+                  <small>EXIF: 14:20:18 UTC · GPS -12.0463, -77.0427 · SHA-256 Validado</small>
+                </div>
+              </div>
+
+              <div class="camerax-photo-preview-box">
+                <i class="pi pi-camera" aria-hidden="true"></i>
+                <div class="photo-info-text">
+                  <strong>Foto Guía & Sensor 3.8°C Capturada</strong>
+                  <small>IMG_20260925_142018_POD.jpg (1.8 MB · EXIF incrustado)</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 5: 6-Digit Customer OTP Verification -->
+            <div class="compose-card otp-verification-card">
+              <span class="card-subhead">CÓDIGO DE TRASPASO DEL COMPRADOR (OTP):</span>
+              <div class="otp-boxes-row">
+                <span class="otp-cell">8</span>
+                <span class="otp-cell">4</span>
+                <span class="otp-cell">9</span>
+                <span class="otp-cell">2</span>
+                <span class="otp-cell">1</span>
+                <span class="otp-cell">0</span>
+              </div>
+              <small class="otp-notice">Presentado por Carlos Mendoza · Validado con servidor local</small>
+            </div>
+
+            <!-- Step 6: Confirmation Action (56dp target) -->
+            <button type="button" class="btn-glove-confirm">
+              <i class="pi pi-shield" aria-hidden="true"></i>
+              <span>Completar Entrega y Emitir Remito POD</span>
+            </button>
 
           </div>
 
-          <!-- Bottom Gesture Line -->
-          <div class="mini-gesture"></div>
+          <!-- Bottom Navigation Bar (Material 3) -->
+          <div class="compose-bottom-nav">
+            <div class="bnav-tab active">
+              <i class="pi pi-map" aria-hidden="true"></i>
+              <span>Ruta</span>
+            </div>
+            <div class="bnav-tab">
+              <i class="pi pi-list" aria-hidden="true"></i>
+              <span>Paradas (4)</span>
+            </div>
+            <div class="bnav-tab">
+              <i class="pi pi-snowflake" aria-hidden="true"></i>
+              <span>Sensores</span>
+            </div>
+            <div class="bnav-tab">
+              <i class="pi pi-user" aria-hidden="true"></i>
+              <span>Diego M.</span>
+            </div>
+          </div>
+
         </div>
+
+        <!-- Android Home Navigation Indicator (Gesture Bar) -->
+        <div class="android-gesture-pill"></div>
       </div>
     </div>
 
@@ -341,61 +494,103 @@
 </div>
 
 <style>
+  /* ==========================================================================
+     STORY SCREEN CONTAINER & WEB-STYLE SECTION FOUNDATIONS
+     ========================================================================== */
   .story-screen-container {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    animation: fadeIn 0.25s ease-out;
+    gap: var(--nexa-space-6, 24px);
   }
 
-  .story-header {
-    background: #ffffff;
-    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  .section-heading-block {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--nexa-color-border-structural, #e2e8f0);
   }
 
-  .story-meta-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--nexa-color-primary-50, #eff6ff);
-    color: var(--nexa-color-primary-700, #1d4ed8);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    padding: 4px 10px;
-    border-radius: 6px;
-    margin-bottom: 12px;
-  }
-
-  .story-title {
-    font-family: var(--nexa-font-family-display, sans-serif);
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--nexa-color-text-primary, #0f172a);
-    margin: 0 0 8px;
-    letter-spacing: -0.02em;
-  }
-
-  .story-desc {
-    color: var(--nexa-color-text-secondary, #64748b);
-    font-size: 14px;
-    line-height: 1.6;
-    margin: 0;
-    max-width: 900px;
-  }
-
-  .story-workbench-layout {
+  .section-heading {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 380px;
-    gap: 28px;
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: var(--nexa-space-3, 12px);
     align-items: start;
   }
 
-  @media (max-width: 1080px) {
+  .section-index {
+    color: var(--nexa-color-primary-600, #2563eb);
+    font: 700 var(--nexa-font-size-sm, 14px) / 1.4 var(--nexa-font-family-mono, monospace);
+  }
+
+  .section-kicker {
+    margin: 0 0 6px;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .section-heading h2 {
+    margin: 0;
+    font: 800 clamp(22px, 3vw, 30px) / 1.16 var(--nexa-font-family-display, sans-serif);
+    letter-spacing: -.03em;
+    color: var(--nexa-color-text-primary, #0f172a);
+  }
+
+  .section-intro {
+    max-width: 820px;
+    margin: 10px 0 0;
+    color: var(--nexa-color-text-secondary, #64748b);
+    line-height: 1.6;
+    font-size: 14px;
+  }
+
+  .heading-meta-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .doc-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  .doc-chip.tone-info {
+    background: #eff6ff;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+  }
+
+  .doc-chip.tone-neutral {
+    background: #f8fafc;
+    color: #334155;
+    border: 1px solid #e2e8f0;
+  }
+
+  .doc-chip.tone-success {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+  }
+
+  /* Workbench Grid */
+  .story-workbench-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 390px;
+    gap: 32px;
+    align-items: start;
+  }
+
+  @media (max-width: 1100px) {
     .story-workbench-layout {
       grid-template-columns: 1fr;
     }
@@ -407,27 +602,37 @@
     gap: 20px;
   }
 
-  /* Phase Buttons */
+  /* Phase Navigation Bar */
   .phase-selector-bar {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
     background: #ffffff;
-    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
     padding: 6px;
-    border-radius: 10px;
+    border-radius: 12px;
   }
 
   .phase-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     background: transparent;
     border: 0;
     padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 11.5px;
+    border-radius: 8px;
+    font-size: 12px;
     font-weight: 600;
     color: #475569;
     cursor: pointer;
     transition: all 0.15s ease;
+  }
+
+  .phase-badge {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 800;
+    opacity: 0.7;
   }
 
   .phase-btn:hover {
@@ -441,6 +646,10 @@
     font-weight: 700;
   }
 
+  .phase-btn.active .phase-badge {
+    opacity: 1;
+  }
+
   /* Phase Panels */
   .phase-panel {
     display: none;
@@ -448,321 +657,501 @@
 
   .phase-panel.active {
     display: block;
+    animation: fadeIn 0.2s ease-out;
   }
 
-  .panel-card {
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Evidence Card (Exact Web-Style tokens) */
+  .evidence-card {
     background: #ffffff;
-    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
-    border-radius: 14px;
-    padding: 20px;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: 16px;
+    padding: 24px;
     box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
   }
 
-  .panel-card-header {
+  .card-kicker-row {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
+    gap: 10px;
+    margin-bottom: 8px;
   }
 
-  .step-num {
-    background: #e2e8f0;
-    color: #334155;
+  .card-step-badge {
+    background: #082846;
+    color: #ffffff;
     font-size: 9px;
     font-weight: 800;
-    padding: 2px 6px;
+    padding: 2px 7px;
     border-radius: 4px;
+    letter-spacing: 0.08em;
   }
 
-  .panel-card-header h3 {
-    font-size: 15px;
-    font-weight: 700;
-    color: #0f172a;
-    margin: 0;
-  }
-
-  .panel-card p {
-    font-size: 13px;
-    color: #64748b;
-    line-height: 1.55;
-    margin: 0 0 14px;
-  }
-
-  .story-spec-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    font-size: 12.5px;
-    color: #334155;
-  }
-
-  .story-spec-list li {
-    padding-left: 14px;
-    position: relative;
-  }
-
-  .story-spec-list li::before {
-    content: "•";
-    color: var(--nexa-color-primary-600, #2563eb);
-    position: absolute;
-    left: 0;
-    font-weight: bold;
-  }
-
-  .outcome-pill-demo {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 10px;
-  }
-
-  .outcome-pill-demo .pill {
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 600;
-  }
-
-  .outcome-pill-demo .pill.ok {
-    background: #ecfdf5;
-    color: #047857;
-    border: 1px solid #a7f3d0;
-  }
-
-  .outcome-pill-demo .pill.warn {
-    background: #fffbeb;
-    color: #b45309;
-    border: 1px solid #fde68a;
-  }
-
-  .outcome-pill-demo .pill.error {
-    background: #fef2f2;
-    color: #b91c1c;
-    border: 1px solid #fecaca;
-  }
-
-  /* Code Snippet */
-  .compose-code-snippet {
-    background: #0f172a;
-    border-radius: 12px;
-    overflow: hidden;
+  .card-mono-id {
     font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 11.5px;
-    color: #e2e8f0;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--nexa-color-primary-700, #1d4ed8);
   }
 
-  .snippet-header {
-    background: #1e293b;
-    padding: 8px 14px;
+  .card-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 0 0 8px;
+  }
+
+  .card-desc {
+    color: var(--nexa-color-text-secondary, #64748b);
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin: 0 0 18px;
+  }
+
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  @media (max-width: 680px) {
+    .evidence-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .evidence-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+  }
+
+  .evidence-item i {
+    font-size: 18px;
+    margin-top: 2px;
+  }
+
+  .text-primary { color: #2563eb; }
+  .text-info { color: #0284c7; }
+  .text-success { color: #16a34a; }
+  .text-danger { color: #dc2626; }
+
+  .evidence-item strong {
+    display: block;
+    font-size: 12px;
+    color: #0f172a;
+    margin-bottom: 2px;
+  }
+
+  .evidence-item p, .evidence-item code {
+    font-size: 11.5px;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  /* Outcome Specs */
+  .outcome-grid-specs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .outcome-spec-row {
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+  }
+
+  .outcome-spec-row.ok {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+  }
+
+  .outcome-spec-row.warn {
+    background: #fffbeb;
+    border-color: #fde68a;
+  }
+
+  .outcome-spec-row.danger {
+    background: #fef2f2;
+    border-color: #fecaca;
+  }
+
+  .outcome-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  .outcome-tag.success { color: #15803d; }
+  .outcome-tag.warning { color: #b45309; }
+  .outcome-tag.danger { color: #b91c1c; }
+
+  .outcome-spec-row p {
+    margin: 0;
+    font-size: 12px;
+    color: #334155;
+    line-height: 1.4;
+  }
+
+  /* OTP Token Preview */
+  .otp-token-preview {
+    display: flex;
+    gap: 8px;
+    max-width: 320px;
+  }
+
+  .otp-slot {
+    flex: 1;
+    height: 48px;
+    background: #f1f5f9;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 18px;
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  /* Offline Banner */
+  .status-banner-offline {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-radius: 12px;
+    color: #065f46;
+  }
+
+  .status-banner-offline i {
+    font-size: 22px;
+    color: #10b981;
+  }
+
+  .status-banner-offline strong {
+    display: block;
+    font-size: 13px;
+  }
+
+  .status-banner-offline small {
+    font-size: 11.5px;
+    color: #047857;
+  }
+
+  /* Compose Code Snippet Container */
+  .compose-code-container {
+    background: #090e17;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #1e293b;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .code-card-header {
+    background: #111827;
+    padding: 10px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #334155;
+    border-bottom: 1px solid #1f2937;
     font-size: 11px;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
-  .code-tag {
+  .code-title-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
     color: #38bdf8;
     font-weight: 700;
   }
 
-  .code-file {
+  .code-path {
+    font-family: var(--nexa-font-family-mono, monospace);
     color: #94a3b8;
   }
 
-  .compose-code-snippet pre {
+  .compose-code {
     margin: 0;
-    padding: 16px;
+    padding: 18px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 12px;
+    line-height: 1.55;
+    color: #e2e8f0;
     overflow-x: auto;
-    line-height: 1.5;
   }
 
   .kw { color: #f43f5e; font-weight: 700; }
   .fn { color: #38bdf8; }
   .type { color: #a78bfa; }
+  .str { color: #34d399; }
   .num { color: #fbbf24; }
+  .cmt { color: #64748b; font-style: italic; }
 
-  /* Device Simulator Preview Stand */
+  /* ==========================================================================
+     PHONE SIMULATOR PREVIEW STAND (Pixel 8 / Zebra TC58 Shell)
+     ========================================================================== */
   .story-preview-col {
     position: sticky;
     top: 80px;
-    width: 380px;
+    width: 390px;
     margin: 0 auto;
   }
 
-  .mini-device-stand {
-    display: flex;
-    justify-content: center;
-  }
-
-  .mini-chassis {
-    width: 360px;
-    height: 720px;
-    background: #000000;
-    border-radius: 42px;
+  .device-chassis-shell {
+    width: 380px;
+    height: 780px;
+    background: #020617;
+    border-radius: 44px;
     padding: 12px;
-    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.2), 0 0 0 1px #334155;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25), 0 0 0 1px #334155;
     display: flex;
     flex-direction: column;
     position: relative;
   }
 
-  .mini-notch {
-    position: absolute;
-    top: 14px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 18px;
-    background: #000000;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 20;
-  }
-
-  .mini-camera {
-    width: 9px;
-    height: 9px;
-    background: #1e293b;
-    border-radius: 50%;
-    border: 1px solid #334155;
-  }
-
-  .mini-status-bar {
-    height: 24px;
+  .android-status-bar {
+    height: 28px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 16px;
-    font-size: 11px;
+    padding: 0 18px;
+    font-size: 12px;
     color: #ffffff;
     font-weight: 600;
     z-index: 10;
   }
 
-  .status-right {
+  .status-icons-cluster {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
+    font-size: 11px;
+  }
+
+  .conn-tag {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 800;
+  }
+
+  .battery-pct {
     font-size: 10px;
   }
 
-  .driver-app-content {
+  .battery-icon {
+    font-size: 11px;
+    color: #22c55e;
+  }
+
+  /* Inner Screen Viewport */
+  .compose-screen-viewport {
     flex: 1;
     background: #f8fafc;
-    border-radius: 30px;
+    border-radius: 32px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     position: relative;
   }
 
-  .app-topbar {
-    height: 48px;
+  /* Top App Bar */
+  .compose-top-app-bar {
+    height: 52px;
     background: #082846;
     color: #ffffff;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 14px;
-    font-size: 13px;
-    font-weight: 700;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: 10px;
+    padding: 0 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
   }
 
-  .offline-pill {
-    background: #10b981;
-    color: #ffffff;
-    width: 22px;
-    height: 22px;
+  .btn-app-icon {
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
+    background: transparent;
+    border: 0;
+    color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 10px;
+    cursor: pointer;
+    font-size: 15px;
   }
 
-  .app-scroll-body {
+  .appbar-title-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .appbar-headline {
+    font-size: 12.5px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .appbar-sub {
+    font-size: 10px;
+    color: #93c5fd;
+  }
+
+  .status-sync-chip {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #10b981;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+  }
+
+  /* Offline Sync Banner inside phone */
+  .workmanager-sync-banner {
+    background: #ecfdf5;
+    border-bottom: 1px solid #a7f3d0;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #065f46;
+  }
+
+  /* Scrollable Content */
+  .compose-scroll-content {
     flex: 1;
     overflow-y: auto;
     padding: 12px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     scrollbar-width: none;
   }
 
-  .app-scroll-body::-webkit-scrollbar {
+  .compose-scroll-content::-webkit-scrollbar {
     display: none;
   }
 
-  .app-order-card {
+  /* Cards inside phone */
+  .compose-card {
     background: #ffffff;
     border: 1px solid #e2e8f0;
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 12px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
   }
 
-  .order-top-row {
+  .card-header-line {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .order-id {
+  .order-tag {
+    font-family: var(--nexa-font-family-mono, monospace);
     font-size: 11px;
     font-weight: 800;
     color: #1d4ed8;
-    font-family: monospace;
   }
 
-  .eta-badge {
+  .cold-chip {
     background: #eff6ff;
     color: #1e40af;
+    border: 1px solid #bfdbfe;
     font-size: 9.5px;
     font-weight: 700;
     padding: 2px 6px;
     border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
   }
 
-  .client-name {
-    font-size: 14px;
-    font-weight: 700;
+  .buyer-heading {
+    font-size: 14.5px;
+    font-weight: 800;
     color: #0f172a;
     margin: 0;
   }
 
-  .address-text {
+  .destination-line {
     font-size: 11px;
     color: #64748b;
     margin: 0;
     display: flex;
     align-items: center;
+    gap: 5px;
+  }
+
+  .cargo-manifest-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
     gap: 4px;
   }
 
-  .cargo-items-box {
-    background: #f1f5f9;
-    padding: 6px 8px;
-    border-radius: 6px;
-    font-size: 10.5px;
-    color: #334155;
+  .manifest-item {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
+    align-items: center;
+    gap: 6px;
+    font-size: 10.5px;
   }
 
-  .btn-app-action {
-    height: 48px;
-    border-radius: 10px;
+  .sku-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3b82f6;
+  }
+
+  .sku-name {
+    flex: 1;
+    color: #1e293b;
+    font-weight: 600;
+  }
+
+  .sku-code {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9.5px;
+    color: #64748b;
+  }
+
+  /* 56dp Glove Button */
+  .btn-glove-primary {
+    min-height: 56px;
+    border-radius: 12px;
     font-size: 12px;
     font-weight: 700;
     border: 0;
@@ -770,191 +1159,224 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 8px;
+    padding: 0 14px;
     transition: transform 0.1s ease;
   }
 
-  .btn-app-action:active {
+  .btn-glove-primary:active {
     transform: scale(0.98);
   }
 
   .btn-gps {
     background: #1d4ed8;
     color: #ffffff;
-    margin-top: 4px;
+    box-shadow: 0 2px 4px rgba(29, 78, 216, 0.2);
   }
 
-  .app-arrival-card {
-    background: #ecfdf5;
-    border: 1px solid #a7f3d0;
-    border-radius: 12px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .arrival-status-row {
+  .geofence-alert-box {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    color: #047857;
+    gap: 8px;
+    padding: 6px 10px;
+    background: #ecfdf5;
+    border-radius: 6px;
+    font-size: 10.5px;
     font-weight: 600;
+    color: #065f46;
   }
 
-  .status-dot.green {
-    width: 7px;
-    height: 7px;
-    background: #10b981;
+  .geofence-pulse {
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
   }
 
-  .btn-arrival {
-    background: #059669;
-    color: #ffffff;
-  }
-
-  .app-outcome-selector {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .selector-label {
-    font-size: 9px;
+  /* Tri-State Button Stack */
+  .card-subhead {
+    font-size: 9.5px;
     font-weight: 800;
     color: #64748b;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
   }
 
-  .outcome-btn-group {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 4px;
-  }
-
-  .outcome-choice {
-    height: 38px;
-    border: 1px solid #cbd5e1;
-    background: #ffffff;
-    border-radius: 6px;
-    font-size: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    color: #475569;
-  }
-
-  .outcome-choice.active {
-    background: #dbeafe;
-    border-color: #3b82f6;
-    color: #1d4ed8;
-    font-weight: 700;
-  }
-
-  .app-pod-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 10px;
+  .tri-state-button-stack {
     display: flex;
     flex-direction: column;
     gap: 6px;
   }
 
-  .pod-header {
+  .tri-outcome-btn {
+    min-height: 52px;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.12s ease;
+  }
+
+  .tri-outcome-btn i {
+    font-size: 18px;
+    color: #64748b;
+  }
+
+  .outcome-btn-text strong {
+    display: block;
+    font-size: 11.5px;
+    color: #0f172a;
+  }
+
+  .outcome-btn-text small {
+    display: block;
+    font-size: 9.5px;
+    color: #64748b;
+  }
+
+  .tri-outcome-btn.active {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 1px #3b82f6 inset;
+  }
+
+  .tri-outcome-btn.active i {
+    color: #2563eb;
+  }
+
+  .tri-outcome-btn.active .outcome-btn-text strong {
+    color: #1d4ed8;
+  }
+
+  /* POD Signature Pad */
+  .pod-card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .pod-label {
-    font-size: 9.5px;
-    font-weight: 800;
-    color: #1d4ed8;
-  }
-
-  .btn-clear-sig {
+  .btn-clear-canvas {
     background: transparent;
     border: 0;
     color: #64748b;
-    font-size: 9.5px;
+    font-size: 10px;
+    font-weight: 600;
     cursor: pointer;
   }
 
-  .signature-canvas-mock {
-    height: 70px;
+  .signature-canvas-area {
+    height: 74px;
     background: #f8fafc;
     border: 1px dashed #cbd5e1;
     border-radius: 8px;
     position: relative;
     display: flex;
-    align-items: flex-end;
-    padding: 6px;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 6px 8px;
+    overflow: hidden;
   }
 
-  .mock-sig-svg {
+  .bezier-signature-svg {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
   }
 
-  .sig-placeholder {
-    font-size: 9.5px;
-    color: #94a3b8;
+  .signature-meta-tag {
     position: relative;
     z-index: 2;
-  }
-
-  .app-otp-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
-  }
-
-  .otp-label {
     font-size: 9px;
-    font-weight: 800;
-    color: #64748b;
+    color: #475569;
   }
 
-  .otp-input-mock {
+  .signature-meta-tag small {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 7.5px;
+    color: #94a3b8;
+  }
+
+  .camerax-photo-preview-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    font-size: 10px;
+  }
+
+  .camerax-photo-preview-box i {
+    font-size: 16px;
+    color: #2563eb;
+  }
+
+  .photo-info-text strong {
+    display: block;
+    color: #1e40af;
+  }
+
+  .photo-info-text small {
+    color: #64748b;
+    font-size: 8.5px;
+  }
+
+  /* OTP Boxes */
+  .otp-boxes-row {
     display: flex;
     justify-content: space-between;
     gap: 4px;
   }
 
-  .otp-digit {
+  .otp-cell {
     flex: 1;
-    height: 38px;
+    height: 40px;
     background: #f1f5f9;
-    border: 1px solid #cbd5e1;
+    border: 1.5px solid #cbd5e1;
     border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 15px;
     font-weight: 800;
-    font-family: monospace;
     color: #0f172a;
   }
 
-  .btn-confirm-delivery {
-    background: #082846;
-    color: #ffffff;
-    margin-top: 4px;
+  .otp-notice {
+    font-size: 9px;
+    color: #64748b;
+    text-align: center;
   }
 
-  .app-bottom-nav {
+  /* Confirm Button (56dp target) */
+  .btn-glove-confirm {
+    min-height: 56px;
+    border-radius: 12px;
+    background: #082846;
+    color: #ffffff;
+    font-size: 12.5px;
+    font-weight: 700;
+    border: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 6px rgba(8, 40, 70, 0.2);
+  }
+
+  /* Bottom Navigation */
+  .compose-bottom-nav {
     height: 52px;
     background: #ffffff;
     border-top: 1px solid #e2e8f0;
@@ -963,21 +1385,22 @@
     justify-content: space-around;
   }
 
-  .nav-tab {
+  .bnav-tab {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2px;
     color: #64748b;
     font-size: 9.5px;
+    min-width: 48px;
   }
 
-  .nav-tab.active {
+  .bnav-tab.active {
     color: #1d4ed8;
     font-weight: 700;
   }
 
-  .mini-gesture {
+  .android-gesture-pill {
     width: 110px;
     height: 4px;
     background: #ffffff;
@@ -989,9 +1412,9 @@
 </style>
 
 <script>
-  // Phase tabs logic
-  const phaseButtons = document.querySelectorAll('.phase-btn');
-  const phasePanels = document.querySelectorAll('.phase-panel');
+  // Phase tabs interaction
+  const phaseButtons = document.querySelectorAll('#story-conductor .phase-btn');
+  const phasePanels = document.querySelectorAll('#story-conductor .phase-panel');
 
   phaseButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -1002,6 +1425,15 @@
       phasePanels.forEach(panel => {
         panel.classList.toggle('active', panel.id === `panel-phase-${phase}`);
       });
+    });
+  });
+
+  // Outcome buttons toggle in phone mockup
+  const outcomeBtns = document.querySelectorAll('#story-conductor .tri-outcome-btn');
+  outcomeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      outcomeBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
     });
   });
 </script>

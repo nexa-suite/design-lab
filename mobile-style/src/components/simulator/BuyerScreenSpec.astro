@@ -1,17 +1,17 @@
 ---
 /**
  * BuyerScreenSpec — Specimen for Nexa Buyer Mobile (Flutter)
- * Represents the equipment catalog & rental booking flow.
+ * Represents the canonical wholesale cold-chain B2B catalog & purchase order flow.
  */
 ---
 
 <div class="screen-content">
   <!-- Top App Bar -->
   <div class="m3-top-app-bar">
-    <div class="logo-text">Nexa<b>Buyer</b></div>
+    <div class="logo-text">Nexa<b>Buyer</b> <span class="b2b-tag">MAYORISTA</span></div>
     <div class="header-actions">
-      <div class="action-icon"><i class="pi pi-search"></i></div>
-      <div class="action-icon"><i class="pi pi-shopping-bag"></i></div>
+      <div class="action-icon"><i class="pi pi-search" aria-hidden="true"></i></div>
+      <div class="action-icon"><i class="pi pi-shopping-bag" aria-hidden="true"></i></div>
     </div>
   </div>
 
@@ -19,44 +19,49 @@
     <!-- Category Filter Chips -->
     <div class="filter-chips-row">
       <button type="button" class="chip active">Todos</button>
-      <button type="button" class="chip">Generadores</button>
-      <button type="button" class="chip">Elevadores</button>
-      <button type="button" class="chip">Compresores</button>
+      <button type="button" class="chip">Pescados & Mariscos</button>
+      <button type="button" class="chip">Carnes & Embutidos</button>
+      <button type="button" class="chip">Lácteos DOP</button>
     </div>
 
-    <!-- Equipment Card Specimen -->
+    <!-- Cold-Chain Wholesale Product Card Specimen -->
     <div class="equipment-card">
       <div class="equipment-img-box">
-        <i class="pi pi-bolt equipment-icon"></i>
-        <span class="availability-badge">DISPONIBLE HOY</span>
+        <i class="pi pi-snowflake equipment-icon" aria-hidden="true"></i>
+        <span class="availability-badge">MUELLE 3 DISPONIBLE</span>
       </div>
 
       <div class="equipment-info">
         <div class="title-row">
-          <h3 class="equipment-title">Generador Diésel CAT 250 kVA</h3>
-          <span class="price-pill">$145 <span>/día</span></span>
+          <div>
+            <span class="sku-label">SKU ALM-LMO-982 · LOTE L-20260914-A</span>
+            <h3 class="equipment-title">Salmón Salar Congelado 4-5kg</h3>
+          </div>
+          <span class="price-pill">$18.50 <span>/kg</span></span>
         </div>
-        <p class="equipment-desc">Insonorizado, trifásico 440/220V, autonomía de 18h a plena carga.</p>
+        <p class="equipment-desc">
+          Filete calidad exportación, congelado IQF a -18°C. Cajas selladas al vacío de 20kg con sensor de temperatura garantizado.
+        </p>
 
-        <!-- Rental Duration Selector -->
-        <span class="duration-label">DURACIÓN ESTIMADA:</span>
+        <!-- Volume Tier Selector -->
+        <span class="duration-label">VOLUMEN MAYORISTA (CAJAS 20kg):</span>
         <div class="duration-pills">
-          <button type="button" class="pill">3 días</button>
-          <button type="button" class="pill active">7 días</button>
-          <button type="button" class="pill">15 días</button>
-          <button type="button" class="pill">30 días</button>
+          <button type="button" class="pill">10 cx</button>
+          <button type="button" class="pill">16 cx</button>
+          <button type="button" class="pill active">24 cx</button>
+          <button type="button" class="pill">48 cx</button>
         </div>
 
         <!-- Escrow Shield Notice -->
         <div class="escrow-notice">
-          <i class="pi pi-shield"></i>
-          <span>Custodia Escrow: Fondos retenidos hasta entrega verificada</span>
+          <i class="pi pi-shield" aria-hidden="true"></i>
+          <span>Custodia Escrow B2B: Fondos retenidos hasta validación de cadena de frío en muelle.</span>
         </div>
 
-        <!-- 1-Tap Booking Button (Min 48dp) -->
+        <!-- 1-Tap Booking Button (Min 52dp) -->
         <button type="button" class="btn-book-mobile">
-          <i class="pi pi-calendar-plus"></i>
-          <span>Solicitar Reserva (7 días)</span>
+          <i class="pi pi-shopping-cart" aria-hidden="true"></i>
+          <span>Solicitar Pedido B2B (24 Cajas · 480 kg)</span>
         </button>
       </div>
     </div>
@@ -65,19 +70,19 @@
   <!-- Bottom Navigation Bar -->
   <div class="m3-bottom-nav">
     <div class="nav-item active">
-      <i class="pi pi-th-large"></i>
+      <i class="pi pi-th-large" aria-hidden="true"></i>
       <span>Catálogo</span>
     </div>
     <div class="nav-item">
-      <i class="pi pi-file-edit"></i>
-      <span>Solicitudes</span>
+      <i class="pi pi-file-edit" aria-hidden="true"></i>
+      <span>Órdenes</span>
     </div>
     <div class="nav-item">
-      <i class="pi pi-clock"></i>
-      <span>Alquileres</span>
+      <i class="pi pi-truck" aria-hidden="true"></i>
+      <span>Despachos</span>
     </div>
     <div class="nav-item">
-      <i class="pi pi-user"></i>
+      <i class="pi pi-user" aria-hidden="true"></i>
       <span>Cuenta</span>
     </div>
   </div>
@@ -109,11 +114,25 @@
   .logo-text {
     font-family: var(--nexa-mobile-font-family-display, sans-serif);
     font-weight: 800;
-    font-size: 18px;
+    font-size: 17px;
     color: #0f172a;
-    b {
-      color: var(--nexa-mobile-primary, #2a67d9);
-    }
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .logo-text b {
+    color: var(--nexa-mobile-primary, #2a67d9);
+  }
+
+  .b2b-tag {
+    font-size: 8.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    background: #eff6ff;
+    color: #1d4ed8;
+    padding: 2px 5px;
+    border-radius: 4px;
   }
 
   .header-actions {
@@ -145,7 +164,10 @@
     gap: 8px;
     overflow-x: auto;
     padding-bottom: 4px;
+    scrollbar-width: none;
   }
+
+  .filter-chips-row::-webkit-scrollbar { display: none; }
 
   .chip {
     min-height: 36px;
@@ -158,12 +180,13 @@
     font-weight: 600;
     cursor: pointer;
     white-space: nowrap;
+    transition: all 0.12s ease;
+  }
 
-    &.active {
-      background: var(--nexa-mobile-primary, #2a67d9);
-      color: #ffffff;
-      border-color: transparent;
-    }
+  .chip.active {
+    background: var(--nexa-mobile-primary, #2a67d9);
+    color: #ffffff;
+    border-color: transparent;
   }
 
   .equipment-card {
@@ -171,11 +194,11 @@
     border: 1px solid var(--nexa-mobile-border, #e2e8f0);
     border-radius: var(--nexa-mobile-radius-card, 16px);
     overflow: hidden;
-    box-shadow: var(--nexa-mobile-elevation-1);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
   }
 
   .equipment-img-box {
-    height: 120px;
+    height: 110px;
     background: #082846;
     display: flex;
     align-items: center;
@@ -184,7 +207,7 @@
   }
 
   .equipment-icon {
-    font-size: 48px;
+    font-size: 44px;
     color: #38c8ff;
   }
 
@@ -192,7 +215,7 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    background: rgba(16, 185, 129, 0.9);
+    background: rgba(16, 185, 129, 0.95);
     color: #ffffff;
     font-size: 9px;
     font-weight: 800;
@@ -202,10 +225,10 @@
   }
 
   .equipment-info {
-    padding: 16px;
+    padding: 14px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
 
   .title-row {
@@ -215,11 +238,21 @@
     gap: 8px;
   }
 
+  .sku-label {
+    font-family: var(--nexa-mobile-font-family-mono, monospace);
+    font-size: 9px;
+    font-weight: 800;
+    color: #2563eb;
+    display: block;
+    margin-bottom: 2px;
+  }
+
   .equipment-title {
     font-family: var(--nexa-mobile-font-family-display, sans-serif);
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 14.5px;
+    font-weight: 800;
     line-height: 1.3;
+    margin: 0;
   }
 
   .price-pill {
@@ -228,21 +261,23 @@
     font-size: 15px;
     color: var(--nexa-mobile-primary, #2a67d9);
     white-space: nowrap;
-    span {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--nexa-mobile-text-secondary, #64748b);
-    }
+  }
+
+  .price-pill span {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--nexa-mobile-text-secondary, #64748b);
   }
 
   .equipment-desc {
-    font-size: 12px;
+    font-size: 11.5px;
     color: var(--nexa-mobile-text-secondary, #64748b);
     line-height: 1.45;
+    margin: 0;
   }
 
   .duration-label {
-    font-size: 10px;
+    font-size: 9.5px;
     font-weight: 800;
     color: var(--nexa-mobile-text-secondary, #64748b);
     letter-spacing: 0.05em;
@@ -263,13 +298,13 @@
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
+  }
 
-    &.active {
-      background: #eff6ff;
-      color: #2563eb;
-      border-color: #2563eb;
-      font-weight: 700;
-    }
+  .pill.active {
+    background: #eff6ff;
+    color: #2563eb;
+    border-color: #2563eb;
+    font-weight: 700;
   }
 
   .escrow-notice {
@@ -280,28 +315,31 @@
     background: #f0fdf4;
     border: 1px solid #bbf7d0;
     border-radius: 8px;
-    font-size: 11px;
+    font-size: 10.5px;
     color: #166534;
-    i {
-      font-size: 14px;
-      flex-shrink: 0;
-    }
+    line-height: 1.35;
+  }
+
+  .escrow-notice i {
+    font-size: 14px;
+    flex-shrink: 0;
+    color: #16a34a;
   }
 
   .btn-book-mobile {
-    min-height: 48px;
+    min-height: 52px;
     background: var(--nexa-mobile-primary, #2a67d9);
     color: #ffffff;
     border: none;
     border-radius: var(--nexa-mobile-radius-button, 12px);
     font-weight: 700;
-    font-size: 14px;
+    font-size: 13.5px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     cursor: pointer;
-    box-shadow: var(--nexa-mobile-elevation-1);
+    box-shadow: 0 2px 4px rgba(42, 103, 217, 0.2);
   }
 
   .m3-bottom-nav {
@@ -328,14 +366,12 @@
     font-size: 10px;
     color: var(--nexa-mobile-text-secondary, #64748b);
     cursor: pointer;
-
-    &.active {
-      color: var(--nexa-mobile-primary, #2a67d9);
-      font-weight: 700;
-    }
-
-    i {
-      font-size: 18px;
-    }
   }
+
+  .nav-item.active {
+    color: var(--nexa-mobile-primary, #2a67d9);
+    font-weight: 700;
+  }
+
+  .nav-item i { font-size: 17px; }
 </style>

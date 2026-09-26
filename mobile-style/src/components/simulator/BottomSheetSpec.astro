@@ -1,50 +1,52 @@
 ---
 /**
  * BottomSheetSpec — Specimen for Modal Bottom Sheet in Nexa Mobile
+ * Canonical Wholesale Cold-Chain & FEFO Filtering Specification.
  * Adheres to 24dp top-radius, 48dp drag handle target, and thumb-friendly elevation.
  */
 ---
 
 <div class="sheet-backdrop">
   <div class="m3-bottom-sheet">
-    <!-- Drag Handle -->
+    <!-- Drag Handle (48dp target) -->
     <div class="drag-handle-container">
       <div class="drag-handle"></div>
     </div>
 
     <!-- Sheet Header -->
     <div class="sheet-header">
-      <h3 class="sheet-title">Filtrar Equipos & Disponibilidad</h3>
-      <button type="button" class="btn-close-sheet" aria-label="Cerrar"><i class="pi pi-times"></i></button>
+      <h3 class="sheet-title">Filtrar Productos & Cadena de Frío</h3>
+      <button type="button" class="btn-close-sheet" aria-label="Cerrar"><i class="pi pi-times" aria-hidden="true"></i></button>
     </div>
 
     <div class="sheet-body">
-      <!-- Status Filter -->
-      <span class="filter-title">ESTADO DE DISPONIBILIDAD</span>
+      <!-- Regimen Térmico -->
+      <span class="filter-title">RÉGIMEN TÉRMICO REQUERIDO</span>
       <div class="sheet-chips">
-        <span class="chip-item active"><i class="pi pi-check"></i> Disponible Inmediato</span>
-        <span class="chip-item">En Tránsito</span>
-        <span class="chip-item">Próxima Devolución</span>
+        <span class="chip-item active"><i class="pi pi-snowflake" aria-hidden="true"></i> Refrigerado (2°C – 6°C)</span>
+        <span class="chip-item">Congelado (-18°C)</span>
+        <span class="chip-item">Ultra-Congelado (-25°C)</span>
       </div>
 
-      <!-- Capacity Range -->
-      <span class="filter-title">POTENCIA / CAPACIDAD</span>
+      <!-- Disponibilidad & Muelle -->
+      <span class="filter-title">DISPONIBILIDAD & MUELLE DE SALIDA</span>
       <div class="sheet-chips">
-        <span class="chip-item">50 - 100 kVA</span>
-        <span class="chip-item active">150 - 250 kVA</span>
-        <span class="chip-item">300+ kVA</span>
+        <span class="chip-item active"><i class="pi pi-check" aria-hidden="true"></i> Stock Muelle 3 (Inmediato)</span>
+        <span class="chip-item">En Tránsito Frío</span>
+        <span class="chip-item">Arribo Programado</span>
       </div>
 
-      <!-- Price Per Day Range -->
-      <span class="filter-title">TARIFA MÁXIMA DIARIA</span>
-      <div class="price-input-row">
-        <span class="currency-prefix">$</span>
-        <input type="text" class="m3-text-field" value="250.00 USD" readonly />
+      <!-- Vida Útil FEFO -->
+      <span class="filter-title">VENTANA DE VIDA ÚTIL (FEFO)</span>
+      <div class="sheet-chips">
+        <span class="chip-item">&gt; 15 días vcto.</span>
+        <span class="chip-item active">&gt; 30 días vcto.</span>
+        <span class="chip-item">&gt; 60 días vcto.</span>
       </div>
 
-      <!-- Action Button (Min 48dp) -->
+      <!-- Action Button (Min 52dp) -->
       <button type="button" class="btn-sheet-apply">
-        <span>Aplicar Filtros (14 Equipos)</span>
+        <span>Aplicar Filtros (18 Productos B2B)</span>
       </button>
     </div>
   </div>
@@ -75,7 +77,7 @@
   }
 
   .drag-handle-container {
-    height: 28px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -83,7 +85,7 @@
   }
 
   .drag-handle {
-    width: 36px;
+    width: 38px;
     height: 4px;
     border-radius: 999px;
     background: var(--nexa-mobile-border, #cbd5e1);
@@ -93,14 +95,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 4px 20px 14px;
+    padding: 2px 20px 12px;
     border-bottom: 1px solid var(--nexa-mobile-border, #f1f5f9);
   }
 
   .sheet-title {
     font-family: var(--nexa-mobile-font-family-display, sans-serif);
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 15.5px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
   }
 
   .btn-close-sheet {
@@ -117,27 +121,27 @@
   }
 
   .sheet-body {
-    padding: 16px 20px;
+    padding: 14px 20px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
   }
 
   .filter-title {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 800;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     color: var(--nexa-mobile-text-secondary, #64748b);
   }
 
   .sheet-chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
   }
 
   .chip-item {
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 600;
     padding: 6px 12px;
     border-radius: 8px;
@@ -148,50 +152,25 @@
     align-items: center;
     gap: 6px;
     cursor: pointer;
-
-    &.active {
-      background: #eff6ff;
-      color: #2563eb;
-      border-color: #93c5fd;
-      font-weight: 700;
-    }
   }
 
-  .price-input-row {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-
-  .currency-prefix {
-    position: absolute;
-    left: 14px;
+  .chip-item.active {
+    background: #eff6ff;
+    color: #2563eb;
+    border-color: #93c5fd;
     font-weight: 700;
-    color: #64748b;
-  }
-
-  .m3-text-field {
-    width: 100%;
-    height: 48px;
-    padding: 0 14px 0 32px;
-    border-radius: 10px;
-    border: 1px solid var(--nexa-mobile-border, #cbd5e1);
-    background: var(--nexa-mobile-surface-bg, #f8fafc);
-    font-family: var(--nexa-mobile-font-family-mono, monospace);
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--nexa-mobile-text-primary, #0f172a);
   }
 
   .btn-sheet-apply {
-    min-height: 48px;
+    min-height: 52px;
     background: var(--nexa-mobile-primary, #2a67d9);
     color: #ffffff;
     border: none;
     border-radius: var(--nexa-mobile-radius-button, 12px);
     font-weight: 700;
-    font-size: 14px;
+    font-size: 13.5px;
     cursor: pointer;
-    margin-top: 8px;
+    margin-top: 6px;
+    box-shadow: 0 2px 4px rgba(42, 103, 217, 0.2);
   }
 </style>

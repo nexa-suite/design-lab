@@ -47,13 +47,13 @@ import ScannerScreenSpec from './ScannerScreenSpec.astro';
         <div class="punch-camera"></div>
       </div>
 
-      <!-- Status Bar -->
+      <!-- Status Bar (Android 14 Material 3) -->
       <div class="m3-status-bar">
-        <span class="status-time">09:41</span>
+        <span class="status-time">14:20</span>
         <div class="status-icons">
-          <i class="pi pi-wifi"></i>
+          <i class="pi pi-wifi" aria-hidden="true"></i>
           <span class="five-g">5G</span>
-          <i class="pi pi-battery"></i>
+          <i class="pi pi-battery" aria-hidden="true"></i>
         </div>
       </div>
 
@@ -222,10 +222,15 @@ import ScannerScreenSpec from './ScannerScreenSpec.astro';
     display: none;
     height: 100%;
     overflow-y: auto;
+    scrollbar-width: none;
 
     &.active {
       display: block;
     }
+  }
+
+  .screen-view::-webkit-scrollbar {
+    display: none;
   }
 
   .m3-gesture-bar {

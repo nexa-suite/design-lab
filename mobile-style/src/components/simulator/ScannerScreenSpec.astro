@@ -2,6 +2,7 @@
 /**
  * ScannerScreenSpec — Specimen for CameraX & ML Kit Barcode Scanning
  * Represents the mandatory hardware scanning slice with manual fallback from ADR-0018.
+ * Domain: Canonical Wholesale Cold-Chain Logistics & FEFO Pallet Validation.
  */
 ---
 
@@ -11,11 +12,11 @@
     <!-- Camera Header Controls -->
     <div class="scanner-header">
       <button type="button" class="btn-scan-ctrl" title="Volver a la ruta">
-        <i class="pi pi-arrow-left"></i>
+        <i class="pi pi-arrow-left" aria-hidden="true"></i>
       </button>
-      <span class="scan-title">Escanear Guía / Activo</span>
+      <span class="scan-title">Escanear Lote FEFO / Palet</span>
       <button type="button" class="btn-scan-ctrl" id="btn-flash" title="Activar Linterna LED">
-        <i class="pi pi-bolt"></i>
+        <i class="pi pi-bolt" aria-hidden="true"></i>
       </button>
     </div>
 
@@ -31,7 +32,7 @@
 
       <!-- Instruction Label -->
       <div class="scan-hint">
-        <span>Alinee el código QR o código de barras (Code 128 / DataMatrix)</span>
+        <span>Alinee código GS1-128 o DataMatrix de caja refrigerada</span>
       </div>
     </div>
 
@@ -46,30 +47,34 @@
   <div class="scan-drawer">
     <div class="drawer-handle"></div>
 
-    <!-- Successful Recognition Preview -->
+    <!-- Successful Recognition Preview (Canonical Cold-Chain SKU) -->
     <div class="detected-asset-card">
-      <div class="asset-icon"><i class="pi pi-qrcode"></i></div>
+      <div class="asset-icon"><i class="pi pi-snowflake" aria-hidden="true"></i></div>
       <div class="asset-details">
-        <span class="asset-code">ASSET-NX-84920</span>
-        <span class="asset-name">Generador Trifásico 250 kVA · Serie #G-991</span>
+        <div class="asset-code-row">
+          <span class="asset-code">SKU ALM-LMO-982</span>
+          <span class="verified-pill">FEFO VALIDADO</span>
+        </div>
+        <span class="asset-name">Salmón Salar Congelado 4-5kg</span>
+        <small class="asset-lot-meta">Lote L-20260914-A · Sonda 3.8°C (2°C – 6°C)</small>
       </div>
-      <span class="verified-pill">VALIDADO</span>
     </div>
 
     <!-- Mandatory Manual Fallback (ADR-0018 Requirement) -->
     <div class="manual-fallback-group">
       <div class="fallback-header">
-        <span class="fallback-title">¿Código ilegible o dañado?</span>
+        <span class="fallback-title">¿Etiqueta húmeda o código ilegible?</span>
         <span class="fallback-tag">FALLBACK MANUAL OBLIGATORIO</span>
       </div>
       
       <div class="manual-input-row">
         <div class="input-wrapper">
-          <i class="pi pi-pencil"></i>
+          <i class="pi pi-pencil" aria-hidden="true"></i>
           <input 
             type="text" 
-            placeholder="Escriba código de guía manual..." 
-            value="ORD-2026-9812-A"
+            placeholder="Escriba código de caja o lote manual..." 
+            value="SO-2026-0018-01"
+            aria-label="Código de bulto manual"
           />
         </div>
         <button type="button" class="btn-confirm-code">
@@ -126,15 +131,15 @@
     cursor: pointer;
     font-size: 16px;
     transition: all 0.15s ease;
+  }
 
-    &:hover {
-      background: rgba(42, 103, 217, 0.6);
-      border-color: #38c8ff;
-    }
+  .btn-scan-ctrl:hover {
+    background: rgba(42, 103, 217, 0.6);
+    border-color: #38c8ff;
   }
 
   .scan-title {
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 700;
     letter-spacing: 0.02em;
     color: #f1f5f9;
@@ -142,8 +147,8 @@
 
   /* Viewfinder Reticle */
   .viewfinder-box {
-    width: 250px;
-    height: 250px;
+    width: 240px;
+    height: 240px;
     position: relative;
     display: flex;
     align-items: center;
@@ -154,8 +159,8 @@
 
   .corner-marker {
     position: absolute;
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     border-color: #38c8ff;
     border-style: solid;
   }
@@ -199,26 +204,18 @@
   }
 
   @keyframes scanPulse {
-    0% {
-      top: 15%;
-      opacity: 0.8;
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      top: 85%;
-      opacity: 0.8;
-    }
+    0% { top: 15%; opacity: 0.8; }
+    50% { opacity: 1; }
+    100% { top: 85%; opacity: 0.8; }
   }
 
   .scan-hint {
     position: absolute;
     bottom: -45px;
-    font-size: 11px;
+    font-size: 10.5px;
     color: #cbd5e1;
     text-align: center;
-    width: 280px;
+    width: 270px;
     line-height: 1.4;
     background: rgba(15, 23, 42, 0.7);
     padding: 4px 10px;
@@ -281,14 +278,14 @@
     gap: 0.75rem;
     background: #f0fdf4;
     border: 1px solid #bbf7d0;
-    padding: 0.65rem 0.85rem;
+    padding: 0.75rem 0.85rem;
     border-radius: 12px;
   }
 
   .asset-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
     background: #dcfce7;
     color: #16a34a;
     display: flex;
@@ -303,26 +300,38 @@
     flex-direction: column;
     gap: 2px;
     flex: 1;
+    min-width: 0;
+  }
+
+  .asset-code-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .asset-code {
     font-family: var(--nexa-mobile-font-family-mono, monospace);
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 800;
     color: #166534;
   }
 
   .asset-name {
-    font-size: 11.5px;
-    color: #334155;
+    font-size: 12px;
+    font-weight: 700;
+    color: #0f172a;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 170px;
+  }
+
+  .asset-lot-meta {
+    font-size: 10px;
+    color: #64748b;
   }
 
   .verified-pill {
-    font-size: 9px;
+    font-size: 8.5px;
     font-weight: 800;
     background: #16a34a;
     color: #ffffff;
@@ -346,13 +355,13 @@
   }
 
   .fallback-title {
-    font-size: 11.5px;
+    font-size: 11px;
     font-weight: 700;
     color: #475569;
   }
 
   .fallback-tag {
-    font-size: 8.5px;
+    font-size: 8px;
     font-weight: 800;
     color: #d97706;
     background: #fef3c7;
@@ -374,22 +383,22 @@
     border-radius: 10px;
     padding: 0 0.65rem;
     gap: 0.4rem;
+  }
 
-    i {
-      font-size: 12px;
-      color: #94a3b8;
-    }
+  .input-wrapper i {
+    font-size: 12px;
+    color: #94a3b8;
+  }
 
-    input {
-      border: none;
-      background: transparent;
-      outline: none;
-      font-family: var(--nexa-mobile-font-family-mono, monospace);
-      font-size: 12px;
-      color: #0f172a;
-      width: 100%;
-      height: 38px;
-    }
+  .input-wrapper input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-family: var(--nexa-mobile-font-family-mono, monospace);
+    font-size: 12px;
+    color: #0f172a;
+    width: 100%;
+    height: 48px;
   }
 
   .btn-confirm-code {
@@ -397,18 +406,18 @@
     color: #ffffff;
     border: none;
     border-radius: 10px;
-    padding: 0 0.85rem;
+    padding: 0 1rem;
     font-size: 12px;
     font-weight: 700;
     cursor: pointer;
-    min-height: 48px; /* 48dp minimum touch target */
+    min-height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.15s ease;
+  }
 
-    &:hover {
-      background: #1d4ed8;
-    }
+  .btn-confirm-code:hover {
+    background: #1d4ed8;
   }
 </style>

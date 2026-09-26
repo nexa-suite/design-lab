@@ -1,82 +1,87 @@
 ---
 /**
  * OperationsScreenSpec — Specimen for Nexa Operations Mobile (Android / Jetpack Compose)
- * Represents the accepted driver identification & active dispatch slice.
+ * Represents the canonical wholesale cold-chain driver identification & active dispatch slice.
  */
 ---
 
 <div class="screen-content">
   <!-- Top App Bar -->
   <div class="m3-top-app-bar">
-    <div class="nav-icon"><i class="pi pi-bars"></i></div>
+    <div class="nav-icon"><i class="pi pi-bars" aria-hidden="true"></i></div>
     <span class="app-bar-title">Operaciones Nexa</span>
-    <div class="action-icon"><i class="pi pi-bell"></i></div>
+    <div class="action-icon"><i class="pi pi-bell" aria-hidden="true"></i></div>
   </div>
 
   <!-- Driver Identification Card -->
   <div class="driver-card">
     <div class="driver-avatar">
-      <i class="pi pi-user"></i>
+      <i class="pi pi-user" aria-hidden="true"></i>
     </div>
     <div class="driver-info">
       <div class="driver-name-row">
-        <span class="driver-name">Carlos Mendoza</span>
-        <span class="status-chip active">EN TURNO</span>
+        <span class="driver-name">Diego Morales</span>
+        <span class="status-chip active">EN RUTA</span>
       </div>
-      <span class="driver-role">Conductor Autorizado · ID #4829</span>
-      <span class="driver-unit">Unidad: Camión Plataforma V-104</span>
+      <span class="driver-role">Conductor Flota C-250 · ID #4829</span>
+      <span class="driver-unit">Furgón Refrigerado · Placa WKN-892</span>
     </div>
   </div>
 
-  <!-- Active Dispatch Route -->
-  <div class="section-label">DESPACHO EN CURSO</div>
+  <!-- Active Dispatch Route (Wholesale Cold-Chain B2B) -->
+  <div class="section-label">DESPACHO EN CURSO · CADENA DE FRÍO</div>
   <div class="dispatch-card">
     <div class="dispatch-header">
-      <span class="order-id">ORD-2026-9812</span>
-      <span class="time-tag">Hace 15 min</span>
+      <span class="order-id">SO-2026-0018</span>
+      <span class="cold-chip"><i class="pi pi-snowflake" aria-hidden="true"></i> 2°C – 6°C</span>
+    </div>
+
+    <div class="buyer-brief">
+      <h4 class="buyer-name">ICISA Distribuciones</h4>
+      <span class="buyer-cargo">24x Salmón Salar (ALM-LMO-982) + 12x Merluza Austral</span>
     </div>
 
     <div class="route-timeline">
       <div class="timeline-step">
         <div class="step-dot origin"></div>
         <div class="step-details">
-          <span class="step-title">Almacén Central (Bodega A-4)</span>
-          <span class="step-sub">Carga de Generador 250 kVA</span>
+          <span class="step-title">Almacén Frigorífico Central</span>
+          <span class="step-sub">Salida Muelle 3 Frío · 13:45</span>
         </div>
       </div>
       <div class="timeline-line"></div>
       <div class="timeline-step">
         <div class="step-dot destination"></div>
         <div class="step-details">
-          <span class="step-title">Obra Proyecto Altamira</span>
-          <span class="step-sub">Entrega estimada: 11:30 AM</span>
+          <span class="step-title">ICISA Distribuciones (Av. Argentina 1240)</span>
+          <span class="step-sub">ETA 14:20 · Sensor Calibrado 3.8°C</span>
         </div>
       </div>
     </div>
 
-    <!-- Action Button (Min 48dp touch target) -->
+    <!-- Action Button (Min 56dp touch target) -->
     <button type="button" class="btn-primary-mobile">
-      <i class="pi pi-check-circle"></i>
-      <span>Confirmar Entrega en Sitio</span>
+      <i class="pi pi-check-circle" aria-hidden="true"></i>
+      <span>Confirmar Entrega en Sitio (POD)</span>
     </button>
   </div>
 
   <!-- Bottom Navigation Bar -->
   <div class="m3-bottom-nav">
     <div class="nav-item active">
-      <i class="pi pi-map-marker"></i>
+      <i class="pi pi-map-marker" aria-hidden="true"></i>
       <span>Rutas</span>
     </div>
     <div class="nav-item">
-      <i class="pi pi-box"></i>
+      <i class="pi pi-box" aria-hidden="true"></i>
       <span>Cargas</span>
     </div>
     <div class="nav-item">
-      <i class="pi pi-shield"></i>
-      <span>Seguridad</span>
+      <i class="pi pi-shield" aria-hidden="true"></i>
+      <span>Frío</span>
     </div>
     <div class="nav-item">
-      <i class="pi pi-user"></i>
+      <i class="pi pi-user" aria-hidden="true"></i>
       <span>Perfil</span>
     </div>
   </div>
@@ -92,7 +97,7 @@
     font-family: var(--nexa-mobile-font-family, sans-serif);
     font-size: 14px;
     position: relative;
-    padding-bottom: 64px; /* Space for bottom nav */
+    padding-bottom: 64px;
   }
 
   .m3-top-app-bar {
@@ -123,15 +128,15 @@
   }
 
   .driver-card {
-    margin: 16px;
-    padding: 14px;
+    margin: 14px 16px;
+    padding: 12px 14px;
     background: var(--nexa-mobile-surface-card, #ffffff);
     border: 1px solid var(--nexa-mobile-border, #e2e8f0);
     border-radius: var(--nexa-mobile-radius-card, 16px);
     display: flex;
     align-items: center;
     gap: 12px;
-    box-shadow: var(--nexa-mobile-elevation-1);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
   }
 
   .driver-avatar {
@@ -166,39 +171,40 @@
   }
 
   .status-chip {
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2px 8px;
+    font-size: 9.5px;
+    font-weight: 800;
+    padding: 2px 7px;
     border-radius: 999px;
-    &.active {
-      background: var(--nexa-mobile-status-success-bg, #dcfce7);
-      color: var(--nexa-mobile-status-success, #15803d);
-    }
+  }
+
+  .status-chip.active {
+    background: #dcfce7;
+    color: #15803d;
   }
 
   .driver-role, .driver-unit {
-    font-size: 12px;
+    font-size: 11.5px;
     color: var(--nexa-mobile-text-secondary, #64748b);
   }
 
   .section-label {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 800;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     color: var(--nexa-mobile-text-secondary, #64748b);
-    margin: 8px 16px 4px;
+    margin: 6px 16px 4px;
   }
 
   .dispatch-card {
     margin: 0 16px 16px;
-    padding: 16px;
+    padding: 14px;
     background: var(--nexa-mobile-surface-card, #ffffff);
     border: 1px solid var(--nexa-mobile-border, #e2e8f0);
     border-radius: var(--nexa-mobile-radius-card, 16px);
-    box-shadow: var(--nexa-mobile-elevation-1);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
   }
 
   .dispatch-header {
@@ -209,48 +215,74 @@
 
   .order-id {
     font-family: var(--nexa-mobile-font-family-mono, monospace);
-    font-weight: 700;
+    font-weight: 800;
     color: var(--nexa-mobile-primary, #2a67d9);
+    font-size: 12.5px;
   }
 
-  .time-tag {
-    font-size: 12px;
-    color: var(--nexa-mobile-text-secondary, #64748b);
+  .cold-chip {
+    background: #eff6ff;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .buyer-brief {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .buyer-name {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  .buyer-cargo {
+    font-size: 11px;
+    color: #475569;
   }
 
   .route-timeline {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 3px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 10px;
   }
 
   .timeline-step {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
+    gap: 10px;
   }
 
   .step-dot {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     margin-top: 4px;
     flex-shrink: 0;
-
-    &.origin {
-      background: #2563eb;
-    }
-
-    &.destination {
-      background: #16a34a;
-    }
   }
+
+  .step-dot.origin { background: #2563eb; }
+  .step-dot.destination { background: #16a34a; }
 
   .timeline-line {
     width: 2px;
-    height: 18px;
+    height: 16px;
     background: #cbd5e1;
-    margin-left: 5px;
+    margin-left: 4px;
   }
 
   .step-details {
@@ -259,35 +291,34 @@
   }
 
   .step-title {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 700;
+    color: #0f172a;
   }
 
   .step-sub {
-    font-size: 11px;
+    font-size: 10.5px;
     color: var(--nexa-mobile-text-secondary, #64748b);
   }
 
   .btn-primary-mobile {
-    min-height: 48px;
+    min-height: 52px;
     background: var(--nexa-mobile-primary, #2a67d9);
     color: #ffffff;
     border: none;
     border-radius: var(--nexa-mobile-radius-button, 12px);
     font-weight: 700;
-    font-size: 14px;
+    font-size: 13px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     cursor: pointer;
-    box-shadow: var(--nexa-mobile-elevation-1);
+    box-shadow: 0 2px 4px rgba(42, 103, 217, 0.2);
     transition: opacity 0.15s ease;
-
-    &:active {
-      opacity: 0.85;
-    }
   }
+
+  .btn-primary-mobile:active { opacity: 0.85; }
 
   .m3-bottom-nav {
     position: absolute;
@@ -313,14 +344,12 @@
     font-size: 10px;
     color: var(--nexa-mobile-text-secondary, #64748b);
     cursor: pointer;
-
-    &.active {
-      color: var(--nexa-mobile-primary, #2a67d9);
-      font-weight: 700;
-    }
-
-    i {
-      font-size: 18px;
-    }
   }
+
+  .nav-item.active {
+    color: var(--nexa-mobile-primary, #2a67d9);
+    font-weight: 700;
+  }
+
+  .nav-item i { font-size: 17px; }
 </style>

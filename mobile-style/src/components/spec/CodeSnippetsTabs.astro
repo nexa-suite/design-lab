@@ -56,16 +56,18 @@
 
   <!-- Flutter Snippet -->
   <div class="snippet-pane" id="pane-flutter">
-    <pre is:raw><code><span class="kw">class</span> <span class="type">NexaEquipmentRentalCard</span> <span class="kw">extends</span> <span class="type">StatelessWidget</span> {
+    <pre is:raw><code><span class="kw">class</span> <span class="type">NexaWholesaleProductCard</span> <span class="kw">extends</span> <span class="type">StatelessWidget</span> {
   <span class="kw">final</span> <span class="type">String</span> title;
-  <span class="kw">final</span> <span class="type">double</span> dailyRate;
-  <span class="kw">final</span> <span class="type">VoidCallback</span> onBook;
+  <span class="kw">final</span> <span class="type">String</span> sku;
+  <span class="kw">final</span> <span class="type">double</span> unitPrice;
+  <span class="kw">final</span> <span class="type">VoidCallback</span> onOrder;
 
-  <span class="kw">const</span> <span class="fn">NexaEquipmentRentalCard</span>({
+  <span class="kw">const</span> <span class="fn">NexaWholesaleProductCard</span>({
     <span class="kw">super</span>.key,
     <span class="kw">required</span> <span class="kw">this</span>.title,
-    <span class="kw">required</span> <span class="kw">this</span>.dailyRate,
-    <span class="kw">required</span> <span class="kw">this</span>.onBook,
+    <span class="kw">required</span> <span class="kw">this</span>.sku,
+    <span class="kw">required</span> <span class="kw">this</span>.unitPrice,
+    <span class="kw">required</span> <span class="kw">this</span>.onOrder,
   });
 
   <span class="kw">@override</span>
@@ -81,20 +83,22 @@
           crossAxisAlignment: <span class="type">CrossAxisAlignment</span>.start,
           children: [
             <span class="fn">Text</span>(title, style: NexaTypography.titleMedium),
+            <span class="kw">const</span> <span class="fn">SizedBox</span>(height: <span class="num">4</span>),
+            <span class="fn">Text</span>(sku, style: NexaTypography.labelSmall),
             <span class="kw">const</span> <span class="fn">SizedBox</span>(height: <span class="num">12</span>),
             <span class="fn">SizedBox</span>(
               width: <span class="type">double</span>.infinity,
               height: <span class="num">48</span>, <span class="cmt">// 48dp minimum touch target</span>
               child: <span class="fn">FilledButton.icon</span>(
-                onPressed: onBook,
+                onPressed: onOrder,
                 style: <span class="fn">FilledButton.styleFrom</span>(
                   backgroundColor: NexaColors.primary,
                   shape: <span class="fn">RoundedRectangleBorder</span>(
                     borderRadius: <span class="fn">BorderRadius.circular</span>(<span class="num">12</span>),
                   ),
                 ),
-                icon: <span class="kw">const</span> <span class="fn">Icon</span>(Icons.calendar_today, size: <span class="num">18</span>),
-                label: <span class="kw">const</span> <span class="fn">Text</span>(<span class="str">'Solicitar Alquiler'</span>),
+                icon: <span class="kw">const</span> <span class="fn">Icon</span>(Icons.shopping_cart, size: <span class="num">18</span>),
+                label: <span class="kw">const</span> <span class="fn">Text</span>(<span class="str">'Solicitar Pedido B2B'</span>),
               ),
             ),
           ],
