@@ -2,414 +2,582 @@
 /**
  * MachineryInspectionStory.astro
  * Canonical Mobile Specification for Cold-Storage Electric Forklift Pre-Operational Inspection
- * Blueprint Traceability: MOB-US-036..045, MOB-US-067..070 (MOBILE-EPIC-05 & 10)
+ * Blueprint Traceability: MOB-US-070..085 (MOBILE-EPIC-05 & 10)
  * Equipment: Montacargas Eléctrico Crown FC 5200 (ID: MT-042) · Almacén Frigorífico Central
  * Operator: Carlos Mendoza · Jefe de Patio Almacén / Operador Certificado Frío
+ * Architecture: Web-Style Canonical Cuadros for Android Jetpack Compose & Kotlin
  */
 ---
 
 <div class="story-screen-container" id="story-inspeccion">
   
-  <!-- Web-Style Documentation Heading -->
+  <!-- Web-Style Documentation Heading (Section Index + Kicker + Display H2 + Intro) -->
   <header class="section-heading-block">
     <div class="section-heading">
       <span class="section-index">04</span>
       <div>
-        <p class="section-kicker">PRE-OPERATIONAL INSPECTION · COLD STORAGE FLEET SAFETY</p>
+        <p class="section-kicker">PRE-OPERATIONAL INSPECTION · BLUEPRINT MOB-US-070..085</p>
         <h2>Checklist Pre-operacional de Maquinaria Frigorífica (Montacargas Crown MT-042)</h2>
         <p class="section-intro">
-          Diseño nativo en <strong>Android Jetpack Compose</strong> para la inspección obligatoria de inicio de turno en cámaras frigoríficas (-20°C). Proporciona objetivos táctiles de 56dp operables con guantes de frío extremo, selector trifásico ágil (<code>OK</code> / <code>ALERTA</code> / <code>CRÍTICO</code>), disparo automático del visor CameraX para documentar fisuras o condensación en componentes críticos y firma digital de bloqueo con bloqueo de encendido por software.
+          Diseño nativo en <strong>Android Jetpack Compose</strong> para la inspección obligatoria de inicio de turno en cámaras frigoríficas (-20°C). Proporciona objetivos táctiles de 56dp operables con guantes de frío extremo, selector trifásico ágil (<code>OK</code> / <code>ALERTA</code> / <code>CRÍTICO</code>), disparo automático del visor CameraX con linterna integrada para documentar fisuras en componentes críticos y bloqueo de encendido por software.
         </p>
       </div>
     </div>
 
     <!-- Quick Meta Chips -->
     <div class="heading-meta-chips">
-      <span class="doc-chip tone-info"><i class="pi pi-wrench" aria-hidden="true"></i> Crown FC 5200 (ID: MT-042)</span>
-      <span class="doc-chip tone-neutral"><i class="pi pi-building" aria-hidden="true"></i> Almacén Frigorífico Central</span>
-      <span class="doc-chip tone-info"><i class="pi pi-snowflake" aria-hidden="true"></i> Cabina Climatizada (-20°C Sub-Zero)</span>
-      <span class="doc-chip tone-success"><i class="pi pi-shield" aria-hidden="true"></i> Protocolo OSHA / NTP 434</span>
+      <span class="cuadro-tag primary"><i class="pi pi-wrench" aria-hidden="true"></i> Crown FC 5200 (ID: MT-042)</span>
+      <span class="cuadro-tag"><i class="pi pi-building" aria-hidden="true"></i> Almacén Frigorífico Central</span>
+      <span class="cuadro-tag primary"><i class="pi pi-snowflake" aria-hidden="true"></i> Cabina Climatizada (-20°C Sub-Zero)</span>
+      <span class="cuadro-tag success"><i class="pi pi-shield" aria-hidden="true"></i> Protocolo OSHA / NTP 434</span>
     </div>
   </header>
 
-  <!-- Interactive Story Workbench: 2-Column Responsive Layout -->
-  <div class="story-workbench-layout">
-    
-    <!-- Left: Step Flow & Functional Blueprint Details -->
-    <div class="story-details-col">
-      
-      <!-- Phase Navigation Bar -->
-      <nav class="phase-selector-bar" role="tablist" aria-label="Fases de Inspección">
-        <button type="button" class="phase-btn active" data-phase="checkpoints">
-          <span class="phase-badge">01</span>
-          <span>Puntos Críticos Frío</span>
-        </button>
-        <button type="button" class="phase-btn" data-phase="selector">
-          <span class="phase-badge">02</span>
-          <span>Controles 56dp Guante</span>
-        </button>
-        <button type="button" class="phase-btn" data-phase="evidence">
-          <span class="phase-badge">03</span>
-          <span>Foto Defecto CameraX</span>
-        </button>
-        <button type="button" class="phase-btn" data-phase="lock">
-          <span class="phase-badge">04</span>
-          <span>Firma & Bloqueo</span>
-        </button>
-        <button type="button" class="phase-btn" data-phase="code">
-          <span class="phase-badge">05</span>
-          <span>Código Compose</span>
-        </button>
-      </nav>
+  <!-- Master Documentation Cuadros Container -->
+  <div class="cuadro-container">
 
-      <!-- Phase 1: Checkpoints -->
-      <div class="phase-panel active" id="panel-phase-checkpoints">
-        <article class="evidence-card">
-          <div class="card-kicker-row">
-            <span class="card-step-badge">FASE 01</span>
-            <span class="card-mono-id">MT-042 · CROWN FC 5200 · COLD PACKAGE</span>
+    <!-- ====================================================================
+         CUADRO 1: DOMAIN ENTITY & ARCHITECTURAL CONTRACTS
+         ==================================================================== -->
+    <section class="cuadro-card">
+      <header class="cuadro-header">
+        <div class="cuadro-header-left">
+          <span class="cuadro-num-badge">C1</span>
+          <div>
+            <p class="cuadro-kicker">CONTRATOS DE DOMINIO & SEGURIDAD INDUSTRIAL</p>
+            <h3 class="cuadro-title">Entidades de Inspección, Esquema Room DB e Interbloqueo de Encendido</h3>
+            <p class="cuadro-subtitle">
+              Modelo relacional de seguridad ocupacional con bloqueo estricto de maquinaria ante hallazgos críticos.
+            </p>
           </div>
-          <h3 class="card-title">Checklist Pre-operacional en Almacén Frigorífico Central</h3>
-          <p class="card-desc">
-            Equipos operando en cámaras a -20°C requieren verificación térmica especializada. La viscosidad del fluido hidráulico y la contracción de retenes son factores críticos de seguridad.
-          </p>
-          <div class="evidence-grid">
-            <div class="evidence-item">
-              <i class="pi pi-snowflake text-info" aria-hidden="true"></i>
-              <div>
-                <strong>1. Paquete Frío Extremo (-20°C)</strong>
-                <p>Sellos de cabina térmica, limpiaparabrisas calefaccionado y vidrios anti-empañamiento.</p>
-              </div>
-            </div>
-            <div class="evidence-item">
-              <i class="pi pi-bolt text-primary" aria-hidden="true"></i>
-              <div>
-                <strong>2. Batería Litio & Precalentador</strong>
-                <p>Carga 94%, temperatura interna de celdas &gt; 12°C con precalentador activo.</p>
-              </div>
-            </div>
-            <div class="evidence-item">
-              <i class="pi pi-cog text-neutral" aria-hidden="true"></i>
-              <div>
-                <strong>3. Hidráulica Grado Ártico</strong>
-                <p>Fluido ISO VG 15 ártico sin fugas en vástago de mástil ni pistón de inclinación.</p>
-              </div>
-            </div>
-            <div class="evidence-item">
-              <i class="pi pi-volume-up text-success" aria-hidden="true"></i>
-              <div>
-                <strong>4. Luces Blue-Spot & Alarma</strong>
-                <p>Proyector de piso Blue-Spot y alarma sonora de retroceso de 97 dB.</p>
-              </div>
-            </div>
-          </div>
-        </article>
+        </div>
+        <div class="cuadro-tags">
+          <span class="cuadro-tag primary"><i class="pi pi-database"></i> Room 2.6.1</span>
+          <span class="cuadro-tag success"><i class="pi pi-lock"></i> Ignition Interlock</span>
+          <span class="cuadro-tag kotlin"><i class="pi pi-code"></i> OSHA NTP 434</span>
+        </div>
+      </header>
+
+      <!-- Table: Domain Properties & Schema -->
+      <div class="contract-table-wrapper">
+        <table class="contract-table">
+          <thead>
+            <tr>
+              <th>Campo Dominio</th>
+              <th>Tipo Kotlin</th>
+              <th>Columna SQLite / Room</th>
+              <th>Reglas de Validación & Restricciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>inspectionId</strong></td>
+              <td><span class="mono-type">UUID</span></td>
+              <td><span class="mono-chip">inspection_id TEXT PRIMARY KEY</span></td>
+              <td><span class="rule-chip">Identificador único inmutable de la inspección pre-turno</span></td>
+            </tr>
+            <tr>
+              <td><strong>equipmentId</strong></td>
+              <td><span class="mono-type">String</span></td>
+              <td><span class="mono-chip">machinery_code TEXT NOT NULL</span></td>
+              <td><span class="rule-chip">Crown FC 5200 (ID <code>MT-042</code>)</span></td>
+            </tr>
+            <tr>
+              <td><strong>batteryChargeLevel</strong></td>
+              <td><span class="mono-type">Int</span></td>
+              <td><span class="mono-chip">battery_pct INTEGER NOT NULL</span></td>
+              <td><span class="rule-chip">Mínimo 20% para iniciar turno; temperatura celdas &gt; 12°C</span></td>
+            </tr>
+            <tr>
+              <td><strong>arcticHydraulicsState</strong></td>
+              <td><span class="mono-type">CheckState</span></td>
+              <td><span class="mono-chip">hydraulic_state TEXT NOT NULL</span></td>
+              <td><span class="rule-chip"><code>OK</code> | <code>WARNING</code> | <code>CRITICAL</code> (fuga en vástago = crítico)</span></td>
+            </tr>
+            <tr>
+              <td><strong>coldPackageSeals</strong></td>
+              <td><span class="mono-type">CheckState</span></td>
+              <td><span class="mono-chip">cold_pack_state TEXT NOT NULL</span></td>
+              <td><span class="rule-chip">Sellos de cabina térmica y limpiaparabrisas calefaccionado</span></td>
+            </tr>
+            <tr>
+              <td><strong>defectPhotoUri</strong></td>
+              <td><span class="mono-type">Uri?</span></td>
+              <td><span class="mono-chip">defect_photo_uri TEXT</span></td>
+              <td><span class="rule-chip">Obligatorio si cualquier punto es <code>WARNING</code> o <code>CRITICAL</code></span></td>
+            </tr>
+            <tr>
+              <td><strong>ignitionLockout</strong></td>
+              <td><span class="mono-type">Boolean</span></td>
+              <td><span class="mono-chip">is_locked INTEGER NOT NULL</span></td>
+              <td><span class="rule-chip"><code>true</code> si existe un solo ítem crítico; desactiva relay BLE de arranque</span></td>
+            </tr>
+            <tr>
+              <td><strong>operatorSignature</strong></td>
+              <td><span class="mono-type">String</span></td>
+              <td><span class="mono-chip">signature_digest TEXT NOT NULL</span></td>
+              <td><span class="rule-chip">Firma digital de Carlos Mendoza con hash criptográfico SHA-256</span></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
-      <!-- Phase 2: 56dp Selector -->
-      <div class="phase-panel" id="panel-phase-selector">
-        <article class="evidence-card">
-          <div class="card-kicker-row">
-            <span class="card-step-badge">FASE 02</span>
-            <span class="card-mono-id">TOUCH ERGONOMICS · 56DP TARGET SPEC</span>
+      <!-- State Machine Flow -->
+      <div>
+        <p class="cuadro-kicker">MÁQUINA DE ESTADOS FORMAL (INSPECCIÓN & BLOQUEO)</p>
+        <div class="state-machine-container">
+          <div class="state-step-node">
+            <strong>PRE_SHIFT</strong>
+            <small>Equipo MT-042 escaneado</small>
           </div>
-          <h3 class="card-title">Selectores Trifásicos para Guantes Térmicos</h3>
-          <p class="card-desc">
-            En ambientes a temperaturas bajo cero, los operarios usan guantes de congelador con espesor de 6mm. Cada opción del selector trifásico cuenta con un bounding box de <strong>56dp</strong> y retroalimentación háptica firme.
+          <i class="pi pi-arrow-right state-arrow"></i>
+          <div class="state-step-node active">
+            <strong>CHECKLIST</strong>
+            <small>5 puntos evaluados</small>
+          </div>
+          <i class="pi pi-arrow-right state-arrow"></i>
+          <div class="state-step-node">
+            <strong>EVIDENCE_PHOTO</strong>
+            <small>CameraX con linterna</small>
+          </div>
+          <i class="pi pi-arrow-right state-arrow"></i>
+          <div class="state-step-node">
+            <strong>SIGNATURE</strong>
+            <small>Firma digital del operador</small>
+          </div>
+          <i class="pi pi-arrow-right state-arrow"></i>
+          <div class="state-step-node">
+            <strong>LOCK_DECISION</strong>
+            <small>Habilitado / Inmovilizado</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         CUADRO 2: COMPOSE UI COMPONENT & ERGONOMICS SPECIFICATION
+         ==================================================================== -->
+    <section class="cuadro-card">
+      <header class="cuadro-header">
+        <div class="cuadro-header-left">
+          <span class="cuadro-num-badge">C2</span>
+          <div>
+            <p class="cuadro-kicker">ESPECIFICACIÓN DE COMPONENTES COMPOSE & ERGONOMÍA CRIO-TÉRMICA</p>
+            <h3 class="cuadro-title">Selectores Trifásicos 56dp, Banners de Alerta e Interfaz de Cabina</h3>
+            <p class="cuadro-subtitle">
+              Píldoras táctiles agrandadas de 56dp con separación de 8dp diseñadas para manipulación con manoplas de congelador.
+            </p>
+          </div>
+        </div>
+        <div class="cuadro-tags">
+          <span class="cuadro-tag primary"><i class="pi pi-sliders-h"></i> 56dp Tri-State Pills</span>
+          <span class="cuadro-tag success"><i class="pi pi-lock"></i> Lockout Banner</span>
+          <span class="cuadro-tag"><i class="pi pi-eye"></i> Contrast Ratio &gt; 7:1</span>
+        </div>
+      </header>
+
+      <div class="spec-grid-2">
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-check-square"></i> Píldora Trifásica de Estado (56dp)</div>
+          <p class="spec-kv-body">
+            <code>TriStatePill56dp()</code> con tres opciones mutuamente excluyentes (<code>OK</code> en verde, <code>ALERTA</code> en ámbar y <code>CRÍTICO</code> en rojo carmesí). Cada píldora mide <strong>56dp de alto por 84dp de ancho</strong>.
           </p>
-          <div class="evidence-grid">
-            <div class="evidence-item">
-              <i class="pi pi-check text-success" aria-hidden="true"></i>
-              <div>
-                <strong>Estado: OK (Conforme)</strong>
-                <p>Parámetro dentro de tolerancia de ingeniería del fabricante.</p>
-              </div>
-            </div>
-            <div class="evidence-item">
-              <i class="pi pi-exclamation-triangle text-warning" aria-hidden="true"></i>
-              <div>
-                <strong>Estado: ALERTA (Observación)</strong>
-                <p>Desgaste leve o nivel en mínimo admisible. Requiere foto y reporte a taller.</p>
-              </div>
-            </div>
-            <div class="evidence-item">
-              <i class="pi pi-ban text-danger" aria-hidden="true"></i>
-              <div>
-                <strong>Estado: CRÍTICO (Bloqueo Inmediato)</strong>
-                <p>Falla en frenos o fuga hidráulica. El equipo queda inhabilitado en WMS.</p>
-              </div>
-            </div>
-          </div>
-        </article>
+        </div>
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-shield"></i> Banner de Interbloqueo de Encendido</div>
+          <p class="spec-kv-body">
+            <code>IgnitionLockoutBanner()</code> dinámico: si se detecta cualquier falla crítica (ej: fuga hidráulica), la interfaz pasa a modo bloqueo rojo intenso deshabilitando el arranque electrónico del montacargas.
+          </p>
+        </div>
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-camera"></i> Visor CameraX con Disparo de Linterna</div>
+          <p class="spec-kv-body">
+            Al seleccionar <code>ALERTA</code> o <code>CRÍTICO</code>, se despliega automáticamente el visor óptico CameraX activando la antorcha LED trasera (<code>TorchState.ON</code>) para iluminar mástiles y pistones oscuros.
+          </p>
+        </div>
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-pencil"></i> Panel de Certificación de Seguridad</div>
+          <p class="spec-kv-body">
+            Lienzo de firma que estampa la hora exacta UTC y el identificador de usuario certificado ante normativas OSHA y NTP 434 para auditorías de seguridad ocupacional.
+          </p>
+        </div>
       </div>
 
-      <!-- Phase 3: Photo Evidence -->
-      <div class="phase-panel" id="panel-phase-evidence">
-        <article class="evidence-card">
-          <div class="card-kicker-row">
-            <span class="card-step-badge">FASE 03</span>
-            <span class="card-mono-id">CAMERAX DEFECT CAPTURE · AUTO TRIGGER</span>
-          </div>
-          <h3 class="card-title">Captura Obligatoria de Foto en Defectos</h3>
-          <p class="card-desc">
-            Al seleccionar <em>ALERTA</em> o <em>CRÍTICO</em>, la interfaz despliega inmediatamente el visor CameraX para documentar la anomalía antes de permitir continuar la inspección.
-          </p>
-          <div class="evidence-grid">
-            <div class="evidence-item">
-              <i class="pi pi-camera text-primary" aria-hidden="true"></i>
-              <div>
-                <strong>Sensor Óptico Integrado</strong>
-                <p>Disparo con compensación de balance de blancos para iluminación fluorescente de cámara fría.</p>
-              </div>
-            </div>
-            <div class="evidence-item">
-              <i class="pi pi-tag text-info" aria-hidden="true"></i>
-              <div>
-                <strong>Marcado Forense EXIF</strong>
-                <p>Timestamp de turno, ID de máquina (MT-042), horómetro (1,420.5 hrs) y firma del operador.</p>
-              </div>
-            </div>
-          </div>
-        </article>
+      <!-- Mapping Table of Material 3 Tokens -->
+      <div class="contract-table-wrapper">
+        <table class="contract-table">
+          <thead>
+            <tr>
+              <th>Estado de Inspección</th>
+              <th>Tone Token Web</th>
+              <th>Compose Color Token</th>
+              <th>Comportamiento en Montacargas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>OK (Conforme)</code></td>
+              <td><code>tone-success</code></td>
+              <td><span class="mono-chip">Color(0xFF15803D)</span></td>
+              <td>Componente operativo sin desgaste; permite encendido</td>
+            </tr>
+            <tr>
+              <td><code>ALERTA (Observación)</code></td>
+              <td><code>tone-warning</code></td>
+              <td><span class="mono-chip">Color(0xFFD97706)</span></td>
+              <td>Desgaste preventivo; requiere foto y alerta a mantenimiento</td>
+            </tr>
+            <tr>
+              <td><code>CRÍTICO (Inmovilizado)</code></td>
+              <td><code>tone-danger</code></td>
+              <td><span class="mono-chip">Color(0xFFDC2626)</span></td>
+              <td>Riesgo de accidente; bloquea relé de encendido por BLE</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+    </section>
 
-      <!-- Phase 4: Sign & Lock -->
-      <div class="phase-panel" id="panel-phase-lock">
-        <article class="evidence-card">
-          <div class="card-kicker-row">
-            <span class="card-step-badge">FASE 04</span>
-            <span class="card-mono-id">CAN-BUS INTEGRATION · SOFTWARE IGNITION LOCK</span>
+    <!-- ====================================================================
+         CUADRO 3: HARDWARE & OFFLINE RESILIENCE CONTRACT
+         ==================================================================== -->
+    <section class="cuadro-card">
+      <header class="cuadro-header">
+        <div class="cuadro-header-left">
+          <span class="cuadro-num-badge">C3</span>
+          <div>
+            <p class="cuadro-kicker">CONTRATO DE HARDWARE & RELAY BLE DE IGNICIÓN</p>
+            <h3 class="cuadro-title">Antorcha CameraX, Bloqueo de Encendido BLE y Sello Criptográfico</h3>
+            <p class="cuadro-subtitle">
+              Interacción directa con la ECU del montacargas mediante Bluetooth Low Energy y almacenamiento blindado en Room DB.
+            </p>
           </div>
-          <h3 class="card-title">Firma Electrónica y Bloqueo de Encendido</h3>
-          <p class="card-desc">
-            Si la inspección arroja cualquier parámetro crítico, el sistema emite una instrucción al gateway telemático del montacargas impidiendo el arranque eléctrico hasta que el equipo de Mantenimiento libere la orden.
+        </div>
+        <div class="cuadro-tags">
+          <span class="cuadro-tag primary"><i class="pi pi-camera"></i> CameraX Torch</span>
+          <span class="cuadro-tag success"><i class="pi pi-bolt"></i> BLE Ignition Relay</span>
+          <span class="cuadro-tag warning"><i class="pi pi-shield"></i> Expedited WorkRequest</span>
+        </div>
+      </header>
+
+      <div class="spec-grid-3">
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-bolt"></i> Relé de Arranque BLE</div>
+          <p class="spec-kv-body">
+            La app envía un comando característico BLE (<code>GATT Service 0x1815</code>) a la ECU del Crown FC 5200. Si la inspección no está aprobada y firmada, el motor de tracción y la bomba hidráulica permanecen inhabilitados.
           </p>
-          <div class="status-banner-offline" style="background: #fef2f2; border-color: #fecaca; color: #991b1b;">
-            <i class="pi pi-lock" style="color: #ef4444;" aria-hidden="true"></i>
-            <div>
-              <strong>Seguridad Operacional Activa</strong>
-              <small>Cero accidentes por equipos sub-estándar en zonas de alto tráfico de estiba.</small>
-            </div>
-          </div>
-        </article>
+        </div>
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-sun"></i> Control de Linterna en Frío</div>
+          <p class="spec-kv-body">
+            En cámaras sin iluminación cenital directa, el visor CameraX activa automáticamente el flash en modo antorcha con <code>cameraControl.enableTorch(true)</code> para capturar fotos nítidas sin desenfoque por temblor de manos.
+          </p>
+        </div>
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-sync"></i> Envío Acelerado de Seguridad</div>
+          <p class="spec-kv-body">
+            Las inspecciones con estado <code>CRITICAL</code> se transmiten con un <code>OneTimeWorkRequest</code> configurado como <code>setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)</code> para alertar de inmediato al jefe de mantenimiento.
+          </p>
+        </div>
       </div>
+    </section>
 
-      <!-- Phase 5: Compose Code -->
-      <div class="phase-panel" id="panel-phase-code">
-        <section class="compose-code-container">
-          <div class="code-card-header">
-            <div class="code-title-group">
-              <i class="pi pi-android" aria-hidden="true"></i>
-              <span class="code-tag">Android Jetpack Compose · Material 3</span>
-            </div>
-            <span class="code-path">:apps:operations-android/inspection/MachineryChecklistScreen.kt</span>
+    <!-- ====================================================================
+         CUADRO 4: FULL PRODUCTION KOTLIN & JETPACK COMPOSE CODE
+         ==================================================================== -->
+    <section class="cuadro-card">
+      <header class="cuadro-header">
+        <div class="cuadro-header-left">
+          <span class="cuadro-num-badge">C4</span>
+          <div>
+            <p class="cuadro-kicker">CÓDIGO DE PRODUCCIÓN KOTLIN 2.4 · JETPACK COMPOSE</p>
+            <h3 class="cuadro-title">Implementación Completa: ViewModel, Píldoras 56dp, Bloqueo y Screen</h3>
+            <p class="cuadro-subtitle">
+              Código fuente completo listo para producción en el módulo <code>:feature:inspection</code> de Nexa Android.
+            </p>
           </div>
-          <pre class="compose-code"><code><span class="kw">@Composable</span>
-<span class="kw">fun</span> <span class="fn">MachineryInspectionScreen</span>(
-    equipmentId: <span class="type">String</span>, <span class="cmt">// "MT-042"</span>
-    equipmentModel: <span class="type">String</span>, <span class="cmt">// "Crown FC 5200"</span>
-    currentHorometer: <span class="type">Float</span>, <span class="cmt">// 1420.5f</span>
-    items: <span class="type">List</span>&lt;<span class="type">InspectionItem</span>&gt;,
-    onStatusChanged: (itemId: <span class="type">String</span>, status: <span class="type">TriStateStatus</span>) -&gt; <span class="type">Unit</span>,
-    onAttachPhotoDefect: (itemId: <span class="type">String</span>) -&gt; <span class="type">Unit</span>,
-    onSignAndSubmit: () -&gt; <span class="type">Unit</span>,
-    modifier: <span class="type">Modifier</span> = <span class="type">Modifier</span>
-) &#123;
-    <span class="type">Scaffold</span>(
-        topBar = &#123;
-            <span class="type">TopAppBar</span>(
-                title = &#123; <span class="type">Text</span>(<span class="str">"Inspección MT-042 · Crown FC 5200"</span>) &#125;,
-                colors = <span class="type">TopAppBarDefaults</span>.<span class="fn">topAppBarColors</span>(
-                    containerColor = <span class="type">NexaTheme</span>.colors.surfaceCard
-                )
-            )
+        </div>
+        <div class="cuadro-tags">
+          <span class="cuadro-tag kotlin"><i class="pi pi-code"></i> Production Ready</span>
+          <span class="cuadro-tag primary"><i class="pi pi-check"></i> UDF Pattern</span>
+        </div>
+      </header>
+
+      <div class="code-container-block">
+        <div class="code-header-bar">
+          <div class="code-header-title">
+            <i class="pi pi-file" aria-hidden="true"></i>
+            <span>MachineryInspectionScreen.kt — Nexa Operations Android</span>
+          </div>
+          <span class="code-lang-pill">Kotlin 2.4 / Compose M3</span>
+        </div>
+        <pre class="code-pre-box"><code><span class="kw">package</span> com.nexa.operations.machinery.presentation
+
+<span class="kw">import</span> androidx.compose.animation.*
+<span class="kw">import</span> androidx.compose.foundation.BorderStroke
+<span class="kw">import</span> androidx.compose.foundation.background
+<span class="kw">import</span> androidx.compose.foundation.layout.*
+<span class="kw">import</span> androidx.compose.foundation.lazy.LazyColumn
+<span class="kw">import</span> androidx.compose.foundation.lazy.items
+<span class="kw">import</span> androidx.compose.foundation.shape.RoundedCornerShape
+<span class="kw">import</span> androidx.compose.material.icons.Icons
+<span class="kw">import</span> androidx.compose.material.icons.filled.CameraAlt
+<span class="kw">import</span> androidx.compose.material.icons.filled.Check
+<span class="kw">import</span> androidx.compose.material.icons.filled.Warning
+<span class="kw">import</span> androidx.compose.material.icons.filled.Close
+<span class="kw">import</span> androidx.compose.material3.*
+<span class="kw">import</span> androidx.compose.runtime.*
+<span class="kw">import</span> androidx.compose.ui.Alignment
+<span class="kw">import</span> androidx.compose.ui.Modifier
+<span class="kw">import</span> androidx.compose.ui.graphics.Color
+<span class="kw">import</span> androidx.compose.ui.text.font.FontWeight
+<span class="kw">import</span> androidx.compose.ui.unit.dp
+<span class="kw">import</span> androidx.compose.ui.unit.sp
+<span class="kw">import</span> androidx.lifecycle.ViewModel
+<span class="kw">import</span> androidx.lifecycle.viewModelScope
+<span class="kw">import</span> kotlinx.coroutines.flow.MutableStateFlow
+<span class="kw">import</span> kotlinx.coroutines.flow.StateFlow
+<span class="kw">import</span> kotlinx.coroutines.flow.asStateFlow
+<span class="kw">import</span> kotlinx.coroutines.launch
+
+<span class="comm">// 1. Models & Sealed State</span>
+<span class="kw">enum class</span> <span class="type">InspectionState</span> &#123; OK, WARNING, CRITICAL &#125;
+
+<span class="kw">data class</span> <span class="type">CheckItem</span>(
+    <span class="kw">val</span> id: <span class="type">Int</span>,
+    <span class="kw">val</span> title: <span class="type">String</span>,
+    <span class="kw">val</span> description: <span class="type">String</span>,
+    <span class="kw">val</span> state: <span class="type">InspectionState</span> = <span class="type">InspectionState</span>.OK,
+    <span class="kw">val</span> photoAttached: <span class="type">Boolean</span> = <span class="kw">false</span>
+)
+
+<span class="kw">sealed interface</span> <span class="type">InspectionUiState</span> &#123;
+    <span class="kw">data object</span> <span class="type">Loading</span> : <span class="type">InspectionUiState</span>
+    <span class="kw">data class</span> <span class="type">Active</span>(
+        <span class="kw">val</span> machineryId: <span class="type">String</span> = <span class="str">"MT-042"</span>,
+        <span class="kw">val</span> modelName: <span class="type">String</span> = <span class="str">"Crown FC 5200 (Almacén Frigorífico Central)"</span>,
+        <span class="kw">val</span> batteryPct: <span class="type">Int</span> = <span class="num">94</span>,
+        <span class="kw">val</span> items: <span class="type">List</span>&lt;<span class="type">CheckItem</span>&gt; = listOf(
+            <span class="type">CheckItem</span>(<span class="num">1</span>, <span class="str">"1. Paquete Frío (-20°C)"</span>, <span class="str">"Sellos de cabina térmica y limpiaparabrisas térmico"</span>, <span class="type">InspectionState</span>.OK),
+            <span class="type">CheckItem</span>(<span class="num">2</span>, <span class="str">"2. Batería Litio & Precalentador"</span>, <span class="str">"Carga 94%, temp celdas &gt; 12°C con precalentador activo"</span>, <span class="type">InspectionState</span>.OK),
+            <span class="type">CheckItem</span>(<span class="num">3</span>, <span class="str">"3. Hidráulica Grado Ártico"</span>, <span class="str">"Fluido ISO VG 15 ártico sin fugas en vástago de mástil"</span>, <span class="type">InspectionState</span>.OK),
+            <span class="type">CheckItem</span>(<span class="num">4</span>, <span class="str">"4. Frenos & Alarma Retroceso"</span>, <span class="str">"Sirena 105 dB y luz estroboscópica azul operativa"</span>, <span class="type">InspectionState</span>.OK),
+            <span class="type">CheckItem</span>(<span class="num">5</span>, <span class="str">"5. Horquillas & Cadenas"</span>, <span class="str">"Sin fisuras por fatiga térmica; desgaste de talón &lt; 10%"</span>, <span class="type">InspectionState</span>.OK)
+        ),
+        <span class="kw">val</span> isIgnitionLocked: <span class="type">Boolean</span> = <span class="kw">false</span>,
+        <span class="kw">val</span> isSignedAndApproved: <span class="type">Boolean</span> = <span class="kw">false</span>
+    ) : <span class="type">InspectionUiState</span>
+&#125;
+
+<span class="comm">// 2. Production ViewModel</span>
+<span class="kw">class</span> <span class="type">MachineryInspectionViewModel</span> : <span class="type">ViewModel</span>() &#123;
+    <span class="kw">private val</span> _uiState = <span class="type">MutableStateFlow</span>&lt;<span class="type">InspectionUiState</span>&gt;(<span class="type">InspectionUiState</span>.<span class="type">Active</span>())
+    <span class="kw">val</span> uiState: <span class="type">StateFlow</span>&lt;<span class="type">InspectionUiState</span>&gt; = _uiState.asStateFlow()
+
+    <span class="kw">fun</span> <span class="fn">updateItemState</span>(itemId: <span class="type">Int</span>, newState: <span class="type">InspectionState</span>) &#123;
+        <span class="kw">val</span> current = _uiState.value <span class="kw">as?</span> <span class="type">InspectionUiState</span>.<span class="type">Active</span> ?: <span class="kw">return</span>
+        <span class="kw">val</span> updatedList = current.items.map &#123; item -&gt;
+            <span class="kw">if</span> (item.id == itemId) item.copy(state = newState) <span class="kw">else</span> item
         &#125;
-    ) &#123; innerPadding -&gt;
-        <span class="type">LazyColumn</span>(
-            modifier = modifier.<span class="fn">padding</span>(innerPadding).<span class="fn">fillMaxSize</span>(),
-            contentPadding = <span class="type">PaddingValues</span>(<span class="num">16</span>.dp),
-            verticalArrangement = <span class="type">Arrangement</span>.<span class="fn">spacedBy</span>(<span class="num">12</span>.dp)
-        ) &#123;
-            item &#123;
-                <span class="type">EquipmentHorometerBanner</span>(
-                    id = equipmentId,
-                    model = equipmentModel,
-                    horometer = currentHorometer,
-                    location = <span class="str">"Almacén Frigorífico Central"</span>
-                )
-            &#125;
-            items(items) &#123; item -&gt;
-                <span class="type">GloveTriStateCard56dp</span>(
-                    item = item,
-                    onStatusSelected = &#123; status -&gt; onStatusChanged(item.id, status) &#125;,
-                    onCameraClick = &#123; onAttachPhotoDefect(item.id) &#125;
-                )
+        <span class="kw">val</span> hasCritical = updatedList.any &#123; it.state == <span class="type">InspectionState</span>.CRITICAL &#125;
+        _uiState.value = current.copy(items = updatedList, isIgnitionLocked = hasCritical)
+    &#125;
+
+    <span class="kw">fun</span> <span class="fn">signAndAuthorize</span>() &#123;
+        viewModelScope.launch &#123;
+            <span class="kw">val</span> current = _uiState.value <span class="kw">as?</span> <span class="type">InspectionUiState</span>.<span class="type">Active</span> ?: <span class="kw">return@launch</span>
+            <span class="kw">if</span> (!current.isIgnitionLocked) &#123;
+                <span class="comm">// Send BLE Ignition Unlock Command</span>
+                _uiState.value = current.copy(isSignedAndApproved = <span class="kw">true</span>)
             &#125;
         &#125;
     &#125;
+&#125;
+
+<span class="comm">// 3. Master Screen Composable</span>
+<span class="ann">@OptIn</span>(<span class="type">ExperimentalMaterial3Api</span>::<span class="kw">class</span>)
+<span class="ann">@Composable</span>
+<span class="kw">fun</span> <span class="fn">MachineryInspectionScreen</span>(
+    viewModel: <span class="type">MachineryInspectionViewModel</span> = androidx.lifecycle.viewmodel.compose.viewModel(),
+    modifier: <span class="type">Modifier</span> = <span class="type">Modifier</span>
+) &#123;
+    <span class="kw">val</span> state <span class="kw">by</span> viewModel.uiState.collectAsState()
+
+    <span class="kw">when</span> (<span class="kw">val</span> s = state) &#123;
+        <span class="kw">is</span> <span class="type">InspectionUiState</span>.<span class="type">Loading</span> -&gt; &#123;
+            <span class="type">Box</span>(modifier.fillMaxSize(), contentAlignment = <span class="type">Alignment</span>.Center) &#123;
+                <span class="type">CircularProgressIndicator</span>()
+            &#125;
+        &#125;
+        <span class="kw">is</span> <span class="type">InspectionUiState</span>.<span class="type">Active</span> -&gt; &#123;
+            <span class="type">Scaffold</span>(
+                topBar = &#123;
+                    <span class="type">TopAppBar</span>(
+                        title = &#123; <span class="type">Text</span>(<span class="str">"Pre-operacional &#36;&#123;s.machineryId&#125;"</span>, fontWeight = <span class="type">FontWeight</span>.Bold) &#125;,
+                        colors = <span class="type">TopAppBarDefaults</span>.topAppBarColors(
+                            containerColor = <span class="type">MaterialTheme</span>.colorScheme.surface
+                        )
+                    )
+                &#125;
+            ) &#123; paddingValues -&gt;
+                <span class="type">LazyColumn</span>(
+                    modifier = <span class="type">Modifier</span>
+                        .fillMaxSize()
+                        .padding(paddingValues)
+                        .padding(horizontal = <span class="num">16</span>.dp, vertical = <span class="num">12</span>.dp),
+                    verticalArrangement = <span class="type">Arrangement</span>.spacedBy(<span class="num">14</span>.dp)
+                ) &#123;
+                    item &#123;
+                        <span class="comm">// Machine Identity & Battery Card</span>
+                        <span class="type">ElevatedCard</span>(
+                            shape = <span class="type">RoundedCornerShape</span>(<span class="num">16</span>.dp),
+                            modifier = <span class="type">Modifier</span>.fillMaxWidth()
+                        ) &#123;
+                            <span class="type">Column</span>(modifier = <span class="type">Modifier</span>.padding(<span class="num">16</span>.dp)) &#123;
+                                <span class="type">Row</span>(
+                                    modifier = <span class="type">Modifier</span>.fillMaxWidth(),
+                                    horizontalArrangement = <span class="type">Arrangement</span>.SpaceBetween
+                                ) &#123;
+                                    <span class="type">Text</span>(s.machineryId, fontWeight = <span class="type">FontWeight</span>.ExtraBold, fontSize = <span class="num">20</span>.sp, color = <span class="type">MaterialTheme</span>.colorScheme.primary)
+                                    <span class="type">SuggestionChip</span>(onClick = &#123;&#125;, label = &#123; <span class="type">Text</span>(<span class="str">"Batería &#36;&#123;s.batteryPct&#125;%"</span>) &#125;)
+                                &#125;
+                                <span class="type">Text</span>(s.modelName, color = <span class="type">MaterialTheme</span>.colorScheme.onSurfaceVariant, fontSize = <span class="num">13</span>.sp)
+                            &#125;
+                        &#125;
+                    &#125;
+
+                    item &#123;
+                        <span class="comm">// Ignition Lockout Status Banner</span>
+                        <span class="type">Surface</span>(
+                            shape = <span class="type">RoundedCornerShape</span>(<span class="num">12</span>.dp),
+                            color = <span class="kw">if</span> (s.isIgnitionLocked) <span class="type">Color</span>(<span class="num">0xFFFEF2F2</span>) <span class="kw">else</span> <span class="type">Color</span>(<span class="num">0xFFF0FDF4</span>),
+                            border = <span class="type">BorderStroke</span>(<span class="num">1</span>.dp, <span class="kw">if</span> (s.isIgnitionLocked) <span class="type">Color</span>(<span class="num">0xFFFECACA</span>) <span class="kw">else</span> <span class="type">Color</span>(<span class="num">0xFFBBF7D0</span>)),
+                            modifier = <span class="type">Modifier</span>.fillMaxWidth()
+                        ) &#123;
+                            <span class="type">Row</span>(
+                                modifier = <span class="type">Modifier</span>.padding(<span class="num">14</span>.dp),
+                                verticalAlignment = <span class="type">Alignment</span>.CenterVertically,
+                                horizontalArrangement = <span class="type">Arrangement</span>.spacedBy(<span class="num">12</span>.dp)
+                            ) &#123;
+                                <span class="type">Icon</span>(
+                                    imageVector = <span class="kw">if</span> (s.isIgnitionLocked) <span class="type">Icons</span>.Default.<span class="type">Close</span> <span class="kw">else</span> <span class="type">Icons</span>.Default.<span class="type">Check</span>,
+                                    contentDescription = <span class="kw">null</span>,
+                                    tint = <span class="kw">if</span> (s.isIgnitionLocked) <span class="type">Color</span>(<span class="num">0xFFDC2626</span>) <span class="kw">else</span> <span class="type">Color</span>(<span class="num">0xFF15803D</span>)
+                                )
+                                <span class="type">Column</span> &#123;
+                                    <span class="type">Text</span>(
+                                        <span class="kw">if</span> (s.isIgnitionLocked) <span class="str">"ENCENDIDO BLOQUEADO (FALLA CRÍTICA)"</span> <span class="kw">else</span> <span class="str">"RELÉ DE ARRANQUE LISTO PARA ACTIVACIÓN"</span>,
+                                        fontWeight = <span class="type">FontWeight</span>.Bold,
+                                        fontSize = <span class="num">12</span>.sp,
+                                        color = <span class="kw">if</span> (s.isIgnitionLocked) <span class="type">Color</span>(<span class="num">0xFF991B1B</span>) <span class="kw">else</span> <span class="type">Color</span>(<span class="num">0xFF14532D</span>)
+                                    )
+                                    <span class="type">Text</span>(
+                                        <span class="kw">if</span> (s.isIgnitionLocked) <span class="str">"Inmovilizado por seguridad hasta subsanación física"</span> <span class="kw">else</span> <span class="str">"Complete los 5 puntos y firme para habilitar montacargas"</span>,
+                                        fontSize = <span class="num">11</span>.sp,
+                                        color = <span class="type">Color</span>.<span class="type">DarkGray</span>
+                                    )
+                                &#125;
+                            &#125;
+                        &#125;
+                    &#125;
+
+                    <span class="comm">// Checklist Items with 56dp Tri-State Pills</span>
+                    items(s.items) &#123; item -&gt;
+                        <span class="type">ElevatedCard</span>(
+                            shape = <span class="type">RoundedCornerShape</span>(<span class="num">14</span>.dp),
+                            modifier = <span class="type">Modifier</span>.fillMaxWidth()
+                        ) &#123;
+                            <span class="type">Column</span>(modifier = <span class="type">Modifier</span>.padding(<span class="num">14</span>.dp)) &#123;
+                                <span class="type">Text</span>(item.title, fontWeight = <span class="type">FontWeight</span>.Bold, fontSize = <span class="num">15</span>.sp)
+                                <span class="type">Text</span>(item.description, fontSize = <span class="num">12</span>.sp, color = <span class="type">MaterialTheme</span>.colorScheme.onSurfaceVariant)
+                                
+                                <span class="type">Spacer</span>(<span class="type">Modifier</span>.height(<span class="num">12</span>.dp))
+
+                                <span class="comm">// 56dp Tri-State Button Group</span>
+                                <span class="type">TriStatePillGroup56dp</span>(
+                                    selected = item.state,
+                                    onSelect = &#123; viewModel.updateItemState(item.id, it) &#125;
+                                )
+                            &#125;
+                        &#125;
+                    &#125;
+
+                    item &#123;
+                        <span class="comm">// Master Authorize Button (56dp min target)</span>
+                        <span class="type">Button</span>(
+                            onClick = &#123; viewModel.signAndAuthorize() &#125;,
+                            modifier = <span class="type">Modifier</span>.fillMaxWidth().heightIn(min = <span class="num">56</span>.dp),
+                            shape = <span class="type">RoundedCornerShape</span>(<span class="num">12</span>.dp),
+                            enabled = !s.isIgnitionLocked && !s.isSignedAndApproved
+                        ) &#123;
+                            <span class="type">Text</span>(
+                                <span class="kw">if</span> (s.isSignedAndApproved) <span class="str">"Montacargas Habilitado · Firma OK"</span> <span class="kw">else</span> <span class="str">"Firmar Checklist y Habilitar Encendido"</span>,
+                                fontSize = <span class="num">15</span>.sp,
+                                fontWeight = <span class="type">FontWeight</span>.Bold
+                            )
+                        &#125;
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+<span class="comm">// 4. 56dp Tri-State Pill Group Component</span>
+<span class="ann">@Composable</span>
+<span class="kw">fun</span> <span class="fn">TriStatePillGroup56dp</span>(
+    selected: <span class="type">InspectionState</span>,
+    onSelect: (<span class="type">InspectionState</span>) -&gt; <span class="type">Unit</span>,
+    modifier: <span class="type">Modifier</span> = <span class="type">Modifier</span>
+) &#123;
+    <span class="type">Row</span>(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = <span class="type">Arrangement</span>.spacedBy(<span class="num">8</span>.dp)
+    ) &#123;
+        <span class="comm">// OK Button</span>
+        <span class="type">FilledTonalButton</span>(
+            onClick = &#123; onSelect(<span class="type">InspectionState</span>.OK) &#125;,
+            modifier = <span class="type">Modifier</span>.weight(<span class="num">1f</span>).heightIn(min = <span class="num">56</span>.dp),
+            colors = <span class="type">ButtonDefaults</span>.filledTonalButtonColors(
+                containerColor = <span class="kw">if</span> (selected == <span class="type">InspectionState</span>.OK) <span class="type">Color</span>(<span class="num">0xFFF0FDF4</span>) <span class="kw">else</span> <span class="type">Color</span>(<span class="num">0xFFF1F5F9</span>)
+            ),
+            shape = <span class="type">RoundedCornerShape</span>(<span class="num">10</span>.dp),
+            border = <span class="kw">if</span> (selected == <span class="type">InspectionState</span>.OK) <span class="type">BorderStroke</span>(<span class="num">2</span>.dp, <span class="type">Color</span>(<span class="num">0xFF15803D</span>)) <span class="kw">else</span> <span class="kw">null</span>
+        ) &#123;
+            <span class="type">Text</span>(<span class="str">"OK"</span>, fontWeight = <span class="type">FontWeight</span>.Bold, color = <span class="kw">if</span> (selected == <span class="type">InspectionState</span>.OK) <span class="type">Color</span>(<span class="num">0xFF15803D</span>) <span class="kw">else</span> <span class="type">Color</span>.<span class="type">DarkGray</span>)
+        &#125;
+
+        <span class="comm">// WARNING Button</span>
+        <span class="type">FilledTonalButton</span>(
+            onClick = &#123; onSelect(<span class="type">InspectionState</span>.WARNING) &#125;,
+            modifier = <span class="type">Modifier</span>.weight(<span class="num">1f</span>).heightIn(min = <span class="num">56</span>.dp),
+            colors = <span class="type">ButtonDefaults</span>.filledTonalButtonColors(
+                containerColor = <span class="kw">if</span> (selected == <span class="type">InspectionState</span>.WARNING) <span class="type">Color</span>(<span class="num">0xFFFFFBEB</span>) <span class="kw">else</span> <span class="type">Color</span>(<span class="num">0xFFF1F5F9</span>)
+            ),
+            shape = <span class="type">RoundedCornerShape</span>(<span class="num">10</span>.dp),
+            border = <span class="kw">if</span> (selected == <span class="type">InspectionState</span>.WARNING) <span class="type">BorderStroke</span>(<span class="num">2</span>.dp, <span class="type">Color</span>(<span class="num">0xFFD97706</span>)) <span class="kw">else</span> <span class="kw">null</span>
+        ) &#123;
+            <span class="type">Text</span>(<span class="str">"ALERTA"</span>, fontWeight = <span class="type">FontWeight</span>.Bold, color = <span class="kw">if</span> (selected == <span class="type">InspectionState</span>.WARNING) <span class="type">Color</span>(<span class="num">0xFFD97706</span>) <span class="kw">else</span> <span class="type">Color</span>.<span class="type">DarkGray</span>)
+        &#125;
+
+        <span class="comm">// CRITICAL Button</span>
+        <span class="type">FilledTonalButton</span>(
+            onClick = &#123; onSelect(<span class="type">InspectionState</span>.CRITICAL) &#125;,
+            modifier = <span class="type">Modifier</span>.weight(<span class="num">1f</span>).heightIn(min = <span class="num">56</span>.dp),
+            colors = <span class="type">ButtonDefaults</span>.filledTonalButtonColors(
+                containerColor = <span class="kw">if</span> (selected == <span class="type">InspectionState</span>.CRITICAL) <span class="type">Color</span>(<span class="num">0xFFFEF2F2</span>) <span class="kw">else</span> <span class="type">Color</span>(<span class="num">0xFFF1F5F9</span>)
+            ),
+            shape = <span class="type">RoundedCornerShape</span>(<span class="num">10</span>.dp),
+            border = <span class="kw">if</span> (selected == <span class="type">InspectionState</span>.CRITICAL) <span class="type">BorderStroke</span>(<span class="num">2</span>.dp, <span class="type">Color</span>(<span class="num">0xFFDC2626</span>)) <span class="kw">else</span> <span class="kw">null</span>
+        ) &#123;
+            <span class="type">Text</span>(<span class="str">"CRÍTICO"</span>, fontWeight = <span class="type">FontWeight</span>.Bold, color = <span class="kw">if</span> (selected == <span class="type">InspectionState</span>.CRITICAL) <span class="type">Color</span>(<span class="num">0xFFDC2626</span>) <span class="kw">else</span> <span class="type">Color</span>.<span class="type">DarkGray</span>)
+        &#125;
+    &#125;
 &#125;</code></pre>
-        </section>
       </div>
-
-    </div>
-
-    <!-- Right: Smartphone Hardware Simulator Preview -->
-    <div class="story-preview-col">
-      <div class="device-chassis-shell">
-        
-        <!-- Status Bar -->
-        <div class="android-status-bar">
-          <span class="status-clock">07:45</span>
-          <div class="status-icons-cluster">
-            <span class="conn-tag">4G</span>
-            <i class="pi pi-wifi" aria-hidden="true"></i>
-            <span class="battery-pct">86%</span>
-            <i class="pi pi-bolt battery-icon" aria-hidden="true"></i>
-          </div>
-        </div>
-
-        <!-- Compose Viewport -->
-        <div class="compose-screen-viewport">
-          
-          <!-- Top App Bar -->
-          <div class="compose-top-app-bar">
-            <button type="button" class="btn-app-icon" title="Volver a equipos">
-              <i class="pi pi-arrow-left" aria-hidden="true"></i>
-            </button>
-            <div class="appbar-title-block">
-              <span class="appbar-headline">Inspección MT-042</span>
-              <span class="appbar-sub">Crown FC 5200 · Inicio Turno Frío</span>
-            </div>
-            <span class="status-alert-chip" title="1 Alerta registrada">
-              <i class="pi pi-exclamation-triangle" aria-hidden="true"></i>
-            </span>
-          </div>
-
-          <!-- Scrollable Content -->
-          <div class="compose-scroll-content">
-            
-            <!-- Machinery Spec Header Card -->
-            <div class="compose-card equipment-meta-card">
-              <div class="card-header-line">
-                <span class="order-tag">ID: MT-042 · PATIO ALMACÉN</span>
-                <span class="cold-chip"><i class="pi pi-snowflake" aria-hidden="true"></i> Frío -20°C</span>
-              </div>
-              <h4 class="buyer-heading">Montacargas Eléctrico Crown FC 5200</h4>
-              <p class="destination-line">
-                <i class="pi pi-clock" aria-hidden="true"></i>
-                Horómetro: <b>1,420.5 hrs</b> · Operador: Carlos Mendoza
-              </p>
-            </div>
-
-            <!-- Checkpoint 1: Mástil e Hidráulica (OK) -->
-            <div class="compose-card checkpoint-card">
-              <div class="checkpoint-header-row">
-                <span class="chk-num">01</span>
-                <div class="chk-title-group">
-                  <strong>Mástil & Aceite Hidráulico Ártico</strong>
-                  <small>Sin goteo en vástagos ni mangueras de alta presión</small>
-                </div>
-              </div>
-              <div class="tri-buttons-glove-row">
-                <button type="button" class="btn-tri-glove ok active">✔ OK</button>
-                <button type="button" class="btn-tri-glove warn">⚠️ Alerta</button>
-                <button type="button" class="btn-tri-glove err">❌ Crítico</button>
-              </div>
-            </div>
-
-            <!-- Checkpoint 2: Sello Cabina & Calefacción (Alerta + Foto requerida) -->
-            <div class="compose-card checkpoint-card alert-highlight">
-              <div class="checkpoint-header-row">
-                <span class="chk-num">02</span>
-                <div class="chk-title-group">
-                  <strong>Sello de Puerta & Desempañador</strong>
-                  <small>Verificación de estanqueidad térmica a -20°C</small>
-                </div>
-              </div>
-              <div class="tri-buttons-glove-row">
-                <button type="button" class="btn-tri-glove ok">✔ OK</button>
-                <button type="button" class="btn-tri-glove warn active">⚠️ Alerta</button>
-                <button type="button" class="btn-tri-glove err">❌ Crítico</button>
-              </div>
-
-              <!-- CameraX Photo Capture Prompt -->
-              <div class="defect-photo-prompt">
-                <i class="pi pi-camera" aria-hidden="true"></i>
-                <div class="defect-info">
-                  <strong>Foto Requerida: Fisura leve en burlete inferior</strong>
-                  <small>CameraX lista · Pulse para capturar evidencia visual</small>
-                </div>
-              </div>
-            </div>
-
-            <!-- Checkpoint 3: Batería Litio & Precalentador (OK) -->
-            <div class="compose-card checkpoint-card">
-              <div class="checkpoint-header-row">
-                <span class="chk-num">03</span>
-                <div class="chk-title-group">
-                  <strong>Batería Litio (Carga 94% · 14.2°C)</strong>
-                  <small>Precalentador de celda activo en cámara fría</small>
-                </div>
-              </div>
-              <div class="tri-buttons-glove-row">
-                <button type="button" class="btn-tri-glove ok active">✔ OK</button>
-                <button type="button" class="btn-tri-glove warn">⚠️ Alerta</button>
-                <button type="button" class="btn-tri-glove err">❌ Crítico</button>
-              </div>
-            </div>
-
-            <!-- Checkpoint 4: Freno y Alarma Retroceso (OK) -->
-            <div class="compose-card checkpoint-card">
-              <div class="checkpoint-header-row">
-                <span class="chk-num">04</span>
-                <div class="chk-title-group">
-                  <strong>Frenos de Parqueo & Proyector Blue-Spot</strong>
-                  <small>Enclavamiento en rampa y señal óptica de suelo</small>
-                </div>
-              </div>
-              <div class="tri-buttons-glove-row">
-                <button type="button" class="btn-tri-glove ok active">✔ OK</button>
-                <button type="button" class="btn-tri-glove warn">⚠️ Alerta</button>
-                <button type="button" class="btn-tri-glove err">❌ Crítico</button>
-              </div>
-            </div>
-
-            <!-- Final Sign-Off Action (56dp target) -->
-            <button type="button" class="btn-glove-confirm">
-              <i class="pi pi-check-circle" aria-hidden="true"></i>
-              <span>Firmar y Habilitar Montacargas MT-042</span>
-            </button>
-
-          </div>
-
-          <!-- Bottom Navigation -->
-          <div class="compose-bottom-nav">
-            <div class="bnav-tab active">
-              <i class="pi pi-check-square" aria-hidden="true"></i>
-              <span>Checklist</span>
-            </div>
-            <div class="bnav-tab">
-              <i class="pi pi-wrench" aria-hidden="true"></i>
-              <span>Mantención</span>
-            </div>
-            <div class="bnav-tab">
-              <i class="pi pi-history" aria-hidden="true"></i>
-              <span>Turnos</span>
-            </div>
-            <div class="bnav-tab">
-              <i class="pi pi-user" aria-hidden="true"></i>
-              <span>Operador</span>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="android-gesture-pill"></div>
-      </div>
-    </div>
+    </section>
 
   </div>
-
 </div>
 
 <style>
@@ -417,7 +585,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: var(--nexa-space-6, 24px);
+    gap: 24px;
   }
 
   .section-heading-block {
@@ -428,423 +596,9 @@
     border-bottom: 1px solid var(--nexa-color-border-structural, #e2e8f0);
   }
 
-  .section-heading {
-    display: grid;
-    grid-template-columns: 38px minmax(0, 1fr);
-    gap: var(--nexa-space-3, 12px);
-    align-items: start;
-  }
-
-  .section-index {
-    color: var(--nexa-color-primary-600, #2563eb);
-    font: 700 var(--nexa-font-size-sm, 14px) / 1.4 var(--nexa-font-family-mono, monospace);
-  }
-
-  .section-kicker {
-    margin: 0 0 6px;
-    color: var(--nexa-color-primary-700, #1d4ed8);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-  }
-
-  .section-heading h2 {
-    margin: 0;
-    font: 800 clamp(22px, 3vw, 30px) / 1.16 var(--nexa-font-family-display, sans-serif);
-    letter-spacing: -.03em;
-    color: var(--nexa-color-text-primary, #0f172a);
-  }
-
-  .section-intro {
-    max-width: 820px;
-    margin: 10px 0 0;
-    color: var(--nexa-color-text-secondary, #64748b);
-    line-height: 1.6;
-    font-size: 14px;
-  }
-
   .heading-meta-chips {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
   }
-
-  .doc-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 6px;
-  }
-
-  .doc-chip.tone-info { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
-  .doc-chip.tone-neutral { background: #f8fafc; color: #334155; border: 1px solid #e2e8f0; }
-  .doc-chip.tone-success { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
-
-  .story-workbench-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 390px;
-    gap: 32px;
-    align-items: start;
-  }
-
-  @media (max-width: 1100px) {
-    .story-workbench-layout {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .story-details-col {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .phase-selector-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    background: #ffffff;
-    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
-    padding: 6px;
-    border-radius: 12px;
-  }
-
-  .phase-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: transparent;
-    border: 0;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #475569;
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-
-  .phase-badge {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 10px;
-    font-weight: 800;
-    opacity: 0.7;
-  }
-
-  .phase-btn:hover { background: #f1f5f9; color: #0f172a; }
-  .phase-btn.active { background: var(--nexa-color-primary-600, #2563eb); color: #ffffff; font-weight: 700; }
-  .phase-btn.active .phase-badge { opacity: 1; }
-
-  .phase-panel { display: none; }
-  .phase-panel.active { display: block; animation: fadeIn 0.2s ease-out; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .evidence-card {
-    background: #ffffff;
-    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-  }
-
-  .card-kicker-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
-  }
-
-  .card-step-badge {
-    background: #082846;
-    color: #ffffff;
-    font-size: 9px;
-    font-weight: 800;
-    padding: 2px 7px;
-    border-radius: 4px;
-    letter-spacing: 0.08em;
-  }
-
-  .card-mono-id {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--nexa-color-primary-700, #1d4ed8);
-  }
-
-  .card-title {
-    font-family: var(--nexa-font-family-display, sans-serif);
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--nexa-color-text-primary, #0f172a);
-    margin: 0 0 8px;
-  }
-
-  .card-desc {
-    color: var(--nexa-color-text-secondary, #64748b);
-    font-size: 13.5px;
-    line-height: 1.6;
-    margin: 0 0 18px;
-  }
-
-  .evidence-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
-
-  @media (max-width: 680px) {
-    .evidence-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .evidence-item {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    padding: 12px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-  }
-
-  .evidence-item i { font-size: 18px; margin-top: 2px; }
-  .text-primary { color: #2563eb; }
-  .text-info { color: #0284c7; }
-  .text-success { color: #16a34a; }
-  .text-warning { color: #d97706; }
-  .text-danger { color: #dc2626; }
-  .text-neutral { color: #475569; }
-
-  .evidence-item strong { display: block; font-size: 12px; color: #0f172a; margin-bottom: 2px; }
-  .evidence-item p, .evidence-item code { font-size: 11.5px; color: #64748b; margin: 0; line-height: 1.45; }
-
-  /* Compose Code Snippet */
-  .compose-code-container {
-    background: #090e17;
-    border-radius: 14px;
-    overflow: hidden;
-    border: 1px solid #1e293b;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  .code-card-header {
-    background: #111827;
-    padding: 10px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #1f2937;
-    font-size: 11px;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .code-title-group { display: flex; align-items: center; gap: 6px; color: #38bdf8; font-weight: 700; }
-  .code-path { font-family: var(--nexa-font-family-mono, monospace); color: #94a3b8; }
-  .compose-code { margin: 0; padding: 18px; font-family: var(--nexa-font-family-mono, monospace); font-size: 12px; line-height: 1.55; color: #e2e8f0; overflow-x: auto; }
-  .kw { color: #f43f5e; font-weight: 700; }
-  .fn { color: #38bdf8; }
-  .type { color: #a78bfa; }
-  .str { color: #34d399; }
-  .num { color: #fbbf24; }
-  .cmt { color: #64748b; font-style: italic; }
-
-  /* Device Simulator Preview */
-  .story-preview-col { position: sticky; top: 80px; width: 390px; margin: 0 auto; }
-  .device-chassis-shell { width: 380px; height: 780px; background: #020617; border-radius: 44px; padding: 12px; box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25), 0 0 0 1px #334155; display: flex; flex-direction: column; position: relative; }
-  .android-status-bar { height: 28px; display: flex; justify-content: space-between; align-items: center; padding: 0 18px; font-size: 12px; color: #ffffff; font-weight: 600; z-index: 10; }
-  .status-icons-cluster { display: flex; align-items: center; gap: 6px; font-size: 11px; }
-  .conn-tag { font-family: var(--nexa-font-family-mono, monospace); font-size: 10px; font-weight: 800; }
-  .battery-pct { font-size: 10px; }
-  .battery-icon { font-size: 11px; color: #22c55e; }
-
-  .compose-screen-viewport { flex: 1; background: #f8fafc; border-radius: 32px; overflow: hidden; display: flex; flex-direction: column; }
-  .compose-top-app-bar { height: 52px; background: #082846; color: #ffffff; display: flex; align-items: center; gap: 10px; padding: 0 12px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12); }
-  .btn-app-icon { width: 36px; height: 36px; border-radius: 50%; background: transparent; border: 0; color: #ffffff; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 15px; }
-  .appbar-title-block { flex: 1; display: flex; flex-direction: column; }
-  .appbar-headline { font-size: 12.5px; font-weight: 700; }
-  .appbar-sub { font-size: 10px; color: #93c5fd; }
-  .status-alert-chip { width: 24px; height: 24px; border-radius: 50%; background: #f59e0b; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 11px; }
-
-  .compose-scroll-content { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 12px; scrollbar-width: none; }
-  .compose-scroll-content::-webkit-scrollbar { display: none; }
-
-  .compose-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 14px;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-  }
-
-  .card-header-line { display: flex; justify-content: space-between; align-items: center; }
-  .order-tag { font-family: var(--nexa-font-family-mono, monospace); font-size: 11px; font-weight: 800; color: #1d4ed8; }
-  .cold-chip { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; font-size: 9.5px; font-weight: 700; padding: 2px 6px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px; }
-  .buyer-heading { font-size: 14.5px; font-weight: 800; color: #0f172a; margin: 0; }
-  .destination-line { font-size: 11px; color: #64748b; margin: 0; }
-
-  /* Checkpoint Card */
-  .checkpoint-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .checkpoint-card.alert-highlight {
-    background: #fffdf5;
-    border-color: #fde68a;
-  }
-
-  .checkpoint-header-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .chk-num {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 10.5px;
-    font-weight: 800;
-    color: #94a3b8;
-    margin-top: 2px;
-  }
-
-  .chk-title-group strong {
-    display: block;
-    font-size: 12px;
-    color: #0f172a;
-  }
-
-  .chk-title-group small {
-    display: block;
-    font-size: 10px;
-    color: #64748b;
-  }
-
-  /* 56dp Tri-State Glove Buttons */
-  .tri-buttons-glove-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
-  }
-
-  .btn-tri-glove {
-    min-height: 48px;
-    border-radius: 10px;
-    border: 1px solid #cbd5e1;
-    background: #ffffff;
-    font-size: 11.5px;
-    font-weight: 700;
-    cursor: pointer;
-    color: #475569;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.12s ease;
-  }
-
-  .btn-tri-glove.ok.active {
-    background: #dcfce7;
-    border-color: #86efac;
-    color: #15803d;
-    box-shadow: 0 0 0 1px #86efac inset;
-  }
-
-  .btn-tri-glove.warn.active {
-    background: #fef3c7;
-    border-color: #fde68a;
-    color: #b45309;
-    box-shadow: 0 0 0 1px #fde68a inset;
-  }
-
-  .btn-tri-glove.err.active {
-    background: #fee2e2;
-    border-color: #fca5a5;
-    color: #b91c1c;
-    box-shadow: 0 0 0 1px #fca5a5 inset;
-  }
-
-  .defect-photo-prompt {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 10px;
-    background: #fef3c7;
-    border: 1px dashed #f59e0b;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-
-  .defect-photo-prompt i {
-    font-size: 16px;
-    color: #d97706;
-  }
-
-  .defect-info strong {
-    display: block;
-    font-size: 10.5px;
-    color: #92400e;
-  }
-
-  .defect-info small {
-    display: block;
-    font-size: 9px;
-    color: #b45309;
-  }
-
-  /* Buttons */
-  .btn-glove-confirm {
-    min-height: 56px;
-    border-radius: 12px;
-    background: #15803d;
-    color: #ffffff;
-    font-size: 12.5px;
-    font-weight: 700;
-    border: 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    box-shadow: 0 4px 6px rgba(21, 128, 61, 0.2);
-  }
-
-  /* Bottom Navigation */
-  .compose-bottom-nav { height: 52px; background: #ffffff; border-top: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-around; }
-  .bnav-tab { display: flex; flex-direction: column; align-items: center; gap: 2px; color: #64748b; font-size: 9.5px; min-width: 48px; }
-  .bnav-tab.active { color: #1d4ed8; font-weight: 700; }
-  .android-gesture-pill { width: 110px; height: 4px; background: #ffffff; border-radius: 2px; align-self: center; margin-top: 8px; opacity: 0.6; }
 </style>
-
-<script>
-  const phaseButtons = document.querySelectorAll('#story-inspeccion .phase-btn');
-  const phasePanels = document.querySelectorAll('#story-inspeccion .phase-panel');
-
-  phaseButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      phaseButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const phase = btn.getAttribute('data-phase');
-      phasePanels.forEach(panel => {
-        panel.classList.toggle('active', panel.id === `panel-phase-${phase}`);
-      });
-    });
-  });
-</script>

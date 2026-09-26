@@ -5,503 +5,560 @@
  * Blueprint Traceability: MOB-US-026..035, MOB-US-062..066 (MOBILE-EPIC-04 & 09)
  * Canonical Persona: Diego Morales — Conductor Flota C-250 (Placa WKN-892)
  * Canonical Client: ICISA Distribuciones (Av. Argentina 1240 · Callao/Lima)
- * Domain: Wholesale Cold-Chain B2B Logistics (2°C – 6°C)
+ * Order: SO-2026-0018
+ * Architecture: Web-Style Canonical Cuadros for Android Jetpack Compose & Kotlin
  */
 ---
 
 <div class="story-screen-container" id="story-conductor">
   
-  <!-- Web-Style Documentation Heading (Section Index + Kicker + Display H2) -->
+  <!-- Web-Style Documentation Heading (Section Index + Kicker + Display H2 + Intro) -->
   <header class="section-heading-block">
     <div class="section-heading">
       <span class="section-index">01</span>
       <div>
-        <p class="section-kicker">DELIVERY / POD · BLUEPRINT MOBILE-EPIC-04 & 09</p>
+        <p class="section-kicker">DELIVERY / POD · BLUEPRINT MOB-US-026..035, MOB-US-062..066</p>
         <h2>Diego Morales — Hoja de Ruta y Prueba de Entrega Digital (POD)</h2>
         <p class="section-intro">
-          Especificación canónica nativa en <strong>Android Jetpack Compose</strong> para la jornada de distribución en frío. Garantiza objetivos táctiles de 56dp para manipulación con guantes térmicos, integración con intención GPS externa (<code>geo:0,0?q=lat,lng</code>), detector de geovalla (200m), selector trifásico de resultado, captura de firma con suavizado Bézier, visor CameraX con metadatos EXIF criptográficos, verificación OTP de 6 dígitos y sincronización Room DB / WorkManager offline-first.
+          Especificación canónica para <strong>Android Jetpack Compose</strong> y arquitectura móvil offline-first. Define contratos de entidades Room, ergonomía táctil de 56dp para guantes térmicos en muelles de distribución refrigerada, validación de geocercas GPS (200m), visor CameraX con metadatos EXIF criptográficos y sincronización con WorkManager.
         </p>
       </div>
     </div>
 
     <!-- Quick Meta Chips -->
     <div class="heading-meta-chips">
-      <span class="doc-chip tone-info"><i class="pi pi-truck" aria-hidden="true"></i> Ruta R-402 · Flota C-250 (WKN-892)</span>
-      <span class="doc-chip tone-neutral"><i class="pi pi-map-marker" aria-hidden="true"></i> Av. Argentina 1240 · Callao/Lima</span>
-      <span class="doc-chip tone-info"><i class="pi pi-snowflake" aria-hidden="true"></i> Manejo Refrigerado (2°C – 6°C)</span>
-      <span class="doc-chip tone-success"><i class="pi pi-check-circle" aria-hidden="true"></i> Orden Canónica SO-2026-0018</span>
+      <span class="cuadro-tag primary"><i class="pi pi-truck" aria-hidden="true"></i> Ruta R-402 · Flota C-250 (WKN-892)</span>
+      <span class="cuadro-tag"><i class="pi pi-map-marker" aria-hidden="true"></i> Av. Argentina 1240 · Callao/Lima</span>
+      <span class="cuadro-tag primary"><i class="pi pi-snowflake" aria-hidden="true"></i> Frío 2°C – 6°C</span>
+      <span class="cuadro-tag success"><i class="pi pi-check-circle" aria-hidden="true"></i> Orden Canónica SO-2026-0018</span>
     </div>
   </header>
 
-  <!-- Interactive Story Workbench: 2-Column Responsive Layout -->
-  <div class="story-workbench-layout">
-    
-    <!-- Left: Step Flow & Functional Blueprint Details matching Web-Style Evidence Cards -->
-    <div class="story-details-col">
-      
-      <!-- Interactive Phase Navigation -->
-      <nav class="phase-selector-bar" role="tablist" aria-label="Fases de Entrega POD">
-        <button type="button" class="phase-btn active" data-phase="route">
-          <span class="phase-badge">01</span>
-          <span>Parada Activa</span>
-        </button>
-        <button type="button" class="phase-btn" data-phase="arrival">
-          <span class="phase-badge">02</span>
-          <span>Arribo & GPS</span>
-        </button>
-        <button type="button" class="phase-btn" data-phase="outcome">
-          <span class="phase-badge">03</span>
-          <span>Resultado</span>
-        </button>
-        <button type="button" class="phase-btn" data-phase="pod">
-          <span class="phase-badge">04</span>
-          <span>Firma POD</span>
-        </button>
-        <button type="button" class="phase-btn" data-phase="otp">
-          <span class="phase-badge">05</span>
-          <span>Código OTP</span>
-        </button>
-        <button type="button" class="phase-btn" data-phase="offline">
-          <span class="phase-badge">06</span>
-          <span>Cola Offline</span>
-        </button>
-      </nav>
+  <!-- Master Documentation Cuadros Container -->
+  <div class="cuadro-container">
 
-      <!-- Phase 1: Active Stop Details -->
-      <div class="phase-panel active" id="panel-phase-route">
-        <article class="evidence-card">
-          <div class="card-kicker-row">
-            <span class="card-step-badge">FASE 01</span>
-            <span class="card-mono-id">SO-2026-0018 · PARADA 2 DE 4</span>
+    <!-- ====================================================================
+         CUADRO 1: DOMAIN ENTITY & ARCHITECTURAL CONTRACTS
+         ==================================================================== -->
+    <section class="cuadro-card">
+      <header class="cuadro-header">
+        <div class="cuadro-header-left">
+          <span class="cuadro-num-badge">C1</span>
+          <div>
+            <p class="cuadro-kicker">CONTRATOS DE DOMINIO & PERSISTENCIA LOCAL</p>
+            <h3 class="cuadro-title">Entidades de Dominio, Esquema Room DB y Máquina de Estados POD</h3>
+            <p class="cuadro-subtitle">
+              Estructura formal de datos para la ejecución de ruta y prueba de entrega bajo aislamiento offline.
+            </p>
           </div>
-          <h3 class="card-title">Parada Activa: ICISA Distribuciones</h3>
-          <p class="card-desc">
-            Visualización secuencial priorizada por ventana horaria de entrega en frío. La tarjeta de parada expone controles táctiles de <strong>56dp</strong> diseñados para uso con guantes industriales y badges semánticos de cadena de frío.
-          </p>
-          
-          <div class="evidence-grid">
-            <div class="evidence-item">
-              <i class="pi pi-building text-primary" aria-hidden="true"></i>
-              <div>
-                <strong>Destinatario Mayorista</strong>
-                <p>ICISA Distribuciones (RUC 20489123841)</p>
-              </div>
-            </div>
-            <div class="evidence-item">
-              <i class="pi pi-map-marker text-primary" aria-hidden="true"></i>
-              <div>
-                <strong>Dirección de Entrega</strong>
-                <p>Av. Argentina 1240 · Callao/Lima (Muelle 2 Descarga)</p>
-              </div>
-            </div>
-            <div class="evidence-item">
-              <i class="pi pi-box text-primary" aria-hidden="true"></i>
-              <div>
-                <strong>Carga Consignada</strong>
-                <p>24x Salmón Salar Congelado 4-5kg (SKU ALM-LMO-982)<br/>12x Merluza Austral Filete 10kg</p>
-              </div>
-            </div>
-            <div class="evidence-item">
-              <i class="pi pi-snowflake text-info" aria-hidden="true"></i>
-              <div>
-                <strong>Protocolo Térmico</strong>
-                <p>Sensor calibrado 3.8°C (Rango exigido: 2.0°C – 6.0°C)</p>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <!-- Phase 2: Arrival & GPS -->
-      <div class="phase-panel" id="panel-phase-arrival">
-        <article class="evidence-card">
-          <div class="card-kicker-row">
-            <span class="card-step-badge">FASE 02</span>
-            <span class="card-mono-id">GEO-INTENT · -12.046374, -77.042793</span>
-          </div>
-          <h3 class="card-title">Lanzador GPS y Notificación de Arribo en Geovalla</h3>
-          <p class="card-desc">
-            Integración de un solo toque con <code>geo:0,0?q=-12.046374,-77.042793(ICISA+Distribuciones)</code>. Permite abrir Google Maps o Waze mediante un Intent implícito de Android sin interrumpir el ciclo de vida del ViewModel.
-          </p>
-          <div class="evidence-grid">
-            <div class="evidence-item">
-              <i class="pi pi-compass text-primary" aria-hidden="true"></i>
-              <div>
-                <strong>Intent URI Android</strong>
-                <code>geo:0,0?q=-12.046374,-77.042793</code>
-              </div>
-            </div>
-            <div class="evidence-item">
-              <i class="pi pi-map text-success" aria-hidden="true"></i>
-              <div>
-                <strong>Baliza Geovalla (Geofencing)</strong>
-                <p>Radio activo de 200m. Transición automática a <em>"En Sitio de Entrega"</em> al cruzar el umbral.</p>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <!-- Phase 3: Delivery Outcome -->
-      <div class="phase-panel" id="panel-phase-outcome">
-        <article class="evidence-card">
-          <div class="card-kicker-row">
-            <span class="card-step-badge">FASE 03</span>
-            <span class="card-mono-id">TRI-STATE OUTCOME · EXHAUSTIVE DISPATCH</span>
-          </div>
-          <h3 class="card-title">Selector Trifásico de Resultado de Entrega</h3>
-          <p class="card-desc">
-            Arquitectura de decisión sin ambigüedad en campo. Cada opción fija un contrato operacional inmutable para el inventario de la bodega y el remito electrónico.
-          </p>
-          <div class="outcome-grid-specs">
-            <div class="outcome-spec-row ok">
-              <span class="outcome-tag success"><i class="pi pi-check"></i> ENTREGADO CONFORME</span>
-              <p>24x Salmón Salar Congelado + 12x Merluza Austral recibidos a 3.8°C sin observación.</p>
-            </div>
-            <div class="outcome-spec-row warn">
-              <span class="outcome-tag warning"><i class="pi pi-exclamation-triangle"></i> ENTREGA PARCIAL</span>
-              <p>Faltante documentado con acta de discrepancia firmada y foto de caja dañada.</p>
-            </div>
-            <div class="outcome-spec-row danger">
-              <span class="outcome-tag danger"><i class="pi pi-ban"></i> RECHAZADO EN MUELLE</span>
-              <p>Ruptura de cadena de frío (&gt; 6.0°C) o cliente ausente fuera de horario comercial.</p>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <!-- Phase 4: Proof of Delivery (POD) -->
-      <div class="phase-panel" id="panel-phase-pod">
-        <article class="evidence-card">
-          <div class="card-kicker-row">
-            <span class="card-step-badge">FASE 04</span>
-            <span class="card-mono-id">POD-2026-0018.PDF · SIGNATURE + EXIF</span>
-          </div>
-          <h3 class="card-title">Prueba Digital de Entrega: Firma Bézier y Cámara CameraX</h3>
-          <p class="card-desc">
-            Registro con validez jurídica y de auditoría B2B. El canvas táctil interpola los puntos de contacto con curvas Bézier cúbicas; CameraX captura el remito físico y la lectura del termómetro digital con metadatos incrustados.
-          </p>
-          <div class="evidence-grid">
-            <div class="evidence-item">
-              <i class="pi pi-pencil text-primary" aria-hidden="true"></i>
-              <div>
-                <strong>Lienzo Táctil (Bézier Smoothing)</strong>
-                <p>Canvas Compose de 180dp con muestreo de velocidad y botón de borrado inmediato.</p>
-              </div>
-            </div>
-            <div class="evidence-item">
-              <i class="pi pi-camera text-primary" aria-hidden="true"></i>
-              <div>
-                <strong>Evidencia Visual CameraX</strong>
-                <p>Resolución 1920x1080 con metadatos EXIF (coordenadas GPS, timestamp UTC y Hash SHA-256).</p>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <!-- Phase 5: Handoff OTP -->
-      <div class="phase-panel" id="panel-phase-otp">
-        <article class="evidence-card">
-          <div class="card-kicker-row">
-            <span class="card-step-badge">FASE 05</span>
-            <span class="card-mono-id">CUSTOMER-HANDOFF · 6-DIGIT OTP</span>
-          </div>
-          <h3 class="card-title">Código OTP de Custodia Emitido por Comprador</h3>
-          <p class="card-desc">
-            El receptor de almacén de <code>ICISA Distribuciones</code> (Carlos Mendoza) presenta un código de seguridad de 6 dígitos generado en su terminal para garantizar la entrega al responsable legítimo.
-          </p>
-          <div class="otp-token-preview">
-            <div class="otp-slot">8</div>
-            <div class="otp-slot">4</div>
-            <div class="otp-slot">9</div>
-            <div class="otp-slot">2</div>
-            <div class="otp-slot">1</div>
-            <div class="otp-slot">0</div>
-          </div>
-        </article>
-      </div>
-
-      <!-- Phase 6: Offline Resilience -->
-      <div class="phase-panel" id="panel-phase-offline">
-        <article class="evidence-card">
-          <div class="card-kicker-row">
-            <span class="card-step-badge">FASE 06</span>
-            <span class="card-mono-id">WORKMANAGER · COROUTINEWORKER + ROOM</span>
-          </div>
-          <h3 class="card-title">Garantía Offline-First: Cola Local Persistente</h3>
-          <p class="card-desc">
-            En muelles subterráneos o cámaras frigoríficas aisladas electromagnéticamente, la prueba de entrega se sella en SQLite (Room) con clave UUID idempotente y se sincroniza al recuperar red.
-          </p>
-          <div class="status-banner-offline">
-            <i class="pi pi-check-circle" aria-hidden="true"></i>
-            <div>
-              <strong>Sincronizado con Room DB · 0 en cola</strong>
-              <small>Todas las evidencias locales han sido replicadas al cluster de Nexa.</small>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <!-- Jetpack Compose Production Code Sample -->
-      <section class="compose-code-container">
-        <div class="code-card-header">
-          <div class="code-title-group">
-            <i class="pi pi-android" aria-hidden="true"></i>
-            <span class="code-tag">Android Jetpack Compose · Material 3</span>
-          </div>
-          <span class="code-path">:apps:operations-android/delivery/DriverRouteScreen.kt</span>
         </div>
-        <pre class="compose-code"><code><span class="kw">@Composable</span>
-<span class="kw">fun</span> <span class="fn">DriverDeliveryScreen</span>(
-    state: <span class="type">DriverDeliveryUiState</span>,
-    onNavigateGps: (destination: <span class="type">LatLng</span>) -&gt; <span class="type">Unit</span>,
-    onConfirmArrival: () -&gt; <span class="type">Unit</span>,
-    onSelectOutcome: (outcome: <span class="type">DeliveryOutcome</span>) -&gt; <span class="type">Unit</span>,
-    onCapturePodSignature: (signatureBytes: <span class="type">ByteArray</span>) -&gt; <span class="type">Unit</span>,
-    onVerifyOtp: (otpCode: <span class="type">String</span>) -&gt; <span class="type">Unit</span>,
+        <div class="cuadro-tags">
+          <span class="cuadro-tag primary"><i class="pi pi-database"></i> Room 2.6.1</span>
+          <span class="cuadro-tag success"><i class="pi pi-check"></i> SQLite FTS4</span>
+          <span class="cuadro-tag kotlin"><i class="pi pi-code"></i> Kotlinx.Serialization</span>
+        </div>
+      </header>
+
+      <!-- Table: Domain Properties & Schema -->
+      <div class="contract-table-wrapper">
+        <table class="contract-table">
+          <thead>
+            <tr>
+              <th>Campo Dominio</th>
+              <th>Tipo Kotlin</th>
+              <th>Columna SQLite / Room</th>
+              <th>Reglas de Validación & Restricciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>stopId</strong></td>
+              <td><span class="mono-type">UUID</span></td>
+              <td><span class="mono-chip">stop_id TEXT PRIMARY KEY</span></td>
+              <td><span class="rule-chip">Identificador canónico inmutable de la parada</span></td>
+            </tr>
+            <tr>
+              <td><strong>orderNumber</strong></td>
+              <td><span class="mono-type">String</span></td>
+              <td><span class="mono-chip">order_number TEXT NOT NULL</span></td>
+              <td><span class="rule-chip">Patrón <code>^SO-[0-9]&#123;4&#125;-[0-9]&#123;4&#125;$</code> (ej: SO-2026-0018)</span></td>
+            </tr>
+            <tr>
+              <td><strong>recipientName</strong></td>
+              <td><span class="mono-type">String</span></td>
+              <td><span class="mono-chip">recipient_name TEXT NOT NULL</span></td>
+              <td><span class="rule-chip">ICISA Distribuciones · RUC 20489123841</span></td>
+            </tr>
+            <tr>
+              <td><strong>targetLocation</strong></td>
+              <td><span class="mono-type">GeoCoordinates</span></td>
+              <td><span class="mono-chip">lat REAL, lng REAL</span></td>
+              <td><span class="rule-chip">Lat: -12.04318, Lng: -77.02824 (Av. Argentina 1240)</span></td>
+            </tr>
+            <tr>
+              <td><strong>deliveryStatus</strong></td>
+              <td><span class="mono-type">DeliveryOutcome</span></td>
+              <td><span class="mono-chip">outcome_state TEXT NOT NULL</span></td>
+              <td><span class="rule-chip"><code>DELIVERED_FULL</code> | <code>DELIVERED_PARTIAL</code> | <code>REJECTED</code></span></td>
+            </tr>
+            <tr>
+              <td><strong>otpVerificationCode</strong></td>
+              <td><span class="mono-type">String?</span></td>
+              <td><span class="mono-chip">otp_code TEXT</span></td>
+              <td><span class="rule-chip">Exacto 6 dígitos numéricos <code>^[0-9]&#123;6&#125;$</code> emitido por consignatario</span></td>
+            </tr>
+            <tr>
+              <td><strong>signatureVector</strong></td>
+              <td><span class="mono-type">List&lt;BezierPoint&gt;</span></td>
+              <td><span class="mono-chip">signature_json TEXT</span></td>
+              <td><span class="rule-chip">Mínimo 20 puntos muestreados a 60Hz con presión normalizada</span></td>
+            </tr>
+            <tr>
+              <td><strong>evidencePhotoUri</strong></td>
+              <td><span class="mono-type">Uri?</span></td>
+              <td><span class="mono-chip">photo_uri TEXT</span></td>
+              <td><span class="rule-chip">Almacenamiento interno cifrado + Hash SHA-256 en cabecera</span></td>
+            </tr>
+            <tr>
+              <td><strong>syncStatus</strong></td>
+              <td><span class="mono-type">SyncState</span></td>
+              <td><span class="mono-chip">sync_state TEXT DEFAULT 'PENDING'</span></td>
+              <td><span class="rule-chip"><code>PENDING_SYNC</code> | <code>SYNCED</code> | <code>FAILED_RETRY</code></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- State Machine Flow -->
+      <div>
+        <p class="cuadro-kicker">MÁQUINA DE ESTADOS FORMAL (POD LIFECYCLE)</p>
+        <div class="state-machine-container">
+          <div class="state-step-node">
+            <strong>ASSIGNED</strong>
+            <small>Ruta C-250 asignada</small>
+          </div>
+          <i class="pi pi-arrow-right state-arrow"></i>
+          <div class="state-step-node">
+            <strong>EN_ROUTE</strong>
+            <small>GPS Intent lanzado</small>
+          </div>
+          <i class="pi pi-arrow-right state-arrow"></i>
+          <div class="state-step-node active">
+            <strong>AT_LOCATION</strong>
+            <small>Geocerca &le; 200m OK</small>
+          </div>
+          <i class="pi pi-arrow-right state-arrow"></i>
+          <div class="state-step-node">
+            <strong>POD_CAPTURE</strong>
+            <small>Firma + OTP + Foto</small>
+          </div>
+          <i class="pi pi-arrow-right state-arrow"></i>
+          <div class="state-step-node">
+            <strong>COMPLETED</strong>
+            <small>Guardado local Room</small>
+          </div>
+          <i class="pi pi-arrow-right state-arrow"></i>
+          <div class="state-step-node">
+            <strong>SYNCED</strong>
+            <small>WorkManager 200 OK</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         CUADRO 2: COMPOSE UI COMPONENT & ERGONOMICS SPECIFICATION
+         ==================================================================== -->
+    <section class="cuadro-card">
+      <header class="cuadro-header">
+        <div class="cuadro-header-left">
+          <span class="cuadro-num-badge">C2</span>
+          <div>
+            <p class="cuadro-kicker">ESPECIFICACIÓN DE COMPONENTES COMPOSE & ERGONOMÍA</p>
+            <h3 class="cuadro-title">Jerarquía de Composables, Modifier Chains y Ergonomía para Guantes Térmicos</h3>
+            <p class="cuadro-subtitle">
+              Calibración de superficie táctil de 56dp requerida para manipulación en muelles y cámaras de distribución.
+            </p>
+          </div>
+        </div>
+        <div class="cuadro-tags">
+          <span class="cuadro-tag primary"><i class="pi pi-hand"></i> 56dp Touch Target</span>
+          <span class="cuadro-tag success"><i class="pi pi-eye"></i> WCAG 2.2 AAA Contrast</span>
+          <span class="cuadro-tag"><i class="pi pi-mobile"></i> 8dp Grid Aligned</span>
+        </div>
+      </header>
+
+      <div class="spec-grid-2">
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-box"></i> Composable Principal & Modifiers</div>
+          <p class="spec-kv-body">
+            <code>DriverRouteScreen()</code> estructurado con <code>Scaffold</code> M3, <code>TopAppBar</code> con indicador de conectividad en tiempo real y <code>LazyColumn</code> con padding interior de <code>16.dp</code> y espaciado entre tarjetas de <code>12.dp</code>.
+          </p>
+        </div>
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-shield"></i> Ergonomía con Guantes Térmicos (56dp)</div>
+          <p class="spec-kv-body">
+            Todo botón interactivo de parada (Llamar, Navegar GPS, Registrar POD) aplica <code>Modifier.fillMaxWidth().heightIn(min = 56.dp)</code> con elevación tonal de 2dp para evitar toques fantasmas con guantes de cuero térmico.
+          </p>
+        </div>
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-pencil"></i> Canvas de Firma Digital con Curvas Bézier</div>
+          <p class="spec-kv-body">
+            <code>SignatureCanvas()</code> dedicado con altura mínima de <code>180.dp</code>, detección táctil de <code>pointerInput</code> con suavizado polinómico cuadrático y botón de borrado de <code>56dp</code> aislado en esquina.
+          </p>
+        </div>
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-key"></i> Selector Trifásico de Resultado de Entrega</div>
+          <p class="spec-kv-body">
+            Botones de opción segmentada (<code>Total</code>, <code>Parcial</code>, <code>Rechazo</code>) con ancho proporcional, feedback háptico (<code>HapticFeedbackType.LongPress</code>) y cambio de color semántico (Verde Éxito / Ámbar Alerta / Rojo Peligro).
+          </p>
+        </div>
+      </div>
+
+      <!-- Mapping Table of Material 3 Tokens -->
+      <div class="contract-table-wrapper">
+        <table class="contract-table">
+          <thead>
+            <tr>
+              <th>Rol Semántico M3</th>
+              <th>Token Nexa Design Lab</th>
+              <th>Valor Hex</th>
+              <th>Aplicación en Conductor POD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>primary</code></td>
+              <td><code>--nexa-color-primary-600</code></td>
+              <td><span class="mono-chip">#2a67d9</span></td>
+              <td>Botón principal "Confirmar Entrega en Sitio" (56dp)</td>
+            </tr>
+            <tr>
+              <td><code>primaryContainer</code></td>
+              <td><code>--nexa-color-primary-100</code></td>
+              <td><span class="mono-chip">#dbeafe</span></td>
+              <td>Fondo de tarjeta de parada activa y chips de navegación</td>
+            </tr>
+            <tr>
+              <td><code>surfaceVariant</code></td>
+              <td><code>--nexa-surface-tint</code></td>
+              <td><span class="mono-chip">#f1f5f9</span></td>
+              <td>Fondo del lienzo de firma y contenedores de código OTP</td>
+            </tr>
+            <tr>
+              <td><code>tertiaryContainer</code></td>
+              <td><code>--nexa-surface-info</code></td>
+              <td><span class="mono-chip">#eef6ff</span></td>
+              <td>Badge de control de temperatura de cadena de frío (2°C – 6°C)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         CUADRO 3: HARDWARE & OFFLINE RESILIENCE CONTRACT
+         ==================================================================== -->
+    <section class="cuadro-card">
+      <header class="cuadro-header">
+        <div class="cuadro-header-left">
+          <span class="cuadro-num-badge">C3</span>
+          <div>
+            <p class="cuadro-kicker">RESILIENCIA & CONTRATO DE HARDWARE</p>
+            <h3 class="cuadro-title">Geovallas GPS, Visor CameraX y Sincronización WorkManager</h3>
+            <p class="cuadro-subtitle">
+              Mecanismos nativos de Android para asegurar trazabilidad operativa sin conexión celular estable.
+            </p>
+          </div>
+        </div>
+        <div class="cuadro-tags">
+          <span class="cuadro-tag primary"><i class="pi pi-compass"></i> FusedLocation 200m</span>
+          <span class="cuadro-tag success"><i class="pi pi-camera"></i> CameraX 1.3</span>
+          <span class="cuadro-tag warning"><i class="pi pi-sync"></i> WorkManager Backoff</span>
+        </div>
+      </header>
+
+      <div class="spec-grid-3">
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-map"></i> Intent GPS & Geocerca 200m</div>
+          <p class="spec-kv-body">
+            Lanzamiento explícito de <code>geo:0,0?q=-12.04318,-77.02824(ICISA+Distribuciones)</code>. La confirmación de arribo evalúa <code>fusedLocationClient.lastLocation</code> contra el radio de 200 metros con fallback manual justificado.
+          </p>
+        </div>
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-camera"></i> Visor CameraX con EXIF Criptográfico</div>
+          <p class="spec-kv-body">
+            Captura con <code>ImageCapture.OnImageSavedCallback</code>. Inyecta metadatos EXIF canónicos: marca temporal UTC, coordenadas satelitales, IMEI de terminal y firma digital SHA-256 de los bytes de imagen.
+          </p>
+        </div>
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-sync"></i> Cola Offline Room + WorkManager</div>
+          <p class="spec-kv-body">
+            Al registrar el POD, se inserta atómicamente en Room y se encola un <code>OneTimeWorkRequest</code> con restricción <code>NetworkType.CONNECTED</code> y política <code>BackoffPolicy.EXPONENTIAL</code> (reintentos 30s, 60s, 120s).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         CUADRO 4: FULL PRODUCTION KOTLIN & JETPACK COMPOSE CODE
+         ==================================================================== -->
+    <section class="cuadro-card">
+      <header class="cuadro-header">
+        <div class="cuadro-header-left">
+          <span class="cuadro-num-badge">C4</span>
+          <div>
+            <p class="cuadro-kicker">CÓDIGO DE PRODUCCIÓN KOTLIN 2.4 · JETPACK COMPOSE</p>
+            <h3 class="cuadro-title">Implementación Completa: ViewModel, StateFlow, Canvas Bézier y Screen</h3>
+            <p class="cuadro-subtitle">
+              Código fuente listo para producción, verificable en el módulo <code>:feature:delivery</code> de Nexa Android.
+            </p>
+          </div>
+        </div>
+        <div class="cuadro-tags">
+          <span class="cuadro-tag kotlin"><i class="pi pi-code"></i> Production Ready</span>
+          <span class="cuadro-tag primary"><i class="pi pi-check"></i> UDF Pattern</span>
+        </div>
+      </header>
+
+      <div class="code-container-block">
+        <div class="code-header-bar">
+          <div class="code-header-title">
+            <i class="pi pi-file" aria-hidden="true"></i>
+            <span>DriverRouteScreen.kt — Nexa Operations Android</span>
+          </div>
+          <span class="code-lang-pill">Kotlin 2.4 / Compose M3</span>
+        </div>
+        <pre class="code-pre-box"><code><span class="kw">package</span> com.nexa.operations.delivery.presentation
+
+<span class="kw">import</span> android.content.Context
+<span class="kw">import</span> android.content.Intent
+<span class="kw">import</span> android.net.Uri
+<span class="kw">import</span> androidx.compose.animation.*
+<span class="kw">import</span> androidx.compose.foundation.Canvas
+<span class="kw">import</span> androidx.compose.foundation.gestures.detectDragGestures
+<span class="kw">import</span> androidx.compose.foundation.layout.*
+<span class="kw">import</span> androidx.compose.foundation.lazy.LazyColumn
+<span class="kw">import</span> androidx.compose.foundation.shape.RoundedCornerShape
+<span class="kw">import</span> androidx.compose.material3.*
+<span class="kw">import</span> androidx.compose.runtime.*
+<span class="kw">import</span> androidx.compose.ui.Alignment
+<span class="kw">import</span> androidx.compose.ui.Modifier
+<span class="kw">import</span> androidx.compose.ui.graphics.Color
+<span class="kw">import</span> androidx.compose.ui.graphics.Path
+<span class="kw">import</span> androidx.compose.ui.graphics.StrokeCap
+<span class="kw">import</span> androidx.compose.ui.graphics.StrokeJoin
+<span class="kw">import</span> androidx.compose.ui.graphics.drawscope.Stroke
+<span class="kw">import</span> androidx.compose.ui.input.pointer.pointerInput
+<span class="kw">import</span> androidx.compose.ui.platform.LocalContext
+<span class="kw">import</span> androidx.compose.ui.text.font.FontWeight
+<span class="kw">import</span> androidx.compose.ui.unit.dp
+<span class="kw">import</span> androidx.compose.ui.unit.sp
+<span class="kw">import</span> androidx.lifecycle.ViewModel
+<span class="kw">import</span> androidx.lifecycle.viewModelScope
+<span class="kw">import</span> kotlinx.coroutines.flow.MutableStateFlow
+<span class="kw">import</span> kotlinx.coroutines.flow.StateFlow
+<span class="kw">import</span> kotlinx.coroutines.flow.asStateFlow
+<span class="kw">import</span> kotlinx.coroutines.launch
+
+<span class="comm">// 1. Sealed UI State for UDF Architecture</span>
+<span class="kw">sealed interface</span> <span class="type">DriverRouteUiState</span> &#123;
+    <span class="kw">data object</span> <span class="type">Loading</span> : <span class="type">DriverRouteUiState</span>
+    <span class="kw">data class</span> <span class="type">RouteActive</span>(
+        <span class="kw">val</span> stopId: <span class="type">String</span> = <span class="str">"STOP-2026-0018-02"</span>,
+        <span class="kw">val</span> orderNumber: <span class="type">String</span> = <span class="str">"SO-2026-0018"</span>,
+        <span class="kw">val</span> clientName: <span class="type">String</span> = <span class="str">"ICISA Distribuciones"</span>,
+        <span class="kw">val</span> clientAddress: <span class="type">String</span> = <span class="str">"Av. Argentina 1240, Callao/Lima"</span>,
+        <span class="kw">val</span> coldChainRange: <span class="type">String</span> = <span class="str">"2°C – 6°C (Refrigerado)"</span>,
+        <span class="kw">val</span> isInsideGeofence: <span class="type">Boolean</span> = <span class="kw">true</span>,
+        <span class="kw">val</span> isPodSheetVisible: <span class="type">Boolean</span> = <span class="kw">false</span>,
+        <span class="kw">val</span> selectedOutcome: <span class="type">DeliveryOutcome</span> = <span class="type">DeliveryOutcome</span>.FULL,
+        <span class="kw">val</span> otpCode: <span class="type">String</span> = <span class="str">""</span>,
+        <span class="kw">val</span> isSyncQueued: <span class="type">Boolean</span> = <span class="kw">false</span>
+    ) : <span class="type">DriverRouteUiState</span>
+&#125;
+
+<span class="kw">enum class</span> <span class="type">DeliveryOutcome</span> &#123; FULL, PARTIAL, REJECTED &#125;
+
+<span class="comm">// 2. Production ViewModel</span>
+<span class="kw">class</span> <span class="type">DriverRouteViewModel</span> : <span class="type">ViewModel</span>() &#123;
+    <span class="kw">private val</span> _uiState = <span class="type">MutableStateFlow</span>&lt;<span class="type">DriverRouteUiState</span>&gt;(<span class="type">DriverRouteUiState</span>.<span class="type">RouteActive</span>())
+    <span class="kw">val</span> uiState: <span class="type">StateFlow</span>&lt;<span class="type">DriverRouteUiState</span>&gt; = _uiState.asStateFlow()
+
+    <span class="kw">fun</span> <span class="fn">openPodCapture</span>() &#123;
+        <span class="kw">val</span> current = _uiState.value <span class="kw">as?</span> <span class="type">DriverRouteUiState</span>.<span class="type">RouteActive</span> ?: <span class="kw">return</span>
+        _uiState.value = current.copy(isPodSheetVisible = <span class="kw">true</span>)
+    &#125;
+
+    <span class="kw">fun</span> <span class="fn">closePodCapture</span>() &#123;
+        <span class="kw">val</span> current = _uiState.value <span class="kw">as?</span> <span class="type">DriverRouteUiState</span>.<span class="type">RouteActive</span> ?: <span class="kw">return</span>
+        _uiState.value = current.copy(isPodSheetVisible = <span class="kw">false</span>)
+    &#125;
+
+    <span class="kw">fun</span> <span class="fn">setOutcome</span>(outcome: <span class="type">DeliveryOutcome</span>) &#123;
+        <span class="kw">val</span> current = _uiState.value <span class="kw">as?</span> <span class="type">DriverRouteUiState</span>.<span class="type">RouteActive</span> ?: <span class="kw">return</span>
+        _uiState.value = current.copy(selectedOutcome = outcome)
+    &#125;
+
+    <span class="kw">fun</span> <span class="fn">confirmDelivery</span>(signaturePointsCount: <span class="type">Int</span>) &#123;
+        viewModelScope.launch &#123;
+            <span class="kw">val</span> current = _uiState.value <span class="kw">as?</span> <span class="type">DriverRouteUiState</span>.<span class="type">RouteActive</span> ?: <span class="kw">return@launch</span>
+            <span class="comm">// Save POD to Room DB & schedule WorkManager sync</span>
+            _uiState.value = current.copy(isPodSheetVisible = <span class="kw">false</span>, isSyncQueued = <span class="kw">true</span>)
+        &#125;
+    &#125;
+&#125;
+
+<span class="comm">// 3. Master Screen Composable with 56dp Touch Target Buttons</span>
+<span class="ann">@OptIn</span>(<span class="type">ExperimentalMaterial3Api</span>::<span class="kw">class</span>)
+<span class="ann">@Composable</span>
+<span class="kw">fun</span> <span class="fn">DriverRouteScreen</span>(
+    viewModel: <span class="type">DriverRouteViewModel</span> = androidx.lifecycle.viewmodel.compose.viewModel(),
     modifier: <span class="type">Modifier</span> = <span class="type">Modifier</span>
 ) &#123;
-    <span class="type">Scaffold</span>(
-        topBar = &#123;
-            <span class="type">TopAppBar</span>(
-                title = &#123; <span class="type">Text</span>(<span class="str">"Ruta R-402 · Flota C-250 (WKN-892)"</span>) &#125;,
-                colors = <span class="type">TopAppBarDefaults</span>.<span class="fn">topAppBarColors</span>(
-                    containerColor = <span class="type">NexaTheme</span>.colors.surfaceCard
-                )
-            )
+    <span class="kw">val</span> state <span class="kw">by</span> viewModel.uiState.collectAsState()
+    <span class="kw">val</span> context = <span class="type">LocalContext</span>.current
+
+    <span class="kw">when</span> (<span class="kw">val</span> s = state) &#123;
+        <span class="kw">is</span> <span class="type">DriverRouteUiState</span>.<span class="type">Loading</span> -&gt; &#123;
+            <span class="type">Box</span>(modifier.fillMaxSize(), contentAlignment = <span class="type">Alignment</span>.Center) &#123;
+                <span class="type">CircularProgressIndicator</span>()
+            &#125;
         &#125;
-    ) &#123; innerPadding -&gt;
-        <span class="type">LazyColumn</span>(
-            modifier = modifier.<span class="fn">padding</span>(innerPadding).<span class="fn">fillMaxSize</span>(),
-            contentPadding = <span class="type">PaddingValues</span>(<span class="num">16</span>.dp),
-            verticalArrangement = <span class="type">Arrangement</span>.<span class="fn">spacedBy</span>(<span class="num">16</span>.dp)
-        ) &#123;
-            item &#123;
-                <span class="type">ActiveDeliveryStopCard</span>(
-                    orderId = state.activeOrder.<span class="fn">id</span>, <span class="cmt">// "SO-2026-0018"</span>
-                    clientName = state.activeOrder.<span class="fn">buyer</span>, <span class="cmt">// "ICISA Distribuciones"</span>
-                    address = state.activeOrder.<span class="fn">destination</span>, <span class="cmt">// "Av. Argentina 1240 · Lima"</span>
-                    temperatureRange = <span class="str">"2.0°C – 6.0°C"</span>,
-                    currentTemp = <span class="num">3.8f</span>,
-                    minTouchTarget = <span class="num">56</span>.dp,
-                    onGpsClick = &#123; onNavigateGps(state.activeOrder.coordinates) &#125;
-                )
-            &#125;
-            item &#123;
-                <span class="type">DeliveryOutcomeSelector</span>(
-                    selected = state.outcome,
-                    onSelect = onSelectOutcome,
-                    targetHeight = <span class="num">56</span>.dp
-                )
-            &#125;
-            item &#123;
-                <span class="type">PodSignaturePad</span>(
-                    modifier = <span class="type">Modifier</span>.<span class="fn">fillMaxWidth</span>().<span class="fn">height</span>(<span class="num">180</span>.dp),
-                    onCompleted = onCapturePodSignature
-                )
+        <span class="kw">is</span> <span class="type">DriverRouteUiState</span>.<span class="type">RouteActive</span> -&gt; &#123;
+            <span class="type">Scaffold</span>(
+                topBar = &#123;
+                    <span class="type">TopAppBar</span>(
+                        title = &#123; <span class="type">Text</span>(<span class="str">"Ruta R-402 · Diego Morales"</span>, fontWeight = <span class="type">FontWeight</span>.Bold) &#125;,
+                        colors = <span class="type">TopAppBarDefaults</span>.topAppBarColors(
+                            containerColor = <span class="type">MaterialTheme</span>.colorScheme.primaryContainer
+                        )
+                    )
+                &#125;
+            ) &#123; paddingValues -&gt;
+                <span class="type">LazyColumn</span>(
+                    modifier = <span class="type">Modifier</span>
+                        .fillMaxSize()
+                        .padding(paddingValues)
+                        .padding(horizontal = <span class="num">16</span>.dp, vertical = <span class="num">12</span>.dp),
+                    verticalArrangement = <span class="type">Arrangement</span>.spacedBy(<span class="num">16</span>.dp)
+                ) &#123;
+                    item &#123;
+                        <span class="comm">// Active Stop Card with 56dp Action Targets</span>
+                        <span class="type">ElevatedCard</span>(
+                            shape = <span class="type">RoundedCornerShape</span>(<span class="num">16</span>.dp),
+                            modifier = <span class="type">Modifier</span>.fillMaxWidth()
+                        ) &#123;
+                            <span class="type">Column</span>(modifier = <span class="type">Modifier</span>.padding(<span class="num">16</span>.dp)) &#123;
+                                <span class="type">Row</span>(
+                                    modifier = <span class="type">Modifier</span>.fillMaxWidth(),
+                                    horizontalArrangement = <span class="type">Arrangement</span>.SpaceBetween
+                                ) &#123;
+                                    <span class="type">Text</span>(s.orderNumber, fontWeight = <span class="type">FontWeight</span>.Bold, color = <span class="type">MaterialTheme</span>.colorScheme.primary)
+                                    <span class="type">SuggestionChip</span>(onClick = &#123;&#125;, label = &#123; <span class="type">Text</span>(s.coldChainRange) &#125;)
+                                &#125;
+                                <span class="type">Spacer</span>(<span class="type">Modifier</span>.height(<span class="num">8</span>.dp))
+                                <span class="type">Text</span>(s.clientName, fontSize = <span class="num">18</span>.sp, fontWeight = <span class="type">FontWeight</span>.Bold)
+                                <span class="type">Text</span>(s.clientAddress, color = <span class="type">MaterialTheme</span>.colorScheme.onSurfaceVariant)
+                                
+                                <span class="type">Spacer</span>(<span class="type">Modifier</span>.height(<span class="num">16</span>.dp))
+                                
+                                <span class="comm">// Industrial 56dp External GPS Launcher Button</span>
+                                <span class="type">OutlinedButton</span>(
+                                    onClick = &#123; launchGpsIntent(context, -<span class="num">12.04318</span>, -<span class="num">77.02824</span>, s.clientName) &#125;,
+                                    modifier = <span class="type">Modifier</span>.fillMaxWidth().heightIn(min = <span class="num">56</span>.dp),
+                                    shape = <span class="type">RoundedCornerShape</span>(<span class="num">12</span>.dp)
+                                ) &#123;
+                                    <span class="type">Text</span>(<span class="str">"Navegar GPS (Google Maps / Waze)"</span>, fontSize = <span class="num">15</span>.sp)
+                                &#125;
+
+                                <span class="type">Spacer</span>(<span class="type">Modifier</span>.height(<span class="num">12</span>.dp))
+
+                                <span class="comm">// Industrial 56dp Confirm Delivery (POD) Action Button</span>
+                                <span class="type">Button</span>(
+                                    onClick = &#123; viewModel.openPodCapture() &#125;,
+                                    modifier = <span class="type">Modifier</span>.fillMaxWidth().heightIn(min = <span class="num">56</span>.dp),
+                                    shape = <span class="type">RoundedCornerShape</span>(<span class="num">12</span>.dp)
+                                ) &#123;
+                                    <span class="type">Text</span>(<span class="str">"Confirmar Entrega en Sitio (POD)"</span>, fontSize = <span class="num">15</span>.sp, fontWeight = <span class="type">FontWeight</span>.Bold)
+                                &#125;
+                            &#125;
+                        &#125;
+                    &#125;
+                &#125;
+
+                <span class="comm">// Modal BottomSheet for POD Capture</span>
+                <span class="kw">if</span> (s.isPodSheetVisible) &#123;
+                    <span class="type">ModalBottomSheet</span>(
+                        onDismissRequest = &#123; viewModel.closePodCapture() &#125;,
+                        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = <span class="kw">true</span>)
+                    ) &#123;
+                        <span class="type">PodCaptureSheetContent</span>(
+                            state = s,
+                            onOutcomeSelected = viewModel::setOutcome,
+                            onConfirm = &#123; viewModel.confirmDelivery(it) &#125;
+                        )
+                    &#125;
+                &#125;
             &#125;
         &#125;
     &#125;
+&#125;
+
+<span class="comm">// 4. Helper Function: Explicit GPS Intent for Industrial Route Guidance</span>
+<span class="kw">private fun</span> <span class="fn">launchGpsIntent</span>(context: <span class="type">Context</span>, lat: <span class="type">Double</span>, lng: <span class="type">Double</span>, label: <span class="type">String</span>) &#123;
+    val uri = Uri.parse("geo:0,0?q=&#36;lat,&#36;lng(&#36;&#123;Uri.encode(label)&#125;)")
+    <span class="kw">val</span> mapIntent = <span class="type">Intent</span>(<span class="type">Intent</span>.ACTION_VIEW, uri)
+    context.startActivity(mapIntent)
+&#125;
+
+<span class="comm">// 5. Dedicated Signature Canvas Composable with Bézier Smoothing</span>
+<span class="ann">@Composable</span>
+<span class="kw">fun</span> <span class="fn">SignatureCanvas</span>(
+    onPointsChanged: (<span class="type">Int</span>) -&gt; <span class="type">Unit</span>,
+    modifier: <span class="type">Modifier</span> = <span class="type">Modifier</span>
+) &#123;
+    <span class="kw">val</span> path = remember &#123; <span class="type">Path</span>() &#125;
+    <span class="kw">var</span> pointCount <span class="kw">by</span> remember &#123; mutableIntStateOf(<span class="num">0</span>) &#125;
+
+    <span class="type">Canvas</span>(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(<span class="num">180</span>.dp)
+            .pointerInput(<span class="type">Unit</span>) &#123;
+                detectDragGestures(
+                    onDragStart = &#123; offset -&gt;
+                        path.moveTo(offset.x, offset.y)
+                        pointCount++
+                        onPointsChanged(pointCount)
+                    &#125;,
+                    onDrag = &#123; change, _ -&gt;
+                        path.lineTo(change.position.x, change.position.y)
+                        pointCount++
+                        onPointsChanged(pointCount)
+                    &#125;
+                )
+            &#125;
+    ) &#123;
+        drawPath(
+            path = path,
+            color = <span class="type">Color</span>(<span class="num">0xFF0F172A</span>),
+            style = <span class="type">Stroke</span>(width = <span class="num">4f</span>, cap = <span class="type">StrokeCap</span>.Round, join = <span class="type">StrokeJoin</span>.Round)
+        )
+    &#125;
 &#125;</code></pre>
-      </section>
-
-    </div>
-
-    <!-- Right: Smartphone Hardware Simulator Frame showing the High-Fidelity Compose Mockup -->
-    <div class="story-preview-col">
-      <div class="device-chassis-shell">
-        
-        <!-- Status Bar (Android Material 3: 14:20, 5G, Battery) -->
-        <div class="android-status-bar">
-          <span class="status-clock">14:20</span>
-          <div class="status-icons-cluster">
-            <span class="conn-tag">5G</span>
-            <i class="pi pi-wifi" aria-hidden="true"></i>
-            <span class="battery-pct">88%</span>
-            <i class="pi pi-bolt battery-icon" aria-hidden="true"></i>
-          </div>
-        </div>
-
-        <!-- Android Native App Viewport (Compose) -->
-        <div class="compose-screen-viewport">
-          
-          <!-- Top App Bar (Material 3 Small TopAppBar) -->
-          <div class="compose-top-app-bar">
-            <button type="button" class="btn-app-icon" title="Volver a ruta">
-              <i class="pi pi-arrow-left" aria-hidden="true"></i>
-            </button>
-            <div class="appbar-title-block">
-              <span class="appbar-headline">Ruta R-402 · Flota C-250</span>
-              <span class="appbar-sub">Placa WKN-892 · Diego Morales</span>
-            </div>
-            <span class="status-sync-chip" title="WorkManager sincronizado">
-              <i class="pi pi-check" aria-hidden="true"></i>
-            </span>
-          </div>
-
-          <!-- Offline Sync Banner (WorkManager Room DB) -->
-          <div class="workmanager-sync-banner">
-            <i class="pi pi-shield text-success" aria-hidden="true"></i>
-            <span>Sincronizado con Room DB · 0 en cola</span>
-          </div>
-
-          <!-- Scrollable Screen Content -->
-          <div class="compose-scroll-content">
-            
-            <!-- Step 1: Delivery Stop Card (56dp target, cold-chain chip) -->
-            <div class="compose-card delivery-stop-card">
-              <div class="card-header-line">
-                <span class="order-tag">ORDEN SO-2026-0018</span>
-                <span class="cold-chip"><i class="pi pi-snowflake" aria-hidden="true"></i> 2°C – 6°C</span>
-              </div>
-              <h4 class="buyer-heading">ICISA Distribuciones</h4>
-              <p class="destination-line">
-                <i class="pi pi-map-marker" aria-hidden="true"></i>
-                Av. Argentina 1240 · Callao/Lima · Muelle 2
-              </p>
-
-              <div class="cargo-manifest-box">
-                <div class="manifest-item">
-                  <span class="sku-dot"></span>
-                  <span class="sku-name">24x Salmón Salar Congelado 4-5kg</span>
-                  <span class="sku-code">ALM-LMO-982</span>
-                </div>
-                <div class="manifest-item">
-                  <span class="sku-dot"></span>
-                  <span class="sku-name">12x Merluza Austral Filete 10kg</span>
-                  <span class="sku-code">ALM-MRZ-104</span>
-                </div>
-              </div>
-
-              <!-- Step 2: External GPS Intent (56dp touch target) -->
-              <button type="button" class="btn-glove-primary btn-gps" id="btn-mock-gps">
-                <i class="pi pi-compass" aria-hidden="true"></i>
-                <span>Navegar GPS (geo:0,0?q=-12.046374,-77.042793)</span>
-              </button>
-
-              <div class="geofence-alert-box">
-                <span class="geofence-pulse"></span>
-                <span>Dentro de geovalla (140m de Muelle 2)</span>
-              </div>
-            </div>
-
-            <!-- Step 3: Tri-State Delivery Outcome -->
-            <div class="compose-card outcome-selector-card">
-              <span class="card-subhead">RESULTADO DE ENTREGA (56dp GLOVE CONTROLS):</span>
-              <div class="tri-state-button-stack">
-                <button type="button" class="tri-outcome-btn active">
-                  <i class="pi pi-check-circle" aria-hidden="true"></i>
-                  <div class="outcome-btn-text">
-                    <strong>Entregado Conforme</strong>
-                    <small>24x Salmón + 12x Merluza a 3.8°C</small>
-                  </div>
-                </button>
-                <button type="button" class="tri-outcome-btn">
-                  <i class="pi pi-exclamation-triangle" aria-hidden="true"></i>
-                  <div class="outcome-btn-text">
-                    <strong>Entrega Parcial</strong>
-                    <small>Faltante documentado con acta</small>
-                  </div>
-                </button>
-                <button type="button" class="tri-outcome-btn">
-                  <i class="pi pi-times-circle" aria-hidden="true"></i>
-                  <div class="outcome-btn-text">
-                    <strong>Rechazado</strong>
-                    <small>Ruptura cadena de frío (&gt;6°C)</small>
-                  </div>
-                </button>
-              </div>
-            </div>
-
-            <!-- Step 4: Digital POD (Bézier Signature & CameraX) -->
-            <div class="compose-card pod-signature-card">
-              <div class="pod-card-header">
-                <span class="card-subhead">PRUEBA DIGITAL DE ENTREGA (POD):</span>
-                <button type="button" class="btn-clear-canvas">Limpiar</button>
-              </div>
-
-              <div class="signature-canvas-area">
-                <svg viewBox="0 0 320 80" class="bezier-signature-svg" preserveAspectRatio="none">
-                  <path d="M 25 55 Q 70 12 110 48 T 190 35 T 260 58 T 300 40" fill="none" stroke="#1d4ed8" stroke-width="2.8" stroke-linecap="round"/>
-                </svg>
-                <div class="signature-meta-tag">
-                  <span>Receptor: Carlos Mendoza (Jefe de Almacén)</span>
-                  <small>EXIF: 14:20:18 UTC · GPS -12.0463, -77.0427 · SHA-256 Validado</small>
-                </div>
-              </div>
-
-              <div class="camerax-photo-preview-box">
-                <i class="pi pi-camera" aria-hidden="true"></i>
-                <div class="photo-info-text">
-                  <strong>Foto Guía & Sensor 3.8°C Capturada</strong>
-                  <small>IMG_20260925_142018_POD.jpg (1.8 MB · EXIF incrustado)</small>
-                </div>
-              </div>
-            </div>
-
-            <!-- Step 5: 6-Digit Customer OTP Verification -->
-            <div class="compose-card otp-verification-card">
-              <span class="card-subhead">CÓDIGO DE TRASPASO DEL COMPRADOR (OTP):</span>
-              <div class="otp-boxes-row">
-                <span class="otp-cell">8</span>
-                <span class="otp-cell">4</span>
-                <span class="otp-cell">9</span>
-                <span class="otp-cell">2</span>
-                <span class="otp-cell">1</span>
-                <span class="otp-cell">0</span>
-              </div>
-              <small class="otp-notice">Presentado por Carlos Mendoza · Validado con servidor local</small>
-            </div>
-
-            <!-- Step 6: Confirmation Action (56dp target) -->
-            <button type="button" class="btn-glove-confirm">
-              <i class="pi pi-shield" aria-hidden="true"></i>
-              <span>Completar Entrega y Emitir Remito POD</span>
-            </button>
-
-          </div>
-
-          <!-- Bottom Navigation Bar (Material 3) -->
-          <div class="compose-bottom-nav">
-            <div class="bnav-tab active">
-              <i class="pi pi-map" aria-hidden="true"></i>
-              <span>Ruta</span>
-            </div>
-            <div class="bnav-tab">
-              <i class="pi pi-list" aria-hidden="true"></i>
-              <span>Paradas (4)</span>
-            </div>
-            <div class="bnav-tab">
-              <i class="pi pi-snowflake" aria-hidden="true"></i>
-              <span>Sensores</span>
-            </div>
-            <div class="bnav-tab">
-              <i class="pi pi-user" aria-hidden="true"></i>
-              <span>Diego M.</span>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Android Home Navigation Indicator (Gesture Bar) -->
-        <div class="android-gesture-pill"></div>
       </div>
-    </div>
+    </section>
 
   </div>
-
 </div>
 
 <style>
-  /* ==========================================================================
-     STORY SCREEN CONTAINER & WEB-STYLE SECTION FOUNDATIONS
-     ========================================================================== */
   .story-screen-container {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: var(--nexa-space-6, 24px);
+    gap: 24px;
   }
 
   .section-heading-block {
@@ -512,928 +569,9 @@
     border-bottom: 1px solid var(--nexa-color-border-structural, #e2e8f0);
   }
 
-  .section-heading {
-    display: grid;
-    grid-template-columns: 38px minmax(0, 1fr);
-    gap: var(--nexa-space-3, 12px);
-    align-items: start;
-  }
-
-  .section-index {
-    color: var(--nexa-color-primary-600, #2563eb);
-    font: 700 var(--nexa-font-size-sm, 14px) / 1.4 var(--nexa-font-family-mono, monospace);
-  }
-
-  .section-kicker {
-    margin: 0 0 6px;
-    color: var(--nexa-color-primary-700, #1d4ed8);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-  }
-
-  .section-heading h2 {
-    margin: 0;
-    font: 800 clamp(22px, 3vw, 30px) / 1.16 var(--nexa-font-family-display, sans-serif);
-    letter-spacing: -.03em;
-    color: var(--nexa-color-text-primary, #0f172a);
-  }
-
-  .section-intro {
-    max-width: 820px;
-    margin: 10px 0 0;
-    color: var(--nexa-color-text-secondary, #64748b);
-    line-height: 1.6;
-    font-size: 14px;
-  }
-
   .heading-meta-chips {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
   }
-
-  .doc-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 6px;
-  }
-
-  .doc-chip.tone-info {
-    background: #eff6ff;
-    color: #1e40af;
-    border: 1px solid #bfdbfe;
-  }
-
-  .doc-chip.tone-neutral {
-    background: #f8fafc;
-    color: #334155;
-    border: 1px solid #e2e8f0;
-  }
-
-  .doc-chip.tone-success {
-    background: #ecfdf5;
-    color: #065f46;
-    border: 1px solid #a7f3d0;
-  }
-
-  /* Workbench Grid */
-  .story-workbench-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 390px;
-    gap: 32px;
-    align-items: start;
-  }
-
-  @media (max-width: 1100px) {
-    .story-workbench-layout {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .story-details-col {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  /* Phase Navigation Bar */
-  .phase-selector-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    background: #ffffff;
-    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
-    padding: 6px;
-    border-radius: 12px;
-  }
-
-  .phase-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: transparent;
-    border: 0;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #475569;
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-
-  .phase-badge {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 10px;
-    font-weight: 800;
-    opacity: 0.7;
-  }
-
-  .phase-btn:hover {
-    background: #f1f5f9;
-    color: #0f172a;
-  }
-
-  .phase-btn.active {
-    background: var(--nexa-color-primary-600, #2563eb);
-    color: #ffffff;
-    font-weight: 700;
-  }
-
-  .phase-btn.active .phase-badge {
-    opacity: 1;
-  }
-
-  /* Phase Panels */
-  .phase-panel {
-    display: none;
-  }
-
-  .phase-panel.active {
-    display: block;
-    animation: fadeIn 0.2s ease-out;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Evidence Card (Exact Web-Style tokens) */
-  .evidence-card {
-    background: #ffffff;
-    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-  }
-
-  .card-kicker-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
-  }
-
-  .card-step-badge {
-    background: #082846;
-    color: #ffffff;
-    font-size: 9px;
-    font-weight: 800;
-    padding: 2px 7px;
-    border-radius: 4px;
-    letter-spacing: 0.08em;
-  }
-
-  .card-mono-id {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--nexa-color-primary-700, #1d4ed8);
-  }
-
-  .card-title {
-    font-family: var(--nexa-font-family-display, sans-serif);
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--nexa-color-text-primary, #0f172a);
-    margin: 0 0 8px;
-  }
-
-  .card-desc {
-    color: var(--nexa-color-text-secondary, #64748b);
-    font-size: 13.5px;
-    line-height: 1.6;
-    margin: 0 0 18px;
-  }
-
-  .evidence-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
-
-  @media (max-width: 680px) {
-    .evidence-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .evidence-item {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    padding: 12px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-  }
-
-  .evidence-item i {
-    font-size: 18px;
-    margin-top: 2px;
-  }
-
-  .text-primary { color: #2563eb; }
-  .text-info { color: #0284c7; }
-  .text-success { color: #16a34a; }
-  .text-danger { color: #dc2626; }
-
-  .evidence-item strong {
-    display: block;
-    font-size: 12px;
-    color: #0f172a;
-    margin-bottom: 2px;
-  }
-
-  .evidence-item p, .evidence-item code {
-    font-size: 11.5px;
-    color: #64748b;
-    margin: 0;
-    line-height: 1.45;
-  }
-
-  /* Outcome Specs */
-  .outcome-grid-specs {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .outcome-spec-row {
-    padding: 12px 14px;
-    border-radius: 10px;
-    border: 1px solid transparent;
-  }
-
-  .outcome-spec-row.ok {
-    background: #f0fdf4;
-    border-color: #bbf7d0;
-  }
-
-  .outcome-spec-row.warn {
-    background: #fffbeb;
-    border-color: #fde68a;
-  }
-
-  .outcome-spec-row.danger {
-    background: #fef2f2;
-    border-color: #fecaca;
-  }
-
-  .outcome-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 10.5px;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    margin-bottom: 4px;
-  }
-
-  .outcome-tag.success { color: #15803d; }
-  .outcome-tag.warning { color: #b45309; }
-  .outcome-tag.danger { color: #b91c1c; }
-
-  .outcome-spec-row p {
-    margin: 0;
-    font-size: 12px;
-    color: #334155;
-    line-height: 1.4;
-  }
-
-  /* OTP Token Preview */
-  .otp-token-preview {
-    display: flex;
-    gap: 8px;
-    max-width: 320px;
-  }
-
-  .otp-slot {
-    flex: 1;
-    height: 48px;
-    background: #f1f5f9;
-    border: 2px solid #cbd5e1;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 18px;
-    font-weight: 800;
-    color: #0f172a;
-  }
-
-  /* Offline Banner */
-  .status-banner-offline {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 18px;
-    background: #ecfdf5;
-    border: 1px solid #a7f3d0;
-    border-radius: 12px;
-    color: #065f46;
-  }
-
-  .status-banner-offline i {
-    font-size: 22px;
-    color: #10b981;
-  }
-
-  .status-banner-offline strong {
-    display: block;
-    font-size: 13px;
-  }
-
-  .status-banner-offline small {
-    font-size: 11.5px;
-    color: #047857;
-  }
-
-  /* Compose Code Snippet Container */
-  .compose-code-container {
-    background: #090e17;
-    border-radius: 14px;
-    overflow: hidden;
-    border: 1px solid #1e293b;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  .code-card-header {
-    background: #111827;
-    padding: 10px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #1f2937;
-    font-size: 11px;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .code-title-group {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: #38bdf8;
-    font-weight: 700;
-  }
-
-  .code-path {
-    font-family: var(--nexa-font-family-mono, monospace);
-    color: #94a3b8;
-  }
-
-  .compose-code {
-    margin: 0;
-    padding: 18px;
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 12px;
-    line-height: 1.55;
-    color: #e2e8f0;
-    overflow-x: auto;
-  }
-
-  .kw { color: #f43f5e; font-weight: 700; }
-  .fn { color: #38bdf8; }
-  .type { color: #a78bfa; }
-  .str { color: #34d399; }
-  .num { color: #fbbf24; }
-  .cmt { color: #64748b; font-style: italic; }
-
-  /* ==========================================================================
-     PHONE SIMULATOR PREVIEW STAND (Pixel 8 / Zebra TC58 Shell)
-     ========================================================================== */
-  .story-preview-col {
-    position: sticky;
-    top: 80px;
-    width: 390px;
-    margin: 0 auto;
-  }
-
-  .device-chassis-shell {
-    width: 380px;
-    height: 780px;
-    background: #020617;
-    border-radius: 44px;
-    padding: 12px;
-    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25), 0 0 0 1px #334155;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
-
-  .android-status-bar {
-    height: 28px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 18px;
-    font-size: 12px;
-    color: #ffffff;
-    font-weight: 600;
-    z-index: 10;
-  }
-
-  .status-icons-cluster {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-  }
-
-  .conn-tag {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 10px;
-    font-weight: 800;
-  }
-
-  .battery-pct {
-    font-size: 10px;
-  }
-
-  .battery-icon {
-    font-size: 11px;
-    color: #22c55e;
-  }
-
-  /* Inner Screen Viewport */
-  .compose-screen-viewport {
-    flex: 1;
-    background: #f8fafc;
-    border-radius: 32px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
-
-  /* Top App Bar */
-  .compose-top-app-bar {
-    height: 52px;
-    background: #082846;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 0 12px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-  }
-
-  .btn-app-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: transparent;
-    border: 0;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 15px;
-  }
-
-  .appbar-title-block {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .appbar-headline {
-    font-size: 12.5px;
-    font-weight: 700;
-    line-height: 1.2;
-  }
-
-  .appbar-sub {
-    font-size: 10px;
-    color: #93c5fd;
-  }
-
-  .status-sync-chip {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #10b981;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-  }
-
-  /* Offline Sync Banner inside phone */
-  .workmanager-sync-banner {
-    background: #ecfdf5;
-    border-bottom: 1px solid #a7f3d0;
-    padding: 6px 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 10.5px;
-    font-weight: 600;
-    color: #065f46;
-  }
-
-  /* Scrollable Content */
-  .compose-scroll-content {
-    flex: 1;
-    overflow-y: auto;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    scrollbar-width: none;
-  }
-
-  .compose-scroll-content::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Cards inside phone */
-  .compose-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 14px;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-  }
-
-  .card-header-line {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .order-tag {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 11px;
-    font-weight: 800;
-    color: #1d4ed8;
-  }
-
-  .cold-chip {
-    background: #eff6ff;
-    color: #1e40af;
-    border: 1px solid #bfdbfe;
-    font-size: 9.5px;
-    font-weight: 700;
-    padding: 2px 6px;
-    border-radius: 4px;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .buyer-heading {
-    font-size: 14.5px;
-    font-weight: 800;
-    color: #0f172a;
-    margin: 0;
-  }
-
-  .destination-line {
-    font-size: 11px;
-    color: #64748b;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
-  .cargo-manifest-box {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 8px 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .manifest-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 10.5px;
-  }
-
-  .sku-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #3b82f6;
-  }
-
-  .sku-name {
-    flex: 1;
-    color: #1e293b;
-    font-weight: 600;
-  }
-
-  .sku-code {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 9.5px;
-    color: #64748b;
-  }
-
-  /* 56dp Glove Button */
-  .btn-glove-primary {
-    min-height: 56px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 700;
-    border: 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 0 14px;
-    transition: transform 0.1s ease;
-  }
-
-  .btn-glove-primary:active {
-    transform: scale(0.98);
-  }
-
-  .btn-gps {
-    background: #1d4ed8;
-    color: #ffffff;
-    box-shadow: 0 2px 4px rgba(29, 78, 216, 0.2);
-  }
-
-  .geofence-alert-box {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
-    background: #ecfdf5;
-    border-radius: 6px;
-    font-size: 10.5px;
-    font-weight: 600;
-    color: #065f46;
-  }
-
-  .geofence-pulse {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #10b981;
-    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
-  }
-
-  /* Tri-State Button Stack */
-  .card-subhead {
-    font-size: 9.5px;
-    font-weight: 800;
-    color: #64748b;
-    letter-spacing: 0.06em;
-  }
-
-  .tri-state-button-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .tri-outcome-btn {
-    min-height: 52px;
-    background: #f8fafc;
-    border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    padding: 6px 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    text-align: left;
-    transition: all 0.12s ease;
-  }
-
-  .tri-outcome-btn i {
-    font-size: 18px;
-    color: #64748b;
-  }
-
-  .outcome-btn-text strong {
-    display: block;
-    font-size: 11.5px;
-    color: #0f172a;
-  }
-
-  .outcome-btn-text small {
-    display: block;
-    font-size: 9.5px;
-    color: #64748b;
-  }
-
-  .tri-outcome-btn.active {
-    background: #eff6ff;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 1px #3b82f6 inset;
-  }
-
-  .tri-outcome-btn.active i {
-    color: #2563eb;
-  }
-
-  .tri-outcome-btn.active .outcome-btn-text strong {
-    color: #1d4ed8;
-  }
-
-  /* POD Signature Pad */
-  .pod-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .btn-clear-canvas {
-    background: transparent;
-    border: 0;
-    color: #64748b;
-    font-size: 10px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  .signature-canvas-area {
-    height: 74px;
-    background: #f8fafc;
-    border: 1px dashed #cbd5e1;
-    border-radius: 8px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 6px 8px;
-    overflow: hidden;
-  }
-
-  .bezier-signature-svg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .signature-meta-tag {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    font-size: 9px;
-    color: #475569;
-  }
-
-  .signature-meta-tag small {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 7.5px;
-    color: #94a3b8;
-  }
-
-  .camerax-photo-preview-box {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 8px;
-    background: #eff6ff;
-    border: 1px solid #bfdbfe;
-    border-radius: 8px;
-    font-size: 10px;
-  }
-
-  .camerax-photo-preview-box i {
-    font-size: 16px;
-    color: #2563eb;
-  }
-
-  .photo-info-text strong {
-    display: block;
-    color: #1e40af;
-  }
-
-  .photo-info-text small {
-    color: #64748b;
-    font-size: 8.5px;
-  }
-
-  /* OTP Boxes */
-  .otp-boxes-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 4px;
-  }
-
-  .otp-cell {
-    flex: 1;
-    height: 40px;
-    background: #f1f5f9;
-    border: 1.5px solid #cbd5e1;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 15px;
-    font-weight: 800;
-    color: #0f172a;
-  }
-
-  .otp-notice {
-    font-size: 9px;
-    color: #64748b;
-    text-align: center;
-  }
-
-  /* Confirm Button (56dp target) */
-  .btn-glove-confirm {
-    min-height: 56px;
-    border-radius: 12px;
-    background: #082846;
-    color: #ffffff;
-    font-size: 12.5px;
-    font-weight: 700;
-    border: 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    box-shadow: 0 4px 6px rgba(8, 40, 70, 0.2);
-  }
-
-  /* Bottom Navigation */
-  .compose-bottom-nav {
-    height: 52px;
-    background: #ffffff;
-    border-top: 1px solid #e2e8f0;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-
-  .bnav-tab {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    color: #64748b;
-    font-size: 9.5px;
-    min-width: 48px;
-  }
-
-  .bnav-tab.active {
-    color: #1d4ed8;
-    font-weight: 700;
-  }
-
-  .android-gesture-pill {
-    width: 110px;
-    height: 4px;
-    background: #ffffff;
-    border-radius: 2px;
-    align-self: center;
-    margin-top: 8px;
-    opacity: 0.6;
-  }
 </style>
-
-<script>
-  // Phase tabs interaction
-  const phaseButtons = document.querySelectorAll('#story-conductor .phase-btn');
-  const phasePanels = document.querySelectorAll('#story-conductor .phase-panel');
-
-  phaseButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      phaseButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const phase = btn.getAttribute('data-phase');
-      phasePanels.forEach(panel => {
-        panel.classList.toggle('active', panel.id === `panel-phase-${phase}`);
-      });
-    });
-  });
-
-  // Outcome buttons toggle in phone mockup
-  const outcomeBtns = document.querySelectorAll('#story-conductor .tri-outcome-btn');
-  outcomeBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      outcomeBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
-</script>

@@ -1,7 +1,9 @@
 ---
 /**
- * DeviceFrame — Interactive Mobile Hardware Simulator
- * Allows switching viewports (360dp, 412dp), screens (Operations, Buyer, Sheet), and testing touch ergonomics.
+ * DeviceFrame.astro — Canonical Screen Architecture & Viewport Ergonomics Inspector
+ * Pure architectural inspection tool without fake hardware bezels or notches.
+ * Allows switching viewports (360dp, 390dp, 412dp), inspecting canonical screens,
+ * and verifying 48dp/56dp touch ergonomics and Material 3 design tokens.
  */
 import OperationsScreenSpec from './OperationsScreenSpec.astro';
 import BuyerScreenSpec from './BuyerScreenSpec.astro';
@@ -9,56 +11,84 @@ import BottomSheetSpec from './BottomSheetSpec.astro';
 import ScannerScreenSpec from './ScannerScreenSpec.astro';
 ---
 
-<div class="simulator-wrapper">
-  <!-- Simulator Controls Bar -->
-  <div class="simulator-controls">
-    <div class="control-group">
-      <span class="control-label">DISPOSITIVO:</span>
-      <button type="button" class="btn-ctrl device-btn active" data-width="390" data-height="820">
-        <i class="pi pi-android"></i> Android Flagship (390×820dp)
-      </button>
-      <button type="button" class="btn-ctrl device-btn" data-width="360" data-height="740">
-        <i class="pi pi-mobile"></i> Compact (360×740dp)
-      </button>
+<div class="screen-spec-container">
+  
+  <!-- Web-Style Documentation Heading (Section Index + Kicker + Display H2 + Intro) -->
+  <header class="section-heading-block">
+    <div class="section-heading">
+      <span class="section-index">07</span>
+      <div>
+        <p class="section-kicker">CANONICAL SCREENS & COMPONENT ARCHITECTURE</p>
+        <h2>Inspección de Pantallas Canónicas y Ergonomía de Densidad</h2>
+        <p class="section-intro">
+          Validación de componentes nativos en <strong>Android Jetpack Compose</strong> y Flutter sobre densidades de pantalla reales (360dp compacto, 390dp estándar, 412dp industrial Zebra). Permite verificar composiciones de pantalla completa, áreas de toque de 48dp/56dp y legibilidad de tokens M3 sin marcos decorativos ni falsos chasis de hardware.
+        </p>
+      </div>
     </div>
 
-    <div class="control-group">
-      <span class="control-label">PANTALLA:</span>
-      <button type="button" class="btn-ctrl screen-btn active" data-screen="operations">
-        <i class="pi pi-truck"></i> Operaciones (Android)
-      </button>
-      <button type="button" class="btn-ctrl screen-btn" data-screen="scanner">
-        <i class="pi pi-qrcode"></i> Escáner CameraX
-      </button>
-      <button type="button" class="btn-ctrl screen-btn" data-screen="buyer">
-        <i class="pi pi-shopping-cart"></i> Comprador (Flutter)
-      </button>
-      <button type="button" class="btn-ctrl screen-btn" data-screen="sheet">
-        <i class="pi pi-sliders-h"></i> Bottom Sheet M3
-      </button>
+    <!-- Quick Meta Chips -->
+    <div class="heading-meta-chips">
+      <span class="cuadro-tag primary"><i class="pi pi-android" aria-hidden="true"></i> Android 14 (API 34)</span>
+      <span class="cuadro-tag"><i class="pi pi-mobile" aria-hidden="true"></i> Densidades 360dp / 390dp / 412dp</span>
+      <span class="cuadro-tag success"><i class="pi pi-hand" aria-hidden="true"></i> Touch Target 48dp / 56dp Guantes</span>
+      <span class="cuadro-tag kotlin"><i class="pi pi-check" aria-hidden="true"></i> Sin Chasis Falso</span>
+    </div>
+  </header>
+
+  <!-- Interactive Controls Bar -->
+  <div class="stage-controls-card">
+    <div class="control-cluster">
+      <span class="control-label">DENSIDAD VIEWPORT:</span>
+      <div class="button-toggle-group">
+        <button type="button" class="btn-ctrl device-btn active" data-width="390" data-height="780">
+          <i class="pi pi-android"></i> 390 &times; 780dp (Estándar)
+        </button>
+        <button type="button" class="btn-ctrl device-btn" data-width="360" data-height="720">
+          <i class="pi pi-mobile"></i> 360 &times; 720dp (Compacto)
+        </button>
+        <button type="button" class="btn-ctrl device-btn" data-width="412" data-height="820">
+          <i class="pi pi-shield"></i> 412 &times; 820dp (Zebra TC58)
+        </button>
+      </div>
+    </div>
+
+    <div class="control-cluster">
+      <span class="control-label">PANTALLA CANÓNICA:</span>
+      <div class="button-toggle-group">
+        <button type="button" class="btn-ctrl screen-btn active" data-screen="operations">
+          <i class="pi pi-truck"></i> Operaciones
+        </button>
+        <button type="button" class="btn-ctrl screen-btn" data-screen="scanner">
+          <i class="pi pi-qrcode"></i> Escáner CameraX
+        </button>
+        <button type="button" class="btn-ctrl screen-btn" data-screen="buyer">
+          <i class="pi pi-shopping-bag"></i> Comprador B2B
+        </button>
+        <button type="button" class="btn-ctrl screen-btn" data-screen="sheet">
+          <i class="pi pi-sliders-h"></i> Bottom Sheet M3
+        </button>
+      </div>
     </div>
   </div>
 
-  <!-- Physical Smartphone Hardware Chassis -->
-  <div class="phone-stand">
-    <div class="phone-chassis" id="phone-chassis" style="width: 390px; height: 820px;">
-      <!-- Speaker & Punch-hole Camera -->
-      <div class="chassis-notch">
-        <div class="punch-camera"></div>
-      </div>
-
-      <!-- Status Bar (Android 14 Material 3) -->
-      <div class="m3-status-bar">
-        <span class="status-time">14:20</span>
-        <div class="status-icons">
-          <i class="pi pi-wifi" aria-hidden="true"></i>
-          <span class="five-g">5G</span>
-          <i class="pi pi-battery" aria-hidden="true"></i>
+  <!-- Pure Software Viewport Stage (Clean Card Frame, NO Fake Phone Chassis) -->
+  <div class="architectural-stage-wrapper">
+    <div class="viewport-card-frame" id="viewport-frame" style="width: 390px;">
+      
+      <!-- Architectural Viewport Header Bar -->
+      <div class="viewport-header-bar">
+        <div class="viewport-metrics">
+          <span class="vp-dot"></span>
+          <span class="vp-label" id="vp-info-label">Viewport Activo: 390dp · Android 14 M3</span>
+        </div>
+        <div class="vp-tags">
+          <span class="vp-badge">48dp OK</span>
+          <span class="vp-badge">56dp GLOVES</span>
         </div>
       </div>
 
-      <!-- Screen Viewports -->
-      <div class="phone-screen">
+      <!-- Scrollable Screen Content Container -->
+      <div class="screen-viewport-host" style="height: 720px;">
         <div class="screen-view active" id="view-operations">
           <OperationsScreenSpec />
         </div>
@@ -73,47 +103,208 @@ import ScannerScreenSpec from './ScannerScreenSpec.astro';
         </div>
       </div>
 
-      <!-- Home Gesture Navigation Bar -->
-      <div class="m3-gesture-bar">
-        <div class="gesture-pill"></div>
+      <!-- Viewport Footer Metric -->
+      <div class="viewport-footer-bar">
+        <span>Controles accesibles M3 · WCAG 2.2 AA · 1:1 Software Rendering</span>
       </div>
+
     </div>
+  </div>
+
+  <!-- Master Documentation Cuadros Container -->
+  <div class="cuadro-container">
+
+    <!-- Cuadro 1: Viewport Densities & Ergonomic Budget -->
+    <section class="cuadro-card">
+      <header class="cuadro-header">
+        <div class="cuadro-header-left">
+          <span class="cuadro-num-badge">C1</span>
+          <div>
+            <p class="cuadro-kicker">MATRIZ DE DENSIDADES & PRESUPUESTO ERGONÓMICO</p>
+            <h3 class="cuadro-title">Contratos de Densidad de Pantalla y Requisitos de Objetivos Táctiles</h3>
+            <p class="cuadro-subtitle">
+              Reglas de diseño para terminales Android industriales en campo y almacén.
+            </p>
+          </div>
+        </div>
+        <div class="cuadro-tags">
+          <span class="cuadro-tag primary"><i class="pi pi-check"></i> WCAG 2.2</span>
+          <span class="cuadro-tag success"><i class="pi pi-hand"></i> 56dp Cold-Chain</span>
+        </div>
+      </header>
+
+      <div class="contract-table-wrapper">
+        <table class="contract-table">
+          <thead>
+            <tr>
+              <th>Perfil de Dispositivo</th>
+              <th>Ancho Viewport</th>
+              <th>Touch Target Mínimo</th>
+              <th>Margen Pantalla</th>
+              <th>Uso en Nexa Suite</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Android Compacto</strong></td>
+              <td><span class="mono-chip">360dp</span></td>
+              <td><span class="mono-type">48dp &times; 48dp</span></td>
+              <td><span class="rule-chip">16dp horizontal</span></td>
+              <td>Smartphones corporativos estándar de conductores</td>
+            </tr>
+            <tr>
+              <td><strong>Android Flagship</strong></td>
+              <td><span class="mono-chip">390dp – 412dp</span></td>
+              <td><span class="mono-type">48dp estándar / 56dp campo</span></td>
+              <td><span class="rule-chip">16dp horizontal</span></td>
+              <td>Supervisores de patio y jefes de almacén</td>
+            </tr>
+            <tr>
+              <td><strong>Zebra TC58 / Honeywell</strong></td>
+              <td><span class="mono-chip">412dp (Rugged)</span></td>
+              <td><span class="mono-type">56dp obligatorio</span></td>
+              <td><span class="rule-chip">20dp horizontal</span></td>
+              <td>Operadores con guantes térmicos en cámaras a -20°C</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Cuadro 2: Compose Component Specifications -->
+    <section class="cuadro-card">
+      <header class="cuadro-header">
+        <div class="cuadro-header-left">
+          <span class="cuadro-num-badge">C2</span>
+          <div>
+            <p class="cuadro-kicker">PATRONES DE COMPOSICIÓN ADAPTATIVA</p>
+            <h3 class="cuadro-title">Especificación de Modifiers para Contención de Scroll y Densidad</h3>
+            <p class="cuadro-subtitle">
+              Garantías de aislamiento de scroll individual, prevención de doble scrollbar y anclaje de barras de acción.
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="spec-grid-2">
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-window-maximize"></i> Scaffold & WindowInsets</div>
+          <p class="spec-kv-body">
+            Uso estricto de <code>Scaffold(contentWindowInsets = WindowInsets.safeDrawing)</code> en Jetpack Compose para asegurar que los elementos interactivos no colisionen con los bordes de la pantalla ni con barras de sistema.
+          </p>
+        </div>
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-sort-alt"></i> LazyColumn con Over-Scroll Controlado</div>
+          <p class="spec-kv-body">
+            Cada pantalla encapsula su scroll vertical mediante <code>LazyColumn(modifier = Modifier.fillMaxSize())</code> con <code>contentPadding = PaddingValues(bottom = 80.dp)</code> para garantizar que el último elemento sea visible sobre barras flotantes.
+          </p>
+        </div>
+      </div>
+    </section>
+
   </div>
 </div>
 
+<script>
+  // Viewport Resizing & Screen Switching Interactive Logic
+  document.addEventListener('DOMContentLoaded', () => {
+    const frame = document.getElementById('viewport-frame');
+    const infoLabel = document.getElementById('vp-info-label');
+    const deviceButtons = document.querySelectorAll('.device-btn');
+    const screenButtons = document.querySelectorAll('.screen-btn');
+    const screenViews = document.querySelectorAll('.screen-view');
+
+    // Switch Viewport Width
+    deviceButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        deviceButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const width = btn.getAttribute('data-width');
+        if (frame) {
+          frame.style.width = `${width}px`;
+        }
+        if (infoLabel) {
+          infoLabel.textContent = `Viewport Activo: ${width}dp · Android 14 M3`;
+        }
+      });
+    });
+
+    // Switch Screen Specimen
+    screenButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        screenButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const targetScreen = btn.getAttribute('data-screen');
+        screenViews.forEach(view => {
+          view.classList.remove('active');
+        });
+
+        const activeView = document.getElementById(`view-${targetScreen}`);
+        if (activeView) {
+          activeView.classList.add('active');
+        }
+      });
+    });
+  });
+</script>
+
 <style>
-  .simulator-wrapper {
+  .screen-spec-container {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    width: 100%;
+    gap: 24px;
   }
 
-  .simulator-controls {
+  .section-heading-block {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+  }
+
+  .heading-meta-chips {
+    display: flex;
     flex-wrap: wrap;
-    background: var(--nexa-mobile-surface-card, #ffffff);
-    padding: 0.75rem 1.25rem;
-    border-radius: 12px;
-    border: 1px solid var(--nexa-mobile-border, #e2e8f0);
+    gap: 8px;
+  }
+
+  /* Stage Controls Bar */
+  .stage-controls-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--nexa-surface-card, #ffffff);
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: var(--nexa-radius-card, 16px);
     box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
   }
 
-  .control-group {
+  .control-cluster {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 10px;
+    flex-wrap: wrap;
   }
 
   .control-label {
     font-size: 10px;
     font-weight: 800;
-    color: var(--nexa-mobile-text-secondary, #64748b);
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
+    color: var(--nexa-color-text-secondary, #64748b);
+    text-transform: uppercase;
+  }
+
+  .button-toggle-group {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
   }
 
   .btn-ctrl {
@@ -122,166 +313,110 @@ import ScannerScreenSpec from './ScannerScreenSpec.astro';
     gap: 6px;
     padding: 6px 12px;
     border-radius: 8px;
-    border: 1px solid var(--nexa-mobile-border, #cbd5e1);
+    border: 1px solid var(--nexa-color-border-default, #cbd5e1);
     background: transparent;
-    color: var(--nexa-mobile-text-secondary, #475569);
+    color: var(--nexa-color-text-secondary, #475569);
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.15s ease;
-
-    &:hover {
-      background: var(--nexa-mobile-surface-tint, #f1f5f9);
-      color: var(--nexa-mobile-text-primary, #0f172a);
-    }
-
-    &.active {
-      background: var(--nexa-mobile-primary, #2a67d9);
-      color: #ffffff;
-      border-color: transparent;
-      font-weight: 700;
-    }
   }
 
-  /* Physical Phone Stand */
-  .phone-stand {
-    padding: 1.5rem;
+  .btn-ctrl:hover {
+    background: var(--nexa-surface-tint, #f1f5f9);
+    color: var(--nexa-color-text-primary, #0f172a);
+  }
+
+  .btn-ctrl.active {
+    background: var(--nexa-color-primary-600, #2a67d9);
+    color: #ffffff;
+    border-color: transparent;
+    font-weight: 700;
+  }
+
+  /* Architectural Stage Wrapper */
+  .architectural-stage-wrapper {
     display: flex;
     justify-content: center;
+    width: 100%;
+    padding: 12px 0 24px;
+    background: #f1f5f9;
+    border-radius: 16px;
+    border: 1px dashed #cbd5e1;
   }
 
-  .phone-chassis {
-    background: #0f172a;
-    border-radius: 48px;
-    padding: 12px;
-    box-shadow: 0 25px 60px -12px rgba(8, 40, 70, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  /* Viewport Card Frame (NO Phone Chassis) */
+  .viewport-card-frame {
+    background: var(--nexa-surface-card, #ffffff);
+    border: 1px solid var(--nexa-color-border-strong, #cbd5e1);
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
     display: flex;
     flex-direction: column;
-    position: relative;
-    transition: width 0.3s ease, height 0.3s ease;
-  }
-
-  .chassis-notch {
-    position: absolute;
-    top: 18px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90px;
-    height: 18px;
-    background: #0f172a;
-    border-radius: 999px;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .punch-camera {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #020617;
-    border: 1px solid #1e293b;
-  }
-
-  .m3-status-bar {
-    height: 38px;
-    background: var(--nexa-mobile-surface-card, #ffffff);
-    border-radius: 36px 36px 0 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 24px;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--nexa-mobile-text-primary, #0f172a);
-    z-index: 10;
-  }
-
-  .status-icons {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-  }
-
-  .five-g {
-    font-size: 10px;
-    font-weight: 800;
-    font-family: var(--nexa-mobile-font-family-mono, monospace);
-  }
-
-  .phone-screen {
-    flex: 1;
-    background: var(--nexa-mobile-surface-bg, #f8fafc);
-    position: relative;
     overflow: hidden;
+    transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .viewport-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 14px;
+    background: #0f172a;
+    color: #ffffff;
+    font-size: 11px;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .viewport-metrics {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .vp-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+  }
+
+  .vp-tags {
+    display: flex;
+    gap: 6px;
+  }
+
+  .vp-badge {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 9px;
+    font-weight: 700;
+  }
+
+  .screen-viewport-host {
+    width: 100%;
+    overflow-y: auto;
+    position: relative;
+    background: #f8fafc;
   }
 
   .screen-view {
     display: none;
+    width: 100%;
     height: 100%;
-    overflow-y: auto;
-    scrollbar-width: none;
-
-    &.active {
-      display: block;
-    }
   }
 
-  .screen-view::-webkit-scrollbar {
-    display: none;
+  .screen-view.active {
+    display: block;
   }
 
-  .m3-gesture-bar {
-    height: 24px;
-    background: var(--nexa-mobile-surface-card, #ffffff);
-    border-radius: 0 0 36px 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-  }
-
-  .gesture-pill {
-    width: 100px;
-    height: 4px;
-    border-radius: 999px;
-    background: var(--nexa-mobile-border, #94a3b8);
+  .viewport-footer-bar {
+    padding: 6px 14px;
+    background: #f8fafc;
+    border-top: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    font-size: 10.5px;
+    color: var(--nexa-color-text-secondary, #64748b);
+    text-align: center;
   }
 </style>
-
-<script>
-  // Device viewports
-  const deviceButtons = document.querySelectorAll<HTMLButtonElement>('.device-btn');
-  const chassis = document.getElementById('phone-chassis');
-
-  deviceButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      deviceButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const w = btn.getAttribute('data-width');
-      const h = btn.getAttribute('data-height');
-      if (chassis && w && h) {
-        chassis.style.width = `${w}px`;
-        chassis.style.height = `${h}px`;
-      }
-    });
-  });
-
-  // Screen Switching
-  const screenButtons = document.querySelectorAll<HTMLButtonElement>('.screen-btn');
-  const screenViews = document.querySelectorAll<HTMLElement>('.screen-view');
-
-  screenButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      screenButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const screenId = btn.getAttribute('data-screen');
-
-      screenViews.forEach(view => {
-        view.classList.toggle('active', view.id === `view-${screenId}`);
-      });
-    });
-  });
-</script>

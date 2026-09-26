@@ -192,7 +192,7 @@ const { currentSection = 'overview' } = Astro.props;
         <div class="lab-nav-items">
           <a class="lab-nav-item" href="#screen-simulador-hardware" data-screen="simulador-hardware">
             <i class="pi pi-mobile" aria-hidden="true"></i>
-            <span>Simulador Hardware Interactivo</span>
+            <span>Inspección de Pantallas Canónicas</span>
           </a>
         </div>
       </section>
@@ -262,17 +262,18 @@ const { currentSection = 'overview' } = Astro.props;
 
   /* Left Sidebar (284px width matching web-style) */
   .lab-sidebar {
-    display: flex;
-    flex: 0 0 284px;
-    width: 284px;
-    flex-direction: column;
     height: 100vh;
     position: sticky;
     top: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-sizing: border-box;
+    flex: 0 0 284px;
+    width: 284px;
     padding: 24px 16px 16px;
     border-right: 1px solid var(--nexa-color-border-structural, #e2e8f0);
     background: var(--nexa-surface-card, #ffffff);
-    overflow: hidden; /* Elimina doble scrollbar en el contenedor padre */
     z-index: 100;
   }
 
@@ -441,11 +442,13 @@ const { currentSection = 'overview' } = Astro.props;
 
   /* Navigation Groups */
   .lab-nav {
-    display: grid;
-    gap: 16px;
+    flex: 1 1 auto;
+    min-height: 0;
     overflow-y: auto;
-    flex: 1;
-    padding-right: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-right: 4px;
   }
 
   .lab-nav-group {
@@ -537,9 +540,11 @@ const { currentSection = 'overview' } = Astro.props;
     display: flex;
     gap: 9px;
     align-items: flex-start;
+    flex-shrink: 0;
     margin-top: auto;
-    padding: 14px 10px 0;
+    padding: 14px 10px 14px;
     border-top: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    background: var(--nexa-surface-card, #ffffff);
     color: var(--nexa-color-text-secondary, #64748b);
     font-size: 11px;
 
