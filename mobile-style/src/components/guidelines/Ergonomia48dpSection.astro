@@ -1,0 +1,400 @@
+---
+/**
+ * Ergonomia48dpSection.astro
+ * Canonical Touch Target Ergonomics & 48dp/56dp Bounding Box Rules
+ * WCAG 2.2 AA (Criterion 2.5.8 Target Size Minimum)
+ */
+---
+
+<div class="ergonomia-48dp-container" data-platform-target="universal">
+  <section class="spec-card">
+    <div class="card-header-row">
+      <div class="card-badge-icon"><i class="pi pi-hand"></i></div>
+      <div>
+        <span class="card-eyebrow">ERGONOMÍA TÁCTIL · WCAG 2.2 AA & CAMPO</span>
+        <h3 class="card-title">Regla de Oro: Objetivo Táctil Mínimo 48×48dp (56dp en Campo)</h3>
+      </div>
+    </div>
+    <p class="card-text">
+      Todo control interactivo en pantalla móvil (botones, checkboxes, selectores, iconos y chips) debe tener un <strong>Bounding Box táctil mínimo de 48×48dp</strong>. Para aplicaciones de choferes y bodegueros con guantes de seguridad (Operations Android), los botones críticos de confirmación se expanden a <strong>56dp</strong> de altura.
+    </p>
+
+    <!-- Visual Target Comparison Grid -->
+    <div class="target-comparison-grid">
+      <div class="target-spec-card">
+        <div class="target-visual-box target-48">
+          <div class="target-bounding-box">
+            <span class="bounding-label">48×48dp Bounding Box</span>
+            <button type="button" class="spec-btn-demo min-48">
+              <i class="pi pi-check"></i>
+              <span>Botón Estándar (48dp)</span>
+            </button>
+          </div>
+        </div>
+        <div class="target-spec-meta">
+          <strong>Uso Estándar (Comprador & Móvil General)</strong>
+          <p>Mínimo accesible WCAG 2.2 AA para navegación y formularios con una mano.</p>
+        </div>
+      </div>
+
+      <div class="target-spec-card">
+        <div class="target-visual-box target-56">
+          <div class="target-bounding-box industrial">
+            <span class="bounding-label industrial">56×56dp Bounding Box (Guantes)</span>
+            <button type="button" class="spec-btn-demo max-56">
+              <i class="pi pi-truck"></i>
+              <span>Confirmar en Sitio (56dp Guantes)</span>
+            </button>
+          </div>
+        </div>
+        <div class="target-spec-meta">
+          <strong>Uso Industrial (Choferes & Almacén)</strong>
+          <p>Superficie ampliada para evitar falsos toques bajo vibración vehicular o uso de guantes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Touch Target Rules Table -->
+  <section class="spec-card">
+    <div class="card-header-row">
+      <div class="card-badge-icon check-badge"><i class="pi pi-check-square"></i></div>
+      <div>
+        <span class="card-eyebrow">CONTRATOS DE ACCESIBILIDAD TÁCTIL</span>
+        <h3 class="card-title">Matriz de Dimensiones Táctiles por Perfil Operativo</h3>
+      </div>
+    </div>
+
+    <div class="table-responsive-wrapper">
+      <table class="metrics-table">
+        <thead>
+          <tr>
+            <th>Elemento Interactivo</th>
+            <th>Tamaño Visual</th>
+            <th>Bounding Box Táctil</th>
+            <th>Haptic Feedback</th>
+            <th>Contexto de Uso</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Icono en TopAppBar</strong></td>
+            <td>24 &times; 24dp</td>
+            <td><span class="code-pill">48 &times; 48dp</span></td>
+            <td>Virtual click</td>
+            <td>Navegación general en app bar</td>
+          </tr>
+          <tr>
+            <td><strong>Checkbox / Switch</strong></td>
+            <td>20 &times; 20dp</td>
+            <td><span class="code-pill">48 &times; 48dp</span></td>
+            <td>Light tick</td>
+            <td>Confirmación de ítems en lista</td>
+          </tr>
+          <tr>
+            <td><strong>Botón de Acción Primaria</strong></td>
+            <td>Ancho completo &times; 48dp</td>
+            <td><span class="code-pill">Ancho &times; 48dp</span></td>
+            <td>Medium impact</td>
+            <td>Formularios estándar y checkout</td>
+          </tr>
+          <tr>
+            <td><strong>Botón Confirmar en Sitio</strong></td>
+            <td>Ancho completo &times; 56dp</td>
+            <td><span class="code-pill">Ancho &times; 56dp</span></td>
+            <td>Heavy confirm</td>
+            <td>Chofer con guantes y cabina en marcha</td>
+          </tr>
+          <tr>
+            <td><strong>Píldoras Tri-estado Inspección</strong></td>
+            <td>56dp altura</td>
+            <td><span class="code-pill">56 &times; 80dp mín</span></td>
+            <td>Heavy confirm</td>
+            <td>Inspección pre-operacional en maquinaria</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 3: Jetpack Compose Modifier Code Contract -->
+  <section class="spec-card">
+    <div class="card-header-row">
+      <div class="card-badge-icon code-badge"><i class="pi pi-code"></i></div>
+      <div>
+        <span class="card-eyebrow">IMPLEMENTACIÓN NATIVA · JETPACK COMPOSE</span>
+        <h3 class="card-title">Garantía de Touch Target en Compose</h3>
+      </div>
+    </div>
+
+    <div class="code-preview-block">
+      <pre is:raw><code>// Modificador canónico para asegurar el bounding box mínimo de 48dp/56dp:
+IconButton(
+    onClick = { onScanBarcode() },
+    modifier = Modifier
+        .size(48.dp) // Touch bounding box de 48dp
+        .semantics { contentDescription = "Escanear código de barra" }
+) {
+    Icon(
+        imageVector = Icons.Default.QrCodeScanner,
+        contentDescription = null,
+        modifier = Modifier.size(24.dp) // Tamaño óptico
+    )
+}
+
+// Botón industrial de 56dp para choferes:
+Button(
+    onClick = { onConfirmDelivery() },
+    modifier = Modifier
+        .fillMaxWidth()
+        .height(56.dp), // Altura para guantes de seguridad
+    shape = RoundedCornerShape(12.dp),
+    colors = ButtonDefaults.buttonColors(containerColor = NexaPrimary)
+) {
+    Text("CONFIRMAR ENTREGA EN SITIO", style = NexaTypography.titleMedium)
+}</code></pre>
+    </div>
+  </section>
+</div>
+
+<style>
+  .ergonomia-48dp-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .spec-card {
+    background: var(--nexa-surface-card, #ffffff);
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: var(--nexa-radius-card, 16px);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .card-header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .card-badge-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--nexa-color-primary-50, #eff6ff);
+    color: var(--nexa-color-primary-600, #2a67d9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+
+    &.check-badge {
+      background: #ecfdf5;
+      color: #059669;
+    }
+    &.code-badge {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+  }
+
+  .card-eyebrow {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .card-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 0;
+  }
+
+  .card-text {
+    font-size: 13.5px;
+    color: var(--nexa-color-text-secondary, #64748b);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .target-comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 900px) {
+    .target-comparison-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .target-spec-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+    background: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .target-visual-box {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 24px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .target-bounding-box {
+    position: relative;
+    border: 2px dashed #3b82f6;
+    padding: 8px;
+    border-radius: 14px;
+    background: rgba(59, 130, 246, 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    max-width: 320px;
+
+    &.industrial {
+      border-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.05);
+    }
+  }
+
+  .bounding-label {
+    font-size: 10px;
+    font-weight: 800;
+    color: #1d4ed8;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+
+    &.industrial {
+      color: #b45309;
+    }
+  }
+
+  .spec-btn-demo {
+    width: 100%;
+    border: 0;
+    border-radius: 10px;
+    background: #2a67d9;
+    color: #ffffff;
+    font-family: inherit;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+
+    &.min-48 {
+      height: 48px;
+      font-size: 14px;
+    }
+
+    &.max-56 {
+      height: 56px;
+      font-size: 15px;
+      background: #082846;
+      border: 1px solid #38c8ff;
+    }
+  }
+
+  .target-spec-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    strong {
+      font-size: 13px;
+      color: #0f172a;
+    }
+    p {
+      font-size: 12px;
+      color: #64748b;
+      margin: 0;
+      line-height: 1.4;
+    }
+  }
+
+  .table-responsive-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--nexa-color-border-subtle, #e2e8f0);
+    border-radius: 12px;
+  }
+
+  .metrics-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    text-align: left;
+
+    th {
+      background: var(--nexa-color-neutral-50, #f8fafc);
+      padding: 10px 14px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--nexa-color-neutral-600, #475569);
+      border-bottom: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
+      color: var(--nexa-color-text-secondary, #64748b);
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+  }
+
+  .code-pill {
+    display: inline-block;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    background: var(--nexa-color-primary-50, #eff6ff);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .code-preview-block {
+    background: #0f172a;
+    border-radius: 12px;
+    padding: 18px;
+    overflow-x: auto;
+
+    pre { margin: 0; }
+    code {
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-size: 12px;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+  }
+</style>

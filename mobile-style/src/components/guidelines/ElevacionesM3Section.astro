@@ -1,0 +1,323 @@
+---
+/**
+ * ElevacionesM3Section.astro
+ * Canonical Material 3 Elevation & Surface Tinting for Android
+ */
+---
+
+<div class="elevaciones-m3-container" data-platform-target="universal">
+  <section class="spec-card">
+    <div class="card-header-row">
+      <div class="card-badge-icon"><i class="pi pi-clone"></i></div>
+      <div>
+        <span class="card-eyebrow">FUNDAMENTOS M3 · ELEVACIÓN & PROFUNDIDAD</span>
+        <h3 class="card-title">Elevación Material 3 & Surface Tinting en Pantalla</h3>
+      </div>
+    </div>
+    <p class="card-text">
+      En lugar de sombras difusas pesadas que se pierden o degradan en pantallas AMOLED y terminales rugerizadas bajo la luz del sol, Nexa Mobile comunica la profundidad mediante <strong>tintado tonal de superficie con azul primario Nexa (<code>#2a67d9</code>)</strong> sobre fondo blanco/grisáceo.
+    </p>
+
+    <!-- Visual Elevation Spectrum -->
+    <div class="elevation-spectrum-row">
+      <div class="elev-item elev-0">
+        <span class="elev-level">Nivel 0</span>
+        <span class="elev-dp">0dp</span>
+        <span class="elev-usage">Fondo Scaffold Base</span>
+      </div>
+      <div class="elev-item elev-1">
+        <span class="elev-level">Nivel 1</span>
+        <span class="elev-dp">1dp - 2dp</span>
+        <span class="elev-usage">Tarjetas & Listas</span>
+      </div>
+      <div class="elev-item elev-2">
+        <span class="elev-level">Nivel 2</span>
+        <span class="elev-dp">3dp</span>
+        <span class="elev-usage">TopAppBar & Barra Inferior</span>
+      </div>
+      <div class="elev-item elev-3">
+        <span class="elev-level">Nivel 3</span>
+        <span class="elev-dp">6dp</span>
+        <span class="elev-usage">Snackbars & FAB Flotante</span>
+      </div>
+      <div class="elev-item elev-4">
+        <span class="elev-level">Nivel 4</span>
+        <span class="elev-dp">8dp - 12dp</span>
+        <span class="elev-usage">Bottom Sheets & Diálogos</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Elevation Specs Table -->
+  <section class="spec-card">
+    <div class="card-header-row">
+      <div class="card-badge-icon table-badge"><i class="pi pi-list"></i></div>
+      <div>
+        <span class="card-eyebrow">CONTRATO TÉCNICO DE PROFUNDIDAD</span>
+        <h3 class="card-title">Matriz de Elevaciones y Opacidad de Tinte Tonal</h3>
+      </div>
+    </div>
+
+    <div class="table-responsive-wrapper">
+      <table class="metrics-table">
+        <thead>
+          <tr>
+            <th>Nivel M3</th>
+            <th>Elevación (dp)</th>
+            <th>Tinte Tonal Primario</th>
+            <th>Sombra Ambiental</th>
+            <th>Uso Arquitectónico en Android</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Level 0</strong></td>
+            <td>0dp</td>
+            <td>0%</td>
+            <td>Ninguna</td>
+            <td>Fondo de ventana de la actividad (`#f6faff`)</td>
+          </tr>
+          <tr>
+            <td><strong>Level 1</strong></td>
+            <td>1dp</td>
+            <td>5% NexaPrimary</td>
+            <td>0 1px 2px rgba(15,23,42,0.04)</td>
+            <td>Tarjetas de paradas de ruta y filas de picking</td>
+          </tr>
+          <tr>
+            <td><strong>Level 2</strong></td>
+            <td>3dp</td>
+            <td>8% NexaPrimary</td>
+            <td>0 2px 4px rgba(15,23,42,0.06)</td>
+            <td>NexaTopAppBar fija y barra inferior de navegación</td>
+          </tr>
+          <tr>
+            <td><strong>Level 3</strong></td>
+            <td>6dp</td>
+            <td>11% NexaPrimary</td>
+            <td>0 4px 8px rgba(15,23,42,0.08)</td>
+            <td>Floating Action Button (FAB) de escaneo y toasts</td>
+          </tr>
+          <tr>
+            <td><strong>Level 4</strong></td>
+            <td>8dp</td>
+            <td>12% NexaPrimary</td>
+            <td>0 8px 16px rgba(15,23,42,0.12)</td>
+            <td>Bottom Sheets modales para firma táctil y reportes</td>
+          </tr>
+          <tr>
+            <td><strong>Level 5</strong></td>
+            <td>12dp</td>
+            <td>14% NexaPrimary</td>
+            <td>0 12px 24px rgba(15,23,42,0.16)</td>
+            <td>Diálogos críticos de confirmación y advertencias</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 3: Kotlin Elevation Contract -->
+  <section class="spec-card">
+    <div class="card-header-row">
+      <div class="card-badge-icon code-badge"><i class="pi pi-code"></i></div>
+      <div>
+        <span class="card-eyebrow">IMPLEMENTACIÓN NATIVA · JETPACK COMPOSE</span>
+        <h3 class="card-title">Uso de Tonal Elevation en Componentes Compose</h3>
+      </div>
+    </div>
+
+    <div class="code-preview-block">
+      <pre is:raw><code>// Aplicación canónica en Card de Jetpack Compose:
+Card(
+    modifier = Modifier.fillMaxWidth(),
+    shape = RoundedCornerShape(16.dp),
+    colors = CardDefaults.cardColors(
+        containerColor = MaterialTheme.colorScheme.surface,
+    ),
+    elevation = CardDefaults.cardElevation(
+        defaultElevation = 1.dp,
+        pressedElevation = 4.dp
+    )
+) {
+    // Contenido con soporte de surface tint automático
+}</code></pre>
+    </div>
+  </section>
+</div>
+
+<style>
+  .elevaciones-m3-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .spec-card {
+    background: var(--nexa-surface-card, #ffffff);
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: var(--nexa-radius-card, 16px);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .card-header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .card-badge-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--nexa-color-primary-50, #eff6ff);
+    color: var(--nexa-color-primary-600, #2a67d9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+
+    &.table-badge {
+      background: #ecfdf5;
+      color: #059669;
+    }
+    &.code-badge {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+  }
+
+  .card-eyebrow {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .card-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 0;
+  }
+
+  .card-text {
+    font-size: 13.5px;
+    color: var(--nexa-color-text-secondary, #64748b);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .elevation-spectrum-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .elev-item {
+    padding: 16px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+
+    &.elev-0 {
+      background: #f8fafc;
+      box-shadow: none;
+    }
+    &.elev-1 {
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+    }
+    &.elev-2 {
+      box-shadow: 0 3px 6px rgba(15, 23, 42, 0.08);
+    }
+    &.elev-3 {
+      box-shadow: 0 6px 12px rgba(15, 23, 42, 0.10);
+    }
+    &.elev-4 {
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+    }
+  }
+
+  .elev-level {
+    font-size: 12px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .elev-dp {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    font-weight: 600;
+  }
+
+  .elev-usage {
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 4px;
+  }
+
+  .table-responsive-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--nexa-color-border-subtle, #e2e8f0);
+    border-radius: 12px;
+  }
+
+  .metrics-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    text-align: left;
+
+    th {
+      background: var(--nexa-color-neutral-50, #f8fafc);
+      padding: 10px 14px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--nexa-color-neutral-600, #475569);
+      border-bottom: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
+      color: var(--nexa-color-text-secondary, #64748b);
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+  }
+
+  .code-preview-block {
+    background: #0f172a;
+    border-radius: 12px;
+    padding: 18px;
+    overflow-x: auto;
+
+    pre { margin: 0; }
+    code {
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-size: 12px;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+  }
+</style>

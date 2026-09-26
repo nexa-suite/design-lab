@@ -2,18 +2,41 @@
 /**
  * MOBILE STYLE — MASTER GUIDELINES & INTERACTIVE DEVICE SIMULATOR
  * Unified 1:1 Design Lab Architecture with Web Style shell, zero padding errors,
- * and comprehensive specifications for Android Jetpack Compose & Flutter.
+ * isolated per-screen navigation, and comprehensive specifications for Android Jetpack Compose.
  */
 import 'primeicons/primeicons.css';
 import '../styles/mobile-tokens.css';
 import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
+
+// Architecture & Evidence
 import MobileArchitectureHero from '../components/guidelines/MobileArchitectureHero.astro';
-import MobileFoundationsSection from '../components/guidelines/MobileFoundationsSection.astro';
-import MobileErgonomicsSection from '../components/guidelines/MobileErgonomicsSection.astro';
+import MobileEvidenceModel from '../components/guidelines/MobileEvidenceModel.astro';
+
+// Foundations M3
+import TokensColorSection from '../components/guidelines/TokensColorSection.astro';
+import TipografiaSpSection from '../components/guidelines/TipografiaSpSection.astro';
+import Cuadricula8dpSection from '../components/guidelines/Cuadricula8dpSection.astro';
+import ElevacionesM3Section from '../components/guidelines/ElevacionesM3Section.astro';
+
+// Ergonomics
+import Ergonomia48dpSection from '../components/guidelines/Ergonomia48dpSection.astro';
+import ZonasAlcanceSection from '../components/guidelines/ZonasAlcanceSection.astro';
+
+// Components & Code
 import MobileComponentsSection from '../components/guidelines/MobileComponentsSection.astro';
+import CodeSnippetsTabs from '../components/spec/CodeSnippetsTabs.astro';
+
+// Blueprint User Stories
+import DriverRouteStory from '../components/stories/DriverRouteStory.astro';
+import WarehousePickingStory from '../components/stories/WarehousePickingStory.astro';
+import DispatchBoardStory from '../components/stories/DispatchBoardStory.astro';
+import MachineryInspectionStory from '../components/stories/MachineryInspectionStory.astro';
+
+// Hardware & Resilience
 import MobileHardwareSection from '../components/guidelines/MobileHardwareSection.astro';
 import MobileResilienceSection from '../components/guidelines/MobileResilienceSection.astro';
-import CodeSnippetsTabs from '../components/spec/CodeSnippetsTabs.astro';
+
+// Native Simulator
 import DeviceFrame from '../components/simulator/DeviceFrame.astro';
 ---
 
@@ -22,7 +45,7 @@ import DeviceFrame from '../components/simulator/DeviceFrame.astro';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mobile Style · Nexa Design Lab (Android Kotlin Compose & Flutter)</title>
+  <title>Mobile Style · Nexa Design Lab (Android Kotlin Compose)</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,7 +73,7 @@ import DeviceFrame from '../components/simulator/DeviceFrame.astro';
       overflow-x: hidden;
     }
 
-    /* Master Documentation Page (Exact padding & layout matching web-style) */
+    /* Master Documentation Page (Exact layout matching web-style) */
     .documentation-page {
       width: min(calc(100% - 48px), var(--nexa-layout-content-max, 1400px));
       margin: 0 auto;
@@ -61,7 +84,7 @@ import DeviceFrame from '../components/simulator/DeviceFrame.astro';
       gap: 32px;
     }
 
-    /* Documentation Header (Matching web-style) */
+    /* Documentation Header */
     .documentation-header {
       display: grid;
       gap: 18px;
@@ -110,7 +133,7 @@ import DeviceFrame from '../components/simulator/DeviceFrame.astro';
     .documentation-header h1 {
       max-width: 820px;
       margin: 0;
-      font: 800 clamp(28px, 4vw, 44px)/1.1 var(--nexa-font-family-display, sans-serif);
+      font: 800 clamp(26px, 3.5vw, 40px)/1.15 var(--nexa-font-family-display, sans-serif);
       letter-spacing: -.035em;
       color: var(--nexa-color-text-primary, #0f172a);
     }
@@ -119,7 +142,7 @@ import DeviceFrame from '../components/simulator/DeviceFrame.astro';
       max-width: 780px;
       margin: 12px 0 0;
       color: var(--nexa-color-text-secondary, #64748b);
-      font-size: 15px;
+      font-size: 14.5px;
       line-height: 1.6;
     }
 
@@ -181,105 +204,103 @@ import DeviceFrame from '../components/simulator/DeviceFrame.astro';
       font-size: 13px;
     }
 
-    /* Document Lede (Matching web-style) */
-    .document-lede {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(300px, 1fr);
-      gap: 32px;
-      align-items: end;
-      padding: 24px 0;
-      border-bottom: 1px solid var(--nexa-color-border-structural, #e2e8f0);
-    }
-
-    @media (max-width: 900px) {
-      .document-lede {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .section-kicker {
-      margin: 0 0 6px;
-      color: var(--nexa-color-primary-700, #1d4ed8);
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .document-lede h2 {
-      margin: 0 0 6px;
-      font: 700 clamp(20px, 2.5vw, 26px)/1.2 var(--nexa-font-family-display, sans-serif);
-      letter-spacing: -.03em;
-      color: var(--nexa-color-text-primary, #0f172a);
-    }
-
-    .document-lede p {
-      color: var(--nexa-color-text-secondary, #64748b);
-      line-height: 1.55;
-      font-size: 13.5px;
-    }
-
-    .provenance-strip {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .provenance-strip span {
-      display: grid;
-      gap: 4px;
-      min-width: 140px;
-      padding: 10px 14px;
-      border-left: 3px solid var(--nexa-color-primary-400, #60a5fa);
-      background: var(--nexa-surface-card, #ffffff);
-      border-radius: 0 8px 8px 0;
-      color: var(--nexa-color-text-secondary, #64748b);
-      font-size: 11.5px;
-      border-top: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
-      border-right: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
-      border-bottom: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
-    }
-
-    .provenance-strip b {
-      color: var(--nexa-color-text-primary, #0f172a);
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    /* Core Guidelines & Simulator Split Grid */
-    .guidelines-split-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 440px;
-      gap: 32px;
-      align-items: start;
+    /* ==========================================================================
+       ONE-SCREEN-AT-A-TIME ARCHITECTURE (.mobile-screen-view)
+       ========================================================================== */
+    .screens-master-host {
       width: 100%;
-    }
-
-    @media (max-width: 1180px) {
-      .guidelines-split-layout {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .guidelines-stream {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
       min-width: 0;
     }
 
-    /* Sticky Simulator Column with Zero Padding Overflow */
-    .simulator-rail {
-      position: sticky;
-      top: 76px;
+    .mobile-screen-view {
+      display: none;
       width: 100%;
-      max-width: 440px;
-      margin: 0 auto;
-      scroll-margin-top: 80px;
+      animation: screenFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Code Snippets Section */
+    .mobile-screen-view.active {
+      display: block;
+    }
+
+    @keyframes screenFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Standalone Simulator Screen */
+    .simulator-standalone-stage {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      width: 100%;
+      align-items: center;
+    }
+
+    .simulator-intro-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding: 18px 22px;
+      background: var(--nexa-surface-card, #ffffff);
+      border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+      border-radius: var(--nexa-radius-card, 16px);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+
+    .card-eyebrow {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--nexa-color-primary-700, #1d4ed8);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .card-title {
+      font-family: var(--nexa-font-family-display, sans-serif);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--nexa-color-text-primary, #0f172a);
+      margin: 0;
+    }
+
+    .spec-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .spec-pill {
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--nexa-color-neutral-50, #f8fafc);
+      color: var(--nexa-color-neutral-700, #334155);
+      border: 1px solid var(--nexa-color-border-default, #cbd5e1);
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .simulator-center-wrapper {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      padding: 12px 0 24px;
+    }
+
+    /* Code Generator Card */
     .code-generator-card {
       background: var(--nexa-surface-card, #ffffff);
       border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
@@ -289,7 +310,6 @@ import DeviceFrame from '../components/simulator/DeviceFrame.astro';
       display: flex;
       flex-direction: column;
       gap: 16px;
-      scroll-margin-top: 80px;
     }
 
     .card-header-row {
@@ -311,24 +331,6 @@ import DeviceFrame from '../components/simulator/DeviceFrame.astro';
       flex-shrink: 0;
     }
 
-    .card-eyebrow {
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      color: var(--nexa-color-primary-700, #1d4ed8);
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 2px;
-    }
-
-    .card-title {
-      font-family: var(--nexa-font-family-display, sans-serif);
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--nexa-color-text-primary, #0f172a);
-      margin: 0;
-    }
-
     .card-text {
       font-size: 13.5px;
       color: var(--nexa-color-text-secondary, #64748b);
@@ -336,7 +338,7 @@ import DeviceFrame from '../components/simulator/DeviceFrame.astro';
       margin: 0;
     }
 
-    /* Provenance Section (Matching web-style) */
+    /* Provenance Section */
     .provenance-section {
       padding: 32px 0 0;
       border-top: 1px solid var(--nexa-color-border-structural, #e2e8f0);
@@ -390,15 +392,15 @@ import DeviceFrame from '../components/simulator/DeviceFrame.astro';
           <span aria-hidden="true">/</span>
           <span>Mobile Style</span>
           <span aria-hidden="true">/</span>
-          <span>Guidelines</span>
+          <span id="breadcrumb-current-screen">¿Qué usan? (Android Kotlin)</span>
         </div>
 
         <div class="header-grid">
           <div>
             <p class="eyebrow">CANONICAL MOBILE SPECIFICATION</p>
-            <h1>Directrices de Diseño Móvil (Android & Flutter)</h1>
+            <h1>Directrices de Diseño Móvil (Android Kotlin Compose M3)</h1>
             <p class="intro">
-              Sistema de diseño unificado para dispositivos móviles de <strong>Nexa Suite</strong>. Integra los contratos de ergonomía táctil (mínimo 48dp), elevaciones Material 3, escalado tipográfico en <code>sp</code>, escaneo óptico CameraX y cola de reintentos con WorkManager.
+              Sistema de diseño unificado para dispositivos móviles de <strong>Nexa Suite</strong>. Arquitectura de pantallas aisladas, contratos de ergonomía táctil (mínimo 48dp y 56dp con guantes industriales), elevaciones tonales Material 3, escalado tipográfico en <code>sp</code>, escaneo óptico CameraX y cola offline con WorkManager.
             </p>
           </div>
 
@@ -406,77 +408,124 @@ import DeviceFrame from '../components/simulator/DeviceFrame.astro';
             <span class="status-label">MATURIDAD</span>
             <strong class="design-status">FROZEN CANDIDATE</strong>
             <span class="status-label">ADOPCIÓN</span>
-            <strong class="adoption-status">Operations Android & Buyer Flutter</strong>
-            <span>Android SDK 37 (minSdk 29) · Flutter 3.x · WCAG 2.2 AA</span>
+            <strong class="adoption-status">Operations Android (:core:designsystem)</strong>
+            <span>Android SDK 37 (minSdk 29) · Kotlin 2.4 · WCAG 2.2 AA</span>
           </aside>
         </div>
 
         <div class="header-meta">
           <span><i class="pi pi-android" aria-hidden="true"></i>Kotlin 2.4 · Jetpack Compose M3</span>
-          <span><i class="pi pi-code" aria-hidden="true"></i>Flutter 3.x · Provider</span>
+          <span><i class="pi pi-shield" aria-hidden="true"></i>ADR-0018 Candidate</span>
           <span><i class="pi pi-camera" aria-hidden="true"></i>CameraX + ML Kit Vision</span>
           <span><i class="pi pi-eye" aria-hidden="true"></i>WCAG 2.2 AA (48dp target)</span>
         </div>
       </header>
 
-      <!-- Document Lede -->
-      <section class="document-lede">
-        <div>
-          <p class="section-kicker">MODELO DE EVIDENCIA</p>
-          <h2>Observa el contrato antes de examinar el código.</h2>
-          <p>
-            Cada sección presenta especificaciones visuales en vivo, reglas métricas inquebrantables, zonas biomécanicas de pulgar y snippets de código listos para producción.
-          </p>
-        </div>
-        <div class="provenance-strip">
-          <span><b>Decisión</b>ADR-0018 & ADR-0019</span>
-          <span><b>Fundación</b>Material 3 + NexaTokens</span>
-          <span><b>Revisión</b>Candidato hasta aprobación humana</span>
-        </div>
-      </section>
+      <!-- Host Container for Isolated Screens -->
+      <div class="screens-master-host">
 
-      <!-- Split Stream: Guidelines vs Sticky Device Simulator -->
-      <div class="guidelines-split-layout">
-        <!-- Left: Complete Mobile Style Guidelines Stream -->
-        <div class="guidelines-stream">
-          <!-- 1. Architectural Clarification (¿Qué usan?) -->
+        <!-- 1. ARQUITECTURA & STACK -->
+        <div class="mobile-screen-view active" id="screen-arquitectura-android">
           <MobileArchitectureHero />
+        </div>
 
-          <!-- 2. Fundamentos & Tokens M3 -->
-          <MobileFoundationsSection />
+        <div class="mobile-screen-view" id="screen-modelo-evidencia">
+          <MobileEvidenceModel />
+        </div>
 
-          <!-- 3. Ergonomía Táctil & Bounding Boxes -->
-          <MobileErgonomicsSection />
+        <!-- 2. FUNDAMENTOS M3 -->
+        <div class="mobile-screen-view" id="screen-tokens-color">
+          <TokensColorSection />
+        </div>
 
-          <!-- 4. Componentes Canónicos Móviles -->
+        <div class="mobile-screen-view" id="screen-tipografia-sp">
+          <TipografiaSpSection />
+        </div>
+
+        <div class="mobile-screen-view" id="screen-cuadricula-8dp">
+          <Cuadricula8dpSection />
+        </div>
+
+        <div class="mobile-screen-view" id="screen-elevaciones-m3">
+          <ElevacionesM3Section />
+        </div>
+
+        <!-- 3. ERGONOMÍA TÁCTIL -->
+        <div class="mobile-screen-view" id="screen-ergonomia-48dp">
+          <Ergonomia48dpSection />
+        </div>
+
+        <div class="mobile-screen-view" id="screen-zonas-alcance">
+          <ZonasAlcanceSection />
+        </div>
+
+        <!-- 4. COMPONENTES COMPOSE & CÓDIGO -->
+        <div class="mobile-screen-view" id="screen-componentes-compose">
           <MobileComponentsSection />
+        </div>
 
-          <!-- 5. Hardware & Escaneo Óptico (CameraX) -->
-          <MobileHardwareSection />
-
-          <!-- 6. Resiliencia de Red & Reintentos (WorkManager) -->
-          <MobileResilienceSection />
-
-          <!-- 7. Generador de Código Nativo -->
-          <section class="code-generator-card" id="sec-codigo-nativo" data-platform-target="universal">
+        <div class="mobile-screen-view" id="screen-codigo-nativo">
+          <section class="code-generator-card">
             <div class="card-header-row">
               <div class="card-badge-icon"><i class="pi pi-code"></i></div>
               <div>
-                <span class="card-eyebrow">CÓDIGO DE PRODUCCIÓN · DUAL TARGET</span>
-                <h3 class="card-title">Generador de Código Nativo (Compose & Flutter)</h3>
+                <span class="card-eyebrow">CÓDIGO DE PRODUCCIÓN · ANDROID KOTLIN</span>
+                <h3 class="card-title">Generador de Código Nativo (Compose & Multiplatform)</h3>
               </div>
             </div>
             <p class="card-text">
-              Implementaciones verificadas frente al compilador de Kotlin 2.4 y Dart. Utilizan tokens semánticos del Design Lab y garantizan objetivos táctiles de 48dp.
+              Implementaciones verificadas frente al compilador de Kotlin 2.4. Utilizan tokens semánticos del Design Lab y garantizan objetivos táctiles de 48dp/56dp.
             </p>
             <CodeSnippetsTabs />
           </section>
         </div>
 
-        <!-- Right: Interactive Smartphone Hardware Stand (Sticky) -->
-        <aside class="simulator-rail" id="sec-simulador" aria-label="Simulador de Hardware Móvil">
-          <DeviceFrame />
-        </aside>
+        <!-- 5. HISTORIAS DE USUARIO (BLUEPRINT EN CAMPO) -->
+        <div class="mobile-screen-view" id="screen-historia-conductor">
+          <DriverRouteStory />
+        </div>
+
+        <div class="mobile-screen-view" id="screen-historia-bodega">
+          <WarehousePickingStory />
+        </div>
+
+        <div class="mobile-screen-view" id="screen-historia-despacho">
+          <DispatchBoardStory />
+        </div>
+
+        <div class="mobile-screen-view" id="screen-inspeccion-maquinaria">
+          <MachineryInspectionStory />
+        </div>
+
+        <!-- 6. HARDWARE & RED -->
+        <div class="mobile-screen-view" id="screen-hardware-camerax">
+          <MobileHardwareSection />
+        </div>
+
+        <div class="mobile-screen-view" id="screen-resiliencia-red">
+          <MobileResilienceSection />
+        </div>
+
+        <!-- 7. SIMULADOR NATIVO STANDALONE -->
+        <div class="mobile-screen-view" id="screen-simulador-hardware">
+          <div class="simulator-standalone-stage">
+            <div class="simulator-intro-bar">
+              <div>
+                <span class="card-eyebrow">TERMINAL DE HARDWARE INTERACTIVO</span>
+                <h3 class="card-title">Simulador de Smartphone en Vivo (Google Pixel 8 / Zebra TC58)</h3>
+              </div>
+              <div class="spec-pills">
+                <span class="spec-pill"><i class="pi pi-mobile"></i> 1080 &times; 2400 (428 ppi)</span>
+                <span class="spec-pill"><i class="pi pi-android"></i> Android 14 (API 34)</span>
+                <span class="spec-pill"><i class="pi pi-check"></i> Escala 100% Sin Deformación</span>
+              </div>
+            </div>
+            <div class="simulator-center-wrapper">
+              <DeviceFrame />
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <!-- Provenance Section (Matching web-style) -->
@@ -487,8 +536,8 @@ import DeviceFrame from '../components/simulator/DeviceFrame.astro';
             <p>Módulo <code>:core:designsystem</code> con <code>NexaTheme</code>, Material 3, ViewModels UDF y Navigation 3 en <code>apps/operations-android</code>.</p>
           </div>
           <div>
-            <b>Flutter Multiplatform Contract</b>
-            <p>Organización <em>feature-first</em> en <code>app/core/features</code> con <code>provider</code>, <code>go_router</code> y toolchain moderno de Swift Package Manager en iOS (ADR-0019).</p>
+            <b>Pantallas Aisladas Canónicas</b>
+            <p>Arquitectura de visualización 1 a 1: cada opción lateral aísla su contenido sin colisiones ni dobles scrollbars.</p>
           </div>
           <div>
             <b>Human Review Gate</b>

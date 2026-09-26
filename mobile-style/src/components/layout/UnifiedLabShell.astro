@@ -66,37 +66,37 @@ const { currentSection = 'overview' } = Astro.props;
           <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
         </button>
         <div class="lab-nav-items">
-          <a class="lab-nav-item active" href="#sec-clarificacion-stack">
+          <a class="lab-nav-item active" href="#screen-arquitectura-android" data-screen="arquitectura-android">
             <i class="pi pi-compass" aria-hidden="true"></i>
-            <span>¿Qué usan? (Kotlin vs Flutter)</span>
+            <span>¿Qué usan? (Android Kotlin)</span>
           </a>
-          <a class="lab-nav-item" href="#sec-modelo-evidencia">
+          <a class="lab-nav-item" href="#screen-modelo-evidencia" data-screen="modelo-evidencia">
             <i class="pi pi-shield" aria-hidden="true"></i>
             <span>Modelo de Evidencia & C4</span>
           </a>
         </div>
       </section>
 
-      <!-- 2. Fundamentos & Tokens -->
+      <!-- 2. Fundamentos M3 -->
       <section class="lab-nav-group">
         <button class="nav-section-button" type="button" data-nav-group="foundations">
-          <span class="nav-section">2. FUNDAMENTOS MÓVILES</span>
+          <span class="nav-section">2. FUNDAMENTOS M3</span>
           <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
         </button>
         <div class="lab-nav-items">
-          <a class="lab-nav-item" href="#sec-tokens-color">
+          <a class="lab-nav-item" href="#screen-tokens-color" data-screen="tokens-color">
             <i class="pi pi-palette" aria-hidden="true"></i>
             <span>Paleta M3 & Tonal Roles</span>
           </a>
-          <a class="lab-nav-item" href="#sec-tipografia-sp">
+          <a class="lab-nav-item" href="#screen-tipografia-sp" data-screen="tipografia-sp">
             <i class="pi pi-align-left" aria-hidden="true"></i>
             <span>Tipografía Escalar en sp</span>
           </a>
-          <a class="lab-nav-item" href="#sec-cuadricula-8dp">
+          <a class="lab-nav-item" href="#screen-cuadricula-8dp" data-screen="cuadricula-8dp">
             <i class="pi pi-th-large" aria-hidden="true"></i>
             <span>Cuadrícula Espacial 8dp</span>
           </a>
-          <a class="lab-nav-item" href="#sec-elevaciones-m3">
+          <a class="lab-nav-item" href="#screen-elevaciones-m3" data-screen="elevaciones-m3">
             <i class="pi pi-clone" aria-hidden="true"></i>
             <span>Elevación & Surface Tint</span>
           </a>
@@ -110,77 +110,87 @@ const { currentSection = 'overview' } = Astro.props;
           <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
         </button>
         <div class="lab-nav-items">
-          <a class="lab-nav-item" href="#sec-ergonomia-48dp">
+          <a class="lab-nav-item" href="#screen-ergonomia-48dp" data-screen="ergonomia-48dp">
             <i class="pi pi-hand" aria-hidden="true"></i>
-            <span>Objetivo Mínimo 48×48dp</span>
+            <span>Objetivo Mínimo 48dp / 56dp</span>
           </a>
-          <a class="lab-nav-item" href="#sec-zonas-alcance">
+          <a class="lab-nav-item" href="#screen-zonas-alcance" data-screen="zonas-alcance">
             <i class="pi pi-chart-pie" aria-hidden="true"></i>
             <span>Zonas de Alcance del Pulgar</span>
           </a>
         </div>
       </section>
 
-      <!-- 4. Componentes Canónicos -->
+      <!-- 4. Componentes Canónicos Compose -->
       <section class="lab-nav-group">
         <button class="nav-section-button" type="button" data-nav-group="components">
-          <span class="nav-section">4. COMPONENTES CANÓNICOS</span>
+          <span class="nav-section">4. COMPONENTES COMPOSE</span>
           <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
         </button>
         <div class="lab-nav-items">
-          <a class="lab-nav-item" href="#sec-comp-appbar">
-            <i class="pi pi-window-minimize" aria-hidden="true"></i>
-            <span>Top App Bars M3</span>
-          </a>
-          <a class="lab-nav-item" href="#sec-comp-botones">
-            <i class="pi pi-check-circle" aria-hidden="true"></i>
-            <span>Botones & CTAs 48dp/56dp</span>
-          </a>
-          <a class="lab-nav-item" href="#sec-comp-cards">
+          <a class="lab-nav-item" href="#screen-componentes-compose" data-screen="componentes-compose">
             <i class="pi pi-id-card" aria-hidden="true"></i>
-            <span>Tarjetas de Despacho & Ítems</span>
+            <span>Catálogo Canónico Compose</span>
           </a>
-          <a class="lab-nav-item" href="#sec-comp-bottomnav">
-            <i class="pi pi-bars" aria-hidden="true"></i>
-            <span>Bottom Navigation 64dp</span>
-          </a>
-          <a class="lab-nav-item" href="#sec-comp-bottomsheet">
-            <i class="pi pi-sliders-h" aria-hidden="true"></i>
-            <span>Modal Bottom Sheets</span>
+          <a class="lab-nav-item" href="#screen-codigo-nativo" data-screen="codigo-nativo">
+            <i class="pi pi-code" aria-hidden="true"></i>
+            <span>Generador de Código Kotlin</span>
           </a>
         </div>
       </section>
 
-      <!-- 5. Hardware & Escáner -->
+      <!-- 5. Historias de Usuario (Blueprint Campo) -->
       <section class="lab-nav-group">
-        <button class="nav-section-button" type="button" data-nav-group="hardware">
-          <span class="nav-section">5. HARDWARE & ESCÁNER</span>
+        <button class="nav-section-button" type="button" data-nav-group="stories">
+          <span class="nav-section">5. HISTORIAS BLUEPRINT</span>
           <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
         </button>
         <div class="lab-nav-items">
-          <a class="lab-nav-item" href="#sec-hardware-camerax">
+          <a class="lab-nav-item" href="#screen-historia-conductor" data-screen="historia-conductor">
+            <i class="pi pi-truck" aria-hidden="true"></i>
+            <span>Diego · Rutas & POD</span>
+          </a>
+          <a class="lab-nav-item" href="#screen-historia-bodega" data-screen="historia-bodega">
+            <i class="pi pi-box" aria-hidden="true"></i>
+            <span>Alejandro · Picking FEFO</span>
+          </a>
+          <a class="lab-nav-item" href="#screen-historia-despacho" data-screen="historia-despacho">
+            <i class="pi pi-send" aria-hidden="true"></i>
+            <span>Mesa de Despachos & Staging</span>
+          </a>
+          <a class="lab-nav-item" href="#screen-inspeccion-maquinaria" data-screen="inspeccion-maquinaria">
+            <i class="pi pi-wrench" aria-hidden="true"></i>
+            <span>Checklist Pre-operacional</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 6. Hardware & Resiliencia -->
+      <section class="lab-nav-group">
+        <button class="nav-section-button" type="button" data-nav-group="hardware">
+          <span class="nav-section">6. HARDWARE & RED</span>
+          <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
+        </button>
+        <div class="lab-nav-items">
+          <a class="lab-nav-item" href="#screen-hardware-camerax" data-screen="hardware-camerax">
             <i class="pi pi-qrcode" aria-hidden="true"></i>
             <span>CameraX + ML Kit (Fallback)</span>
           </a>
-          <a class="lab-nav-item" href="#sec-resiliencia-red">
+          <a class="lab-nav-item" href="#screen-resiliencia-red" data-screen="resiliencia-red">
             <i class="pi pi-sync" aria-hidden="true"></i>
             <span>WorkManager & Cola Offline</span>
           </a>
         </div>
       </section>
 
-      <!-- 6. Código & Simulador -->
+      <!-- 7. Simulador Hardware -->
       <section class="lab-nav-group">
         <button class="nav-section-button" type="button" data-nav-group="simulator">
-          <span class="nav-section">6. CÓDIGO & SIMULADOR</span>
+          <span class="nav-section">7. SIMULADOR NATIVO</span>
           <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
         </button>
         <div class="lab-nav-items">
-          <a class="lab-nav-item" href="#sec-codigo-nativo">
-            <i class="pi pi-code" aria-hidden="true"></i>
-            <span>Snippets Compose & Flutter</span>
-          </a>
-          <a class="lab-nav-item" href="#sec-simulador">
+          <a class="lab-nav-item" href="#screen-simulador-hardware" data-screen="simulador-hardware">
             <i class="pi pi-mobile" aria-hidden="true"></i>
             <span>Simulador Hardware Interactivo</span>
           </a>
@@ -193,7 +203,7 @@ const { currentSection = 'overview' } = Astro.props;
       <span class="status-dot" aria-hidden="true"></span>
       <span>
         <strong>Visual evidence candidate</strong>
-        <small>Operations Android & Buyer Flutter</small>
+        <small>Operations Android (:core:designsystem)</small>
       </span>
     </div>
   </aside>
@@ -205,18 +215,14 @@ const { currentSection = 'overview' } = Astro.props;
         <button class="mobile-menu-button" id="btn-mobile-sidebar-toggle" type="button" aria-label="Abrir navegación móvil">
           <i class="pi pi-bars" aria-hidden="true"></i>
         </button>
-        <span class="topbar-title">Design documentation · v1.0.0 (Mobile Style)</span>
+        <span class="topbar-title" id="topbar-screen-title">Design documentation · v1.0.0 (Mobile Style)</span>
       </div>
 
-      <!-- Evaluation Controls (Segmented controls matching web-style) -->
+      <!-- Evaluation Controls (Clean Android Native priority) -->
       <div class="evaluation-controls" aria-label="Modos de evaluación del Design Lab">
-        <span class="evaluation-label">Evaluate</span>
-
-        <!-- Platform Filter -->
-        <div class="segmented-evaluation" role="group" aria-label="Filtro de plataforma móvil">
-          <button type="button" class="btn-eval-platform active" data-platform="all">Todo</button>
-          <button type="button" class="btn-eval-platform" data-platform="kotlin">🤖 Kotlin</button>
-          <button type="button" class="btn-eval-platform" data-platform="flutter">💙 Flutter</button>
+        <div class="android-native-pill" title="100% Prioridad Android Kotlin nativo con Jetpack Compose">
+          <i class="pi pi-android"></i>
+          <span>Android Kotlin · Compose M3</span>
         </div>
 
         <!-- Contrast Mode -->
@@ -224,15 +230,9 @@ const { currentSection = 'overview' } = Astro.props;
           <button type="button" class="btn-eval-contrast active" data-contrast="standard">Standard</button>
           <button type="button" class="btn-eval-contrast" data-contrast="increased">Increased</button>
         </div>
-
-        <!-- Dark / Light Theme -->
-        <button type="button" class="btn-theme-pill" id="topbar-theme-toggle" title="Cambiar tema claro / oscuro">
-          <i class="pi pi-moon" id="topbar-theme-icon" aria-hidden="true"></i>
-          <span id="topbar-theme-text">Oscuro</span>
-        </button>
       </div>
 
-      <span class="topbar-review">ADR-0018 / ADR-0019 Candidate</span>
+      <span class="topbar-review">ADR-0018 Candidate</span>
     </header>
 
     <!-- Master Content Slot -->
@@ -272,7 +272,7 @@ const { currentSection = 'overview' } = Astro.props;
     padding: 24px 16px 16px;
     border-right: 1px solid var(--nexa-color-border-structural, #e2e8f0);
     background: var(--nexa-surface-card, #ffffff);
-    overflow-y: auto;
+    overflow: hidden; /* Elimina doble scrollbar en el contenedor padre */
     z-index: 100;
   }
 
@@ -812,13 +812,81 @@ const { currentSection = 'overview' } = Astro.props;
     sidebar?.classList.toggle('open');
   });
 
-  // Active nav link highlight on scroll
+  // ==========================================================================
+  // SCREEN SWITCHING & HASH ROUTING ENGINE (One-screen-at-a-time architecture)
+  // ==========================================================================
   const navItems = document.querySelectorAll<HTMLAnchorElement>('.lab-nav-item');
+  const topbarTitle = document.getElementById('topbar-screen-title');
+  const breadcrumbCurrent = document.getElementById('breadcrumb-current-screen');
+
+  function switchToScreen(screenId: string) {
+    const cleanId = screenId.replace(/^screen-/, '');
+    const allScreens = document.querySelectorAll<HTMLElement>('.mobile-screen-view');
+    
+    // Find target screen element by ID
+    let target = document.getElementById(`screen-${cleanId}`) || document.getElementById(cleanId);
+    
+    if (target) {
+      // 1. Hide all screens and show only target
+      allScreens.forEach(s => s.classList.remove('active'));
+      target.classList.add('active');
+
+      // 2. Update active nav link and expand parent group
+      let screenTitle = '';
+      navItems.forEach(item => {
+        const itemTarget = item.getAttribute('data-screen');
+        const isMatch = itemTarget === cleanId || item.getAttribute('href') === `#screen-${cleanId}`;
+        item.classList.toggle('active', isMatch);
+        if (isMatch) {
+          screenTitle = item.querySelector('span')?.textContent || cleanId;
+          const group = item.closest('.lab-nav-group');
+          group?.classList.remove('collapsed');
+        }
+      });
+
+      // 3. Update topbar title
+      if (topbarTitle && screenTitle) {
+        topbarTitle.textContent = `Design documentation · ${screenTitle}`;
+      }
+
+      // 4. Update breadcrumb
+      if (breadcrumbCurrent && screenTitle) {
+        breadcrumbCurrent.textContent = screenTitle;
+      }
+
+      // 5. Scroll to top smoothly
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  // Intercept navigation clicks
   navItems.forEach(item => {
-    item.addEventListener('click', () => {
-      navItems.forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-      sidebar?.classList.remove('open');
+    item.addEventListener('click', (e) => {
+      const screenId = item.getAttribute('data-screen');
+      if (screenId) {
+        e.preventDefault();
+        window.location.hash = `screen-${screenId}`;
+        switchToScreen(screenId);
+        sidebar?.classList.remove('open');
+      }
     });
   });
+
+  // Handle URL Hash Changes & Initial Page Load
+  function onHashChange() {
+    const rawHash = window.location.hash.replace(/^#/, '');
+    if (rawHash) {
+      switchToScreen(rawHash);
+    } else {
+      switchToScreen('arquitectura-android');
+    }
+  }
+
+  window.addEventListener('hashchange', onHashChange);
+  // Initial check on DOMContentLoaded / load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', onHashChange);
+  } else {
+    onHashChange();
+  }
 </script>

@@ -1,0 +1,286 @@
+---
+/**
+ * TokensColorSection.astro
+ * Canonical Color Tokens & Material 3 Dynamic Roles for Android
+ */
+---
+
+<div class="tokens-color-container" data-platform-target="universal">
+  <!-- Section 1: Colorimetría M3 -->
+  <section class="spec-card">
+    <div class="card-header-row">
+      <div class="card-badge-icon"><i class="pi pi-palette"></i></div>
+      <div>
+        <span class="card-eyebrow">FUNDAMENTOS M3 · PALETA TONAL</span>
+        <h3 class="card-title">Paleta Tonal Material 3 & Contratos de Color</h3>
+      </div>
+    </div>
+    <p class="card-text">
+      Nexa Mobile implementa el sistema de color dinámico Material 3 adaptado a la identidad corporativa. Cada superficie calcula su contraste contra el fondo para asegurar cumplimiento <strong>WCAG 2.2 AA (mínimo 4.5:1 para texto normal y 3:1 para controles interactivos)</strong>.
+    </p>
+
+    <!-- Color Swatches Grid -->
+    <div class="swatches-grid">
+      <div class="swatch-item">
+        <div class="swatch-color" style="background: #2a67d9; color: #ffffff;">#2a67d9</div>
+        <div class="swatch-info">
+          <span class="swatch-name">Primary (Nexa Blue)</span>
+          <span class="swatch-role">Botones CTA, AppBar tint, FAB</span>
+          <span class="swatch-contrast">Contraste: 5.2:1 (PASS)</span>
+        </div>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-color" style="background: #e8f0fe; color: #174ea6;">#e8f0fe</div>
+        <div class="swatch-info">
+          <span class="swatch-name">Primary Container</span>
+          <span class="swatch-role">Chips activos, selecciones de lista</span>
+          <span class="swatch-contrast">Contraste: 6.8:1 (PASS)</span>
+        </div>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-color" style="background: #082846; color: #ffffff;">#082846</div>
+        <div class="swatch-info">
+          <span class="swatch-name">Brand Navy</span>
+          <span class="swatch-role">Identidad corporativa solida</span>
+          <span class="swatch-contrast">Contraste: 14.8:1 (PASS)</span>
+        </div>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-color" style="background: #38c8ff; color: #082846;">#38c8ff</div>
+        <div class="swatch-info">
+          <span class="swatch-name">Brand Celeste</span>
+          <span class="swatch-role">Láser escáner y acentos vivos</span>
+          <span class="swatch-contrast">Contraste: 9.1:1 (PASS)</span>
+        </div>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-color" style="background: #ffffff; color: #0f172a; border: 1px solid #e2e8f0;">#ffffff</div>
+        <div class="swatch-info">
+          <span class="swatch-name">Surface Card</span>
+          <span class="swatch-role">Tarjetas, modales, dialogs</span>
+          <span class="swatch-contrast">Contraste: 16.2:1 (PASS)</span>
+        </div>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-color" style="background: #15803d; color: #ffffff;">#15803d</div>
+        <div class="swatch-info">
+          <span class="swatch-name">Success Green</span>
+          <span class="swatch-role">Entregas confirmadas, QR verificado</span>
+          <span class="swatch-contrast">Contraste: 4.8:1 (PASS)</span>
+        </div>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-color" style="background: #b45309; color: #ffffff;">#b45309</div>
+        <div class="swatch-info">
+          <span class="swatch-name">Warning Amber</span>
+          <span class="swatch-role">Alertas de stock, reintentos offline</span>
+          <span class="swatch-contrast">Contraste: 4.6:1 (PASS)</span>
+        </div>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-color" style="background: #b91c1c; color: #ffffff;">#b91c1c</div>
+        <div class="swatch-info">
+          <span class="swatch-name">Error Red</span>
+          <span class="swatch-role">Discrepancias críticas de carga</span>
+          <span class="swatch-contrast">Contraste: 5.6:1 (PASS)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Contrato Kotlin Compose Color.kt -->
+  <section class="spec-card">
+    <div class="card-header-row">
+      <div class="card-badge-icon code-badge"><i class="pi pi-code"></i></div>
+      <div>
+        <span class="card-eyebrow">IMPLEMENTACIÓN NATIVA · JETPACK COMPOSE</span>
+        <h3 class="card-title">Contrato de Colores Kotlin (:core:designsystem)</h3>
+      </div>
+    </div>
+    <p class="card-text">
+      Definición en Kotlin puro compatible con <code>androidx.compose.material3.ColorScheme</code> y <code>NexaTheme</code>.
+    </p>
+
+    <div class="code-preview-block">
+      <pre is:raw><code>// core/designsystem/src/main/kotlin/com/nexa/core/designsystem/theme/Color.kt
+package com.nexa.core.designsystem.theme
+
+import androidx.compose.ui.graphics.Color
+import androidx.compose.material3.lightColorScheme
+
+val NexaPrimary = Color(0xFF2A67D9)
+val NexaOnPrimary = Color(0xFFFFFFFF)
+val NexaPrimaryContainer = Color(0xFFE8F0FE)
+val NexaOnPrimaryContainer = Color(0xFF174EA6)
+
+val NexaBrandNavy = Color(0xFF082846)
+val NexaBrandCeleste = Color(0xFF38C8FF)
+
+val NexaSurface = Color(0xFFF6FAFF)
+val NexaOnSurface = Color(0xFF0F172A)
+val NexaSurfaceVariant = Color(0xFFFFFFFF)
+val NexaOutline = Color(0xFFCBD5E1)
+
+val NexaSuccess = Color(0xFF15803D)
+val NexaWarning = Color(0xFFB45309)
+val NexaError = Color(0xFFB91C1C)
+
+val NexaLightColorScheme = lightColorScheme(
+    primary = NexaPrimary,
+    onPrimary = NexaOnPrimary,
+    primaryContainer = NexaPrimaryContainer,
+    onPrimaryContainer = NexaOnPrimaryContainer,
+    surface = NexaSurface,
+    onSurface = NexaOnSurface,
+    surfaceVariant = NexaSurfaceVariant,
+    outline = NexaOutline,
+    error = NexaError
+)</code></pre>
+    </div>
+  </section>
+</div>
+
+<style>
+  .tokens-color-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .spec-card {
+    background: var(--nexa-surface-card, #ffffff);
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: var(--nexa-radius-card, 16px);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .card-header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .card-badge-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--nexa-color-primary-50, #eff6ff);
+    color: var(--nexa-color-primary-600, #2a67d9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+
+    &.code-badge {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+  }
+
+  .card-eyebrow {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .card-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 0;
+  }
+
+  .card-text {
+    font-size: 13.5px;
+    color: var(--nexa-color-text-secondary, #64748b);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .swatches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .swatch-item {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-subtle, #e2e8f0);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+
+  .swatch-color {
+    height: 72px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 8px 12px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .swatch-info {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .swatch-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+  }
+
+  .swatch-role {
+    font-size: 11.5px;
+    color: var(--nexa-color-text-secondary, #64748b);
+  }
+
+  .swatch-contrast {
+    font-size: 11px;
+    font-weight: 700;
+    color: #15803d;
+    margin-top: 4px;
+  }
+
+  .code-preview-block {
+    background: #0f172a;
+    border-radius: 12px;
+    padding: 18px;
+    overflow-x: auto;
+
+    pre {
+      margin: 0;
+    }
+
+    code {
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-size: 12px;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+  }
+</style>

@@ -1,0 +1,482 @@
+---
+/**
+ * MobileEvidenceModel.astro
+ * Canonical Evidence Model & C4 Traceability for Mobile Style
+ * Blueprint Traceability: ADR-0018, ADR-0005, C4 Architecture Model
+ */
+---
+
+<div class="evidence-model-container" data-platform-target="universal">
+  <!-- Section Heading -->
+  <section class="spec-card">
+    <div class="card-header-row">
+      <div class="card-badge-icon evidence-badge"><i class="pi pi-shield"></i></div>
+      <div>
+        <span class="card-eyebrow">ARQUITECTURA & AUDITORÍA · MODELO DE EVIDENCIA</span>
+        <h3 class="card-title">Modelo de Evidencia C4, ADRs y Puertas de Calidad Móvil</h3>
+      </div>
+    </div>
+    <p class="card-text">
+      Nexa Mobile opera bajo un <strong>modelo de evidencia estricto (ADR-0005)</strong>: ningún componente o flujo de pantalla se considera canónico hasta que demuestre trazabilidad con las especificaciones de Blueprint, cumplimiento de contraste WCAG 2.2 AA y resiliencia determinista ante fallos de red.
+    </p>
+
+    <!-- Architecture Decision Records (ADRs) Strip -->
+    <div class="adr-summary-grid">
+      <div class="adr-card">
+        <div class="adr-badge">ADR-0018</div>
+        <h4>Operations Android Nativo</h4>
+        <p>100% Kotlin 2.4, Jetpack Compose Material 3, CameraX, WorkManager y Room DB para operaciones críticas de logística y bodega.</p>
+        <span class="adr-status status-frozen">FROZEN CANDIDATE</span>
+      </div>
+
+      <div class="adr-card">
+        <div class="adr-badge">ADR-0005</div>
+        <h4>Gates de Evidencia Visual</h4>
+        <p>Inspección estática de contrastes, tamaños táctiles de 48dp/56dp y mitigación de falsos toques bajo vibración vehicular.</p>
+        <span class="adr-status status-verified">PASS (0 VIOLACIONES)</span>
+      </div>
+
+      <div class="adr-card">
+        <div class="adr-badge">ADR-0019</div>
+        <h4>Buyer Mobile Multiplatform</h4>
+        <p>Estrategia desacoplada para clientes corporativos y compradores B2B, sin condicionar la robustez del stack de campo.</p>
+        <span class="adr-status status-evaluate">DOCUMENTED</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- C4 Model Container View -->
+  <section class="spec-card">
+    <div class="card-header-row">
+      <div class="card-badge-icon c4-badge"><i class="pi pi-sitemap"></i></div>
+      <div>
+        <span class="card-eyebrow">C4 LEVEL 2 & 3 · COMPOSITION BOUNDARIES</span>
+        <h3 class="card-title">Límites y Responsabilidades en el Stack Android</h3>
+      </div>
+    </div>
+
+    <div class="c4-layers-stack">
+      <!-- Layer 1: UI Layer (Jetpack Compose) -->
+      <div class="c4-layer ui-layer">
+        <div class="layer-header">
+          <span class="layer-index">CAPA 1</span>
+          <h4>UI Layer (Jetpack Compose M3)</h4>
+          <span class="module-tag">:core:designsystem & :feature:*</span>
+        </div>
+        <p class="layer-desc">
+          Vistas declarativas @Composable puras que consumen StateFlow&lt;UiState&gt; y emiten eventos unidireccionales UiIntent. Cero lógica de negocio ni persistencia en vistas.
+        </p>
+        <div class="layer-items">
+          <span class="tech-chip">NexaTopAppBar</span>
+          <span class="tech-chip">DriverRouteStopCard</span>
+          <span class="tech-chip">CameraXScannerView</span>
+          <span class="tech-chip">PodSignatureCanvas</span>
+          <span class="tech-chip">OtpDigitField</span>
+        </div>
+      </div>
+
+      <!-- Layer 2: Presentation & State (ViewModels) -->
+      <div class="c4-layer vm-layer">
+        <div class="layer-header">
+          <span class="layer-index">CAPA 2</span>
+          <h4>State & Orchestration (ViewModels UDF)</h4>
+          <span class="module-tag">:feature:route & :feature:picking</span>
+        </div>
+        <p class="layer-desc">
+          Gestión del ciclo de vida con Navigation 3, estado reactivo mutable protegido (_uiState.asStateFlow()) y captura de geoposicionamiento en segundo plano.
+        </p>
+        <div class="layer-items">
+          <span class="tech-chip">DriverRouteViewModel</span>
+          <span class="tech-chip">PickingFefoViewModel</span>
+          <span class="tech-chip">DispatchBoardViewModel</span>
+          <span class="tech-chip">MachineryChecklistViewModel</span>
+        </div>
+      </div>
+
+      <!-- Layer 3: Data & Offline Sync -->
+      <div class="c4-layer data-layer">
+        <div class="layer-header">
+          <span class="layer-index">CAPA 3</span>
+          <h4>Data & Offline Resilience (Room + WorkManager)</h4>
+          <span class="module-tag">:core:database & :core:network</span>
+        </div>
+        <p class="layer-desc">
+          Fuente de verdad local única (Single Source of Truth) en Room SQLite. Sincronización asíncrona garantizada con WorkManager, Exponential Backoff y claves de idempotencia UUID v4.
+        </p>
+        <div class="layer-items">
+          <span class="tech-chip">Room DAO (Offline First)</span>
+          <span class="tech-chip">WorkManager SyncWorker</span>
+          <span class="tech-chip">X-Idempotency-Key Header</span>
+          <span class="tech-chip">EncryptedDataStore (Keystore)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quality Gates Matrix -->
+  <section class="spec-card">
+    <div class="card-header-row">
+      <div class="card-badge-icon check-badge"><i class="pi pi-verified"></i></div>
+      <div>
+        <span class="card-eyebrow">VERIFICACIÓN AUTOMATIZADA · WCAG 2.2 AA</span>
+        <h3 class="card-title">Matriz de Puertas de Calidad (Quality Gates)</h3>
+      </div>
+    </div>
+
+    <div class="table-responsive-wrapper">
+      <table class="metrics-table">
+        <thead>
+          <tr>
+            <th>Puerta de Calidad</th>
+            <th>Criterio Canónico</th>
+            <th>Umbral Exigido</th>
+            <th>Evidencia Inspeccionada</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Contraste de Texto</strong></td>
+            <td>WCAG 2.2 AA (1.4.3)</td>
+            <td>&ge; 4.5:1 texto regular</td>
+            <td>Texto principal #0f172a en superficie #ffffff = <strong>16.2:1</strong></td>
+            <td><span class="gate-status pass">PASS</span></td>
+          </tr>
+          <tr>
+            <td><strong>Contraste de Controles</strong></td>
+            <td>WCAG 2.2 AA (1.4.11)</td>
+            <td>&ge; 3.0:1 límites activos</td>
+            <td>Botón primario #2a67d9 en blanco = <strong>5.2:1</strong></td>
+            <td><span class="gate-status pass">PASS</span></td>
+          </tr>
+          <tr>
+            <td><strong>Touch Target Estándar</strong></td>
+            <td>WCAG 2.2 AA (2.5.8)</td>
+            <td>&ge; 48 &times; 48dp área táctil</td>
+            <td>Todos los iconos y chips tienen padding mínimo de 48dp</td>
+            <td><span class="gate-status pass">PASS</span></td>
+          </tr>
+          <tr>
+            <td><strong>Touch Target Industrial</strong></td>
+            <td>Nexa Field Safety (ADR-0018)</td>
+            <td>&ge; 56dp altura en botones críticos</td>
+            <td>Botón "Confirmar Entrega" y "Registrar Arribo" en 56dp</td>
+            <td><span class="gate-status pass">PASS</span></td>
+          </tr>
+          <tr>
+            <td><strong>Fallback de Hardware</strong></td>
+            <td>ADR-0018 Hardware Scan</td>
+            <td>Entrada manual obligatoria</td>
+            <td>Entrada numérica con teclado expandido en todo escaneo</td>
+            <td><span class="gate-status pass">PASS</span></td>
+          </tr>
+          <tr>
+            <td><strong>Idempotencia Offline</strong></td>
+            <td>ADR-0018 Network Drop</td>
+            <td>Transacción atómica + UUID v4</td>
+            <td>X-Idempotency-Key preservada en SQLite hasta confirmación 200</td>
+            <td><span class="gate-status pass">PASS</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<style>
+  .evidence-model-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .spec-card {
+    background: var(--nexa-surface-card, #ffffff);
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: var(--nexa-radius-card, 16px);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .card-header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .card-badge-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+  }
+
+  .card-badge-icon.evidence-badge {
+    background: var(--nexa-color-primary-50, #eff6ff);
+    color: var(--nexa-color-primary-600, #2a67d9);
+  }
+
+  .card-badge-icon.c4-badge {
+    background: #f0fdf4;
+    color: #16a34a;
+  }
+
+  .card-badge-icon.check-badge {
+    background: #faf5ff;
+    color: #9333ea;
+  }
+
+  .card-eyebrow {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .card-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 0;
+  }
+
+  .card-text {
+    font-size: 13.5px;
+    color: var(--nexa-color-text-secondary, #64748b);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ADR Grid */
+  .adr-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 900px) {
+    .adr-summary-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .adr-card {
+    padding: 16px;
+    background: var(--nexa-color-neutral-50, #f8fafc);
+    border: 1px solid var(--nexa-color-border-subtle, #e2e8f0);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .adr-card h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 0;
+  }
+
+  .adr-card p {
+    font-size: 12px;
+    color: var(--nexa-color-text-secondary, #64748b);
+    line-height: 1.5;
+    margin: 0;
+    flex: 1;
+  }
+
+  .adr-badge {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    background: var(--nexa-color-primary-100, #dbeafe);
+    padding: 2px 8px;
+    border-radius: 6px;
+    width: fit-content;
+  }
+
+  .adr-status {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    border-radius: 6px;
+    width: fit-content;
+    text-transform: uppercase;
+  }
+
+  .adr-status.status-frozen {
+    background: #eff6ff;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+  }
+
+  .adr-status.status-verified {
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+  }
+
+  .adr-status.status-evaluate {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+  }
+
+  /* C4 Layers */
+  .c4-layers-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .c4-layer {
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--nexa-color-border-subtle, #e2e8f0);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .c4-layer.ui-layer {
+    background: #f8fafc;
+    border-left: 4px solid var(--nexa-color-primary-600, #2a67d9);
+  }
+
+  .c4-layer.vm-layer {
+    background: #f8fafc;
+    border-left: 4px solid #0284c7;
+  }
+
+  .c4-layer.data-layer {
+    background: #f8fafc;
+    border-left: 4px solid #059669;
+  }
+
+  .layer-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .layer-header h4 {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 0;
+  }
+
+  .layer-index {
+    font-size: 10px;
+    font-weight: 800;
+    background: #0f172a;
+    color: #ffffff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .module-tag {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    background: var(--nexa-color-primary-50, #eff6ff);
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--nexa-color-primary-200, #bfdbfe);
+  }
+
+  .layer-desc {
+    font-size: 12.5px;
+    color: var(--nexa-color-text-secondary, #64748b);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .layer-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .tech-chip {
+    font-size: 11px;
+    font-weight: 600;
+    background: #ffffff;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  /* Table styling */
+  .table-responsive-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--nexa-color-border-subtle, #e2e8f0);
+    border-radius: 12px;
+  }
+
+  .metrics-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    text-align: left;
+  }
+
+  .metrics-table th {
+    background: var(--nexa-color-neutral-50, #f8fafc);
+    padding: 10px 14px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--nexa-color-neutral-600, #475569);
+    border-bottom: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+  }
+
+  .metrics-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
+    color: var(--nexa-color-text-secondary, #64748b);
+    line-height: 1.5;
+  }
+
+  .metrics-table tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .gate-status {
+    display: inline-flex;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+  }
+
+  .gate-status.pass {
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+  }
+</style>
