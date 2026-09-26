@@ -12,6 +12,7 @@ interface Props {
 }
 
 const { currentSection = 'workbench', activeTab = 'motor-grafico' } = Astro.props;
+const baseTabUrl = currentSection === 'workbench' ? '#' : '/#';
 ---
 
 <header class="nexafy-top-header" role="banner">
@@ -79,7 +80,7 @@ const { currentSection = 'workbench', activeTab = 'motor-grafico' } = Astro.prop
     <div class="nav-links-cluster">
       <!-- 1. Motor Gráfico Vivo -->
       <a 
-        href="/" 
+        href={currentSection === 'workbench' ? '#motor-grafico' : '/#motor-grafico'} 
         class={`nav-link-btn ${currentSection === 'workbench' && activeTab === 'motor-grafico' ? 'active' : ''}`}
         data-nav-tab="motor-grafico"
       >
@@ -90,8 +91,8 @@ const { currentSection = 'workbench', activeTab = 'motor-grafico' } = Astro.prop
 
       <!-- 2. Colorimetría & Tokens -->
       <a 
-        href="#colorimetria" 
-        class={`nav-link-btn ${activeTab === 'colorimetria' ? 'active' : ''}`}
+        href={`${baseTabUrl}colorimetria`} 
+        class={`nav-link-btn ${currentSection === 'workbench' && activeTab === 'colorimetria' ? 'active' : ''}`}
         data-nav-tab="colorimetria"
       >
         <i class="pi pi-palette" aria-hidden="true"></i>
@@ -101,8 +102,8 @@ const { currentSection = 'workbench', activeTab = 'motor-grafico' } = Astro.prop
 
       <!-- 3. Tipografía & Jerarquía -->
       <a 
-        href="#tipografia" 
-        class={`nav-link-btn ${activeTab === 'tipografia' ? 'active' : ''}`}
+        href={`${baseTabUrl}tipografia`} 
+        class={`nav-link-btn ${currentSection === 'workbench' && activeTab === 'tipografia' ? 'active' : ''}`}
         data-nav-tab="tipografia"
       >
         <i class="pi pi-align-left" aria-hidden="true"></i>
@@ -112,8 +113,8 @@ const { currentSection = 'workbench', activeTab = 'motor-grafico' } = Astro.prop
 
       <!-- 4. Espaciado & Conductos -->
       <a 
-        href="#geometria" 
-        class={`nav-link-btn ${activeTab === 'geometria' ? 'active' : ''}`}
+        href={`${baseTabUrl}geometria`} 
+        class={`nav-link-btn ${currentSection === 'workbench' && activeTab === 'geometria' ? 'active' : ''}`}
         data-nav-tab="geometria"
       >
         <i class="pi pi-share-alt" aria-hidden="true"></i>
@@ -123,8 +124,8 @@ const { currentSection = 'workbench', activeTab = 'motor-grafico' } = Astro.prop
 
       <!-- 5. Componentes de Conversión -->
       <a 
-        href="#componentes" 
-        class={`nav-link-btn ${activeTab === 'componentes' ? 'active' : ''}`}
+        href={`${baseTabUrl}componentes`} 
+        class={`nav-link-btn ${currentSection === 'workbench' && activeTab === 'componentes' ? 'active' : ''}`}
         data-nav-tab="componentes"
       >
         <i class="pi pi-box" aria-hidden="true"></i>
