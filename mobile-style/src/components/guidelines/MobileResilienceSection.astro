@@ -1,0 +1,245 @@
+---
+/**
+ * MobileResilienceSection — Offline Resilience & Idempotent Retry Contracts
+ * Explains WorkManager, idempotency keys, correlation IDs, and non-authoritative local cache.
+ */
+---
+
+<div class="resilience-container" id="sec-resiliencia-red" data-platform-target="universal">
+  <section class="spec-card">
+    <div class="card-header-row">
+      <div class="card-badge-icon sync-badge"><i class="pi pi-sync"></i></div>
+      <div>
+        <span class="card-eyebrow">RED & RESILIENCIA · CONEXIONES INESTABLES</span>
+        <h3 class="card-title">Resiliencia Offline & Reintentos Idempotentes en Campo</h3>
+      </div>
+    </div>
+    <p class="card-text">
+      Las operaciones de campo en minas, obras y carreteras a menudo pierden señal 4G/5G. El sistema de diseño contempla <strong>estados de sincronización no intrusivos</strong> y cola de reintentos administrada por el sistema operativo (WorkManager en Android).
+    </p>
+
+    <!-- Sync Indicators Row -->
+    <div class="sync-indicators-grid">
+      <div class="sync-indicator-card online">
+        <div class="sync-status-dot online"></div>
+        <div class="sync-status-info">
+          <strong>En Línea (Conectado a API)</strong>
+          <span>Latencia: 42ms · Sincronizado</span>
+        </div>
+      </div>
+
+      <div class="sync-indicator-card offline">
+        <div class="sync-status-dot offline"></div>
+        <div class="sync-status-info">
+          <strong>Modo Fuera de Línea (Ruta Local)</strong>
+          <span>2 despachos en cola segura</span>
+        </div>
+      </div>
+
+      <div class="sync-indicator-card syncing">
+        <i class="pi pi-spin pi-spinner sync-spinner"></i>
+        <div class="sync-status-info">
+          <strong>Sincronizando con Nexa API...</strong>
+          <span>Reintentando con WorkManager</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Idempotency Rules Table -->
+    <div class="table-responsive-wrapper">
+      <table class="metrics-table">
+        <thead>
+          <tr>
+            <th>Encabezado / Mecanismo</th>
+            <th>Propósito en Móvil</th>
+            <th>Comportamiento ante Caída de Red</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>X-Idempotency-Key</code></td>
+            <td>Identificador único generado en el cliente (UUID v4) por cada comando de despacho.</td>
+            <td>Si la conexión falla durante la confirmación, el reintento reenvía la misma clave evitando duplicar despachos en backend.</td>
+          </tr>
+          <tr>
+            <td><code>X-Correlation-ID</code></td>
+            <td>Identificador diagnóstico para trazabilidad extremo a extremo entre dispositivo y servidor.</td>
+            <td>Se registra en los logs de depuración para auditar problemas de red sin exponer datos sensibles.</td>
+          </tr>
+          <tr>
+            <td><code>Room / SQLite Local</code></td>
+            <td>Caché de solo lectura de rutas asignadas y borrador de firmas.</td>
+            <td><strong>No autoritativo:</strong> Jamás declara confirmación de orden sin el acuse de recibo HTTP 200/204 del servidor.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<style>
+  .resilience-container {
+    width: 100%;
+  }
+
+  .spec-card {
+    background: var(--nexa-surface-card, #ffffff);
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: var(--nexa-radius-card, 16px);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    scroll-margin-top: 80px;
+  }
+
+  .card-header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .card-badge-icon.sync-badge {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #eff6ff;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+  }
+
+  .card-eyebrow {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: #2563eb;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .card-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 0;
+  }
+
+  .card-text {
+    font-size: 13.5px;
+    color: var(--nexa-color-text-secondary, #64748b);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .sync-indicators-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+  }
+
+  .sync-indicator-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+
+    &.online {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+
+    &.offline {
+      background: #fffbeb;
+      border-color: #fde68a;
+    }
+
+    &.syncing {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+  }
+
+  .sync-status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+
+    &.online {
+      background: #16a34a;
+      box-shadow: 0 0 6px rgba(22, 163, 74, 0.4);
+    }
+
+    &.offline {
+      background: #d97706;
+      box-shadow: 0 0 6px rgba(217, 119, 6, 0.4);
+    }
+  }
+
+  .sync-spinner {
+    font-size: 14px;
+    color: #2563eb;
+    flex-shrink: 0;
+  }
+
+  .sync-status-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+
+    strong {
+      font-size: 12px;
+      color: #0f172a;
+    }
+
+    span {
+      font-size: 11px;
+      color: #64748b;
+    }
+  }
+
+  .table-responsive-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 10px;
+  }
+
+  .metrics-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    text-align: left;
+    white-space: nowrap;
+
+    th {
+      background: var(--nexa-color-neutral-100, #f1f5f9);
+      color: var(--nexa-color-text-secondary, #64748b);
+      font-weight: 700;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--nexa-color-border-default, #e2e8f0);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
+      color: var(--nexa-color-text-primary, #0f172a);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+  }
+</style>

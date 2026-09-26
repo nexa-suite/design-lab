@@ -1,0 +1,638 @@
+---
+/**
+ * MobileComponentsSection — Canonical Mobile Component Catalog & Contracts
+ * Shows live rendered specimens for TopAppBar, PrimaryButton, DispatchCard, BottomNav, and BottomSheet.
+ */
+---
+
+<div class="components-container" data-platform-target="universal">
+  <!-- Section: Top App Bar -->
+  <section class="spec-card" id="sec-comp-appbar">
+    <div class="card-header-row">
+      <div class="card-badge-icon"><i class="pi pi-window-minimize"></i></div>
+      <div>
+        <span class="card-eyebrow">COMPONENTES MÓVILES · NAVEGACIÓN</span>
+        <h3 class="card-title">1. NexaTopAppBar (Material 3 Top App Bar)</h3>
+      </div>
+    </div>
+    <p class="card-text">
+      Barra superior de navegación móvil con altura estandarizada de <strong>56dp</strong> (Small) o expandible en scroll. Incluye iconos táctiles con bounding box de 48dp y soporte de título centrado.
+    </p>
+
+    <!-- Live Specimen -->
+    <div class="component-demo-stage">
+      <div class="live-app-bar">
+        <button type="button" class="btn-app-icon" aria-label="Navegar atrás o abrir menú">
+          <i class="pi pi-arrow-left"></i>
+        </button>
+        <span class="app-bar-heading">Ruta de Despacho #9812</span>
+        <div class="app-bar-actions">
+          <button type="button" class="btn-app-icon" aria-label="Buscar en ruta">
+            <i class="pi pi-search"></i>
+          </button>
+          <button type="button" class="btn-app-icon" aria-label="Notificaciones">
+            <i class="pi pi-bell"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Botones & Estados 48dp / 56dp -->
+  <section class="spec-card" id="sec-comp-botones">
+    <div class="card-header-row">
+      <div class="card-badge-icon"><i class="pi pi-check-circle"></i></div>
+      <div>
+        <span class="card-eyebrow">COMPONENTES MÓVILES · ACCIÓN</span>
+        <h3 class="card-title">2. NexaPrimaryButton & Estados de Interacción</h3>
+      </div>
+    </div>
+    <p class="card-text">
+      Botones principales móviles de ancho completo con radio de 12dp y altura mínima accesible de 48dp (56dp en modo industrial para uso con guantes).
+    </p>
+
+    <!-- Live Buttons Row -->
+    <div class="buttons-states-grid">
+      <div class="btn-state-col">
+        <span class="state-label">ESTADO: REPOSO (48dp)</span>
+        <button type="button" class="nexa-mobile-btn primary">
+          <i class="pi pi-check-circle"></i>
+          <span>Confirmar Despacho</span>
+        </button>
+      </div>
+
+      <div class="btn-state-col">
+        <span class="state-label">ESTADO: INDUSTRIAL (56dp GUANTES)</span>
+        <button type="button" class="nexa-mobile-btn industrial">
+          <i class="pi pi-truck"></i>
+          <span>Entrega en Obra (56dp)</span>
+        </button>
+      </div>
+
+      <div class="btn-state-col">
+        <span class="state-label">ESTADO: CARGANDO / EN COLA</span>
+        <button type="button" class="nexa-mobile-btn loading" disabled>
+          <i class="pi pi-spin pi-spinner"></i>
+          <span>Sincronizando con API...</span>
+        </button>
+      </div>
+
+      <div class="btn-state-col">
+        <span class="state-label">ESTADO: SECUNDARIO / CANCELAR</span>
+        <button type="button" class="nexa-mobile-btn secondary">
+          <i class="pi pi-times"></i>
+          <span>Reportar Incidencia</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Tarjeta de Despacho & Timeline -->
+  <section class="spec-card" id="sec-comp-cards">
+    <div class="card-header-row">
+      <div class="card-badge-icon"><i class="pi pi-id-card"></i></div>
+      <div>
+        <span class="card-eyebrow">COMPONENTES MÓVILES · DATOS</span>
+        <h3 class="card-title">3. NexaDispatchCard (Tarjeta de Ruta de Campo)</h3>
+      </div>
+    </div>
+    <p class="card-text">
+      Contenedor estructurado con elevación Nivel 1 (2dp), borde sutil de 1px y radio de 16dp. Organiza la cronología del despacho con conectores visuales y botón táctil principal.
+    </p>
+
+    <div class="component-demo-stage">
+      <div class="live-dispatch-card">
+        <div class="card-top-row">
+          <div class="order-badge">
+            <span class="order-num">ORD-2026-9812</span>
+            <span class="order-client">Constructora Altamira S.A.</span>
+          </div>
+          <span class="status-chip en-turno">EN RUTA</span>
+        </div>
+
+        <div class="route-stepper">
+          <div class="stepper-item">
+            <div class="step-marker origin"></div>
+            <div class="step-text">
+              <span class="step-name">Bodega Central A-4 (Santiago Norte)</span>
+              <span class="step-time">Salida: 08:30 AM · Despachado</span>
+            </div>
+          </div>
+          <div class="stepper-connector"></div>
+          <div class="stepper-item">
+            <div class="step-marker destination"></div>
+            <div class="step-text">
+              <span class="step-name">Obra Proyecto Altamira (Torre 2)</span>
+              <span class="step-time">Entrega estimada: 11:30 AM (Restan 45 min)</span>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="nexa-mobile-btn primary">
+          <i class="pi pi-map-marker"></i>
+          <span>Iniciar Navegación GPS a Sitio</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Bottom Navigation -->
+  <section class="spec-card" id="sec-comp-bottomnav">
+    <div class="card-header-row">
+      <div class="card-badge-icon"><i class="pi pi-bars"></i></div>
+      <div>
+        <span class="card-eyebrow">COMPONENTES MÓVILES · NAVEGACIÓN BASE</span>
+        <h3 class="card-title">4. NexaBottomNav (Navegación Inferior M3)</h3>
+      </div>
+    </div>
+    <p class="card-text">
+      Barra de navegación fija inferior con altura de <strong>64dp</strong> y áreas táctiles de 64×48dp por destino. Respeta las directrices ergonómicas de alcance del pulgar sin solapamiento con la barra de gestos del sistema.
+    </p>
+
+    <div class="component-demo-stage">
+      <div class="live-bottom-nav">
+        <div class="nav-destination active">
+          <div class="destination-icon-wrap">
+            <i class="pi pi-map-marker"></i>
+          </div>
+          <span class="destination-label">Rutas</span>
+        </div>
+        <div class="nav-destination">
+          <div class="destination-icon-wrap">
+            <i class="pi pi-box"></i>
+          </div>
+          <span class="destination-label">Cargas</span>
+        </div>
+        <div class="nav-destination">
+          <div class="destination-icon-wrap">
+            <i class="pi pi-shield"></i>
+          </div>
+          <span class="destination-label">Seguridad</span>
+        </div>
+        <div class="nav-destination">
+          <div class="destination-icon-wrap">
+            <i class="pi pi-user"></i>
+          </div>
+          <span class="destination-label">Perfil</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Modal Bottom Sheet -->
+  <section class="spec-card" id="sec-comp-bottomsheet">
+    <div class="card-header-row">
+      <div class="card-badge-icon"><i class="pi pi-sliders-h"></i></div>
+      <div>
+        <span class="card-eyebrow">COMPONENTES MÓVILES · CONTENEDOR MODAL</span>
+        <h3 class="card-title">5. NexaModalBottomSheet (Deslizable M3)</h3>
+      </div>
+    </div>
+    <p class="card-text">
+      Superficie modal emergente con esquinas redondeadas de <strong>24dp</strong> y manija táctil central de 36×4dp. Se utiliza para confirmar recepciones, seleccionar motivos de discrepancia y filtros densos.
+    </p>
+
+    <div class="component-demo-stage">
+      <div class="live-bottom-sheet">
+        <div class="sheet-drag-handle"></div>
+        <div class="sheet-header">
+          <h4 class="sheet-title">Confirmar Recepción de Carga</h4>
+          <span class="sheet-subtitle">Verifique el número de guía antes de solicitar la firma del receptor.</span>
+        </div>
+
+        <div class="sheet-form-group">
+          <label class="sheet-label">Nombre del Receptor en Obra</label>
+          <input type="text" class="sheet-input" value="Ing. Manuel Valdés" readonly />
+        </div>
+
+        <div class="sheet-actions">
+          <button type="button" class="nexa-mobile-btn secondary">Cancelar</button>
+          <button type="button" class="nexa-mobile-btn primary">Abrir Panel de Firma</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .components-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .spec-card {
+    background: var(--nexa-surface-card, #ffffff);
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: var(--nexa-radius-card, 16px);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    scroll-margin-top: 80px;
+  }
+
+  .card-header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .card-badge-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--nexa-color-primary-50, #eff6ff);
+    color: var(--nexa-color-primary-600, #2a67d9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+  }
+
+  .card-eyebrow {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .card-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 0;
+  }
+
+  .card-text {
+    font-size: 13.5px;
+    color: var(--nexa-color-text-secondary, #64748b);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Component Demo Stage */
+  .component-demo-stage {
+    background: var(--nexa-color-neutral-50, #f8fafc);
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Live Top App Bar */
+  .live-app-bar {
+    width: 100%;
+    max-width: 480px;
+    height: 56px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  }
+
+  .btn-app-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: var(--nexa-color-text-primary, #0f172a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 15px;
+
+    &:hover {
+      background: #f1f5f9;
+    }
+  }
+
+  .app-bar-heading {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+  }
+
+  .app-bar-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* Button States Grid */
+  .buttons-states-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .btn-state-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .state-label {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9.5px;
+    font-weight: 800;
+    color: var(--nexa-color-neutral-500, #64748b);
+  }
+
+  /* Nexa Mobile Buttons */
+  .nexa-mobile-btn {
+    width: 100%;
+    min-height: 48px;
+    border-radius: 12px;
+    font-family: var(--nexa-font-family-body, sans-serif);
+    font-size: 13px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 0 16px;
+    border: none;
+    transition: all 0.15s ease;
+
+    &.primary {
+      background: var(--nexa-color-primary-600, #2a67d9);
+      color: #ffffff;
+      box-shadow: 0 1px 3px rgba(42, 103, 217, 0.25);
+
+      &:hover {
+        background: #1d4ed8;
+      }
+    }
+
+    &.industrial {
+      min-height: 56px;
+      background: #082846;
+      color: #ffffff;
+      border: 1px solid #1a4975;
+      font-size: 13.5px;
+
+      &:hover {
+        background: #0d3860;
+      }
+    }
+
+    &.secondary {
+      background: #ffffff;
+      color: var(--nexa-color-neutral-700, #334155);
+      border: 1px solid var(--nexa-color-border-default, #cbd5e1);
+
+      &:hover {
+        background: #f8fafc;
+        border-color: #94a3b8;
+      }
+    }
+
+    &.loading {
+      background: #93c5fd;
+      color: #1e3a8a;
+      cursor: not-allowed;
+    }
+  }
+
+  /* Live Dispatch Card */
+  .live-dispatch-card {
+    width: 100%;
+    max-width: 480px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .card-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .order-badge {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .order-num {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 13px;
+    font-weight: 800;
+    color: #2a67d9;
+  }
+
+  .order-client {
+    font-size: 12px;
+    color: #64748b;
+  }
+
+  .status-chip {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 6px;
+
+    &.en-turno {
+      background: #dcfce7;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+    }
+  }
+
+  .route-stepper {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 4px 0;
+  }
+
+  .stepper-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .step-marker {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-top: 3px;
+    flex-shrink: 0;
+
+    &.origin {
+      background: #2a67d9;
+      box-shadow: 0 0 0 3px rgba(42, 103, 217, 0.15);
+    }
+
+    &.destination {
+      background: #15803d;
+      box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.15);
+    }
+  }
+
+  .stepper-connector {
+    width: 2px;
+    height: 18px;
+    background: #cbd5e1;
+    margin-left: 5px;
+  }
+
+  .step-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .step-name {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .step-time {
+    font-size: 11px;
+    color: #64748b;
+  }
+
+  /* Live Bottom Nav */
+  .live-bottom-nav {
+    width: 100%;
+    max-width: 480px;
+    height: 64px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+  }
+
+  .nav-destination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+    color: #64748b;
+
+    &.active {
+      color: #2a67d9;
+
+      .destination-icon-wrap {
+        background: #e8f0fe;
+        color: #2a67d9;
+      }
+
+      .destination-label {
+        font-weight: 700;
+      }
+    }
+  }
+
+  .destination-icon-wrap {
+    width: 48px;
+    height: 28px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.15s ease;
+  }
+
+  .destination-label {
+    font-size: 10.5px;
+    font-weight: 500;
+  }
+
+  /* Live Bottom Sheet */
+  .live-bottom-sheet {
+    width: 100%;
+    max-width: 480px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    padding: 16px 20px 20px;
+    box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sheet-drag-handle {
+    width: 36px;
+    height: 4px;
+    background: #cbd5e1;
+    border-radius: 2px;
+    align-self: center;
+  }
+
+  .sheet-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .sheet-subtitle {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.4;
+  }
+
+  .sheet-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .sheet-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #475569;
+  }
+
+  .sheet-input {
+    height: 42px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 0 12px;
+    font-size: 13px;
+    color: #0f172a;
+    background: #f8fafc;
+    outline: none;
+  }
+
+  .sheet-actions {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 10px;
+    margin-top: 4px;
+  }
+</style>

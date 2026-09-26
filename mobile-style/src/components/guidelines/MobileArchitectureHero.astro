@@ -1,0 +1,335 @@
+---
+/**
+ * MobileArchitectureHero — Canonical Mobile Architecture Clarification
+ * Answers the architectural question: "¿Usan Kotlin a full o qué usan?"
+ * Explains Operations Mobile (ADR-0018) vs Buyer Mobile (ADR-0019).
+ */
+---
+
+<div class="arch-hero-container" id="sec-clarificacion-stack" data-platform-target="universal">
+  <div class="hero-top-badges">
+    <span class="arch-kicker">AUTORIDAD DE ARQUITECTURA MÓVIL</span>
+    <span class="arch-badge">ADR-0018 & ADR-0019</span>
+    <span class="arch-badge frozen">FROZEN CANDIDATE</span>
+  </div>
+
+  <h2 class="hero-heading">
+    ¿Qué tecnologías se usan en Nexa Mobile?
+  </h2>
+
+  <p class="hero-intro">
+    La suite móvil de <strong>Nexa</strong> está estrictamente desacoplada en dos aplicaciones con tecnologías distintas según el perfil operativo, hardware de campo y condiciones ambientales:
+  </p>
+
+  <div class="arch-comparison-grid">
+    <!-- Operations Android -->
+    <div class="arch-box kotlin-box" data-platform-target="kotlin">
+      <div class="arch-box-header">
+        <div class="platform-icon-tag kotlin-tag">
+          <i class="pi pi-android" aria-hidden="true"></i>
+          <span>OPERATIONS MOBILE</span>
+        </div>
+        <span class="tech-pill kotlin-pill">100% KOTLIN A FULL</span>
+      </div>
+
+      <h3 class="arch-app-name">Operations Android (Choferes & Bodega)</h3>
+      <p class="arch-box-desc">
+        Desarrollada íntegramente en <strong>Android Nativo con Kotlin 2.4+ y Jetpack Compose (Material 3)</strong> bajo el módulo <code>:core:designsystem</code> en <code>apps/operations-android</code>.
+      </p>
+
+      <ul class="arch-bullets">
+        <li>
+          <i class="pi pi-check"></i>
+          <span><strong>Hardware Scanner:</strong> Integración directa con <strong>CameraX + ML Kit</strong> para lectura láser de códigos QR y de barra en guías de despacho, con <em>fallback manual obligatorio</em>.</span>
+        </li>
+        <li>
+          <i class="pi pi-check"></i>
+          <span><strong>Resiliencia en Ruta:</strong> Cola de reintentos con <strong>WorkManager</strong>, <code>X-Idempotency-Key</code> y <code>X-Correlation-ID</code> para despachos sin red.</span>
+        </li>
+        <li>
+          <i class="pi pi-check"></i>
+          <span><strong>Criptografía en Reposo:</strong> Tokens y credenciales de rotación almacenados en <strong>Android Keystore</strong> y <code>EncryptedDataStore</code>.</span>
+        </li>
+        <li>
+          <i class="pi pi-check"></i>
+          <span><strong>Condiciones Extremas:</strong> Diseñado para terminales rugerizadas (Zebra, Honeywell, Pixel), operación con guantes (blancos táctiles de 56dp) y visibilidad bajo sol directo.</span>
+        </li>
+      </ul>
+
+      <div class="arch-stack-row">
+        <span class="tag-stack">Kotlin 2.4</span>
+        <span class="tag-stack">Compose M3</span>
+        <span class="tag-stack">Hilt DI</span>
+        <span class="tag-stack">Navigation 3</span>
+        <span class="tag-stack">CameraX</span>
+        <span class="tag-stack">Room Cache</span>
+      </div>
+    </div>
+
+    <!-- Buyer Mobile -->
+    <div class="arch-box flutter-box" data-platform-target="flutter">
+      <div class="arch-box-header">
+        <div class="platform-icon-tag flutter-tag">
+          <i class="pi pi-apple" aria-hidden="true"></i>
+          <span>BUYER MOBILE</span>
+        </div>
+        <span class="tech-pill flutter-pill">FLUTTER / DART</span>
+      </div>
+
+      <h3 class="arch-app-name">Buyer Mobile (Compradores B2B)</h3>
+      <p class="arch-box-desc">
+        Construida con <strong>Flutter / Dart</strong> para despliegue multiplataforma simultáneo en iOS y Android bajo el estándar canónico <strong>ADR-0019</strong>.
+      </p>
+
+      <ul class="arch-bullets">
+        <li>
+          <i class="pi pi-check"></i>
+          <span><strong>Experiencia B2B Comercial:</strong> Catálogo de equipos, solicitudes de cotización, arriendos y seguimiento de recepciones desde teléfonos personales de clientes.</span>
+        </li>
+        <li>
+          <i class="pi pi-check"></i>
+          <span><strong>Arquitectura Limpia:</strong> Organización <em>feature-first</em> en <code>app/core/features</code> con ViewModels inmutables y <code>provider</code>.</span>
+        </li>
+        <li>
+          <i class="pi pi-check"></i>
+          <span><strong>Navegación Declarativa:</strong> <code>go_router</code> con soporte de deep-linking y preservación de historial de navegación.</span>
+        </li>
+        <li>
+          <i class="pi pi-check"></i>
+          <span><strong>Toolchain Moderno en iOS:</strong> Compilación directa con <strong>Swift Package Manager</strong> nativo, excluyendo dependencias legacy de CocoaPods.</span>
+        </li>
+      </ul>
+
+      <div class="arch-stack-row">
+        <span class="tag-stack">Flutter 3.x</span>
+        <span class="tag-stack">Dart</span>
+        <span class="tag-stack">Provider</span>
+        <span class="tag-stack">go_router</span>
+        <span class="tag-stack">SwiftPM iOS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- C4 Authority Note -->
+  <div class="authority-note" id="sec-modelo-evidencia">
+    <i class="pi pi-info-circle"></i>
+    <p>
+      <strong>Regla de Autoridad Canónica (C4 DDD):</strong> La API de Nexa Suite es la <em>única autoridad</em> de negocio. Ni la base de datos local SQLite/Room en Android ni el estado local de Flutter son fuente de verdad de inventario ni de confirmación de órdenes. El éxito offline representa un borrador inocuo en cola de reintento.
+    </p>
+  </div>
+</div>
+
+<style>
+  .arch-hero-container {
+    background: var(--nexa-surface-card, #ffffff);
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: var(--nexa-radius-card, 16px);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .hero-top-badges {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .arch-kicker {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    text-transform: uppercase;
+  }
+
+  .arch-badge {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--nexa-color-neutral-600, #475569);
+    background: var(--nexa-color-neutral-100, #f1f5f9);
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+
+    &.frozen {
+      color: #1e40af;
+      background: #dbeafe;
+      border-color: #bfdbfe;
+    }
+  }
+
+  .hero-heading {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--nexa-color-text-primary, #0f172a);
+    letter-spacing: -0.03em;
+  }
+
+  .hero-intro {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--nexa-color-text-secondary, #64748b);
+  }
+
+  .arch-comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 4px;
+  }
+
+  @media (max-width: 900px) {
+    .arch-comparison-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .arch-box {
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    background: var(--nexa-color-neutral-50, #f8fafc);
+    transition: all 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+    }
+
+    &.kotlin-box {
+      border-left: 4px solid var(--nexa-color-kotlin, #7f52ff);
+    }
+
+    &.flutter-box {
+      border-left: 4px solid var(--nexa-color-flutter, #02569b);
+    }
+  }
+
+  .arch-box-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .platform-icon-tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+
+    &.kotlin-tag {
+      color: #7f52ff;
+    }
+
+    &.flutter-tag {
+      color: #0284c7;
+    }
+  }
+
+  .tech-pill {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9.5px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 999px;
+
+    &.kotlin-pill {
+      background: #7f52ff;
+      color: #ffffff;
+    }
+
+    &.flutter-pill {
+      background: #02569b;
+      color: #38c8ff;
+    }
+  }
+
+  .arch-app-name {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+  }
+
+  .arch-box-desc {
+    font-size: 12.5px;
+    color: var(--nexa-color-text-secondary, #64748b);
+    line-height: 1.5;
+  }
+
+  .arch-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 4px 0;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--nexa-color-text-primary, #0f172a);
+
+      i {
+        font-size: 11px;
+        color: #16a34a;
+        margin-top: 3px;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  .arch-stack-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
+  }
+
+  .tag-stack {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 600;
+    background: #ffffff;
+    color: var(--nexa-color-neutral-700, #334155);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+  }
+
+  .authority-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 16px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 10px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: #1e40af;
+
+    i {
+      font-size: 16px;
+      color: #2563eb;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+  }
+</style>

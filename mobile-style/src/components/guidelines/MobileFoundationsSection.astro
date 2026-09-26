@@ -1,0 +1,445 @@
+---
+/**
+ * MobileFoundationsSection — Mobile Design Tokens & Material 3 Foundations
+ * Zero-padding errors, clean responsive tables and token swatches.
+ */
+---
+
+<div class="foundations-container" data-platform-target="universal">
+  <!-- Section 1: Colorimetría M3 -->
+  <section class="spec-card" id="sec-tokens-color">
+    <div class="card-header-row">
+      <div class="card-badge-icon"><i class="pi pi-palette"></i></div>
+      <div>
+        <span class="card-eyebrow">FUNDAMENTOS · COLOR</span>
+        <h3 class="card-title">1. Paleta Tonal Material 3 & Contratos de Color</h3>
+      </div>
+    </div>
+    <p class="card-text">
+      Nexa Mobile implementa el sistema de color dinámico Material 3 adaptado a la identidad corporativa. Cada superficie calcula su contraste contra el fondo para asegurar cumplimiento WCAG 2.2 AA (mínimo 4.5:1 para texto normal y 3:1 para controles interactivos).
+    </p>
+
+    <!-- Color Swatches Grid -->
+    <div class="swatches-grid">
+      <div class="swatch-item">
+        <div class="swatch-color" style="background: #2a67d9; color: #ffffff;">#2a67d9</div>
+        <div class="swatch-info">
+          <span class="swatch-name">Primary (Nexa Blue)</span>
+          <span class="swatch-role">Botones CTA, AppBar tint</span>
+        </div>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-color" style="background: #e8f0fe; color: #174ea6;">#e8f0fe</div>
+        <div class="swatch-info">
+          <span class="swatch-name">Primary Container</span>
+          <span class="swatch-role">Chips activos, selecciones</span>
+        </div>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-color" style="background: #082846; color: #ffffff;">#082846</div>
+        <div class="swatch-info">
+          <span class="swatch-name">Brand Navy</span>
+          <span class="swatch-role">Identidad corporativa solida</span>
+        </div>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-color" style="background: #38c8ff; color: #082846;">#38c8ff</div>
+        <div class="swatch-info">
+          <span class="swatch-name">Brand Celeste</span>
+          <span class="swatch-role">Láser escáner y acentos</span>
+        </div>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-color" style="background: #ffffff; color: #0f172a; border: 1px solid #e2e8f0;">#ffffff</div>
+        <div class="swatch-info">
+          <span class="swatch-name">Surface Card</span>
+          <span class="swatch-role">Tarjetas, modales, dialogs</span>
+        </div>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-color" style="background: #15803d; color: #ffffff;">#15803d</div>
+        <div class="swatch-info">
+          <span class="swatch-name">Success Green</span>
+          <span class="swatch-role">Entregas confirmadas, QR OK</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Tipografía en sp -->
+  <section class="spec-card" id="sec-tipografia-sp">
+    <div class="card-header-row">
+      <div class="card-badge-icon"><i class="pi pi-align-left"></i></div>
+      <div>
+        <span class="card-eyebrow">FUNDAMENTOS · TIPOGRAFÍA</span>
+        <h3 class="card-title">2. Escala Tipográfica en Unidades Escalares (sp)</h3>
+      </div>
+    </div>
+    <p class="card-text">
+      Todo texto móvil se define en <strong>Scale-independent Pixels (sp)</strong> en Jetpack Compose y puntos lógicos en Flutter para respetar el escalado de fuentes del sistema operativo (accesibilidad para baja visión hasta 200%).
+    </p>
+
+    <div class="table-responsive-wrapper">
+      <table class="metrics-table">
+        <thead>
+          <tr>
+            <th>Rol Tipográfico</th>
+            <th>Tamaño (sp)</th>
+            <th>Altura de Línea</th>
+            <th>Peso</th>
+            <th>Uso Canónico en Móvil</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>displayLarge</code></td>
+            <td><span class="code-pill">32sp</span></td>
+            <td>40sp</td>
+            <td>800 (Bold)</td>
+            <td>KPIs numéricos de bodega y totales de despacho</td>
+          </tr>
+          <tr>
+            <td><code>headlineMedium</code></td>
+            <td><span class="code-pill">24sp</span></td>
+            <td>32sp</td>
+            <td>700 (Bold)</td>
+            <td>Títulos principales de pantalla y TopAppBar colapsada</td>
+          </tr>
+          <tr>
+            <td><code>titleMedium</code></td>
+            <td><span class="code-pill">16sp</span></td>
+            <td>24sp</td>
+            <td>600 (SemiBold)</td>
+            <td>Cabeceras de tarjetas de despacho, ítems y clientes</td>
+          </tr>
+          <tr>
+            <td><code>bodyLarge</code></td>
+            <td><span class="code-pill">15sp</span></td>
+            <td>22sp</td>
+            <td>400 (Regular)</td>
+            <td>Textos de lectura principal, descripciones de ruta</td>
+          </tr>
+          <tr>
+            <td><code>bodyMedium</code></td>
+            <td><span class="code-pill">13.5sp</span></td>
+            <td>20sp</td>
+            <td>400 (Regular)</td>
+            <td>Subtextos de guía, direcciones y notas de campo</td>
+          </tr>
+          <tr>
+            <td><code>labelSmall</code></td>
+            <td><span class="code-pill">11sp</span></td>
+            <td>16sp</td>
+            <td>700 (Bold)</td>
+            <td>Chips de estado (EN TURNO, ENTREGADO), badges M3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 3: Cuadrícula Espacial 8dp -->
+  <section class="spec-card" id="sec-cuadricula-8dp">
+    <div class="card-header-row">
+      <div class="card-badge-icon"><i class="pi pi-th-large"></i></div>
+      <div>
+        <span class="card-eyebrow">FUNDAMENTOS · ESPACIADO</span>
+        <h3 class="card-title">3. Cuadrícula Espacial de 8dp (con medios pasos de 4dp)</h3>
+      </div>
+    </div>
+    <p class="card-text">
+      Todo el espaciado vertical y horizontal sigue múltiplos estrictos de <strong>8dp</strong>, permitiendo 4dp únicamente para ajustes finos de alineación interna en iconos y badges.
+    </p>
+
+    <div class="table-responsive-wrapper">
+      <table class="metrics-table">
+        <thead>
+          <tr>
+            <th>Token de Espaciado</th>
+            <th>Valor (dp)</th>
+            <th>Equivalente Compose</th>
+            <th>Uso Arquitectónico</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>margin.screen</code></td>
+            <td><span class="code-pill">16dp</span></td>
+            <td><code>Modifier.padding(horizontal = 16.dp)</code></td>
+            <td>Márgenes laterales del Scaffold móvil</td>
+          </tr>
+          <tr>
+            <td><code>gutter.cards</code></td>
+            <td><span class="code-pill">12dp</span></td>
+            <td><code>Arrangement.spacedBy(12.dp)</code></td>
+            <td>Separación vertical en LazyColumn entre tarjetas</td>
+          </tr>
+          <tr>
+            <td><code>padding.card-inner</code></td>
+            <td><span class="code-pill">16dp</span></td>
+            <td><code>Modifier.padding(16.dp)</code></td>
+            <td>Relleno interior de tarjetas de despacho</td>
+          </tr>
+          <tr>
+            <td><code>spacing.touch-gap</code></td>
+            <td><span class="code-pill">8dp</span></td>
+            <td><code>Spacer(modifier = Modifier.width(8.dp))</code></td>
+            <td>Separación mínima entre botones adyacentes</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 4: Elevaciones M3 -->
+  <section class="spec-card" id="sec-elevaciones-m3">
+    <div class="card-header-row">
+      <div class="card-badge-icon"><i class="pi pi-clone"></i></div>
+      <div>
+        <span class="card-eyebrow">FUNDAMENTOS · ELEVACIÓN M3</span>
+        <h3 class="card-title">4. Elevación Material 3 & Surface Tinting</h3>
+      </div>
+    </div>
+    <p class="card-text">
+      En lugar de sombras pesadas o difusas, la profundidad se comunica a través de <strong>tintado de superficie en color primario azul Nexa (<code>#2a67d9</code>)</strong>, garantizando legibilidad en pantallas AMOLED y bajo el sol.
+    </p>
+
+    <div class="elevation-cards-row">
+      <div class="elev-item elev-0">
+        <span class="elev-level">Nivel 0</span>
+        <span class="elev-dp">0dp</span>
+        <span class="elev-usage">Fondo Scaffold</span>
+      </div>
+      <div class="elev-item elev-1">
+        <span class="elev-level">Nivel 1</span>
+        <span class="elev-dp">1dp - 2dp</span>
+        <span class="elev-usage">Tarjetas & Listas</span>
+      </div>
+      <div class="elev-item elev-2">
+        <span class="elev-level">Nivel 2</span>
+        <span class="elev-dp">3dp</span>
+        <span class="elev-usage">TopAppBar / BottomNav</span>
+      </div>
+      <div class="elev-item elev-3">
+        <span class="elev-level">Nivel 3</span>
+        <span class="elev-dp">6dp</span>
+        <span class="elev-usage">Snackbars & FAB</span>
+      </div>
+      <div class="elev-item elev-4">
+        <span class="elev-level">Nivel 4</span>
+        <span class="elev-dp">8dp - 12dp</span>
+        <span class="elev-usage">Bottom Sheets & Diálogos</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .foundations-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .spec-card {
+    background: var(--nexa-surface-card, #ffffff);
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: var(--nexa-radius-card, 16px);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    scroll-margin-top: 80px;
+  }
+
+  .card-header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .card-badge-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--nexa-color-primary-50, #eff6ff);
+    color: var(--nexa-color-primary-600, #2a67d9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+  }
+
+  .card-eyebrow {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .card-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 0;
+  }
+
+  .card-text {
+    font-size: 13.5px;
+    color: var(--nexa-color-text-secondary, #64748b);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Swatches Grid */
+  .swatches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  .swatch-item {
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--nexa-color-neutral-50, #f8fafc);
+  }
+
+  .swatch-color {
+    height: 48px;
+    padding: 8px 12px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .swatch-info {
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .swatch-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+  }
+
+  .swatch-role {
+    font-size: 10.5px;
+    color: var(--nexa-color-text-secondary, #64748b);
+  }
+
+  /* Responsive Table without padding errors */
+  .table-responsive-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 10px;
+  }
+
+  .metrics-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    text-align: left;
+    white-space: nowrap;
+
+    th {
+      background: var(--nexa-color-neutral-100, #f1f5f9);
+      color: var(--nexa-color-text-secondary, #64748b);
+      font-weight: 700;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--nexa-color-border-default, #e2e8f0);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
+      color: var(--nexa-color-text-primary, #0f172a);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+  }
+
+  .code-pill {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    background: var(--nexa-color-primary-50, #eff6ff);
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--nexa-color-primary-200, #bfdbfe);
+  }
+
+  /* Elevation Row */
+  .elevation-cards-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  .elev-item {
+    border-radius: 12px;
+    padding: 14px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    background: #ffffff;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    &.elev-0 { background: #f8fafc; box-shadow: none; }
+    &.elev-1 { background: #ffffff; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08); }
+    &.elev-2 { background: #ffffff; box-shadow: 0 3px 6px rgba(15, 23, 42, 0.10); }
+    &.elev-3 { background: #ffffff; box-shadow: 0 6px 12px rgba(15, 23, 42, 0.12); }
+    &.elev-4 { background: #ffffff; box-shadow: 0 10px 20px rgba(15, 23, 42, 0.14); }
+  }
+
+  .elev-level {
+    font-size: 11.5px;
+    font-weight: 800;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+  }
+
+  .elev-dp {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    color: var(--nexa-color-neutral-600, #475569);
+  }
+
+  .elev-usage {
+    font-size: 10px;
+    color: var(--nexa-color-text-muted, #94a3b8);
+    margin-top: 2px;
+  }
+</style>

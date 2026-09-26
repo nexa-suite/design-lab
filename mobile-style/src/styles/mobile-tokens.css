@@ -1,65 +1,167 @@
 /**
  * NEXA MOBILE DESIGN TOKENS
  * Canonical tokens for Android Jetpack Compose & Flutter implementations.
+ * Unified with Nexa Design Lab Web Foundations.
  */
 :root {
-  /* Spatial Grid & Ergonomics */
+  /* Layout Dimensions */
+  --nexa-layout-content-max: 1400px;
+  --nexa-layout-sidebar-width: 284px;
+  --nexa-layout-section-gap: 40px;
+
+  /* Surfaces & Canvas (matching web-style) */
+  --nexa-surface-page: #f6faff;
+  --nexa-surface-card: #ffffff;
+  --nexa-surface-tint: #f1f5f9;
+  --nexa-surface-nav-active: #edf4fe;
+  --nexa-surface-info: #eef6ff;
+  --nexa-surface-success: #f0fdf4;
+  --nexa-surface-warning: #fffbeb;
+  --nexa-surface-danger: #fef2f2;
+
+  /* Spatial Grid & Ergonomics (Mobile Canonical) */
   --nexa-mobile-touch-target-min: 48px;
+  --nexa-mobile-touch-target-gloves: 56px;
   --nexa-mobile-grid-baseline: 8px;
+  --nexa-mobile-grid-half: 4px;
   --nexa-mobile-margin-screen: 16px;
   --nexa-mobile-gutter-cards: 12px;
-  --nexa-mobile-radius-card: 16px;
-  --nexa-mobile-radius-button: 12px;
-  --nexa-mobile-radius-chip: 8px;
-  --nexa-mobile-radius-sheet: 24px;
+  
+  /* Radii */
+  --nexa-radius-xs: 4px;
+  --nexa-radius-sm: 6px;
+  --nexa-radius-md: 8px;
+  --nexa-radius-lg: 12px;
+  --nexa-radius-xl: 16px;
+  --nexa-radius-card: 16px;
+  --nexa-radius-button: 12px;
+  --nexa-radius-chip: 8px;
+  --nexa-radius-sheet: 24px;
+  --nexa-radius-nav-active: 10px;
+  --nexa-radius-pill: 9999px;
 
   /* Material 3 & Android Surface Elevations */
-  --nexa-mobile-elevation-0: none;
-  --nexa-mobile-elevation-1: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
-  --nexa-mobile-elevation-2: 0 3px 6px rgba(15, 23, 42, 0.10), 0 2px 4px rgba(15, 23, 42, 0.06);
-  --nexa-mobile-elevation-3: 0 6px 12px rgba(15, 23, 42, 0.12), 0 3px 6px rgba(15, 23, 42, 0.08);
-  --nexa-mobile-elevation-4: 0 10px 20px rgba(15, 23, 42, 0.14), 0 4px 8px rgba(15, 23, 42, 0.08);
-  --nexa-mobile-elevation-5: 0 14px 28px rgba(15, 23, 42, 0.16), 0 6px 10px rgba(15, 23, 42, 0.10);
+  --nexa-elevation-0: none;
+  --nexa-elevation-1: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --nexa-elevation-2: 0 3px 6px rgba(15, 23, 42, 0.10), 0 2px 4px rgba(15, 23, 42, 0.06);
+  --nexa-elevation-3: 0 6px 12px rgba(15, 23, 42, 0.12), 0 3px 6px rgba(15, 23, 42, 0.08);
+  --nexa-elevation-4: 0 10px 20px rgba(15, 23, 42, 0.14), 0 4px 8px rgba(15, 23, 42, 0.08);
+  --nexa-elevation-5: 0 14px 28px rgba(15, 23, 42, 0.16), 0 6px 10px rgba(15, 23, 42, 0.10);
 
-  /* Canonical Colors */
-  --nexa-mobile-primary: #2a67d9;
-  --nexa-mobile-primary-dark: #1b4fb8;
-  --nexa-mobile-primary-container: #e8f0fe;
-  --nexa-mobile-on-primary-container: #174ea6;
-  --nexa-mobile-brand-navy: #082846;
-  --nexa-mobile-brand-celeste: #38c8ff;
-  
+  /* Primary Blue Palette */
+  --nexa-color-primary-50: #eff6ff;
+  --nexa-color-primary-100: #dbeafe;
+  --nexa-color-primary-200: #bfdbfe;
+  --nexa-color-primary-300: #93c5fd;
+  --nexa-color-primary-400: #60a5fa;
+  --nexa-color-primary-500: #3b82f6;
+  --nexa-color-primary-600: #2a67d9;
+  --nexa-color-primary-700: #1d4ed8;
+  --nexa-color-primary-800: #1e40af;
+  --nexa-color-primary-900: #1e3a8a;
+  --nexa-color-primary-950: #172554;
+
+  /* Canonical Brand Solid Tones */
+  --nexa-brand-navy: #082846;
+  --nexa-brand-celeste: #38c8ff;
+  --nexa-color-kotlin: #7f52ff;
+  --nexa-color-flutter: #02569b;
+
+  /* Neutral Palette */
+  --nexa-color-neutral-50: #f8fafc;
+  --nexa-color-neutral-100: #f1f5f9;
+  --nexa-color-neutral-200: #e2e8f0;
+  --nexa-color-neutral-300: #cbd5e1;
+  --nexa-color-neutral-400: #94a3b8;
+  --nexa-color-neutral-500: #64748b;
+  --nexa-color-neutral-600: #475569;
+  --nexa-color-neutral-700: #334155;
+  --nexa-color-neutral-800: #1e293b;
+  --nexa-color-neutral-900: #0f172a;
+
+  /* Semantic Text & Borders */
+  --nexa-color-text-primary: #0f172a;
+  --nexa-color-text-secondary: #64748b;
+  --nexa-color-text-muted: #94a3b8;
+  --nexa-color-text-inverse: #ffffff;
+
+  --nexa-color-border-default: #e2e8f0;
+  --nexa-color-border-strong: #cbd5e1;
+  --nexa-color-border-structural: #e2e8f0;
+  --nexa-color-border-subtle: #f1f5f9;
+  --nexa-color-border-interactive: #cbd5e1;
+  --nexa-focus-ring: 0 0 0 3px rgba(42, 103, 217, 0.18);
+
   /* Status Semantics */
-  --nexa-mobile-status-success: #15803d;
-  --nexa-mobile-status-success-bg: #dcfce7;
-  --nexa-mobile-status-warning: #b45309;
-  --nexa-mobile-status-warning-bg: #fef3c7;
-  --nexa-mobile-status-error: #b91c1c;
-  --nexa-mobile-status-error-bg: #fee2e2;
+  --nexa-color-success-50: #f0fdf4;
+  --nexa-color-success-200: #bbf7d0;
+  --nexa-color-success-700: #15803d;
+  --nexa-color-warning-50: #fffbeb;
+  --nexa-color-warning-200: #fde68a;
+  --nexa-color-warning-600: #d97706;
+  --nexa-color-warning-text: #92400e;
+  --nexa-color-danger-50: #fef2f2;
+  --nexa-color-danger-200: #fecaca;
+  --nexa-color-danger-600: #dc2626;
+  --nexa-color-danger-text: #991b1b;
 
-  /* Typography Scale */
-  --nexa-mobile-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --nexa-mobile-font-family-display: 'Plus Jakarta Sans', sans-serif;
-  --nexa-mobile-font-family-mono: 'JetBrains Mono', monospace;
+  /* Typography Fonts */
+  --nexa-font-family-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --nexa-font-family-display: 'Plus Jakarta Sans', sans-serif;
+  --nexa-font-family-mono: 'JetBrains Mono', monospace;
 
-  /* Light Theme Surfaces */
-  --nexa-mobile-surface-bg: #f8fafc;
-  --nexa-mobile-surface-card: #ffffff;
-  --nexa-mobile-surface-tint: #f1f5f9;
-  --nexa-mobile-text-primary: #0f172a;
-  --nexa-mobile-text-secondary: #64748b;
-  --nexa-mobile-text-tertiary: #94a3b8;
-  --nexa-mobile-border: #e2e8f0;
+  /* Typography Scales (Desktop + Mobile sp equivalent) */
+  --nexa-font-size-xs: 11px;
+  --nexa-font-size-sm: 12.5px;
+  --nexa-font-size-base: 14px;
+  --nexa-font-size-md: 15px;
+  --nexa-font-size-lg: 18px;
+  --nexa-font-size-xl: 20px;
+  --nexa-font-size-2xl: 24px;
+  --nexa-font-size-3xl: 30px;
+
+  /* Backward Compatibility Aliases for mobile components */
+  --nexa-mobile-touch-target-min: 48px;
+  --nexa-mobile-surface-bg: var(--nexa-surface-page);
+  --nexa-mobile-surface-card: var(--nexa-surface-card);
+  --nexa-mobile-surface-tint: var(--nexa-surface-tint);
+  --nexa-mobile-border: var(--nexa-color-border-default);
+  --nexa-mobile-primary: var(--nexa-color-primary-600);
+  --nexa-mobile-primary-container: var(--nexa-color-primary-100);
+  --nexa-mobile-text-primary: var(--nexa-color-text-primary);
+  --nexa-mobile-text-secondary: var(--nexa-color-text-secondary);
+  --nexa-mobile-font-family: var(--nexa-font-family-body);
+  --nexa-mobile-font-family-display: var(--nexa-font-family-display);
+  --nexa-mobile-font-family-mono: var(--nexa-font-family-mono);
 }
 
 [data-theme="dark"] {
-  --nexa-mobile-surface-bg: #0b1120;
-  --nexa-mobile-surface-card: #131c31;
-  --nexa-mobile-surface-tint: #1e293b;
+  --nexa-surface-page: #090e17;
+  --nexa-surface-card: #111a29;
+  --nexa-surface-tint: #162235;
+  --nexa-surface-nav-active: #172844;
+  --nexa-color-text-primary: #f8fafc;
+  --nexa-color-text-secondary: #94a3b8;
+  --nexa-color-text-muted: #64748b;
+  --nexa-color-border-default: #1e293b;
+  --nexa-color-border-structural: #1e293b;
+  --nexa-color-border-interactive: #334155;
+  --nexa-color-neutral-50: #111a29;
+  --nexa-color-neutral-100: #162235;
+  --nexa-color-neutral-200: #1e293b;
+  
+  --nexa-mobile-surface-bg: #090e17;
+  --nexa-mobile-surface-card: #111a29;
+  --nexa-mobile-surface-tint: #162235;
+  --nexa-mobile-border: #1e293b;
   --nexa-mobile-text-primary: #f8fafc;
   --nexa-mobile-text-secondary: #94a3b8;
-  --nexa-mobile-text-tertiary: #64748b;
-  --nexa-mobile-border: #1e293b;
-  --nexa-mobile-primary-container: #1e3a8a;
-  --nexa-mobile-on-primary-container: #bfdbfe;
+}
+
+[data-contrast-mode="increased"] {
+  --nexa-color-text-primary: #000000;
+  --nexa-color-text-secondary: #1e293b;
+  --nexa-color-border-default: #64748b;
+  --nexa-color-border-structural: #475569;
+  --nexa-color-primary-600: #1a4fb8;
 }

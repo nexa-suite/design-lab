@@ -1,0 +1,361 @@
+---
+/**
+ * MobileHardwareSection — CameraX & ML Kit Hardware Scanning with Mandatory Manual Fallback
+ * Directly adheres to ADR-0018 and field ruggedization constraints.
+ */
+---
+
+<div class="hardware-container" id="sec-hardware-camerax" data-platform-target="kotlin">
+  <section class="spec-card">
+    <div class="card-header-row">
+      <div class="card-badge-icon hardware-badge"><i class="pi pi-qrcode"></i></div>
+      <div>
+        <span class="card-eyebrow">HARDWARE MÓVIL · CAMERAX & ML KIT</span>
+        <h3 class="card-title">Escaneo Óptico en Campo con Fallback Manual Obligatorio</h3>
+      </div>
+    </div>
+    <p class="card-text">
+      En operaciones logísticas y de almacén (Operations Android), los conductores y operarios deben validar guías de despacho y códigos de activos en contenedores. El sistema implementa <strong>CameraX + ML Kit Barcode Scanning</strong> junto con integración a escáneres láser industriales (Zebra DataWedge via Android Intents).
+    </p>
+
+    <!-- Fallback Requirement Box -->
+    <div class="field-rule-banner">
+      <div class="rule-icon"><i class="pi pi-exclamation-circle"></i></div>
+      <div class="rule-text">
+        <strong>Mandato Arquitectónico (ADR-0018): Fallback Manual Obligatorio</strong>
+        <p>Bajo ninguna circunstancia la imposibilidad de escanear (código físico con manchas de grasa, roto, o falta de luz en tolva) puede detener la operativa de despacho. La pantalla de escáner debe ofrecer <em>siempre</em> un campo de texto numérico de 48dp con teclado numérico ampliado para validación manual de la guía.</p>
+      </div>
+    </div>
+
+    <!-- Live Scanner Architecture Specimen -->
+    <div class="scanner-specimen-layout">
+      <div class="scanner-mock-view">
+        <div class="cam-lens-header">
+          <span><i class="pi pi-camera"></i> CameraX 1.4 PreviewView</span>
+          <span class="fps-tag">60 FPS · QR/Code128</span>
+        </div>
+        <div class="cam-lens-body">
+          <div class="reticle-box">
+            <div class="reticle-laser"></div>
+            <span class="reticle-text">Alinee guía física aquí</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scanner-fallback-panel">
+        <span class="panel-kicker">INTERFAZ DE CONTINGENCIA</span>
+        <h4 class="panel-title">Entrada Manual Inmediata</h4>
+        <p class="panel-desc">Disponible en todo momento sin salir del flujo de escaneo:</p>
+
+        <div class="manual-input-box">
+          <label>Código de Guía de Despacho (10 dígitos)</label>
+          <div class="input-action-row">
+            <input type="text" value="ORD-2026-9812-A" readonly />
+            <button type="button" class="btn-validate">
+              <i class="pi pi-check"></i> Validar
+            </button>
+          </div>
+        </div>
+
+        <div class="hardware-specs-list">
+          <div class="spec-pill-item">
+            <i class="pi pi-bolt"></i> Linterna Flash Integrada
+          </div>
+          <div class="spec-pill-item">
+            <i class="pi pi-tablet"></i> Soporte Zebra DataWedge
+          </div>
+          <div class="spec-pill-item">
+            <i class="pi pi-volume-up"></i> Pitido y Haptic Feedback
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .hardware-container {
+    width: 100%;
+  }
+
+  .spec-card {
+    background: var(--nexa-surface-card, #ffffff);
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: var(--nexa-radius-card, 16px);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    scroll-margin-top: 80px;
+  }
+
+  .card-header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .card-badge-icon.hardware-badge {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #f3e8ff;
+    color: #7f52ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+  }
+
+  .card-eyebrow {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: #7f52ff;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .card-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 0;
+  }
+
+  .card-text {
+    font-size: 13.5px;
+    color: var(--nexa-color-text-secondary, #64748b);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .field-rule-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 12px;
+    color: #92400e;
+  }
+
+  .rule-icon {
+    font-size: 18px;
+    color: #d97706;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .rule-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    strong {
+      font-size: 13px;
+      color: #78350f;
+    }
+
+    p {
+      font-size: 12px;
+      line-height: 1.5;
+      margin: 0;
+      color: #92400e;
+    }
+  }
+
+  .scanner-specimen-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f8fafc;
+  }
+
+  @media (max-width: 800px) {
+    .scanner-specimen-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .scanner-mock-view {
+    background: #090e17;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .cam-lens-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    color: #94a3b8;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .fps-tag {
+    color: #22c55e;
+  }
+
+  .cam-lens-body {
+    flex: 1;
+    min-height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, #172554 0%, #030712 100%);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .reticle-box {
+    width: 140px;
+    height: 140px;
+    border: 2px dashed #38c8ff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .reticle-laser {
+    width: 90%;
+    height: 2px;
+    background: #38c8ff;
+    box-shadow: 0 0 10px #38c8ff;
+    position: absolute;
+    animation: laserScan 2s infinite alternate;
+  }
+
+  @keyframes laserScan {
+    0% { top: 15%; }
+    100% { top: 85%; }
+  }
+
+  .reticle-text {
+    font-size: 9px;
+    color: #cbd5e1;
+    background: rgba(0,0,0,0.6);
+    padding: 2px 6px;
+    border-radius: 4px;
+    position: absolute;
+    bottom: -20px;
+  }
+
+  .scanner-fallback-panel {
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #ffffff;
+  }
+
+  .panel-kicker {
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #d97706;
+  }
+
+  .panel-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .panel-desc {
+    font-size: 12.5px;
+    color: #64748b;
+    margin: 0;
+  }
+
+  .manual-input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 6px;
+
+    label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #475569;
+    }
+  }
+
+  .input-action-row {
+    display: flex;
+    gap: 8px;
+
+    input {
+      flex: 1;
+      height: 48px;
+      padding: 0 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-size: 13px;
+      font-weight: 700;
+      background: #f8fafc;
+      color: #0f172a;
+      outline: none;
+    }
+  }
+
+  .btn-validate {
+    height: 48px;
+    padding: 0 18px;
+    background: var(--nexa-color-primary-600, #2a67d9);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    &:hover {
+      background: #1d4ed8;
+    }
+  }
+
+  .hardware-specs-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .spec-pill-item {
+    font-size: 11px;
+    color: #334155;
+    background: #f1f5f9;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    i {
+      font-size: 11px;
+      color: #2a67d9;
+    }
+  }
+</style>
