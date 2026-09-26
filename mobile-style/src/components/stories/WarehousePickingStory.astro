@@ -1,0 +1,814 @@
+---
+/**
+ * WarehousePickingStory.astro
+ * Canonical Mobile Specification for Warehouse & FEFO Picking Operations
+ * Blueprint Traceability: MOB-US-011..019, MOB-US-050..056 (MOBILE-EPIC-02 & 08)
+ * Persona: Alejandro — Operador de Almacén y Control de Inventarios
+ */
+---
+
+<div class="story-screen-container" id="story-bodega">
+  
+  <!-- Story Header -->
+  <header class="story-header">
+    <div class="story-meta-badge">
+      <i class="pi pi-box"></i>
+      <span>BLUEPRINT MOBILE-EPIC-02 & 08 · HISTORIAS MOB-US-011..019, 050..056</span>
+    </div>
+    <h2 class="story-title">Alejandro — Operaciones de Almacén, Picking FEFO y Control de Lotes</h2>
+    <p class="story-desc">
+      Diseño nativo en <strong>Android Jetpack Compose</strong> para terminales robustas de almacén (Zebra TC58 / Honeywell). Integra lectura por láser/cámara (CameraX), localización guiada por pasillo/rack/nivel, algoritmo <em>First-Expired, First-Out</em> (FEFO), registro de temperatura (°C) y reporte de discrepancias con evidencia.
+    </p>
+  </header>
+
+  <!-- Interactive Story Workbench -->
+  <div class="story-workbench-layout">
+    
+    <!-- Left: Functional Steps -->
+    <div class="story-details-col">
+      
+      <!-- Phase Navigation -->
+      <div class="phase-selector-bar" role="tablist">
+        <button type="button" class="phase-btn active" data-phase="location">
+          <span>1. Ubicación Rack</span>
+        </button>
+        <button type="button" class="phase-btn" data-phase="fefo">
+          <span>2. Lote & FEFO</span>
+        </button>
+        <button type="button" class="phase-btn" data-phase="temp">
+          <span>3. Temp (°C)</span>
+        </button>
+        <button type="button" class="phase-btn" data-phase="discrepancy">
+          <span>4. Discrepancia</span>
+        </button>
+        <button type="button" class="phase-btn" data-phase="code">
+          <span>5. Código Compose</span>
+        </button>
+      </div>
+
+      <!-- Phase 1: Location -->
+      <div class="phase-panel active" id="panel-phase-location">
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <span class="step-num">PASO 1</span>
+            <h3>Navegación Guiada de Pasillos y Estanterías (MOB-US-016)</h3>
+          </div>
+          <p>
+            El operador recibe una ruta de preparación óptima. La tipografía de la ubicación se presenta en <code>24sp bold</code> para lectura rápida a 1 metro de distancia en montacargas.
+          </p>
+          <ul class="story-spec-list">
+            <li><strong>Código de Ubicación:</strong> <code>B-04-N2-P12</code> (Pasillo B · Rack 04 · Nivel 2 · Posición 12).</li>
+            <li><strong>Producto:</strong> Generador Eléctrico Trifásico 250 kVA (SKU #GEN-250-TRI).</li>
+            <li><strong>Cantidad Solicitada:</strong> 2 unidades (conteo con botones de + / − de 56dp).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Phase 2: FEFO -->
+      <div class="phase-panel" id="panel-phase-fefo">
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <span class="step-num">PASO 2</span>
+            <h3>Algoritmo FEFO y Validación de Lote (MOB-US-014, 054)</h3>
+          </div>
+          <p>
+            Nexa exige priorizar el lote de caducidad más cercana. Si el operador intenta escanear otro lote, el sistema advierte la sustitución y exige autorización.
+          </p>
+          <ul class="story-spec-list">
+            <li><strong>Lote Prioritario FEFO:</strong> <code>LOT-2026-NOV-04</code> (Vence: 04 Nov 2026 · Prioridad #1).</li>
+            <li><strong>Lote Alternativo:</strong> <code>LOT-2027-MAR-18</code> (Requiere motivo: Lote prioritario bloqueado o dañado).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Phase 3: Temperature -->
+      <div class="phase-panel" id="panel-phase-temp">
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <span class="step-num">PASO 3</span>
+            <h3>Registro de Cadena de Frío y Temperatura (MOB-US-019, 061)</h3>
+          </div>
+          <p>
+            Para fluidos, aditivos o maquinaria con especificación térmica, el operador captura la lectura del sensor BLE o termómetro infrarrojo antes del picking.
+          </p>
+          <ul class="story-spec-list">
+            <li><strong>Umbral Aceptable:</strong> 4.0°C – 8.0°C (Verde conforme).</li>
+            <li><strong>Alerta de Desvío:</strong> > 8.5°C bloquea el despacho preventivamente.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Phase 4: Discrepancy -->
+      <div class="phase-panel" id="panel-phase-discrepancy">
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <span class="step-num">PASO 4</span>
+            <h3>Reporte de Discrepancia Física y Cuarentena (MOB-US-017, 050, 051)</h3>
+          </div>
+          <p>
+            Si la estantería física tiene menos unidades que el stock lógico o si el empaque presenta fisuras, se dispara la orden de cuarentena sin borrar la trazabilidad.
+          </p>
+        </div>
+      </div>
+
+      <!-- Phase 5: Compose Code -->
+      <div class="phase-panel" id="panel-phase-code">
+        <div class="compose-code-snippet">
+          <div class="snippet-header">
+            <span class="code-tag">Kotlin · Jetpack Compose</span>
+            <span class="code-file">apps/operations-android/.../WarehousePickingScreen.kt</span>
+          </div>
+          <pre><code><span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">WarehousePickingScreen</span>(
+    state: <span class="type">WarehousePickingUiState</span>,
+    onBarcodeScanned: (sku: <span class="type">String</span>) -&gt; <span class="type">Unit</span>,
+    onIncrementQuantity: () -&gt; <span class="type">Unit</span>,
+    onDecrementQuantity: () -&gt; <span class="type">Unit</span>,
+    onConfirmPick: () -&gt; <span class="type">Unit</span>
+) &#123;
+    <span class="type">Scaffold</span>(
+        topBar = &#123; <span class="type">NexaWarehouseTopBar</span>(title = <span class="str">"Picking B-04-N2"</span>) &#125;
+    ) &#123; padding -&gt;
+        <span class="type">Column</span>(modifier = <span class="type">Modifier</span>.<span class="fn">padding</span>(padding).<span class="fn">fillMaxSize</span>()) &#123;
+            <span class="type">LocationBreadcrumbChip</span>(location = state.currentLocation)
+            <span class="type">FefoLotRecommendationCard</span>(
+                suggestedLot = state.suggestedLot,
+                expiryDate = state.expiryDate
+            )
+            <span class="type">GloveFriendlyStepper</span>(
+                current = state.pickedCount,
+                target = state.requiredCount,
+                onAdd = onIncrementQuantity,
+                onSub = onDecrementQuantity
+            )
+        &#125;
+    &#125;
+&#125;</code></pre>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right: Smartphone Hardware Simulator Preview -->
+    <div class="story-preview-col">
+      <div class="mini-device-stand">
+        <div class="mini-chassis">
+          
+          <div class="mini-notch">
+            <div class="mini-camera"></div>
+          </div>
+
+          <div class="mini-status-bar">
+            <span>10:15</span>
+            <div class="status-right">
+              <i class="pi pi-wifi"></i>
+              <span>LAN</span>
+              <i class="pi pi-battery"></i>
+            </div>
+          </div>
+
+          <div class="driver-app-content">
+            <!-- App Topbar -->
+            <div class="app-topbar" style="background: #082846;">
+              <i class="pi pi-box"></i>
+              <span class="topbar-title">Picking · Orden #PCK-408</span>
+              <span class="offline-pill" style="background: #3b82f6;" title="Láser escáner activo">
+                <i class="pi pi-barcode"></i>
+              </span>
+            </div>
+
+            <div class="app-scroll-body">
+              
+              <!-- Location Banner -->
+              <div class="rack-location-banner">
+                <span class="banner-sub">PASILLO B · RACK 04 · NIVEL 2</span>
+                <strong class="banner-code">POSICIÓN P-12</strong>
+              </div>
+
+              <!-- Product Card -->
+              <div class="warehouse-product-card">
+                <div class="prod-badge">SKU #GEN-250-TRI</div>
+                <h4 class="prod-title">Generador Diésel Trifásico 250 kVA</h4>
+                <p class="prod-specs">Marca: PowerMax · Peso: 1,840 kg · Lote: <b>LOT-2026-NOV-04</b></p>
+                <div class="fefo-status-tag">
+                  <i class="pi pi-clock"></i> Prioridad FEFO: Vence en 42 días
+                </div>
+              </div>
+
+              <!-- Glove-Friendly Quantity Stepper (56dp target) -->
+              <div class="glove-stepper-card">
+                <span class="stepper-title">CANTIDAD RECOLECTADA:</span>
+                <div class="stepper-controls">
+                  <button type="button" class="btn-step-circle">−1</button>
+                  <div class="step-value-display">
+                    <strong class="count-big">2</strong>
+                    <span class="count-target">de 2 Solicitados</span>
+                  </div>
+                  <button type="button" class="btn-step-circle">+1</button>
+                </div>
+              </div>
+
+              <!-- Temperature Sensor Check -->
+              <div class="temp-sensor-card">
+                <div class="temp-row">
+                  <span class="temp-title"><i class="pi pi-sun"></i> Sensor Temp. Batería/Fluidos:</span>
+                  <strong class="temp-val">6.2°C</strong>
+                </div>
+                <span class="temp-status-ok">✔ Conforme con especificación del fabricante (4-8°C)</span>
+              </div>
+
+              <!-- Action Scan Trigger -->
+              <button type="button" class="btn-app-action" style="background: #0284c7; color: white;">
+                <i class="pi pi-barcode"></i>
+                <span>Escanear Código de Barras (Láser)</span>
+              </button>
+
+              <button type="button" class="btn-app-action" style="background: #15803d; color: white;">
+                <i class="pi pi-check"></i>
+                <span>Confirmar Picking de Ubicación</span>
+              </button>
+
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="app-bottom-nav">
+              <div class="nav-tab active">
+                <i class="pi pi-list"></i>
+                <span>Picking</span>
+              </div>
+              <div class="nav-tab">
+                <i class="pi pi-arrow-right-arrow-left"></i>
+                <span>Transferir</span>
+              </div>
+              <div class="nav-tab">
+                <i class="pi pi-exclamation-triangle"></i>
+                <span>Incidencias</span>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="mini-gesture"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+  .story-screen-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    animation: fadeIn 0.25s ease-out;
+  }
+
+  .story-header {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .story-meta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--nexa-color-primary-50, #eff6ff);
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+
+  .story-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .story-desc {
+    color: var(--nexa-color-text-secondary, #64748b);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 900px;
+  }
+
+  .story-workbench-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 28px;
+    align-items: start;
+  }
+
+  @media (max-width: 1080px) {
+    .story-workbench-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .story-details-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .phase-selector-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    padding: 6px;
+    border-radius: 10px;
+  }
+
+  .phase-btn {
+    background: transparent;
+    border: 0;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .phase-btn:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+  }
+
+  .phase-btn.active {
+    background: var(--nexa-color-primary-600, #2563eb);
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  .phase-panel {
+    display: none;
+  }
+
+  .phase-panel.active {
+    display: block;
+  }
+
+  .panel-card {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .panel-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .step-num {
+    background: #e2e8f0;
+    color: #334155;
+    font-size: 9px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .panel-card-header h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .panel-card p {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.55;
+    margin: 0 0 14px;
+  }
+
+  .story-spec-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 12.5px;
+    color: #334155;
+  }
+
+  .story-spec-list li {
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .story-spec-list li::before {
+    content: "•";
+    color: var(--nexa-color-primary-600, #2563eb);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+
+  /* Rack Location Banner inside Phone */
+  .rack-location-banner {
+    background: #082846;
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  }
+
+  .banner-sub {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #93c5fd;
+    letter-spacing: 0.08em;
+  }
+
+  .banner-code {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    font-family: monospace;
+    color: #ffffff;
+    margin-top: 2px;
+  }
+
+  .warehouse-product-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .prod-badge {
+    font-size: 9.5px;
+    font-weight: 800;
+    color: #0284c7;
+    font-family: monospace;
+  }
+
+  .prod-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .prod-specs {
+    font-size: 11px;
+    color: #64748b;
+    margin: 0;
+  }
+
+  .fefo-status-tag {
+    background: #fef3c7;
+    color: #92400e;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+    width: fit-content;
+  }
+
+  .glove-stepper-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .stepper-title {
+    font-size: 9.5px;
+    font-weight: 800;
+    color: #64748b;
+  }
+
+  .stepper-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .btn-step-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    font-size: 18px;
+    font-weight: 800;
+    color: #0f172a;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-step-circle:active {
+    background: #e2e8f0;
+  }
+
+  .step-value-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .count-big {
+    font-size: 28px;
+    font-weight: 900;
+    color: #082846;
+    font-family: monospace;
+    line-height: 1;
+  }
+
+  .count-target {
+    font-size: 10.5px;
+    color: #64748b;
+    font-weight: 600;
+  }
+
+  .temp-sensor-card {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .temp-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: #166534;
+  }
+
+  .temp-val {
+    font-size: 14px;
+    font-weight: 800;
+    font-family: monospace;
+  }
+
+  .temp-status-ok {
+    font-size: 10px;
+    color: #15803d;
+  }
+
+  .story-preview-col {
+    position: sticky;
+    top: 80px;
+    width: 380px;
+    margin: 0 auto;
+  }
+
+  .mini-device-stand {
+    display: flex;
+    justify-content: center;
+  }
+
+  .mini-chassis {
+    width: 360px;
+    height: 720px;
+    background: #000000;
+    border-radius: 42px;
+    padding: 12px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.2), 0 0 0 1px #334155;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .mini-notch {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 18px;
+    background: #000000;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+  }
+
+  .mini-camera {
+    width: 9px;
+    height: 9px;
+    background: #1e293b;
+    border-radius: 50%;
+    border: 1px solid #334155;
+  }
+
+  .mini-status-bar {
+    height: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 11px;
+    color: #ffffff;
+    font-weight: 600;
+    z-index: 10;
+  }
+
+  .status-right {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+  }
+
+  .driver-app-content {
+    flex: 1;
+    background: #f8fafc;
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .app-topbar {
+    height: 48px;
+    background: #082846;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .offline-pill {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #ffffff;
+  }
+
+  .app-scroll-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scrollbar-width: none;
+  }
+
+  .app-scroll-body::-webkit-scrollbar {
+    display: none;
+  }
+
+  .btn-app-action {
+    height: 48px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    border: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: transform 0.1s ease;
+  }
+
+  .btn-app-action:active {
+    transform: scale(0.98);
+  }
+
+  .app-bottom-nav {
+    height: 52px;
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .nav-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    color: #64748b;
+    font-size: 9.5px;
+  }
+
+  .nav-tab.active {
+    color: #1d4ed8;
+    font-weight: 700;
+  }
+
+  .mini-gesture {
+    width: 110px;
+    height: 4px;
+    background: #ffffff;
+    border-radius: 2px;
+    align-self: center;
+    margin-top: 8px;
+    opacity: 0.6;
+  }
+
+  .compose-code-snippet {
+    background: #0f172a;
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11.5px;
+    color: #e2e8f0;
+  }
+
+  .snippet-header {
+    background: #1e293b;
+    padding: 8px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #334155;
+    font-size: 11px;
+  }
+
+  .code-tag {
+    color: #38bdf8;
+    font-weight: 700;
+  }
+
+  .code-file {
+    color: #94a3b8;
+  }
+
+  .compose-code-snippet pre {
+    margin: 0;
+    padding: 16px;
+    overflow-x: auto;
+    line-height: 1.5;
+  }
+
+  .kw { color: #f43f5e; font-weight: 700; }
+  .fn { color: #38bdf8; }
+  .type { color: #a78bfa; }
+  .str { color: #34d399; }
+</style>
+
+<script>
+  const phaseButtons = document.querySelectorAll('#story-bodega .phase-btn');
+  const phasePanels = document.querySelectorAll('#story-bodega .phase-panel');
+
+  phaseButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      phaseButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const phase = btn.getAttribute('data-phase');
+      phasePanels.forEach(panel => {
+        panel.classList.toggle('active', panel.id === `panel-phase-${phase}`);
+      });
+    });
+  });
+</script>

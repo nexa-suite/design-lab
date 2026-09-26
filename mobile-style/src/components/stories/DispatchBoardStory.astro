@@ -1,0 +1,301 @@
+---
+/**
+ * DispatchBoardStory.astro
+ * Canonical Mobile Specification for Dispatch Coordinator & Staging Operations
+ * Blueprint Traceability: MOB-US-020..025, MOB-US-057..061 (MOBILE-EPIC-03 & 09)
+ * Persona: Coordinador de Despacho y Logística de Patio
+ */
+---
+
+<div class="story-screen-container" id="story-despacho">
+  
+  <!-- Story Header -->
+  <header class="story-header">
+    <div class="story-meta-badge">
+      <i class="pi pi-send"></i>
+      <span>BLUEPRINT MOBILE-EPIC-03 & 09 · HISTORIAS MOB-US-020..025, 057..061</span>
+    </div>
+    <h2 class="story-title">Coordinación de Despachos, Asignación y Control de Estiba (Staging)</h2>
+    <p class="story-desc">
+      Diseño nativo en <strong>Android Jetpack Compose</strong> para la mesa de salida en muelle. Permite revisar órdenes listas para embarque, asignar transportistas, realizar control de bultos salientes con escaneo en ráfaga y emitir el código QR de traspaso de responsabilidad.
+    </p>
+  </header>
+
+  <!-- Interactive Story Workbench -->
+  <div class="story-workbench-layout">
+    
+    <!-- Left: Functional Steps -->
+    <div class="story-details-col">
+      
+      <!-- Phase Navigation -->
+      <div class="phase-selector-bar" role="tablist">
+        <button type="button" class="phase-btn active" data-phase="staging">
+          <span>1. Mesa de Envíos</span>
+        </button>
+        <button type="button" class="phase-btn" data-phase="assign">
+          <span>2. Asignar Chofer</span>
+        </button>
+        <button type="button" class="phase-btn" data-phase="tally">
+          <span>3. Chequeo de Carga</span>
+        </button>
+        <button type="button" class="phase-btn" data-phase="handoff">
+          <span>4. Código QR Traspaso</span>
+        </button>
+      </div>
+
+      <!-- Phase 1: Staging Board -->
+      <div class="phase-panel active" id="panel-phase-staging">
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <span class="step-num">PASO 1</span>
+            <h3>Tablero de Envíos Listos para Carga (MOB-US-020)</h3>
+          </div>
+          <p>
+            Listado reactivo ordenado por hora de salida comprometida. Cada tarjeta indica el volumen en m³, peso total y muelle asignado.
+          </p>
+          <ul class="story-spec-list">
+            <li><strong>Despacho #DSP-1092:</strong> 3 bultos · 2,450 kg · Muelle 3 (Salida: 10:45 AM).</li>
+            <li><strong>Destino:</strong> Constructora Bolivar · Obra Altamira Torre 3.</li>
+            <li><strong>Estado:</strong> Listo para estiba en camión plataforma.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Phase 2: Driver Assignment -->
+      <div class="phase-panel" id="panel-phase-assign">
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <span class="step-num">PASO 2</span>
+            <h3>Asignación de Conductor y Vehículo (MOB-US-021, 058)</h3>
+          </div>
+          <p>
+            El coordinador selecciona al conductor disponible verificando vigencia de licencia de conducción pesada y capacidad del vehículo asignado.
+          </p>
+        </div>
+      </div>
+
+      <!-- Phase 3: Staging Check -->
+      <div class="phase-panel" id="panel-phase-tally">
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <span class="step-num">PASO 3</span>
+            <h3>Verificación Bulto a Bulto (Staging Check MOB-US-022)</h3>
+          </div>
+          <p>
+            Lectura óptica o láser antes de cruzar la compuerta del muelle para certificar que ningún producto incorrecto suba al camión.
+          </p>
+        </div>
+      </div>
+
+      <!-- Phase 4: Handoff QR -->
+      <div class="phase-panel" id="panel-phase-handoff">
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <span class="step-num">PASO 4</span>
+            <h3>Código QR Dinámico de Traspaso de Custodia (MOB-US-024, 025, 060)</h3>
+          </div>
+          <p>
+            Generación de un token criptográfico efímero renderizado en un código QR dinámico. El conductor lo escanea con su app para aceptar la responsabilidad de la carga.
+          </p>
+        </div>
+      </div>
+
+      <!-- Compose Code -->
+      <div class="compose-code-snippet">
+        <div class="snippet-header">
+          <span class="code-tag">Kotlin · Jetpack Compose</span>
+          <span class="code-file">apps/operations-android/.../DispatchStagingScreen.kt</span>
+        </div>
+        <pre><code><span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">DispatchHandoffQrSheet</span>(
+    dispatchId: <span class="type">String</span>,
+    handoffToken: <span class="type">String</span>,
+    driverName: <span class="type">String</span>,
+    onConfirmed: () -&gt; <span class="type">Unit</span>
+) &#123;
+    <span class="type">Column</span>(
+        modifier = <span class="type">Modifier</span>.<span class="fn">fillMaxWidth</span>().<span class="fn">padding</span>(<span class="num">24</span>.dp),
+        horizontalAlignment = <span class="type">Alignment</span>.CenterHorizontally
+    ) &#123;
+        <span class="type">Text</span>(text = <span class="str">"Traspaso de Custodia: $dispatchId"</span>, style = <span class="type">MaterialTheme</span>.typography.titleLarge)
+        <span class="type">DynamicHandoffQrCode</span>(token = handoffToken, modifier = <span class="type">Modifier</span>.<span class="fn">size</span>(<span class="num">220</span>.dp))
+        <span class="type">Text</span>(text = <span class="str">"Conductor Asignado: $driverName"</span>, style = <span class="type">MaterialTheme</span>.typography.bodyMedium)
+    &#125;
+&#125;</code></pre>
+      </div>
+
+    </div>
+
+    <!-- Right: Smartphone Simulator Preview -->
+    <div class="story-preview-col">
+      <div class="mini-device-stand">
+        <div class="mini-chassis">
+          <div class="mini-notch"><div class="mini-camera"></div></div>
+          <div class="mini-status-bar">
+            <span>10:30</span>
+            <div class="status-right"><i class="pi pi-wifi"></i><span>5G</span><i class="pi pi-battery"></i></div>
+          </div>
+
+          <div class="driver-app-content">
+            <div class="app-topbar" style="background: #082846;">
+              <i class="pi pi-truck"></i>
+              <span class="topbar-title">Muelle 3 · Despacho #DSP-1092</span>
+              <span class="offline-pill" style="background: #16a34a;"><i class="pi pi-check"></i></span>
+            </div>
+
+            <div class="app-scroll-body">
+              
+              <!-- Staging Status Card -->
+              <div class="staging-progress-card">
+                <div class="progress-title-row">
+                  <span class="staging-label">ESTIBA EN VEHÍCULO:</span>
+                  <span class="staging-ratio">2 de 3 bultos verificados</span>
+                </div>
+                <div class="progress-bar-track">
+                  <div class="progress-bar-fill" style="width: 66%;"></div>
+                </div>
+              </div>
+
+              <!-- Item Checklist -->
+              <div class="staging-item-card verified">
+                <i class="pi pi-check-circle item-icon ok"></i>
+                <div class="item-meta">
+                  <strong>Generador 250 kVA (Lote NOV-04)</strong>
+                  <span>Palet #PLT-8821 · Escaneado a las 10:24 AM</span>
+                </div>
+              </div>
+
+              <div class="staging-item-card verified">
+                <i class="pi pi-check-circle item-icon ok"></i>
+                <div class="item-meta">
+                  <strong>Generador 250 kVA (Lote NOV-04)</strong>
+                  <span>Palet #PLT-8822 · Escaneado a las 10:26 AM</span>
+                </div>
+              </div>
+
+              <div class="staging-item-card pending">
+                <i class="pi pi-clock item-icon wait"></i>
+                <div class="item-meta">
+                  <strong>Tablero Eléctrico IP65</strong>
+                  <span>Caja #BOX-304 · Pendiente de lectura en rampa</span>
+                </div>
+              </div>
+
+              <!-- Handoff QR Card -->
+              <div class="qr-handoff-card">
+                <span class="qr-title"><i class="pi pi-qrcode"></i> QR TRASPASO AL CHOFER</span>
+                <div class="qr-mock-box">
+                  <div class="qr-matrix-mock"></div>
+                </div>
+                <span class="qr-exp">Token criptográfico efímero (Expira en 14 min)</span>
+              </div>
+
+              <button type="button" class="btn-app-action" style="background: #082846; color: white;">
+                <i class="pi pi-check-circle"></i>
+                <span>Completar Salida de Muelle</span>
+              </button>
+
+            </div>
+
+            <div class="app-bottom-nav">
+              <div class="nav-tab active"><i class="pi pi-inbox"></i><span>Muelle</span></div>
+              <div class="nav-tab"><i class="pi pi-users"></i><span>Choferes</span></div>
+              <div class="nav-tab"><i class="pi pi-history"></i><span>Historial</span></div>
+            </div>
+          </div>
+          <div class="mini-gesture"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+  .story-screen-container { width: 100%; display: flex; flex-direction: column; gap: 24px; animation: fadeIn 0.25s ease-out; }
+  .story-header { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; box-shadow: 0 1px 3px rgba(15,23,42,0.04); }
+  .story-meta-badge { display: inline-flex; align-items: center; gap: 6px; background: #eff6ff; color: #1d4ed8; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 6px; margin-bottom: 12px; }
+  .story-title { font-size: 22px; font-weight: 800; color: #0f172a; margin: 0 0 8px; }
+  .story-desc { color: #64748b; font-size: 14px; line-height: 1.6; margin: 0; max-width: 900px; }
+  .story-workbench-layout { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 28px; align-items: start; }
+  @media (max-width: 1080px) { .story-workbench-layout { grid-template-columns: 1fr; } }
+  .story-details-col { display: flex; flex-direction: column; gap: 20px; }
+  .phase-selector-bar { display: flex; flex-wrap: wrap; gap: 6px; background: #ffffff; border: 1px solid #e2e8f0; padding: 6px; border-radius: 10px; }
+  .phase-btn { background: transparent; border: 0; padding: 8px 12px; border-radius: 6px; font-size: 11.5px; font-weight: 600; color: #475569; cursor: pointer; }
+  .phase-btn.active { background: #2563eb; color: #ffffff; font-weight: 700; }
+  .phase-panel { display: none; }
+  .phase-panel.active { display: block; }
+  .panel-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 20px; box-shadow: 0 1px 3px rgba(15,23,42,0.04); }
+  .panel-card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .step-num { background: #e2e8f0; color: #334155; font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 4px; }
+  .panel-card-header h3 { font-size: 15px; font-weight: 700; color: #0f172a; margin: 0; }
+  .panel-card p { font-size: 13px; color: #64748b; line-height: 1.55; margin: 0 0 14px; }
+  .story-spec-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 12.5px; color: #334155; }
+  .story-spec-list li { padding-left: 14px; position: relative; }
+  .story-spec-list li::before { content: "•"; color: #2563eb; position: absolute; left: 0; font-weight: bold; }
+
+  /* Device Preview */
+  .story-preview-col { position: sticky; top: 80px; width: 380px; margin: 0 auto; }
+  .mini-device-stand { display: flex; justify-content: center; }
+  .mini-chassis { width: 360px; height: 720px; background: #000000; border-radius: 42px; padding: 12px; box-shadow: 0 24px 60px rgba(15,23,42,0.2), 0 0 0 1px #334155; display: flex; flex-direction: column; position: relative; }
+  .mini-notch { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 80px; height: 18px; background: #000000; border-radius: 10px; display: flex; align-items: center; justify-content: center; z-index: 20; }
+  .mini-camera { width: 9px; height: 9px; background: #1e293b; border-radius: 50%; }
+  .mini-status-bar { height: 24px; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; font-size: 11px; color: #ffffff; font-weight: 600; }
+  .status-right { display: flex; align-items: center; gap: 5px; font-size: 10px; }
+  .driver-app-content { flex: 1; background: #f8fafc; border-radius: 30px; overflow: hidden; display: flex; flex-direction: column; }
+  .app-topbar { height: 48px; background: #082846; color: #ffffff; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; font-size: 13px; font-weight: 700; }
+  .offline-pill { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #ffffff; }
+  .app-scroll-body { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 10px; scrollbar-width: none; }
+  .staging-progress-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px; }
+  .progress-title-row { display: flex; justify-content: space-between; font-size: 10.5px; font-weight: 700; margin-bottom: 6px; }
+  .staging-label { color: #64748b; }
+  .staging-ratio { color: #1d4ed8; }
+  .progress-bar-track { height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: #2563eb; border-radius: 3px; }
+  .staging-item-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px; display: flex; align-items: center; gap: 10px; }
+  .staging-item-card.verified { border-left: 3px solid #16a34a; }
+  .staging-item-card.pending { border-left: 3px solid #eab308; }
+  .item-icon.ok { color: #16a34a; font-size: 16px; }
+  .item-icon.wait { color: #eab308; font-size: 16px; }
+  .item-meta { display: flex; flex-direction: column; gap: 2px; }
+  .item-meta strong { font-size: 12px; color: #0f172a; }
+  .item-meta span { font-size: 10px; color: #64748b; }
+  .qr-handoff-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+  .qr-title { font-size: 10px; font-weight: 800; color: #1d4ed8; }
+  .qr-mock-box { width: 110px; height: 110px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+  .qr-matrix-mock { width: 90px; height: 90px; background: repeating-conic-gradient(#082846 0% 25%, #ffffff 0% 50%) 50% / 15px 15px; }
+  .qr-exp { font-size: 9.5px; color: #64748b; font-family: monospace; }
+  .btn-app-action { height: 48px; border-radius: 10px; font-size: 12px; font-weight: 700; border: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .app-bottom-nav { height: 52px; background: #ffffff; border-top: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-around; }
+  .nav-tab { display: flex; flex-direction: column; align-items: center; gap: 2px; color: #64748b; font-size: 9.5px; }
+  .nav-tab.active { color: #1d4ed8; font-weight: 700; }
+  .mini-gesture { width: 110px; height: 4px; background: #ffffff; border-radius: 2px; align-self: center; margin-top: 8px; opacity: 0.6; }
+  .compose-code-snippet { background: #0f172a; border-radius: 12px; overflow: hidden; font-family: var(--nexa-font-family-mono, monospace); font-size: 11.5px; color: #e2e8f0; }
+  .snippet-header { background: #1e293b; padding: 8px 14px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; }
+  .code-tag { color: #38bdf8; font-weight: 700; }
+  .code-file { color: #94a3b8; }
+  .compose-code-snippet pre { margin: 0; padding: 16px; overflow-x: auto; line-height: 1.5; }
+  .kw { color: #f43f5e; font-weight: 700; }
+  .fn { color: #38bdf8; }
+  .type { color: #a78bfa; }
+  .str { color: #34d399; }
+  .num { color: #fbbf24; }
+</style>
+
+<script>
+  const phaseButtons = document.querySelectorAll('#story-despacho .phase-btn');
+  const phasePanels = document.querySelectorAll('#story-despacho .phase-panel');
+
+  phaseButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      phaseButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const phase = btn.getAttribute('data-phase');
+      phasePanels.forEach(panel => {
+        panel.classList.toggle('active', panel.id === `panel-phase-${phase}`);
+      });
+    });
+  });
+</script>

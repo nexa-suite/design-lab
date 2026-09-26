@@ -1,0 +1,1007 @@
+---
+/**
+ * DriverRouteStory.astro
+ * Canonical Mobile Specification for Driver Delivery Execution
+ * Blueprint Traceability: MOB-US-026..035, MOB-US-062..066 (MOBILE-EPIC-04 & 09)
+ * Persona: Diego — Conductor de Flota y Operador de Entrega en Terreno
+ */
+---
+
+<div class="story-screen-container" id="story-conductor">
+  
+  <!-- Story Header -->
+  <header class="story-header">
+    <div class="story-meta-badge">
+      <i class="pi pi-truck"></i>
+      <span>BLUEPRINT MOBILE-EPIC-04 & 09 · HISTORIAS MOB-US-026..035, 062..066</span>
+    </div>
+    <h2 class="story-title">Diego — Ejecución de Ruta y Prueba de Entrega (POD)</h2>
+    <p class="story-desc">
+      Diseño nativo en <strong>Android Jetpack Compose</strong> para la jornada del conductor. Incluye ordenamiento de paradas, apertura de navegación GPS externa, registro de arribo, selector trifásico de resultado, firma táctil digital (Canvas POD), verificación de código OTP y resiliencia offline con WorkManager.
+    </p>
+  </header>
+
+  <!-- Interactive Story Workbench (Side-by-side or clean stacked responsive view) -->
+  <div class="story-workbench-layout">
+    
+    <!-- Left: Step Flow & Functional Blueprint Details -->
+    <div class="story-details-col">
+      
+      <!-- Interactive Phase Navigation -->
+      <div class="phase-selector-bar" role="tablist">
+        <button type="button" class="phase-btn active" data-phase="route">
+          <span>1. Parada Activa</span>
+        </button>
+        <button type="button" class="phase-btn" data-phase="arrival">
+          <span>2. Arribo & GPS</span>
+        </button>
+        <button type="button" class="phase-btn" data-phase="outcome">
+          <span>3. Resultado</span>
+        </button>
+        <button type="button" class="phase-btn" data-phase="pod">
+          <span>4. Firma POD</span>
+        </button>
+        <button type="button" class="phase-btn" data-phase="otp">
+          <span>5. Código OTP</span>
+        </button>
+        <button type="button" class="phase-btn" data-phase="offline">
+          <span>6. Cola Offline</span>
+        </button>
+      </div>
+
+      <!-- Phase 1: Active Stop Details -->
+      <div class="phase-panel active" id="panel-phase-route">
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <span class="step-num">PASO 1</span>
+            <h3>Visualización de Hoja de Ruta Asignada (MOB-US-026, 027)</h3>
+          </div>
+          <p>
+            El conductor visualiza su secuencia optimizada de paradas. Los objetivos táctiles de cada tarjeta miden mínimo <strong>56dp</strong> de alto para permitir pulsar con guantes de conducción.
+          </p>
+          <ul class="story-spec-list">
+            <li><strong>Parada Activa:</strong> Constructora Bolivar · Parada 2 de 4.</li>
+            <li><strong>Materiales:</strong> 2x Generadores 250 kVA + 1x Tablero Eléctrico IP65.</li>
+            <li><strong>Ventana Horaria:</strong> 11:00 AM – 12:30 PM (ETA estimado en vivo con tráfico).</li>
+            <li><strong>Contacto en Sitio:</strong> Arq. Roberto Gómez (+57 310 982 1234).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Phase 2: Arrival & GPS -->
+      <div class="phase-panel" id="panel-phase-arrival">
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <span class="step-num">PASO 2</span>
+            <h3>Lanzador GPS y Notificación de Arribo (MOB-US-028, 062)</h3>
+          </div>
+          <p>
+            Integración de un solo toque con <code>geo:0,0?q=lat,lng</code> para abrir Google Maps o Waze sin bloquear la sesión nativa de Nexa.
+          </p>
+          <ul class="story-spec-list">
+            <li><strong>Intención de Navegación:</strong> Intent implícito <code>ACTION_VIEW</code> respetando el gestor de mapas preferido del conductor.</li>
+            <li><strong>Baliza de Arribo:</strong> Al llegar al geofence (200m), el botón cambia a verde fluorescente: <em>"Registrar Arribo en Sitio"</em>.</li>
+            <li><strong>Auditoría GPS:</strong> Captura silenciosa de precisión satelital, timestamp UTC y nivel de batería para trazabilidad.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Phase 3: Delivery Outcome -->
+      <div class="phase-panel" id="panel-phase-outcome">
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <span class="step-num">PASO 3</span>
+            <h3>Registro de Estado de Entrega (MOB-US-031, 032)</h3>
+          </div>
+          <p>
+            Selector visual trifásico que no permite ambigüedad operativa. Si la entrega no es 100% conforme, se habilitan los campos de faltantes y motivo de rechazo.
+          </p>
+          <div class="outcome-pill-demo">
+            <div class="pill ok">✔ Entregado Completo (3/3 ítems conformes)</div>
+            <div class="pill warn">⚠️ Entrega Parcial (Faltante 1 ítem con acta)</div>
+            <div class="pill error">❌ Rechazado (Cliente ausente / Daño en tránsito)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 4: Proof of Delivery (POD) -->
+      <div class="phase-panel" id="panel-phase-pod">
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <span class="step-num">PASO 4</span>
+            <h3>Prueba Digital de Entrega - Firma y Foto (MOB-US-033)</h3>
+          </div>
+          <p>
+            Módulo dual de evidencia física: pad de firma táctil con suavizado Bézier nativo en Canvas Compose + captura fotográfica mediante CameraX.
+          </p>
+          <ul class="story-spec-list">
+            <li><strong>Firma Táctil:</strong> Canvas interactivo con <code>pointerInput</code>, anti-aliasing y botón de borrado rápido.</li>
+            <li><strong>Fotografía de Obra:</strong> Visor CameraX para registrar el equipo posicionado en terreno y el remito físico firmado.</li>
+            <li><strong>Metadatos Incrustados:</strong> EXIF con coordenadas GPS y hash criptográfico SHA-256 en la firma.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Phase 5: Handoff OTP -->
+      <div class="phase-panel" id="panel-phase-otp">
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <span class="step-num">PASO 5</span>
+            <h3>Validación de Código OTP del Comprador (MOB-US-034, 047)</h3>
+          </div>
+          <p>
+            El receptor autorizado debe presentar un código de 6 dígitos emitido en su app de Comprador para prevenir entregas a terceros no autorizados.
+          </p>
+          <ul class="story-spec-list">
+            <li><strong>Teclado Numérico Accesible:</strong> Botones gigantes de 64dp para evitar equivocaciones bajo luz solar directa.</li>
+            <li><strong>Criptografía Local:</strong> Verificación mediante HMAC token acotado temporalmente a 30 minutos.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Phase 6: Offline Resilience -->
+      <div class="phase-panel" id="panel-phase-offline">
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <span class="step-num">PASO 6</span>
+            <h3>Cola de Sincronización Offline WorkManager (MOB-US-035, 066)</h3>
+          </div>
+          <p>
+            En sótanos u obras sin cobertura celular, la entrega se sella localmente en SQLite/Room y se programa un <code>CoroutineWorker</code> con backoff exponencial.
+          </p>
+          <ul class="story-spec-list">
+            <li><strong>Idempotencia:</strong> Cabecera <code>X-Correlation-ID: uuid</code> persistente para evitar duplicación de remitos.</li>
+            <li><strong>Indicador Visual:</strong> Pill ámbar en la cabecera: <em>"1 Remito Pendiente de Sincronización"</em>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Jetpack Compose Production Code Sample -->
+      <div class="compose-code-snippet">
+        <div class="snippet-header">
+          <span class="code-tag">Kotlin · Jetpack Compose</span>
+          <span class="code-file">apps/operations-android/.../DriverDeliveryScreen.kt</span>
+        </div>
+        <pre><code><span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">DriverDeliveryScreen</span>(
+    state: <span class="type">DeliveryUiState</span>,
+    onNavigateGps: (destination: <span class="type">LatLng</span>) -&gt; <span class="type">Unit</span>,
+    onConfirmArrival: () -&gt; <span class="type">Unit</span>,
+    onCapturePodSignature: (bitmap: <span class="type">Bitmap</span>) -&gt; <span class="type">Unit</span>,
+    onVerifyOtp: (code: <span class="type">String</span>) -&gt; <span class="type">Unit</span>
+) &#123;
+    <span class="type">LazyColumn</span>(
+        modifier = <span class="type">Modifier</span>.<span class="fn">fillMaxSize</span>().<span class="fn">padding</span>(horizontal = <span class="num">16</span>.dp),
+        verticalArrangement = <span class="type">Arrangement</span>.<span class="fn">spacedBy</span>(<span class="num">16</span>.dp)
+    ) &#123;
+        item &#123;
+            <span class="type">ActiveDeliveryHeaderCard</span>(
+                orderNumber = state.orderId,
+                clientName = state.clientName,
+                eta = state.estimatedArrival,
+                onGpsClick = &#123; onNavigateGps(state.coordinates) &#125;
+            )
+        &#125;
+        item &#123;
+            <span class="type">PodSignaturePad</span>(
+                modifier = <span class="type">Modifier</span>.<span class="fn">fillMaxWidth</span>().<span class="fn">height</span>(<span class="num">180</span>.dp),
+                onSignatureComplete = onCapturePodSignature
+            )
+        &#125;
+    &#125;
+&#125;</code></pre>
+      </div>
+
+    </div>
+
+    <!-- Right: Smartphone Hardware Simulator Frame showing the interactive Driver Screen -->
+    <div class="story-preview-col">
+      <div class="mini-device-stand">
+        <div class="mini-chassis">
+          
+          <!-- Top Notch & Speaker -->
+          <div class="mini-notch">
+            <div class="mini-camera"></div>
+          </div>
+
+          <!-- Status Bar -->
+          <div class="mini-status-bar">
+            <span>09:42</span>
+            <div class="status-right">
+              <i class="pi pi-wifi"></i>
+              <span>4G</span>
+              <i class="pi pi-battery"></i>
+            </div>
+          </div>
+
+          <!-- Inner Interactive Driver App Viewport -->
+          <div class="driver-app-content">
+            
+            <!-- App Top Bar -->
+            <div class="app-topbar">
+              <i class="pi pi-bars"></i>
+              <span class="topbar-title">Ruta Activa · Parada 2/4</span>
+              <span class="offline-pill" id="app-offline-indicator" title="Cola offline sincronizada">
+                <i class="pi pi-check"></i>
+              </span>
+            </div>
+
+            <!-- Scrollable Body inside Phone -->
+            <div class="app-scroll-body">
+              
+              <!-- Active Stop Card -->
+              <div class="app-order-card">
+                <div class="order-top-row">
+                  <span class="order-id">ORD-2026-9812</span>
+                  <span class="eta-badge">ETA 11:20 AM</span>
+                </div>
+                <h4 class="client-name">Constructora Bolivar S.A.</h4>
+                <p class="address-text"><i class="pi pi-map-marker"></i> Av. Industrial 402, Obra Altamira Torre 3</p>
+                <div class="cargo-items-box">
+                  <span>📦 <b>2x</b> Generador Diésel 250 kVA</span>
+                  <span>⚡ <b>1x</b> Tablero Transferencia IP65</span>
+                </div>
+
+                <!-- GPS Trigger Button (48dp height minimum) -->
+                <button type="button" class="btn-app-action btn-gps">
+                  <i class="pi pi-directions"></i>
+                  <span>Navegar con Google Maps</span>
+                </button>
+              </div>
+
+              <!-- Arrival Action Card -->
+              <div class="app-arrival-card">
+                <div class="arrival-status-row">
+                  <span class="status-dot green"></span>
+                  <span>Dentro de zona de obra (140m)</span>
+                </div>
+                <button type="button" class="btn-app-action btn-arrival" id="btn-mock-arrived">
+                  <i class="pi pi-check-circle"></i>
+                  <span>Marcar Arribo en Sitio</span>
+                </button>
+              </div>
+
+              <!-- Interactive Outcome Selector -->
+              <div class="app-outcome-selector">
+                <span class="selector-label">RESULTADO DE ENTREGA:</span>
+                <div class="outcome-btn-group">
+                  <button type="button" class="outcome-choice active">
+                    <i class="pi pi-check"></i> Completo
+                  </button>
+                  <button type="button" class="outcome-choice">
+                    <i class="pi pi-exclamation-triangle"></i> Parcial
+                  </button>
+                  <button type="button" class="outcome-choice">
+                    <i class="pi pi-times"></i> Rechazado
+                  </button>
+                </div>
+              </div>
+
+              <!-- Proof of Delivery (POD) Pad -->
+              <div class="app-pod-card">
+                <div class="pod-header">
+                  <span class="pod-label"><i class="pi pi-pencil"></i> FIRMA DEL RECEPTOR</span>
+                  <button type="button" class="btn-clear-sig">Limpiar</button>
+                </div>
+                <div class="signature-canvas-mock">
+                  <svg viewBox="0 0 260 70" class="mock-sig-svg">
+                    <path d="M 20 45 Q 60 10 90 40 T 160 30 T 220 50" fill="none" stroke="#1d4ed8" stroke-width="2.5" stroke-linecap="round"/>
+                  </svg>
+                  <span class="sig-placeholder">Roberto Gómez (Receptor Obra)</span>
+                </div>
+              </div>
+
+              <!-- Customer OTP Verification -->
+              <div class="app-otp-card">
+                <span class="otp-label">CÓDIGO DE TRASPASO DEL COMPRADOR (OTP):</span>
+                <div class="otp-input-mock">
+                  <span class="otp-digit">8</span>
+                  <span class="otp-digit">4</span>
+                  <span class="otp-digit">9</span>
+                  <span class="otp-digit">2</span>
+                  <span class="otp-digit">1</span>
+                  <span class="otp-digit">0</span>
+                </div>
+              </div>
+
+              <!-- Final Confirm Button -->
+              <button type="button" class="btn-app-action btn-confirm-delivery">
+                <i class="pi pi-shield"></i>
+                <span>Completar Entrega y Emitir Remito</span>
+              </button>
+
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="app-bottom-nav">
+              <div class="nav-tab active">
+                <i class="pi pi-map"></i>
+                <span>Ruta</span>
+              </div>
+              <div class="nav-tab">
+                <i class="pi pi-list"></i>
+                <span>Paradas</span>
+              </div>
+              <div class="nav-tab">
+                <i class="pi pi-sync"></i>
+                <span>Offline</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Gesture Line -->
+          <div class="mini-gesture"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+  .story-screen-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    animation: fadeIn 0.25s ease-out;
+  }
+
+  .story-header {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .story-meta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--nexa-color-primary-50, #eff6ff);
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+
+  .story-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .story-desc {
+    color: var(--nexa-color-text-secondary, #64748b);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 900px;
+  }
+
+  .story-workbench-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 28px;
+    align-items: start;
+  }
+
+  @media (max-width: 1080px) {
+    .story-workbench-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .story-details-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Phase Buttons */
+  .phase-selector-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    padding: 6px;
+    border-radius: 10px;
+  }
+
+  .phase-btn {
+    background: transparent;
+    border: 0;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .phase-btn:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+  }
+
+  .phase-btn.active {
+    background: var(--nexa-color-primary-600, #2563eb);
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  /* Phase Panels */
+  .phase-panel {
+    display: none;
+  }
+
+  .phase-panel.active {
+    display: block;
+  }
+
+  .panel-card {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .panel-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .step-num {
+    background: #e2e8f0;
+    color: #334155;
+    font-size: 9px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .panel-card-header h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .panel-card p {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.55;
+    margin: 0 0 14px;
+  }
+
+  .story-spec-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 12.5px;
+    color: #334155;
+  }
+
+  .story-spec-list li {
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .story-spec-list li::before {
+    content: "•";
+    color: var(--nexa-color-primary-600, #2563eb);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+
+  .outcome-pill-demo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .outcome-pill-demo .pill {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .outcome-pill-demo .pill.ok {
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+  }
+
+  .outcome-pill-demo .pill.warn {
+    background: #fffbeb;
+    color: #b45309;
+    border: 1px solid #fde68a;
+  }
+
+  .outcome-pill-demo .pill.error {
+    background: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+  }
+
+  /* Code Snippet */
+  .compose-code-snippet {
+    background: #0f172a;
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11.5px;
+    color: #e2e8f0;
+  }
+
+  .snippet-header {
+    background: #1e293b;
+    padding: 8px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #334155;
+    font-size: 11px;
+  }
+
+  .code-tag {
+    color: #38bdf8;
+    font-weight: 700;
+  }
+
+  .code-file {
+    color: #94a3b8;
+  }
+
+  .compose-code-snippet pre {
+    margin: 0;
+    padding: 16px;
+    overflow-x: auto;
+    line-height: 1.5;
+  }
+
+  .kw { color: #f43f5e; font-weight: 700; }
+  .fn { color: #38bdf8; }
+  .type { color: #a78bfa; }
+  .num { color: #fbbf24; }
+
+  /* Device Simulator Preview Stand */
+  .story-preview-col {
+    position: sticky;
+    top: 80px;
+    width: 380px;
+    margin: 0 auto;
+  }
+
+  .mini-device-stand {
+    display: flex;
+    justify-content: center;
+  }
+
+  .mini-chassis {
+    width: 360px;
+    height: 720px;
+    background: #000000;
+    border-radius: 42px;
+    padding: 12px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.2), 0 0 0 1px #334155;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .mini-notch {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 18px;
+    background: #000000;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+  }
+
+  .mini-camera {
+    width: 9px;
+    height: 9px;
+    background: #1e293b;
+    border-radius: 50%;
+    border: 1px solid #334155;
+  }
+
+  .mini-status-bar {
+    height: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 11px;
+    color: #ffffff;
+    font-weight: 600;
+    z-index: 10;
+  }
+
+  .status-right {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+  }
+
+  .driver-app-content {
+    flex: 1;
+    background: #f8fafc;
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .app-topbar {
+    height: 48px;
+    background: #082846;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .offline-pill {
+    background: #10b981;
+    color: #ffffff;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+  }
+
+  .app-scroll-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scrollbar-width: none;
+  }
+
+  .app-scroll-body::-webkit-scrollbar {
+    display: none;
+  }
+
+  .app-order-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .order-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .order-id {
+    font-size: 11px;
+    font-weight: 800;
+    color: #1d4ed8;
+    font-family: monospace;
+  }
+
+  .eta-badge {
+    background: #eff6ff;
+    color: #1e40af;
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .client-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .address-text {
+    font-size: 11px;
+    color: #64748b;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .cargo-items-box {
+    background: #f1f5f9;
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 10.5px;
+    color: #334155;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .btn-app-action {
+    height: 48px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    border: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: transform 0.1s ease;
+  }
+
+  .btn-app-action:active {
+    transform: scale(0.98);
+  }
+
+  .btn-gps {
+    background: #1d4ed8;
+    color: #ffffff;
+    margin-top: 4px;
+  }
+
+  .app-arrival-card {
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .arrival-status-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #047857;
+    font-weight: 600;
+  }
+
+  .status-dot.green {
+    width: 7px;
+    height: 7px;
+    background: #10b981;
+    border-radius: 50%;
+  }
+
+  .btn-arrival {
+    background: #059669;
+    color: #ffffff;
+  }
+
+  .app-outcome-selector {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .selector-label {
+    font-size: 9px;
+    font-weight: 800;
+    color: #64748b;
+    letter-spacing: 0.05em;
+  }
+
+  .outcome-btn-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+  }
+
+  .outcome-choice {
+    height: 38px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #475569;
+  }
+
+  .outcome-choice.active {
+    background: #dbeafe;
+    border-color: #3b82f6;
+    color: #1d4ed8;
+    font-weight: 700;
+  }
+
+  .app-pod-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .pod-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .pod-label {
+    font-size: 9.5px;
+    font-weight: 800;
+    color: #1d4ed8;
+  }
+
+  .btn-clear-sig {
+    background: transparent;
+    border: 0;
+    color: #64748b;
+    font-size: 9.5px;
+    cursor: pointer;
+  }
+
+  .signature-canvas-mock {
+    height: 70px;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 6px;
+  }
+
+  .mock-sig-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .sig-placeholder {
+    font-size: 9.5px;
+    color: #94a3b8;
+    position: relative;
+    z-index: 2;
+  }
+
+  .app-otp-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .otp-label {
+    font-size: 9px;
+    font-weight: 800;
+    color: #64748b;
+  }
+
+  .otp-input-mock {
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+  }
+
+  .otp-digit {
+    flex: 1;
+    height: 38px;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 800;
+    font-family: monospace;
+    color: #0f172a;
+  }
+
+  .btn-confirm-delivery {
+    background: #082846;
+    color: #ffffff;
+    margin-top: 4px;
+  }
+
+  .app-bottom-nav {
+    height: 52px;
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .nav-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    color: #64748b;
+    font-size: 9.5px;
+  }
+
+  .nav-tab.active {
+    color: #1d4ed8;
+    font-weight: 700;
+  }
+
+  .mini-gesture {
+    width: 110px;
+    height: 4px;
+    background: #ffffff;
+    border-radius: 2px;
+    align-self: center;
+    margin-top: 8px;
+    opacity: 0.6;
+  }
+</style>
+
+<script>
+  // Phase tabs logic
+  const phaseButtons = document.querySelectorAll('.phase-btn');
+  const phasePanels = document.querySelectorAll('.phase-panel');
+
+  phaseButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      phaseButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const phase = btn.getAttribute('data-phase');
+      phasePanels.forEach(panel => {
+        panel.classList.toggle('active', panel.id === `panel-phase-${phase}`);
+      });
+    });
+  });
+</script>
