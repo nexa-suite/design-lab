@@ -1,66 +1,164 @@
 ---
 /**
- * MonorepoNavHeader — Cross-Suite Navigation Header for Website Style (Nexafy)
- * Provides 1-click intercommunication across Web (:4200), Mobile (:4201), and Website (:4321).
+ * MonorepoNavHeader — Nexa Design Lab Navigation System for Website Style (Nexafy)
+ * Inspired by the Angular Design Lab shell with search, category disclosures, status badges,
+ * and 1-click cross-monorepo switching.
  */
 import NexaLogo from '../guidelines/NexaLogo.astro';
 
 interface Props {
   currentSection?: 'workbench' | 'artifacts' | 'landing-spec';
+  activeTab?: string;
 }
 
-const { currentSection = 'workbench' } = Astro.props;
+const { currentSection = 'workbench', activeTab = 'motor-grafico' } = Astro.props;
 ---
 
-<header class="nexafy-top-header">
-  <div class="top-row">
-    <!-- Brand Identity & Release Tag -->
-    <div class="brand-group">
-      <NexaLogo variant="primary" height={26} />
-      <div class="brand-text">
-        <span class="system-tag">WEBSITE STYLE</span>
-        <span class="system-title">Nexafy Living Geometry System</span>
+<header class="nexafy-top-header" role="banner">
+  <!-- Top Utility Bar: Brand, Monorepo Triad, and Global Tools -->
+  <div class="top-utility-row">
+    <div class="brand-identity-group">
+      <a href="/" class="brand-link" title="Ir al inicio de Nexafy">
+        <NexaLogo variant="primary" height={26} />
+        <div class="brand-text">
+          <div class="brand-title-row">
+            <span class="system-brand-name">DESIGN LAB</span>
+            <span class="system-release-tag">WEBSITE STYLE · v1.0.2</span>
+          </div>
+          <span class="system-subcaption">Living Geometry System · Landing Architecture & Artifacts</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Monorepo Switcher Triad -->
+    <div class="monorepo-switcher-box" aria-label="Nexa Style Triad Selector">
+      <span class="switcher-label"><i class="pi pi-compass"></i> MONOREPO:</span>
+      <div class="switcher-pills">
+        <a href="http://localhost:4200" class="triad-pill" target="_blank" rel="noopener" title="Ver Web Style Guidelines en Angular (:4200)">
+          <i class="pi pi-desktop" aria-hidden="true"></i>
+          <span>Web :4200</span>
+          <span class="ext-arrow">↗</span>
+        </a>
+        <a href="http://localhost:4201" class="triad-pill" target="_blank" rel="noopener" title="Ver Mobile Style Guidelines & Simulador Android/Flutter (:4201)">
+          <i class="pi pi-mobile" aria-hidden="true"></i>
+          <span>Mobile :4201</span>
+          <span class="ext-arrow">↗</span>
+        </a>
+        <span class="triad-pill active" title="Actualmente en Website Style (Nexafy)">
+          <i class="pi pi-globe" aria-hidden="true"></i>
+          <span>Website :4321</span>
+          <span class="current-dot">●</span>
+        </span>
       </div>
     </div>
 
-    <!-- Monorepo Triad Switcher -->
-    <div class="monorepo-triad" aria-label="Style Monorepo Switcher">
-      <span class="triad-label">MONOREPO:</span>
-      <a href="http://localhost:4200" class="triad-pill" target="_blank" rel="noopener" title="Nexa Web Style Guidelines (Angular)">
-        <i class="pi pi-desktop" aria-hidden="true"></i> Web :4200 ↗
-      </a>
-      <a href="http://localhost:4201" class="triad-pill" target="_blank" rel="noopener" title="Nexa Mobile Style Guidelines (Android / Flutter)">
-        <i class="pi pi-mobile" aria-hidden="true"></i> Mobile :4201 ↗
-      </a>
-      <span class="triad-pill active" title="Currently viewing Website Style / Nexafy">
-        <i class="pi pi-globe" aria-hidden="true"></i> Website :4321
-      </span>
-    </div>
+    <!-- Quick Utilities -->
+    <div class="quick-utilities-group">
+      <!-- Search Input (Angular style) -->
+      <div class="quick-search-box">
+        <i class="pi pi-search search-icon" aria-hidden="true"></i>
+        <input 
+          type="search" 
+          id="global-search-input" 
+          placeholder="Buscar tokens, artefactos, reglas..." 
+          aria-label="Buscar en la documentación de Nexafy"
+        />
+        <kbd class="search-kbd">/</kbd>
+      </div>
 
-    <!-- Utility Actions -->
-    <div class="actions-group">
-      <!-- Contrast Toggle -->
-      <button type="button" class="btn-utility" id="btn-toggle-contrast" title="Toggle Increased Contrast Mode">
+      <!-- Contrast Mode Toggle -->
+      <button type="button" class="btn-tool" id="btn-toggle-contrast" title="Alternar modo de contraste">
         <i class="pi pi-circle" aria-hidden="true"></i>
         <span id="contrast-label">Contraste Estándar</span>
       </button>
     </div>
   </div>
 
-  <!-- Internal Page Navigation Bar -->
-  <nav class="sub-nav-bar" aria-label="Website Style Subsections">
-    <a href="/" class={`sub-nav-item ${currentSection === 'workbench' ? 'active' : ''}`}>
-      <i class="pi pi-bolt" aria-hidden="true"></i>
-      <span>✦ Motor Gráfico & Guidelines</span>
-    </a>
-    <a href="/artifacts" class={`sub-nav-item ${currentSection === 'artifacts' ? 'active' : ''}`}>
-      <i class="pi pi-box" aria-hidden="true"></i>
-      <span>Catálogo de Artefactos Vivos</span>
-    </a>
-    <a href="/landing-spec" class={`sub-nav-item ${currentSection === 'landing-spec' ? 'active' : ''}`}>
-      <i class="pi pi-th-large" aria-hidden="true"></i>
-      <span>Especificaciones de Landing & Bento</span>
-    </a>
+  <!-- Primary Navigation Bar: Categorized Navigation with Status Pills -->
+  <nav class="main-navbar-row" aria-label="Navegación principal de Nexafy">
+    <div class="nav-links-cluster">
+      <!-- 1. Motor Gráfico Vivo -->
+      <a 
+        href="/" 
+        class={`nav-link-btn ${currentSection === 'workbench' && activeTab === 'motor-grafico' ? 'active' : ''}`}
+        data-nav-tab="motor-grafico"
+      >
+        <i class="pi pi-bolt" aria-hidden="true"></i>
+        <span>✦ Motor Gráfico Vivo</span>
+        <span class="status-pill live">LIVE WORKBENCH</span>
+      </a>
+
+      <!-- 2. Colorimetría & Tokens -->
+      <a 
+        href="#colorimetria" 
+        class={`nav-link-btn ${activeTab === 'colorimetria' ? 'active' : ''}`}
+        data-nav-tab="colorimetria"
+      >
+        <i class="pi pi-palette" aria-hidden="true"></i>
+        <span>Colorimetría Sólida</span>
+        <span class="status-pill zero">0 DEGRADADOS</span>
+      </a>
+
+      <!-- 3. Tipografía & Jerarquía -->
+      <a 
+        href="#tipografia" 
+        class={`nav-link-btn ${activeTab === 'tipografia' ? 'active' : ''}`}
+        data-nav-tab="tipografia"
+      >
+        <i class="pi pi-align-left" aria-hidden="true"></i>
+        <span>Tipografía Cinética</span>
+        <span class="status-pill fluid">CLAMP FLUID</span>
+      </a>
+
+      <!-- 4. Espaciado & Conductos -->
+      <a 
+        href="#geometria" 
+        class={`nav-link-btn ${activeTab === 'geometria' ? 'active' : ''}`}
+        data-nav-tab="geometria"
+      >
+        <i class="pi pi-share-alt" aria-hidden="true"></i>
+        <span>Conductos & Fillets</span>
+        <span class="status-pill vascular">28PX VASCULAR</span>
+      </a>
+
+      <!-- 5. Componentes de Conversión -->
+      <a 
+        href="#componentes" 
+        class={`nav-link-btn ${activeTab === 'componentes' ? 'active' : ''}`}
+        data-nav-tab="componentes"
+      >
+        <i class="pi pi-box" aria-hidden="true"></i>
+        <span>Componentes Nexa UI</span>
+      </a>
+
+      <div class="nav-divider"></div>
+
+      <!-- 6. Catálogo de Artefactos Vivos -->
+      <a 
+        href="/artifacts" 
+        class={`nav-link-btn ${currentSection === 'artifacts' ? 'active' : ''}`}
+      >
+        <i class="pi pi-th-large" aria-hidden="true"></i>
+        <span>Catálogo de Artefactos</span>
+        <span class="status-pill count">14 CARDS</span>
+      </a>
+
+      <!-- 7. Especificaciones de Landing & Bento -->
+      <a 
+        href="/landing-spec" 
+        class={`nav-link-btn ${currentSection === 'landing-spec' ? 'active' : ''}`}
+      >
+        <i class="pi pi-file-edit" aria-hidden="true"></i>
+        <span>Landing & Bento Specs</span>
+        <span class="status-pill strict">NORMATIVA</span>
+      </a>
+    </div>
+
+    <!-- Active Compliance Indicator -->
+    <div class="compliance-badge" title="Validado frente a contratos canónicos de diseño Nexa">
+      <i class="pi pi-verified"></i>
+      <span>WCAG 2.2 AA · Validado</span>
+    </div>
   </nav>
 </header>
 
@@ -72,65 +170,94 @@ const { currentSection = 'workbench' } = Astro.props;
     top: 0;
     z-index: 1000;
     box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    display: flex;
+    flex-direction: column;
   }
 
-  .top-row {
+  /* Top Row */
+  .top-utility-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0.65rem 1.5rem;
-    gap: 1rem;
+    gap: 1.25rem;
+    border-bottom: 1px solid #f1f5f9;
     flex-wrap: wrap;
   }
 
-  .brand-group {
+  .brand-identity-group {
+    display: flex;
+    align-items: center;
+  }
+
+  .brand-link {
     display: flex;
     align-items: center;
     gap: 0.85rem;
+    text-decoration: none;
+    color: inherit;
   }
 
   .brand-text {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 1px;
   }
 
-  .system-tag {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 10px;
-    font-weight: 800;
-    color: var(--nexa-color-primary-700, #1b4fb8);
-    background: var(--nexa-color-primary-50, #f0f5ff);
-    border: 1px solid var(--nexa-color-primary-200, #b8d4fe);
-    padding: 1px 6px;
-    border-radius: 999px;
-    align-self: flex-start;
-    letter-spacing: 0.05em;
-  }
-
-  .system-title {
-    font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--nexa-color-text-primary, #0f172a);
-  }
-
-  /* Monorepo Triad Pills */
-  .monorepo-triad {
+  .brand-title-row {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 0.5rem;
+  }
+
+  .system-brand-name {
+    font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 13px;
+    font-weight: 800;
+    color: #082846;
+    letter-spacing: 0.04em;
+  }
+
+  .system-release-tag {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 700;
+    color: #1b4fb8;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    padding: 1px 6px;
+    border-radius: 999px;
+  }
+
+  .system-subcaption {
+    font-size: 11px;
+    color: #64748b;
+  }
+
+  /* Monorepo Triad Box */
+  .monorepo-switcher-box {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     background: #f8fafc;
     border: 1px solid #e2e8f0;
     padding: 3px 8px;
     border-radius: 8px;
   }
 
-  .triad-label {
+  .switcher-label {
     font-size: 9px;
     font-weight: 800;
     color: #64748b;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .switcher-pills {
+    display: flex;
+    gap: 4px;
   }
 
   .triad-pill {
@@ -139,8 +266,8 @@ const { currentSection = 'workbench' } = Astro.props;
     gap: 4px;
     font-size: 11px;
     font-weight: 600;
-    padding: 2px 7px;
-    border-radius: 5px;
+    padding: 3px 8px;
+    border-radius: 6px;
     text-decoration: none;
     color: #475569;
     border: 1px solid transparent;
@@ -153,31 +280,91 @@ const { currentSection = 'workbench' } = Astro.props;
     }
 
     &.active {
-      background: #2a67d9;
-      color: #ffffff;
+      background: #082846;
+      color: #38c8ff;
       font-weight: 700;
+      border-color: #082846;
+    }
+
+    .ext-arrow {
+      font-size: 9px;
+      color: #94a3b8;
+    }
+
+    .current-dot {
+      color: #38c8ff;
+      font-size: 8px;
     }
   }
 
-  /* Utility Actions */
-  .actions-group {
+  /* Quick Utilities */
+  .quick-utilities-group {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
 
-  .btn-utility {
-    background: #ffffff;
-    border: 1px solid var(--nexa-color-border-strong, #cbd5e1);
-    color: var(--nexa-color-text-secondary, #64748b);
-    padding: 0.4rem 0.85rem;
-    border-radius: 8px;
+  .quick-search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    color: #94a3b8;
     font-size: 12px;
+    pointer-events: none;
+  }
+
+  .quick-search-box input {
+    height: 32px;
+    width: 240px;
+    padding: 0 32px 0 28px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    font-size: 12px;
+    color: #0f172a;
+    transition: all 0.15s ease;
+
+    &:focus {
+      outline: none;
+      background: #ffffff;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+      width: 280px;
+    }
+  }
+
+  .search-kbd {
+    position: absolute;
+    right: 8px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 700;
+    color: #64748b;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 1px 5px;
+    border-radius: 4px;
+    pointer-events: none;
+  }
+
+  .btn-tool {
+    height: 32px;
+    padding: 0 10px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    color: #475569;
+    font-size: 11px;
     font-weight: 600;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 6px;
     transition: all 0.15s ease;
 
     &:hover {
@@ -192,39 +379,168 @@ const { currentSection = 'workbench' } = Astro.props;
     }
   }
 
-  /* Sub Nav Bar */
-  .sub-nav-bar {
+  /* Main Navigation Row */
+  .main-navbar-row {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 0 1.5rem;
-    gap: 0.5rem;
+    gap: 1rem;
     overflow-x: auto;
     background: #ffffff;
-    border-top: 1px solid var(--nexa-color-border-default, #e2e8f0);
   }
 
-  .sub-nav-item {
-    padding: 0.65rem 1rem;
+  .nav-links-cluster {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .nav-link-btn {
+    padding: 0.65rem 0.85rem;
     font-family: var(--nexa-font-family-body, 'Inter', sans-serif);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
-    color: var(--nexa-color-text-secondary, #64748b);
+    color: #475569;
     text-decoration: none;
     border-bottom: 2px solid transparent;
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.4rem;
     transition: all 0.15s ease;
     white-space: nowrap;
 
     &:hover {
       color: #0f172a;
+      background: #f8fafc;
     }
 
     &.active {
       color: #2a67d9;
       border-bottom-color: #2a67d9;
       font-weight: 700;
+      background: #f0f5ff;
+    }
+  }
+
+  .nav-divider {
+    width: 1px;
+    height: 20px;
+    background: #e2e8f0;
+    margin: 0 6px;
+    flex-shrink: 0;
+  }
+
+  /* Status Pills */
+  .status-pill {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9px;
+    font-weight: 800;
+    padding: 1px 5px;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+
+    &.live {
+      background: #eff6ff;
+      color: #2563eb;
+      border: 1px solid #bfdbfe;
+    }
+
+    &.zero {
+      background: #fef2f2;
+      color: #dc2626;
+      border: 1px solid #fecaca;
+    }
+
+    &.fluid {
+      background: #ecfdf5;
+      color: #059669;
+      border: 1px solid #a7f3d0;
+    }
+
+    &.vascular {
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+
+    &.count {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    &.strict {
+      background: #fffbeb;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+  }
+
+  .compliance-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #166534;
+    background: #f0fdf4;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid #bbf7d0;
+    white-space: nowrap;
+    i {
+      font-size: 12px;
+      color: #16a34a;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .top-utility-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .quick-utilities-group {
+      width: 100%;
+      justify-content: space-between;
+    }
+    .quick-search-box input {
+      width: 180px;
     }
   }
 </style>
+
+<script>
+  // Keyboard shortcut '/' to focus search input
+  const searchInput = document.getElementById('global-search-input') as HTMLInputElement | null;
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== searchInput) {
+      e.preventDefault();
+      searchInput?.focus();
+    }
+  });
+
+  // Client-side quick filter
+  searchInput?.addEventListener('input', () => {
+    const term = searchInput.value.trim().toLowerCase();
+    const searchableCards = document.querySelectorAll<HTMLElement>('.artifact-card, .spec-card, .token-preview-card');
+    searchableCards.forEach(card => {
+      const text = card.textContent?.toLowerCase() || '';
+      card.style.display = term && !text.includes(term) ? 'none' : '';
+    });
+  });
+
+  // Contrast toggle synchronization
+  const btnContrast = document.getElementById('btn-toggle-contrast');
+  const contrastLabel = document.getElementById('contrast-label');
+  let isHighContrast = false;
+
+  btnContrast?.addEventListener('click', () => {
+    isHighContrast = !isHighContrast;
+    document.documentElement.setAttribute('data-contrast-mode', isHighContrast ? 'increased' : 'standard');
+    if (contrastLabel) {
+      contrastLabel.textContent = isHighContrast ? 'Contraste Alto' : 'Contraste Estándar';
+    }
+    btnContrast.classList.toggle('active', isHighContrast);
+  });
+</script>
