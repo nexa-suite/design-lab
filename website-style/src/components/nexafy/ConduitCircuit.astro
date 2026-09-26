@@ -16,7 +16,7 @@
   <!-- 1. Main Trunk Line connecting directly from YOUR COMPANY to central modular mark -->
   <path 
     class="circuit-pipe pipe-trunk" 
-    d="M 150 195 L 485 195" 
+    d="M 174 205 L 450 205" 
     stroke-width="28" 
     stroke-linecap="square"
   />
@@ -27,26 +27,26 @@
     d="M 557 106 L 556 107 L 554 107 L 553 109 L 552 111 L 552 142 L 549 145 L 506 145 L 502 147 L 501 150 L 501 178 L 499 180 L 497 181 L 450 181 L 450 208 L 499 208 L 501 207 L 501 204 L 502 189 L 503 186 L 506 183 L 549 183 L 552 186 L 552 217 L 550 219 L 548 220 L 505 220 L 503 221 L 502 222 L 501 224 L 501 241 L 497 245 L 461 246 L 460 245 L 458 246 L 457 248 L 457 259 L 468 259 L 470 257 L 489 257 L 490 259 L 502 259 L 502 252 L 503 249 L 505 247 L 507 246 L 551 246 L 553 244 L 553 241 L 554 240 L 554 238 L 553 237 L 553 233 L 554 225 L 557 222 L 559 221 L 610 221 L 613 222 L 615 224 L 616 226 L 616 259 L 659 259 L 658 220 L 621 220 L 619 219 L 618 218 L 617 216 L 617 184 L 615 182 L 613 182 L 611 181 L 557 181 L 554 178 L 553 174 L 553 153 L 554 150 L 557 147 L 560 146 L 609 146 L 613 147 L 615 149 L 616 151 L 616 169 L 617 171 L 619 172 L 659 172 L 659 145 L 620 145 L 618 143 L 617 141 L 617 110 L 616 108 L 612 106 Z" 
   />
 
-  <!-- 3. Branch 1: Steps down to Physical Store POS -->
+  <!-- 3. Branch 1: Steps down to Physical Store POS (docks at x: 305, y: 295) -->
   <path 
     class="circuit-pipe pipe-store" 
-    d="M 502 208 L 502 245 L 460 245 L 460 260" 
+    d="M 458 248 L 458 270 L 305 270 L 305 295" 
     stroke-width="28" 
     stroke-linejoin="round"
   />
 
-  <!-- 4. Branch 2: Center step down to John Cooper Inquiry -->
+  <!-- 4. Branch 2: Center step down to John Cooper Inquiry (docks at x: 697, y: 295) -->
   <path 
     class="circuit-pipe pipe-email" 
-    d="M 616 220 L 638 220 L 638 235" 
+    d="M 616 248 L 616 270 L 697 270 L 697 295" 
     stroke-width="28" 
     stroke-linejoin="round"
   />
 
-  <!-- 5. Branch 3: Steps UP to Online Store -->
+  <!-- 5. Branch 3: Steps UP to Online Store (docks at x: 850, y: 160) -->
   <path 
     class="circuit-pipe pipe-online" 
-    d="M 616 159 L 787 159 L 787 185" 
+    d="M 616 160 L 850 160" 
     stroke-width="28" 
     stroke-linejoin="round"
   />
@@ -54,17 +54,23 @@
   <!-- 6. Branch 4: Extends out right to Escrow Shield -->
   <path 
     class="circuit-pipe pipe-shield" 
-    d="M 800 200 L 1090 200" 
+    d="M 659 205 L 1090 205" 
     stroke-width="28" 
     stroke-linejoin="round"
   />
 
   <!-- Animated Signal Pulses flowing along conduits in real-time -->
   <g class="circuit-pulses-group">
-    <circle class="pulse-particle pulse-1" cx="0" cy="0" r="6" />
-    <circle class="pulse-particle pulse-2" cx="0" cy="0" r="6" />
-    <circle class="pulse-particle pulse-3" cx="0" cy="0" r="6" />
-    <circle class="pulse-particle pulse-4" cx="0" cy="0" r="6" />
+    <!-- Pulse 1: Trunk to Center -->
+    <circle class="pulse-particle pulse-trunk" cx="0" cy="0" r="7" />
+    <!-- Pulse 2: Center to Physical Store -->
+    <circle class="pulse-particle pulse-store" cx="0" cy="0" r="7" />
+    <!-- Pulse 3: Center to Customer Inquiry -->
+    <circle class="pulse-particle pulse-email" cx="0" cy="0" r="7" />
+    <!-- Pulse 4: Center to Online Store -->
+    <circle class="pulse-particle pulse-online" cx="0" cy="0" r="7" />
+    <!-- Pulse 5: Center to Escrow -->
+    <circle class="pulse-particle pulse-shield" cx="0" cy="0" r="7" />
   </g>
 </svg>
 
@@ -92,21 +98,65 @@
   /* Animated Pulses */
   .pulse-particle {
     fill: var(--stage-pulse);
-    opacity: 0.85;
-    animation: flowPulse 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    opacity: 0;
+    filter: drop-shadow(0 0 6px var(--stage-pulse));
     transition: fill 0.3s ease;
   }
 
-  .pulse-1 { animation-delay: 0s; }
-  .pulse-2 { animation-delay: 0.75s; }
-  .pulse-3 { animation-delay: 1.5s; }
-  .pulse-4 { animation-delay: 2.25s; }
+  .pulse-trunk {
+    animation: flowTrunk 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
 
-  @keyframes flowPulse {
-    0% { transform: translate(150px, 195px); opacity: 0; }
-    10% { opacity: 0.9; }
-    50% { transform: translate(550px, 195px); opacity: 0.9; }
-    75% { transform: translate(780px, 160px); opacity: 0.9; }
-    100% { transform: translate(1090px, 200px); opacity: 0; }
+  .pulse-store {
+    animation: flowStore 2.4s cubic-bezier(0.4, 0, 0.2, 1) 0.6s infinite;
+  }
+
+  .pulse-email {
+    animation: flowEmail 2.4s cubic-bezier(0.4, 0, 0.2, 1) 0.9s infinite;
+  }
+
+  .pulse-online {
+    animation: flowOnline 2.4s cubic-bezier(0.4, 0, 0.2, 1) 1.2s infinite;
+  }
+
+  .pulse-shield {
+    animation: flowShield 2.4s cubic-bezier(0.4, 0, 0.2, 1) 1.5s infinite;
+  }
+
+  @keyframes flowTrunk {
+    0% { transform: translate(174px, 205px); opacity: 0; }
+    20% { opacity: 0.95; }
+    80% { opacity: 0.95; }
+    100% { transform: translate(450px, 205px); opacity: 0; }
+  }
+
+  @keyframes flowStore {
+    0% { transform: translate(458px, 248px); opacity: 0; }
+    20% { opacity: 0.95; }
+    50% { transform: translate(458px, 270px); opacity: 0.95; }
+    75% { transform: translate(305px, 270px); opacity: 0.95; }
+    100% { transform: translate(305px, 295px); opacity: 0; }
+  }
+
+  @keyframes flowEmail {
+    0% { transform: translate(616px, 248px); opacity: 0; }
+    20% { opacity: 0.95; }
+    50% { transform: translate(616px, 270px); opacity: 0.95; }
+    75% { transform: translate(697px, 270px); opacity: 0.95; }
+    100% { transform: translate(697px, 295px); opacity: 0; }
+  }
+
+  @keyframes flowOnline {
+    0% { transform: translate(616px, 160px); opacity: 0; }
+    20% { opacity: 0.95; }
+    80% { opacity: 0.95; }
+    100% { transform: translate(850px, 160px); opacity: 0; }
+  }
+
+  @keyframes flowShield {
+    0% { transform: translate(659px, 205px); opacity: 0; }
+    20% { opacity: 0.95; }
+    80% { opacity: 0.95; }
+    100% { transform: translate(1090px, 205px); opacity: 0; }
   }
 </style>

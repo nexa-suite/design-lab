@@ -38,93 +38,304 @@ import FloatingChapterController from '../nexafy/FloatingChapterController.astro
   <!-- 1. OKLCH Human Vision Bar Component -->
   <OklchVisionBar initialPreset="cashmere" />
 
-  <!-- 2. Outer Sculpted Frame Contour -->
-  <div class="nexafy-sculpted-frame" id="nexafy-frame">
+  <!-- 1.5. Master Engine Interactive Controls & Resolution Toolbar -->
+  <div class="engine-master-toolbar" role="toolbar" aria-label="Controles del Motor Gráfico Nexafy">
     
-    <!-- Authentic Sculpted Architectural Contour SVG -->
-    <svg 
-      class="nexafy-frame-svg" 
-      viewBox="0 0 1440 680" 
-      preserveAspectRatio="none"
-      aria-hidden="true"
-    >
-      <path 
-        class="nexafy-frame-path"
-        d="M 0 110 C 0 85 20 70 45 70 L 415 70 C 435 70 445 55 445 35 L 445 15 C 445 0 460 0 480 0 L 960 0 C 980 0 995 0 995 15 L 995 35 C 995 55 1005 70 1025 70 L 1395 70 C 1420 70 1440 85 1440 110 L 1440 570 C 1440 595 1420 610 1395 610 L 1175 610 C 1155 610 1145 625 1145 645 L 1145 665 C 1145 680 1130 680 1110 680 L 330 680 C 310 680 295 680 295 665 L 295 645 C 295 625 285 610 265 610 L 45 610 C 20 610 0 595 0 570 Z" 
-      />
-    </svg>
-
-    <!-- 3. Center Stage Container: 1130x410 Native Coordinates -->
-    <div class="nexafy-center-stage" id="nexafy-center-stage">
-      
-      <!-- CHAPTER 01: CHANNELS & SECURITY -->
-      <div class="chapter-view active" id="ch1-view">
-        <YourCompanyHub />
-        <ConduitCircuit />
-        <ConduitBadges />
-        <PhysicalStoreCard />
-        <CustomerInquiryCard />
-        <OnlineStoreCard />
+    <!-- Group A: Canvas Resolution Presets -->
+    <div class="toolbar-group">
+      <span class="toolbar-label">RESOLUCIÓN:</span>
+      <div class="resolution-presets" role="group">
+        <button type="button" class="res-chip active" data-res-w="1440" data-res-h="720">1440×720 (Desktop)</button>
+        <button type="button" class="res-chip" data-res-w="1280" data-res-h="640">1280×640 (Laptop)</button>
+        <button type="button" class="res-chip" data-res-w="1024" data-res-h="560">1024×560 (Tablet)</button>
+        <button type="button" class="res-chip" data-res-w="auto" data-res-h="auto">Fluid Auto</button>
       </div>
+    </div>
 
-      <!-- CHAPTER 02: MODULAR SAAS DASHBOARD PLATFORM MORPH -->
-      <div class="chapter-view" id="ch2-view">
-        <div class="saas-morph-backdrop-plate" aria-hidden="true">
-          <button type="button" class="saas-send-link-btn" aria-label="Send Flecto Link">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-            </svg>
-            <span>Send Flecto Link</span>
-          </button>
+    <!-- Group B: Zoom & Scaling Controls -->
+    <div class="toolbar-group">
+      <span class="toolbar-label">ZOOM:</span>
+      <div class="zoom-controls" role="group">
+        <button type="button" class="zoom-btn" id="btn-zoom-out" title="Disminuir tamaño (−)">−</button>
+        <button type="button" class="zoom-btn zoom-reset" id="btn-zoom-reset" title="Restablecer tamaño normal (100%)">100%</button>
+        <button type="button" class="zoom-btn" id="btn-zoom-in" title="Aumentar tamaño (+)">+</button>
+        <button type="button" class="zoom-btn zoom-fit" id="btn-zoom-fit" title="Ajustar al ancho de pantalla">Fit</button>
+        <span class="scale-badge" id="scale-badge-text">100%</span>
+      </div>
+    </div>
+
+    <!-- Group C: Live Movement & Simulation Controls ("Demostrar en vivo todos los movimientos") -->
+    <div class="toolbar-group">
+      <span class="toolbar-label">MOVIMIENTO EN VIVO:</span>
+      <div class="motion-toggles">
+        <button type="button" class="toggle-pill active" id="btn-toggle-living-motion" title="Activar/desactivar flotación armónica viva">
+          <i class="pi pi-compass"></i> Movimiento Vivo
+        </button>
+        <button type="button" class="toggle-pill active" id="btn-toggle-pulses" title="Activar/desactivar pulsos vasculares en 28px">
+          <i class="pi pi-bolt"></i> Pulsos Señal
+        </button>
+        <button type="button" class="toggle-pill active" id="btn-toggle-traffic" title="Activar/desactivar simulación de tráfico en tiempo real">
+          <i class="pi pi-sync"></i> Tráfico en Vivo
+        </button>
+        <button type="button" class="toggle-pill" id="btn-toggle-wireframe" title="Ver puertos de anclaje y cero colisiones">
+          <i class="pi pi-table"></i> Halos & Puertos
+        </button>
+      </div>
+    </div>
+
+    <!-- Speed Selector -->
+    <div class="toolbar-group speed-group">
+      <span class="toolbar-label">VELOCIDAD:</span>
+      <div class="speed-selector">
+        <button type="button" class="speed-btn" data-speed="0.5">0.5×</button>
+        <button type="button" class="speed-btn active" data-speed="1">1×</button>
+        <button type="button" class="speed-btn" data-speed="2">2×</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 2. Outer Sculpted Frame Contour with dynamic zoom wrapper -->
+  <div class="nexafy-viewport-container" id="nexafy-viewport-container">
+    <div class="nexafy-sculpted-frame" id="nexafy-frame">
+      
+      <!-- Authentic Sculpted Architectural Contour SVG -->
+      <svg 
+        class="nexafy-frame-svg" 
+        viewBox="0 0 1440 680" 
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path 
+          class="nexafy-frame-path"
+          d="M 0 110 C 0 85 20 70 45 70 L 415 70 C 435 70 445 55 445 35 L 445 15 C 445 0 460 0 480 0 L 960 0 C 980 0 995 0 995 15 L 995 35 C 995 55 1005 70 1025 70 L 1395 70 C 1420 70 1440 85 1440 110 L 1440 570 C 1440 595 1420 610 1395 610 L 1175 610 C 1155 610 1145 625 1145 645 L 1145 665 C 1145 680 1130 680 1110 680 L 330 680 C 310 680 295 680 295 665 L 295 645 C 295 625 285 610 265 610 L 45 610 C 20 610 0 595 0 570 Z" 
+        />
+      </svg>
+
+      <!-- 3. Center Stage Container: Zero-Overlap Forensic Docking Coordinates -->
+      <div class="nexafy-center-stage" id="nexafy-center-stage">
+        
+        <!-- CHAPTER 01: CHANNELS & SECURITY (FORENSIC ZERO OVERLAP) -->
+        <div class="chapter-view active" id="ch1-view">
+          <YourCompanyHub />
+          <ConduitCircuit />
+          <ConduitBadges />
+          <PhysicalStoreCard />
+          <CustomerInquiryCard />
+          <OnlineStoreCard />
         </div>
 
-        <SaasCustomerProfileCard />
-        <SaasItemsTableCard />
-        <SaasFloatingDateCard />
+        <!-- CHAPTER 02: MODULAR SAAS DASHBOARD PLATFORM MORPH -->
+        <div class="chapter-view" id="ch2-view">
+          <div class="saas-morph-backdrop-plate" aria-hidden="true">
+            <button type="button" class="saas-send-link-btn" aria-label="Send Flecto Link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+              <span>Send Flecto Link</span>
+            </button>
+          </div>
+
+          <SaasCustomerProfileCard />
+          <SaasItemsTableCard />
+          <SaasFloatingDateCard />
+        </div>
+
+        <!-- CHAPTER 03: SAFE RENTING & PAYMENT MORPH -->
+        <div class="chapter-view" id="ch3-view">
+          <PaymentCircuitMethods />
+          <PhoneCheckoutSimulator />
+          <EscrowGuaranteeCard />
+        </div>
+
       </div>
 
-      <!-- CHAPTER 03: SAFE RENTING & PAYMENT MORPH -->
-      <div class="chapter-view" id="ch3-view">
-        <PaymentCircuitMethods />
-        <PhoneCheckoutSimulator />
-        <EscrowGuaranteeCard />
+      <!-- 4. Floating Chapter Controller Component -->
+      <FloatingChapterController />
+
+      <!-- 5. Node Inspector Overlay Pill -->
+      <div class="node-inspector-chip" id="node-inspector-chip" style="display: none;">
+        <div class="inspector-chip-header">
+          <span class="inspector-dot">●</span>
+          <strong id="inspector-node-title">YOUR COMPANY</strong>
+          <button type="button" class="btn-close-inspector" id="btn-close-inspector" aria-label="Cerrar inspector">✕</button>
+        </div>
+        <div class="inspector-chip-body">
+          <span id="inspector-node-role">Rol: Nodo Origen Raíz</span>
+          <span id="inspector-node-coords">Coords: X: 20px, Y: 135px [154×140]</span>
+          <span id="inspector-node-ports">Conduits: 1 Trunk Port (x:174, y:205)</span>
+          <span class="inspector-status-ok"><i class="pi pi-check"></i> Cero colisiones (PASS) · Latencia 3ms</span>
+        </div>
       </div>
 
     </div>
+  </div>
 
-    <!-- 4. Floating Chapter Controller Component -->
-    <FloatingChapterController />
-
+  <!-- 6. Live Telemetry & Event Stream Ticker -->
+  <div class="engine-telemetry-strip" id="engine-telemetry-strip">
+    <div class="telemetry-badge">
+      <span class="pulse-indicator"></span>
+      <span>TRÁFICO EN VIVO</span>
+    </div>
+    <div class="telemetry-log" id="telemetry-log-stream">
+      <span class="telemetry-item active">● [10:48:01] ⚡ Conduit Trunk conectado: YOUR COMPANY → Central Hub (28px vascular)</span>
+      <span class="telemetry-item">● [10:48:03] 📦 Paquete #1042 (24KB) · Sincronizando catálogo POS Tienda Física</span>
+      <span class="telemetry-item">● [10:48:06] ✉️ Paquete #1043 (8KB) · Webhook consulta cliente: John Cooper (GoPro x2)</span>
+      <span class="telemetry-item">● [10:48:09] 🌐 Paquete #1044 (64KB) · Sesión acme.store en línea autorizada</span>
+      <span class="telemetry-item">● [10:48:12] 🛡️ Paquete #1045 (16KB) · Bloqueo de custodia Escrow 100% verificado</span>
+    </div>
+    <div class="telemetry-stat">
+      <span>Rendimiento: <b>60 FPS</b></span>
+      <span>Colisiones: <b style="color: #16a34a;">0 (PASS)</b></span>
+    </div>
   </div>
 
 </div>
 
 <style>
   /* ==========================================================================
-     NEXAFY LIVING ENGINE STYLES — OKLCH HUMAN VISION SYSTEM (0 GRADIENTS)
-     Default Preset: Cashmere Arctic Mist (Ultra-Soft, Low Fatigue)
+     MASTER ENGINE TOOLBAR & RESOLUTION CONTROLS
      ========================================================================== */
 
-  .nexafy-stage-wrapper {
-    /* DEFAULT PRESET: Cashmere Arctic Mist (258° - Suave, sin deslumbramiento) */
-    --stage-bg: oklch(33% 0.06 258);
-    --stage-card: oklch(88% 0.045 258);
-    --stage-text: oklch(30% 0.06 258);
-    --stage-capsule-bg: oklch(28% 0.06 258);
-    --stage-capsule-text: oklch(92% 0.03 258);
-    --stage-pulse: oklch(30% 0.06 258);
-
+  .engine-master-toolbar {
     width: 100%;
-    min-height: calc(100vh - 60px);
+    max-width: 1440px;
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 14px;
+    padding: 10px 16px;
+    margin: 0.75rem 0 1.25rem 0;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: flex-start;
-    padding: 1rem 1rem 3rem 1rem;
-    background: #f6faff;
-    overflow-x: hidden;
-    transition: --stage-bg 0.3s ease, --stage-card 0.3s ease;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .toolbar-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--nexa-color-neutral-500, #64748b);
+    text-transform: uppercase;
+  }
+
+  .resolution-presets, .zoom-controls, .motion-toggles, .speed-selector {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .res-chip, .speed-btn {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 9px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .res-chip:hover, .speed-btn:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+  }
+
+  .res-chip.active, .speed-btn.active {
+    background: var(--nexa-color-primary-100, #dbeafe);
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    border-color: var(--nexa-color-primary-300, #93c5fd);
+    font-weight: 700;
+  }
+
+  .zoom-btn {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 700;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .zoom-btn.zoom-reset, .zoom-btn.zoom-fit {
+    width: auto;
+    padding: 0 8px;
+    font-size: 11px;
+  }
+
+  .zoom-btn:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+  }
+
+  .scale-badge {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    background: var(--nexa-color-primary-50, #eff6ff);
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--nexa-color-primary-200, #bfdbfe);
+  }
+
+  .toggle-pill {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .toggle-pill i {
+    font-size: 11px;
+  }
+
+  .toggle-pill:hover {
+    background: #f1f5f9;
+  }
+
+  .toggle-pill.active {
+    background: #ecfdf5;
+    color: #047857;
+    border-color: #6ee7b7;
+    font-weight: 700;
+  }
+
+  /* Viewport Outer Container */
+  .nexafy-viewport-container {
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
   }
 
   /* Architectural Sculpted Container */
@@ -139,7 +350,7 @@ import FloatingChapterController from '../nexafy/FloatingChapterController.astro
     justify-content: center;
     overflow: hidden;
     background-color: var(--stage-bg);
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .nexafy-frame-svg {
@@ -163,50 +374,48 @@ import FloatingChapterController from '../nexafy/FloatingChapterController.astro
     height: 410px;
     z-index: 5;
     flex-shrink: 0;
-    transition: transform 0.2s ease;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: center center;
   }
 
-  /* Responsive Scaling for smaller screens without horizontal overflow */
-  @media (max-width: 1240px) {
-    .nexafy-center-stage {
-      transform: scale(0.85);
-      transform-origin: center center;
-    }
-    .nexafy-sculpted-frame {
-      height: 640px;
-    }
+  /* Harmonic Living Motion Physics */
+  .living-motion-active .channel-card,
+  .living-motion-active .node-origin-hub,
+  .living-motion-active .circuit-badge {
+    animation: gentleLivingDrift 6s ease-in-out infinite alternate;
   }
 
-  @media (max-width: 1024px) {
-    .nexafy-center-stage {
-      transform: scale(0.72);
-      transform-origin: center center;
-    }
-    .nexafy-sculpted-frame {
-      height: 560px;
-    }
+  .living-motion-active .card-store {
+    animation-delay: -1.2s;
   }
 
-  @media (max-width: 768px) {
-    .nexafy-center-stage {
-      transform: scale(0.52);
-      transform-origin: center center;
-    }
-    .nexafy-sculpted-frame {
-      height: 480px;
-      border-radius: 20px;
-    }
+  .living-motion-active .card-email {
+    animation-delay: -2.4s;
   }
 
-  @media (max-width: 480px) {
-    .nexafy-center-stage {
-      transform: scale(0.38);
-      transform-origin: center center;
-    }
-    .nexafy-sculpted-frame {
-      height: 420px;
-      border-radius: 16px;
-    }
+  .living-motion-active .card-online {
+    animation-delay: -3.6s;
+  }
+
+  .living-motion-active .node-origin-hub {
+    animation-delay: -0.5s;
+  }
+
+  @keyframes gentleLivingDrift {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-3px) rotate(0.15deg); }
+    100% { transform: translateY(2px) rotate(-0.15deg); }
+  }
+
+  /* Wireframe Clearance Bounds Mode */
+  .wireframe-mode .channel-card,
+  .wireframe-mode .node-origin-hub {
+    outline: 2px dashed #38bdf8 !important;
+    outline-offset: 4px;
+  }
+
+  .wireframe-mode .circuit-pipe {
+    stroke-dasharray: 6 4 !important;
   }
 
   /* Chapter Views */
@@ -273,6 +482,140 @@ import FloatingChapterController from '../nexafy/FloatingChapterController.astro
     justify-content: space-between;
     padding: 0 2rem;
   }
+
+  /* Node Inspector Floating Chip */
+  .node-inspector-chip {
+    position: absolute;
+    bottom: 84px;
+    left: 24px;
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 10px 14px;
+    color: #ffffff;
+    font-size: 11px;
+    z-index: 50;
+    max-width: 320px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  .inspector-chip-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding-bottom: 4px;
+  }
+
+  .inspector-dot {
+    color: #10b981;
+    font-size: 12px;
+  }
+
+  .inspector-chip-header strong {
+    font-size: 12px;
+    letter-spacing: -0.01em;
+    flex: 1;
+  }
+
+  .btn-close-inspector {
+    background: transparent;
+    border: 0;
+    color: #94a3b8;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 0 4px;
+  }
+
+  .btn-close-inspector:hover {
+    color: #ffffff;
+  }
+
+  .inspector-chip-body {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    color: #cbd5e1;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10.5px;
+  }
+
+  .inspector-status-ok {
+    color: #34d399;
+    font-weight: 700;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* Live Telemetry Strip */
+  .engine-telemetry-strip {
+    width: 100%;
+    max-width: 1440px;
+    background: #0f172a;
+    color: #94a3b8;
+    border-radius: 10px;
+    padding: 8px 16px;
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+
+  .telemetry-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+
+  .pulse-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 8px #10b981;
+    animation: blinkPulse 1.2s infinite ease-in-out;
+  }
+
+  @keyframes blinkPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .telemetry-log {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #e2e8f0;
+  }
+
+  .telemetry-stat {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+    color: #64748b;
+  }
+
+  .telemetry-stat b {
+    color: #38bdf8;
+  }
 </style>
 
 <script>
@@ -314,8 +657,162 @@ import FloatingChapterController from '../nexafy/FloatingChapterController.astro
 
   function initLivingEngine() {
     const wrapper = document.getElementById('nexafy-stage-wrapper');
+    const stageFrame = document.getElementById('nexafy-frame');
+    const centerStage = document.getElementById('nexafy-center-stage');
     const metricCardVal = document.getElementById('metric-card-val');
     const metricBgVal = document.getElementById('metric-bg-val');
+    const scaleBadge = document.getElementById('scale-badge-text');
+
+    let currentScale = 1.0;
+
+    function applyScale(scale: number) {
+      currentScale = Math.max(0.4, Math.min(scale, 1.6));
+      if (centerStage) {
+        centerStage.style.transform = `scale(${currentScale})`;
+      }
+      if (scaleBadge) {
+        scaleBadge.textContent = `${Math.round(currentScale * 100)}%`;
+      }
+    }
+
+    // Zoom Buttons
+    document.getElementById('btn-zoom-in')?.addEventListener('click', () => applyScale(currentScale + 0.1));
+    document.getElementById('btn-zoom-out')?.addEventListener('click', () => applyScale(currentScale - 0.1));
+    document.getElementById('btn-zoom-reset')?.addEventListener('click', () => applyScale(1.0));
+    document.getElementById('btn-zoom-fit')?.addEventListener('click', () => {
+      const containerWidth = document.getElementById('nexafy-viewport-container')?.clientWidth || 1130;
+      const fitRatio = Math.min(1.0, (containerWidth - 40) / 1130);
+      applyScale(fitRatio);
+    });
+
+    // Resolution Presets
+    const resChips = document.querySelectorAll('.res-chip');
+    resChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        resChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+
+        const w = chip.getAttribute('data-res-w');
+        const h = chip.getAttribute('data-res-h');
+
+        if (stageFrame) {
+          if (w === 'auto') {
+            stageFrame.style.width = '100%';
+            stageFrame.style.maxWidth = '1440px';
+            stageFrame.style.height = '720px';
+          } else if (w && h) {
+            stageFrame.style.width = `${w}px`;
+            stageFrame.style.maxWidth = `${w}px`;
+            stageFrame.style.height = `${h}px`;
+          }
+        }
+      });
+    });
+
+    // Movement & Motion Toggles ("Demostrar en vivo todos los movimientos")
+    const btnLivingMotion = document.getElementById('btn-toggle-living-motion');
+    btnLivingMotion?.addEventListener('click', () => {
+      const active = btnLivingMotion.classList.toggle('active');
+      wrapper?.classList.toggle('living-motion-active', active);
+    });
+    // Set initial living motion active
+    wrapper?.classList.add('living-motion-active');
+
+    const btnPulses = document.getElementById('btn-toggle-pulses');
+    btnPulses?.addEventListener('click', () => {
+      const active = btnPulses.classList.toggle('active');
+      const pulses = document.querySelector('.circuit-pulses-group') as HTMLElement;
+      if (pulses) pulses.style.display = active ? 'block' : 'none';
+    });
+
+    const btnWireframe = document.getElementById('btn-toggle-wireframe');
+    btnWireframe?.addEventListener('click', () => {
+      const active = btnWireframe.classList.toggle('active');
+      wrapper?.classList.toggle('wireframe-mode', active);
+    });
+
+    // Live Traffic Simulation & Event Stream Ticker
+    const telemetryStream = document.getElementById('telemetry-log-stream');
+    const TELEMETRY_EVENTS = [
+      '● [10:48:15] ⚡ Conduit Trunk conectado: YOUR COMPANY → Central Hub (28px vascular)',
+      '● [10:48:18] 📦 Paquete #1046 (32KB) · Inventario actualizado en Tienda Física',
+      '● [10:48:21] ✉️ Paquete #1047 (14KB) · Notificación enviada a John Cooper (alquiler confirmado)',
+      '● [10:48:24] 🛒 Paquete #1048 (48KB) · Transacción acme.store procesada con éxito',
+      '● [10:48:27] 🛡️ Paquete #1049 (18KB) · Garantía Escrow validada contra contratos',
+      '● [10:48:30] 🔄 Conduit Trunk sincronizado · Cero retrasos de latencia'
+    ];
+    let eventIdx = 0;
+    let trafficTimer: any = null;
+
+    function emitTelemetry() {
+      if (!telemetryStream) return;
+      eventIdx = (eventIdx + 1) % TELEMETRY_EVENTS.length;
+      telemetryStream.innerHTML = `<span class="telemetry-item active">${TELEMETRY_EVENTS[eventIdx]}</span>`;
+    }
+    trafficTimer = setInterval(emitTelemetry, 3000);
+
+    const btnTraffic = document.getElementById('btn-toggle-traffic');
+    btnTraffic?.addEventListener('click', () => {
+      const active = btnTraffic.classList.toggle('active');
+      const telemetryStrip = document.getElementById('engine-telemetry-strip');
+      if (telemetryStrip) telemetryStrip.style.display = active ? 'flex' : 'none';
+      if (active) {
+        if (!trafficTimer) trafficTimer = setInterval(emitTelemetry, 3000);
+      } else {
+        if (trafficTimer) clearInterval(trafficTimer);
+        trafficTimer = null;
+      }
+    });
+
+    // Speed Controls
+    const speedButtons = document.querySelectorAll('.speed-btn');
+    speedButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        speedButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const sp = btn.getAttribute('data-speed') || '1';
+        const pulses = document.querySelectorAll<HTMLElement>('.pulse-particle');
+        pulses.forEach(p => {
+          p.style.animationDuration = `${2.4 / parseFloat(sp)}s`;
+        });
+      });
+    });
+
+    // Interactive Node Inspector
+    const inspectorChip = document.getElementById('node-inspector-chip');
+    const inspectorTitle = document.getElementById('inspector-node-title');
+    const inspectorRole = document.getElementById('inspector-node-role');
+    const inspectorCoords = document.getElementById('inspector-node-coords');
+    const inspectorPorts = document.getElementById('inspector-node-ports');
+
+    document.getElementById('btn-close-inspector')?.addEventListener('click', () => {
+      if (inspectorChip) inspectorChip.style.display = 'none';
+    });
+
+    function showInspector(title: string, role: string, coords: string, ports: string) {
+      if (!inspectorChip) return;
+      if (inspectorTitle) inspectorTitle.textContent = title;
+      if (inspectorRole) inspectorRole.textContent = `Rol: ${role}`;
+      if (inspectorCoords) inspectorCoords.textContent = `Coords: ${coords}`;
+      if (inspectorPorts) inspectorPorts.textContent = `Conduits: ${ports}`;
+      inspectorChip.style.display = 'block';
+    }
+
+    document.getElementById('node-origin-hub')?.addEventListener('click', () => {
+      showInspector('YOUR COMPANY', 'Nodo Origen Raíz', 'X: 20px, Y: 135px [154×140]', '1 Trunk Port (x:174, y:205)');
+    });
+
+    document.querySelector('.card-store')?.addEventListener('click', () => {
+      showInspector('PHYSICAL STORE', 'Canal POS Físico', 'X: 170px, Y: 295px [270×112]', '1 Inbound Port (x:305, y:295)');
+    });
+
+    document.querySelector('.card-email')?.addEventListener('click', () => {
+      showInspector('CUSTOMER INQUIRY (John Cooper)', 'Canal Consulta Directa', 'X: 560px, Y: 295px [275×105]', '1 Inbound Port (x:697, y:295)');
+    });
+
+    document.querySelector('.card-online')?.addEventListener('click', () => {
+      showInspector('ONLINE STORE (acme.store)', 'Canal Comercio Web', 'X: 850px, Y: 35px [260×200]', '1 Inbound Port (x:850, y:160)');
+    });
 
     // Preset Chip Buttons
     const presetChips = document.querySelectorAll('.oklch-chip');
@@ -413,6 +910,7 @@ import FloatingChapterController from '../nexafy/FloatingChapterController.astro
 
     window.addEventListener('beforeunload', () => {
       if (loopTimer) clearTimeout(loopTimer);
+      if (trafficTimer) clearInterval(trafficTimer);
     });
   }
 
