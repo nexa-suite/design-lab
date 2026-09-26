@@ -151,6 +151,127 @@ import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
       color: var(--nexa-color-text-secondary, #64748b);
       line-height: 1.5;
     }
+
+    /* Interactive Suite Spotlight Card */
+    .suite-spotlight-card {
+      background: #082846;
+      border: 1px solid #1a4971;
+      border-radius: 16px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      box-shadow: 0 8px 24px rgba(8, 40, 70, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .spotlight-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .spotlight-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(56, 200, 255, 0.15);
+      border: 1px solid rgba(56, 200, 255, 0.4);
+      color: #38c8ff;
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 9999px;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.04em;
+    }
+
+    .spotlight-title {
+      font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+      font-size: 20px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 0.4rem;
+    }
+
+    .spotlight-desc {
+      font-size: 13.5px;
+      color: #cbd5e1;
+      line-height: 1.55;
+      max-width: 820px;
+      margin-bottom: 1rem;
+    }
+
+    .spotlight-desc code {
+      font-family: var(--nexa-font-family-mono, monospace);
+      background: rgba(255, 255, 255, 0.12);
+      color: #38c8ff;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .spotlight-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .feature-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .feature-tag i {
+      color: #38c8ff;
+      font-size: 10px;
+    }
+
+    .btn-spotlight-launch {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #38c8ff;
+      color: #082846;
+      font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+      font-size: 13.5px;
+      font-weight: 700;
+      padding: 12px 22px;
+      border-radius: 10px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.18s ease;
+      box-shadow: 0 4px 12px rgba(56, 200, 255, 0.3);
+    }
+
+    .btn-spotlight-launch:hover {
+      background: #ffffff;
+      color: #082846;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(56, 200, 255, 0.45);
+    }
+
+    @media (max-width: 900px) {
+      .suite-spotlight-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .btn-spotlight-launch {
+        width: 100%;
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -162,6 +283,33 @@ import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
       <p class="catalog-desc">
         Inventario exhaustivo de componentes geométricos vivos de Nexafy. Cada artefacto está diseñado bajo la regla de <strong>cero degradados</strong>, utilizando colorimetría sólida pura (Fondo Azul Oscuro <code>#082846</code> y relleno de tarjeta Celeste Nexa <code>#38c8ff</code>) y conductos vasculares gruesos de 28px con redondeos arquitectónicos.
       </p>
+    </div>
+
+    <!-- Interactive Suite Spotlight Banner -->
+    <div class="suite-spotlight-card">
+      <div class="spotlight-content">
+        <div class="spotlight-badge">
+          <i class="pi pi-sparkles"></i>
+          <span>ORQUESTACIÓN COMPLETA DE CONVERSIÓN</span>
+        </div>
+        <h2 class="spotlight-title">Suite Interactiva Flecto & Nexafy</h2>
+        <p class="spotlight-desc">
+          Visualiza los cinco macro-artefactos ensamblados en su flujo interactivo completo: Scrollytelling con simulador de checkout en 4 pasos (selector de fechas, cálculo de días, depósito escrow, resumen y pago), Bento Grid de Canales en warm beige <code>#FDFAE7</code>, SaaS Operational OS con búsqueda reactiva, Seguro Escrow con toggle de protección 100% y Canvas de Sostenibilidad.
+        </p>
+        <div class="spotlight-features">
+          <span class="feature-tag"><i class="pi pi-mobile"></i> Scrollytelling Checkout 4-Etapas</span>
+          <span class="feature-tag"><i class="pi pi-th-large"></i> Bento 8-Tiles Warm Beige #FDFAE7</span>
+          <span class="feature-tag"><i class="pi pi-table"></i> SaaS Operational OS + Search</span>
+          <span class="feature-tag"><i class="pi pi-shield"></i> Seguro 100% Protection Toggle</span>
+          <span class="feature-tag"><i class="pi pi-globe"></i> Circular Economy Canvas</span>
+        </div>
+      </div>
+      <div class="spotlight-action">
+        <a href="/interactive-suite" class="btn-spotlight-launch">
+          <span>Abrir Suite Interactiva</span>
+          <i class="pi pi-arrow-right"></i>
+        </a>
+      </div>
     </div>
 
     <!-- Capítulo 1: Canales & Origen -->

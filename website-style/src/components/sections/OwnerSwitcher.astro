@@ -1,0 +1,472 @@
+---
+// OwnerSwitcher: The Flecto Link configurator (Owner mode vs Customer experience)
+---
+
+<section class="owner-section" id="flecto-link" aria-labelledby="owner-heading">
+  <div class="owner-container">
+    <div class="owner-header">
+      <div class="owner-tag text-eyebrow">
+        <span>For Your Business</span>
+        <span class="tag-sep" aria-hidden="true">—</span>
+        <span>The Flecto Link</span>
+      </div>
+
+      <h2 id="owner-heading" class="owner-title">
+        Everything you need to <br />
+        <span class="text-mint">start renting today</span>
+      </h2>
+
+      <p class="owner-desc body-lead">
+        Set up and customize your rental operation in just a few clicks. Scan government IDs, bundle specialized services, or collect security deposits via one flexible dynamic link.
+      </p>
+
+      <!-- Tab Switcher (Bookings vs Inventory) -->
+      <div class="tab-switcher" role="tablist" aria-label="Configuration categories">
+        <button type="button" role="tab" class="tab-btn active" id="tab-config-bookings" aria-selected="true" aria-controls="bookings-panel">
+          <span>Bookings</span>
+        </button>
+        <button type="button" role="tab" class="tab-btn" id="tab-config-inventory" aria-selected="false" aria-controls="inventory-panel">
+          <span>Inventory</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Interactive Toggles & Live Configurator Panel -->
+    <div class="configurator-grid">
+      <!-- Left Column: The 4 Toggles -->
+      <div class="toggles-column" id="bookings-panel" role="tabpanel" aria-labelledby="tab-config-bookings">
+        <div class="toggle-card active" data-toggle="online-pay" tabindex="0" role="switch" aria-checked="true">
+          <div class="toggle-card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+              <line x1="1" y1="10" x2="23" y2="10"/>
+            </svg>
+          </div>
+          <div class="toggle-info">
+            <h3 class="toggle-name">Online Payments</h3>
+            <p class="toggle-desc">Toggle this to allow customers to settle instantly online.</p>
+          </div>
+          <div class="switch-ui" aria-hidden="true">
+            <span class="switch-dot"></span>
+          </div>
+        </div>
+
+        <div class="toggle-card active" data-toggle="pay-store" tabindex="0" role="switch" aria-checked="true">
+          <div class="toggle-card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <div class="toggle-info">
+            <h3 class="toggle-name">Pay in Store</h3>
+            <p class="toggle-desc">You can allow in-person payment at your physical counter.</p>
+          </div>
+          <div class="switch-ui" aria-hidden="true">
+            <span class="switch-dot"></span>
+          </div>
+        </div>
+
+        <div class="toggle-card active" data-toggle="add-services" tabindex="0" role="switch" aria-checked="true">
+          <div class="toggle-card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </div>
+          <div class="toggle-info">
+            <h3 class="toggle-name">Add Services</h3>
+            <p class="toggle-desc">Bundle services like Delivery, Cleaning, and Insurance.</p>
+          </div>
+          <div class="switch-ui" aria-hidden="true">
+            <span class="switch-dot"></span>
+          </div>
+        </div>
+
+        <div class="toggle-card active" data-toggle="add-deposits" tabindex="0" role="switch" aria-checked="true">
+          <div class="toggle-card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div class="toggle-info">
+            <h3 class="toggle-name">Add Deposits</h3>
+            <p class="toggle-desc">Protect your valuable equipment by holding pre-auth deposits.</p>
+          </div>
+          <div class="switch-ui" aria-hidden="true">
+            <span class="switch-dot"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Live Link Simulator Card -->
+      <div class="link-simulator-card" aria-label="Generated Flecto Link Simulator">
+        <div class="sim-header">
+          <div class="sim-pill text-mono">flecto.io/l/camera-store-88219</div>
+          <button type="button" class="sim-copy-btn" id="copy-link-btn" aria-label="Copy generated Flecto link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            <span id="copy-btn-label">Copy Link</span>
+          </button>
+        </div>
+
+        <div class="sim-content">
+          <div class="sim-status-row">
+            <span class="sim-indicator live" aria-hidden="true"></span>
+            <span class="sim-status-text">Active Link Parameters</span>
+          </div>
+
+          <div class="sim-params-list" id="sim-params-list">
+            <div class="param-row" id="param-online-pay">
+              <span class="param-label">Payment Gateway</span>
+              <span class="param-val enabled">Online Enabled (Stripe & MB Way)</span>
+            </div>
+            <div class="param-row" id="param-pay-store">
+              <span class="param-label">In-Store Settlement</span>
+              <span class="param-val enabled">Walk-In POS Allowed</span>
+            </div>
+            <div class="param-row" id="param-add-services">
+              <span class="param-label">Bundled Services</span>
+              <span class="param-val enabled">Pick-up & Drop-off Included (€20)</span>
+            </div>
+            <div class="param-row" id="param-add-deposits">
+              <span class="param-label">Escrow Safeguard</span>
+              <span class="param-val enabled">€200 Pre-authorized Hold</span>
+            </div>
+          </div>
+
+          <div class="sim-quote-summary">
+            <div class="quote-header">
+              <span>Customer Quote Preview</span>
+              <span class="text-mono quote-calc" id="sim-quote-amount">€690.00 Total</span>
+            </div>
+            <p class="quote-notes">Generated automatically from current inventory availability and active policy rules.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .owner-section {
+    padding: var(--layout-section-padding) 0;
+    background-color: var(--surface-primary);
+    color: var(--text-primary-on-dark);
+  }
+
+  .owner-container {
+    max-width: var(--layout-max-width);
+    margin: 0 auto;
+    padding: 0 var(--layout-gutter);
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+
+  .owner-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 840px;
+  }
+
+  .owner-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--primitive-color-mint-400);
+  }
+
+  .owner-title {
+    color: var(--primitive-color-cream-100);
+  }
+
+  .text-mint {
+    color: var(--primitive-color-mint-500);
+  }
+
+  .owner-desc {
+    color: var(--text-secondary-on-dark);
+    max-width: 55ch;
+  }
+
+  /* Tab Switcher */
+  .tab-switcher {
+    display: inline-flex;
+    background: rgba(1, 56, 44, 0.8);
+    border: 1px solid var(--border-on-dark);
+    padding: 4px;
+    border-radius: var(--pill-radius);
+    width: fit-content;
+    margin-top: 1rem;
+  }
+
+  .tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary-on-dark);
+    font-family: var(--primitive-font-display);
+    font-size: 0.9375rem;
+    font-weight: var(--primitive-weight-semibold);
+    padding: 8px 24px;
+    border-radius: var(--pill-radius);
+    cursor: pointer;
+    transition: all var(--primitive-duration-fast) ease;
+  }
+
+  .tab-btn.active {
+    background: var(--primitive-color-mint-500);
+    color: var(--primitive-color-forest-900);
+    box-shadow: 0 4px 12px rgba(86, 240, 159, 0.25);
+  }
+
+  /* Configurator Grid */
+  .configurator-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: stretch;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .toggles-column, .simulator-column {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .toggles-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .toggle-card {
+    background: rgba(1, 56, 44, 0.5);
+    border: 1px solid var(--border-on-dark);
+    border-radius: var(--primitive-radius-xl);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    cursor: pointer;
+    transition: all var(--primitive-duration-normal) var(--primitive-ease-out-quint);
+    user-select: none;
+  }
+
+  .toggle-card:hover, .toggle-card:focus-visible {
+    background: rgba(1, 78, 60, 0.75);
+    border-color: var(--border-on-dark-active);
+    transform: translateX(4px);
+  }
+
+  .toggle-card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--primitive-radius-md);
+    background: rgba(86, 240, 159, 0.12);
+    color: var(--primitive-color-mint-500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .toggle-info {
+    flex-grow: 1;
+  }
+
+  .toggle-name {
+    font-size: 1.125rem;
+    color: var(--primitive-color-cream-100);
+    margin-bottom: 2px;
+  }
+
+  .toggle-desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary-on-dark);
+  }
+
+  /* Switch UI */
+  .switch-ui {
+    width: 48px;
+    height: 26px;
+    background: rgba(255, 251, 236, 0.2);
+    border-radius: 13px;
+    position: relative;
+    padding: 2px;
+    transition: background var(--primitive-duration-fast) ease;
+    flex-shrink: 0;
+  }
+
+  .switch-dot {
+    display: block;
+    width: 22px;
+    height: 22px;
+    background: var(--primitive-color-white);
+    border-radius: 50%;
+    transition: transform var(--primitive-duration-fast) var(--primitive-ease-out-quint);
+  }
+
+  .toggle-card.active .switch-ui {
+    background: var(--primitive-color-mint-500);
+  }
+
+  .toggle-card.active .switch-dot {
+    transform: translateX(22px);
+    background: var(--primitive-color-forest-900);
+  }
+
+  /* Link Simulator Card */
+  .link-simulator-card {
+    background: var(--surface-primary-deep);
+    border: 1px solid var(--border-on-dark);
+    border-radius: var(--primitive-radius-2xl);
+    padding: clamp(1rem, 4vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .sim-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-on-dark);
+    min-width: 0;
+  }
+
+  .sim-pill {
+    background: rgba(1, 56, 44, 0.8);
+    border: 1px solid var(--border-on-dark);
+    padding: 6px 14px;
+    border-radius: var(--pill-radius);
+    font-size: 0.8125rem;
+    color: var(--primitive-color-mint-400);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+
+  .sim-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: 1px solid var(--border-on-dark);
+    color: var(--text-secondary-on-dark);
+    font-size: 0.8125rem;
+    font-weight: var(--primitive-weight-medium);
+    padding: 6px 12px;
+    border-radius: var(--pill-radius);
+    cursor: pointer;
+    transition: all var(--primitive-duration-fast) ease;
+  }
+
+  .sim-copy-btn:hover {
+    background: rgba(255, 251, 236, 0.1);
+    color: var(--primitive-color-cream-100);
+  }
+
+  .sim-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    padding-top: 1.5rem;
+  }
+
+  .sim-status-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sim-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primitive-color-mint-500);
+    box-shadow: 0 0 10px var(--primitive-color-mint-500);
+  }
+
+  .sim-status-text {
+    font-size: 0.875rem;
+    font-weight: var(--primitive-weight-semibold);
+    color: var(--primitive-color-cream-100);
+  }
+
+  .sim-params-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+
+  .param-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    padding: 0.75rem;
+    border-radius: var(--primitive-radius-md);
+    background: rgba(1, 56, 44, 0.4);
+    border: 1px solid rgba(86, 240, 159, 0.08);
+    transition: opacity var(--primitive-duration-fast) ease;
+  }
+
+  .param-row.disabled {
+    opacity: 0.35;
+  }
+
+  .param-label {
+    color: var(--text-secondary-on-dark);
+  }
+
+  .param-val.enabled {
+    color: var(--primitive-color-mint-400);
+    font-weight: var(--primitive-weight-medium);
+  }
+
+  .param-val.disabled {
+    color: var(--primitive-color-gray-500);
+  }
+
+  .sim-quote-summary {
+    background: rgba(1, 56, 44, 0.7);
+    border: 1px solid var(--border-on-dark);
+    border-radius: var(--primitive-radius-lg);
+    padding: 1.25rem;
+  }
+
+  .quote-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: var(--primitive-weight-bold);
+    color: var(--primitive-color-cream-100);
+    margin-bottom: 4px;
+  }
+
+  .quote-calc {
+    color: var(--primitive-color-mint-500);
+    font-size: 1.125rem;
+  }
+
+  .quote-notes {
+    font-size: 0.75rem;
+    color: var(--text-muted-on-dark);
+  }
+
+  @media (max-width: 1024px) {
+    .configurator-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

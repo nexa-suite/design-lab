@@ -1,0 +1,477 @@
+---
+// StoreMockups: The 3 channel entrypoints (Email, Physical Store, Online Web Store)
+---
+
+<div class="store-channels-grid">
+  <!-- Channel 1: Email Request -->
+  <article class="channel-card email-channel" aria-labelledby="email-ch-title">
+    <div class="channel-header">
+      <div class="channel-avatar" aria-hidden="true">
+        <img src="/assets/synthetic/avatar-customer.svg" alt="John Cooper" class="channel-avatar-img" />
+      </div>
+      <div class="channel-meta">
+        <h4 id="email-ch-title" class="channel-sender">John Cooper</h4>
+        <span class="channel-sub text-mono">john.cooper@email.com</span>
+      </div>
+      <span class="channel-badge text-mono">Email ✉️</span>
+    </div>
+
+    <div class="email-bubble">
+      <p>Hi! 👋 I want to rent <strong>2x GoPro HERO10</strong> for 4 days, for a weekend event in Lisbon.</p>
+    </div>
+
+    <div class="channel-footer">
+      <span class="time-stamp">Today, 09:15</span>
+      <span class="status-auto">Auto-synced to Flecto</span>
+    </div>
+  </article>
+
+  <!-- Channel Notification Cascade (Observed in Awwwards Element 3) -->
+  <div class="notifications-cascade-card" aria-label="Customer Push Notifications">
+    <div class="cascade-header">
+      <span class="cascade-label text-eyebrow">Notifications</span>
+    </div>
+
+    <div class="notification-item">
+      <div class="notif-icon-col" aria-hidden="true">
+        <span class="notif-badge-flecto"></span>
+      </div>
+      <div class="notif-text-col">
+        <div class="notif-title-row">
+          <strong>Flecto Pay</strong>
+          <span class="notif-time text-mono">now</span>
+        </div>
+        <p class="notif-sub">Tap to Pay your booking of €690.00</p>
+      </div>
+    </div>
+
+    <div class="notification-item">
+      <div class="notif-icon-col" aria-hidden="true">
+        <span class="notif-badge-flecto"></span>
+      </div>
+      <div class="notif-text-col">
+        <div class="notif-title-row">
+          <strong>Multiple Payment Methods</strong>
+          <span class="notif-time text-mono">now</span>
+        </div>
+        <p class="notif-sub">MB Way, Credit Cards, Apple Pay, etc...</p>
+      </div>
+    </div>
+
+    <div class="notification-item">
+      <div class="notif-icon-col" aria-hidden="true">
+        <span class="notif-badge-flecto"></span>
+      </div>
+      <div class="notif-text-col">
+        <div class="notif-title-row">
+          <strong>Flecto Insurance</strong>
+          <span class="notif-time text-mono">now</span>
+        </div>
+        <p class="notif-sub">Flecto activated on your booking</p>
+      </div>
+    </div>
+
+    <div class="cascade-footer">
+      <span class="cascade-hint">Customer gets notification</span>
+    </div>
+  </div>
+
+  <!-- Channel 2: Physical Store POS -->
+  <article class="channel-card store-channel" aria-labelledby="pos-ch-title">
+    <div class="channel-header">
+      <div class="channel-icon-hub" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </div>
+      <div class="channel-meta">
+        <h4 id="pos-ch-title" class="channel-sender">Downtown Flagship POS</h4>
+        <span class="channel-sub">Counter Walk-In Desk</span>
+      </div>
+      <span class="channel-badge text-mono">In-Store 🏬</span>
+    </div>
+
+    <div class="store-inventory-snippet">
+      <div class="inventory-status">
+        <span class="inv-dot" aria-hidden="true"></span>
+        <span>GoPro available for in-person rent</span>
+      </div>
+      <div class="inv-rate text-mono">
+        <strong>€100</strong><span>/Day</span>
+      </div>
+    </div>
+
+    <div class="channel-footer">
+      <span>Unit #08 & #09 reserved</span>
+      <span class="flecto-link-pill">Flecto Link Ready</span>
+    </div>
+  </article>
+
+  <!-- Channel 3: Online Storefront Browser Preview -->
+  <article class="channel-card web-channel" aria-labelledby="web-ch-title">
+    <div class="browser-chrome" aria-hidden="true">
+      <div class="browser-dots">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="browser-address-bar text-mono">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        <span>acme.store/rent/gopro-hero10</span>
+      </div>
+    </div>
+
+    <div class="web-preview-body">
+      <div class="web-prod-info">
+        <h4 id="web-ch-title" class="web-prod-title">GoPro HERO10 Black</h4>
+        <span class="web-prod-rate text-mono">€100.00 / day</span>
+      </div>
+      <button type="button" class="web-rent-btn" tabindex="-1" aria-hidden="true">
+        <span>RENT</span>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M2.5 6h7M6.5 2.5L9.5 6l-3 3.5"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="channel-footer">
+      <span class="channel-badge text-mono">Web Store 📱</span>
+      <span class="conversion-tag">Direct Checkout Link</span>
+    </div>
+  </article>
+</div>
+
+<style>
+  .store-channels-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+  }
+
+  .channel-card {
+    background: rgba(1, 56, 44, 0.6);
+    border: 1px solid var(--border-on-dark);
+    border-radius: var(--primitive-radius-xl);
+    padding: clamp(0.875rem, 3vw, 1.25rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: all var(--primitive-duration-normal) var(--primitive-ease-out-quint);
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .channel-card:hover {
+    background: rgba(1, 78, 60, 0.75);
+    border-color: var(--border-on-dark-active);
+    transform: translateY(-2px);
+  }
+
+  .channel-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .channel-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--primitive-color-mint-500);
+    color: var(--primitive-color-forest-900);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--primitive-weight-bold);
+    font-size: 0.8125rem;
+    flex-shrink: 0;
+  }
+
+  .channel-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Notifications Cascade Card (Awwwards Element 3) */
+  .notifications-cascade-card {
+    background: rgba(3, 32, 25, 0.7);
+    border: 1px solid rgba(86, 240, 159, 0.2);
+    border-radius: var(--primitive-radius-xl);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .cascade-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cascade-label {
+    color: var(--primitive-color-mint-400);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+
+  .notification-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background: rgba(255, 251, 236, 0.06);
+    border: 1px solid rgba(255, 251, 236, 0.08);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    transition: background 0.2s ease;
+  }
+
+  .notification-item:hover {
+    background: rgba(86, 240, 159, 0.1);
+  }
+
+  .notif-badge-flecto {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    background-color: var(--primitive-color-mint-500);
+    margin-top: 3px;
+  }
+
+  .notif-text-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    width: 100%;
+  }
+
+  .notif-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8125rem;
+    color: #ffffff;
+  }
+
+  .notif-time {
+    font-size: 0.6875rem;
+    color: rgba(255, 251, 236, 0.6);
+  }
+
+  .notif-sub {
+    font-size: 0.75rem;
+    color: rgba(255, 251, 236, 0.8);
+    margin: 0;
+  }
+
+  .cascade-footer {
+    display: flex;
+    justify-content: center;
+    padding-top: 0.5rem;
+  }
+
+  .cascade-hint {
+    font-size: 0.75rem;
+    color: var(--primitive-color-mint-400);
+    font-style: italic;
+  }
+
+  .channel-icon-hub {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--primitive-radius-md);
+    background: rgba(86, 240, 159, 0.15);
+    color: var(--primitive-color-mint-500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .channel-meta {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .channel-sender {
+    font-size: 0.9375rem;
+    font-weight: var(--primitive-weight-bold);
+    color: var(--primitive-color-cream-100);
+  }
+
+  .channel-sub {
+    font-size: 0.75rem;
+    color: var(--text-muted-on-dark);
+  }
+
+  .channel-badge {
+    font-size: 0.6875rem;
+    padding: 3px 8px;
+    border-radius: var(--pill-radius);
+    background: rgba(86, 240, 159, 0.12);
+    color: var(--primitive-color-mint-200);
+  }
+
+  .email-bubble {
+    background: rgba(3, 32, 25, 0.6);
+    border: 1px solid var(--border-on-dark);
+    border-radius: var(--primitive-radius-md);
+    padding: 0.875rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary-on-dark);
+    line-height: 1.45;
+  }
+
+  .email-bubble strong {
+    color: var(--primitive-color-cream-100);
+  }
+
+  .channel-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-muted-on-dark);
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(86, 240, 159, 0.08);
+  }
+
+  .status-auto {
+    color: var(--primitive-color-mint-400);
+    font-weight: var(--primitive-weight-semibold);
+  }
+
+  /* POS specifics */
+  .store-inventory-snippet {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(3, 32, 25, 0.6);
+    border: 1px solid var(--border-on-dark);
+    border-radius: var(--primitive-radius-md);
+    padding: 0.875rem;
+  }
+
+  .inventory-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8125rem;
+    color: var(--primitive-color-cream-100);
+  }
+
+  .inv-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primitive-color-mint-500);
+    box-shadow: 0 0 6px var(--primitive-color-mint-500);
+  }
+
+  .inv-rate strong {
+    font-size: 1.125rem;
+    color: var(--primitive-color-mint-500);
+  }
+
+  .inv-rate span {
+    font-size: 0.75rem;
+    color: var(--text-muted-on-dark);
+  }
+
+  .flecto-link-pill {
+    background: rgba(86, 240, 159, 0.15);
+    color: var(--primitive-color-mint-400);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.6875rem;
+    font-weight: var(--primitive-weight-semibold);
+  }
+
+  /* Web Channel Specifics */
+  .browser-chrome {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0, 24, 18, 0.8);
+    border-radius: var(--primitive-radius-sm);
+    padding: 6px 10px;
+    border: 1px solid var(--border-on-dark);
+  }
+
+  .browser-dots {
+    display: flex;
+    gap: 4px;
+  }
+
+  .browser-dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255, 251, 236, 0.2);
+  }
+
+  .browser-address-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(1, 56, 44, 0.8);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.6875rem;
+    color: var(--text-secondary-on-dark);
+    flex-grow: 1;
+    min-width: 0;
+  }
+
+  .browser-address-bar span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .web-preview-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(3, 32, 25, 0.6);
+    border: 1px solid var(--border-on-dark);
+    border-radius: var(--primitive-radius-md);
+    padding: 0.875rem;
+  }
+
+  .web-prod-title {
+    font-size: 0.875rem;
+    color: var(--primitive-color-cream-100);
+  }
+
+  .web-prod-rate {
+    font-size: 0.75rem;
+    color: var(--primitive-color-mint-400);
+  }
+
+  .web-rent-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--primitive-color-mint-500);
+    color: var(--primitive-color-forest-900);
+    border: none;
+    font-family: var(--primitive-font-display);
+    font-size: 0.75rem;
+    font-weight: var(--primitive-weight-bold);
+    padding: 6px 12px;
+    border-radius: var(--pill-radius);
+    pointer-events: none;
+  }
+</style>

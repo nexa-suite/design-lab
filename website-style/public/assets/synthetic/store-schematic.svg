@@ -1,0 +1,45 @@
+<svg width="150" height="130" viewBox="0 0 150 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bright Minimalist Showroom Background (Matching 2022 Reference) -->
+  <rect width="150" height="130" rx="10" fill="#e9ecea"/>
+  
+  <!-- Ceiling Track Light Grid -->
+  <rect x="0" y="0" width="150" height="28" fill="#d8deda"/>
+  <line x1="15" y1="12" x2="135" y2="12" stroke="#b2beba" stroke-width="1.5"/>
+  <line x1="15" y1="20" x2="135" y2="20" stroke="#b2beba" stroke-width="1.5"/>
+  <circle cx="35" cy="16" r="3" fill="#ffffff"/>
+  <circle cx="65" cy="16" r="3" fill="#ffffff"/>
+  <circle cx="95" cy="16" r="3" fill="#ffffff"/>
+  <circle cx="125" cy="16" r="3" fill="#ffffff"/>
+  
+  <!-- Recessed Back Wall & Shelving Display -->
+  <rect x="18" y="34" width="114" height="42" rx="4" fill="#ffffff" stroke="#cdd5d1" stroke-width="1"/>
+  <line x1="46" y1="34" x2="46" y2="76" stroke="#e0e5e2" stroke-width="1"/>
+  <line x1="75" y1="34" x2="75" y2="76" stroke="#e0e5e2" stroke-width="1"/>
+  <line x1="104" y1="34" x2="104" y2="76" stroke="#e0e5e2" stroke-width="1"/>
+  <line x1="18" y1="55" x2="132" y2="55" stroke="#e0e5e2" stroke-width="1"/>
+  
+  <!-- Display Products on Shelves -->
+  <rect x="25" y="42" width="14" height="9" rx="2" fill="#2d3748"/>
+  <rect x="54" y="40" width="12" height="11" rx="2" fill="#4a5568"/>
+  <circle cx="90" cy="46" r="4.5" fill="#1a202c"/>
+  <rect x="112" y="41" width="12" height="10" rx="2" fill="#718096"/>
+  <rect x="26" y="61" width="12" height="10" rx="2" fill="#a0aec0"/>
+  <circle cx="60" cy="66" r="4" fill="#2d3748"/>
+  <rect x="83" y="60" width="14" height="11" rx="2" fill="#4a5568"/>
+  <rect x="111" y="62" width="13" height="9" rx="2" fill="#1a202c"/>
+  
+  <!-- Floor Grid (Light Architectural Perspective) -->
+  <polygon points="0,130 150,130 135,82 15,82" fill="#f7f9f8"/>
+  <line x1="35" y1="82" x2="20" y2="130" stroke="#dbe1de" stroke-width="1"/>
+  <line x1="75" y1="82" x2="75" y2="130" stroke="#dbe1de" stroke-width="1"/>
+  <line x1="115" y1="82" x2="130" y2="130" stroke="#dbe1de" stroke-width="1"/>
+  
+  <!-- Modern Geometric Island Display Counter -->
+  <rect x="42" y="86" width="66" height="26" rx="3" fill="#ffffff" stroke="#cdd5d1" stroke-width="1"/>
+  <rect x="48" y="92" width="20" height="14" rx="2" fill="#e2e8f0"/>
+  <rect x="74" y="92" width="28" height="14" rx="2" fill="#2b6cb0"/>
+  
+  <!-- Stylized Visitor Silhouette Walking in Showroom -->
+  <circle cx="106" cy="74" r="3.5" fill="#4a5568"/>
+  <path d="M103 79 C103 78 109 78 109 79 L108 96 L104 96 Z" fill="#2d3748"/>
+</svg>
