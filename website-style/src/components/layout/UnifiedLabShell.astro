@@ -1,0 +1,689 @@
+---
+/**
+ * UnifiedLabShell — Master Monorepo Shell for Website Style (Nexafy)
+ * 100% unified visual design with Web Style and Mobile Style (Sidebar, Topbar, Search, Suite Switcher, Evaluation).
+ */
+import NexaLogo from '../guidelines/NexaLogo.astro';
+
+interface Props {
+  currentSection?: 'workbench' | 'artifacts' | 'landing-spec';
+  activeTab?: string;
+}
+
+const { currentSection = 'workbench', activeTab = 'motor-grafico' } = Astro.props;
+---
+
+<div class="lab-shell" id="app-shell" data-current-section={currentSection}>
+  <!-- Left Master Sidebar (284px width, unified with web-style & mobile-style) -->
+  <aside class="lab-sidebar" aria-label="Website Style Navigation">
+    <a class="lab-brand" href="/" title="Ir al inicio de Website Style">
+      <NexaLogo variant="primary" height={26} />
+      <span>DESIGN LAB <b>v1.0.2 · Website Style</b></span>
+    </a>
+
+    <p class="lab-context">
+      Living Geometry System, motor gráfico interactivo, conductos vasculares de 28px y artefactos de conversión.
+    </p>
+
+    <!-- Unified Monorepo Suite Switcher -->
+    <div class="monorepo-suite-switcher" aria-label="Nexa Style Triad">
+      <span class="suite-title">STYLE MONOREPO</span>
+      <div class="suite-links">
+        <a href="http://localhost:4200" class="suite-pill link" target="_blank" rel="noopener" title="Abrir Web Style Guidelines (Angular & PrimeNG)">
+          <i class="pi pi-desktop" aria-hidden="true"></i> Web ↗
+        </a>
+        <a href="http://localhost:4201" class="suite-pill link" target="_blank" rel="noopener" title="Abrir Mobile Style Guidelines (Android / Flutter)">
+          <i class="pi pi-mobile" aria-hidden="true"></i> Mobile ↗
+        </a>
+        <span class="suite-pill active" title="Actualmente visualizando Website Style & Nexafy">
+          <i class="pi pi-globe" aria-hidden="true"></i> Website
+        </span>
+      </div>
+    </div>
+
+    <!-- Search Control with keyboard shortcut '/' -->
+    <div class="lab-search">
+      <label for="website-sidebar-search">BUSCAR EN NEXAFY</label>
+      <div class="search-control">
+        <i class="pi pi-search" aria-hidden="true"></i>
+        <input
+          id="website-sidebar-search"
+          type="search"
+          autocomplete="off"
+          placeholder="Buscar tokens, nodos... (/)"
+        />
+        <button type="button" class="clear-search" id="btn-clear-search-web" aria-label="Limpiar búsqueda" style="display: none;">
+          <i class="pi pi-times" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Groups with Accordions -->
+    <nav class="lab-nav" aria-label="Secciones de la documentación de landing">
+      <!-- 1. Motor Gráfico & Geometría -->
+      <section class="lab-nav-group">
+        <button class="nav-section-button" type="button" data-nav-group="engine">
+          <span class="nav-section">1. GEOMETRÍA & MOTOR VIVO</span>
+          <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
+        </button>
+        <div class="lab-nav-items">
+          <a class={`lab-nav-item ${currentSection === 'workbench' && activeTab === 'motor-grafico' ? 'active' : ''}`} href="/#motor-grafico" data-nav-tab="motor-grafico">
+            <i class="pi pi-bolt" aria-hidden="true"></i>
+            <span>✦ Motor Gráfico Vivo</span>
+          </a>
+          <a class={`lab-nav-item ${currentSection === 'workbench' && activeTab === 'geometria' ? 'active' : ''}`} href="/#geometria" data-nav-tab="geometria">
+            <i class="pi pi-share-alt" aria-hidden="true"></i>
+            <span>Conductos & Fillets (28px)</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 2. Tokens de Landing -->
+      <section class="lab-nav-group">
+        <button class="nav-section-button" type="button" data-nav-group="tokens">
+          <span class="nav-section">2. TOKENS DE LANDING</span>
+          <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
+        </button>
+        <div class="lab-nav-items">
+          <a class={`lab-nav-item ${currentSection === 'workbench' && activeTab === 'colorimetria' ? 'active' : ''}`} href="/#colorimetria" data-nav-tab="colorimetria">
+            <i class="pi pi-palette" aria-hidden="true"></i>
+            <span>Colorimetría (0 Degradados)</span>
+          </a>
+          <a class={`lab-nav-item ${currentSection === 'workbench' && activeTab === 'tipografia' ? 'active' : ''}`} href="/#tipografia" data-nav-tab="tipografia">
+            <i class="pi pi-align-left" aria-hidden="true"></i>
+            <span>Tipografía Cinética (Fluid)</span>
+          </a>
+          <a class={`lab-nav-item ${currentSection === 'workbench' && activeTab === 'componentes' ? 'active' : ''}`} href="/#componentes" data-nav-tab="componentes">
+            <i class="pi pi-box" aria-hidden="true"></i>
+            <span>Componentes Nexa UI</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 3. Catálogo & Especificaciones -->
+      <section class="lab-nav-group">
+        <button class="nav-section-button" type="button" data-nav-group="catalog">
+          <span class="nav-section">3. CATÁLOGO & SPECS</span>
+          <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
+        </button>
+        <div class="lab-nav-items">
+          <a class={`lab-nav-item ${currentSection === 'artifacts' ? 'active' : ''}`} href="/artifacts">
+            <i class="pi pi-compass" aria-hidden="true"></i>
+            <span>Catálogo de Artefactos Vivos</span>
+          </a>
+          <a class={`lab-nav-item ${currentSection === 'landing-spec' ? 'active' : ''}`} href="/landing-spec">
+            <i class="pi pi-book" aria-hidden="true"></i>
+            <span>Landing Architecture Spec</span>
+          </a>
+        </div>
+      </section>
+    </nav>
+
+    <!-- Unified Sidebar Footer -->
+    <div class="lab-footer">
+      <span class="status-dot" aria-hidden="true"></span>
+      <span>
+        <strong>Visual evidence candidate</strong>
+        <small>Nexafy Living Geometry Engine</small>
+      </span>
+    </div>
+  </aside>
+
+  <!-- Right Main Area (Topbar + Content) -->
+  <div class="lab-main">
+    <header class="lab-topbar">
+      <div class="topbar-left">
+        <button class="mobile-menu-button" id="btn-mobile-sidebar-toggle-web" type="button" aria-label="Abrir navegación móvil">
+          <i class="pi pi-bars" aria-hidden="true"></i>
+        </button>
+        <span class="topbar-title">Design documentation · v1.0.2 (Website Style)</span>
+      </div>
+
+      <!-- Evaluation Controls -->
+      <div class="evaluation-controls" aria-label="Modos de evaluación del Design Lab">
+        <span class="evaluation-label">Evaluate</span>
+
+        <!-- Contrast Mode -->
+        <div class="segmented-evaluation" role="group" aria-label="Modo de contraste">
+          <button type="button" class="btn-eval-contrast active" data-contrast="standard">Standard</button>
+          <button type="button" class="btn-eval-contrast" data-contrast="increased">Increased</button>
+        </div>
+
+        <span class="rule-badge">0 RASTER GRADIENTS</span>
+      </div>
+
+      <span class="topbar-review">Living Geometry Candidate</span>
+    </header>
+
+    <!-- Master Content Slot -->
+    <div class="lab-content">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Global Reset & Box-Sizing */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .lab-shell {
+    display: flex;
+    min-height: 100vh;
+    background: var(--nexa-surface-page, #f6faff);
+    color: var(--nexa-color-text-primary, #0f172a);
+    font-family: var(--nexa-font-family-body, 'Inter', sans-serif);
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Left Sidebar (284px width matching web-style & mobile-style) */
+  .lab-sidebar {
+    display: flex;
+    flex: 0 0 284px;
+    width: 284px;
+    flex-direction: column;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    padding: 24px 16px 16px;
+    border-right: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    background: var(--nexa-surface-card, #ffffff);
+    overflow-y: auto;
+    z-index: 100;
+  }
+
+  .lab-brand {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 10px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .lab-brand > span:last-child {
+    color: var(--nexa-color-neutral-500, #64748b);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-align: right;
+  }
+
+  .lab-brand b {
+    display: block;
+    margin-top: 4px;
+    color: var(--nexa-color-primary-600, #2a67d9);
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  .lab-context {
+    margin: 18px 10px 14px;
+    color: var(--nexa-color-text-secondary, #64748b);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  /* Monorepo Suite Switcher */
+  .monorepo-suite-switcher {
+    margin: 0 10px 18px;
+    padding: 8px 10px;
+    background: var(--nexa-color-neutral-50, #f8fafc);
+    border: 1px solid var(--nexa-color-border-subtle, #e2e8f0);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .suite-title {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--nexa-color-neutral-500, #64748b);
+    text-transform: uppercase;
+  }
+
+  .suite-links {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .suite-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+
+    &.active {
+      background: var(--nexa-color-primary-100, #dbeafe);
+      color: var(--nexa-color-primary-700, #1d4ed8);
+      font-weight: 700;
+    }
+
+    &.link {
+      background: #ffffff;
+      color: var(--nexa-color-neutral-700, #334155);
+      border: 1px solid var(--nexa-color-border-default, #cbd5e1);
+
+      &:hover {
+        background: var(--nexa-color-neutral-100, #f1f5f9);
+        color: var(--nexa-color-primary-600, #2563eb);
+        border-color: var(--nexa-color-primary-300, #93c5fd);
+      }
+    }
+  }
+
+  /* Search */
+  .lab-search {
+    display: grid;
+    gap: 6px;
+    margin: 0 0 18px;
+  }
+
+  .lab-search label {
+    margin: 0 10px;
+    color: var(--nexa-color-neutral-500, #64748b);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .search-control {
+    display: grid;
+    grid-template-columns: 16px minmax(0, 1fr) 24px;
+    gap: 8px;
+    align-items: center;
+    min-height: 38px;
+    padding: 0 9px;
+    border: 1px solid var(--nexa-color-border-interactive, #cbd5e1);
+    border-radius: 8px;
+    background: var(--nexa-surface-card, #ffffff);
+    transition: all 0.15s ease;
+
+    &:focus-within {
+      border-color: var(--nexa-color-primary-600, #2a67d9);
+      box-shadow: 0 0 0 3px rgba(42, 103, 217, 0.15);
+    }
+
+    i {
+      color: var(--nexa-color-text-secondary, #64748b);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+      min-width: 0;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--nexa-color-text-primary, #0f172a);
+      font: 13px/1.2 var(--nexa-font-family-body);
+
+      &::placeholder {
+        color: var(--nexa-color-text-muted, #94a3b8);
+      }
+    }
+  }
+
+  .clear-search {
+    display: grid;
+    width: 24px;
+    height: 24px;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--nexa-color-text-secondary);
+    cursor: pointer;
+
+    &:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+  }
+
+  /* Navigation Groups */
+  .lab-nav {
+    display: grid;
+    gap: 16px;
+    overflow-y: auto;
+    flex: 1;
+    padding-right: 2px;
+  }
+
+  .lab-nav-group {
+    display: grid;
+    gap: 2px;
+  }
+
+  .nav-section-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    padding: 0 10px 5px 12px;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .nav-section {
+    margin: 0;
+    color: var(--nexa-color-neutral-500, #64748b);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .toggle-icon {
+    color: var(--nexa-color-neutral-400, #94a3b8);
+    font-size: 10px;
+    transition: transform 0.2s ease;
+  }
+
+  .lab-nav-group.collapsed .toggle-icon {
+    transform: rotate(-90deg);
+  }
+
+  .lab-nav-group.collapsed .lab-nav-items {
+    display: none;
+  }
+
+  .lab-nav-items {
+    display: grid;
+    gap: 2px;
+  }
+
+  .lab-nav-item {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr);
+    gap: 11px;
+    align-items: center;
+    min-height: 38px;
+    padding: 0 12px;
+    border-radius: 10px;
+    color: var(--nexa-color-neutral-600, #475569);
+    font-size: 12.5px;
+    text-decoration: none;
+    transition: all 140ms ease;
+
+    &:hover {
+      background: var(--nexa-color-neutral-50, #f8fafc);
+      color: var(--nexa-color-primary-700, #1d4ed8);
+    }
+
+    &.active {
+      background: #edf4fe;
+      color: #1d4ed8;
+      font-weight: 700;
+      box-shadow: inset 3px 0 0 #2a67d9;
+    }
+
+    i {
+      color: currentColor;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  /* Sidebar Footer */
+  .lab-footer {
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+    margin-top: auto;
+    padding: 14px 10px 0;
+    border-top: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    color: var(--nexa-color-text-secondary, #64748b);
+    font-size: 11px;
+
+    strong {
+      color: var(--nexa-color-text-primary, #0f172a);
+      font-size: 11px;
+    }
+
+    small {
+      display: block;
+      font-size: 10px;
+      color: var(--nexa-color-text-muted, #94a3b8);
+      margin-top: 2px;
+    }
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    margin-top: 3px;
+    border-radius: 50%;
+    background: #0284c7;
+    flex-shrink: 0;
+    box-shadow: 0 0 6px rgba(2, 132, 199, 0.4);
+  }
+
+  /* Right Main Content */
+  .lab-main {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .lab-topbar {
+    display: flex;
+    min-height: 56px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 0 clamp(18px, 3vw, 42px);
+    border-bottom: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    background: var(--nexa-surface-card, #ffffff);
+    color: var(--nexa-color-text-secondary, #64748b);
+    font-size: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 90;
+  }
+
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .mobile-menu-button {
+    display: none;
+    width: 32px;
+    height: 32px;
+    place-items: center;
+    background: transparent;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 6px;
+    color: var(--nexa-color-text-primary, #0f172a);
+    cursor: pointer;
+  }
+
+  .topbar-title {
+    font-weight: 500;
+    color: var(--nexa-color-text-secondary, #64748b);
+  }
+
+  /* Evaluation Controls */
+  .evaluation-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .evaluation-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--nexa-color-neutral-500, #64748b);
+  }
+
+  .segmented-evaluation {
+    display: inline-flex;
+    padding: 2px;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    gap: 2px;
+
+    button {
+      background: transparent;
+      border: 0;
+      padding: 3px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+
+      &:hover {
+        color: #0f172a;
+      }
+
+      &.active {
+        background: #ffffff;
+        color: #1d4ed8;
+        font-weight: 700;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+      }
+    }
+  }
+
+  .rule-badge {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9.5px;
+    font-weight: 800;
+    background: #082846;
+    color: #38c8ff;
+    padding: 3px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .topbar-review {
+    color: #1d4ed8;
+    font-size: 11px;
+    font-weight: 700;
+    background: #eff6ff;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid #bfdbfe;
+    white-space: nowrap;
+  }
+
+  /* Content Area */
+  .lab-content {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+  }
+
+  @media (max-width: 900px) {
+    .mobile-menu-button {
+      display: grid;
+    }
+    .lab-sidebar {
+      position: fixed;
+      left: -284px;
+      transition: left 0.25s ease;
+      box-shadow: 4px 0 16px rgba(0,0,0,0.15);
+    }
+    .lab-sidebar.open {
+      left: 0;
+    }
+    .topbar-review {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Search filtering in sidebar
+  const searchInput = document.getElementById('website-sidebar-search') as HTMLInputElement | null;
+  const btnClear = document.getElementById('btn-clear-search-web');
+
+  searchInput?.addEventListener('input', () => {
+    const term = searchInput.value.trim().toLowerCase();
+    if (btnClear) btnClear.style.display = term ? 'grid' : 'none';
+
+    const searchableCards = document.querySelectorAll<HTMLElement>('.artifact-card, .spec-card, .token-preview-card, .tab-pane');
+    searchableCards.forEach(card => {
+      const text = card.textContent?.toLowerCase() || '';
+      card.style.display = term && !text.includes(term) ? 'none' : '';
+    });
+  });
+
+  btnClear?.addEventListener('click', () => {
+    if (searchInput) {
+      searchInput.value = '';
+      searchInput.dispatchEvent(new Event('input'));
+      searchInput.focus();
+    }
+  });
+
+  // Keyboard shortcut '/'
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== searchInput) {
+      e.preventDefault();
+      searchInput?.focus();
+    }
+  });
+
+  // Contrast Mode Segmented Buttons
+  const contrastButtons = document.querySelectorAll<HTMLButtonElement>('.btn-eval-contrast');
+  contrastButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      contrastButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const mode = btn.getAttribute('data-contrast');
+      document.documentElement.setAttribute('data-contrast-mode', mode === 'increased' ? 'increased' : 'standard');
+    });
+  });
+
+  // Accordion Toggles
+  const navSectionButtons = document.querySelectorAll<HTMLButtonElement>('.nav-section-button');
+  navSectionButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const group = btn.closest('.lab-nav-group');
+      group?.classList.toggle('collapsed');
+    });
+  });
+
+  // Mobile menu toggle
+  const btnMobileMenu = document.getElementById('btn-mobile-sidebar-toggle-web');
+  const sidebar = document.querySelector('.lab-sidebar');
+  btnMobileMenu?.addEventListener('click', () => {
+    sidebar?.classList.toggle('open');
+  });
+</script>

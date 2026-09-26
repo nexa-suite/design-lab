@@ -5,7 +5,7 @@
  */
 import 'primeicons/primeicons.css';
 import '../styles/tokens.css';
-import MonorepoNavHeader from '../components/layout/MonorepoNavHeader.astro';
+import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
 ---
 
 <!DOCTYPE html>
@@ -145,9 +145,8 @@ import MonorepoNavHeader from '../components/layout/MonorepoNavHeader.astro';
 </head>
 <body>
 
-  <MonorepoNavHeader currentSection="landing-spec" />
-
-  <main class="spec-container">
+  <UnifiedLabShell currentSection="landing-spec">
+    <main class="spec-container">
     <div class="spec-header">
       <h1 class="spec-title">Especificaciones de Arquitectura de Landing & Bento</h1>
       <p class="spec-desc">
@@ -245,6 +244,7 @@ import MonorepoNavHeader from '../components/layout/MonorepoNavHeader.astro';
       </div>
     </div>
   </main>
+</UnifiedLabShell>
 
 </body>
 </html>

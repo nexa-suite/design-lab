@@ -5,7 +5,7 @@
  */
 import 'primeicons/primeicons.css';
 import '../styles/tokens.css';
-import MonorepoNavHeader from '../components/layout/MonorepoNavHeader.astro';
+import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
 import YourCompanyHub from '../components/nexafy/YourCompanyHub.astro';
 import PhysicalStoreCard from '../components/nexafy/PhysicalStoreCard.astro';
 import CustomerInquiryCard from '../components/nexafy/CustomerInquiryCard.astro';
@@ -155,9 +155,8 @@ import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
 </head>
 <body>
 
-  <MonorepoNavHeader currentSection="artifacts" />
-
-  <main class="catalog-container">
+  <UnifiedLabShell currentSection="artifacts">
+    <main class="catalog-container">
     <div class="catalog-header">
       <h1 class="catalog-title">Catálogo Modular de Artefactos Vivos (Nexafy)</h1>
       <p class="catalog-desc">
@@ -395,6 +394,7 @@ import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
       </div>
     </div>
   </main>
+</UnifiedLabShell>
 
 </body>
 </html>

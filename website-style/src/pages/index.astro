@@ -5,7 +5,7 @@
  */
 import 'primeicons/primeicons.css';
 import '../styles/tokens.css';
-import MonorepoNavHeader from '../components/layout/MonorepoNavHeader.astro';
+import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
 import NexafyLivingEngine from '../components/guidelines/NexafyLivingEngine.astro';
 import ColorimetriaSection from '../components/guidelines/ColorimetriaSection.astro';
 import TipografiaSection from '../components/guidelines/TipografiaSection.astro';
@@ -107,57 +107,57 @@ import ComponentesNexaUiSection from '../components/guidelines/ComponentesNexaUi
 </head>
 <body>
 
-  <!-- Top Monorepo & Categorized Navbar Header (Angular Style) -->
-  <MonorepoNavHeader currentSection="workbench" activeTab="motor-grafico" />
-
-  <!-- Main Content Panes -->
-  <main class="guidelines-main">
-    
-    <!-- Tab 1 (DEFAULT & PRIMARY): Motor Gráfico Nexafy Vivo -->
-    <div id="pane-motor-grafico" class="tab-pane active" role="tabpanel">
-      <NexafyLivingEngine />
-    </div>
-
-    <!-- Tab 2: Colorimetría -->
-    <div id="pane-colorimetria" class="tab-pane" role="tabpanel">
-      <div class="guidelines-content-wrapper">
-        <ColorimetriaSection />
+  <!-- Unified Design Lab Shell (Identical structure to Web and Mobile) -->
+  <UnifiedLabShell currentSection="workbench" activeTab="motor-grafico">
+    <!-- Main Content Panes -->
+    <main class="guidelines-main">
+      
+      <!-- Tab 1 (DEFAULT & PRIMARY): Motor Gráfico Nexafy Vivo -->
+      <div id="pane-motor-grafico" class="tab-pane active" role="tabpanel">
+        <NexafyLivingEngine />
       </div>
-    </div>
 
-    <!-- Tab 3: Tipografía -->
-    <div id="pane-tipografia" class="tab-pane" role="tabpanel">
-      <div class="guidelines-content-wrapper">
-        <TipografiaSection />
+      <!-- Tab 2: Colorimetría -->
+      <div id="pane-colorimetria" class="tab-pane" role="tabpanel">
+        <div class="guidelines-content-wrapper">
+          <ColorimetriaSection />
+        </div>
       </div>
-    </div>
 
-    <!-- Tab 4: Espaciado & Geometría -->
-    <div id="pane-geometria" class="tab-pane" role="tabpanel">
-      <div class="guidelines-content-wrapper">
-        <GeometriaSpacingSection />
+      <!-- Tab 3: Tipografía -->
+      <div id="pane-tipografia" class="tab-pane" role="tabpanel">
+        <div class="guidelines-content-wrapper">
+          <TipografiaSection />
+        </div>
       </div>
-    </div>
 
-    <!-- Tab 5: Componentes Nexa UI -->
-    <div id="pane-componentes" class="tab-pane" role="tabpanel">
-      <div class="guidelines-content-wrapper">
-        <ComponentesNexaUiSection />
+      <!-- Tab 4: Espaciado & Geometría -->
+      <div id="pane-geometria" class="tab-pane" role="tabpanel">
+        <div class="guidelines-content-wrapper">
+          <GeometriaSpacingSection />
+        </div>
       </div>
-    </div>
 
-  </main>
+      <!-- Tab 5: Componentes Nexa UI -->
+      <div id="pane-componentes" class="tab-pane" role="tabpanel">
+        <div class="guidelines-content-wrapper">
+          <ComponentesNexaUiSection />
+        </div>
+      </div>
 
-  <!-- Footer -->
-  <footer class="guidelines-footer">
-    <div>
-      <strong>Nexafy · Living Geometry System (Website Style)</strong> · Pure flat solid colorimetry (Nexa Dark Blue #082846 & Celeste #38c8ff · 0 Gradients · 28px Conduits).
-    </div>
-    <div class="footer-links">
-      <a href="/artifacts">Ver Catálogo de Artefactos Vivos &rarr;</a>
-      <a href="/landing-spec">Ver Landing Specs &rarr;</a>
-    </div>
-  </footer>
+    </main>
+
+    <!-- Footer -->
+    <footer class="guidelines-footer">
+      <div>
+        <strong>Nexafy · Living Geometry System (Website Style)</strong> · Pure flat solid colorimetry (Nexa Dark Blue #082846 & Celeste #38c8ff · 0 Gradients · 28px Conduits).
+      </div>
+      <div class="footer-links">
+        <a href="/artifacts">Ver Catálogo de Artefactos Vivos &rarr;</a>
+        <a href="/landing-spec">Ver Landing Specs &rarr;</a>
+      </div>
+    </footer>
+  </UnifiedLabShell>
 
   <script>
     // Tab Switching Logic wired to MonorepoNavHeader data-nav-tab links
