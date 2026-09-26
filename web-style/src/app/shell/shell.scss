@@ -55,9 +55,9 @@
 .monorepo-suite-switcher {
   margin: 0 10px 18px;
   padding: 8px 10px;
-  background: var(--nexa-color-neutral-50, #f8fafc);
-  border: 1px solid var(--nexa-color-border-subtle, #e2e8f0);
-  border-radius: 8px;
+  background: var(--nexa-color-neutral-50);
+  border: 1px solid var(--nexa-color-border-subtle);
+  border-radius: var(--nexa-radius-md);
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -66,7 +66,7 @@
     font-size: 9px;
     font-weight: 800;
     letter-spacing: 0.08em;
-    color: var(--nexa-color-neutral-500, #64748b);
+    color: var(--nexa-color-neutral-500);
     text-transform: uppercase;
   }
 
@@ -83,25 +83,25 @@
     font-size: 11px;
     font-weight: 600;
     padding: 3px 8px;
-    border-radius: 6px;
+    border-radius: var(--nexa-radius-sm);
     text-decoration: none;
     transition: all 0.15s ease;
 
     &.active {
-      background: var(--nexa-color-primary-100, #dbeafe);
-      color: var(--nexa-color-primary-700, #1d4ed8);
+      background: var(--nexa-color-primary-100);
+      color: var(--nexa-color-primary-700);
       font-weight: 700;
     }
 
     &.link {
-      background: #ffffff;
-      color: var(--nexa-color-neutral-700, #334155);
-      border: 1px solid var(--nexa-color-border-default, #cbd5e1);
+      background: var(--nexa-surface-card);
+      color: var(--nexa-color-neutral-700);
+      border: 1px solid var(--nexa-color-border-default);
 
       &:hover {
-        background: var(--nexa-color-neutral-100, #f1f5f9);
-        color: var(--nexa-color-primary-600, #2563eb);
-        border-color: var(--nexa-color-primary-300, #93c5fd);
+        background: var(--nexa-color-neutral-100);
+        color: var(--nexa-color-primary-600);
+        border-color: var(--nexa-color-primary-300);
       }
     }
   }

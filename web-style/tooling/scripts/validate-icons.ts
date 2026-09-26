@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
 const root = process.cwd();
@@ -7,7 +7,9 @@ const catalogPath = join(root, 'src', 'app', 'documentation', 'foundations', 'ic
 const catalog = readFileSync(catalogPath, 'utf8');
 const globalStyles = readFileSync(join(root, 'src', 'styles.scss'), 'utf8');
 const angularConfig = JSON.parse(readFileSync(join(root, 'angular.json'), 'utf8'));
-const primeIconsStylesheet = readFileSync(join(root, 'node_modules', 'primeicons', 'primeicons.css'), 'utf8');
+const localPrimeIcons = join(root, 'node_modules', 'primeicons', 'primeicons.css');
+const parentPrimeIcons = join(root, '..', 'node_modules', 'primeicons', 'primeicons.css');
+const primeIconsStylesheet = readFileSync(existsSync(localPrimeIcons) ? localPrimeIcons : parentPrimeIcons, 'utf8');
 const renderableIcons = new Set([...primeIconsStylesheet.matchAll(/\.((?:pi)-[a-z0-9-]+):before/g)].map((match) => match[1]));
 const allowed = new Set(manifest.icons);
 const violations = [];
