@@ -1,0 +1,49 @@
+---
+import 'primeicons/primeicons.css';
+import '../styles/tokens.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { 
+  title = "Flecto — Unlock your Rental Business and Access New Customers",
+  description = "A flexible operating system for rental businesses. Connect online, in-store, and direct inquiries in a single circular platform." 
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#004737" />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    <!-- Inline SVG Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect x='2' y='2' width='20' height='20' rx='6' fill='%23004737'/><circle cx='12' cy='12' r='4' fill='%2356f09f'/></svg>" />
+    
+    <!-- Google Fonts for faithful typographic character (Aeonik & Roobert aesthetic) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" 
+      rel="stylesheet" 
+    />
+    
+    <title>{title}</title>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <slot />
+
+    <script src="../scripts/interactions.ts"></script>
+  </body>
+</html>

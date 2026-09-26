@@ -6,7 +6,7 @@
 import NexaLogo from '../guidelines/NexaLogo.astro';
 
 interface Props {
-  currentSection?: 'workbench' | 'artifacts' | 'landing-spec';
+  currentSection?: 'workbench' | 'artifacts' | 'landing-spec' | 'interactive-suite' | 'nexafy' | 'flecto-forensic';
   activeTab?: string;
 }
 
@@ -107,6 +107,10 @@ const { currentSection = 'workbench', activeTab = 'motor-grafico' } = Astro.prop
           <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
         </button>
         <div class="lab-nav-items">
+          <a class={`lab-nav-item ${currentSection === 'interactive-suite' ? 'active' : ''}`} href="/interactive-suite">
+            <i class="pi pi-sparkles" aria-hidden="true"></i>
+            <span>✦ Suite Interactiva Flecto</span>
+          </a>
           <a class={`lab-nav-item ${currentSection === 'artifacts' ? 'active' : ''}`} href="/artifacts">
             <i class="pi pi-compass" aria-hidden="true"></i>
             <span>Catálogo de Artefactos Vivos</span>
@@ -114,6 +118,24 @@ const { currentSection = 'workbench', activeTab = 'motor-grafico' } = Astro.prop
           <a class={`lab-nav-item ${currentSection === 'landing-spec' ? 'active' : ''}`} href="/landing-spec">
             <i class="pi pi-book" aria-hidden="true"></i>
             <span>Landing Architecture Spec</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 4. Nexafy & Análisis Forense -->
+      <section class="lab-nav-group">
+        <button class="nav-section-button" type="button" data-nav-group="forensic">
+          <span class="nav-section">4. NEXAFY & FORENSE FLECTO</span>
+          <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
+        </button>
+        <div class="lab-nav-items">
+          <a class={`lab-nav-item ${currentSection === 'nexafy' ? 'active' : ''}`} href="/nexafy">
+            <i class="pi pi-desktop" aria-hidden="true"></i>
+            <span>✦ Nexafy Live Landing</span>
+          </a>
+          <a class={`lab-nav-item ${currentSection === 'flecto-forensic' ? 'active' : ''}`} href="/flecto-forensic">
+            <i class="pi pi-search" aria-hidden="true"></i>
+            <span>🔬 Frame-by-Frame Forensic</span>
           </a>
         </div>
       </section>

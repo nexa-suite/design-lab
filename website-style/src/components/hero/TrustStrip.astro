@@ -1,0 +1,95 @@
+---
+// TrustStrip: Historical 2022 Press Strip (Forbes, TC, O Jornal Económico, ECO)
+// Independent geometric and typographic vector approximations for historical sandbox study
+---
+
+<section class="trust-strip" aria-label="Press mentions in the circular economy">
+  <div class="trust-container">
+    <div class="trust-badges" role="list">
+      
+      <!-- Mark 1: Forbes -->
+      <div class="badge-item" role="listitem" title="Forbes">
+        <svg class="press-logo-svg" width="90" height="28" viewBox="0 0 100 30" fill="currentColor" aria-label="Forbes logo">
+          <text x="0" y="24" font-family="'Times New Roman', Times, serif" font-size="28" font-weight="700" font-style="italic" letter-spacing="-0.02em">Forbes</text>
+        </svg>
+      </div>
+
+      <!-- Mark 2: TC (TechCrunch style) -->
+      <div class="badge-item" role="listitem" title="TechCrunch">
+        <svg class="press-logo-svg" width="46" height="28" viewBox="0 0 46 28" fill="none" aria-label="TC logo">
+          <rect x="1" y="1" width="44" height="26" rx="4" stroke="currentColor" stroke-width="2"/>
+          <text x="8" y="20" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="900" fill="currentColor">TC</text>
+        </svg>
+      </div>
+
+      <!-- Mark 3: O Jornal Económico -->
+      <div class="badge-item" role="listitem" title="O Jornal Económico">
+        <svg class="press-logo-svg" width="180" height="28" viewBox="0 0 200 30" fill="currentColor" aria-label="O Jornal Económico logo">
+          <text x="0" y="16" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" letter-spacing="0.1em">O JORNAL</text>
+          <text x="0" y="27" font-family="'Times New Roman', serif" font-size="14" font-weight="700" font-style="italic">ECONÓMICO</text>
+        </svg>
+      </div>
+
+      <!-- Mark 4: ECO -->
+      <div class="badge-item" role="listitem" title="ECO Economia Online">
+        <svg class="press-logo-svg" width="60" height="28" viewBox="0 0 70 30" fill="currentColor" aria-label="ECO logo">
+          <text x="0" y="24" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="900" letter-spacing="0.04em">ECO</text>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust-strip {
+    background-color: var(--primitive-color-forest-900);
+    border-top: 1px solid rgba(87, 240, 158, 0.12);
+    border-bottom: 1px solid rgba(87, 240, 158, 0.12);
+    padding: 1.75rem 0;
+  }
+
+  .trust-container {
+    max-width: var(--layout-max-width);
+    margin: 0 auto;
+    padding: 0 var(--layout-gutter);
+    display: flex;
+    justify-content: center;
+  }
+
+  .trust-badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 3.5rem;
+    width: 100%;
+  }
+
+  .badge-item {
+    display: inline-flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.55);
+    transition: color var(--primitive-duration-fast) ease, transform var(--primitive-duration-fast) ease;
+  }
+
+  .badge-item:hover {
+    color: var(--primitive-color-mint-500);
+    transform: translateY(-1px);
+  }
+
+  .press-logo-svg {
+    display: block;
+    height: 24px;
+    width: auto;
+  }
+
+  @media (max-width: 768px) {
+    .trust-badges {
+      gap: 2rem;
+    }
+    .press-logo-svg {
+      height: 20px;
+    }
+  }
+</style>
