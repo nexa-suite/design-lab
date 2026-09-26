@@ -9,10 +9,15 @@
   background: var(--nexa-surface-page);
 }
 .lab-sidebar {
+  height: 100vh;
+  position: sticky;
+  top: 0;
   display: flex;
-  flex: 0 0 284px;
   flex-direction: column;
-  min-height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  flex: 0 0 284px;
+  width: 284px;
   padding: 24px 16px 16px;
   border-right: 1px solid var(--nexa-color-border-structural);
   background: var(--nexa-surface-card);
@@ -171,9 +176,13 @@
 }
 
 .lab-nav {
-  display: grid;
-  gap: 20px;
-  overflow: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-right: 4px;
 }
 .lab-nav-group {
   display: grid;
@@ -254,9 +263,11 @@
   display: flex;
   gap: 9px;
   align-items: flex-start;
+  flex-shrink: 0;
   margin-top: auto;
-  padding: 14px 10px 0;
-  border-top: 1px solid var(--nexa-color-border-structural);
+  padding: 14px 10px 14px;
+  border-top: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+  background: var(--nexa-surface-card, #ffffff);
   color: var(--nexa-color-text-secondary);
   font-size: 11px;
 }
