@@ -6,6 +6,7 @@
 import OperationsScreenSpec from './OperationsScreenSpec.astro';
 import BuyerScreenSpec from './BuyerScreenSpec.astro';
 import BottomSheetSpec from './BottomSheetSpec.astro';
+import ScannerScreenSpec from './ScannerScreenSpec.astro';
 ---
 
 <div class="simulator-wrapper">
@@ -25,6 +26,9 @@ import BottomSheetSpec from './BottomSheetSpec.astro';
       <span class="control-label">PANTALLA:</span>
       <button type="button" class="btn-ctrl screen-btn active" data-screen="operations">
         <i class="pi pi-truck"></i> Operaciones (Android)
+      </button>
+      <button type="button" class="btn-ctrl screen-btn" data-screen="scanner">
+        <i class="pi pi-qrcode"></i> Escáner CameraX
       </button>
       <button type="button" class="btn-ctrl screen-btn" data-screen="buyer">
         <i class="pi pi-shopping-cart"></i> Comprador (Flutter)
@@ -57,6 +61,9 @@ import BottomSheetSpec from './BottomSheetSpec.astro';
       <div class="phone-screen">
         <div class="screen-view active" id="view-operations">
           <OperationsScreenSpec />
+        </div>
+        <div class="screen-view" id="view-scanner">
+          <ScannerScreenSpec />
         </div>
         <div class="screen-view" id="view-buyer">
           <BuyerScreenSpec />
