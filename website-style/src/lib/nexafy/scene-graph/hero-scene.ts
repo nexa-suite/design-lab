@@ -47,38 +47,39 @@ export function createHeroChapter1Scene(stageWidth: number = 1440, stageHeight: 
   ];
 
   // Responsive constraint solving
-  const isDesktop = stageWidth >= 1280;
-  const isTabletLandscape = stageWidth >= 1000 && stageWidth < 1280;
+  const isDesktop = stageWidth >= 1200;
+  const isTabletLandscape = stageWidth >= 900 && stageWidth < 1200;
 
-  // Adaptive node dimensions
-  const companyWidth = isDesktop ? 220 : (isTabletLandscape ? 180 : 150);
-  const companyHeight = isDesktop ? 104 : (isTabletLandscape ? 90 : 80);
+  // Adaptive node dimensions matching media_1790393466518.png
+  const companyWidth = isDesktop ? 190 : (isTabletLandscape ? 170 : 150);
+  const companyHeight = isDesktop ? 90 : (isTabletLandscape ? 85 : 80);
 
-  const hubSize = isDesktop ? 140 : (isTabletLandscape ? 120 : 100);
+  const hubSize = isDesktop ? 120 : (isTabletLandscape ? 110 : 100);
 
-  const cardWidth = isDesktop ? 280 : (isTabletLandscape ? 220 : 190);
-  const cardHeight = isDesktop ? 136 : (isTabletLandscape ? 120 : 105);
+  const cardWidth = isDesktop ? 230 : (isTabletLandscape ? 200 : 180);
+  const cardHeight = isDesktop ? 115 : (isTabletLandscape ? 105 : 95);
 
-  const shieldSize = isDesktop ? 70 : (isTabletLandscape ? 56 : 48);
+  const shieldWidth = isDesktop ? 140 : (isTabletLandscape ? 125 : 110);
+  const shieldHeight = isDesktop ? 80 : (isTabletLandscape ? 75 : 70);
 
-  // Responsive Anchor Calculations with Guaranteed Clearances (Gx >= 32px, Gy >= 24px)
-  const companyX = Math.max(30, 120 * (stageWidth / 1440));
-  const companyY = 240;
+  // Responsive Anchor Calculations with Guaranteed Clearances matching media_1790393466518.png
+  const companyX = Math.round(stageWidth * 0.08);
+  const companyY = Math.round(stageHeight * 0.33);
 
-  const hubX = Math.max(companyX + companyWidth + 48, stageWidth * 0.38);
-  const hubY = 220;
+  const hubX = Math.round(stageWidth * 0.33);
+  const hubY = Math.round(stageHeight * 0.31);
 
-  const onlineX = Math.max(hubX + hubSize + 40, stageWidth * 0.58);
-  const onlineY = 210;
+  const onlineX = Math.round(stageWidth * 0.49);
+  const onlineY = Math.round(stageHeight * 0.29);
 
-  const shieldX = Math.max(onlineX + cardWidth + 32, stageWidth * 0.88);
-  const shieldY = 245;
+  const shieldX = Math.round(stageWidth * 0.74);
+  const shieldY = Math.round(stageHeight * 0.33);
 
-  const storeX = Math.max(24, hubX - cardWidth * 0.7);
-  const storeY = Math.max(hubY + hubSize + 50, 440);
+  const storeX = Math.round(stageWidth * 0.24);
+  const storeY = Math.round(stageHeight * 0.55);
 
-  const emailX = Math.max(storeX + cardWidth + 32, hubX + 40);
-  const emailY = storeY;
+  const emailX = Math.round(stageWidth * 0.44);
+  const emailY = Math.round(stageHeight * 0.55);
 
   const nodes: SceneNode[] = [
     // 1. YOUR COMPANY tile
@@ -109,10 +110,10 @@ export function createHeroChapter1Scene(stageWidth: number = 1440, stageHeight: 
       allowOverlapWith: ['node-trunk-edge']
     },
 
-    // 2. FLECTO MODULAR HUB
+    // 2. NEXA MODULAR HUB (FLECTO MODULAR HUB)
     {
       id: 'node-hub',
-      name: 'Flecto Modular Hub',
+      name: 'Nexa Modular Hub',
       semanticRole: 'hub',
       regionId: 'NETWORK_REGION',
       anchor: { x: hubX, y: hubY },
@@ -134,6 +135,28 @@ export function createHeroChapter1Scene(stageWidth: number = 1440, stageHeight: 
           computedAbsolutePosition: { x: hubX, y: hubY + hubSize / 2 }
         },
         {
+          id: 'port-hub-online-out',
+          nodeId: 'node-hub',
+          role: 'source',
+          signalType: 'circuit_branch',
+          direction: 'right',
+          normal: { x: 1, y: 0 },
+          offsetRatio: { x: 1.0, y: 0.35 },
+          escapeClearance: 24,
+          computedAbsolutePosition: { x: hubX + hubSize, y: hubY + hubSize * 0.35 }
+        },
+        {
+          id: 'port-hub-online2-out',
+          nodeId: 'node-hub',
+          role: 'source',
+          signalType: 'circuit_branch',
+          direction: 'right',
+          normal: { x: 1, y: 0 },
+          offsetRatio: { x: 1.0, y: 0.65 },
+          escapeClearance: 24,
+          computedAbsolutePosition: { x: hubX + hubSize, y: hubY + hubSize * 0.65 }
+        },
+        {
           id: 'port-hub-store-out',
           nodeId: 'node-hub',
           role: 'source',
@@ -151,34 +174,12 @@ export function createHeroChapter1Scene(stageWidth: number = 1440, stageHeight: 
           signalType: 'circuit_branch',
           direction: 'bottom',
           normal: { x: 0, y: 1 },
-          offsetRatio: { x: 0.70, y: 1.0 },
+          offsetRatio: { x: 0.75, y: 1.0 },
           escapeClearance: 20,
-          computedAbsolutePosition: { x: hubX + hubSize * 0.70, y: hubY + hubSize }
-        },
-        {
-          id: 'port-hub-online-out',
-          nodeId: 'node-hub',
-          role: 'source',
-          signalType: 'circuit_branch',
-          direction: 'right',
-          normal: { x: 1, y: 0 },
-          offsetRatio: { x: 1.0, y: 0.35 },
-          escapeClearance: 24,
-          computedAbsolutePosition: { x: hubX + hubSize, y: hubY + hubSize * 0.35 }
-        },
-        {
-          id: 'port-hub-shield-out',
-          nodeId: 'node-hub',
-          role: 'source',
-          signalType: 'escrow_link',
-          direction: 'right',
-          normal: { x: 1, y: 0 },
-          offsetRatio: { x: 1.0, y: 0.65 },
-          escapeClearance: 24,
-          computedAbsolutePosition: { x: hubX + hubSize, y: hubY + hubSize * 0.65 }
+          computedAbsolutePosition: { x: hubX + hubSize * 0.75, y: hubY + hubSize }
         }
       ],
-      allowOverlapWith: ['node-trunk-edge', 'edge-store', 'edge-email', 'edge-online', 'edge-shield']
+      allowOverlapWith: ['node-trunk-edge', 'edge-store', 'edge-email', 'edge-online', 'edge-online2']
     },
 
     // 3. PHYSICAL STORE CHANNEL CARD
@@ -257,23 +258,45 @@ export function createHeroChapter1Scene(stageWidth: number = 1440, stageHeight: 
           signalType: 'circuit_branch',
           direction: 'left',
           normal: { x: -1, y: 0 },
-          offsetRatio: { x: 0.0, y: 0.5 },
+          offsetRatio: { x: 0.0, y: 0.35 },
           escapeClearance: 20,
-          computedAbsolutePosition: { x: onlineX, y: onlineY + cardHeight / 2 }
+          computedAbsolutePosition: { x: onlineX, y: onlineY + cardHeight * 0.35 }
+        },
+        {
+          id: 'port-card-online-in2',
+          nodeId: 'node-card-online',
+          role: 'sink',
+          signalType: 'circuit_branch',
+          direction: 'left',
+          normal: { x: -1, y: 0 },
+          offsetRatio: { x: 0.0, y: 0.65 },
+          escapeClearance: 20,
+          computedAbsolutePosition: { x: onlineX, y: onlineY + cardHeight * 0.65 }
+        },
+        {
+          id: 'port-card-online-out',
+          nodeId: 'node-card-online',
+          role: 'source',
+          signalType: 'escrow_link',
+          direction: 'right',
+          normal: { x: 1, y: 0 },
+          offsetRatio: { x: 1.0, y: 0.5 },
+          escapeClearance: 20,
+          computedAbsolutePosition: { x: onlineX + cardWidth, y: onlineY + cardHeight / 2 }
         }
       ],
-      allowOverlapWith: ['edge-online']
+      allowOverlapWith: ['edge-online', 'edge-online2', 'edge-shield']
     },
 
-    // 6. ESCROW SHIELD TERMINAL
+    // 6. ESCROW SECURITY TERMINAL
     {
       id: 'node-shield',
       name: 'Escrow Security Terminal',
       semanticRole: 'terminal_badge',
       regionId: 'NETWORK_REGION',
       anchor: { x: shieldX, y: shieldY },
-      intrinsicBounds: { x: shieldX, y: shieldY, width: shieldSize, height: shieldSize },
-      visualBounds: { x: shieldX, y: shieldY, width: shieldSize, height: shieldSize },
+      intrinsicBounds: { x: shieldX, y: shieldY, width: shieldWidth, height: shieldHeight },
+      visualBounds: { x: shieldX, y: shieldY, width: shieldWidth, height: shieldHeight },
       zLayer: 56,
       visibility: 'visible',
       motionState: { x: 0, y: 0, scale: 1, rotation: 0, opacity: 1 },
@@ -287,7 +310,7 @@ export function createHeroChapter1Scene(stageWidth: number = 1440, stageHeight: 
           normal: { x: -1, y: 0 },
           offsetRatio: { x: 0.0, y: 0.5 },
           escapeClearance: 16,
-          computedAbsolutePosition: { x: shieldX, y: shieldY + shieldSize / 2 }
+          computedAbsolutePosition: { x: shieldX, y: shieldY + shieldHeight / 2 }
         }
       ],
       allowOverlapWith: ['edge-shield']
@@ -297,7 +320,7 @@ export function createHeroChapter1Scene(stageWidth: number = 1440, stageHeight: 
   // Route Edges using OrthogonalFilletRouter
   const edges: SceneEdge[] = [];
 
-  // Trunk Edge: Company -> Hub
+  // 1. Trunk Edge: Company -> Hub
   const companyPort = nodes[0].ports[0];
   const hubInPort = nodes[1].ports[0];
   const trunkRoute = OrthogonalFilletRouter.route(companyPort, hubInPort, 16);
@@ -307,9 +330,9 @@ export function createHeroChapter1Scene(stageWidth: number = 1440, stageHeight: 
     sourcePortId: 'port-company-out',
     targetNodeId: 'node-hub',
     targetPortId: 'port-hub-in',
-    strokeWidth: 28,
+    strokeWidth: 20,
     filletRadius: 16,
-    colorToken: '#57f09e',
+    colorToken: '#38c8ff',
     waypoints: trunkRoute.waypoints,
     svgPathData: trunkRoute.svgPathData,
     animationOrder: 1,
@@ -317,8 +340,48 @@ export function createHeroChapter1Scene(stageWidth: number = 1440, stageHeight: 
     drawDelay: 3.30
   });
 
-  // Store Edge: Hub -> Store Card
-  const hubStorePort = nodes[1].ports[1];
+  // 2. Online Top Edge: Hub -> Online Card (Upper Port)
+  const hubOnlinePort = nodes[1].ports[1];
+  const onlinePort1 = nodes[4].ports[0];
+  const onlineRoute1 = OrthogonalFilletRouter.route(hubOnlinePort, onlinePort1, 16);
+  edges.push({
+    id: 'edge-online',
+    sourceNodeId: 'node-hub',
+    sourcePortId: 'port-hub-online-out',
+    targetNodeId: 'node-card-online',
+    targetPortId: 'port-card-online-in',
+    strokeWidth: 20,
+    filletRadius: 16,
+    colorToken: '#38c8ff',
+    waypoints: onlineRoute1.waypoints,
+    svgPathData: onlineRoute1.svgPathData,
+    animationOrder: 2,
+    drawDuration: 0.45,
+    drawDelay: 9.80
+  });
+
+  // 3. Online Lower Edge: Hub -> Online Card (Lower Port)
+  const hubOnline2Port = nodes[1].ports[2];
+  const onlinePort2 = nodes[4].ports[1];
+  const onlineRoute2 = OrthogonalFilletRouter.route(hubOnline2Port, onlinePort2, 16);
+  edges.push({
+    id: 'edge-online2',
+    sourceNodeId: 'node-hub',
+    sourcePortId: 'port-hub-online2-out',
+    targetNodeId: 'node-card-online',
+    targetPortId: 'port-card-online-in2',
+    strokeWidth: 20,
+    filletRadius: 16,
+    colorToken: '#38c8ff',
+    waypoints: onlineRoute2.waypoints,
+    svgPathData: onlineRoute2.svgPathData,
+    animationOrder: 3,
+    drawDuration: 0.45,
+    drawDelay: 10.10
+  });
+
+  // 4. Store Edge: Hub -> Physical Store POS Card
+  const hubStorePort = nodes[1].ports[3];
   const storePort = nodes[2].ports[0];
   const storeRoute = OrthogonalFilletRouter.route(hubStorePort, storePort, 16);
   edges.push({
@@ -327,18 +390,18 @@ export function createHeroChapter1Scene(stageWidth: number = 1440, stageHeight: 
     sourcePortId: 'port-hub-store-out',
     targetNodeId: 'node-card-store',
     targetPortId: 'port-card-store-in',
-    strokeWidth: 28,
+    strokeWidth: 20,
     filletRadius: 16,
-    colorToken: '#57f09e',
+    colorToken: '#38c8ff',
     waypoints: storeRoute.waypoints,
     svgPathData: storeRoute.svgPathData,
-    animationOrder: 2,
+    animationOrder: 4,
     drawDuration: 0.4,
     drawDelay: 7.40
   });
 
-  // Email Edge: Hub -> Email Card
-  const hubEmailPort = nodes[1].ports[2];
+  // 5. Email Edge: Hub -> Direct Customer Inquiry Card
+  const hubEmailPort = nodes[1].ports[4];
   const emailPort = nodes[3].ports[0];
   const emailRoute = OrthogonalFilletRouter.route(hubEmailPort, emailPort, 16);
   edges.push({
@@ -347,52 +410,32 @@ export function createHeroChapter1Scene(stageWidth: number = 1440, stageHeight: 
     sourcePortId: 'port-hub-email-out',
     targetNodeId: 'node-card-email',
     targetPortId: 'port-card-email-in',
-    strokeWidth: 28,
+    strokeWidth: 20,
     filletRadius: 16,
-    colorToken: '#57f09e',
+    colorToken: '#38c8ff',
     waypoints: emailRoute.waypoints,
     svgPathData: emailRoute.svgPathData,
-    animationOrder: 3,
+    animationOrder: 5,
     drawDuration: 0.4,
     drawDelay: 6.00
   });
 
-  // Online Edge: Hub -> Online Card
-  const hubOnlinePort = nodes[1].ports[3];
-  const onlinePort = nodes[4].ports[0];
-  const onlineRoute = OrthogonalFilletRouter.route(hubOnlinePort, onlinePort, 16);
-  edges.push({
-    id: 'edge-online',
-    sourceNodeId: 'node-hub',
-    sourcePortId: 'port-hub-online-out',
-    targetNodeId: 'node-card-online',
-    targetPortId: 'port-card-online-in',
-    strokeWidth: 28,
-    filletRadius: 16,
-    colorToken: '#57f09e',
-    waypoints: onlineRoute.waypoints,
-    svgPathData: onlineRoute.svgPathData,
-    animationOrder: 4,
-    drawDuration: 0.45,
-    drawDelay: 9.80
-  });
-
-  // Shield Edge: Hub -> Escrow Shield
-  const hubShieldPort = nodes[1].ports[4];
+  // 6. Shield Edge: Online Card -> Escrow Security Terminal
+  const onlineShieldPort = nodes[4].ports[2];
   const shieldPort = nodes[5].ports[0];
-  const shieldRoute = OrthogonalFilletRouter.route(hubShieldPort, shieldPort, 16);
+  const shieldRoute = OrthogonalFilletRouter.route(onlineShieldPort, shieldPort, 16);
   edges.push({
     id: 'edge-shield',
-    sourceNodeId: 'node-hub',
-    sourcePortId: 'port-hub-shield-out',
+    sourceNodeId: 'node-card-online',
+    sourcePortId: 'port-card-online-out',
     targetNodeId: 'node-shield',
     targetPortId: 'port-shield-in',
-    strokeWidth: 28,
+    strokeWidth: 20,
     filletRadius: 16,
-    colorToken: '#57f09e',
+    colorToken: '#38c8ff',
     waypoints: shieldRoute.waypoints,
     svgPathData: shieldRoute.svgPathData,
-    animationOrder: 5,
+    animationOrder: 6,
     drawDuration: 0.35,
     drawDelay: 10.50
   });

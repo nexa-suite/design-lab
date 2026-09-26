@@ -30,8 +30,8 @@ export const NEXAFY_PRESETS: Record<string, NexafyShapeConfig> = {
       filletRadius: 36
     },
     colors: {
-      background: '#004737',
-      mintAccent: '#57f09e',
+      background: '#082846',
+      mintAccent: '#38c8ff',
       surface: '#ffffff'
     }
   },
@@ -60,8 +60,8 @@ export const NEXAFY_PRESETS: Record<string, NexafyShapeConfig> = {
       filletRadius: 36
     },
     colors: {
-      background: '#004737',
-      mintAccent: '#57f09e',
+      background: '#082846',
+      mintAccent: '#38c8ff',
       surface: '#ffffff'
     }
   },
@@ -90,8 +90,8 @@ export const NEXAFY_PRESETS: Record<string, NexafyShapeConfig> = {
       filletRadius: 28
     },
     colors: {
-      background: '#004737',
-      mintAccent: '#57f09e',
+      background: '#082846',
+      mintAccent: '#38c8ff',
       surface: '#ffffff'
     }
   },

@@ -172,6 +172,19 @@
         </div>
 
         <div class="view-toggles">
+          <!-- Plate Palette Preset Selector -->
+          <div class="plate-palette-toggle" role="group" aria-label="Plate Palette">
+            <button type="button" class="plate-pill active" data-plate="#082846" data-accent="#38c8ff" title="Nexa Deep Dark Blue (#082846)">
+              <span class="color-swatch" style="background: #082846; border: 1px solid #38c8ff;"></span> Nexa Blue
+            </button>
+            <button type="button" class="plate-pill" data-plate="#00382b" data-accent="#57f09e" title="Obsidian Green (#00382b)">
+              <span class="color-swatch" style="background: #00382b; border: 1px solid #57f09e;"></span> Obsidian
+            </button>
+            <button type="button" class="plate-pill" data-plate="#052018" data-accent="#57f09e" title="Deep Obsidian (#052018)">
+              <span class="color-swatch" style="background: #052018; border: 1px solid #57f09e;"></span> Deep Dark
+            </button>
+          </div>
+
           <label class="toggle-checkbox">
             <input type="checkbox" id="toggle-living-motion" checked>
             <span>Living Movement</span>
@@ -204,7 +217,7 @@
         </div>
       </div>
 
-      <!-- SVG Drawing Surface -->
+      <!-- SVG Drawing Surface with dotted grid canvas wrapper -->
       <div class="canvas-stage-wrapper" id="stage-wrapper">
         <div class="canvas-frame" id="canvas-frame" style="width: 720px; height: 410px;">
           
@@ -224,22 +237,22 @@
           >
             <defs>
               <radialGradient id="lab-radial-glow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#005e49" stop-opacity="0.4" />
-                <stop offset="100%" stop-color="#004737" stop-opacity="0" />
+                <stop offset="0%" stop-color="#38c8ff" stop-opacity="0.12" />
+                <stop offset="100%" stop-color="#082846" stop-opacity="0" />
               </radialGradient>
               <filter id="node-glow" x="-20%" y="-20%" width="140%" height="140%">
                 <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#2a67d9" flood-opacity="0.25" />
               </filter>
-              <filter id="card-shadow" x="-10%" y="-10%" width="120%" height="120%">
-                <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12" />
+              <filter id="card-shadow" x="-15%" y="-15%" width="130%" height="130%">
+                <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.12" />
               </filter>
-              <filter id="pulse-glow" x="-30%" y="-30%" width="160%" height="160%">
-                <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#56f09f" flood-opacity="0.9" />
+              <filter id="pulse-glow" x="-40%" y="-40%" width="180%" height="180%">
+                <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#38c8ff" flood-opacity="0.95" />
               </filter>
             </defs>
             
-            <!-- Layer 1: Sculpted Stage Contour -->
-            <path id="sculpted-path" d="" fill="#004737" stroke="#56f09f" stroke-width="1.5" />
+            <!-- Layer 1: Sculpted Stage Contour with smooth 28px/36px fillets -->
+            <path id="sculpted-path" d="" fill="none" stroke="#38c8ff" stroke-width="1.5" stroke-linejoin="round" />
             <rect id="sculpted-glow" x="0" y="0" width="1440" height="820" fill="url(#lab-radial-glow)" pointer-events="none" />
 
             <!-- Layer 2: Living Vascular Circuit Routes (SVG Edges) -->
@@ -651,6 +664,49 @@
     gap: 0.6rem;
   }
 
+  .plate-palette-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: #f1f5f9;
+    padding: 2px 4px;
+    border-radius: 6px;
+    border: 1px solid var(--nexafy-border);
+  }
+
+  .plate-pill {
+    background: transparent;
+    border: 0;
+    color: var(--nexafy-muted);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    padding: 0.2rem 0.45rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s ease;
+  }
+
+  .plate-pill:hover {
+    color: var(--nexafy-text);
+  }
+
+  .plate-pill.active {
+    background: #ffffff;
+    color: var(--nexafy-accent);
+    font-weight: 700;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  }
+
+  .color-swatch {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
   .toggle-checkbox {
     display: flex;
     align-items: center;
@@ -705,7 +761,8 @@
     justify-content: center;
     padding: 1.25rem;
     overflow: hidden;
-    background-image: radial-gradient(rgba(42, 103, 217, 0.08) 1px, transparent 1px);
+    background: #f6faff;
+    background-image: radial-gradient(#94a3b8 1.2px, transparent 1.2px);
     background-size: 24px 24px;
     position: relative;
     user-select: none;
@@ -713,13 +770,13 @@
 
   .canvas-frame {
     position: relative;
-    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
-    background: #004737;
-    border: 1px solid var(--nexafy-border);
+    box-shadow: 0 20px 50px rgba(8, 40, 70, 0.18);
+    background: #082846;
+    border: 1px solid rgba(56, 200, 255, 0.15);
     overflow: hidden;
     transform-origin: center center;
-    transition: box-shadow 0.2s ease;
-    border-radius: 8px;
+    transition: background-color 0.25s ease, box-shadow 0.2s ease;
+    border-radius: 20px;
   }
 
   .canvas-svg {
@@ -1021,6 +1078,18 @@
     const refImg = document.getElementById('ref-overlay-img') as HTMLImageElement;
     const inputRefOpacity = document.getElementById('input-ref-opacity') as HTMLInputElement;
     const selectRefBlend = document.getElementById('select-ref-blend') as HTMLSelectElement;
+
+    // Palette preset switcher (Nexa Blue vs Obsidian vs Deep Dark)
+    document.querySelectorAll('.plate-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.plate-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const plateColor = (btn as HTMLElement).dataset.plate || '#082846';
+        const accentColor = (btn as HTMLElement).dataset.accent || '#38c8ff';
+        canvasFrame.style.backgroundColor = plateColor;
+        pathElem.setAttribute('stroke', accentColor);
+      });
+    });
 
     const btnZoomIn = document.getElementById('btn-zoom-in') as HTMLButtonElement;
     const btnZoomOut = document.getElementById('btn-zoom-out') as HTMLButtonElement;

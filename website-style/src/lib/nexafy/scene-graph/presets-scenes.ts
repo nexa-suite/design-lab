@@ -19,35 +19,7 @@ export interface SceneGraph {
  * 1. Hero Chapter 01 (Channels & Security)
  */
 export function createChannelsScene(w: number, h: number): SceneGraph {
-  // Use existing hero-scene with refined, non-overflowing dimensions
-  const base = createHeroChapter1Scene(w, h);
-  
-  // Ensure the shield terminal has generous width and height so text never clips or overflows
-  const shieldNode = base.nodes.find(n => n.id === 'node-shield');
-  if (shieldNode) {
-    shieldNode.visualBounds.width = 160;
-    shieldNode.visualBounds.height = 96;
-    shieldNode.intrinsicBounds.width = 160;
-    shieldNode.intrinsicBounds.height = 96;
-    shieldNode.visualBounds.x = Math.min(w - 180, shieldNode.visualBounds.x);
-    shieldNode.ports[0].computedAbsolutePosition = {
-      x: shieldNode.visualBounds.x,
-      y: shieldNode.visualBounds.y + shieldNode.visualBounds.height / 2
-    };
-  }
-
-  // Re-route the shield edge
-  const hubNode = base.nodes.find(n => n.id === 'node-hub');
-  const shieldEdge = base.edges.find(e => e.id === 'edge-shield');
-  if (hubNode && shieldNode && shieldEdge) {
-    const hubShieldPort = hubNode.ports.find(p => p.id === 'port-hub-shield-out') || hubNode.ports[3];
-    const shieldInPort = shieldNode.ports[0];
-    const newRoute = OrthogonalFilletRouter.route(hubShieldPort, shieldInPort, 16);
-    shieldEdge.waypoints = newRoute.waypoints;
-    shieldEdge.svgPathData = newRoute.svgPathData;
-  }
-
-  return base;
+  return createHeroChapter1Scene(w, h);
 }
 
 /**
@@ -877,6 +849,416 @@ export function createFooterBeigeScene(w: number, h: number): SceneGraph {
 }
 
 /**
+ * 6. Insurance Protection Stage
+ */
+export function createInsuranceScene(w: number, h: number): SceneGraph {
+  const isDesktop = w >= 1200;
+  const hubW = isDesktop ? 220 : 180;
+  const hubH = isDesktop ? 120 : 100;
+  const hubX = Math.round((w - hubW) / 2);
+  const hubY = Math.round(h * 0.32);
+
+  const policyW = isDesktop ? 220 : 180;
+  const policyH = isDesktop ? 100 : 90;
+  const policyX = Math.max(40, hubX - policyW - 60);
+  const policyY = hubY + 10;
+
+  const claimW = isDesktop ? 220 : 180;
+  const claimH = isDesktop ? 100 : 90;
+  const claimX = Math.min(w - claimW - 40, hubX + hubW + 60);
+  const claimY = hubY + 10;
+
+  const guaranteeW = isDesktop ? 220 : 180;
+  const guaranteeH = isDesktop ? 100 : 90;
+  const guaranteeX = Math.round((w - guaranteeW) / 2);
+  const guaranteeY = Math.min(h - guaranteeH - 40, hubY + hubH + 60);
+
+  const nodes: SceneNode[] = [
+    {
+      id: 'node-ins-hub',
+      name: 'Nexa Protection Engine',
+      semanticRole: 'hub',
+      regionId: 'NETWORK_REGION',
+      anchor: { x: hubX, y: hubY },
+      intrinsicBounds: { x: hubX, y: hubY, width: hubW, height: hubH },
+      visualBounds: { x: hubX, y: hubY, width: hubW, height: hubH },
+      zLayer: 55,
+      visibility: 'visible',
+      motionState: { x: 0, y: 0, scale: 1, rotation: 0, opacity: 1 },
+      ports: [
+        {
+          id: 'port-ins-hub-in',
+          nodeId: 'node-ins-hub',
+          role: 'sink',
+          signalType: 'circuit_trunk',
+          direction: 'left',
+          normal: { x: -1, y: 0 },
+          offsetRatio: { x: 0.0, y: 0.5 },
+          escapeClearance: 20,
+          computedAbsolutePosition: { x: hubX, y: hubY + hubH * 0.5 }
+        },
+        {
+          id: 'port-ins-hub-right',
+          nodeId: 'node-ins-hub',
+          role: 'source',
+          signalType: 'circuit_branch',
+          direction: 'right',
+          normal: { x: 1, y: 0 },
+          offsetRatio: { x: 1.0, y: 0.5 },
+          escapeClearance: 20,
+          computedAbsolutePosition: { x: hubX + hubW, y: hubY + hubH * 0.5 }
+        },
+        {
+          id: 'port-ins-hub-bottom',
+          nodeId: 'node-ins-hub',
+          role: 'source',
+          signalType: 'escrow_link',
+          direction: 'bottom',
+          normal: { x: 0, y: 1 },
+          offsetRatio: { x: 0.5, y: 1.0 },
+          escapeClearance: 20,
+          computedAbsolutePosition: { x: hubX + hubW * 0.5, y: hubY + hubH }
+        }
+      ]
+    },
+    {
+      id: 'node-ins-policy',
+      name: 'Smart Policy Underwriting',
+      semanticRole: 'origin',
+      regionId: 'NETWORK_REGION',
+      anchor: { x: policyX, y: policyY },
+      intrinsicBounds: { x: policyX, y: policyY, width: policyW, height: policyH },
+      visualBounds: { x: policyX, y: policyY, width: policyW, height: policyH },
+      zLayer: 54,
+      visibility: 'visible',
+      motionState: { x: 0, y: 0, scale: 1, rotation: 0, opacity: 1 },
+      ports: [
+        {
+          id: 'port-ins-policy-out',
+          nodeId: 'node-ins-policy',
+          role: 'source',
+          signalType: 'circuit_trunk',
+          direction: 'right',
+          normal: { x: 1, y: 0 },
+          offsetRatio: { x: 1.0, y: 0.5 },
+          escapeClearance: 20,
+          computedAbsolutePosition: { x: policyX + policyW, y: policyY + policyH * 0.5 }
+        }
+      ]
+    },
+    {
+      id: 'node-ins-claims',
+      name: 'Instant Claims Settlement',
+      semanticRole: 'leaf_channel',
+      regionId: 'NETWORK_REGION',
+      anchor: { x: claimX, y: claimY },
+      intrinsicBounds: { x: claimX, y: claimY, width: claimW, height: claimH },
+      visualBounds: { x: claimX, y: claimY, width: claimW, height: claimH },
+      zLayer: 54,
+      visibility: 'visible',
+      motionState: { x: 0, y: 0, scale: 1, rotation: 0, opacity: 1 },
+      ports: [
+        {
+          id: 'port-ins-claim-in',
+          nodeId: 'node-ins-claims',
+          role: 'sink',
+          signalType: 'circuit_branch',
+          direction: 'left',
+          normal: { x: -1, y: 0 },
+          offsetRatio: { x: 0.0, y: 0.5 },
+          escapeClearance: 20,
+          computedAbsolutePosition: { x: claimX, y: claimY + claimH * 0.5 }
+        }
+      ]
+    },
+    {
+      id: 'node-ins-guarantee',
+      name: 'Escrow Guarantee Shield',
+      semanticRole: 'terminal_badge',
+      regionId: 'NETWORK_REGION',
+      anchor: { x: guaranteeX, y: guaranteeY },
+      intrinsicBounds: { x: guaranteeX, y: guaranteeY, width: guaranteeW, height: guaranteeH },
+      visualBounds: { x: guaranteeX, y: guaranteeY, width: guaranteeW, height: guaranteeH },
+      zLayer: 54,
+      visibility: 'visible',
+      motionState: { x: 0, y: 0, scale: 1, rotation: 0, opacity: 1 },
+      ports: [
+        {
+          id: 'port-ins-guarantee-in',
+          nodeId: 'node-ins-guarantee',
+          role: 'sink',
+          signalType: 'escrow_link',
+          direction: 'top',
+          normal: { x: 0, y: -1 },
+          offsetRatio: { x: 0.5, y: 0.0 },
+          escapeClearance: 20,
+          computedAbsolutePosition: { x: guaranteeX + guaranteeW * 0.5, y: guaranteeY }
+        }
+      ]
+    }
+  ];
+
+  const r1 = OrthogonalFilletRouter.route(nodes[1].ports[0], nodes[0].ports[0], 16);
+  const r2 = OrthogonalFilletRouter.route(nodes[0].ports[1], nodes[2].ports[0], 16);
+  const r3 = OrthogonalFilletRouter.route(nodes[0].ports[2], nodes[3].ports[0], 16);
+
+  const edges: SceneEdge[] = [
+    {
+      id: 'edge-ins-policy',
+      sourceNodeId: 'node-ins-policy',
+      sourcePortId: 'port-ins-policy-out',
+      targetNodeId: 'node-ins-hub',
+      targetPortId: 'port-ins-hub-in',
+      strokeWidth: 20,
+      filletRadius: 16,
+      colorToken: '#57f09e',
+      waypoints: r1.waypoints,
+      svgPathData: r1.svgPathData,
+      animationOrder: 1,
+      drawDuration: 0.5,
+      drawDelay: 0.2
+    },
+    {
+      id: 'edge-ins-claims',
+      sourceNodeId: 'node-ins-hub',
+      sourcePortId: 'port-ins-hub-right',
+      targetNodeId: 'node-ins-claims',
+      targetPortId: 'port-ins-claim-in',
+      strokeWidth: 20,
+      filletRadius: 16,
+      colorToken: '#57f09e',
+      waypoints: r2.waypoints,
+      svgPathData: r2.svgPathData,
+      animationOrder: 2,
+      drawDuration: 0.5,
+      drawDelay: 0.4
+    },
+    {
+      id: 'edge-ins-guarantee',
+      sourceNodeId: 'node-ins-hub',
+      sourcePortId: 'port-ins-hub-bottom',
+      targetNodeId: 'node-ins-guarantee',
+      targetPortId: 'port-ins-guarantee-in',
+      strokeWidth: 20,
+      filletRadius: 16,
+      colorToken: '#57f09e',
+      waypoints: r3.waypoints,
+      svgPathData: r3.svgPathData,
+      animationOrder: 3,
+      drawDuration: 0.5,
+      drawDelay: 0.6
+    }
+  ];
+
+  return { nodes, edges };
+}
+
+/**
+ * 7. Sustainability Aerial Canvas
+ */
+export function createSustainabilityScene(w: number, h: number): SceneGraph {
+  const isDesktop = w >= 1200;
+  const hubW = isDesktop ? 240 : 190;
+  const hubH = isDesktop ? 120 : 100;
+  const hubX = Math.round((w - hubW) / 2);
+  const hubY = Math.round(h * 0.32);
+
+  const footW = isDesktop ? 220 : 180;
+  const footH = isDesktop ? 100 : 90;
+  const footX = Math.max(40, hubX - footW - 60);
+  const footY = hubY + 10;
+
+  const fleetW = isDesktop ? 220 : 180;
+  const fleetH = isDesktop ? 100 : 90;
+  const fleetX = Math.min(w - fleetW - 40, hubX + hubW + 60);
+  const fleetY = hubY + 10;
+
+  const recW = isDesktop ? 240 : 190;
+  const recH = isDesktop ? 100 : 90;
+  const recX = Math.round((w - recW) / 2);
+  const recY = Math.min(h - recH - 40, hubY + hubH + 60);
+
+  const nodes: SceneNode[] = [
+    {
+      id: 'node-sust-hub',
+      name: 'Circular Lifecycle Platform',
+      semanticRole: 'hub',
+      regionId: 'NETWORK_REGION',
+      anchor: { x: hubX, y: hubY },
+      intrinsicBounds: { x: hubX, y: hubY, width: hubW, height: hubH },
+      visualBounds: { x: hubX, y: hubY, width: hubW, height: hubH },
+      zLayer: 55,
+      visibility: 'visible',
+      motionState: { x: 0, y: 0, scale: 1, rotation: 0, opacity: 1 },
+      ports: [
+        {
+          id: 'port-sust-hub-in',
+          nodeId: 'node-sust-hub',
+          role: 'sink',
+          signalType: 'circuit_trunk',
+          direction: 'left',
+          normal: { x: -1, y: 0 },
+          offsetRatio: { x: 0.0, y: 0.5 },
+          escapeClearance: 20,
+          computedAbsolutePosition: { x: hubX, y: hubY + hubH * 0.5 }
+        },
+        {
+          id: 'port-sust-hub-right',
+          nodeId: 'node-sust-hub',
+          role: 'source',
+          signalType: 'circuit_branch',
+          direction: 'right',
+          normal: { x: 1, y: 0 },
+          offsetRatio: { x: 1.0, y: 0.5 },
+          escapeClearance: 20,
+          computedAbsolutePosition: { x: hubX + hubW, y: hubY + hubH * 0.5 }
+        },
+        {
+          id: 'port-sust-hub-bottom',
+          nodeId: 'node-sust-hub',
+          role: 'source',
+          signalType: 'data_flow',
+          direction: 'bottom',
+          normal: { x: 0, y: 1 },
+          offsetRatio: { x: 0.5, y: 1.0 },
+          escapeClearance: 20,
+          computedAbsolutePosition: { x: hubX + hubW * 0.5, y: hubY + hubH }
+        }
+      ]
+    },
+    {
+      id: 'node-sust-footprint',
+      name: 'Carbon Emission Ledger',
+      semanticRole: 'origin',
+      regionId: 'NETWORK_REGION',
+      anchor: { x: footX, y: footY },
+      intrinsicBounds: { x: footX, y: footY, width: footW, height: footH },
+      visualBounds: { x: footX, y: footY, width: footW, height: footH },
+      zLayer: 54,
+      visibility: 'visible',
+      motionState: { x: 0, y: 0, scale: 1, rotation: 0, opacity: 1 },
+      ports: [
+        {
+          id: 'port-sust-foot-out',
+          nodeId: 'node-sust-footprint',
+          role: 'source',
+          signalType: 'circuit_trunk',
+          direction: 'right',
+          normal: { x: 1, y: 0 },
+          offsetRatio: { x: 1.0, y: 0.5 },
+          escapeClearance: 20,
+          computedAbsolutePosition: { x: footX + footW, y: footY + footH * 0.5 }
+        }
+      ]
+    },
+    {
+      id: 'node-sust-fleet',
+      name: 'Fleet Electrification',
+      semanticRole: 'leaf_channel',
+      regionId: 'NETWORK_REGION',
+      anchor: { x: fleetX, y: fleetY },
+      intrinsicBounds: { x: fleetX, y: fleetY, width: fleetW, height: fleetH },
+      visualBounds: { x: fleetX, y: fleetY, width: fleetW, height: fleetH },
+      zLayer: 54,
+      visibility: 'visible',
+      motionState: { x: 0, y: 0, scale: 1, rotation: 0, opacity: 1 },
+      ports: [
+        {
+          id: 'port-sust-fleet-in',
+          nodeId: 'node-sust-fleet',
+          role: 'sink',
+          signalType: 'circuit_branch',
+          direction: 'left',
+          normal: { x: -1, y: 0 },
+          offsetRatio: { x: 0.0, y: 0.5 },
+          escapeClearance: 20,
+          computedAbsolutePosition: { x: fleetX, y: fleetY + fleetH * 0.5 }
+        }
+      ]
+    },
+    {
+      id: 'node-sust-recovery',
+      name: 'Automated Asset Recovery',
+      semanticRole: 'terminal_badge',
+      regionId: 'NETWORK_REGION',
+      anchor: { x: recX, y: recY },
+      intrinsicBounds: { x: recX, y: recY, width: recW, height: recH },
+      visualBounds: { x: recX, y: recY, width: recW, height: recH },
+      zLayer: 54,
+      visibility: 'visible',
+      motionState: { x: 0, y: 0, scale: 1, rotation: 0, opacity: 1 },
+      ports: [
+        {
+          id: 'port-sust-rec-in',
+          nodeId: 'node-sust-recovery',
+          role: 'sink',
+          signalType: 'data_flow',
+          direction: 'top',
+          normal: { x: 0, y: -1 },
+          offsetRatio: { x: 0.5, y: 0.0 },
+          escapeClearance: 20,
+          computedAbsolutePosition: { x: recX + recW * 0.5, y: recY }
+        }
+      ]
+    }
+  ];
+
+  const r1 = OrthogonalFilletRouter.route(nodes[1].ports[0], nodes[0].ports[0], 16);
+  const r2 = OrthogonalFilletRouter.route(nodes[0].ports[1], nodes[2].ports[0], 16);
+  const r3 = OrthogonalFilletRouter.route(nodes[0].ports[2], nodes[3].ports[0], 16);
+
+  const edges: SceneEdge[] = [
+    {
+      id: 'edge-sust-foot',
+      sourceNodeId: 'node-sust-footprint',
+      sourcePortId: 'port-sust-foot-out',
+      targetNodeId: 'node-sust-hub',
+      targetPortId: 'port-sust-hub-in',
+      strokeWidth: 20,
+      filletRadius: 16,
+      colorToken: '#57f09e',
+      waypoints: r1.waypoints,
+      svgPathData: r1.svgPathData,
+      animationOrder: 1,
+      drawDuration: 0.5,
+      drawDelay: 0.2
+    },
+    {
+      id: 'edge-sust-fleet',
+      sourceNodeId: 'node-sust-hub',
+      sourcePortId: 'port-sust-hub-right',
+      targetNodeId: 'node-sust-fleet',
+      targetPortId: 'port-sust-fleet-in',
+      strokeWidth: 20,
+      filletRadius: 16,
+      colorToken: '#57f09e',
+      waypoints: r2.waypoints,
+      svgPathData: r2.svgPathData,
+      animationOrder: 2,
+      drawDuration: 0.5,
+      drawDelay: 0.4
+    },
+    {
+      id: 'edge-sust-rec',
+      sourceNodeId: 'node-sust-hub',
+      sourcePortId: 'port-sust-hub-bottom',
+      targetNodeId: 'node-sust-recovery',
+      targetPortId: 'port-sust-rec-in',
+      strokeWidth: 20,
+      filletRadius: 16,
+      colorToken: '#57f09e',
+      waypoints: r3.waypoints,
+      svgPathData: r3.svgPathData,
+      animationOrder: 3,
+      drawDuration: 0.5,
+      drawDelay: 0.6
+    }
+  ];
+
+  return { nodes, edges };
+}
+
+/**
  * Master Scene Dispatcher for Presets
  */
 export function createSceneForPreset(presetId: string, stageWidth: number, stageHeight: number): SceneGraph {
@@ -885,6 +1267,10 @@ export function createSceneForPreset(presetId: string, stageWidth: number, stage
       return createSaaSScene(stageWidth, stageHeight);
     case 'PAYMENT':
       return createPaymentScene(stageWidth, stageHeight);
+    case 'INSURANCE':
+      return createInsuranceScene(stageWidth, stageHeight);
+    case 'SUSTAINABILITY':
+      return createSustainabilityScene(stageWidth, stageHeight);
     case 'ACCESS_CHANNELS':
       return createAccessChannelsScene(stageWidth, stageHeight);
     case 'FOOTER_BEIGE':
