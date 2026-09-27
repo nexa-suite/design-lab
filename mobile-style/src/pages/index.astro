@@ -15,8 +15,9 @@ import 'primeicons/primeicons.css';
 import '../styles/mobile-tokens.css';
 import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
 
-// 1. Master Multi-Device Android Showcase
+// 1. Master Multi-Device Android Showcase & Interactive Simulator
 import GaleriaVisualAndroid from '../components/simulator/GaleriaVisualAndroid.astro';
+import DeviceFrame from '../components/simulator/DeviceFrame.astro';
 
 // 2. Visual Design Foundations M3
 import TokensColorSection from '../components/guidelines/TokensColorSection.astro';
@@ -250,6 +251,60 @@ import InteractiveMobileNavbar from '../components/simulator/InteractiveMobileNa
 
     .btn-print-report:hover { opacity: 0.9; }
 
+    /* Showcase View Switcher Bar */
+    .showcase-view-switch-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 4px;
+    }
+
+    .mobile-view-toggle-group {
+      display: inline-flex;
+      background: #ffffff;
+      border: 1px solid var(--nexa-color-border-default, #cbd5e1);
+      border-radius: 10px;
+      padding: 4px;
+      gap: 4px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+
+    .btn-view-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 7px;
+      border: none;
+      background: transparent;
+      color: #475569;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-view-toggle:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+
+    .btn-view-toggle.active {
+      background: #0f172a;
+      color: #ffffff;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.2);
+    }
+
+    .btn-view-toggle.active strong {
+      color: #38c8ff;
+    }
+
+    .mobile-main-stage-view {
+      width: 100%;
+    }
+
     /* Part Dividers */
     .part-separator-block {
       display: flex;
@@ -478,17 +533,39 @@ import InteractiveMobileNavbar from '../components/simulator/InteractiveMobileNa
       </div>
 
       <!-- =====================================================================
-           PARTE 1: GRAND MULTI-DEVICE ANDROID SHOWCASE (TOP / HERO)
+           PARTE 1: SIMULADOR INTERACTIVO ANDROID & ESCAPARATE MULTI-DISPOSITIVO
            ===================================================================== -->
-      <div class="part-separator-block">
-        <span class="part-tag">PARTE 1 · ESCAPARATE MULTI-DISPOSITIVO</span>
-        <h2 class="part-title">Grand Multi-Device Android Showcase</h2>
-        <p class="part-desc">
-          Muestrario de pantallas canónicas renderizadas sobre chasis Android realistas: smartphone compacto (390dp), phablet mayorista (412dp), terminal industrial rugerizado (412dp), tablet compacta de 8" con Kanban amplio de 4 columnas (600dp) y consola TwoPane en tablet de 11" (800dp).
-        </p>
+      <div class="part-separator-block" id="seccion-simulador">
+        <span class="part-tag">PARTE 1 · SIMULADOR ANDROID & ESTUDIO MULTI-DISPOSITIVO</span>
+        <div class="showcase-view-switch-bar">
+          <div>
+            <h2 class="part-title">Simulador Móvil Interactivo & Estudio Multi-Dispositivo Android</h2>
+            <p class="part-desc">
+              Alterna entre el <strong>Simulador Interactivo en Vivo</strong> (con cambio de factor de forma, navegación activa y Kanban adaptativo) y la <strong>Galería de los 5 Dispositivos Lado a Lado</strong> para captura e informe visual.
+            </p>
+          </div>
+          <div class="mobile-view-toggle-group">
+            <button type="button" class="btn-view-toggle active" id="btn-toggle-simulator">
+              <i class="pi pi-sliders-h"></i>
+              <strong>✦ Simulador Interactivo (Medidas & Tabs)</strong>
+            </button>
+            <button type="button" class="btn-view-toggle" id="btn-toggle-gallery">
+              <i class="pi pi-th-large"></i>
+              <span>Galería 5 Dispositivos (Reporte Visual)</span>
+            </button>
+          </div>
+        </div>
       </div>
 
-      <GaleriaVisualAndroid />
+      <!-- View 1: Live Interactive Simulator (DEFAULT & ACTIVE) -->
+      <div id="view-interactive-simulator-stage" class="mobile-main-stage-view active">
+        <DeviceFrame />
+      </div>
+
+      <!-- View 2: Multi-Device Side-by-Side Gallery (Ready for PDF/Screenshot report) -->
+      <div id="view-multi-device-gallery-stage" class="mobile-main-stage-view" style="display: none;">
+        <GaleriaVisualAndroid />
+      </div>
 
 
       <!-- =====================================================================
@@ -684,5 +761,26 @@ import InteractiveMobileNavbar from '../components/simulator/InteractiveMobileNa
     </main>
   </UnifiedLabShell>
 
+  <script>
+    // Sub-view toggle between Interactive Simulator and Multi-Device Gallery
+    const btnToggleSim = document.getElementById('btn-toggle-simulator');
+    const btnToggleGal = document.getElementById('btn-toggle-gallery');
+    const viewSimStage = document.getElementById('view-interactive-simulator-stage');
+    const viewGalStage = document.getElementById('view-multi-device-gallery-stage');
+
+    btnToggleSim?.addEventListener('click', () => {
+      btnToggleSim.classList.add('active');
+      btnToggleGal?.classList.remove('active');
+      if (viewSimStage) viewSimStage.style.display = 'block';
+      if (viewGalStage) viewGalStage.style.display = 'none';
+    });
+
+    btnToggleGal?.addEventListener('click', () => {
+      btnToggleGal.classList.add('active');
+      btnToggleSim?.classList.remove('active');
+      if (viewGalStage) viewGalStage.style.display = 'block';
+      if (viewSimStage) viewSimStage.style.display = 'none';
+    });
+  </script>
 </body>
 </html>

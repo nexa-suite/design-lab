@@ -770,17 +770,18 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    container-type: inline-size;
   }
 
   .dispatch-stage-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 18px;
-    background: #f8fafc;
+    padding: 12px 16px;
+    background: #ffffff;
     border-bottom: 1px solid var(--nexa-color-border-default, #e2e8f0);
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
   }
 
   .header-left-meta {
@@ -798,7 +799,7 @@
 
   .board-title {
     font-family: var(--nexa-font-family-display, sans-serif);
-    font-size: 16.5px;
+    font-size: 15px;
     font-weight: 700;
     color: var(--nexa-color-text-primary, #0f172a);
     margin: 2px 0 0;
@@ -813,13 +814,13 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    height: 38px;
-    padding: 0 12px;
+    height: 34px;
+    padding: 0 10px;
     border-radius: 8px;
     border: 1px solid var(--nexa-color-border-default, #cbd5e1);
     background: #ffffff;
     color: #475569;
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.15s ease;
@@ -839,11 +840,14 @@
   /* Mobile Tabs for Kanban Column Switching */
   .mobile-column-tabs-bar {
     display: flex;
-    background: #f1f5f9;
-    padding: 6px 8px;
+    background: #f8fafc;
+    padding: 8px;
     gap: 6px;
     overflow-x: auto;
-    border-bottom: 1px solid var(--nexa-color-border-default, #cbd5e1);
+    border-bottom: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    position: sticky;
+    top: 0;
+    z-index: 10;
   }
 
   .col-tab-btn {
@@ -852,72 +856,101 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    height: 36px;
-    padding: 0 8px;
+    height: 38px;
+    padding: 0 10px;
     border-radius: 8px;
-    border: none;
-    background: transparent;
+    border: 1px solid transparent;
+    background: #ffffff;
     color: #64748b;
-    font-size: 11.5px;
+    font-size: 12px;
     font-weight: 700;
     cursor: pointer;
     white-space: nowrap;
     transition: all 0.15s ease;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
   }
 
   .col-tab-btn.active {
-    background: #ffffff;
+    background: #eff6ff;
     color: var(--nexa-color-primary-700, #1d4ed8);
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+    border-color: #bfdbfe;
+    box-shadow: 0 1px 3px rgba(29, 78, 216, 0.12);
   }
 
   .badge-count {
     background: #e2e8f0;
     color: #334155;
-    font-size: 10px;
-    padding: 1px 6px;
+    font-size: 10.5px;
+    padding: 1px 7px;
     border-radius: 10px;
+    font-weight: 700;
   }
 
   .col-tab-btn.active .badge-count {
-    background: var(--nexa-color-primary-100, #dbeafe);
-    color: var(--nexa-color-primary-800, #1e40af);
+    background: var(--nexa-color-primary-600, #2563eb);
+    color: #ffffff;
   }
 
-  /* Kanban Columns Layout */
+  /* Kanban Columns Layout — Adaptive: Single-column on phone, 4 columns on tablet */
   .dispatch-kanban-canvas {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: 12px;
-    padding: 16px;
+    padding: 12px;
     background: #f8fafc;
-    overflow-x: auto;
     min-height: 480px;
   }
 
-  @media (max-width: 900px) {
-    .dispatch-kanban-canvas {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .kanban-column {
-      display: none;
-      width: 100%;
-    }
-
-    .kanban-column.active {
-      display: flex;
-    }
-  }
-
+  /* On phone viewports (default inside mobile phone chassis), show active column full-width */
   .kanban-column {
+    display: none;
+    width: 100%;
     background: #ffffff;
     border: 1px solid var(--nexa-color-border-default, #e2e8f0);
     border-radius: 12px;
-    display: flex;
     flex-direction: column;
     overflow: hidden;
+  }
+
+  .kanban-column.active {
+    display: flex;
+    width: 100%;
+  }
+
+  /* Tablet Expansion (When container >= 580px or parent is tablet) */
+  @container (min-width: 580px) {
+    .mobile-column-tabs-bar {
+      display: none !important;
+    }
+
+    .dispatch-kanban-canvas {
+      display: grid !important;
+      grid-template-columns: repeat(4, 1fr) !important;
+      gap: 12px !important;
+      padding: 16px !important;
+    }
+
+    .kanban-column {
+      display: flex !important;
+      width: auto !important;
+    }
+  }
+
+  /* Fallback for when parent chassis has mode-tablet class */
+  :global(.mode-tablet) .mobile-column-tabs-bar {
+    display: none !important;
+  }
+
+  :global(.mode-tablet) .dispatch-kanban-canvas {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 12px !important;
+    padding: 16px !important;
+  }
+
+  :global(.mode-tablet) .kanban-column {
+    display: flex !important;
+    width: auto !important;
   }
 
   .kanban-column-header {
