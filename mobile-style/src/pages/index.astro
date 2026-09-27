@@ -3,20 +3,15 @@
  * MOBILE STYLE — MASTER VISUAL REPORT & MULTI-DEVICE ANDROID STUDIO
  * Nexa Design Lab · Canonical Android Jetpack Compose M3 Specifications
  *
- * FULL VISUAL FIRST ARCHITECTURE:
- * Designed for direct visual reporting, PDF export, and executive reviews without interactive gates.
- *
- * Structure:
- * 1. Grand Multi-Device Android Showcase (Galaxy S24, S24 Ultra, Zebra TC58, Tab Active 8", Tab S9 11")
- * 2. Visual Design Foundations M3 (Swatches, Type Matrix, 8dp Grid, Elevations, Caliper, Thumb Reach)
- * 3. Technical Specifications, Architecture C4, SQLite Room & Production Kotlin Code (At the bottom)
+ * MODULAR SCREEN-BY-SCREEN ARCHITECTURE:
+ * Each sidebar option is an isolated, dedicated screen view.
+ * No more chaotic 10,000px downward stacking!
  */
 import 'primeicons/primeicons.css';
 import '../styles/mobile-tokens.css';
 import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
 
-// 1. Master Multi-Device Android Showcase & Interactive Simulator
-import GaleriaVisualAndroid from '../components/simulator/GaleriaVisualAndroid.astro';
+// 1. Master Simulator (Interactive Calibrator & Model Sizer)
 import DeviceFrame from '../components/simulator/DeviceFrame.astro';
 
 // 2. Visual Design Foundations M3
@@ -27,7 +22,7 @@ import ElevacionesM3Section from '../components/guidelines/ElevacionesM3Section.
 import Ergonomia48dpSection from '../components/guidelines/Ergonomia48dpSection.astro';
 import ZonasAlcanceSection from '../components/guidelines/ZonasAlcanceSection.astro';
 
-// 3. Technical Specifications & Kotlin Code (At the bottom)
+// 3. Technical Specifications & Kotlin Code
 import MobileArchitectureHero from '../components/guidelines/MobileArchitectureHero.astro';
 import MobileEvidenceModel from '../components/guidelines/MobileEvidenceModel.astro';
 import MobileHardwareSection from '../components/guidelines/MobileHardwareSection.astro';
@@ -35,17 +30,20 @@ import MobileResilienceSection from '../components/guidelines/MobileResilienceSe
 import MobileComponentsSection from '../components/guidelines/MobileComponentsSection.astro';
 import CodeSnippetsTabs from '../components/spec/CodeSnippetsTabs.astro';
 
-// Blueprint User Stories
+// 4. Blueprint User Stories
 import DriverRouteStory from '../components/stories/DriverRouteStory.astro';
 import WarehousePickingStory from '../components/stories/WarehousePickingStory.astro';
 import DispatchBoardStory from '../components/stories/DispatchBoardStory.astro';
 import MachineryInspectionStory from '../components/stories/MachineryInspectionStory.astro';
 
-// Live Simulator Modules
+// 5. Live Simulator Modules
 import InteractiveDispatchMovement from '../components/simulator/InteractiveDispatchMovement.astro';
 import InteractiveWholesaleCatalog from '../components/simulator/InteractiveWholesaleCatalog.astro';
 import InteractiveMobileForms from '../components/simulator/InteractiveMobileForms.astro';
 import InteractiveMobileNavbar from '../components/simulator/InteractiveMobileNavbar.astro';
+
+// 6. Master Multi-Device Android Showcase (Reporte al fondo)
+import GaleriaVisualAndroid from '../components/simulator/GaleriaVisualAndroid.astro';
 ---
 
 <!DOCTYPE html>
@@ -53,7 +51,7 @@ import InteractiveMobileNavbar from '../components/simulator/InteractiveMobileNa
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mobile Visual Report · Multi-Device Studio · Nexa Design Lab (Android Compose M3)</title>
+  <title>Mobile Design Guidelines · Android Jetpack Compose M3 · Nexa Suite</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,711 +74,386 @@ import InteractiveMobileNavbar from '../components/simulator/InteractiveMobileNa
       font-family: var(--nexa-font-family-body, 'Inter', sans-serif);
       font-size: 14px;
       line-height: 1.5;
-      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
     }
 
-    /* Master Report Container (Full visual flow, zero display:none) */
-    .visual-report-page {
+    /* Master Screen Viewport Host */
+    .modular-screen-stage {
       width: min(calc(100% - 48px), var(--nexa-layout-content-max, 1400px));
       margin: 0 auto;
-      padding: clamp(24px, 4vw, 48px) 0 96px;
+      padding: clamp(20px, 3vw, 36px) 0 64px;
       color: var(--nexa-color-text-primary, #0f172a);
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
     }
 
-    /* Documentation Header */
-    .report-header {
-      display: grid;
-      gap: 18px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    /* Distinct Screen Views */
+    .lab-screen-view {
+      display: none;
+      width: 100%;
+      animation: screenFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .breadcrumb-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-      color: var(--nexa-color-text-muted, #94a3b8);
-      font: 500 11px/1.4 var(--nexa-font-family-mono, monospace);
+    .lab-screen-view.active {
+      display: block;
     }
 
-    .breadcrumb-row a {
-      color: var(--nexa-color-primary-700, #1d4ed8);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .header-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 300px;
-      gap: 32px;
-      align-items: start;
-    }
-
-    @media (max-width: 960px) {
-      .header-grid {
-        grid-template-columns: 1fr;
+    @keyframes screenFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
-    .eyebrow {
-      margin: 0 0 8px;
-      color: var(--nexa-color-primary-700, #1d4ed8);
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .12em;
-      line-height: 1.3;
-      text-transform: uppercase;
-    }
-
-    .report-header h1 {
-      max-width: 860px;
-      margin: 0;
-      font: 800 clamp(24px, 3.2vw, 38px)/1.15 var(--nexa-font-family-display, sans-serif);
-      letter-spacing: -.035em;
-      color: var(--nexa-color-text-primary, #0f172a);
-    }
-
-    .intro {
-      max-width: 800px;
-      margin: 12px 0 0;
-      color: var(--nexa-color-text-secondary, #64748b);
-      font-size: 14.5px;
-      line-height: 1.6;
-    }
-
-    .status-panel {
-      display: grid;
-      gap: 8px;
-      padding: 16px;
-      border: 1px solid var(--nexa-color-border-default, #e2e8f0);
-      border-radius: var(--nexa-radius-card, 16px);
-      background: var(--nexa-surface-card, #ffffff);
-      color: var(--nexa-color-text-secondary, #64748b);
-      font-size: 11.5px;
-      line-height: 1.4;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-    }
-
-    .status-label {
-      margin: 0;
-      color: var(--nexa-color-text-muted, #94a3b8);
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .design-status {
-      display: inline-flex;
-      width: fit-content;
-      padding: 3px 8px;
-      border-radius: 6px;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .04em;
-      color: var(--nexa-color-primary-800, #1e40af);
-      background: var(--nexa-color-primary-100, #dbeafe);
-    }
-
-    .adoption-status {
-      color: var(--nexa-color-primary-700, #1d4ed8);
-      font-weight: 700;
-    }
-
-    .header-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px 24px;
-      color: var(--nexa-color-text-muted, #94a3b8);
-      font-size: 11.5px;
-    }
-
-    .header-meta span {
-      display: inline-flex;
-      gap: 6px;
-      align-items: center;
-    }
-
-    .header-meta i {
-      color: var(--nexa-color-primary-600, #2a67d9);
-      font-size: 13px;
-    }
-
-    /* Print / Export Report Bar */
-    .report-action-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      padding: 12px 18px;
-      background: #ffffff;
-      border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
-      border-radius: 12px;
-      font-size: 12px;
-    }
-
-    .report-notice {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--nexa-color-text-secondary, #475569);
-      font-weight: 600;
-    }
-
-    .btn-print-report {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      background: var(--nexa-color-primary-600, #2563eb);
-      color: #ffffff;
-      border: none;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: opacity 0.15s ease;
-    }
-
-    .btn-print-report:hover { opacity: 0.9; }
-
-    /* Showcase View Switcher Bar */
-    .showcase-view-switch-bar {
+    /* Screen Title Bar */
+    .screen-header-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 16px;
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    }
+
+    .screen-badge-tag {
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--nexa-color-primary-600, #2563eb);
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    .screen-main-title {
+      font-family: var(--nexa-font-family-display, sans-serif);
+      font-size: 24px;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.01em;
+    }
+
+    .screen-main-desc {
+      font-size: 13.5px;
+      color: #64748b;
       margin-top: 4px;
+      max-width: 800px;
+      line-height: 1.5;
     }
 
-    .mobile-view-toggle-group {
-      display: inline-flex;
-      background: #ffffff;
-      border: 1px solid var(--nexa-color-border-default, #cbd5e1);
-      border-radius: 10px;
-      padding: 4px;
-      gap: 4px;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    .screen-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
     }
 
-    .btn-view-toggle {
+    .btn-quick-nav {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      border-radius: 7px;
-      border: none;
-      background: transparent;
-      color: #475569;
-      font-size: 13px;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
       font-weight: 600;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: #334155;
       cursor: pointer;
       transition: all 0.15s ease;
+      text-decoration: none;
     }
 
-    .btn-view-toggle:hover {
+    .btn-quick-nav:hover {
       background: #f1f5f9;
       color: #0f172a;
     }
 
-    .btn-view-toggle.active {
-      background: #0f172a;
-      color: #ffffff;
-      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.2);
-    }
-
-    .btn-view-toggle.active strong {
-      color: #38c8ff;
-    }
-
-    .mobile-main-stage-view {
-      width: 100%;
-    }
-
-    /* Part Dividers */
-    .part-separator-block {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding: 32px 0 16px;
-      border-top: 2px dashed var(--nexa-color-border-structural, #e2e8f0);
-      margin-top: 16px;
-    }
-
-    .part-tag {
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      color: var(--nexa-color-primary-700, #1d4ed8);
-      text-transform: uppercase;
-    }
-
-    .part-title {
-      font-family: var(--nexa-font-family-display, sans-serif);
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--nexa-color-text-primary, #0f172a);
-      margin: 0;
-      letter-spacing: -0.02em;
-    }
-
-    .part-desc {
-      font-size: 13.5px;
-      color: var(--nexa-color-text-secondary, #64748b);
-      max-width: 860px;
-      margin: 0;
-      line-height: 1.5;
-    }
-
-    /* Technical Collapsible Wrapper */
-    .technical-specs-container {
+    /* Screen Module Stack (for screens with multiple cards) */
+    .screen-cards-stack {
       display: flex;
       flex-direction: column;
       gap: 28px;
-      background: #ffffff;
-      border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
-      border-radius: var(--nexa-radius-card, 16px);
-      padding: 24px;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
     }
 
-    .tech-accordion-item {
-      border: 1px solid var(--nexa-color-border-default, #e2e8f0);
-      border-radius: 12px;
-      overflow: hidden;
-      background: #ffffff;
-    }
-
-    .tech-accordion-summary {
-      padding: 16px 20px;
-      background: var(--nexa-color-neutral-50, #f8fafc);
-      cursor: pointer;
+    .stories-grid-stage {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: var(--nexa-font-family-display, sans-serif);
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--nexa-color-text-primary, #0f172a);
-      user-select: none;
-      list-style: none;
-      transition: background 0.15s ease;
+      flex-direction: column;
+      gap: 24px;
     }
 
-    .tech-accordion-summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .tech-accordion-summary:hover {
-      background: #f1f5f9;
-    }
-
-    .tech-summary-left {
+    .modules-interactive-grid {
       display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .tech-badge-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: #eff6ff;
-      color: #2563eb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-    }
-
-    .tech-chevron-icon {
-      font-size: 12px;
-      color: #64748b;
-      transition: transform 0.2s ease;
-    }
-
-    details[open] .tech-chevron-icon {
-      transform: rotate(180deg);
-    }
-
-    .tech-accordion-body {
-      padding: 20px;
-      border-top: 1px solid #e2e8f0;
-      background: #ffffff;
-    }
-
-    /* Provenance Section */
-    .provenance-section {
-      padding: 32px 0 0;
-      border-top: 1px solid var(--nexa-color-border-structural, #e2e8f0);
-    }
-
-    .provenance-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    @media (max-width: 900px) {
-      .provenance-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .provenance-grid > div {
-      padding: 16px;
-      border-top: 3px solid var(--nexa-color-primary-300, #93c5fd);
-      background: var(--nexa-surface-card, #ffffff);
-      border-radius: 0 0 10px 10px;
-      border-left: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
-      border-right: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
-      border-bottom: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
-    }
-
-    .provenance-grid b {
-      font-size: 13px;
-      color: var(--nexa-color-text-primary, #0f172a);
-    }
-
-    .provenance-grid p {
-      margin: 8px 0 0;
-      color: var(--nexa-color-text-secondary, #64748b);
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    /* Print Media Query */
-    @media print {
-      body {
-        background: #ffffff !important;
-      }
-      .visual-report-page {
-        width: 100% !important;
-        padding: 0 !important;
-      }
-      .report-action-bar, .device-switcher-bar {
-        display: none !important;
-      }
-      .android-chassis {
-        box-shadow: none !important;
-        border: 2px solid #334155 !important;
-        page-break-inside: avoid;
-      }
+      flex-direction: column;
+      gap: 32px;
     }
   </style>
 </head>
 <body>
-
-  <!-- Unified Design Lab Shell with anchor navigation -->
-  <UnifiedLabShell currentSection="mobile">
-    <main class="visual-report-page" id="documentation-content">
+  <UnifiedLabShell currentSection="simulator">
+    <main class="modular-screen-stage">
       
-      <!-- Top Documentation Header -->
-      <header class="report-header">
-        <div class="breadcrumb-row">
-          <a href="/">Design Lab</a>
-          <span aria-hidden="true">/</span>
-          <span>Mobile Style</span>
-          <span aria-hidden="true">/</span>
-          <span id="breadcrumb-current-screen">Informe Visual Multi-Dispositivo Android</span>
-        </div>
-
-        <div class="header-grid">
-          <div>
-            <p class="eyebrow">INFORME VISUAL CANÓNICO · FULL VISUAL FIRST</p>
-            <h1>Directrices de Diseño Móvil (Android Kotlin Compose M3)</h1>
-            <p class="intro">
-              Muestrario canónico y reporte visual para <strong>Nexa Suite</strong>. Presenta los 5 factores de forma Android estándar (Samsung S24, S24 Ultra, Zebra TC58, Galaxy Tab Active 8" y Tab S9 11"), interfaces minimalistas con fondo blanco, TopAppBar y Navbar activa en todas las pantallas, fundamentos M3 con contraste accesible WCAG AAA y contratos de ingeniería en Kotlin Compose.
-            </p>
-          </div>
-
-          <aside class="status-panel">
-            <span class="status-label">MATURIDAD</span>
-            <strong class="design-status">FROZEN CANDIDATE</strong>
-            <span class="status-label">ADOPCIÓN</span>
-            <strong class="adoption-status">Operations Android (:core:designsystem)</strong>
-            <span>Android SDK 37 (minSdk 29) · Kotlin 2.4 · WCAG 2.2 AAA</span>
-          </aside>
-        </div>
-
-        <div class="header-meta">
-          <span><i class="pi pi-android" aria-hidden="true"></i>Kotlin 2.4 · Jetpack Compose M3</span>
-          <span><i class="pi pi-shield" aria-hidden="true"></i>ADR-0018 Candidate</span>
-          <span><i class="pi pi-eye" aria-hidden="true"></i>100% Fondo Blanco Minimalista</span>
-          <span><i class="pi pi-bars" aria-hidden="true"></i>Navbar M3 Siempre Activa</span>
-          <span><i class="pi pi-camera" aria-hidden="true"></i>CameraX + ML Kit Vision</span>
-        </div>
-      </header>
-
-      <!-- Visual Report Export / Action Notice Bar -->
-      <div class="report-action-bar">
-        <div class="report-notice">
-          <i class="pi pi-info-circle text-primary"></i>
-          <span>Documento preparado para captura visual y exportación PDF: Toda la galería y fundamentos son visibles de inmediato sin clics previos.</span>
-        </div>
-        <button type="button" class="btn-print-report" onclick="window.print()">
-          <i class="pi pi-print"></i>
-          <span>Imprimir / Exportar PDF</span>
-        </button>
-      </div>
-
       <!-- =====================================================================
-           PARTE 1: SIMULADOR INTERACTIVO ANDROID & ESCAPARATE MULTI-DISPOSITIVO
+           PANTALLA 1 (DEFAULT): SIMULADOR & CALIBRADOR DINÁMICO ANDROID
            ===================================================================== -->
-      <div class="part-separator-block" id="seccion-simulador">
-        <span class="part-tag">PARTE 1 · SIMULADOR ANDROID & ESTUDIO MULTI-DISPOSITIVO</span>
-        <div class="showcase-view-switch-bar">
-          <div>
-            <h2 class="part-title">Simulador Móvil Interactivo & Estudio Multi-Dispositivo Android</h2>
-            <p class="part-desc">
-              Alterna entre el <strong>Simulador Interactivo en Vivo</strong> (con cambio de factor de forma, navegación activa y Kanban adaptativo) y la <strong>Galería de los 5 Dispositivos Lado a Lado</strong> para captura e informe visual.
-            </p>
-          </div>
-          <div class="mobile-view-toggle-group">
-            <button type="button" class="btn-view-toggle active" id="btn-toggle-simulator">
-              <i class="pi pi-sliders-h"></i>
-              <strong>✦ Simulador Interactivo (Medidas & Tabs)</strong>
-            </button>
-            <button type="button" class="btn-view-toggle" id="btn-toggle-gallery">
-              <i class="pi pi-th-large"></i>
-              <span>Galería 5 Dispositivos (Reporte Visual)</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- View 1: Live Interactive Simulator (DEFAULT & ACTIVE) -->
-      <div id="view-interactive-simulator-stage" class="mobile-main-stage-view active">
+      <section class="lab-screen-view active" id="screen-simulator" data-title="Simulador & Calibrador Android">
         <DeviceFrame />
-      </div>
-
-      <!-- View 2: Multi-Device Side-by-Side Gallery (Ready for PDF/Screenshot report) -->
-      <div id="view-multi-device-gallery-stage" class="mobile-main-stage-view" style="display: none;">
-        <GaleriaVisualAndroid />
-      </div>
-
+      </section>
 
       <!-- =====================================================================
-           PARTE 2: FUNDAMENTOS DE DISEÑO VISUAL M3 (VISUAL FOUNDATIONS)
+           PANTALLA 2.1: PALETA M3 & SWATCHES WCAG
            ===================================================================== -->
-      <div class="part-separator-block">
-        <span class="part-tag">PARTE 2 · FUNDAMENTOS VISUALES M3</span>
-        <h2 class="part-title">Fundamentos Visuales de Color, Tipografía, Grids, Elevación & Ergonomía</h2>
-        <p class="part-desc">
-          Tokens visuales certificados para Android Jetpack Compose. Muestrarios de roles tonales M3 con contraste verificado bajo WCAG 2.2 AAA, tipografía escalar en <code>sp</code>, cuadrícula espacial de 8dp, elevaciones con sombra real, calibrador táctil de 48dp vs 56dp para guantes y zonas biomecánicas del pulgar.
-        </p>
-      </div>
-
-      <!-- 2.1 Paleta Tonal M3 & Swatches de Color -->
-      <section id="fundamentos-color">
+      <section class="lab-screen-view" id="screen-foundations-color" data-title="Paleta M3 & Contraste WCAG">
+        <div class="screen-header-bar">
+          <div>
+            <span class="screen-badge-tag">FUNDAMENTOS VISUALES M3 · 01</span>
+            <h2 class="screen-main-title">Paleta Tonal Material 3 & Contraste Accesible</h2>
+            <p class="screen-main-desc">
+              Tokens tonales certificados bajo WCAG 2.2 AAA para Android Jetpack Compose con paleta de alto contraste para logística de campo.
+            </p>
+          </div>
+          <div class="screen-actions">
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
+          </div>
+        </div>
         <TokensColorSection />
       </section>
 
-      <!-- 2.2 Tipografía Escalar en sp -->
-      <section id="fundamentos-tipografia">
+      <!-- =====================================================================
+           PANTALLA 2.2: TIPOGRAFÍA ESCALAR EN SP
+           ===================================================================== -->
+      <section class="lab-screen-view" id="screen-foundations-typography" data-title="Tipografía Escalar en sp">
+        <div class="screen-header-bar">
+          <div>
+            <span class="screen-badge-tag">FUNDAMENTOS VISUALES M3 · 02</span>
+            <h2 class="screen-main-title">Escala Tipográfica Dinámica en sp (Scale-Independent Pixels)</h2>
+            <p class="screen-main-desc">
+              Especificaciones de texto en <code>sp</code> con soporte nativo para escalado de accesibilidad del sistema operativo Android (85% a 200%).
+            </p>
+          </div>
+          <div class="screen-actions">
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
+          </div>
+        </div>
         <TipografiaSpSection />
       </section>
 
-      <!-- 2.3 Cuadrícula Espacial 8dp -->
-      <section id="fundamentos-cuadricula">
+      <!-- =====================================================================
+           PANTALLA 2.3: CUADRÍCULA ESPACIAL 8DP
+           ===================================================================== -->
+      <section class="lab-screen-view" id="screen-foundations-grid" data-title="Cuadrícula Espacial 8dp">
+        <div class="screen-header-bar">
+          <div>
+            <span class="screen-badge-tag">FUNDAMENTOS VISUALES M3 · 03</span>
+            <h2 class="screen-main-title">Cuadrícula Espacial 8dp & Densidad Multiplataforma</h2>
+            <p class="screen-main-desc">
+              Ritmo vertical y horizontal de 8dp (y half-step de 4dp) alineado con los píxeles independientes de densidad (dp) de Android.
+            </p>
+          </div>
+          <div class="screen-actions">
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
+          </div>
+        </div>
         <Cuadricula8dpSection />
       </section>
 
-      <!-- 2.4 Elevaciones Tonal M3 (Level 0 a Level 5) -->
-      <section id="fundamentos-elevacion">
+      <!-- =====================================================================
+           PANTALLA 2.4: ELEVACIÓN TONAL M3 (0 A 5)
+           ===================================================================== -->
+      <section class="lab-screen-view" id="screen-foundations-elevation" data-title="Elevación & Surface Tint">
+        <div class="screen-header-bar">
+          <div>
+            <span class="screen-badge-tag">FUNDAMENTOS VISUALES M3 · 04</span>
+            <h2 class="screen-main-title">Elevación Tonal Material 3 & Surface Tint (Nivel 0 al 5)</h2>
+            <p class="screen-main-desc">
+              Capas de elevación sin sombras artificiales pesadas; profundidad jerárquica lograda mediante tinte de superficie tonal M3.
+            </p>
+          </div>
+          <div class="screen-actions">
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
+          </div>
+        </div>
         <ElevacionesM3Section />
       </section>
 
-      <!-- 2.5 Ergonomía Táctil: Calibrador 48dp vs 56dp -->
-      <section id="fundamentos-ergonomia">
+      <!-- =====================================================================
+           PANTALLA 2.5: ERGONOMÍA 48DP VS 56DP
+           ===================================================================== -->
+      <section class="lab-screen-view" id="screen-foundations-ergonomics" data-title="Ergonomía 48dp vs 56dp">
+        <div class="screen-header-bar">
+          <div>
+            <span class="screen-badge-tag">FUNDAMENTOS VISUALES M3 · 05</span>
+            <h2 class="screen-main-title">Calibrador Táctil 48dp Estándar vs 56dp con Guantes</h2>
+            <p class="screen-main-desc">
+              Diana mínima táctil de 48dp para conductores en movimiento y 56dp para operarios de almacén con guantes de cámara de frío.
+            </p>
+          </div>
+          <div class="screen-actions">
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
+          </div>
+        </div>
         <Ergonomia48dpSection />
       </section>
 
-      <!-- 2.6 Zonas Biomecánicas de Alcance del Pulgar -->
-      <section id="fundamentos-alcance">
+      <!-- =====================================================================
+           PANTALLA 2.6: ZONAS DE ALCANCE DEL PULGAR
+           ===================================================================== -->
+      <section class="lab-screen-view" id="screen-foundations-reach" data-title="Zonas de Alcance del Pulgar">
+        <div class="screen-header-bar">
+          <div>
+            <span class="screen-badge-tag">FUNDAMENTOS VISUALES M3 · 06</span>
+            <h2 class="screen-main-title">Zonas Biomecánicas de Alcance del Pulgar en Pantalla Móvil</h2>
+            <p class="screen-main-desc">
+              Mapeo ergonómico de zonas: Cómoda (inferior), Estiramiento (centro) y Difícil (superior) para ubicar acciones primarias.
+            </p>
+          </div>
+          <div class="screen-actions">
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
+          </div>
+        </div>
         <ZonasAlcanceSection />
       </section>
 
-
       <!-- =====================================================================
-           PARTE 3: ESPECIFICACIONES TÉCNICAS & CÓDIGO KOTLIN :core:designsystem
-           (Organized at the bottom as requested!)
+           PANTALLA 3.1: CATÁLOGO DE COMPONENTES M3
            ===================================================================== -->
-      <div class="part-separator-block" id="especificaciones-tecnicas">
-        <span class="part-tag">PARTE 3 · ESPECIFICACIONES TÉCNICAS & CONTRATOS</span>
-        <h2 class="part-title">Especificaciones Técnicas, Contratos C4 & Código Kotlin (:core:designsystem)</h2>
-        <p class="part-desc">
-          Documentación técnica profunda, modelos de arquitectura C4, colas offline con SQLite Room y WorkManager, contratos de hardware CameraX y código nativo Kotlin 2.4 para el equipo de ingeniería Android.
-        </p>
-      </div>
-
-      <div class="technical-specs-container">
-        <!-- 3.1 Arquitectura C4 & Stack Android -->
-        <details class="tech-accordion-item" open id="tech-arquitectura">
-          <summary class="tech-accordion-summary">
-            <div class="tech-summary-left">
-              <span class="tech-badge-icon"><i class="pi pi-compass"></i></span>
-              <span>1. Arquitectura C4 & Stack Tecnológico Android (Kotlin 2.4 · Compose M3)</span>
-            </div>
-            <i class="pi pi-chevron-down tech-chevron-icon"></i>
-          </summary>
-          <div class="tech-accordion-body">
-            <MobileArchitectureHero />
-          </div>
-        </details>
-
-        <!-- 3.2 Modelo de Evidencia & C4 de Calidad -->
-        <details class="tech-accordion-item" open id="tech-evidencia">
-          <summary class="tech-accordion-summary">
-            <div class="tech-summary-left">
-              <span class="tech-badge-icon"><i class="pi pi-shield"></i></span>
-              <span>2. Modelo de Evidencia ADR-0018 & Puertas de Calidad</span>
-            </div>
-            <i class="pi pi-chevron-down tech-chevron-icon"></i>
-          </summary>
-          <div class="tech-accordion-body">
-            <MobileEvidenceModel />
-          </div>
-        </details>
-
-        <!-- 3.3 Hardware CameraX & Resiliencia Offline WorkManager -->
-        <details class="tech-accordion-item" id="tech-hardware">
-          <summary class="tech-accordion-summary">
-            <div class="tech-summary-left">
-              <span class="tech-badge-icon"><i class="pi pi-qrcode"></i></span>
-              <span>3. Hardware CameraX, Escáner Óptico & Zebra SE55 Imager</span>
-            </div>
-            <i class="pi pi-chevron-down tech-chevron-icon"></i>
-          </summary>
-          <div class="tech-accordion-body">
-            <MobileHardwareSection />
-          </div>
-        </details>
-
-        <details class="tech-accordion-item" id="tech-resiliencia">
-          <summary class="tech-accordion-summary">
-            <div class="tech-summary-left">
-              <span class="tech-badge-icon"><i class="pi pi-sync"></i></span>
-              <span>4. Resiliencia de Red, Cola SQLite Room & Sincronización WorkManager</span>
-            </div>
-            <i class="pi pi-chevron-down tech-chevron-icon"></i>
-          </summary>
-          <div class="tech-accordion-body">
-            <MobileResilienceSection />
-          </div>
-        </details>
-
-        <!-- 3.4 Catálogo Canónico Compose & Código Nativo -->
-        <details class="tech-accordion-item" id="tech-componentes">
-          <summary class="tech-accordion-summary">
-            <div class="tech-summary-left">
-              <span class="tech-badge-icon"><i class="pi pi-id-card"></i></span>
-              <span>5. Catálogo Canónico de Componentes Jetpack Compose M3</span>
-            </div>
-            <i class="pi pi-chevron-down tech-chevron-icon"></i>
-          </summary>
-          <div class="tech-accordion-body">
-            <MobileComponentsSection />
-          </div>
-        </details>
-
-        <details class="tech-accordion-item" id="tech-codigo">
-          <summary class="tech-accordion-summary">
-            <div class="tech-summary-left">
-              <span class="tech-badge-icon"><i class="pi pi-code"></i></span>
-              <span>6. Generador de Código Nativo Kotlin 2.4 (:core:designsystem)</span>
-            </div>
-            <i class="pi pi-chevron-down tech-chevron-icon"></i>
-          </summary>
-          <div class="tech-accordion-body">
-            <CodeSnippetsTabs />
-          </div>
-        </details>
-
-        <!-- 3.5 Historias de Usuario Blueprint en Campo -->
-        <details class="tech-accordion-item" id="tech-historias">
-          <summary class="tech-accordion-summary">
-            <div class="tech-summary-left">
-              <span class="tech-badge-icon"><i class="pi pi-book"></i></span>
-              <span>7. Historias de Usuario Blueprint en Campo (Rutas, Bodega, Despacho, Maquinaria)</span>
-            </div>
-            <i class="pi pi-chevron-down tech-chevron-icon"></i>
-          </summary>
-          <div class="tech-accordion-body" style="display: flex; flex-direction: column; gap: 24px;">
-            <DriverRouteStory />
-            <WarehousePickingStory />
-            <DispatchBoardStory />
-            <MachineryInspectionStory />
-          </div>
-        </details>
-
-        <!-- 3.6 Módulos Interactivos en Vivo (Simulador de Laboratorio) -->
-        <details class="tech-accordion-item" id="tech-modulos-vivos">
-          <summary class="tech-accordion-summary">
-            <div class="tech-summary-left">
-              <span class="tech-badge-icon"><i class="pi pi-sliders-h"></i></span>
-              <span>8. Módulos Interactivos de Laboratorio (Despacho Live, Catálogo Live, POD Live, Navbar Live)</span>
-            </div>
-            <i class="pi pi-chevron-down tech-chevron-icon"></i>
-          </summary>
-          <div class="tech-accordion-body" style="display: flex; flex-direction: column; gap: 24px;">
-            <InteractiveDispatchMovement />
-            <InteractiveWholesaleCatalog />
-            <InteractiveMobileForms />
-            <InteractiveMobileNavbar />
-          </div>
-        </details>
-      </div>
-
-      <!-- Provenance Section -->
-      <section class="provenance-section">
-        <div class="provenance-grid">
+      <section class="lab-screen-view" id="screen-components" data-title="Componentes Canónicos M3">
+        <div class="screen-header-bar">
           <div>
-            <b>Android Compose Contract</b>
-            <p>Módulo <code>:core:designsystem</code> con <code>NexaTheme</code>, Material 3, ViewModels UDF y Navigation 3 en <code>apps/operations-android</code>.</p>
+            <span class="screen-badge-tag">CATÁLOGO DE COMPONENTES · M3</span>
+            <h2 class="screen-main-title">Catálogo Oficial de Componentes Android Compose</h2>
+            <p class="screen-main-desc">
+              Botones, tarjetas operativas, chips de estado, diálogos y controles táctiles de <code>:core:designsystem</code>.
+            </p>
           </div>
-          <div>
-            <b>Full Visual Report First</b>
-            <p>Arquitectura continua sin dependencias interactivas: 100% de la galería y fundamentos visibles para reportes ejecutivos e impresión PDF.</p>
-          </div>
-          <div>
-            <b>Human Review Gate</b>
-            <p>La dirección visual móvil, los contratos de ergonomía táctil y la evidencia de accesibilidad permanecen sujetos a validación en equipo.</p>
+          <div class="screen-actions">
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
           </div>
         </div>
+        <MobileComponentsSection />
+      </section>
+
+      <!-- =====================================================================
+           PANTALLA 3.2: MÓDULOS INTERACTIVOS DE OPERACIONES
+           ===================================================================== -->
+      <section class="lab-screen-view" id="screen-modules" data-title="Módulos Interactivos en Vivo">
+        <div class="screen-header-bar">
+          <div>
+            <span class="screen-badge-tag">MÓDULOS OPERATIVOS · LIVE</span>
+            <h2 class="screen-main-title">Módulos Interactivos de Operaciones en Campo</h2>
+            <p class="screen-main-desc">
+              Tablero Kanban adaptativo, catálogo mayorista B2B, formularios de inspección de maquinaria y navegación M3.
+            </p>
+          </div>
+          <div class="screen-actions">
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
+          </div>
+        </div>
+        <div class="modules-interactive-grid">
+          <InteractiveDispatchMovement />
+          <InteractiveWholesaleCatalog />
+          <InteractiveMobileForms />
+          <InteractiveMobileNavbar />
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           PANTALLA 3.3: GENERADOR DE CÓDIGO KOTLIN
+           ===================================================================== -->
+      <section class="lab-screen-view" id="screen-code" data-title="Generador de Código Kotlin 2.4">
+        <div class="screen-header-bar">
+          <div>
+            <span class="screen-badge-tag">CÓDIGO NATIVO · KOTLIN 2.4</span>
+            <h2 class="screen-main-title">Código Fuente Nativo Compose & Contratos de Implementación</h2>
+            <p class="screen-main-desc">
+              Archivos Kotlin de referencia listos para copiar al módulo <code>:core:designsystem</code> de la aplicación Android.
+            </p>
+          </div>
+          <div class="screen-actions">
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
+          </div>
+        </div>
+        <CodeSnippetsTabs />
+      </section>
+
+      <!-- =====================================================================
+           PANTALLA 3.4: HISTORIAS BLUEPRINT EN CAMPO
+           ===================================================================== -->
+      <section class="lab-screen-view" id="screen-stories" data-title="Historias Blueprint en Campo">
+        <div class="screen-header-bar">
+          <div>
+            <span class="screen-badge-tag">BLUEPRINT STORIES · CRITERIOS DE ACEPTACIÓN</span>
+            <h2 class="screen-main-title">Propuestas de Diseño Basadas en User Stories de Blueprint</h2>
+            <p class="screen-main-desc">
+              Slices arquitectónicos de Rutas con POD, Picking FEFO en frío, Despacho en muelle e Inspección de apiladores.
+            </p>
+          </div>
+          <div class="screen-actions">
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
+          </div>
+        </div>
+        <div class="stories-grid-stage">
+          <DriverRouteStory />
+          <WarehousePickingStory />
+          <DispatchBoardStory />
+          <MachineryInspectionStory />
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           PANTALLA 3.5: ARQUITECTURA C4 & RESILIENCIA
+           ===================================================================== -->
+      <section class="lab-screen-view" id="screen-architecture" data-title="Arquitectura C4 & Resiliencia">
+        <div class="screen-header-bar">
+          <div>
+            <span class="screen-badge-tag">ARQUITECTURA & RESILIENCIA · C4</span>
+            <h2 class="screen-main-title">Arquitectura C4, Cola SQLite Room & Resiliencia Offline</h2>
+            <p class="screen-main-desc">
+              Estructura modular Gradle, sincronización en segundo plano con WorkManager y contratos de integración con hardware industrial.
+            </p>
+          </div>
+          <div class="screen-actions">
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
+          </div>
+        </div>
+        <div class="screen-cards-stack">
+          <MobileArchitectureHero />
+          <MobileEvidenceModel />
+          <MobileHardwareSection />
+          <MobileResilienceSection />
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           PANTALLA 4: REPORTE MULTI-DISPOSITIVO (COLOCADA AL FONDO COMO SE PIDIÓ)
+           ===================================================================== -->
+      <section class="lab-screen-view" id="screen-gallery" data-title="Galería Multi-Dispositivo (5 Equipos)">
+        <div class="screen-header-bar">
+          <div>
+            <span class="screen-badge-tag">REPORTE VISUAL COMPLETO · 5 EQUIPOS</span>
+            <h2 class="screen-main-title">Grand Multi-Device Android Showcase (Mural Comparativo)</h2>
+            <p class="screen-main-desc">
+              Mural comparativo lado a lado con los 5 formatos de pantalla (390dp, 412dp teléfono, 412dp rugerizado, 600dp tablet 8" y 800dp tablet 11").
+            </p>
+          </div>
+          <div class="screen-actions">
+            <button type="button" class="btn-quick-nav" onclick="window.print()"><i class="pi pi-print"></i> Imprimir Reporte</button>
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
+          </div>
+        </div>
+        <GaleriaVisualAndroid />
       </section>
 
     </main>
   </UnifiedLabShell>
-
-  <script>
-    // Sub-view toggle between Interactive Simulator and Multi-Device Gallery
-    const btnToggleSim = document.getElementById('btn-toggle-simulator');
-    const btnToggleGal = document.getElementById('btn-toggle-gallery');
-    const viewSimStage = document.getElementById('view-interactive-simulator-stage');
-    const viewGalStage = document.getElementById('view-multi-device-gallery-stage');
-
-    btnToggleSim?.addEventListener('click', () => {
-      btnToggleSim.classList.add('active');
-      btnToggleGal?.classList.remove('active');
-      if (viewSimStage) viewSimStage.style.display = 'block';
-      if (viewGalStage) viewGalStage.style.display = 'none';
-    });
-
-    btnToggleGal?.addEventListener('click', () => {
-      btnToggleGal.classList.add('active');
-      btnToggleSim?.classList.remove('active');
-      if (viewGalStage) viewGalStage.style.display = 'block';
-      if (viewSimStage) viewSimStage.style.display = 'none';
-    });
-  </script>
 </body>
 </html>
