@@ -3,18 +3,14 @@
  * DeviceFrame.astro — Canonical Multi-Device Android Studio & Viewport Ergonomics Inspector
  * Nexa Suite · Material 3 Design System & Ergonomics Validation
  *
- * Features:
- *  - 100% Android Form Factors:
- *    * Samsung Galaxy S24 / Pixel 8 (390×844dp)
- *    * Samsung Galaxy S24 Ultra (412×915dp)
- *    * Zebra TC58 Rugged Enterprise (412×820dp)
- *    * Samsung Galaxy Tab Active 8" (600×960dp)
- *    * Samsung Galaxy Tab S9 11" (800×1200dp)
- *  - Persistent M3 TopAppBar & ALWAYS ACTIVE M3 BottomNav on all phone screens
- *  - Adaptive NavigationRail on tablet screens
- *  - Live Interactive Specimens (Fixed Kanban with Tabs, Catalog with Steppers, POD Forms, Navbar)
- *  - Canonical Static Screens (Operaciones Gold Standard, CameraX, Buyer B2B, Bottom Sheet)
- *  - Pure Minimalist Nexa Palette: 100% White Backgrounds (#ffffff), zero dark blue cards!
+ * Upgraded Features:
+ *  - Interactive Calibrator & Model Sizer:
+ *    * Presets: S24 (390dp), S24 Ultra (412dp), Zebra TC58 (412dp), Tab Active 8" (600dp), Tab S9 11" (800dp)
+ *    * Custom Dimension Inputs: Width (320-960dp), Height (600-1400dp)
+ *    * Dynamic Padding Adjuster: Compact (12dp), Standard (16dp), Spacious (24dp)
+ *  - Clean TopAppBar: Hamburger on left, dynamic Title, Notification bell, and User Profile on right (No duplication!)
+ *  - Persistent BottomNav: Synced with active screen (Rutas, Despacho, Picking, Checklist)
+ *  - Pure Minimalist Nexa Palette: 100% White Backgrounds (#ffffff), zero dark blue cards
  */
 import OperationsScreenSpec from './OperationsScreenSpec.astro';
 import BuyerScreenSpec from './BuyerScreenSpec.astro';
@@ -33,11 +29,11 @@ import InteractiveDispatchMovement from './InteractiveDispatchMovement.astro';
     <div class="section-heading">
       <span class="section-index">01</span>
       <div>
-        <p class="section-kicker">SIMULADOR MULTI-DISPOSITIVO ANDROID · JETPACK COMPOSE M3</p>
-        <h2>Simulador Móvil Interactivo en Vivo & Ergonomía de Densidad</h2>
+        <p class="section-kicker">SIMULADOR & CALIBRADOR DINÁMICO ANDROID · JETPACK COMPOSE M3</p>
+        <h2>Simulador Móvil Interactivo & Calibrador de Medidas y Padding</h2>
         <p class="section-intro">
-          Validación de interfaces nativas en <strong>Android Jetpack Compose</strong> sobre todas las medidas estándar de Android (Samsung S24, S24 Ultra, Zebra industrial y Tablets de 8" y 11"). 
-          <strong>Fondo blanco minimalista, TopAppBar M3 persistente y Navbar activa en todas las pantallas.</strong>
+          Ajusta interactivamente cualquier modelo, medidas personalizadas en <strong>dp</strong> y espaciado de pantalla (<strong>padding</strong>). 
+          La interfaz se reacomoda dinámicamente con adaptación de contenedor (@container) entre smartphone compacto y tablet expansiva.
         </p>
       </div>
     </div>
@@ -45,61 +41,98 @@ import InteractiveDispatchMovement from './InteractiveDispatchMovement.astro';
     <!-- Quick Meta Chips -->
     <div class="heading-meta-chips">
       <span class="cuadro-tag primary"><i class="pi pi-android" aria-hidden="true"></i> Android 14 (API 34)</span>
-      <span class="cuadro-tag"><i class="pi pi-mobile" aria-hidden="true"></i> 390dp / 412dp / 600dp / 800dp</span>
-      <span class="cuadro-tag success"><i class="pi pi-hand" aria-hidden="true"></i> Touch Target 48dp / 56dp Guantes</span>
-      <span class="cuadro-tag kotlin"><i class="pi pi-bars" aria-hidden="true"></i> Navbar M3 Siempre Activa</span>
+      <span class="cuadro-tag" id="chip-live-dimensions"><i class="pi pi-mobile" aria-hidden="true"></i> 390 × 844 dp</span>
+      <span class="cuadro-tag success" id="chip-live-padding"><i class="pi pi-sliders-h" aria-hidden="true"></i> Padding: 16dp</span>
+      <span class="cuadro-tag kotlin"><i class="pi pi-bars" aria-hidden="true"></i> TopBar & BottomNav Activas</span>
     </div>
   </header>
 
-  <!-- Interactive Controls Bar -->
+  <!-- Interactive Calibrator & Model Controls Card -->
   <div class="stage-controls-card">
-    <!-- Cluster 1: Android Form Factors & Tablets -->
+    
+    <!-- Top Row: Device Presets -->
     <div class="control-cluster">
-      <span class="control-label">DENSIDAD & DISPOSITIVO ANDROID:</span>
-      <div class="button-toggle-group">
-        <button type="button" class="btn-ctrl device-btn active" data-width="390" data-height="780" data-device="s24">
+      <span class="control-label">DISPOSITIVO Y FACTOR DE FORMA:</span>
+      <div class="button-toggle-group" id="group-device-presets">
+        <button type="button" class="btn-ctrl device-preset-btn active" data-width="390" data-height="844" data-padding="16" data-name="Galaxy S24 (390dp)">
           <i class="pi pi-mobile"></i> Galaxy S24 (390dp)
         </button>
-        <button type="button" class="btn-ctrl device-btn" data-width="412" data-height="820" data-device="s24ultra">
+        <button type="button" class="btn-ctrl device-preset-btn" data-width="412" data-height="915" data-padding="16" data-name="Pixel 8 / S24 Ultra (412dp)">
           <i class="pi pi-mobile"></i> S24 Ultra (412dp)
         </button>
-        <button type="button" class="btn-ctrl device-btn" data-width="412" data-height="800" data-device="zebra">
+        <button type="button" class="btn-ctrl device-preset-btn" data-width="412" data-height="820" data-padding="12" data-name="Zebra TC58 Rugged (412dp)">
           <i class="pi pi-shield"></i> Zebra TC58 (412dp)
         </button>
-        <button type="button" class="btn-ctrl device-btn tablet" data-width="600" data-height="740" data-device="tab-active">
+        <button type="button" class="btn-ctrl device-preset-btn tablet" data-width="600" data-height="880" data-padding="20" data-name="Tab Active 8&quot; (600dp)">
           <i class="pi pi-tablet"></i> Tab Active 8" (600dp)
         </button>
-        <button type="button" class="btn-ctrl device-btn tablet" data-width="800" data-height="760" data-device="tab-s9">
+        <button type="button" class="btn-ctrl device-preset-btn tablet" data-width="800" data-height="920" data-padding="24" data-name="Tab S9 11&quot; (800dp)">
           <i class="pi pi-desktop"></i> Tab S9 11" (800dp)
         </button>
       </div>
     </div>
 
-    <!-- Cluster 2: Live Interactive Modules -->
-    <div class="control-cluster">
-      <span class="control-label">MÓDULOS INTERACTIVOS EN VIVO:</span>
-      <div class="button-toggle-group">
-        <button type="button" class="btn-ctrl screen-btn live-feature" data-screen="dispatch-live" data-title="Tablero de Despacho & Movimiento">
-          <i class="pi pi-send"></i> Despacho Kanban (Live)
-        </button>
-        <button type="button" class="btn-ctrl screen-btn live-feature" data-screen="catalog-live" data-title="Catálogo Mayorista B2B">
-          <i class="pi pi-shopping-bag"></i> Catálogo B2B (Live)
-        </button>
-        <button type="button" class="btn-ctrl screen-btn live-feature" data-screen="forms-live" data-title="Inspección ISO 3691 & Firma POD">
-          <i class="pi pi-pencil"></i> Formularios & POD (Live)
-        </button>
-        <button type="button" class="btn-ctrl screen-btn live-feature" data-screen="navbar-live" data-title="Navegación & Sucursales M3">
-          <i class="pi pi-bars"></i> Navbar & Sucursales (Live)
-        </button>
+    <!-- Middle Row: Interactive Dimension & Padding Sliders -->
+    <div class="calibrator-fine-tune-row">
+      <!-- Width Adjuster -->
+      <div class="calibrator-param-box">
+        <label for="input-custom-width">
+          <i class="pi pi-arrows-h"></i>
+          <span>Ancho: <strong id="lbl-custom-width">390dp</strong></span>
+        </label>
+        <div class="param-input-wrap">
+          <input type="range" id="slider-custom-width" min="320" max="860" step="10" value="390" class="calibrator-slider" />
+          <input type="number" id="num-custom-width" min="320" max="960" step="10" value="390" class="calibrator-num-input" />
+          <span class="unit-tag">dp</span>
+        </div>
+      </div>
+
+      <!-- Height Adjuster -->
+      <div class="calibrator-param-box">
+        <label for="input-custom-height">
+          <i class="pi pi-arrows-v"></i>
+          <span>Alto: <strong id="lbl-custom-height">780dp</strong></span>
+        </label>
+        <div class="param-input-wrap">
+          <input type="range" id="slider-custom-height" min="600" max="1100" step="20" value="780" class="calibrator-slider" />
+          <input type="number" id="num-custom-height" min="600" max="1200" step="20" value="780" class="calibrator-num-input" />
+          <span class="unit-tag">dp</span>
+        </div>
+      </div>
+
+      <!-- Padding Inset Adjuster -->
+      <div class="calibrator-param-box">
+        <label>
+          <i class="pi pi-sliders-h"></i>
+          <span>Padding de Pantalla:</span>
+        </label>
+        <div class="padding-pills-group" id="group-padding-pills">
+          <button type="button" class="btn-pad-pill" data-padding="12">12dp (Compacto)</button>
+          <button type="button" class="btn-pad-pill active" data-padding="16">16dp (M3 Estándar)</button>
+          <button type="button" class="btn-pad-pill" data-padding="20">20dp (Espacioso)</button>
+          <button type="button" class="btn-pad-pill" data-padding="24">24dp (Tablet)</button>
+        </div>
       </div>
     </div>
 
-    <!-- Cluster 3: Canonical Screens -->
+    <!-- Bottom Row: Screen Specimen Selector -->
     <div class="control-cluster">
-      <span class="control-label">PANTALLAS CANÓNICAS:</span>
-      <div class="button-toggle-group">
+      <span class="control-label">PANTALLA ACTIVA EN EL SIMULADOR:</span>
+      <div class="button-toggle-group" id="group-screen-selector">
         <button type="button" class="btn-ctrl screen-btn active" data-screen="operations" data-title="Operaciones Nexa · En Ruta">
-          <i class="pi pi-truck"></i> Operaciones (Image 4)
+          <i class="pi pi-truck"></i> Operaciones (En Ruta)
+        </button>
+        <button type="button" class="btn-ctrl screen-btn" data-screen="dispatch-live" data-title="Tablero de Despacho & Movimiento">
+          <i class="pi pi-send"></i> Despacho Kanban (Live)
+        </button>
+        <button type="button" class="btn-ctrl screen-btn" data-screen="catalog-live" data-title="Catálogo Mayorista B2B">
+          <i class="pi pi-shopping-bag"></i> Catálogo B2B (Live)
+        </button>
+        <button type="button" class="btn-ctrl screen-btn" data-screen="forms-live" data-title="Inspección ISO 3691 & Firma POD">
+          <i class="pi pi-pencil"></i> Formularios & POD (Live)
+        </button>
+        <button type="button" class="btn-ctrl screen-btn" data-screen="navbar-live" data-title="Navegación & Sucursales M3">
+          <i class="pi pi-bars"></i> Navbar & Sucursales (Live)
         </button>
         <button type="button" class="btn-ctrl screen-btn" data-screen="scanner" data-title="Escáner Óptico CameraX">
           <i class="pi pi-qrcode"></i> Escáner CameraX
@@ -129,7 +162,7 @@ import InteractiveDispatchMovement from './InteractiveDispatchMovement.astro';
         </div>
       </div>
 
-      <!-- M3 TopAppBar (Always Active on Phone Screens) -->
+      <!-- M3 TopAppBar (Single Canonical Top Bar: Hamburger left, Title, Bell, Profile right) -->
       <header class="frame-m3-top-bar" id="frame-top-bar">
         <div class="top-bar-left">
           <button type="button" class="frame-icon-btn" aria-label="Menú principal">
@@ -142,16 +175,16 @@ import InteractiveDispatchMovement from './InteractiveDispatchMovement.astro';
             <i class="pi pi-bell"></i>
             <span class="notif-dot"></span>
           </button>
-          <div class="frame-user-avatar">
+          <div class="frame-user-avatar" title="Perfil Conductor">
             <i class="pi pi-user"></i>
           </div>
         </div>
       </header>
 
       <!-- Scrollable Screen Content Host Container -->
-      <div class="screen-viewport-host" id="screen-viewport-host" style="height: 680px;">
+      <div class="screen-viewport-host" id="screen-viewport-host" style="height: 660px; padding: 16px;">
         
-        <!-- Screen 1 (DEFAULT): Canonical Operaciones (Exact Image 4 Gold Standard!) -->
+        <!-- Screen 1 (DEFAULT): Canonical Operaciones (Clean without duplicated header/footer) -->
         <div class="screen-view active" id="view-operations">
           <OperationsScreenSpec />
         </div>
@@ -176,181 +209,171 @@ import InteractiveDispatchMovement from './InteractiveDispatchMovement.astro';
           <InteractiveMobileNavbar />
         </div>
 
-        <!-- Canonical Screens -->
+        <!-- Screen 6: Canonical CameraX Scanner -->
         <div class="screen-view" id="view-scanner">
           <ScannerScreenSpec />
         </div>
+
+        <!-- Screen 7: Canonical Buyer Specimen -->
         <div class="screen-view" id="view-buyer">
           <BuyerScreenSpec />
         </div>
+
+        <!-- Screen 8: Canonical Bottom Sheet Specimen -->
         <div class="screen-view" id="view-sheet">
           <BottomSheetSpec />
         </div>
       </div>
 
-      <!-- M3 Bottom Navigation Bar (ALWAYS ACTIVE ON ALL PHONE SPECIMENS) -->
+      <!-- Persistent M3 Bottom Navigation Bar (Synchronized with active screens) -->
       <nav class="frame-m3-bottom-nav" id="frame-bottom-nav" aria-label="Navegación principal de la aplicación">
-        <button type="button" class="nav-dest active" data-dest="rutas">
-          <div class="dest-icon-wrap">
-            <i class="pi pi-map-marker"></i>
-          </div>
-          <span class="dest-label">Rutas</span>
+        <button type="button" class="nav-destination active" data-dest="rutas" aria-label="Rutas">
+          <i class="pi pi-map-marker"></i>
+          <span>Rutas</span>
         </button>
-        <button type="button" class="nav-dest" data-dest="despacho">
-          <div class="dest-icon-wrap">
-            <i class="pi pi-send"></i>
-          </div>
-          <span class="dest-label">Despacho</span>
+        <button type="button" class="nav-destination" data-dest="despacho" aria-label="Despacho">
+          <i class="pi pi-send"></i>
+          <span>Despacho</span>
         </button>
-        <button type="button" class="nav-dest" data-dest="picking">
-          <div class="dest-icon-wrap">
-            <i class="pi pi-box"></i>
-          </div>
-          <span class="dest-label">Picking</span>
+        <button type="button" class="nav-destination" data-dest="picking" aria-label="Picking">
+          <i class="pi pi-box"></i>
+          <span>Picking</span>
         </button>
-        <button type="button" class="nav-dest" data-dest="checklist">
-          <div class="dest-icon-wrap">
-            <i class="pi pi-check-square"></i>
-          </div>
-          <span class="dest-label">Checklist</span>
+        <button type="button" class="nav-destination" data-dest="checklist" aria-label="Checklist">
+          <i class="pi pi-check-square"></i>
+          <span>Checklist</span>
         </button>
       </nav>
 
-      <!-- Viewport Device Metric Status Footer -->
-      <div class="viewport-footer-bar">
-        <span class="vp-dot"></span>
-        <span id="vp-info-label">Samsung Galaxy S24 · 390 &times; 844dp · Android 14 M3</span>
-        <span class="vp-chip">WCAG AAA</span>
-        <span class="vp-chip">Touch 48/56dp</span>
+      <!-- Frame Footnote / Spec Metadata -->
+      <div class="frame-spec-footer">
+        <div class="footer-meta">
+          <span class="live-dot"></span>
+          <span class="footer-spec-label" id="frame-info-label">Galaxy S24 · 390 × 844dp · Android 14 M3</span>
+        </div>
+        <div class="footer-badges">
+          <span class="footer-chip">WCAG AAA</span>
+          <span class="footer-chip">Touch 48/56dp</span>
+        </div>
       </div>
-
     </div>
-  </div>
-
-  <!-- Master Documentation Cuadros Container -->
-  <div class="cuadro-container">
-
-    <!-- Cuadro 1: Viewport Densities & Ergonomic Budget -->
-    <section class="cuadro-card">
-      <header class="cuadro-header">
-        <div class="cuadro-header-left">
-          <span class="cuadro-num-badge">C1</span>
-          <div>
-            <p class="cuadro-kicker">MATRIZ DE DENSIDADES & PRESUPUESTO ERGONÓMICO</p>
-            <h3 class="cuadro-title">Contratos de Densidad de Pantalla y Requisitos de Objetivos Táctiles</h3>
-            <p class="cuadro-subtitle">
-              Reglas de diseño para smartphones, phablets, terminales industriales y tablets Android.
-            </p>
-          </div>
-        </div>
-        <div class="cuadro-tags">
-          <span class="cuadro-tag primary"><i class="pi pi-check"></i> WCAG 2.2 AAA</span>
-          <span class="cuadro-tag success"><i class="pi pi-hand"></i> 56dp Cold-Chain</span>
-        </div>
-      </header>
-
-      <div class="contract-table-wrapper">
-        <table class="contract-table">
-          <thead>
-            <tr>
-              <th>Perfil de Dispositivo</th>
-              <th>Ancho Viewport</th>
-              <th>Touch Target Mínimo</th>
-              <th>Margen Pantalla</th>
-              <th>Uso en Nexa Suite</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Samsung Galaxy S24 / Pixel 8</strong></td>
-              <td><span class="mono-chip">390dp</span></td>
-              <td><span class="mono-type">48dp &times; 48dp</span></td>
-              <td><span class="rule-chip">16dp horizontal</span></td>
-              <td>Conductor en ruta, choferes de reparto rápido</td>
-            </tr>
-            <tr>
-              <td><strong>Samsung Galaxy S24 Ultra</strong></td>
-              <td><span class="mono-chip">412dp</span></td>
-              <td><span class="mono-type">48dp estándar</span></td>
-              <td><span class="rule-chip">16dp horizontal</span></td>
-              <td>Comprador B2B mayorista, supervisores de flota</td>
-            </tr>
-            <tr>
-              <td><strong>Zebra TC58 / Honeywell Rugged</strong></td>
-              <td><span class="mono-chip">412dp (Rugged)</span></td>
-              <td><span class="mono-type">56dp obligatorio</span></td>
-              <td><span class="rule-chip">20dp horizontal</span></td>
-              <td>Operadores de frío (-20°C a 4°C) con guantes térmicos</td>
-            </tr>
-            <tr>
-              <td><strong>Samsung Galaxy Tab Active 8"</strong></td>
-              <td><span class="mono-chip">600dp (Compact Tablet)</span></td>
-              <td><span class="mono-type">56dp industrial</span></td>
-              <td><span class="rule-chip">24dp horizontal</span></td>
-              <td>Montacarguistas y operadores de muelle frigorífico</td>
-            </tr>
-            <tr>
-              <td><strong>Samsung Galaxy Tab S9 11"</strong></td>
-              <td><span class="mono-chip">800dp (Expanded Tablet)</span></td>
-              <td><span class="mono-type">48dp – 56dp</span></td>
-              <td><span class="rule-chip">32dp TwoPane</span></td>
-              <td>Consola de control de patio y telemetría de frío</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
   </div>
 </div>
 
 <script>
-  // Viewport Resizing & Screen Switching Interactive Logic
   document.addEventListener('DOMContentLoaded', () => {
     const frame = document.getElementById('viewport-frame');
     const host = document.getElementById('screen-viewport-host');
-    const infoLabel = document.getElementById('vp-info-label');
+    const infoLabel = document.getElementById('frame-info-label');
     const topTitle = document.getElementById('frame-top-title');
-    const deviceButtons = document.querySelectorAll('.device-btn');
+
+    // Controls
+    const devicePresetBtns = document.querySelectorAll('.device-preset-btn');
+    const sliderWidth = document.getElementById('slider-custom-width') as HTMLInputElement | null;
+    const numWidth = document.getElementById('num-custom-width') as HTMLInputElement | null;
+    const lblWidth = document.getElementById('lbl-custom-width');
+
+    const sliderHeight = document.getElementById('slider-custom-height') as HTMLInputElement | null;
+    const numHeight = document.getElementById('num-custom-height') as HTMLInputElement | null;
+    const lblHeight = document.getElementById('lbl-custom-height');
+
+    const padPills = document.querySelectorAll('.btn-pad-pill');
     const screenButtons = document.querySelectorAll('.screen-btn');
     const screenViews = document.querySelectorAll('.screen-view');
-    const navDests = document.querySelectorAll('.nav-dest');
+    const navDests = document.querySelectorAll('.nav-destination');
 
-    // Switch Viewport Width & Device
-    deviceButtons.forEach(btn => {
+    const chipDims = document.getElementById('chip-live-dimensions');
+    const chipPad = document.getElementById('chip-live-padding');
+
+    let currentWidth = 390;
+    let currentHeight = 780;
+    let currentPadding = 16;
+    let currentModelName = 'Galaxy S24';
+
+    function applyDimensions(w: number, h: number, p: number, name?: string) {
+      currentWidth = w;
+      currentHeight = h;
+      currentPadding = p;
+      if (name) currentModelName = name;
+
+      // Update frame width
+      if (frame) {
+        frame.style.width = `${w}px`;
+        if (w >= 580) {
+          frame.classList.add('mode-tablet');
+        } else {
+          frame.classList.remove('mode-tablet');
+        }
+      }
+
+      // Update host height & padding
+      if (host) {
+        const hostH = Math.max(480, h - 140);
+        host.style.height = `${hostH}px`;
+        host.style.padding = `${p}px`;
+      }
+
+      // Update UI numbers & sliders
+      if (sliderWidth) sliderWidth.value = String(w);
+      if (numWidth) numWidth.value = String(w);
+      if (lblWidth) lblWidth.textContent = `${w}dp`;
+
+      if (sliderHeight) sliderHeight.value = String(h);
+      if (numHeight) numHeight.value = String(h);
+      if (lblHeight) lblHeight.textContent = `${h}dp`;
+
+      // Update chips & labels
+      if (chipDims) chipDims.innerHTML = `<i class="pi pi-mobile"></i> ${w} × ${h} dp`;
+      if (chipPad) chipPad.innerHTML = `<i class="pi pi-sliders-h"></i> Padding: ${p}dp`;
+      if (infoLabel) {
+        infoLabel.textContent = `${currentModelName} · ${w} × ${h}dp · Padding ${p}dp · ${w >= 580 ? 'Tablet' : 'Móvil'}`;
+      }
+    }
+
+    // Preset button clicks
+    devicePresetBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        deviceButtons.forEach(b => b.classList.remove('active'));
+        devicePresetBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
-        const width = parseInt(btn.getAttribute('data-width') || '390', 10);
-        const height = parseInt(btn.getAttribute('data-height') || '780', 10);
-        const deviceType = btn.getAttribute('data-device') || 's24';
+        const w = parseInt(btn.getAttribute('data-width') || '390', 10);
+        const h = parseInt(btn.getAttribute('data-height') || '780', 10);
+        const p = parseInt(btn.getAttribute('data-padding') || '16', 10);
+        const name = btn.getAttribute('data-name') || 'Android Model';
 
-        if (frame) {
-          frame.style.width = `${width}px`;
-          
-          if (width >= 600) {
-            frame.classList.add('mode-tablet');
-            if (host) host.style.height = `${height - 120}px`;
-          } else {
-            frame.classList.remove('mode-tablet');
-            if (host) host.style.height = '680px';
-          }
-        }
+        // Sync padding pill
+        padPills.forEach(pill => {
+          const padVal = parseInt(pill.getAttribute('data-padding') || '16', 10);
+          pill.classList.toggle('active', padVal === p);
+        });
 
-        if (infoLabel) {
-          if (deviceType === 's24') {
-            infoLabel.textContent = `Samsung Galaxy S24 · 390 × 844dp · Android 14 M3`;
-          } else if (deviceType === 's24ultra') {
-            infoLabel.textContent = `Samsung Galaxy S24 Ultra · 412 × 915dp · Android 14 M3`;
-          } else if (deviceType === 'zebra') {
-            infoLabel.textContent = `Zebra TC58 Enterprise · 412 × 820dp · Rugged SE55`;
-          } else if (deviceType === 'tab-active') {
-            infoLabel.textContent = `Samsung Galaxy Tab Active 8" · 600 × 960dp Tablet`;
-          } else if (deviceType === 'tab-s9') {
-            infoLabel.textContent = `Samsung Galaxy Tab S9 11" · 800 × 1200dp Tablet TwoPane`;
-          }
-        }
+        applyDimensions(w, h, p, name);
+      });
+    });
+
+    // Custom width changes
+    function onWidthChange(val: number) {
+      devicePresetBtns.forEach(b => b.classList.remove('active'));
+      applyDimensions(val, currentHeight, currentPadding, 'Personalizado');
+    }
+    sliderWidth?.addEventListener('input', () => onWidthChange(parseInt(sliderWidth.value, 10)));
+    numWidth?.addEventListener('input', () => onWidthChange(parseInt(numWidth.value || '390', 10)));
+
+    // Custom height changes
+    function onHeightChange(val: number) {
+      devicePresetBtns.forEach(b => b.classList.remove('active'));
+      applyDimensions(currentWidth, val, currentPadding, 'Personalizado');
+    }
+    sliderHeight?.addEventListener('input', () => onHeightChange(parseInt(sliderHeight.value, 10)));
+    numHeight?.addEventListener('input', () => onHeightChange(parseInt(numHeight.value || '780', 10)));
+
+    // Padding pill changes
+    padPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        padPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        const p = parseInt(pill.getAttribute('data-padding') || '16', 10);
+        applyDimensions(currentWidth, currentHeight, p);
       });
     });
 
@@ -419,202 +442,287 @@ import InteractiveDispatchMovement from './InteractiveDispatchMovement.astro';
     gap: 24px;
   }
 
+  /* Section Heading */
   .section-heading-block {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
     gap: 16px;
-    padding-bottom: 24px;
+    padding-bottom: 20px;
     border-bottom: 1px solid var(--nexa-color-border-structural, #e2e8f0);
   }
 
   .section-heading {
     display: flex;
-    align-items: flex-start;
     gap: 16px;
+    max-width: 820px;
   }
 
   .section-index {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: #eff6ff;
-    color: #1d4ed8;
-    font-size: 13px;
-    font-weight: 800;
     font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--nexa-color-primary-600, #2563eb);
+    background: var(--nexa-color-primary-50, #eff6ff);
+    border: 1px solid var(--nexa-color-primary-200, #bfdbfe);
+    border-radius: 8px;
+    padding: 6px 10px;
+    height: fit-content;
   }
 
   .section-kicker {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    color: var(--nexa-color-primary-700, #1d4ed8);
-    text-transform: uppercase;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--nexa-color-primary-600, #2563eb);
     margin-bottom: 4px;
   }
 
   .section-heading h2 {
     font-family: var(--nexa-font-family-display, sans-serif);
-    font-size: 22px;
-    font-weight: 800;
-    color: #0f172a;
-    letter-spacing: -0.02em;
-    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
   }
 
   .section-intro {
-    font-size: 13.5px;
-    color: #64748b;
-    max-width: 820px;
-    margin-top: 6px;
-    line-height: 1.5;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--nexa-color-text-secondary, #64748b);
   }
 
   .heading-meta-chips {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    align-self: center;
   }
 
   .cuadro-tag {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 3px 8px;
+    padding: 4px 10px;
     border-radius: 6px;
-    font-size: 11.5px;
+    font-size: 12px;
     font-weight: 600;
-    background: #f1f5f9;
-    color: #475569;
-    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-default, #cbd5e1);
+    color: #334155;
   }
 
-  .cuadro-tag.primary { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
-  .cuadro-tag.success { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
-  .cuadro-tag.kotlin { background: #fdf4ff; color: #a21caf; border-color: #f5d0fe; }
+  .cuadro-tag.primary {
+    background: #eff6ff;
+    border-color: #bfdbfe;
+    color: #1d4ed8;
+  }
 
-  /* Stage Controls Bar */
+  .cuadro-tag.success {
+    background: #ecfdf5;
+    border-color: #a7f3d0;
+    color: #047857;
+  }
+
+  .cuadro-tag.kotlin {
+    background: #f5f3ff;
+    border-color: #ddd6fe;
+    color: #6d28d9;
+  }
+
+  /* Interactive Stage Controls Card */
   .stage-controls-card {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-default, #cbd5e1);
+    border-radius: 14px;
+    padding: 16px 20px;
     display: flex;
     flex-direction: column;
     gap: 14px;
-    padding: 16px 20px;
-    background: #ffffff;
-    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
-    border-radius: var(--nexa-radius-card, 16px);
     box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
   }
 
   .control-cluster {
     display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .control-label {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    color: #64748b;
-    text-transform: uppercase;
-    min-width: 170px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #475569;
   }
 
   .button-toggle-group {
     display: flex;
-    gap: 6px;
     flex-wrap: wrap;
+    gap: 6px;
   }
 
   .btn-ctrl {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 12px;
+    padding: 7px 12px;
     border-radius: 8px;
-    border: 1px solid #cbd5e1;
-    background: #ffffff;
-    color: #475569;
-    font-size: 12px;
+    font-size: 12.5px;
     font-weight: 600;
+    background: #f8fafc;
+    border: 1px solid var(--nexa-color-border-default, #cbd5e1);
+    color: #334155;
     cursor: pointer;
     transition: all 0.15s ease;
   }
 
   .btn-ctrl:hover {
-    background: #f8fafc;
-    color: #0f172a;
+    background: #f1f5f9;
     border-color: #94a3b8;
   }
 
   .btn-ctrl.active {
     background: #0f172a;
-    color: #ffffff;
     border-color: #0f172a;
-    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.15);
-  }
-
-  .btn-ctrl.tablet {
-    border-color: #93c5fd;
-  }
-
-  .btn-ctrl.live-feature {
-    border-color: #bfdbfe;
-    background: #eff6ff;
-    color: #1d4ed8;
-  }
-
-  .btn-ctrl.live-feature.active {
-    background: #2563eb;
     color: #ffffff;
-    border-color: #2563eb;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.2);
   }
 
-  /* Architectural Stage Wrapper */
+  /* Fine Tune Row (Sliders & Numbers) */
+  .calibrator-fine-tune-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.3fr;
+    gap: 16px;
+    padding: 12px 14px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 900px) {
+    .calibrator-fine-tune-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .calibrator-param-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .calibrator-param-box label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+  }
+
+  .param-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .calibrator-slider {
+    flex: 1;
+    height: 6px;
+    border-radius: 3px;
+    background: #cbd5e1;
+    accent-color: #2563eb;
+    cursor: pointer;
+  }
+
+  .calibrator-num-input {
+    width: 68px;
+    padding: 4px 8px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 12px;
+    font-weight: 600;
+    color: #0f172a;
+    text-align: right;
+  }
+
+  .unit-tag {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    color: #64748b;
+  }
+
+  .padding-pills-group {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .btn-pad-pill {
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-pad-pill:hover {
+    background: #f1f5f9;
+  }
+
+  .btn-pad-pill.active {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #ffffff;
+  }
+
+  /* Architectural Viewport Stage */
   .architectural-stage-wrapper {
+    width: 100%;
     display: flex;
     justify-content: center;
-    width: 100%;
-    padding: 24px 16px 36px;
-    background: #f8fafc;
-    border-radius: 20px;
-    border: 1px solid #e2e8f0;
-    overflow-x: auto;
+    align-items: center;
+    padding: 24px 0 40px;
   }
 
-  /* Viewport Card Frame (Physical Android Bezels) */
   .viewport-card-frame {
     background: #ffffff;
     border: 1px solid #cbd5e1;
-    border-radius: 36px;
-    box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(15, 23, 42, 0.05);
+    border-radius: 28px;
+    box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    position: relative;
+    transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     max-width: 100%;
   }
 
+  /* Mode Tablet */
   .viewport-card-frame.mode-tablet {
-    border-radius: 24px;
+    border-radius: 20px;
   }
 
-  /* 1. Android 14 System Bar */
+  /* Android 14 System Bar */
   .frame-system-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 18px 4px;
+    height: 32px;
     background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
     font-size: 11px;
     font-weight: 700;
-    color: #1e293b;
-    border-bottom: 1px solid transparent;
+    color: #0f172a;
+    border-bottom: 1px solid #f1f5f9;
   }
 
   .sys-icons {
@@ -622,58 +730,32 @@ import InteractiveDispatchMovement from './InteractiveDispatchMovement.astro';
     align-items: center;
     gap: 8px;
     font-size: 11px;
+    color: #334155;
   }
 
-  .sys-net {
-    font-size: 9.5px;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    color: #3b82f6;
-  }
-
-  /* 2. M3 TopAppBar (Always Active) */
+  /* M3 Top App Bar */
   .frame-m3-top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 14px;
+    height: 52px;
     background: #ffffff;
     border-bottom: 1px solid #e2e8f0;
-    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    flex-shrink: 0;
   }
 
   .top-bar-left {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
-
-  .frame-icon-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    border: none;
-    background: transparent;
-    color: #334155;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 15px;
-    transition: background 0.15s ease;
-  }
-
-  .frame-icon-btn:hover { background: #f1f5f9; }
 
   .frame-top-title {
     font-family: var(--nexa-font-family-display, sans-serif);
     font-size: 14.5px;
     font-weight: 700;
     color: #0f172a;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   .top-bar-right {
@@ -682,120 +764,138 @@ import InteractiveDispatchMovement from './InteractiveDispatchMovement.astro';
     gap: 6px;
   }
 
-  .notif-btn { position: relative; }
+  .frame-icon-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    color: #475569;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.15s ease;
+  }
+
+  .frame-icon-btn:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+  }
 
   .notif-dot {
     position: absolute;
-    top: 7px;
-    right: 7px;
-    width: 7px;
-    height: 7px;
+    top: 8px;
+    right: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: #ef4444;
-    border: 1.5px solid #ffffff;
   }
 
   .frame-user-avatar {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background: #eff6ff;
     color: #2563eb;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
+    font-size: 14px;
+    border: 1px solid #bfdbfe;
+    cursor: pointer;
   }
 
-  /* 3. Screen Viewport Host */
+  /* Screen Viewport Host */
   .screen-viewport-host {
-    width: 100%;
-    overflow-y: auto;
-    position: relative;
     background: #f8fafc;
-    display: flex;
-    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    box-sizing: border-box;
   }
 
   .screen-view {
     display: none;
     width: 100%;
-    height: 100%;
   }
 
   .screen-view.active {
     display: block;
+    animation: fadeIn 0.2s ease;
   }
 
-  /* 4. M3 Bottom Navigation Bar (Always Active) */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* M3 Bottom Nav */
   .frame-m3-bottom-nav {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    height: 60px;
     background: #ffffff;
     border-top: 1px solid #e2e8f0;
-    padding: 6px 12px 10px;
-    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 8px;
+    flex-shrink: 0;
   }
 
-  .nav-dest {
+  .nav-destination {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 3px;
+    min-width: 56px;
+    height: 48px;
+    justify-content: center;
     border: none;
     background: transparent;
-    cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 12px;
-    transition: all 0.15s ease;
-  }
-
-  .dest-icon-wrap {
-    width: 48px;
-    height: 28px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #64748b;
-    font-size: 15px;
-    transition: all 0.15s ease;
-  }
-
-  .dest-label {
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 600;
     color: #64748b;
-    transition: color 0.15s ease;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.15s ease;
   }
 
-  .nav-dest.active .dest-icon-wrap {
-    background: #dbeafe;
-    color: #1d4ed8;
+  .nav-destination i {
+    font-size: 17px;
   }
 
-  .nav-dest.active .dest-label {
-    color: #1d4ed8;
-    font-weight: 800;
+  .nav-destination:hover {
+    color: #0f172a;
   }
 
-  /* 5. Viewport Device Metric Status Footer */
-  .viewport-footer-bar {
-    padding: 7px 16px;
-    background: #f8fafc;
-    border-top: 1px solid #e2e8f0;
-    font-size: 11px;
-    color: #64748b;
+  .nav-destination.active {
+    color: #2563eb;
+    font-weight: 700;
+  }
+
+  /* Spec Footer */
+  .frame-spec-footer {
+    background: #ffffff;
+    border-top: 1px solid #f1f5f9;
+    padding: 8px 16px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #64748b;
     font-family: var(--nexa-font-family-mono, monospace);
   }
 
-  .vp-dot {
+  .footer-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .live-dot {
     width: 7px;
     height: 7px;
     border-radius: 50%;
@@ -803,123 +903,18 @@ import InteractiveDispatchMovement from './InteractiveDispatchMovement.astro';
     display: inline-block;
   }
 
-  .vp-chip {
-    padding: 1px 6px;
-    border-radius: 4px;
-    background: #ffffff;
-    border: 1px solid #cbd5e1;
-    font-size: 9.5px;
-    font-weight: 700;
-    color: #334155;
-  }
-
-  /* Contract Table */
-  .contract-table-wrapper {
-    overflow-x: auto;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-  }
-
-  .contract-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12.5px;
-    text-align: left;
-  }
-
-  .contract-table th {
-    background: #f8fafc;
-    padding: 10px 14px;
-    font-weight: 700;
-    color: #0f172a;
-    border-bottom: 1px solid #e2e8f0;
-  }
-
-  .contract-table td {
-    padding: 10px 14px;
-    border-bottom: 1px solid #f1f5f9;
-    color: #334155;
-  }
-
-  .mono-chip {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-weight: 700;
-    color: #1d4ed8;
-  }
-
-  .mono-type {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 11.5px;
-  }
-
-  .rule-chip {
-    background: #f1f5f9;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 11px;
-  }
-
-  .cuadro-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 14px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .cuadro-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .cuadro-header-left {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .cuadro-num-badge {
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    background: #eff6ff;
-    color: #1d4ed8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 800;
-    font-family: var(--nexa-font-family-mono, monospace);
-  }
-
-  .cuadro-kicker {
-    font-size: 9.5px;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    color: #1d4ed8;
-    margin: 0;
-  }
-
-  .cuadro-title {
-    font-size: 15px;
-    font-weight: 700;
-    color: #0f172a;
-    margin: 2px 0 0;
-  }
-
-  .cuadro-subtitle {
-    font-size: 12px;
-    color: #64748b;
-    margin: 2px 0 0;
-  }
-
-  .cuadro-tags {
+  .footer-badges {
     display: flex;
     gap: 6px;
+  }
+
+  .footer-chip {
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    font-size: 10px;
+    font-weight: 600;
+    color: #334155;
   }
 </style>
