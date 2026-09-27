@@ -1,0 +1,666 @@
+---
+/**
+ * LoginScreenSpec.astro — Canonical Nexa Mobile Login & Workspace Access
+ * 100% aligned with Nexa Web Authentication Pattern (ADR-0018 / Blueprint).
+ * Features:
+ *  - Blueprint grid background pattern ("cuadraditos")
+ *  - Isolated NX logo badge (white background with blue NX)
+ *  - 4-quadrant architectural mark
+ *  - Mobile form inputs with 56dp touch targets
+ *  - Role-based quick credentials (Conductor, Almacén, Despacho, Comprador)
+ *  - Interactive client-side demo with biometric fallback simulation
+ */
+---
+
+<div class="mobile-login-specimen">
+  <!-- Blueprint Grid Brand Hero Header -->
+  <div class="login-brand-plane">
+    <!-- Background Blueprint Grid Pattern Overlay -->
+    <div class="blueprint-grid-mesh" aria-hidden="true"></div>
+
+    <div class="brand-plane-content">
+      <!-- Isolated NX Logo Badge -->
+      <div class="brand-header-row">
+        <div class="nx-logo-badge" title="Nexa Suite">
+          <img src="/assets/nexa-mobile-inverted.svg" alt="NX Logo" class="nx-logo-img" />
+        </div>
+        <div class="workspace-access-tag">
+          <span class="pulse-dot"></span>
+          <span>WORKSPACE ACCESS</span>
+        </div>
+      </div>
+
+      <h2 class="brand-motto-title">
+        Operational clarity for teams that need a trustworthy next step.
+      </h2>
+
+      <!-- 4-Quadrant Architectural Mark (from Web Login Pattern) -->
+      <div class="architectural-quadrant-mark" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <p class="brand-footnote-copy">
+        Cold-chain specialization remains a capability, not the definition of Nexa.
+      </p>
+    </div>
+  </div>
+
+  <!-- Form Content Area -->
+  <div class="login-form-plane">
+    <div class="form-header-cluster">
+      <div>
+        <span class="form-kicker">IDENTIDAD OPERATIVA</span>
+        <h3 class="form-main-heading">Sign in to your workspace</h3>
+        <p class="form-sub-copy">Use your work identity to continue.</p>
+      </div>
+      
+      <!-- Locale Switcher -->
+      <div class="locale-pill-toggle" role="group" aria-label="Idioma">
+        <button type="button" class="btn-lang active" data-lang="en">EN</button>
+        <button type="button" class="btn-lang" data-lang="es">ES</button>
+      </div>
+    </div>
+
+    <!-- Role Quick-Login Chips -->
+    <div class="quick-roles-cluster">
+      <span class="quick-role-label">ACCESO RÁPIDO POR ROL:</span>
+      <div class="quick-role-pills">
+        <button type="button" class="btn-quick-role active" data-email="diego.morales@nexa.pe" data-role="Conductor">
+          <i class="pi pi-map-marker"></i> Conductor
+        </button>
+        <button type="button" class="btn-quick-role" data-email="alejandro.vargas@nexa.pe" data-role="Almacén">
+          <i class="pi pi-box"></i> Almacén
+        </button>
+        <button type="button" class="btn-quick-role" data-email="carlos.mendoza@supermercados.pe" data-role="Comprador">
+          <i class="pi pi-shopping-bag"></i> Comprador
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Login Form -->
+    <form class="workspace-login-form" id="mobile-login-form" onsubmit="return false;">
+      <!-- Email Field -->
+      <div class="form-field-group">
+        <label for="login-email-input" class="field-label">Work email</label>
+        <div class="input-with-icon">
+          <i class="pi pi-envelope prefix-icon" aria-hidden="true"></i>
+          <input 
+            type="email" 
+            id="login-email-input" 
+            class="m3-text-input" 
+            value="diego.morales@nexa.pe" 
+            placeholder="name@company.com" 
+            autocomplete="email"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-field-group">
+        <div class="field-label-row">
+          <label for="login-password-input" class="field-label">Password</label>
+          <a href="#forgot" class="forgot-link">¿Olvidaste tu contraseña?</a>
+        </div>
+        <div class="input-with-icon">
+          <i class="pi pi-lock prefix-icon" aria-hidden="true"></i>
+          <input 
+            type="password" 
+            id="login-password-input" 
+            class="m3-text-input" 
+            value="NexaSecure2026!" 
+            placeholder="••••••••••••" 
+            autocomplete="current-password"
+            required
+          />
+          <button type="button" class="btn-toggle-eye" id="btn-toggle-pwd" aria-label="Mostrar contraseña">
+            <i class="pi pi-eye" id="eye-icon"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Remember & Security Options -->
+      <div class="form-options-row">
+        <label class="custom-checkbox-wrap">
+          <input type="checkbox" id="chk-remember" checked />
+          <span class="chk-box-custom"></span>
+          <span class="chk-label">Recordar espacio de trabajo</span>
+        </label>
+        <span class="offline-ready-tag" title="Permite autenticación offline con SQLite Room">
+          <i class="pi pi-wifi"></i> Offline-ready
+        </span>
+      </div>
+
+      <!-- Primary Sign In Action (56dp Industrial Target) -->
+      <button type="submit" class="btn-login-submit" id="btn-login-submit">
+        <span>Sign in</span>
+        <i class="pi pi-arrow-right"></i>
+      </button>
+
+      <!-- Biometric Hardware Login for Rugged Devices (Zebra / Samsung Knox) -->
+      <button type="button" class="btn-biometric-auth" id="btn-biometric-login">
+        <i class="pi pi-shield"></i>
+        <span>Acceso Biométrico / Huella Knox</span>
+      </button>
+    </form>
+
+    <!-- Feedback Banner / Demo Status -->
+    <div class="login-feedback-banner" id="login-feedback-banner" style="display: none;">
+      <i class="pi pi-check-circle"></i>
+      <span id="login-feedback-text">Sesión iniciada correctamente. Cargando hoja de ruta...</span>
+    </div>
+
+    <!-- Pattern Only Disclaimer -->
+    <p class="pattern-disclaimer">
+      Pattern only; no backend authentication is performed.
+    </p>
+  </div>
+</div>
+
+<style>
+  .mobile-login-specimen {
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+  }
+
+  /* Blueprint Grid Brand Plane */
+  .login-brand-plane {
+    position: relative;
+    background: linear-gradient(145deg, #091e42 0%, #1d4ed8 100%);
+    color: #ffffff;
+    padding: 24px 20px 22px;
+    overflow: hidden;
+  }
+
+  /* The Blueprint Grid Lines ("cuadraditos") */
+  .blueprint-grid-mesh {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.22;
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.18) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .brand-plane-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .brand-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Isolated NX Logo Badge */
+  .nx-logo-badge {
+    width: 38px;
+    height: 38px;
+    background: #ffffff;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  .nx-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .workspace-access-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #93c5fd;
+    background: rgba(15, 23, 42, 0.4);
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(147, 197, 253, 0.3);
+  }
+
+  .pulse-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #38bdf8;
+    box-shadow: 0 0 6px #38bdf8;
+  }
+
+  .brand-motto-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.45;
+    color: #f1f5f9;
+    max-width: 320px;
+    margin: 4px 0 0;
+  }
+
+  /* 4-Quadrant Mark (as in web login) */
+  .architectural-quadrant-mark {
+    display: grid;
+    grid-template-columns: repeat(2, 20px);
+    gap: 4px;
+    margin: 4px 0;
+  }
+
+  .architectural-quadrant-mark span {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .brand-footnote-copy {
+    font-size: 11px;
+    line-height: 1.4;
+    color: #bfdbfe;
+    margin: 0;
+    opacity: 0.9;
+  }
+
+  /* Form Plane */
+  .login-form-plane {
+    padding: 20px 18px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: #ffffff;
+  }
+
+  .form-header-cluster {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .form-kicker {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #2563eb;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .form-main-heading {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  .form-sub-copy {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 2px;
+  }
+
+  /* Locale Switcher */
+  .locale-pill-toggle {
+    display: inline-flex;
+    padding: 2px;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    gap: 2px;
+  }
+
+  .btn-lang {
+    border: 0;
+    background: transparent;
+    padding: 2px 7px;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #64748b;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-lang.active {
+    background: #ffffff;
+    color: #1d4ed8;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Quick Roles */
+  .quick-roles-cluster {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: #f8fafc;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+  }
+
+  .quick-role-label {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #64748b;
+  }
+
+  .quick-role-pills {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .btn-quick-role {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    color: #334155;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-quick-role:hover {
+    background: #f1f5f9;
+  }
+
+  .btn-quick-role.active {
+    background: #eff6ff;
+    border-color: #2563eb;
+    color: #1d4ed8;
+    font-weight: 700;
+  }
+
+  /* Form Inputs */
+  .workspace-login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .form-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .field-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #334155;
+  }
+
+  .field-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .forgot-link {
+    font-size: 11px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .prefix-icon {
+    position: absolute;
+    left: 12px;
+    color: #94a3b8;
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  .m3-text-input {
+    width: 100%;
+    min-height: 46px;
+    padding: 0 38px 0 36px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 13px;
+    color: #0f172a;
+    background: #f8fafc;
+    transition: all 0.15s ease;
+    outline: none;
+  }
+
+  .m3-text-input:focus {
+    background: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+  }
+
+  .btn-toggle-eye {
+    position: absolute;
+    right: 8px;
+    background: transparent;
+    border: 0;
+    padding: 6px;
+    color: #64748b;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  /* Options Row */
+  .form-options-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11.5px;
+  }
+
+  .custom-checkbox-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    color: #475569;
+  }
+
+  .custom-checkbox-wrap input {
+    display: none;
+  }
+
+  .chk-box-custom {
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 4px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+  }
+
+  .custom-checkbox-wrap input:checked + .chk-box-custom {
+    background: #2563eb;
+    border-color: #2563eb;
+  }
+
+  .custom-checkbox-wrap input:checked + .chk-box-custom::after {
+    content: '';
+    width: 4px;
+    height: 8px;
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    margin-bottom: 2px;
+  }
+
+  .offline-ready-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10.5px;
+    color: #16a34a;
+    font-weight: 600;
+  }
+
+  /* Action Buttons */
+  .btn-login-submit {
+    min-height: 50px;
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.28);
+  }
+
+  .btn-login-submit:hover {
+    background: #1d4ed8;
+  }
+
+  .btn-biometric-auth {
+    min-height: 44px;
+    background: #ffffff;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 12.5px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-biometric-auth:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+  }
+
+  /* Feedback Banner */
+  .login-feedback-banner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    color: #065f46;
+    font-size: 12px;
+    font-weight: 600;
+    animation: fadeIn 0.2s ease;
+  }
+
+  .pattern-disclaimer {
+    margin: 4px 0 0;
+    font-size: 11px;
+    color: #94a3b8;
+    text-align: center;
+    line-height: 1.4;
+  }
+</style>
+
+<script>
+  // Quick Role Fill Logic
+  const roleButtons = document.querySelectorAll<HTMLButtonElement>('.btn-quick-role');
+  const emailInput = document.getElementById('login-email-input') as HTMLInputElement | null;
+  const loginForm = document.getElementById('mobile-login-form');
+  const feedbackBanner = document.getElementById('login-feedback-banner');
+  const feedbackText = document.getElementById('login-feedback-text');
+  const btnTogglePwd = document.getElementById('btn-toggle-pwd');
+  const pwdInput = document.getElementById('login-password-input') as HTMLInputElement | null;
+  const eyeIcon = document.getElementById('eye-icon');
+  const btnBiometric = document.getElementById('btn-biometric-login');
+
+  roleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      roleButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const email = btn.getAttribute('data-email');
+      if (emailInput && email) {
+        emailInput.value = email;
+      }
+    });
+  });
+
+  // Toggle Password Visibility
+  btnTogglePwd?.addEventListener('click', () => {
+    if (!pwdInput) return;
+    const isPwd = pwdInput.type === 'password';
+    pwdInput.type = isPwd ? 'text' : 'password';
+    eyeIcon?.classList.toggle('pi-eye', !isPwd);
+    eyeIcon?.classList.toggle('pi-eye-slash', isPwd);
+  });
+
+  // Form Submit Simulation
+  loginForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (feedbackBanner && feedbackText) {
+      feedbackBanner.style.display = 'flex';
+      feedbackBanner.style.background = '#ecfdf5';
+      feedbackBanner.style.borderColor = '#a7f3d0';
+      feedbackBanner.style.color = '#065f46';
+      feedbackText.textContent = `Autenticado como ${emailInput?.value || 'operador'}. Iniciando sesión segura...`;
+      setTimeout(() => {
+        feedbackBanner.style.display = 'none';
+      }, 3500);
+    }
+  });
+
+  // Biometric Auth Simulation
+  btnBiometric?.addEventListener('click', () => {
+    if (feedbackBanner && feedbackText) {
+      feedbackBanner.style.display = 'flex';
+      feedbackBanner.style.background = '#eff6ff';
+      feedbackBanner.style.borderColor = '#bfdbfe';
+      feedbackBanner.style.color = '#1e40af';
+      feedbackText.textContent = 'Huella dactilar Samsung Knox / Zebra verificada. Espacio de trabajo desbloqueado.';
+      setTimeout(() => {
+        feedbackBanner.style.display = 'none';
+      }, 3500);
+    }
+  });
+</script>

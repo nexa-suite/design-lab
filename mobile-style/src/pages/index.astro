@@ -13,6 +13,7 @@ import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
 
 // 1. Master Simulator (Interactive Calibrator & Model Sizer)
 import DeviceFrame from '../components/simulator/DeviceFrame.astro';
+import LoginScreenSpec from '../components/simulator/LoginScreenSpec.astro';
 
 // 2. Visual Design Foundations M3
 import TokensColorSection from '../components/guidelines/TokensColorSection.astro';
@@ -207,6 +208,27 @@ import GaleriaVisualAndroid from '../components/simulator/GaleriaVisualAndroid.a
            ===================================================================== -->
       <section class="lab-screen-view active" id="screen-simulator" data-title="Simulador & Calibrador Android">
         <DeviceFrame />
+      </section>
+
+      <!-- =====================================================================
+           PANTALLA 1.1: LOGIN & IDENTIDAD OPERATIVA (WORKSPACE ACCESS)
+           ===================================================================== -->
+      <section class="lab-screen-view" id="screen-login" data-title="Login & Workspace Access">
+        <div class="screen-header-bar">
+          <div>
+            <span class="screen-badge-tag">AUTENTICACIÓN · IDENTIDAD OPERATIVA</span>
+            <h2 class="screen-main-title">Pantalla de Login & Acceso al Espacio de Trabajo</h2>
+            <p class="screen-main-desc">
+              Diseño de acceso móvil derivado del patrón de autenticación Web con fondo blueprint de cuadraditos, isotipo oficial NX, credenciales por rol y soporte offline.
+            </p>
+          </div>
+          <div class="screen-actions">
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
+          </div>
+        </div>
+        <div style="max-width: 440px; margin: 0 auto;">
+          <LoginScreenSpec />
+        </div>
       </section>
 
       <!-- =====================================================================

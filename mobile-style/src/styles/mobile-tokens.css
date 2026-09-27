@@ -506,3 +506,65 @@
 .code-pre-box .ann { color: #f59e0b; }
 .code-pre-box .comm { color: #64748b; font-style: italic; }
 
+/* ==========================================================================
+   SCROLLBAR HYGIENE (No clunky web scrollbars, horizontal scrollbars eliminated)
+   ========================================================================== */
+.no-scrollbar, 
+.mobile-column-tabs-bar,
+.button-toggle-group,
+.padding-pills-group,
+.swatches-row,
+.chips-cluster,
+.role-pills-selector,
+.nav-pills-flow {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.no-scrollbar::-webkit-scrollbar,
+.mobile-column-tabs-bar::-webkit-scrollbar,
+.button-toggle-group::-webkit-scrollbar,
+.padding-pills-group::-webkit-scrollbar,
+.swatches-row::-webkit-scrollbar,
+.chips-cluster::-webkit-scrollbar,
+.role-pills-selector::-webkit-scrollbar,
+.nav-pills-flow::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Elegant Native-like Vertical Scrollbars */
+.screen-viewport-host,
+.code-pre-box,
+.contract-table-wrapper {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.35) transparent;
+}
+
+.screen-viewport-host::-webkit-scrollbar,
+.code-pre-box::-webkit-scrollbar,
+.contract-table-wrapper::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.screen-viewport-host::-webkit-scrollbar-track,
+.code-pre-box::-webkit-scrollbar-track,
+.contract-table-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.screen-viewport-host::-webkit-scrollbar-thumb,
+.code-pre-box::-webkit-scrollbar-thumb,
+.contract-table-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.35);
+  border-radius: 999px;
+}
+
+.screen-viewport-host::-webkit-scrollbar-thumb:hover,
+.code-pre-box::-webkit-scrollbar-thumb:hover,
+.contract-table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.6);
+}
+
