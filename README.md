@@ -40,9 +40,14 @@ design-lab/
 │   ├── src/pages/             # Workbench (/), Artifacts (/artifacts), Landing Specs (/landing-spec)
 │   └── Dockerfile             # Standalone production container (port 4321)
 │
-├── gateway/                   # 🧭 Port 8080: Style Monorepo Hub & Gateway
+├── gateway/                   # 🧭 Port 8090: Style Monorepo Hub & Gateway
 │   ├── index.html             # Unified landing portal to access all three environments
 │   └── nginx.conf             # Unified reverse proxy routes (/web/, /mobile/, /website/)
+│
+├── shared/                    # 💎 Shared Monorepo Resources & Design Tokens
+│   ├── tokens/                # Canonical DTCG design tokens (JSON source of truth)
+│   ├── brand/                 # Canonical vector SVG logos and wordmarks
+│   └── README.md              # Shared asset synchronization guide
 │
 └── docker-compose.yml         # Multi-service container orchestration
 ```
