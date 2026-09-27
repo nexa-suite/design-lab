@@ -19,10 +19,10 @@
     <div class="blueprint-grid-mesh" aria-hidden="true"></div>
 
     <div class="brand-plane-content">
-      <!-- Isolated NX Logo Badge -->
+      <!-- Transparent NX White Logo Mark -->
       <div class="brand-header-row">
-        <div class="nx-logo-badge" title="Nexa Suite">
-          <img src="/assets/nexa-mobile-inverted.svg" alt="NX Logo" class="nx-logo-img" />
+        <div class="nx-logo-mark" title="Nexa Suite">
+          <img src="/assets/nexa-nx-white.svg" alt="NX" class="nx-logo-img" />
         </div>
         <div class="workspace-access-tag">
           <span class="pulse-dot"></span>
@@ -30,21 +30,10 @@
         </div>
       </div>
 
-      <h2 class="brand-motto-title">
-        Operational clarity for teams that need a trustworthy next step.
-      </h2>
-
-      <!-- 4-Quadrant Architectural Mark (from Web Login Pattern) -->
-      <div class="architectural-quadrant-mark" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="brand-hero-text">
+        <h2 class="brand-title">Tu espacio de trabajo operativo</h2>
+        <p class="brand-subtitle">Gestión logística y cadena de frío en tiempo real</p>
       </div>
-
-      <p class="brand-footnote-copy">
-        Cold-chain specialization remains a capability, not the definition of Nexa.
-      </p>
     </div>
   </div>
 
@@ -206,24 +195,22 @@
     justify-content: space-between;
   }
 
-  /* Isolated NX Logo Badge */
-  .nx-logo-badge {
-    width: 38px;
+  /* Transparent NX Logo Mark */
+  .nx-logo-mark {
+    width: 44px;
     height: 38px;
-    background: #ffffff;
-    border-radius: 9px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    justify-content: flex-start;
+    background: transparent;
+    border: none;
+    box-shadow: none;
   }
 
   .nx-logo-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .workspace-access-tag {
@@ -231,14 +218,14 @@
     align-items: center;
     gap: 6px;
     font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 10px;
+    font-size: 10.5px;
     font-weight: 700;
     letter-spacing: 0.08em;
     color: #93c5fd;
-    background: rgba(15, 23, 42, 0.4);
-    padding: 3px 8px;
-    border-radius: 6px;
-    border: 1px solid rgba(147, 197, 253, 0.3);
+    background: rgba(15, 23, 42, 0.45);
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(147, 197, 253, 0.35);
   }
 
   .pulse-dot {
@@ -249,39 +236,29 @@
     box-shadow: 0 0 6px #38bdf8;
   }
 
-  .brand-motto-title {
-    font-family: var(--nexa-font-family-display, sans-serif);
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.45;
-    color: #f1f5f9;
-    max-width: 320px;
-    margin: 4px 0 0;
-  }
-
-  /* 4-Quadrant Mark (as in web login) */
-  .architectural-quadrant-mark {
-    display: grid;
-    grid-template-columns: repeat(2, 20px);
+  .brand-hero-text {
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
     gap: 4px;
-    margin: 4px 0;
   }
 
-  .architectural-quadrant-mark span {
-    display: block;
-    width: 20px;
-    height: 20px;
-    border: 1.5px solid rgba(255, 255, 255, 0.3);
-    border-radius: 5px;
-    background: rgba(255, 255, 255, 0.05);
+  .brand-title {
+    font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 19px;
+    font-weight: 800;
+    line-height: 1.25;
+    color: #ffffff;
+    letter-spacing: -0.015em;
+    margin: 0;
   }
 
-  .brand-footnote-copy {
-    font-size: 11px;
-    line-height: 1.4;
+  .brand-subtitle {
+    font-size: 13px;
+    line-height: 1.45;
     color: #bfdbfe;
     margin: 0;
-    opacity: 0.9;
+    opacity: 0.95;
   }
 
   /* Form Plane */
@@ -380,13 +357,14 @@
   .btn-quick-role {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 4px 8px;
-    border-radius: 6px;
+    gap: 6px;
+    padding: 7px 12px;
+    min-height: 38px;
+    border-radius: 8px;
     border: 1px solid #cbd5e1;
     background: #ffffff;
     color: #334155;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.15s ease;
@@ -407,17 +385,17 @@
   .workspace-login-form {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 16px;
   }
 
   .form-field-group {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 6px;
   }
 
   .field-label {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     color: #334155;
   }
@@ -429,7 +407,7 @@
   }
 
   .forgot-link {
-    font-size: 11px;
+    font-size: 11.5px;
     color: #2563eb;
     text-decoration: none;
     font-weight: 600;
@@ -443,20 +421,20 @@
 
   .prefix-icon {
     position: absolute;
-    left: 12px;
+    left: 14px;
     color: #94a3b8;
-    font-size: 14px;
+    font-size: 15px;
     pointer-events: none;
   }
 
   .m3-text-input {
     width: 100%;
-    min-height: 46px;
-    padding: 0 38px 0 36px;
-    border: 1px solid #cbd5e1;
-    border-radius: 9px;
+    min-height: 52px;
+    padding: 0 42px 0 40px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 12px;
     font-family: inherit;
-    font-size: 13px;
+    font-size: 14.5px;
     color: #0f172a;
     background: #f8fafc;
     transition: all 0.15s ease;
@@ -538,12 +516,12 @@
 
   /* Action Buttons */
   .btn-login-submit {
-    min-height: 50px;
+    min-height: 54px;
     background: #2563eb;
     color: #ffffff;
     border: none;
-    border-radius: 10px;
-    font-size: 13.5px;
+    border-radius: 12px;
+    font-size: 15px;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -551,7 +529,7 @@
     gap: 8px;
     cursor: pointer;
     transition: all 0.15s ease;
-    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.28);
+    box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3);
   }
 
   .btn-login-submit:hover {
@@ -559,12 +537,12 @@
   }
 
   .btn-biometric-auth {
-    min-height: 44px;
+    min-height: 50px;
     background: #ffffff;
-    color: #334155;
-    border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    font-size: 12.5px;
+    color: #1e293b;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 12px;
+    font-size: 13.5px;
     font-weight: 600;
     display: flex;
     align-items: center;

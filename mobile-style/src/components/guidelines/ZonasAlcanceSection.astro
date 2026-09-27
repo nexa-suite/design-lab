@@ -13,53 +13,50 @@
       <div class="cuadro-header-left">
         <span class="cuadro-num-badge">01</span>
         <div>
-          <p class="cuadro-kicker">ERGONOMÍA BIOMECÁNICA · OPERACIÓN CON UNA MANO</p>
+          <p class="cuadro-kicker">ERGONOMÍA MÓVIL · DISEÑO PARA UNA MANO (ONE-HANDED REACH)</p>
           <h3 class="cuadro-title">Zonas de Alcance del Pulgar (Thumb Reachability Zones)</h3>
           <p class="cuadro-subtitle">
-            En terminales Android con pantallas de 6.1" a 6.7" (360dp a 412dp de ancho lógico), la ergonomía de una mano impone colocar las acciones primarias en la <strong>zona natural inferior (base 35%)</strong> para mitigar la fatiga tenar y evitar caídas accidentales de terminales en obra.
+            En terminales Android (360dp a 412dp de ancho lógico), las acciones críticas y de uso frecuente se anclan en la <strong>zona inferior (65%–100%)</strong> para permitir una operación ágil y segura sin necesidad de reajustar el agarre del dispositivo con una sola mano.
           </p>
         </div>
       </div>
       <div class="cuadro-tags">
-        <span class="cuadro-tag primary"><i class="pi pi-compass"></i> Biomecánica 1 Mano</span>
+        <span class="cuadro-tag primary"><i class="pi pi-compass"></i> Alcance 1 Mano</span>
         <span class="cuadro-tag success"><i class="pi pi-check"></i> Sticky Bottom Action</span>
-        <span class="cuadro-tag warning"><i class="pi pi-exclamation-triangle"></i> Safe Destruction Zone</span>
+        <span class="cuadro-tag neutral"><i class="pi pi-mobile"></i> Android 360–412dp</span>
       </div>
     </div>
 
-    <!-- Visual Biomechanical Reach Stage: Phone Silhouette + Callout Spec -->
+    <!-- Visual Reach Stage: Phone Silhouette with Clean Ergonomic Ruler + Spec Cards -->
     <div class="biomechanical-stage-grid">
-      <!-- High-Fidelity Phone Silhouette with Reach Zone Overlays -->
+      <!-- High-Fidelity Phone Silhouette with Side Ergonomic Ruler -->
       <div class="phone-silhouette-wrapper">
         <div class="phone-frame">
           <div class="phone-camera-hole"></div>
           <div class="phone-speaker-grille"></div>
 
-          <div class="phone-screen">
-            <!-- 1. RED ZONE (Top 25%) -->
-            <div class="reach-zone-layer zone-red">
-              <div class="zone-watermark">
-                <span class="zone-pill red">ZONA DIFÍCIL (TOP 25%)</span>
-                <small>Extensión Crítica del Pulgar</small>
-              </div>
+          <!-- Subtle Zone Bezel Indicators on the left side -->
+          <div class="phone-bezel-ruler" aria-hidden="true">
+            <span class="ruler-bracket r-top" title="Zona Superior (0-25%)">TOP</span>
+            <span class="ruler-bracket r-mid" title="Zona Media (25-65%)">MID</span>
+            <span class="ruler-bracket r-base" title="Zona Inferior (65-100%)">BASE</span>
+          </div>
 
-              <!-- Rendered Mock Passive UI -->
-              <div class="zone-mock-topbar">
-                <i class="pi pi-arrow-left"></i>
-                <span>Despacho SO-2026-0018</span>
-                <i class="pi pi-ellipsis-v"></i>
+          <div class="phone-screen">
+            <!-- 1. TOP ZONE (0% - 25% · Passive Header) -->
+            <div class="screen-section-top">
+              <div class="clean-mock-topbar">
+                <div class="topbar-nav-back">
+                  <i class="pi pi-arrow-left"></i>
+                  <span class="topbar-title-text">Despacho SO-2026-0018</span>
+                </div>
+                <span class="topbar-status-chip">En Ruta</span>
               </div>
             </div>
 
-            <!-- 2. AMBER ZONE (Center 40%) -->
-            <div class="reach-zone-layer zone-amber">
-              <div class="zone-watermark">
-                <span class="zone-pill amber">ZONA ALCANZABLE (CENTRO 40%)</span>
-                <small>Desplazamiento Natural / Fling</small>
-              </div>
-
-              <!-- Rendered Mock Scrollable Content -->
-              <div class="zone-mock-card">
+            <!-- 2. MID ZONE (25% - 65% · Scrollable Content) -->
+            <div class="screen-section-mid">
+              <div class="clean-mock-card">
                 <div class="mock-card-header">
                   <strong>ICISA Distribuciones S.A.C.</strong>
                   <span class="mock-fefo-chip">FEFO OK</span>
@@ -71,43 +68,35 @@
                 </div>
               </div>
 
-              <div class="zone-mock-card secondary">
+              <div class="clean-mock-card secondary">
                 <div class="mock-card-header">
                   <strong>Item 1: Vacunas A-24 (x40 Cajas)</strong>
                   <span class="mock-qty">Lote #982</span>
                 </div>
+                <p class="mock-card-address">Pallet 04 · Posición B-12</p>
               </div>
             </div>
 
-            <!-- 3. GREEN ZONE (Bottom 35%) -->
-            <div class="reach-zone-layer zone-green">
-              <!-- Natural Thumb Sweep Radial Arc Overlay -->
-              <div class="thumb-sweep-arc"></div>
-
-              <div class="zone-watermark">
-                <span class="zone-pill green">ZONA CÓMODA / NATURAL (BASE 35%)</span>
-                <small>Rango Neutro Biomecánico</small>
-              </div>
-
-              <!-- Rendered Mock Sticky Action & BottomNav -->
-              <div class="zone-mock-bottom-action">
+            <!-- 3. BOTTOM ZONE (65% - 100% · Direct Thumb Action) -->
+            <div class="screen-section-bottom">
+              <div class="clean-mock-bottom-action">
                 <button type="button" class="mock-btn-cta-industrial">
                   <i class="pi pi-truck" aria-hidden="true"></i>
                   <span>REGISTRAR ARRIBO A MUELLE (56DP)</span>
                 </button>
               </div>
 
-              <div class="zone-mock-bottom-nav">
+              <div class="clean-mock-bottom-nav">
                 <div class="mock-nav-item active">
                   <i class="pi pi-compass"></i>
-                  <span>Ruta</span>
+                  <span>Rutas</span>
                 </div>
                 <div class="mock-nav-item">
                   <i class="pi pi-box"></i>
                   <span>Picking</span>
                 </div>
                 <div class="mock-nav-item">
-                  <i class="pi pi-camera"></i>
+                  <i class="pi pi-qrcode"></i>
                   <span>Escanear</span>
                 </div>
                 <div class="mock-nav-item">
@@ -115,30 +104,30 @@
                   <span>Perfil</span>
                 </div>
               </div>
-            </div>
 
-            <!-- Gesture Navigation Bar Indicator -->
-            <div class="phone-gesture-bar"></div>
+              <!-- Android Gesture Indicator -->
+              <div class="phone-gesture-bar"></div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Biomechanical Fatigue & Zone Explanation Cards -->
+      <!-- Human-Centered Ergonomics Explanation Cards -->
       <div class="biomechanical-spec-column">
         <div class="zone-spec-card red-border">
           <div class="zone-spec-header">
             <span class="zone-indicator red"></span>
             <div>
-              <strong>Zona Difícil / Prohibida (Top 25%)</strong>
-              <small>0% – 25% superior de pantalla</small>
+              <strong>Zona Superior (0% – 25% · Contexto y Navegación Pasiva)</strong>
+              <small>Área de baja alcanzabilidad con una mano</small>
             </div>
           </div>
           <p>
-            Exige estirar el pulgar forzando el músculo <em>abductor pollicis brevis</em> o reajustar el agarre de la mano, lo cual provoca el <strong>82% de las caídas de terminales</strong> en patios de maniobra.
+            Orientada a títulos de pantalla, identificadores de documento y retroceso. No debe albergar acciones primarias obligatorias que fuercen a estirar la mano o cambiar el agarre.
           </p>
           <div class="zone-rules-list">
-            <span class="rule-chip allowed"><i class="pi pi-check"></i> Permitido: Título pasivo, retorno atrás, avatar</span>
-            <span class="rule-chip prohibited"><i class="pi pi-times"></i> Prohibido: Botones de acción primaria, inputs obligatorios</span>
+            <span class="rule-chip allowed"><i class="pi pi-check"></i> Permitido: Título de pantalla, botón atrás, avatar, chips de estado</span>
+            <span class="rule-chip prohibited"><i class="pi pi-times"></i> Evitar: Botones de confirmación obligatorios, campos requeridos</span>
           </div>
         </div>
 
@@ -146,16 +135,16 @@
           <div class="zone-spec-header">
             <span class="zone-indicator amber"></span>
             <div>
-              <strong>Zona Alcanzable / Desplazamiento (Centro 40%)</strong>
-              <small>25% – 65% intermedio</small>
+              <strong>Zona Media (25% – 65% · Exploración y Scroll Natural)</strong>
+              <small>Área óptima de lectura y desplazamiento vertical</small>
             </div>
           </div>
           <p>
-            Área óptima para consumo de datos: lectura de comprobantes, tarjetas de parada de ruta y desplazamiento vertical fluido con el pulgar (inercia <em>fling</em>).
+            Área natural para consumo de datos. Ideal para listas verticales (<code>LazyColumn</code>), tarjetas de bultos, lecturas de telemetría y campos de formulario con desplazamiento fluido del pulgar.
           </p>
           <div class="zone-rules-list">
-            <span class="rule-chip allowed"><i class="pi pi-check"></i> Permitido: LazyColumn de paradas, tarjetas de inventario, checkboxes</span>
-            <span class="rule-chip prohibited"><i class="pi pi-times"></i> Prohibido: Acciones destructivas sin diálogo de confirmación</span>
+            <span class="rule-chip allowed"><i class="pi pi-check"></i> Permitido: LazyColumn de entregas, tarjetas de inventario, selectores</span>
+            <span class="rule-chip prohibited"><i class="pi pi-times"></i> Evitar: Acciones destructivas irreversibles sin confirmación previa</span>
           </div>
         </div>
 
@@ -163,23 +152,23 @@
           <div class="zone-spec-header">
             <span class="zone-indicator green"></span>
             <div>
-              <strong>Zona Cómoda / Rango Natural (Base 35%)</strong>
-              <small>65% – 100% inferior</small>
+              <strong>Zona Inferior (65% – 100% · Rango Natural de Acción Directa)</strong>
+              <small>Punto de máxima ergonomía y velocidad operativa</small>
             </div>
           </div>
           <p>
-            Rango de reposo articular natural. Aquí se anclan obligatoriamente los botones de acción principal (CTA 56dp) mediante <strong>BottomBar persistente</strong> y la barra de navegación (64dp).
+            Punto de reposo inmediato del pulgar. Aquí se anclan obligatoriamente los botones de acción principal (CTA 56dp) mediante <strong>BottomBar persistente</strong> y la barra de navegación (64dp).
           </p>
           <div class="zone-rules-list">
-            <span class="rule-chip allowed"><i class="pi pi-check"></i> Mandatorio: Botón Industrial 56dp, FAB flotante, NexaBottomNav</span>
-            <span class="rule-chip prohibited"><i class="pi pi-times"></i> Prohibido: Listas no scrolleables que queden tapadas por la barra</span>
+            <span class="rule-chip allowed"><i class="pi pi-check"></i> Mandatorio: Botón Industrial 56dp, Floating Action Button (FAB), NexaBottomNav</span>
+            <span class="rule-chip prohibited"><i class="pi pi-times"></i> Prohibido: Botones críticos solapados por la barra de navegación del sistema</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Section 2: Matriz Arquitectónica de Colocación Biomecánica -->
+  <!-- Section 2: Matriz de Ubicación por Zona -->
   <section class="cuadro-card">
     <div class="cuadro-header">
       <div class="cuadro-header-left">
@@ -188,7 +177,7 @@
           <p class="cuadro-kicker">MATRIZ DE COLOCACIÓN · COMPONENTES POR ZONA</p>
           <h3 class="cuadro-title">Reglas de Gobernanza para Ubicación de Componentes</h3>
           <p class="cuadro-subtitle">
-            Restricciones de diseño para evitar dolor muscular en jornadas de 8 horas de choferes y operarios.
+            Criterios de diseño para maximizar la velocidad de operación y reducir fricción en almacén y ruta.
           </p>
         </div>
       </div>
@@ -200,30 +189,30 @@
           <tr>
             <th>Zona de Alcance</th>
             <th>Porcentaje de Pantalla</th>
-            <th>Nivel de Fatiga Muscular</th>
-            <th>Componentes Permitidos</th>
+            <th>Facilidad con 1 Mano</th>
+            <th>Componentes Recomendados</th>
             <th>Componentes Prohibidos</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong class="zone-label red">Zona Difícil (Top)</strong></td>
+            <td><strong class="zone-label red">Zona Superior (Top)</strong></td>
             <td>0% – 25% superior</td>
-            <td>Alta (Extensión forzada del pulgar)</td>
+            <td>Baja (Exige estirar el pulgar)</td>
             <td>Título pasivo de pantalla, botón atrás de navegación, icono de búsqueda secundario</td>
             <td>Botones de confirmación de despacho, campos de texto obligatorios</td>
           </tr>
           <tr>
-            <td><strong class="zone-label amber">Zona Alcanzable (Centro)</strong></td>
-            <td>25% – 65% medio</td>
-            <td>Media (Desplazamiento natural)</td>
+            <td><strong class="zone-label amber">Zona Media (Centro)</strong></td>
+            <td>25% – 65% intermedio</td>
+            <td>Media (Desplazamiento natural con scroll)</td>
             <td>LazyColumn de paradas, inputs de formulario, selectores de muelle, checkboxes</td>
             <td>Acciones críticas irreversibles sin confirmación posterior</td>
           </tr>
           <tr>
-            <td><strong class="zone-label green">Zona Natural (Base)</strong></td>
+            <td><strong class="zone-label green">Zona Inferior (Base)</strong></td>
             <td>65% – 100% inferior</td>
-            <td>Mínima (Rango neutro articular)</td>
+            <td>Inmediata (Rango natural de reposo)</td>
             <td>NexaIndustrialButton (56dp), FloatingActionButton (FAB), NexaBottomNav fija</td>
             <td>Listas densas sin scroll que queden solapadas por la barra de navegación</td>
           </tr>
@@ -398,152 +387,180 @@
     flex-direction: column;
   }
 
-  /* Reach Zone Layers */
-  .reach-zone-layer {
-    position: relative;
+  /* Subtle Zone Bezel Ruler on phone frame */
+  .phone-bezel-ruler {
+    position: absolute;
+    left: -22px;
+    top: 36px;
+    bottom: 36px;
+    width: 18px;
     display: flex;
     flex-direction: column;
-    padding: 10px 12px;
-    transition: background 0.2s ease;
-
-    &.zone-red {
-      height: 25%;
-      background: linear-gradient(180deg, rgba(239, 68, 68, 0.16) 0%, rgba(239, 68, 68, 0.06) 100%);
-      border-bottom: 2px dashed rgba(239, 68, 68, 0.4);
-      justify-content: flex-start;
-      padding-top: 28px;
-    }
-
-    &.zone-amber {
-      height: 40%;
-      background: linear-gradient(180deg, rgba(245, 158, 11, 0.08) 0%, rgba(245, 158, 11, 0.14) 100%);
-      border-bottom: 2px dashed rgba(245, 158, 11, 0.4);
-      justify-content: space-around;
-      gap: 6px;
-    }
-
-    &.zone-green {
-      height: 35%;
-      background: linear-gradient(180deg, rgba(34, 197, 94, 0.08) 0%, rgba(34, 197, 94, 0.18) 100%);
-      justify-content: flex-end;
-      gap: 6px;
-    }
-  }
-
-  .zone-watermark {
-    display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 4px;
-
-    small {
-      font-size: 8.5px;
-      font-weight: 700;
-      color: #64748b;
-    }
-  }
-
-  .zone-pill {
+    font-family: var(--nexa-font-family-mono, monospace);
     font-size: 8px;
     font-weight: 800;
+  }
+
+  .ruler-bracket {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    padding: 2px;
     letter-spacing: 0.05em;
-    padding: 2px 6px;
-    border-radius: 4px;
-
-    &.red { background: #fee2e2; color: #991b1b; }
-    &.amber { background: #fef3c7; color: #92400e; }
-    &.green { background: #dcfce7; color: #166534; }
   }
 
-  /* Thumb Sweep Arc Graphic */
-  .thumb-sweep-arc {
-    position: absolute;
-    bottom: -40px;
-    right: -40px;
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    border: 2px dashed rgba(22, 101, 52, 0.35);
-    background: radial-gradient(circle, rgba(34, 197, 94, 0.12) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 1;
+  .ruler-bracket.r-top {
+    height: 25%;
+    background: #fee2e2;
+    color: #991b1b;
+    border-left: 2px solid #ef4444;
   }
 
-  /* Mock UI Elements Inside Screen */
-  .zone-mock-topbar {
+  .ruler-bracket.r-mid {
+    height: 40%;
+    background: #fef3c7;
+    color: #92400e;
+    border-left: 2px solid #f59e0b;
+  }
+
+  .ruler-bracket.r-base {
+    height: 35%;
+    background: #dcfce7;
+    color: #166534;
+    border-left: 2px solid #22c55e;
+  }
+
+  /* Clean Phone Screen Zones */
+  .screen-section-top {
+    height: 22%;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 26px 12px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .clean-mock-topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    padding: 6px 10px;
-    font-size: 10.5px;
-    font-weight: 700;
-    color: #0f172a;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-
-    i { font-size: 11px; color: #2a67d9; }
+    gap: 8px;
   }
 
-  .zone-mock-card {
+  .topbar-nav-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #0f172a;
+    i { font-size: 11px; color: #2563eb; }
+  }
+
+  .topbar-status-chip {
+    font-size: 9px;
+    font-weight: 700;
+    background: #eff6ff;
+    color: #1d4ed8;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid #bfdbfe;
+  }
+
+  .screen-section-mid {
+    height: 48%;
+    background: #f8fafc;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+  }
+
+  .clean-mock-card {
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
-    padding: 8px;
+    padding: 8px 10px;
     display: flex;
     flex-direction: column;
     gap: 3px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
 
-    &.secondary {
-      background: #f1f5f9;
-      border-color: #cbd5e1;
+  .clean-mock-card.secondary {
+    background: #ffffff;
+    border-color: #cbd5e1;
+  }
+
+  .mock-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    strong {
+      font-size: 10px;
+      color: #0f172a;
     }
+  }
 
-    .mock-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+  .mock-fefo-chip {
+    font-size: 8px;
+    font-weight: 800;
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: #dcfce7;
+    color: #15803d;
+  }
 
-      strong {
-        font-size: 10px;
-        color: #0f172a;
-      }
-    }
+  .mock-qty {
+    font-size: 8.5px;
+    color: #64748b;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
 
-    .mock-fefo-chip {
-      font-size: 7.5px;
-      font-weight: 800;
-      padding: 1px 4px;
-      border-radius: 3px;
-      background: #dcfce7;
-      color: #166534;
-    }
+  .mock-card-address {
+    font-size: 9px;
+    color: #64748b;
+    margin: 0;
+  }
 
-    .mock-qty {
-      font-size: 8px;
-      color: #64748b;
-      font-family: var(--nexa-font-family-mono, monospace);
-    }
+  .mock-card-temp {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 8.5px;
+    font-weight: 700;
+    color: #15803d;
+    margin-top: 2px;
+    i { font-size: 9px; }
+  }
 
-    .mock-card-address {
-      font-size: 9px;
-      color: #64748b;
-      margin: 0;
-    }
+  .screen-section-bottom {
+    height: 30%;
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    padding: 8px 12px 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-    .mock-card-temp {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 8.5px;
-      font-weight: 700;
-      color: #15803d;
-      margin-top: 2px;
+  .clean-mock-bottom-action {
+    width: 100%;
+  }
 
-      i { font-size: 9px; }
-    }
+  .clean-mock-bottom-nav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 4px 0;
   }
 
   .zone-mock-bottom-action {
