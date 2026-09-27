@@ -266,8 +266,8 @@
   flex-shrink: 0;
   margin-top: auto;
   padding: 14px 10px 14px;
-  border-top: 1px solid var(--nexa-color-border-structural, #e2e8f0);
-  background: var(--nexa-surface-card, #ffffff);
+  border-top: 1px solid var(--nexa-color-border-structural);
+  background: var(--nexa-surface-card);
   color: var(--nexa-color-text-secondary);
   font-size: 11px;
 }
