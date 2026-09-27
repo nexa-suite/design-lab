@@ -1,24 +1,36 @@
 ---
-// AccessChannels: The Authentic Historical BEIGE Bento Section
-// Evidence: Bürocratik Awwwards SOTD (Scene 7, t=40-45s & unsection-features.jpg 2880x3354 reference)
-// Warm beige background #FDFAE7 with asymmetric multi-channel distribution bento grid
+// AccessChannels: Nexa B2B Distribution Channels Bento Grid
+// Dark technical slate canvas (#082846 / #05192d) with blueprint grid mesh and contrast slate cards (#0c2038 / #122b49)
 ---
 
 <section class="channels-section" id="channels" data-section="market" aria-labelledby="channels-heading">
+  <!-- Subtle Blueprint Grid Pattern Mesh -->
+  <div class="channels-blueprint-grid" aria-hidden="true">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="channels-grid-pattern" width="48" height="48" patternUnits="userSpaceOnUse">
+          <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(56, 189, 248, 0.08)" stroke-width="1"/>
+          <circle cx="48" cy="0" r="1.5" fill="rgba(56, 189, 248, 0.22)"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#channels-grid-pattern)" />
+    </svg>
+  </div>
+
   <!-- Anchor for Market links -->
   <span id="market" class="market-anchor" aria-hidden="true"></span>
   
   <div class="channels-container">
     
-    <!-- Centered Header on Warm Beige Canvas -->
+    <!-- Centered Header on Dark Slate Canvas -->
     <div class="channels-header">
       <div class="channels-pill-eyebrow">
-        <span>Access Channels</span>
+        <span>Canales de Distribución B2B</span>
       </div>
 
       <h2 id="channels-heading" class="channels-title">
-        Multiple channels to<br />
-        <span class="title-light">multiply your online sales</span>
+        Múltiples canales para<br />
+        <span class="title-light">acelerar tus despachos mayoristas</span>
       </h2>
     </div>
 
@@ -26,187 +38,193 @@
     <div class="channels-bento-grid">
       
       <!-- ====================================================================
-           ROW 1: TWO MONUMENTAL CARDS (FLECTO MARKET + ONLINE STORE)
+           ROW 1: TWO MONUMENTAL CARDS (NEXA MARKETPLACE + PORTAL MAYORISTA)
            ==================================================================== -->
 
-      <!-- 1. Top-Left: Large Mint Flecto Market Card (Col 1-2, Row 1) -->
-      <article class="bento-tile tile-market-wide" aria-label="Flecto Market Channel">
+      <!-- 1. Top-Left: Large Dark Tech Nexa Marketplace Card (Col 1-2, Row 1) -->
+      <article class="bento-tile tile-market-wide" aria-label="Nexa B2B Marketplace Channel">
         <div class="market-tile-header">
           <div class="market-brand-badge">
-            <svg width="34" height="28" viewBox="0 0 52 42" fill="none" class="market-flecto-logo" aria-hidden="true">
-              <rect x="0" y="0" width="22" height="12" rx="3" fill="#004737"/>
-              <rect x="28" y="0" width="12" height="12" rx="3" fill="#004737"/>
-              <rect x="0" y="18" width="12" height="12" rx="3" fill="#004737"/>
-              <rect x="18" y="18" width="22" height="12" rx="3" fill="#004737"/>
-            </svg>
-            <span class="market-title-text">Flecto Market</span>
+            <img src="/assets/nexa-nx-white.svg" alt="NX" width="34" height="34" class="market-nexa-logo" />
+            <span class="market-title-text">Nexa Marketplace</span>
           </div>
           <p class="market-lead-desc">
-            List all of your items in a single marketplace for a community of thousands.
+            Publica y comercializa lotes perecibles en un ecosistema mayorista interconectado en vivo con muelles, transportistas de frío y compradores corporativos.
           </p>
           <div class="market-cta-wrap">
-            <a href="#book-demo" class="bento-pill-btn">Get Started</a>
+            <a href="#book-demo" class="bento-pill-btn">Explorar Catálogo B2B</a>
           </div>
         </div>
 
-        <!-- Authentic Flecto Market Catalog UI Preview -->
+        <!-- Nexa Marketplace Catalog UI Preview -->
         <div class="market-ui-preview" aria-hidden="true">
           <!-- Browser Mockup Top Bar -->
           <div class="market-top-searchbar">
             <div class="market-browser-left">
               <span class="market-browser-icon">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                  <rect x="2" y="2" width="20" height="20" rx="5" fill="#004737"/>
-                  <circle cx="12" cy="12" r="3" fill="#45f396"/>
+                  <rect x="2" y="2" width="20" height="20" rx="5" fill="#2563eb"/>
+                  <circle cx="12" cy="12" r="3" fill="#38bdf8"/>
                 </svg>
               </span>
               <div class="search-input-pill">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#004737" stroke-width="2.5">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5">
                   <circle cx="11" cy="11" r="8"/>
                   <line x1="21" y1="21" x2="16.65" y2="16.65"/>
                 </svg>
-                <span>nikon</span>
+                <span>pescados y mariscos congelados</span>
               </div>
             </div>
             
             <div class="market-browser-tags">
-              <span class="browser-tag">Localização</span>
-              <span class="browser-tag">Datas</span>
-              <span class="browser-tag tag-muted">PARA PROFISSIONAIS</span>
-              <span class="browser-tag tag-muted">SABER MAIS</span>
+              <span class="browser-tag">Puerto Callao</span>
+              <span class="browser-tag">Lotes FEFO</span>
+              <span class="browser-tag tag-muted">CADENA DE FRÍO</span>
+              <span class="browser-tag tag-muted">GS1 CERTIFICADO</span>
               <span class="browser-avatar-circle"></span>
             </div>
           </div>
 
-          <!-- Split Catalog View: Items Grid (Left) + Europe Map (Right) -->
+          <!-- Split Catalog View: Items Grid (Left) + Ports Map (Right) -->
           <div class="market-catalog-split">
             <!-- Left: Catalog Items Grid (2 Columns x 4 Rows) -->
             <div class="catalog-items-subgrid">
               
               <div class="cat-item-card">
                 <div class="cat-img-box">
-                  <img src="/assets/synthetic/camera-vector.svg" alt="" width="32" height="26" />
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                  </svg>
                 </div>
                 <div class="cat-item-info">
-                  <span class="cat-name">Nikon D7000 + 17-55</span>
-                  <strong class="cat-price">€25,00<small>/dia</small></strong>
-                  <span class="cat-loc">Rua 25 de Abril</span>
+                  <span class="cat-name">Salmón Salar Congelado</span>
+                  <strong class="cat-price">$14.50<small>/kg</small></strong>
+                  <span class="cat-loc">Muelle Callao · -18°C</span>
                 </div>
               </div>
 
               <div class="cat-item-card">
                 <div class="cat-img-box">
-                  <img src="/assets/synthetic/camera-vector.svg" alt="" width="32" height="26" />
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                  </svg>
                 </div>
                 <div class="cat-item-info">
-                  <span class="cat-name">Nikon D3100</span>
-                  <strong class="cat-price">€10,00<small>/dia</small></strong>
-                  <span class="cat-loc">Telheiras</span>
+                  <span class="cat-name">Trucha Andina Eviscerada</span>
+                  <strong class="cat-price">$9.20<small>/kg</small></strong>
+                  <span class="cat-loc">Puno · Frío Controlado</span>
                 </div>
               </div>
 
               <div class="cat-item-card">
                 <div class="cat-img-box">
-                  <img src="/assets/synthetic/camera-vector.svg" alt="" width="32" height="26" />
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                  </svg>
                 </div>
                 <div class="cat-item-info">
-                  <span class="cat-name">Objetiva 70-200mm</span>
-                  <strong class="cat-price">€100,00<small>/dia</small></strong>
-                  <span class="cat-loc">Fradesso da Silveira</span>
+                  <span class="cat-name">Filete Merluza Congelada</span>
+                  <strong class="cat-price">$6.80<small>/kg</small></strong>
+                  <span class="cat-loc">Paita · Planta 02</span>
                 </div>
               </div>
 
               <div class="cat-item-card">
                 <div class="cat-img-box">
-                  <img src="/assets/synthetic/camera-vector.svg" alt="" width="32" height="26" />
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                  </svg>
                 </div>
                 <div class="cat-item-info">
-                  <span class="cat-name">Nikon D3200 + Lente</span>
-                  <strong class="cat-price">€8,00<small>/dia</small></strong>
-                  <span class="cat-loc">Telheiras</span>
+                  <span class="cat-name">Langostino IQF Cola</span>
+                  <strong class="cat-price">$18.00<small>/kg</small></strong>
+                  <span class="cat-loc">Tumbes · Frío -20°C</span>
                 </div>
               </div>
 
               <div class="cat-item-card">
                 <div class="cat-img-box">
-                  <img src="/assets/synthetic/camera-vector.svg" alt="" width="32" height="26" />
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                  </svg>
                 </div>
                 <div class="cat-item-info">
-                  <span class="cat-name">NIKON D3500 24MP</span>
-                  <strong class="cat-price">€40,00<small>/dia</small></strong>
-                  <span class="cat-loc">London</span>
+                  <span class="cat-name">Atún Aleta Amarilla Lomo</span>
+                  <strong class="cat-price">$22.00<small>/kg</small></strong>
+                  <span class="cat-loc">Chimbote · Certificado</span>
                 </div>
               </div>
 
               <div class="cat-item-card">
                 <div class="cat-img-box">
-                  <img src="/assets/synthetic/camera-vector.svg" alt="" width="32" height="26" />
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                  </svg>
                 </div>
                 <div class="cat-item-info">
-                  <span class="cat-name">Nikon D5000</span>
-                  <strong class="cat-price">€15,00<small>/dia</small></strong>
-                  <span class="cat-loc">Venda do Pinheiro</span>
+                  <span class="cat-name">Pulpo Entero Congelado</span>
+                  <strong class="cat-price">$12.50<small>/kg</small></strong>
+                  <span class="cat-loc">Ilo · Bahía Sur</span>
                 </div>
               </div>
 
               <div class="cat-item-card">
                 <div class="cat-img-box">
-                  <img src="/assets/synthetic/camera-vector.svg" alt="" width="32" height="26" />
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                  </svg>
                 </div>
                 <div class="cat-item-info">
-                  <span class="cat-name">Nikon D7100</span>
-                  <strong class="cat-price">€30,00<small>/dia</small></strong>
-                  <span class="cat-loc">Quirino da Fonseca</span>
+                  <span class="cat-name">Conchas de Abanico Tallo</span>
+                  <strong class="cat-price">$24.00<small>/kg</small></strong>
+                  <span class="cat-loc">Sechura · Lote Premium</span>
                 </div>
               </div>
 
               <div class="cat-item-card">
                 <div class="cat-img-box">
-                  <img src="/assets/synthetic/camera-vector.svg" alt="" width="32" height="26" />
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                  </svg>
                 </div>
                 <div class="cat-item-info">
-                  <span class="cat-name">Nikon D3200 AF-S</span>
-                  <strong class="cat-price">€15,00<small>/dia</small></strong>
-                  <span class="cat-loc">Coimbra</span>
+                  <span class="cat-name">Calamar Gigante Trozado</span>
+                  <strong class="cat-price">$4.80<small>/kg</small></strong>
+                  <span class="cat-loc">Paita · Exportación</span>
                 </div>
               </div>
 
             </div>
 
-            <!-- Right: Stylized European Hub Map with Verified Price Pins -->
+            <!-- Right: Stylized Cold Ports Map with Real-time Hub Pins -->
             <div class="catalog-map-panel">
               <svg viewBox="0 0 200 200" class="europe-map-svg">
-                <!-- Europe landmass silhouette -->
-                <path d="M 25 70 Q 40 45 60 50 T 95 35 T 135 45 T 160 80 T 135 145 T 85 170 T 45 135 Z" fill="#b9eed4" stroke="#87dbb2" stroke-width="1.5"/>
+                <!-- Coastal route line -->
+                <path d="M 50 20 Q 70 70 85 110 T 115 160 T 150 190" fill="none" stroke="rgba(56, 189, 248, 0.35)" stroke-width="2" stroke-dasharray="4 3"/>
                 
-                <!-- Regional Labels -->
-                <text x="35" y="150" font-size="9" font-family="sans-serif" fill="#004737" font-weight="700">Portugal</text>
-                <text x="95" y="135" font-size="9" font-family="sans-serif" fill="#004737" font-weight="700">Espanha</text>
-                <text x="105" y="75" font-size="9" font-family="sans-serif" fill="#004737" font-weight="700">França</text>
+                <!-- Regional Hub Labels -->
+                <text x="35" y="45" font-size="8" font-family="sans-serif" fill="#38bdf8" font-weight="700">Paita (-18°)</text>
+                <text x="50" y="95" font-size="8" font-family="sans-serif" fill="#38bdf8" font-weight="700">Chimbote (-20°)</text>
+                <text x="95" y="130" font-size="9" font-family="sans-serif" fill="#ffffff" font-weight="800">Callao (Hub)</text>
+                <text x="125" y="175" font-size="8" font-family="sans-serif" fill="#38bdf8" font-weight="700">Ilo (-18°)</text>
                 
-                <!-- Price Pins matching unsection-features.jpg -->
-                <g class="map-pin" transform="translate(48, 125)">
-                  <rect x="-16" y="-14" width="32" height="16" rx="8" fill="#004737"/>
-                  <text x="0" y="-3" font-size="8" font-family="monospace" fill="#ffffff" font-weight="700" text-anchor="middle">€10.00</text>
-                  <circle cx="0" cy="5" r="2.5" fill="#004737"/>
+                <!-- Price Pins -->
+                <g class="map-pin" transform="translate(90, 115)">
+                  <rect x="-18" y="-12" width="36" height="15" rx="6" fill="#2563eb"/>
+                  <text x="0" y="-2" font-size="8" font-family="monospace" fill="#ffffff" font-weight="700" text-anchor="middle">$14.50</text>
+                  <circle cx="0" cy="5" r="2.5" fill="#38bdf8"/>
                 </g>
 
-                <g class="map-pin" transform="translate(68, 105)">
-                  <rect x="-16" y="-14" width="32" height="16" rx="8" fill="#004737"/>
-                  <text x="0" y="-3" font-size="8" font-family="monospace" fill="#ffffff" font-weight="700" text-anchor="middle">€75.00</text>
-                  <circle cx="0" cy="5" r="2.5" fill="#004737"/>
+                <g class="map-pin" transform="translate(60, 35)">
+                  <rect x="-16" y="-12" width="32" height="15" rx="6" fill="#1e3a8a"/>
+                  <text x="0" y="-2" font-size="8" font-family="monospace" fill="#38bdf8" font-weight="700" text-anchor="middle">$6.80</text>
+                  <circle cx="0" cy="5" r="2.5" fill="#38bdf8"/>
                 </g>
 
-                <g class="map-pin" transform="translate(115, 60)">
-                  <rect x="-16" y="-14" width="32" height="16" rx="8" fill="#004737"/>
-                  <text x="0" y="-3" font-size="8" font-family="monospace" fill="#ffffff" font-weight="700" text-anchor="middle">€40.00</text>
-                  <circle cx="0" cy="5" r="2.5" fill="#004737"/>
-                </g>
-
-                <g class="map-pin" transform="translate(80, 160)">
-                  <rect x="-14" y="-14" width="28" height="16" rx="8" fill="#004737"/>
-                  <text x="0" y="-3" font-size="8" font-family="monospace" fill="#ffffff" font-weight="700" text-anchor="middle">€4.00</text>
-                  <circle cx="0" cy="5" r="2.5" fill="#004737"/>
+                <g class="map-pin" transform="translate(130, 160)">
+                  <rect x="-16" y="-12" width="32" height="15" rx="6" fill="#1e3a8a"/>
+                  <text x="0" y="-2" font-size="8" font-family="monospace" fill="#38bdf8" font-weight="700" text-anchor="middle">$12.50</text>
+                  <circle cx="0" cy="5" r="2.5" fill="#38bdf8"/>
                 </g>
               </svg>
             </div>
@@ -214,22 +232,24 @@
         </div>
       </article>
 
-      <!-- 2. Top-Right: Online Store Card (Col 3-4, Row 1) -->
-      <article class="bento-tile tile-online-store" aria-label="Dedicated Online Store">
+      <!-- 2. Top-Right: Dedicated Portal Card (Col 3-4, Row 1) -->
+      <article class="bento-tile tile-online-store" aria-label="Dedicated B2B Portal">
         <!-- Floating Isometric Store Screens Mockup -->
         <div class="store-preview-visual" aria-hidden="true">
           <div class="store-screens-wrapper">
             <!-- Screen 1: Store Catalog View -->
             <div class="mock-screen screen-catalog">
               <div class="mock-screen-header">
-                <span class="mock-store-name">My store</span>
+                <span class="mock-store-name">Portal Mayorista</span>
                 <div class="mock-screen-nav">
-                  <span>About us</span>
-                  <span>Location</span>
+                  <span>Muelle</span>
+                  <span>Frío</span>
                 </div>
               </div>
               <div class="mock-hero-banner">
-                <img src="/assets/synthetic/store-schematic.svg" alt="" class="mock-hero-img" />
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+                  <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                </svg>
               </div>
               <div class="mock-screen-grid">
                 <div class="mock-thumb-box"></div>
@@ -241,30 +261,34 @@
             <!-- Screen 2: Checkout Modal View -->
             <div class="mock-screen screen-checkout">
               <div class="checkout-header-row">
-                <span class="checkout-back">&lt; Check-out</span>
-                <span class="checkout-badge">Active</span>
+                <span class="checkout-back">&lt; Despacho</span>
+                <span class="checkout-badge">Escrow 100%</span>
               </div>
               <div class="checkout-item-preview">
-                <div class="checkout-item-thumb"></div>
+                <div class="checkout-item-thumb">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                  </svg>
+                </div>
                 <div class="checkout-item-meta">
-                  <strong class="checkout-item-title">LG 43 4k smart screen</strong>
-                  <span class="checkout-item-price text-mono">€15,00 / day</span>
+                  <strong class="checkout-item-title">Lote Salmón Salar</strong>
+                  <span class="checkout-item-price text-mono">$3,450.00 USD</span>
                 </div>
               </div>
               <div class="checkout-action-line">
-                <span class="checkout-pill-btn">Check availability</span>
+                <span class="checkout-pill-btn">Verificar Muelle</span>
               </div>
             </div>
           </div>
         </div>
 
         <div class="store-tile-content">
-          <h3 class="store-tile-title">Set up your own online store</h3>
+          <h3 class="store-tile-title">Portal Propio de Pedidos & Muelle</h3>
           <p class="store-tile-desc">
-            You now have the power to have a dedicated store for your business and maximize your contacts and leads.
+            Ofrece a tus clientes corporativos una interfaz dedicada para programar ventanas de carga, monitorear pallets y liberar pagos contra recepción conforme.
           </p>
           <div class="store-cta-row">
-            <a href="#book-demo" class="bento-pill-btn">Get Started</a>
+            <a href="#book-demo" class="bento-pill-btn">Comenzar Ahora</a>
           </div>
         </div>
       </article>
@@ -273,52 +297,51 @@
            ROW 2 & 3: ASYMMETRIC BENTO SATELLITES (SALES, SAFE, BOOKING, EASY, SEO)
            ==================================================================== -->
 
-      <!-- 3A. Sales €21k Chart Card (Col 1, Row 2) -->
-      <article class="bento-tile tile-mini tile-chart" aria-label="Monthly Sales Growth">
+      <!-- 3A. Sales $210k Chart Card (Col 1, Row 2) -->
+      <article class="bento-tile tile-mini tile-chart" aria-label="Despachos Mensuales">
         <div class="chart-content-box">
-          <span class="chart-label">Sales</span>
-          <strong class="chart-value text-mono">€21k</strong>
+          <span class="chart-label">Despachos B2B</span>
+          <strong class="chart-value text-mono">$210k</strong>
         </div>
         <svg viewBox="0 0 160 90" class="wave-chart-svg" preserveAspectRatio="none" aria-hidden="true">
           <defs>
-            <linearGradient id="purpleWaveGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#8a3ffc" stop-opacity="0.45"/>
-              <stop offset="100%" stop-color="#8a3ffc" stop-opacity="0.05"/>
+            <linearGradient id="blueWaveGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.45"/>
+              <stop offset="100%" stop-color="#2563eb" stop-opacity="0.05"/>
             </linearGradient>
           </defs>
-          <path d="M 0,75 C 25,72 45,55 70,60 C 95,65 110,35 130,42 C 145,48 150,15 160,10 L 160,90 L 0,90 Z" fill="url(#purpleWaveGrad)"/>
-          <path d="M 0,75 C 25,72 45,55 70,60 C 95,65 110,35 130,42 C 145,48 150,15 160,10" fill="none" stroke="#7026ed" stroke-width="3" stroke-linecap="round"/>
+          <path d="M 0,75 C 25,72 45,55 70,60 C 95,65 110,35 130,42 C 145,48 150,15 160,10 L 160,90 L 0,90 Z" fill="url(#blueWaveGrad)"/>
+          <path d="M 0,75 C 25,72 45,55 70,60 C 95,65 110,35 130,42 C 145,48 150,15 160,10" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
         </svg>
       </article>
 
-      <!-- 4. Amber "Safe" Shield Card (Col 2, Row 2) -->
-      <article class="bento-tile tile-mini tile-safe" aria-label="Safe and Guaranteed Rentals">
+      <!-- 4. Blue "Safe" Escrow Shield Card (Col 2, Row 2) -->
+      <article class="bento-tile tile-mini tile-safe" aria-label="Custodia Escrow Garantizada">
         <div class="safe-badge-container">
           <svg width="68" height="68" viewBox="0 0 24 24" fill="none" class="shield-bg-svg" aria-hidden="true">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="#004737"/>
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="#2563eb"/>
           </svg>
-          <span class="safe-text-overlay">Safe</span>
+          <span class="safe-text-overlay">Escrow</span>
         </div>
       </article>
 
-      <!-- 5. Center-Tall: Deep Forest Green Booking Flow Card (Col 3, Row 2-3) -->
-      <article class="bento-tile tile-tall-booking" aria-label="Manage Entire Booking Flow">
+      <!-- 5. Center-Tall: Deep Tech Booking Flow Card (Col 3, Row 2-3) -->
+      <article class="bento-tile tile-tall-booking" aria-label="Gestión Integral de Muelle y Despachos">
         <div class="booking-tile-inner">
           <h3 class="booking-tile-title">
-            Manage your entire booking flow in one place
+            Control integral de muelle, precintos y liquidación
           </h3>
           <p class="booking-tile-body">
-            All leads from the Flecto Market are managed on Flecto so you can send quotes, receive payments and assure that the equipment is insured.
+            Todas las órdenes del Marketplace se gestionan en Nexa OS: asignación de bahías frigoríficas, telemetría Sensirion en tránsito y liberación escrow automática al validar en destino.
           </p>
         </div>
       </article>
 
-      <!-- 6A. Emerald Mint "Easy" Snapping Fingers Card (Col 4, Row 2) -->
-      <article class="bento-tile tile-mini tile-sparkle" aria-label="Easy and Effortless Operations">
+      <!-- 6A. Emerald/Cyan "Easy" Snapping Fingers Card (Col 4, Row 2) -->
+      <article class="bento-tile tile-mini tile-sparkle" aria-label="Operación Fluida">
         <div class="easy-content-row">
-          <strong class="easy-text-label">Easy</strong>
-          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#004737" stroke-width="1.8" class="sparkle-hand-svg" aria-hidden="true">
-            <!-- Snapping fingers with magic sparkles -->
+          <strong class="easy-text-label">Ágil</strong>
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" class="sparkle-hand-svg" aria-hidden="true">
             <path d="M12 6V3M12 3L10 5M12 3l2 2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M18 10l2-1M18 14l2 1" stroke-linecap="round"/>
             <path d="M6 10l-2-1M6 14l-2 1" stroke-linecap="round"/>
@@ -327,19 +350,19 @@
         </div>
       </article>
 
-      <!-- 3B. Sand Boost Leads Card (Col 1-2, Row 3) -->
-      <article class="bento-tile tile-boost-leads" aria-label="Boost Business Leads">
-        <h3 class="sand-tile-title">Boost leads</h3>
+      <!-- 3B. Tech Slate Boost Leads Card (Col 1-2, Row 3) -->
+      <article class="bento-tile tile-boost-leads" aria-label="Mayor Rotación FEFO">
+        <h3 class="sand-tile-title">Mayor Rotación FEFO</h3>
         <p class="sand-tile-desc">
-          Get more leads and more revenue by reaching out to a new generation of consumers that prioritizes sustainable, smart access to items.
+          Reduce mermas y acelera la rotación de lotes con fechas de vencimiento críticas conectando de forma directa con cadenas de supermercados e industrias.
         </p>
       </article>
 
-      <!-- 6B. Sand Programmatic SEO Card (Col 4, Row 3) -->
-      <article class="bento-tile tile-seo-pages" aria-label="Advanced Programmatic SEO">
-        <h3 class="sand-tile-title">Advanced SEO</h3>
+      <!-- 6B. Tech Slate GS1 Pages Card (Col 4, Row 3) -->
+      <article class="bento-tile tile-seo-pages" aria-label="Trazabilidad GS1 Homologada">
+        <h3 class="sand-tile-title">Trazabilidad GS1</h3>
         <p class="sand-tile-desc">
-          Item and industry pages per location are highly SEO optimized to drive new traffic to your products and get you some quality leads.
+          Catálogos homologados bajo estándares GS1-128 con fichas técnicas y certificados sanitarios descargables para auditorías inmediatas.
         </p>
       </article>
 
@@ -349,15 +372,23 @@
 
 <style>
   /* ==========================================================================
-     THE ICONIC HISTORICAL BEIGE CANVAS (#FDFAE7)
+     DARK TECHNICAL SLATE CANVAS (#082846 / #05192d)
      ========================================================================== */
   .channels-section {
-    background-color: #FDFAE7;
-    color: #004737;
+    background: radial-gradient(circle at 50% 20%, #0c2038 0%, #082846 45%, #05192d 100%);
+    color: #ffffff;
     padding: 6.5rem 2rem 7.5rem;
     position: relative;
     overflow: hidden;
     scroll-margin-top: 70px;
+  }
+
+  .channels-blueprint-grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.6;
+    z-index: 1;
   }
 
   .market-anchor {
@@ -373,6 +404,8 @@
     display: flex;
     flex-direction: column;
     gap: 3.5rem;
+    position: relative;
+    z-index: 2;
   }
 
   /* Header */
@@ -388,34 +421,35 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.35rem 1.25rem;
-    border: 1.5px solid #004737;
+    padding: 0.4rem 1.35rem;
+    border: 1.5px solid rgba(56, 189, 248, 0.4);
     border-radius: 999px;
     font-size: 0.8125rem;
     font-weight: 700;
-    color: #004737;
-    background: transparent;
-    letter-spacing: -0.01em;
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.08);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   .channels-title {
     font-family: var(--primitive-font-display);
     font-size: clamp(2.35rem, 4.5vw, 4rem);
-    font-weight: 700;
+    font-weight: 800;
     line-height: 1.08;
-    color: #004737;
+    color: #ffffff;
     letter-spacing: -0.03em;
     margin: 0;
   }
 
   .title-light {
     font-weight: 400;
-    color: #004737;
+    color: #93c5fd;
   }
 
-  /* Shared Bento Pill Button (Forest Green Pill) */
+  /* Shared Bento Pill Button (Tech Electric Blue Pill) */
   .bento-pill-btn {
-    background-color: #004737;
+    background-color: #2563eb;
     color: #ffffff;
     font-family: var(--primitive-font-display);
     font-size: 0.9375rem;
@@ -426,12 +460,14 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
   }
 
   .bento-pill-btn:hover {
-    background-color: #0f3c2d;
-    transform: scale(1.03);
+    background-color: #1d4ed8;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+    transform: translateY(-1px);
   }
 
   /* ==========================================================================
@@ -449,19 +485,21 @@
     position: relative;
     overflow: hidden;
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    border: 1px solid rgba(56, 189, 248, 0.16);
   }
 
   .bento-tile:hover {
     transform: translateY(-2px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
   }
 
   /* --------------------------------------------------------------------------
-     1. Large Mint Flecto Market Card (Col 1-2, Row 1)
+     1. Large Slate Nexa Market Card (Col 1-2, Row 1)
      -------------------------------------------------------------------------- */
   .tile-market-wide {
     grid-column: 1 / 3;
     grid-row: 1;
-    background: #c2f4d6;
+    background: #0c2038;
     padding: 2.5rem 2.5rem 0;
     display: flex;
     flex-direction: column;
@@ -480,7 +518,7 @@
     gap: 0.75rem;
   }
 
-  .market-flecto-logo {
+  .market-nexa-logo {
     flex-shrink: 0;
   }
 
@@ -488,17 +526,17 @@
     font-family: var(--primitive-font-display);
     font-size: 1.75rem;
     font-weight: 800;
-    color: #004737;
+    color: #ffffff;
     letter-spacing: -0.025em;
   }
 
   .market-lead-desc {
     font-size: 1.0625rem;
     line-height: 1.45;
-    color: #004737;
+    color: #cbd5e1;
     margin: 0;
     max-width: 48ch;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   .market-cta-wrap {
@@ -507,11 +545,13 @@
 
   /* Market Catalog Web Window Preview */
   .market-ui-preview {
-    background: #ffffff;
+    background: #081d33;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     padding: 1.15rem 1.35rem 1.35rem;
-    box-shadow: 0 16px 36px rgba(0, 71, 55, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    border-bottom: none;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -522,7 +562,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #ebf1ee;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.12);
     padding-bottom: 0.75rem;
   }
 
@@ -536,12 +576,13 @@
     display: flex;
     align-items: center;
     gap: 0.45rem;
-    background: #f2f6f4;
+    background: #0d2847;
+    border: 1px solid rgba(56, 189, 248, 0.2);
     padding: 0.35rem 0.85rem;
     border-radius: 999px;
     font-size: 0.8125rem;
     font-weight: 600;
-    color: #004737;
+    color: #38bdf8;
   }
 
   .market-browser-tags {
@@ -553,11 +594,11 @@
   .browser-tag {
     font-size: 0.75rem;
     font-weight: 600;
-    color: #004737;
+    color: #94a3b8;
   }
 
   .tag-muted {
-    color: #889e94;
+    color: #64748b;
     font-size: 0.6875rem;
   }
 
@@ -565,7 +606,7 @@
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    background: #d4e8de;
+    background: #2563eb;
   }
 
   .market-catalog-split {
@@ -581,8 +622,8 @@
   }
 
   .cat-item-card {
-    background: #fbfdfc;
-    border: 1px solid #e5eee9;
+    background: #0f2742;
+    border: 1px solid rgba(56, 189, 248, 0.14);
     border-radius: 10px;
     padding: 0.5rem;
     display: flex;
@@ -591,11 +632,11 @@
   }
 
   .cat-img-box {
-    height: 40px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #edf7f2;
+    background: #081d33;
     border-radius: 6px;
   }
 
@@ -607,7 +648,7 @@
   .cat-name {
     font-size: 0.6875rem;
     font-weight: 600;
-    color: #004737;
+    color: #e2e8f0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -616,22 +657,23 @@
   .cat-price {
     font-size: 0.8125rem;
     font-weight: 700;
-    color: #004737;
+    color: #38bdf8;
   }
 
   .cat-price small {
     font-size: 0.625rem;
     font-weight: 400;
-    color: #4a6358;
+    color: #94a3b8;
   }
 
   .cat-loc {
     font-size: 0.5875rem;
-    color: #889e94;
+    color: #64748b;
   }
 
   .catalog-map-panel {
-    background: #edf8f3;
+    background: #081d33;
+    border: 1px solid rgba(56, 189, 248, 0.12);
     border-radius: 14px;
     display: flex;
     align-items: center;
@@ -651,17 +693,16 @@
   .tile-online-store {
     grid-column: 3 / 5;
     grid-row: 1;
-    background: #ffffff;
+    background: #0c2038;
     padding: 2.5rem 2.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 10px 30px rgba(0, 71, 55, 0.04);
   }
 
   .store-preview-visual {
-    background: #f7faf8;
-    border: 1px solid #e5eee9;
+    background: #081d33;
+    border: 1px solid rgba(56, 189, 248, 0.14);
     border-radius: 20px;
     padding: 1.5rem;
     position: relative;
@@ -676,11 +717,11 @@
   }
 
   .mock-screen {
-    background: #ffffff;
-    border: 1px solid #e1ebe5;
+    background: #0f2742;
+    border: 1px solid rgba(56, 189, 248, 0.16);
     border-radius: 12px;
     padding: 0.75rem;
-    box-shadow: 0 8px 20px rgba(0, 71, 55, 0.06);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -692,30 +733,25 @@
     align-items: center;
     font-size: 0.6875rem;
     font-weight: 700;
-    color: #004737;
+    color: #ffffff;
   }
 
   .mock-screen-nav {
     display: flex;
     gap: 0.5rem;
     font-size: 0.5875rem;
-    color: #7a9489;
+    color: #94a3b8;
   }
 
   .mock-hero-banner {
     height: 50px;
-    background: #eef5f1;
+    background: #081d33;
+    border: 1px solid rgba(56, 189, 248, 0.1);
     border-radius: 6px;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .mock-hero-img {
-    width: 60px;
-    height: auto;
-    opacity: 0.8;
   }
 
   .mock-screen-grid {
@@ -726,7 +762,7 @@
 
   .mock-thumb-box {
     height: 28px;
-    background: #edf3ef;
+    background: #081d33;
     border-radius: 4px;
   }
 
@@ -737,12 +773,13 @@
     align-items: center;
     font-size: 0.6875rem;
     font-weight: 700;
-    color: #004737;
+    color: #ffffff;
   }
 
   .checkout-badge {
-    background: #c2f4d6;
-    color: #004737;
+    background: rgba(37, 99, 235, 0.3);
+    color: #38bdf8;
+    border: 1px solid rgba(56, 189, 248, 0.3);
     font-size: 0.5875rem;
     font-weight: 800;
     padding: 0.15rem 0.4rem;
@@ -753,7 +790,8 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: #f7faf8;
+    background: #081d33;
+    border: 1px solid rgba(56, 189, 248, 0.1);
     padding: 0.5rem;
     border-radius: 8px;
   }
@@ -761,8 +799,11 @@
   .checkout-item-thumb {
     width: 32px;
     height: 32px;
-    background: #004737;
+    background: #0d2847;
     border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .checkout-item-meta {
@@ -772,19 +813,19 @@
 
   .checkout-item-title {
     font-size: 0.6875rem;
-    color: #004737;
+    color: #e2e8f0;
   }
 
   .checkout-item-price {
     font-size: 0.625rem;
-    color: #557266;
+    color: #38bdf8;
     font-weight: 700;
   }
 
   .checkout-pill-btn {
     display: block;
     text-align: center;
-    background: #004737;
+    background: #2563eb;
     color: #ffffff;
     font-size: 0.625rem;
     font-weight: 700;
@@ -803,7 +844,7 @@
     font-family: var(--primitive-font-display);
     font-size: 1.85rem;
     font-weight: 800;
-    color: #004737;
+    color: #ffffff;
     letter-spacing: -0.025em;
     margin: 0;
   }
@@ -811,9 +852,9 @@
   .store-tile-desc {
     font-size: 1.0625rem;
     line-height: 1.5;
-    color: #4a6358;
+    color: #cbd5e1;
     margin: 0;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   .store-cta-row {
@@ -821,18 +862,17 @@
   }
 
   /* --------------------------------------------------------------------------
-     3A. Sales €21k Chart Card (Col 1, Row 2)
+     3A. Sales $210k Chart Card (Col 1, Row 2)
      -------------------------------------------------------------------------- */
   .tile-chart {
     grid-column: 1;
     grid-row: 2;
-    background: #ffffff;
+    background: #0c2038;
     height: 165px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 1.25rem 1.5rem 0.75rem;
-    box-shadow: 0 6px 24px rgba(0, 71, 55, 0.04);
   }
 
   .chart-content-box {
@@ -844,13 +884,13 @@
   .chart-label {
     font-size: 0.8125rem;
     font-weight: 600;
-    color: #5a7369;
+    color: #94a3b8;
   }
 
   .chart-value {
     font-size: 2.15rem;
     font-weight: 800;
-    color: #7026ed;
+    color: #38bdf8;
     line-height: 1;
     letter-spacing: -0.03em;
   }
@@ -861,12 +901,12 @@
   }
 
   /* --------------------------------------------------------------------------
-     4. Amber "Safe" Shield Card (Col 2, Row 2)
+     4. Blue "Safe" Shield Card (Col 2, Row 2)
      -------------------------------------------------------------------------- */
   .tile-safe {
     grid-column: 2;
     grid-row: 2;
-    background: #f7a600;
+    background: #122b49;
     height: 165px;
     display: flex;
     align-items: center;
@@ -890,22 +930,23 @@
     color: #ffffff;
     font-family: var(--primitive-font-display);
     font-weight: 800;
-    font-size: 1.45rem;
+    font-size: 1.25rem;
     letter-spacing: -0.02em;
   }
 
   /* --------------------------------------------------------------------------
-     5. Center-Tall: Deep Forest Green Booking Flow Card (Col 3, Row 2-3)
+     5. Center-Tall: Deep Tech Booking Flow Card (Col 3, Row 2-3)
      -------------------------------------------------------------------------- */
   .tile-tall-booking {
     grid-column: 3;
     grid-row: 2 / 4;
-    background: #003b2c;
+    background: #081d33;
     color: #ffffff;
     padding: 2.5rem 2.25rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border: 1px solid rgba(56, 189, 248, 0.25);
   }
 
   .booking-tile-title {
@@ -921,17 +962,17 @@
   .booking-tile-body {
     font-size: 0.9375rem;
     line-height: 1.6;
-    color: #b3d9c7;
+    color: #cbd5e1;
     margin: 0;
   }
 
   /* --------------------------------------------------------------------------
-     6A. Emerald Mint "Easy" Snapping Fingers Card (Col 4, Row 2)
+     6A. Blue "Ágil" Snapping Fingers Card (Col 4, Row 2)
      -------------------------------------------------------------------------- */
   .tile-sparkle {
     grid-column: 4;
     grid-row: 2;
-    background: #45f396;
+    background: #2563eb;
     height: 165px;
     display: flex;
     align-items: center;
@@ -951,7 +992,7 @@
     font-family: var(--primitive-font-display);
     font-size: 1.85rem;
     font-weight: 800;
-    color: #004737;
+    color: #ffffff;
     letter-spacing: -0.02em;
   }
 
@@ -961,12 +1002,12 @@
   }
 
   /* --------------------------------------------------------------------------
-     3B. Sand Boost Leads Card (Col 1-2, Row 3)
+     3B. Dark Slate Boost Leads Card (Col 1-2, Row 3)
      -------------------------------------------------------------------------- */
   .tile-boost-leads {
     grid-column: 1 / 3;
     grid-row: 3;
-    background: #faf4e6;
+    background: #0c2038;
     padding: 2.25rem 2.5rem;
     display: flex;
     flex-direction: column;
@@ -978,7 +1019,7 @@
     font-family: var(--primitive-font-display);
     font-size: 1.75rem;
     font-weight: 800;
-    color: #004737;
+    color: #ffffff;
     letter-spacing: -0.02em;
     margin: 0;
   }
@@ -986,18 +1027,18 @@
   .sand-tile-desc {
     font-size: 1.0625rem;
     line-height: 1.55;
-    color: #4a6358;
+    color: #cbd5e1;
     margin: 0;
     max-width: 48ch;
   }
 
   /* --------------------------------------------------------------------------
-     6B. Sand Programmatic SEO Card (Col 4, Row 3)
+     6B. Dark Slate GS1 Traceability Card (Col 4, Row 3)
      -------------------------------------------------------------------------- */
   .tile-seo-pages {
     grid-column: 4;
     grid-row: 3;
-    background: #faf4e6;
+    background: #0c2038;
     padding: 2.25rem 2rem;
     display: flex;
     flex-direction: column;

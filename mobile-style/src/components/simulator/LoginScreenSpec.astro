@@ -1,135 +1,119 @@
 ---
 /**
  * LoginScreenSpec.astro — Canonical Nexa Mobile Login & Workspace Access
- * 100% aligned with Nexa Web Authentication Pattern (ADR-0018 / Blueprint).
- * Features:
- *  - Blueprint grid background pattern ("cuadraditos")
- *  - Isolated NX logo badge (white background with blue NX)
- *  - 4-quadrant architectural mark
- *  - Mobile form inputs with 56dp touch targets
- *  - Role-based quick credentials (Conductor, Almacén, Despacho, Comprador)
- *  - Interactive client-side demo with biometric fallback simulation
+ * Modern, thumb-friendly mobile authentication with fluid gradient transition,
+ * in-block labels, Knox biometric access, and home navigation.
  */
 ---
 
 <div class="mobile-login-specimen">
-  <!-- Blueprint Grid Brand Hero Header -->
+  <!-- Blueprint Grid Brand Hero Header with Fluid Gradient Transition -->
   <div class="login-brand-plane">
-    <!-- Background Blueprint Grid Pattern Overlay -->
+    <!-- Subtle Blueprint Grid Pattern Overlay -->
     <div class="blueprint-grid-mesh" aria-hidden="true"></div>
 
     <div class="brand-plane-content">
-      <!-- Transparent NX White Logo Mark -->
+      <!-- Top Brand Row: Transparent NX White Logo & Home Return Pill -->
       <div class="brand-header-row">
         <div class="nx-logo-mark" title="Nexa Suite">
           <img src="/assets/nexa-nx-white.svg" alt="NX" class="nx-logo-img" />
         </div>
-        <div class="workspace-access-tag">
-          <span class="pulse-dot"></span>
-          <span>WORKSPACE ACCESS</span>
-        </div>
+
+        <!-- Central / Top Return to Home Action -->
+        <a href="/" class="login-home-pill" title="Volver al Portal Central Nexa">
+          <i class="pi pi-home" aria-hidden="true"></i>
+          <span>Inicio</span>
+        </a>
       </div>
 
       <div class="brand-hero-text">
-        <h2 class="brand-title">Tu espacio de trabajo operativo</h2>
-        <p class="brand-subtitle">Gestión logística y cadena de frío en tiempo real</p>
+        <h2 class="brand-title">Iniciar Sesión</h2>
+        <p class="brand-subtitle">Plataforma logística y cadena de frío</p>
       </div>
     </div>
   </div>
 
-  <!-- Form Content Area -->
+  <!-- Form Content Area with Overlapping Curved Shell -->
   <div class="login-form-plane">
-    <div class="form-header-cluster">
-      <div>
-        <span class="form-kicker">IDENTIDAD OPERATIVA</span>
-        <h3 class="form-main-heading">Sign in to your workspace</h3>
-        <p class="form-sub-copy">Use your work identity to continue.</p>
-      </div>
-      
-      <!-- Locale Switcher -->
-      <div class="locale-pill-toggle" role="group" aria-label="Idioma">
-        <button type="button" class="btn-lang active" data-lang="en">EN</button>
-        <button type="button" class="btn-lang" data-lang="es">ES</button>
-      </div>
-    </div>
-
     <!-- Role Quick-Login Chips -->
     <div class="quick-roles-cluster">
-      <span class="quick-role-label">ACCESO RÁPIDO POR ROL:</span>
-      <div class="quick-role-pills">
+      <div class="quick-role-pills" role="radiogroup" aria-label="Seleccionar rol de acceso">
         <button type="button" class="btn-quick-role active" data-email="diego.morales@nexa.pe" data-role="Conductor">
-          <i class="pi pi-map-marker"></i> Conductor
+          <i class="pi pi-map-marker"></i>
+          <span>Conductor</span>
         </button>
         <button type="button" class="btn-quick-role" data-email="alejandro.vargas@nexa.pe" data-role="Almacén">
-          <i class="pi pi-box"></i> Almacén
+          <i class="pi pi-box"></i>
+          <span>Almacén</span>
         </button>
         <button type="button" class="btn-quick-role" data-email="carlos.mendoza@supermercados.pe" data-role="Comprador">
-          <i class="pi pi-shopping-bag"></i> Comprador
+          <i class="pi pi-shopping-bag"></i>
+          <span>Comprador</span>
         </button>
       </div>
     </div>
 
-    <!-- Mobile Login Form -->
+    <!-- Mobile Login Form with In-Block Modern Inputs -->
     <form class="workspace-login-form" id="mobile-login-form" onsubmit="return false;">
-      <!-- Email Field -->
-      <div class="form-field-group">
-        <label for="login-email-input" class="field-label">Work email</label>
-        <div class="input-with-icon">
-          <i class="pi pi-envelope prefix-icon" aria-hidden="true"></i>
+      
+      <!-- Email Field (Label Inside Block) -->
+      <div class="inblock-input-card">
+        <div class="inblock-icon-wrap">
+          <i class="pi pi-envelope" aria-hidden="true"></i>
+        </div>
+        <div class="inblock-text-wrap">
+          <label for="login-email-input" class="inblock-floating-label">Correo corporativo</label>
           <input 
             type="email" 
             id="login-email-input" 
-            class="m3-text-input" 
+            class="inblock-raw-input" 
             value="diego.morales@nexa.pe" 
-            placeholder="name@company.com" 
+            placeholder="tu@nexa.pe" 
             autocomplete="email"
             required
           />
         </div>
       </div>
 
-      <!-- Password Field -->
-      <div class="form-field-group">
-        <div class="field-label-row">
-          <label for="login-password-input" class="field-label">Password</label>
-          <a href="#forgot" class="forgot-link">¿Olvidaste tu contraseña?</a>
+      <!-- Password Field (Label Inside Block + Toggle Eye) -->
+      <div class="inblock-input-card">
+        <div class="inblock-icon-wrap">
+          <i class="pi pi-lock" aria-hidden="true"></i>
         </div>
-        <div class="input-with-icon">
-          <i class="pi pi-lock prefix-icon" aria-hidden="true"></i>
+        <div class="inblock-text-wrap">
+          <label for="login-password-input" class="inblock-floating-label">Contraseña</label>
           <input 
             type="password" 
             id="login-password-input" 
-            class="m3-text-input" 
+            class="inblock-raw-input" 
             value="NexaSecure2026!" 
             placeholder="••••••••••••" 
             autocomplete="current-password"
             required
           />
-          <button type="button" class="btn-toggle-eye" id="btn-toggle-pwd" aria-label="Mostrar contraseña">
-            <i class="pi pi-eye" id="eye-icon"></i>
-          </button>
         </div>
+        <button type="button" class="btn-toggle-eye" id="btn-toggle-pwd" aria-label="Mostrar u ocultar contraseña">
+          <i class="pi pi-eye" id="eye-icon"></i>
+        </button>
       </div>
 
-      <!-- Remember & Security Options -->
+      <!-- Remember & Forgot Row -->
       <div class="form-options-row">
         <label class="custom-checkbox-wrap">
           <input type="checkbox" id="chk-remember" checked />
           <span class="chk-box-custom"></span>
-          <span class="chk-label">Recordar espacio de trabajo</span>
+          <span class="chk-label">Recordar usuario</span>
         </label>
-        <span class="offline-ready-tag" title="Permite autenticación offline con SQLite Room">
-          <i class="pi pi-wifi"></i> Offline-ready
-        </span>
+        <a href="#forgot" class="forgot-link">¿Olvidaste tu clave?</a>
       </div>
 
-      <!-- Primary Sign In Action (56dp Industrial Target) -->
+      <!-- Primary Sign In Action (54dp Touch Target) -->
       <button type="submit" class="btn-login-submit" id="btn-login-submit">
-        <span>Sign in</span>
+        <span>Ingresar al espacio</span>
         <i class="pi pi-arrow-right"></i>
       </button>
 
-      <!-- Biometric Hardware Login for Rugged Devices (Zebra / Samsung Knox) -->
+      <!-- Biometric Hardware Login for Rugged Devices (Knox / Fingerprint) -->
       <button type="button" class="btn-biometric-auth" id="btn-biometric-login">
         <i class="pi pi-shield"></i>
         <span>Acceso Biométrico / Huella Knox</span>
@@ -141,31 +125,28 @@
       <i class="pi pi-check-circle"></i>
       <span id="login-feedback-text">Sesión iniciada correctamente. Cargando hoja de ruta...</span>
     </div>
-
-    <!-- Pattern Only Disclaimer -->
-    <p class="pattern-disclaimer">
-      Pattern only; no backend authentication is performed.
-    </p>
   </div>
 </div>
 
 <style>
   .mobile-login-specimen {
     background: #ffffff;
-    border-radius: 18px;
+    border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+    box-shadow: 0 12px 36px -8px rgba(15, 23, 42, 0.12), 0 0 0 1px #e2e8f0;
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
   }
 
-  /* Blueprint Grid Brand Plane */
+  /* Blueprint Grid Brand Plane with Fluid Gradient Transition */
   .login-brand-plane {
     position: relative;
-    background: linear-gradient(145deg, #091e42 0%, #1d4ed8 100%);
+    background: linear-gradient(180deg, #061e38 0%, #0d3868 38%, #1d4ed8 72%, #2563eb 90%, #3b82f6 100%);
     color: #ffffff;
-    padding: 24px 20px 22px;
+    padding: 24px 22px 34px;
     overflow: hidden;
   }
 
@@ -174,10 +155,10 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.22;
+    opacity: 0.24;
     background-image: 
-      linear-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.18) 1px, transparent 1px);
+      linear-gradient(rgba(255, 255, 255, 0.22) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.22) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 
@@ -186,7 +167,7 @@
     z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
   }
 
   .brand-header-row {
@@ -197,14 +178,12 @@
 
   /* Transparent NX Logo Mark */
   .nx-logo-mark {
-    width: 44px;
-    height: 38px;
+    width: 46px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     background: transparent;
-    border: none;
-    box-shadow: none;
   }
 
   .nx-logo-img {
@@ -213,31 +192,34 @@
     object-fit: contain;
   }
 
-  .workspace-access-tag {
+  /* Central / Top Home Navigation Pill */
+  .login-home-pill {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 10.5px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: #93c5fd;
-    background: rgba(15, 23, 42, 0.45);
-    padding: 4px 10px;
+    padding: 6px 14px;
     border-radius: 999px;
-    border: 1px solid rgba(147, 197, 253, 0.35);
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.15s ease;
   }
 
-  .pulse-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #38bdf8;
-    box-shadow: 0 0 6px #38bdf8;
+  .login-home-pill:hover {
+    background: rgba(255, 255, 255, 0.28);
+    transform: translateY(-1px);
+  }
+
+  .login-home-pill i {
+    font-size: 13px;
   }
 
   .brand-hero-text {
-    margin-top: 4px;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -245,244 +227,205 @@
 
   .brand-title {
     font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
-    font-size: 19px;
+    font-size: 24px;
     font-weight: 800;
-    line-height: 1.25;
     color: #ffffff;
-    letter-spacing: -0.015em;
-    margin: 0;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
   }
 
   .brand-subtitle {
     font-size: 13px;
-    line-height: 1.45;
-    color: #bfdbfe;
-    margin: 0;
-    opacity: 0.95;
+    color: #dbeafe;
+    line-height: 1.4;
+    font-weight: 500;
   }
 
-  /* Form Plane */
+  /* Form Content Area Overlapping Gradient */
   .login-form-plane {
-    padding: 20px 18px 24px;
+    position: relative;
+    z-index: 3;
+    margin-top: -16px;
+    background: #ffffff;
+    border-radius: 24px 24px 0 0;
+    padding: 22px 22px 26px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    background: #ffffff;
+    gap: 18px;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.04);
   }
 
-  .form-header-cluster {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  .form-kicker {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 9.5px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    color: #2563eb;
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 2px;
-  }
-
-  .form-main-heading {
-    font-family: var(--nexa-font-family-display, sans-serif);
-    font-size: 18px;
-    font-weight: 700;
-    color: #0f172a;
-    line-height: 1.25;
-    margin: 0;
-  }
-
-  .form-sub-copy {
-    font-size: 12px;
-    color: #64748b;
-    margin-top: 2px;
-  }
-
-  /* Locale Switcher */
-  .locale-pill-toggle {
-    display: inline-flex;
-    padding: 2px;
-    background: #f1f5f9;
-    border: 1px solid #cbd5e1;
-    border-radius: 7px;
-    gap: 2px;
-  }
-
-  .btn-lang {
-    border: 0;
-    background: transparent;
-    padding: 2px 7px;
-    font-size: 10.5px;
-    font-weight: 700;
-    color: #64748b;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .btn-lang.active {
-    background: #ffffff;
-    color: #1d4ed8;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-  }
-
-  /* Quick Roles */
+  /* Quick Role Chips */
   .quick-roles-cluster {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    background: #f8fafc;
-    padding: 8px 10px;
-    border-radius: 8px;
-    border: 1px solid #e2e8f0;
-  }
-
-  .quick-role-label {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 9.5px;
-    font-weight: 700;
-    color: #64748b;
   }
 
   .quick-role-pills {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
   }
 
   .btn-quick-role {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
-    padding: 7px 12px;
-    min-height: 38px;
-    border-radius: 8px;
-    border: 1px solid #cbd5e1;
-    background: #ffffff;
-    color: #334155;
+    height: 38px;
+    padding: 0 8px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    color: #475569;
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .btn-quick-role:hover {
     background: #f1f5f9;
+    border-color: #cbd5e1;
   }
 
   .btn-quick-role.active {
     background: #eff6ff;
     border-color: #2563eb;
     color: #1d4ed8;
-    font-weight: 700;
+    box-shadow: 0 1px 3px rgba(37, 99, 235, 0.15);
   }
 
-  /* Form Inputs */
+  .btn-quick-role i {
+    font-size: 13px;
+  }
+
+  /* Mobile Login Form */
   .workspace-login-form {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
   }
 
-  .form-field-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .field-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #334155;
-  }
-
-  .field-label-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .forgot-link {
-    font-size: 11.5px;
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  .input-with-icon {
-    position: relative;
+  /* Modern In-Block Input Cards (Label + Field Inside One Enclosure) */
+  .inblock-input-card {
     display: flex;
     align-items: center;
-  }
-
-  .prefix-icon {
-    position: absolute;
-    left: 14px;
-    color: #94a3b8;
-    font-size: 15px;
-    pointer-events: none;
-  }
-
-  .m3-text-input {
-    width: 100%;
-    min-height: 52px;
-    padding: 0 42px 0 40px;
-    border: 1.5px solid #cbd5e1;
-    border-radius: 12px;
-    font-family: inherit;
-    font-size: 14.5px;
-    color: #0f172a;
-    background: #f8fafc;
-    transition: all 0.15s ease;
-    outline: none;
-  }
-
-  .m3-text-input:focus {
+    gap: 12px;
+    padding: 8px 14px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 14px;
     background: #ffffff;
+    min-height: 56px;
+    transition: all 0.15s ease;
+  }
+
+  .inblock-input-card:focus-within {
     border-color: #2563eb;
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
   }
 
-  .btn-toggle-eye {
-    position: absolute;
-    right: 8px;
-    background: transparent;
-    border: 0;
-    padding: 6px;
+  .inblock-icon-wrap {
     color: #64748b;
-    cursor: pointer;
-    border-radius: 4px;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
   }
 
-  /* Options Row */
+  .inblock-input-card:focus-within .inblock-icon-wrap {
+    color: #2563eb;
+  }
+
+  .inblock-text-wrap {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .inblock-floating-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    margin-bottom: 2px;
+  }
+
+  .inblock-input-card:focus-within .inblock-floating-label {
+    color: #2563eb;
+  }
+
+  .inblock-raw-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #0f172a;
+    font-size: 14.5px;
+    font-weight: 600;
+    font-family: inherit;
+    padding: 0;
+  }
+
+  .inblock-raw-input::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
+  }
+
+  .btn-toggle-eye {
+    background: transparent;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    border-radius: 8px;
+    transition: color 0.15s ease;
+  }
+
+  .btn-toggle-eye:hover {
+    color: #0f172a;
+  }
+
+  /* Form Options Row */
   .form-options-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 11.5px;
+    font-size: 12px;
+    padding: 2px 2px;
   }
 
   .custom-checkbox-wrap {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     cursor: pointer;
+    user-select: none;
     color: #475569;
+    font-weight: 500;
   }
 
   .custom-checkbox-wrap input {
-    display: none;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
   }
 
   .chk-box-custom {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
     border: 1.5px solid #cbd5e1;
-    border-radius: 4px;
     background: #ffffff;
     display: flex;
     align-items: center;
@@ -490,37 +433,40 @@
     transition: all 0.15s ease;
   }
 
-  .custom-checkbox-wrap input:checked + .chk-box-custom {
+  .custom-checkbox-wrap input:checked ~ .chk-box-custom {
     background: #2563eb;
     border-color: #2563eb;
   }
 
-  .custom-checkbox-wrap input:checked + .chk-box-custom::after {
+  .custom-checkbox-wrap input:checked ~ .chk-box-custom::after {
     content: '';
-    width: 4px;
-    height: 8px;
+    width: 5px;
+    height: 9px;
     border: solid #ffffff;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
     margin-bottom: 2px;
   }
 
-  .offline-ready-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 10.5px;
-    color: #16a34a;
+  .forgot-link {
+    color: #2563eb;
     font-weight: 600;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .forgot-link:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
   }
 
   /* Action Buttons */
   .btn-login-submit {
-    min-height: 54px;
+    height: 52px;
+    border-radius: 14px;
     background: #2563eb;
     color: #ffffff;
     border: none;
-    border-radius: 12px;
     font-size: 15px;
     font-weight: 700;
     display: flex;
@@ -528,21 +474,28 @@
     justify-content: center;
     gap: 8px;
     cursor: pointer;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
     transition: all 0.15s ease;
-    box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3);
+    -webkit-tap-highlight-color: transparent;
   }
 
   .btn-login-submit:hover {
     background: #1d4ed8;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .btn-login-submit:active {
+    transform: scale(0.98);
   }
 
   .btn-biometric-auth {
-    min-height: 50px;
-    background: #ffffff;
-    color: #1e293b;
-    border: 1.5px solid #cbd5e1;
-    border-radius: 12px;
-    font-size: 13.5px;
+    height: 48px;
+    border-radius: 14px;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+    font-size: 13px;
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -550,11 +503,21 @@
     gap: 8px;
     cursor: pointer;
     transition: all 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .btn-biometric-auth:hover {
-    background: #f8fafc;
+    background: #f1f5f9;
     border-color: #94a3b8;
+  }
+
+  .btn-biometric-auth:active {
+    transform: scale(0.98);
+  }
+
+  .btn-biometric-auth i {
+    color: #2563eb;
+    font-size: 15px;
   }
 
   /* Feedback Banner */
@@ -562,22 +525,19 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 12px;
-    border-radius: 8px;
-    background: #ecfdf5;
-    border: 1px solid #a7f3d0;
-    color: #065f46;
-    font-size: 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    color: #1e40af;
+    font-size: 12.5px;
     font-weight: 600;
     animation: fadeIn 0.2s ease;
   }
 
-  .pattern-disclaimer {
-    margin: 4px 0 0;
-    font-size: 11px;
-    color: #94a3b8;
-    text-align: center;
-    line-height: 1.4;
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 </style>
 

@@ -242,3 +242,32 @@ export function commandsToSvgPath(commands: PathCommand[]): string {
 function round(n: number): number {
   return Math.round(n * 10) / 10;
 }
+
+function interpolatePoint(p1: Point2D, p2: Point2D, t: number): Point2D {
+  return {
+    x: p1.x + (p2.x - p1.x) * t,
+    y: p1.y + (p2.y - p1.y) * t,
+  };
+}
+
+export function interpolateCommands(cmdsA: PathCommand[], cmdsB: PathCommand[], t: number): PathCommand[] {
+  return cmdsA.map((cmdA, i) => {
+    const cmdB = cmdsB[i];
+    if (!cmdB) return cmdA;
+    if (cmdA.type === 'M' && cmdB.type === 'M') {
+      return { type: 'M', start: interpolatePoint(cmdA.start, cmdB.start, t) };
+    }
+    if (cmdA.type === 'L' && cmdB.type === 'L') {
+      return { type: 'L', end: interpolatePoint(cmdA.end, cmdB.end, t) };
+    }
+    if (cmdA.type === 'C' && cmdB.type === 'C') {
+      return {
+        type: 'C',
+        cp1: interpolatePoint(cmdA.cp1, cmdB.cp1, t),
+        cp2: interpolatePoint(cmdA.cp2, cmdB.cp2, t),
+        end: interpolatePoint(cmdA.end, cmdB.end, t),
+      };
+    }
+    return cmdB;
+  });
+}
