@@ -150,32 +150,137 @@
       </div>
     </div>
 
-    <!-- Live Interactive Bottom Navigation Demo (Dynamic by Role) -->
-    <div class="component-demo-stage">
-      <div class="live-bottom-nav-interactive" id="interactive-bottomnav-demo">
-        <!-- Rendered dynamically by script below, default is Conductor -->
-        <div class="bottom-nav-tab active" data-tab-id="rutas">
-          <div class="tab-indicator-pill"><i class="pi pi-map-marker"></i></div>
-          <span class="tab-label">Rutas</span>
-          <span class="tab-badge">2</span>
+    <!-- Authentic Phone Base Stage (Designed for Hands & Thumbs) -->
+    <div class="touch-nav-stage">
+      <div class="touch-stage-phone-bezel">
+        <div class="touch-stage-preview-header">
+          <span class="touch-stage-role-tag" id="touch-stage-role-tag">CONDUCTOR EN RUTA</span>
+          <span class="touch-stage-screen-name" id="touch-stage-screen-name">Rutas & Despacho Activo</span>
         </div>
-        <div class="bottom-nav-tab" data-tab-id="entregas">
-          <div class="tab-indicator-pill"><i class="pi pi-file-edit"></i></div>
-          <span class="tab-label">Entregas POD</span>
-          <span class="tab-badge">5</span>
-        </div>
-        <div class="bottom-nav-tab" data-tab-id="incidencias">
-          <div class="tab-indicator-pill"><i class="pi pi-exclamation-triangle"></i></div>
-          <span class="tab-label">Incidencias</span>
-        </div>
-        <div class="bottom-nav-tab" data-tab-id="jornada">
-          <div class="tab-indicator-pill"><i class="pi pi-user"></i></div>
-          <span class="tab-label">Mi Jornada</span>
+
+        <!-- 1. Rol Conductor -->
+        <nav class="live-bottom-nav-interactive role-bottom-nav active-role-nav" id="role-nav-conductor" data-role="conductor" aria-label="Navegación Conductor">
+          <button type="button" class="bottom-nav-tab active" data-tab-name="Rutas" data-desc="Visualización de ruta satelital optimizada y tiempos de arribo a muelles">
+            <div class="tab-indicator-pill"><i class="pi pi-map-marker"></i></div>
+            <span class="tab-label">Rutas</span>
+            <span class="tab-badge">2</span>
+          </button>
+          <button type="button" class="bottom-nav-tab" data-tab-name="Entregas POD" data-desc="Firma digital, captura fotográfica de precintos y recepción conforme">
+            <div class="tab-indicator-pill"><i class="pi pi-file-edit"></i></div>
+            <span class="tab-label">Entregas</span>
+            <span class="tab-badge">5</span>
+          </button>
+          <button type="button" class="bottom-nav-tab" data-tab-name="Incidencias" data-desc="Reporte de desvíos térmicos, demoras de tráfico o rechazo en rampa">
+            <div class="tab-indicator-pill"><i class="pi pi-exclamation-triangle"></i></div>
+            <span class="tab-label">Alertas</span>
+          </button>
+          <button type="button" class="bottom-nav-tab" data-tab-name="Mi Jornada" data-desc="Turno actual, tiempos de descanso reglamentarios y hoja de ruta">
+            <div class="tab-indicator-pill"><i class="pi pi-user"></i></div>
+            <span class="tab-label">Perfil</span>
+          </button>
+        </nav>
+
+        <!-- 2. Rol Operario Almacén -->
+        <nav class="live-bottom-nav-interactive role-bottom-nav" id="role-nav-almacen" data-role="almacen" aria-label="Navegación Almacén" style="display: none;">
+          <button type="button" class="bottom-nav-tab active" data-tab-name="Picking FEFO" data-desc="Rutas de recolección en racks frigoríficos ordenadas por fecha de vencimiento">
+            <div class="tab-indicator-pill"><i class="pi pi-box"></i></div>
+            <span class="tab-label">Picking</span>
+            <span class="tab-badge">8</span>
+          </button>
+          <button type="button" class="bottom-nav-tab" data-tab-name="Escáner Lotes" data-desc="Lector de código de barras y QR GS1-128 integrado por hardware">
+            <div class="tab-indicator-pill"><i class="pi pi-qrcode"></i></div>
+            <span class="tab-label">Escanear</span>
+          </button>
+          <button type="button" class="bottom-nav-tab" data-tab-name="Ubicaciones" data-desc="Mapa de pasillos, niveles y slots de congelado en cámara (-18°C)">
+            <div class="tab-indicator-pill"><i class="pi pi-sitemap"></i></div>
+            <span class="tab-label">Racks</span>
+          </button>
+          <button type="button" class="bottom-nav-tab" data-tab-name="Mermas Frío" data-desc="Registro de roturas de cadena de frío y productos no conformes">
+            <div class="tab-indicator-pill"><i class="pi pi-times-circle"></i></div>
+            <span class="tab-label">Mermas</span>
+            <span class="tab-badge warn">!</span>
+          </button>
+        </nav>
+
+        <!-- 3. Rol Supervisor Despacho -->
+        <nav class="live-bottom-nav-interactive role-bottom-nav" id="role-nav-despacho" data-role="despacho" aria-label="Navegación Despacho" style="display: none;">
+          <button type="button" class="bottom-nav-tab active" data-tab-name="Bahías 1-8" data-desc="Asignación y estado en vivo de rampas de carga de camiones frigoríficos">
+            <div class="tab-indicator-pill"><i class="pi pi-truck"></i></div>
+            <span class="tab-label">Bahías</span>
+            <span class="tab-badge">4</span>
+          </button>
+          <button type="button" class="bottom-nav-tab" data-tab-name="Kanban Patio" data-desc="Tablero de flujo: camiones en espera, cargando, pesaje y despachados">
+            <div class="tab-indicator-pill"><i class="pi pi-th-large"></i></div>
+            <span class="tab-label">Kanban</span>
+          </button>
+          <button type="button" class="bottom-nav-tab" data-tab-name="Manifiestos" data-desc="Guías electrónicas de remisión y control de precintos de seguridad">
+            <div class="tab-indicator-pill"><i class="pi pi-file"></i></div>
+            <span class="tab-label">Manifiestos</span>
+          </button>
+          <button type="button" class="bottom-nav-tab" data-tab-name="Flota Activa" data-desc="Balance de peso de ejes y capacidad volumétrica por camión">
+            <div class="tab-indicator-pill"><i class="pi pi-sliders-h"></i></div>
+            <span class="tab-label">Flota</span>
+          </button>
+        </nav>
+
+        <!-- 4. Rol Inspector Maquinaria -->
+        <nav class="live-bottom-nav-interactive role-bottom-nav" id="role-nav-inspector" data-role="inspector" aria-label="Navegación Inspector" style="display: none;">
+          <button type="button" class="bottom-nav-tab active" data-tab-name="Checklist ISO" data-desc="Inspección pre-operacional obligatoria ISO 3691 de montacargas">
+            <div class="tab-indicator-pill"><i class="pi pi-check-square"></i></div>
+            <span class="tab-label">Checklist</span>
+            <span class="tab-badge">1</span>
+          </button>
+          <button type="button" class="bottom-nav-tab" data-tab-name="Equipos" data-desc="Inventario de apiladores eléctricos, transpaletas y baterías de litio">
+            <div class="tab-indicator-pill"><i class="pi pi-wrench"></i></div>
+            <span class="tab-label">Equipos</span>
+          </button>
+          <button type="button" class="bottom-nav-tab" data-tab-name="Reporte Fallas" data-desc="Bloqueo preventivo de equipo e informe de fallas hidráulicas o de frenos">
+            <div class="tab-indicator-pill"><i class="pi pi-shield"></i></div>
+            <span class="tab-label">Bloqueos</span>
+          </button>
+          <button type="button" class="bottom-nav-tab" data-tab-name="Historial" data-desc="Bitácora de mantenimientos preventivos y firmas de certificación">
+            <div class="tab-indicator-pill"><i class="pi pi-history"></i></div>
+            <span class="tab-label">Bitácora</span>
+          </button>
+        </nav>
+
+        <!-- 5. Rol Comprador B2B -->
+        <nav class="live-bottom-nav-interactive role-bottom-nav" id="role-nav-comprador" data-role="comprador" aria-label="Navegación Comprador" style="display: none;">
+          <button type="button" class="bottom-nav-tab active" data-tab-name="Catálogo B2B" data-desc="Precios por volumen escalonado de mariscos y pescados congelados">
+            <div class="tab-indicator-pill"><i class="pi pi-shopping-bag"></i></div>
+            <span class="tab-label">Catálogo</span>
+          </button>
+          <button type="button" class="bottom-nav-tab" data-tab-name="Mis Pedidos" data-desc="Órdenes de compra mayoristas en preparación o en tránsito">
+            <div class="tab-indicator-pill"><i class="pi pi-list"></i></div>
+            <span class="tab-label">Pedidos</span>
+            <span class="tab-badge">3</span>
+          </button>
+          <button type="button" class="bottom-nav-tab" data-tab-name="Tracking Frío" data-desc="Temperatura de contenedor en vivo durante el transporte (-18.2°C)">
+            <div class="tab-indicator-pill"><i class="pi pi-compass"></i></div>
+            <span class="tab-label">Tracking</span>
+          </button>
+          <button type="button" class="bottom-nav-tab" data-tab-name="Facturación" data-desc="Línea de crédito comercial B2B y facturación electrónica a 30 días">
+            <div class="tab-indicator-pill"><i class="pi pi-credit-card"></i></div>
+            <span class="tab-label">Facturas</span>
+          </button>
+        </nav>
+
+        <!-- Android Home Gesture Bar -->
+        <div class="android-gesture-pill-bar">
+          <div class="gesture-handle"></div>
         </div>
       </div>
     </div>
+
+    <!-- Active Status Readout Card -->
     <div class="nav-tab-status-readout" id="nav-tab-status-readout">
-      <span>Rol Activo: <strong>CONDUCTOR (Diego Morales · Rutas GPS, captura de POD y eventos de entrega)</strong></span>
+      <div class="readout-role-title">
+        <i class="pi pi-info-circle"></i>
+        <span id="readout-text-role">CONDUCTOR (Diego Morales · Rutas GPS, captura de POD y eventos de entrega)</span>
+      </div>
+      <div class="readout-tab-details" id="readout-tab-details">
+        Destino activo: <strong>RUTAS</strong> — Visualización de ruta satelital optimizada y tiempos de arribo a muelles.
+      </div>
     </div>
   </section>
 
@@ -801,18 +906,64 @@
     }
   }
 
+  /* Touch Nav Stage (Phone Viewport Simulation for Hands) */
+  .touch-nav-stage {
+    display: flex;
+    justify-content: center;
+    padding: 24px 16px;
+    background: #f8fafc;
+    border: 1px solid var(--nexa-color-border-subtle, #e2e8f0);
+    border-radius: 16px;
+    margin: 16px 0;
+  }
+
+  .touch-stage-phone-bezel {
+    width: 100%;
+    max-width: 430px;
+    background: #ffffff;
+    border-radius: 28px;
+    box-shadow: 0 16px 36px -10px rgba(15, 23, 42, 0.12), 0 0 0 1px #cbd5e1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .touch-stage-preview-header {
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 12px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .touch-stage-role-tag {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 700;
+    color: #2563eb;
+    background: #eff6ff;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid #bfdbfe;
+    letter-spacing: 0.05em;
+  }
+
+  .touch-stage-screen-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+  }
+
   /* Interactive Bottom Nav */
   .live-bottom-nav-interactive {
     width: 100%;
-    max-width: 540px;
-    height: 64px;
+    height: 74px;
     background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 16px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     align-items: center;
-    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+    border-top: 1px solid #f1f5f9;
   }
 
   .bottom-nav-tab {
@@ -821,64 +972,120 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    gap: 3px;
+    background: transparent;
+    border: none;
+    gap: 4px;
     cursor: pointer;
     position: relative;
     color: #64748b;
+    padding: 6px 2px;
+    transition: transform 0.12s ease, color 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
 
-    .tab-indicator-pill {
-      width: 52px;
-      height: 28px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      transition: all 0.15s ease;
-    }
+  .bottom-nav-tab:active {
+    transform: scale(0.95);
+  }
 
-    .tab-label {
-      font-size: 11px;
-      font-weight: 500;
-    }
+  .tab-indicator-pill {
+    width: 58px;
+    height: 32px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+    color: inherit;
+    background: transparent;
+  }
 
-    .tab-badge {
-      position: absolute;
-      top: 6px;
-      right: calc(50% - 24px);
-      background: #2a67d9;
-      color: #ffffff;
-      font-size: 9px;
-      font-weight: 800;
-      padding: 1px 5px;
-      border-radius: 999px;
-      line-height: 1;
+  .tab-label {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: inherit;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
 
-      &.warn { background: #b45309; }
-    }
+  .tab-badge {
+    position: absolute;
+    top: 5px;
+    right: calc(50% - 24px);
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 1px 6px;
+    border-radius: 999px;
+    line-height: 1.2;
+    border: 2px solid #ffffff;
+    box-shadow: 0 1px 3px rgba(37, 99, 235, 0.35);
+  }
 
-    &.active {
-      color: #1d4ed8;
+  .tab-badge.warn {
+    background: #d97706;
+    box-shadow: 0 1px 3px rgba(217, 119, 6, 0.35);
+  }
 
-      .tab-indicator-pill {
-        background: #dbeafe;
-        color: #1d4ed8;
-      }
+  .bottom-nav-tab.active {
+    color: #1d4ed8;
+  }
 
-      .tab-label {
-        font-weight: 700;
-      }
-    }
+  .bottom-nav-tab.active .tab-indicator-pill {
+    background: #dbeafe;
+    color: #1d4ed8;
+  }
+
+  .bottom-nav-tab.active .tab-label {
+    font-weight: 800;
+    color: #1d4ed8;
+  }
+
+  /* Android Gesture Indicator */
+  .android-gesture-pill-bar {
+    width: 100%;
+    height: 18px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 4px;
+  }
+
+  .gesture-handle {
+    width: 72px;
+    height: 4px;
+    border-radius: 999px;
+    background: #cbd5e1;
   }
 
   .nav-tab-status-readout {
-    padding: 10px 16px;
+    padding: 14px 18px;
     background: #eff6ff;
     border: 1px solid #bfdbfe;
-    border-radius: 8px;
-    font-size: 12px;
+    border-radius: 10px;
+    font-size: 12.5px;
     color: #1e40af;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .readout-role-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+  }
+
+  .readout-tab-details {
+    color: #3b82f6;
+    font-size: 12px;
+  }
+
+  .readout-tab-details strong {
+    color: #1d4ed8;
   }
 
   /* Form Specimen Grid */
@@ -1455,113 +1662,97 @@
 </style>
 
 <script>
-  // Role-Aware Bottom Navigation State (Derived from Blueprint User Stories)
-  const roleNavData: Record<string, {
-    destinations: Array<{ id: string; label: string; icon: string; badge?: string | number; isWarn?: boolean }>;
-    summary: string;
-  }> = {
+  // Role-Aware Bottom Navigation State (Static Rendered Navbars)
+  const roleButtons = document.querySelectorAll<HTMLButtonElement>('.btn-role-nav-pill');
+  const roleNavbars = document.querySelectorAll<HTMLElement>('.role-bottom-nav');
+  const roleTag = document.getElementById('touch-stage-role-tag');
+  const screenName = document.getElementById('touch-stage-screen-name');
+  const readoutRole = document.getElementById('readout-text-role');
+  const readoutTab = document.getElementById('readout-tab-details');
+
+  const roleMeta: Record<string, { tag: string; screen: string; summary: string }> = {
     conductor: {
-      destinations: [
-        { id: 'rutas', label: 'Rutas', icon: 'pi-map-marker', badge: 2 },
-        { id: 'entregas', label: 'Entregas POD', icon: 'pi-file-edit', badge: 5 },
-        { id: 'incidencias', label: 'Incidencias', icon: 'pi-exclamation-triangle' },
-        { id: 'jornada', label: 'Mi Jornada', icon: 'pi-user' },
-      ],
+      tag: 'CONDUCTOR EN RUTA',
+      screen: 'Rutas & Despacho Activo',
       summary: 'CONDUCTOR (Diego Morales · Rutas GPS, captura de POD y eventos de entrega)',
     },
     almacen: {
-      destinations: [
-        { id: 'picking', label: 'Picking FEFO', icon: 'pi-box', badge: 8 },
-        { id: 'escaner', label: 'Escáner Lotes', icon: 'pi-qrcode' },
-        { id: 'ubicaciones', label: 'Ubicaciones', icon: 'pi-sitemap' },
-        { id: 'mermas', label: 'Mermas Frío', icon: 'pi-times-circle', badge: '!', isWarn: true },
-      ],
+      tag: 'OPERARIO ALMACÉN',
+      screen: 'Picking FEFO & Racks Frigoríficos',
       summary: 'OPERARIO ALMACÉN (Alejandro Vargas · Cumplimiento FEFO, escaneo GS1 y racks frigoríficos)',
     },
     despacho: {
-      destinations: [
-        { id: 'muelle', label: 'Bahías 1-8', icon: 'pi-truck', badge: 4 },
-        { id: 'kanban', label: 'Kanban Patio', icon: 'pi-th-large' },
-        { id: 'manifiestos', label: 'Manifiestos', icon: 'pi-file' },
-        { id: 'flota', label: 'Flota Activa', icon: 'pi-sliders-h' },
-      ],
+      tag: 'SUPERVISOR DESPACHO',
+      screen: 'Bahías de Carga & Kanban Patio',
       summary: 'SUPERVISOR DESPACHO (Asignación de rampas, balance de carga de camiones y sellos)',
     },
     inspector: {
-      destinations: [
-        { id: 'checklist', label: 'Checklist ISO', icon: 'pi-check-square', badge: 1 },
-        { id: 'equipos', label: 'Equipos', icon: 'pi-wrench' },
-        { id: 'fallas', label: 'Reporte Fallas', icon: 'pi-shield' },
-        { id: 'historial', label: 'Historial', icon: 'pi-history' },
-      ],
+      tag: 'INSPECTOR MAQUINARIA',
+      screen: 'Checklist ISO 3691 & Bitácora',
       summary: 'INSPECTOR MAQUINARIA (Inspección pre-uso ISO 3691 de montacargas y transpaletas)',
     },
     comprador: {
-      destinations: [
-        { id: 'catalogo', label: 'Catálogo B2B', icon: 'pi-shopping-bag' },
-        { id: 'pedidos', label: 'Mis Pedidos', icon: 'pi-list', badge: 3 },
-        { id: 'tracking', label: 'Tracking Frío', icon: 'pi-compass' },
-        { id: 'facturacion', label: 'Facturas', icon: 'pi-credit-card' },
-      ],
+      tag: 'COMPRADOR B2B',
+      screen: 'Catálogo Mayorista de Frío',
       summary: 'COMPRADOR B2B (Carlos Mendoza · Abastecimiento perecible y telemetría de frío)',
     },
   };
 
-  const roleButtons = document.querySelectorAll<HTMLButtonElement>('.btn-role-nav-pill');
-  const bottomNavContainer = document.getElementById('interactive-bottomnav-demo');
-  const readout = document.getElementById('nav-tab-status-readout');
+  function updateReadoutForTab(tab: HTMLElement) {
+    const tabName = tab.getAttribute('data-tab-name') || '';
+    const tabDesc = tab.getAttribute('data-desc') || '';
+    if (screenName && tabName) screenName.textContent = tabName;
+    if (readoutTab && tabName) {
+      readoutTab.innerHTML = `Destino activo: <strong>${tabName.toUpperCase()}</strong> — ${tabDesc}`;
+    }
+  }
 
-  function renderBottomNavForRole(roleKey: string) {
-    const roleConfig = roleNavData[roleKey];
-    if (!roleConfig || !bottomNavContainer) return;
-
-    let html = '';
-    roleConfig.destinations.forEach((dest, idx) => {
-      const activeClass = idx === 0 ? 'active' : '';
-      const badgeHtml = dest.badge 
-        ? `<span class="tab-badge ${dest.isWarn ? 'warn' : ''}">${dest.badge}</span>` 
-        : '';
-      html += `
-        <div class="bottom-nav-tab ${activeClass}" data-tab-id="${dest.id}">
-          <div class="tab-indicator-pill"><i class="pi ${dest.icon}"></i></div>
-          <span class="tab-label">${dest.label}</span>
-          ${badgeHtml}
-        </div>
-      `;
+  function activateRole(role: string) {
+    // 1. Update active pill
+    roleButtons.forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-role') === role);
     });
 
-    bottomNavContainer.innerHTML = html;
-    if (readout) {
-      readout.innerHTML = `<span>Rol Activo: <strong>${roleConfig.summary}</strong></span>`;
-    }
+    // 2. Hide all navbars, show active
+    roleNavbars.forEach(nav => {
+      if (nav.getAttribute('data-role') === role) {
+        nav.style.display = 'grid';
+        nav.classList.add('active-role-nav');
+        // Find active tab in this navbar
+        const activeTab = nav.querySelector<HTMLButtonElement>('.bottom-nav-tab.active') || nav.querySelector<HTMLButtonElement>('.bottom-nav-tab');
+        if (activeTab) {
+          updateReadoutForTab(activeTab);
+        }
+      } else {
+        nav.style.display = 'none';
+        nav.classList.remove('active-role-nav');
+      }
+    });
 
-    const tabs = bottomNavContainer.querySelectorAll('.bottom-nav-tab');
+    const meta = roleMeta[role];
+    if (meta) {
+      if (roleTag) roleTag.textContent = meta.tag;
+      if (readoutRole) readoutRole.textContent = meta.summary;
+    }
+  }
+
+  // Bind tab click on all navbars
+  roleNavbars.forEach(nav => {
+    const tabs = nav.querySelectorAll<HTMLButtonElement>('.bottom-nav-tab');
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
         tabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
-        const tabLabel = tab.querySelector('.tab-label')?.textContent || '';
-        if (readout) {
-          readout.innerHTML = `<span>Pestaña Activa: <strong>${tabLabel.toUpperCase()} (${roleConfig.summary})</strong></span>`;
-        }
+        updateReadoutForTab(tab);
       });
-    });
-  }
-
-  roleButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      roleButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const role = btn.getAttribute('data-role') || 'conductor';
-      renderBottomNavForRole(role);
     });
   });
 
-  const initialTabs = bottomNavContainer?.querySelectorAll('.bottom-nav-tab');
-  initialTabs?.forEach(tab => {
-    tab.addEventListener('click', () => {
-      initialTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
+  // Bind role button clicks
+  roleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const role = btn.getAttribute('data-role') || 'conductor';
+      activateRole(role);
     });
   });
 </script>

@@ -383,31 +383,31 @@
             </div>
           </div>
 
-          <!-- Bottom Navigation Bar (ALWAYS ACTIVE!) -->
-          <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal">
-            <div class="bnav-item">
-              <div class="bnav-pill-indicator">
-                <i class="pi pi-map-marker"></i>
-              </div>
-              <span class="bnav-label">Rutas</span>
-            </div>
-            <div class="bnav-item">
-              <div class="bnav-pill-indicator">
-                <i class="pi pi-send"></i>
-              </div>
-              <span class="bnav-label">Despacho</span>
-            </div>
+          <!-- Bottom Navigation Bar (B2B Commercial - ALWAYS ACTIVE!) -->
+          <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal B2B">
             <div class="bnav-item active">
               <div class="bnav-pill-indicator">
-                <i class="pi pi-box"></i>
+                <i class="pi pi-shopping-bag"></i>
               </div>
-              <span class="bnav-label">Picking</span>
+              <span class="bnav-label">Catálogo</span>
             </div>
             <div class="bnav-item">
               <div class="bnav-pill-indicator">
-                <i class="pi pi-check-square"></i>
+                <i class="pi pi-list"></i>
               </div>
-              <span class="bnav-label">Checklist</span>
+              <span class="bnav-label">Pedidos</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-compass"></i>
+              </div>
+              <span class="bnav-label">Tracking</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-user"></i>
+              </div>
+              <span class="bnav-label">Mi Cuenta</span>
             </div>
           </nav>
         </div>
@@ -576,31 +576,31 @@
             </div>
           </div>
 
-          <!-- Bottom Navigation Bar (ALWAYS ACTIVE!) -->
-          <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal">
-            <div class="bnav-item">
-              <div class="bnav-pill-indicator">
-                <i class="pi pi-map-marker"></i>
-              </div>
-              <span class="bnav-label">Rutas</span>
-            </div>
-            <div class="bnav-item">
-              <div class="bnav-pill-indicator">
-                <i class="pi pi-send"></i>
-              </div>
-              <span class="bnav-label">Despacho</span>
-            </div>
-            <div class="bnav-item">
+          <!-- Bottom Navigation Bar (Warehouse Industrial - ALWAYS ACTIVE!) -->
+          <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal Almacén">
+            <div class="bnav-item active">
               <div class="bnav-pill-indicator">
                 <i class="pi pi-box"></i>
               </div>
-              <span class="bnav-label">Picking</span>
+              <span class="bnav-label">Picking FEFO</span>
             </div>
-            <div class="bnav-item active">
+            <div class="bnav-item">
               <div class="bnav-pill-indicator">
-                <i class="pi pi-check-square"></i>
+                <i class="pi pi-qrcode"></i>
               </div>
-              <span class="bnav-label">Checklist</span>
+              <span class="bnav-label">Escáner GS1</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-sitemap"></i>
+              </div>
+              <span class="bnav-label">Ubicaciones</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-times-circle"></i>
+              </div>
+              <span class="bnav-label">Mermas</span>
             </div>
           </nav>
         </div>
@@ -910,13 +910,15 @@
         <div class="android-screen-surface twopane-surface">
           <!-- Persistent NavigationRail on Left -->
           <aside class="m3-navigation-rail" aria-label="Navegación Lateral Tablet">
-            <div class="rail-logo-mark">
-              <span class="rail-brand-n">N</span>
+            <div class="rail-logo-mark" title="Nexa Operations Suite (NX)">
+              <img src="/assets/nexa-nx-blue.svg" alt="NX" class="rail-nx-logo" />
             </div>
 
             <nav class="rail-destinations">
               <button type="button" class="rail-item">
-                <i class="pi pi-compass"></i>
+                <div class="rail-pill-indicator">
+                  <i class="pi pi-compass"></i>
+                </div>
                 <span>Rutas</span>
               </button>
               <button type="button" class="rail-item active">
@@ -926,15 +928,21 @@
                 <span>Patio</span>
               </button>
               <button type="button" class="rail-item">
-                <i class="pi pi-box"></i>
+                <div class="rail-pill-indicator">
+                  <i class="pi pi-box"></i>
+                </div>
                 <span>Picking</span>
               </button>
               <button type="button" class="rail-item">
-                <i class="pi pi-chart-line"></i>
+                <div class="rail-pill-indicator">
+                  <i class="pi pi-chart-line"></i>
+                </div>
                 <span>Telemetría</span>
               </button>
               <button type="button" class="rail-item">
-                <i class="pi pi-cog"></i>
+                <div class="rail-pill-indicator">
+                  <i class="pi pi-cog"></i>
+                </div>
                 <span>Config</span>
               </button>
             </nav>
@@ -2556,23 +2564,27 @@
   }
 
   .rail-logo-mark {
-    width: 40px;
-    height: 40px;
-    background: #2563eb;
-    color: #ffffff;
-    border-radius: 12px;
+    width: 48px;
+    height: 48px;
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    font-weight: 800;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
+    border: none;
+    box-shadow: none;
+  }
+
+  .rail-nx-logo {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
   }
 
   .rail-destinations {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
     width: 100%;
     align-items: center;
     flex: 1;
@@ -2586,25 +2598,50 @@
     background: transparent;
     border: none;
     color: #64748b;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     cursor: pointer;
     width: 100%;
+    min-height: 56px;
+    padding: 4px 0;
+    transition: all 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .rail-item i { font-size: 18px; }
+  .rail-item:active {
+    transform: scale(0.96);
+  }
 
   .rail-pill-indicator {
-    background: #dbeafe;
-    color: #1d4ed8;
-    padding: 4px 16px;
+    width: 56px;
+    height: 32px;
     border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: transparent;
+    color: inherit;
+    transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
   }
 
-  .rail-item.active { color: #1d4ed8; font-weight: 800; }
+  .rail-pill-indicator i {
+    font-size: 19px;
+  }
+
+  .rail-item:hover .rail-pill-indicator {
+    background: #f1f5f9;
+    color: #334155;
+  }
+
+  .rail-item.active {
+    color: #1d4ed8;
+    font-weight: 800;
+  }
+
+  .rail-item.active .rail-pill-indicator {
+    background: #dbeafe;
+    color: #1d4ed8;
+  }
 
   .rail-avatar {
     width: 38px;
