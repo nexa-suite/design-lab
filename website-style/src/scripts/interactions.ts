@@ -13,7 +13,7 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function runInteractionsInit() {
   initStickyHeader();
   initMobileDrawer();
   initHeroAnimation();
@@ -24,7 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
   initSustainabilityCounters();
   initScrollChoreography();
   initInsuranceAnimation();
-});
+}
+
+if (typeof window !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runInteractionsInit);
+  } else {
+    runInteractionsInit();
+  }
+}
 
 /* --------------------------------------------------------------------------
    1. STICKY HEADER TRANSITION ON SCROLL
@@ -129,21 +137,30 @@ function initHeroAnimation() {
   const isDesktop = window.innerWidth > 900;
   let ch3ConfettiId: number | null = null;
 
-  // 1. Static Settled Fallback for prefers-reduced-motion
-  if (prefersReduced) {
+  const setSettledHero = () => {
     gsap.set(canvas, { scale: 1, opacity: 1 });
     gsap.set(hub, { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1 });
     if (crown) gsap.set(crown, { y: 0, opacity: 1 });
     if (guarantee) gsap.set(guarantee, { opacity: 1 });
-    pipeLines.forEach(p => gsap.set(p, { opacity: 1, strokeDashoffset: 0 }));
+    pipeLines.forEach(p => {
+      p.style.strokeDashoffset = '0';
+      p.style.strokeDasharray = 'none';
+      gsap.set(p, { opacity: 1 });
+    });
     const markEl = document.querySelector<SVGPathElement>('.line-flecto-mark');
     if (markEl) gsap.set(markEl, { opacity: 1, scale: 1 });
     if (pipeAccent) gsap.set(pipeAccent, { opacity: 1 });
     badges.forEach(b => gsap.set(b, { scale: 1, opacity: 1 }));
     cards.forEach(c => gsap.set(c, { scale: 1, opacity: 1 }));
-    if (tickerMsg) tickerMsg.textContent = 'Every booking is safe and every transaction is insured.';
-    return;
-  }
+    if (tickerMsg) tickerMsg.textContent = 'Customers can email you directly or book in Physical Stores';
+  };
+
+  const isSettledMode = canvas.getAttribute('data-settled') === 'true';
+
+  // 1. Static Settled Fallback for prefers-reduced-motion or data-settled
+  if (prefersReduced || isSettledMode) {
+    setSettledHero();
+  } else {
     // 2. Set Up Initial Dormant Stage (State A: Opening stillness)
     gsap.set(canvas, { scale: 0.98, opacity: 0.8 });
     gsap.set(hub, {
@@ -169,6 +186,7 @@ function initHeroAnimation() {
     badges.forEach((b) => gsap.set(b, { scale: 0, opacity: 0 }));
     cards.forEach((c) => gsap.set(c, { scale: 0.85, opacity: 0 }));
     if (mark) gsap.set(mark, { opacity: 0, scale: 0.96, transformOrigin: 'left center' });
+  }
 
   const tickerIconSlot = document.getElementById('ticker-icon-slot');
   const setTicker = (msg: string, iconSvg: string) => {
@@ -567,6 +585,13 @@ function initHeroAnimation() {
       goToChapter(chapter);
     });
   });
+
+  // Expose hero controllers for external toolbar / workbench drivers
+  if (typeof window !== 'undefined') {
+    (window as any).__nexafyHeroGoToChapter = goToChapter;
+    (window as any).__nexafyHeroSetSettled = setSettledHero;
+    (window as any).__nexafyHeroMasterTl = masterTl;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -1097,6 +1122,9 @@ function initScrollytellingTimeline() {
   const section = document.getElementById('scrollytelling');
   if (!section) return;
 
+  const stickyFrame = section.querySelector<HTMLElement>('.scrolly-sticky-frame');
+  if (!stickyFrame) return;
+
   const navTabs = section.querySelector<HTMLElement>('.scrolly-nav-tabs');
   const leftCards = section.querySelectorAll<HTMLElement>('.card-top-left, .card-bottom-left');
   const rightCards = section.querySelectorAll<HTMLElement>('.card-right, .card-bottom-right');
@@ -1115,13 +1143,17 @@ function initScrollytellingTimeline() {
     gsap.set(rightWing, { opacity: 0, x: 30 });
   }
 
-  // Create GSAP ScrollTrigger timeline with scrub
+  // Create GSAP ScrollTrigger timeline with scrub and physical pinning
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: '#scrollytelling',
+      pin: stickyFrame,
       start: 'top top',
       end: 'bottom bottom',
+      pinSpacing: false,
+      anticipatePin: 1,
       scrub: 0.6,
+      invalidateOnRefresh: true,
       onUpdate: (self) => {
         const p = self.progress;
 
@@ -1196,6 +1228,13 @@ function initScrollytellingTimeline() {
 
   // Hold completion state through the remainder of the pin
   tl.to({}, { duration: 0.65 }, 0.35);
+
+  // Guarantee accurate pin placement after layout and images settle
+  ScrollTrigger.refresh();
+  if (typeof window !== 'undefined') {
+    window.addEventListener('load', () => ScrollTrigger.refresh());
+    setTimeout(() => ScrollTrigger.refresh(), 350);
+  }
 }
 
 /* --------------------------------------------------------------------------

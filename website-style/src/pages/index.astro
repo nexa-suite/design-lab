@@ -6,6 +6,7 @@
 import 'primeicons/primeicons.css';
 import '../styles/tokens.css';
 import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
+import Hero from '../components/hero/Hero.astro';
 import LivingEngineWorkbench from '../components/guidelines/LivingEngineWorkbench.astro';
 import ColorimetriaSection from '../components/guidelines/ColorimetriaSection.astro';
 import TipografiaSection from '../components/guidelines/TipografiaSection.astro';
@@ -112,9 +113,37 @@ import ComponentesNexaUiSection from '../components/guidelines/ComponentesNexaUi
     <!-- Main Content Panes -->
     <main class="guidelines-main">
       
-      <!-- Tab 1 (DEFAULT & PRIMARY): Motor Gráfico Nexafy Vivo -->
+      <!-- Tab 1 (DEFAULT & PRIMARY): Motor Gráfico Nexafy Vivo & Hero Flecto Auténtico 1:1 -->
       <div id="pane-motor-grafico" class="tab-pane active" role="tabpanel">
-        <LivingEngineWorkbench />
+        <div class="hero-live-showcase-container">
+          <!-- Top Sub-Nav to switch between Hero Auténtico and Workbench -->
+          <div class="hero-view-switch-bar">
+            <div class="view-switch-group">
+              <button type="button" class="view-switch-btn active" id="btn-show-authentic-hero">
+                <i class="pi pi-star-fill" style="color: #10b981; margin-right: 6px;"></i>
+                <strong>Hero Flecto Auténtico 1:1 (Awwwards SOTD)</strong>
+              </button>
+              <button type="button" class="view-switch-btn" id="btn-show-workbench">
+                <i class="pi pi-sliders-h" style="margin-right: 6px;"></i>
+                <span>Workbench & Inspector de Geometría</span>
+              </button>
+            </div>
+            <div class="view-meta-badge">
+              <span class="pulse-green-dot"></span>
+              <span>0 Gradientes Raster · Conduits 28px · Silueta Esculpida Bürocratik</span>
+            </div>
+          </div>
+
+          <!-- Mode 1: Authentic Sculpted Flecto Hero (DEFAULT & PRIMARY) -->
+          <div id="view-authentic-hero-stage" class="hero-stage-view active">
+            <Hero />
+          </div>
+
+          <!-- Mode 2: Workbench Engine with Tones, Auto-Tour & Edge Primitives -->
+          <div id="view-workbench-stage" class="hero-stage-view" style="display: none;">
+            <LivingEngineWorkbench />
+          </div>
+        </div>
       </div>
 
       <!-- Tab 2: Colorimetría -->
@@ -200,5 +229,8 @@ import ComponentesNexaUiSection from '../components/guidelines/ComponentesNexaUi
       }
     }
   </script>
+
+  <!-- Load Interactions Engine for Hero, Scrollytelling, and GSAP Choreography -->
+  <script src="../scripts/interactions.ts"></script>
 </body>
 </html>

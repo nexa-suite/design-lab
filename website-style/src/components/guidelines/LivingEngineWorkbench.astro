@@ -1,2501 +1,805 @@
 ---
 /**
  * LIVING GEOMETRY GRAPHICS ENGINE & ARTIFACT WORKBENCH
- * Interactive sandbox environment with zero-overlap collision physics,
- * 60fps dynamic orthogonal routing, signal pulses, and multi-preset artifact scenes.
- * Restyled with Nexa Design System visual foundations (cool canvas, crisp card surfaces, slate borders, blue accents).
+ * Authentic Flecto Architectural Hero & Forensic Living Geometry Sandbox.
+ * Renders the authentic sculpted Flecto Hero (100% fidelity to flecto-reconstruction/Hero.astro & Image 2)
+ * equipped with the Human Tone Switcher (Nexa Dark Blue, Cashmere Arctic Mist, Ceramic Azure, Oceanic Sage),
+ * Conduit Pastel Palettes, and Auto-Tour & Chapter Morph controls.
  */
+import Hero from '../hero/Hero.astro';
 ---
 
-<div class="nexafy-studio-container">
-  <!-- Studio Layout -->
-  <div class="nexafy-studio">
+<div class="workbench-master-container">
+  <!-- 1. Interactive Master Toolbar -->
+  <header class="workbench-toolbar-bar" aria-label="Living Engine Workbench Controls">
+    <div class="toolbar-left-group">
+      <div class="toolbar-title-wrap">
+        <span class="toolbar-live-badge"><i class="live-dot"></i> EN VIVO</span>
+        <strong class="toolbar-main-title">Motor Gráfico Vivo</strong>
+      </div>
 
-    <!-- Left Controls Panel -->
-    <aside class="nexafy-panel">
-      
-      <!-- Preset Selector -->
-      <div class="panel-section">
-        <div class="panel-section-title">
-          <span>Stage Preset (Artifact Environment)</span>
-        </div>
-        <select id="preset-selector" class="nexa-select">
-          <option value="CHANNELS" selected>Hero Chapter 01 (Channels & Security)</option>
-          <option value="DORMANT">Hero Dormant Canvas</option>
-          <option value="SAAS">Hero Chapter 02 (SaaS Morph)</option>
-          <option value="PAYMENT">Safe Renting (Payment Flow / iOS Phone)</option>
-          <option value="INSURANCE">Insurance Protection Stage</option>
-          <option value="SUSTAINABILITY">Sustainability Aerial Canvas</option>
-          <option value="ACCESS_CHANNELS">Access Channels (Beige Bento Grid)</option>
-          <option value="FOOTER_BEIGE">Global Footer (Sculpted Beige)</option>
+      <!-- Preset / Chapter Selector -->
+      <div class="preset-selector-wrap">
+        <label for="workbench-preset-select" class="selector-label">Capítulo:</label>
+        <select id="workbench-preset-select" class="workbench-select" aria-label="Seleccionar capítulo del Hero">
+          <option value="1" selected>01 Canales & Seguridad (Hero Oficial)</option>
+          <option value="2">02 Plataforma SaaS (Ledger Morph)</option>
+          <option value="3">03 Flecto Link & Pago Seguro (Checkout & Confetti)</option>
         </select>
       </div>
+    </div>
 
-      <!-- Semantic Scene Graph Artifact Tree -->
-      <div class="panel-section">
-        <div class="panel-section-title">
-          <span>Scene Graph Artifact Tree</span>
-          <span class="item-tag" id="node-count-badge">6 Nodes</span>
-        </div>
-        <div class="scene-tree-list" id="scene-node-list">
-          <!-- Injected via JavaScript -->
-        </div>
+    <div class="toolbar-center-group">
+      <!-- Human Ergonomic Tones Switcher -->
+      <div class="human-tones-toggle" role="group" aria-label="Human Ergonomic Tones">
+        <span class="tones-label">Tono Humano:</span>
+        <button 
+          type="button" 
+          class="tone-pill active" 
+          data-tone="oceanic" 
+          data-plate="#004737" 
+          data-accent="#4ade80" 
+          data-conduit="#57f09e" 
+          title="Oceanic Sage / Flecto Authentic (#004737 & #57f09e)"
+        >
+          <span class="color-swatch" style="background: #004737; border: 1.5px solid #57f09e;"></span>
+          <span>Oceanic Sage</span>
+        </button>
+        <button 
+          type="button" 
+          class="tone-pill" 
+          data-tone="nexa" 
+          data-plate="#082846" 
+          data-accent="#38c8ff" 
+          data-conduit="#bae6fd" 
+          title="Nexa Calibrated Dark Blue (#082846 & #38c8ff)"
+        >
+          <span class="color-swatch" style="background: #082846; border: 1.5px solid #38c8ff;"></span>
+          <span>Nexa Blue</span>
+        </button>
+        <button 
+          type="button" 
+          class="tone-pill" 
+          data-tone="cashmere" 
+          data-plate="#283a48" 
+          data-accent="#7dd3fc" 
+          data-conduit="#bae6fd" 
+          title="Cashmere Arctic Mist (#283a48 & #7dd3fc)"
+        >
+          <span class="color-swatch" style="background: #283a48; border: 1.5px solid #7dd3fc;"></span>
+          <span>Cashmere Mist</span>
+        </button>
+        <button 
+          type="button" 
+          class="tone-pill" 
+          data-tone="ceramic" 
+          data-plate="#1d3d63" 
+          data-accent="#38bdf8" 
+          data-conduit="#a5f3fc" 
+          title="Ceramic Azure Harmony (#1d3d63 & #38bdf8)"
+        >
+          <span class="color-swatch" style="background: #1d3d63; border: 1.5px solid #38bdf8;"></span>
+          <span>Ceramic Azure</span>
+        </button>
       </div>
 
-      <!-- Multi-Tier Edge Geometry Primitives -->
-      <div class="panel-section">
-        <div class="panel-section-title">
-          <span>Nexafy 2.0 Edge Primitives</span>
-        </div>
-        <div class="primitives-grid">
-          <button type="button" class="primitive-btn active" data-prim="PROTRUDE">PROTRUDE</button>
-          <button type="button" class="primitive-btn" data-prim="RECESS">RECESS</button>
-          <button type="button" class="primitive-btn" data-prim="STEP">STEP</button>
-          <button type="button" class="primitive-btn" data-prim="SHELF">SHELF</button>
-          <button type="button" class="primitive-btn" data-prim="TAB">TAB</button>
-          <button type="button" class="primitive-btn" data-prim="CHANNEL">CHANNEL</button>
-          <button type="button" class="primitive-btn" data-prim="CUTOUT">CUTOUT</button>
-          <button type="button" class="primitive-btn" data-prim="ALL">CANONICAL</button>
-        </div>
-        <p style="font-size: 0.6875rem; color: var(--nexafy-muted); line-height: 1.3;" id="primitive-desc">
-          PROTRUDE: Extrudes outward from shoulder. Used for Hero top canopy headline crown.
-        </p>
+      <!-- Conduit Pastel Tone Selector -->
+      <div class="conduit-palette-toggle" role="group" aria-label="Conduit Pastel Tone">
+        <span class="conduit-toggle-label">Conducto 28px:</span>
+        <button type="button" class="conduit-pill active" data-pastel="#57f09e" title="Mint SOTD (#57f09e)">
+          <span class="color-swatch" style="background: #57f09e;"></span> Mint
+        </button>
+        <button type="button" class="conduit-pill" data-pastel="#bae6fd" title="Celeste Pastel (#bae6fd)">
+          <span class="color-swatch" style="background: #bae6fd;"></span> Celeste
+        </button>
+        <button type="button" class="conduit-pill" data-pastel="#a5f3fc" title="Soft Cyan (#a5f3fc)">
+          <span class="color-swatch" style="background: #a5f3fc;"></span> Cyan
+        </button>
       </div>
+    </div>
 
-      <!-- Canvas Dimensions -->
-      <div class="panel-section">
-        <div class="panel-section-title">
-          <span>Canvas Metrics</span>
-        </div>
-        <div class="control-row">
-          <div class="control-label-group">
-            <span>Width (px)</span>
-            <span class="control-value" id="val-width">1440</span>
-          </div>
-          <input type="range" id="input-width" min="320" max="1600" step="10" value="1440">
-        </div>
-        <div class="control-row">
-          <div class="control-label-group">
-            <span>Height (px)</span>
-            <span class="control-value" id="val-height">820</span>
-          </div>
-          <input type="range" id="input-height" min="400" max="1200" step="10" value="820">
-        </div>
-        <div class="control-row">
-          <div class="control-label-group">
-            <span>Base Corner Radius (px)</span>
-            <span class="control-value" id="val-base-radius">36</span>
-          </div>
-          <input type="range" id="input-base-radius" min="0" max="80" step="2" value="36">
-        </div>
-      </div>
+    <div class="toolbar-right-group">
+      <!-- Auto-Tour / Play Live Button -->
+      <button type="button" class="workbench-action-btn primary" id="btn-auto-tour" title="Reproducir Auto-Tour Cinematográfico">
+        <span class="tour-icon" id="tour-btn-icon">▶</span>
+        <span id="auto-tour-btn-text">Auto-Tour En Vivo</span>
+      </button>
 
-      <!-- Top Crown Controls -->
-      <div class="panel-section">
-        <div class="panel-section-title">
-          <span>Top Canopy Crown</span>
-          <label class="toggle-checkbox">
-            <input type="checkbox" id="check-crown-enabled" checked>
-            <span>Enabled</span>
-          </label>
-        </div>
-        <div class="control-row">
-          <div class="control-label-group">
-            <span>Crown Width (px)</span>
-            <span class="control-value" id="val-crown-w">568</span>
-          </div>
-          <input type="range" id="input-crown-w" min="200" max="1200" step="4" value="568">
-        </div>
-        <div class="control-row">
-          <div class="control-label-group">
-            <span>Crown Drop (px)</span>
-            <span class="control-value" id="val-crown-h">105</span>
-          </div>
-          <input type="range" id="input-crown-h" min="0" max="250" step="5" value="105">
-        </div>
-        <div class="control-row">
-          <div class="control-label-group">
-            <span>Fillet Radius</span>
-            <span class="control-value" id="val-crown-fillet">36</span>
-          </div>
-          <input type="range" id="input-crown-fillet" min="0" max="60" step="2" value="36">
-        </div>
-      </div>
+      <!-- Toggle Developer Inspector -->
+      <button type="button" class="workbench-action-btn secondary" id="btn-toggle-inspector" title="Ver Primitivas de Borde y Geometría C4">
+        <span>📐 Primitivas & SVG</span>
+      </button>
+    </div>
+  </header>
 
-      <!-- Bottom Shelf Controls -->
-      <div class="panel-section">
-        <div class="panel-section-title">
-          <span>Bottom Shelf Notch</span>
-          <label class="toggle-checkbox">
-            <input type="checkbox" id="check-shelf-enabled" checked>
-            <span>Enabled</span>
-          </label>
-        </div>
-        <div class="control-row">
-          <div class="control-label-group">
-            <span>Shelf Width (px)</span>
-            <span class="control-value" id="val-shelf-w">888</span>
-          </div>
-          <input type="range" id="input-shelf-w" min="200" max="1400" step="4" value="888">
-        </div>
-        <div class="control-row">
-          <div class="control-label-group">
-            <span>Shelf Extend (px)</span>
-            <span class="control-value" id="val-shelf-h">85</span>
-          </div>
-          <input type="range" id="input-shelf-h" min="0" max="250" step="5" value="85">
-        </div>
-        <div class="control-row">
-          <div class="control-label-group">
-            <span>Fillet Radius</span>
-            <span class="control-value" id="val-shelf-fillet">36</span>
-          </div>
-          <input type="range" id="input-shelf-fillet" min="0" max="60" step="2" value="36">
-        </div>
-      </div>
-
-    </aside>
-
-    <!-- Center Stage Canvas -->
-    <main class="nexafy-viewport">
-      
-      <!-- Responsive Resolution Presets Toolbar -->
-      <div class="viewport-toolbar">
-        <div class="viewport-presets">
-          <button type="button" class="viewport-chip active" data-w="1440" data-h="820">1440×820 (Desktop)</button>
-          <button type="button" class="viewport-chip" data-w="1600" data-h="1200">1600×1200 (Historical)</button>
-          <button type="button" class="viewport-chip" data-w="1280" data-h="800">1280×800</button>
-          <button type="button" class="viewport-chip" data-w="1024" data-h="768">1024×768</button>
-          <button type="button" class="viewport-chip" data-w="768" data-h="1024">768×1024</button>
-          <button type="button" class="viewport-chip" data-w="390" data-h="844">390×844</button>
-          <button type="button" class="viewport-chip" data-w="320" data-h="700">320×700</button>
-        </div>
-
-        <div class="view-toggles">
-          <!-- Human Ergonomic Tones Switcher -->
-          <div class="human-tones-toggle" role="group" aria-label="Human Ergonomic Tones">
-            <button type="button" class="tone-pill active" data-tone="nexa" data-plate="#082846" data-accent="#38c8ff" data-conduit="#bae6fd" data-oklch="oklch(28% 0.07 240)" title="Nexa Calibrated Dark Blue (#082846 & #38c8ff)">
-              <span class="color-swatch" style="background: #082846; border: 1.5px solid #38c8ff;"></span>
-              <span>Nexa Blue</span>
-            </button>
-            <button type="button" class="tone-pill" data-tone="cashmere" data-plate="#283a48" data-accent="#7dd3fc" data-conduit="#bae6fd" data-oklch="oklch(33% 0.06 258)" title="Cashmere Arctic Mist (oklch(33% 0.06 258) / #283a48)">
-              <span class="color-swatch" style="background: #283a48; border: 1.5px solid #7dd3fc;"></span>
-              <span>Cashmere Mist</span>
-            </button>
-            <button type="button" class="tone-pill" data-tone="ceramic" data-plate="#1d3d63" data-accent="#38bdf8" data-conduit="#a5f3fc" data-oklch="oklch(35% 0.08 245)" title="Ceramic Azure Harmony (oklch(35% 0.08 245) / #1d3d63)">
-              <span class="color-swatch" style="background: #1d3d63; border: 1.5px solid #38bdf8;"></span>
-              <span>Ceramic Azure</span>
-            </button>
-            <button type="button" class="tone-pill" data-tone="oceanic" data-plate="#163b45" data-accent="#4ade80" data-conduit="#bbf7d0" data-oklch="oklch(32% 0.07 215)" title="Oceanic Sage Blue (oklch(32% 0.07 215) / #163b45)">
-              <span class="color-swatch" style="background: #163b45; border: 1.5px solid #4ade80;"></span>
-              <span>Oceanic Sage</span>
-            </button>
-          </div>
-
-          <!-- Conduit Pastel Tone Selector -->
-          <div class="conduit-palette-toggle" role="group" aria-label="Conduit Pastel Tone">
-            <span class="conduit-toggle-label">Conduit:</span>
-            <button type="button" class="conduit-pill active" data-pastel="#bae6fd" title="Celeste Pastel (#bae6fd)">
-              <span class="color-swatch" style="background: #bae6fd;"></span> Celeste
-            </button>
-            <button type="button" class="conduit-pill" data-pastel="#bbf7d0" title="Mint Pastel (#bbf7d0)">
-              <span class="color-swatch" style="background: #bbf7d0;"></span> Mint
-            </button>
-            <button type="button" class="conduit-pill" data-pastel="#a5f3fc" title="Soft Cyan (#a5f3fc)">
-              <span class="color-swatch" style="background: #a5f3fc;"></span> Cyan
-            </button>
-          </div>
-
-          <!-- Auto-Tour Button -->
-          <button type="button" class="nexafy-btn primary auto-tour-btn" id="btn-auto-tour" title="Play choreographed Cinematic Auto-Tour">
-            <span class="tour-icon" id="tour-btn-icon">▶</span>
-            <span id="auto-tour-btn-text">Auto-Tour</span>
-          </button>
-
-          <label class="toggle-checkbox">
-            <input type="checkbox" id="toggle-living-motion" checked>
-            <span>Living Movement</span>
-          </label>
-          <label class="toggle-checkbox">
-            <input type="checkbox" id="toggle-pulses" checked>
-            <span>Signal Pulses</span>
-          </label>
-          <label class="toggle-checkbox">
-            <input type="checkbox" id="toggle-circuit" checked>
-            <span>28px Conduits</span>
-          </label>
-          <label class="toggle-checkbox">
-            <input type="checkbox" id="toggle-debug-mode" checked>
-            <span>Clearance Halos</span>
-          </label>
-          <label class="toggle-checkbox">
-            <input type="checkbox" id="toggle-ref-overlay">
-            <span>Reference Frame</span>
-          </label>
-          <div class="viewport-controls-group">
-            <button type="button" class="viewport-btn-sm" id="btn-zoom-out" title="Zoom Out">−</button>
-            <button type="button" class="viewport-btn-sm" id="btn-zoom-reset" title="Reset View">100%</button>
-            <button type="button" class="viewport-btn-sm" id="btn-zoom-in" title="Zoom In">+</button>
-            <button type="button" class="viewport-btn-sm" id="btn-zoom-fit" title="Fit to Viewport">Fit</button>
-          </div>
-          <span style="font-size: 0.75rem; color: var(--nexafy-muted); margin-left: 0.25rem;">
-            Scale: <span id="scale-indicator" style="color: var(--nexafy-text); font-family: monospace; font-weight: 700;">100%</span>
-          </span>
-        </div>
-      </div>
-
-      <!-- SVG Drawing Surface with pure clean white background and ultra-subtle dot grid -->
-      <div class="canvas-stage-wrapper" id="stage-wrapper">
-        <!-- Floating Cinematic Auto-Tour HUD Banner -->
-        <div class="tour-status-banner" id="tour-status-banner" style="display: none;">
-          <span class="tour-live-dot"></span>
-          <span class="tour-step-badge" id="tour-step-badge">TOUR 1/5</span>
-          <span class="tour-step-desc" id="tour-step-desc">DORMANT SCULPTED PLATE</span>
-          <button type="button" class="tour-stop-btn" id="tour-stop-btn" title="Stop Cinematic Tour">✕ Stop</button>
-        </div>
-
-        <div class="canvas-frame" id="canvas-frame" style="width: 720px; height: 410px;">
-          
-          <!-- Reference Frame Image -->
-          <img 
-            id="ref-overlay-img" 
-            src="/artifacts/pass6/reference/pass5_hero_baseline.png" 
-            alt="Historical Video Reference"
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; pointer-events: none; z-index: 25; mix-blend-mode: normal; display: none;"
-          />
-
-          <svg 
-            id="nexafy-svg" 
-            class="canvas-svg" 
-            viewBox="0 0 1440 820"
-            preserveAspectRatio="none"
-          >
-            <defs>
-              <radialGradient id="lab-radial-glow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#38c8ff" stop-opacity="0.12" />
-                <stop offset="100%" stop-color="#082846" stop-opacity="0" />
-              </radialGradient>
-              <filter id="conduit-glow" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="6" result="blur" />
-                <feComposite in="SourceGraphic" in2="blur" operator="over" />
-              </filter>
-              <filter id="node-glow" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#2a67d9" flood-opacity="0.25" />
-              </filter>
-              <filter id="card-shadow" x="-15%" y="-15%" width="130%" height="130%">
-                <feDropShadow dx="0" dy="5" stdDeviation="10" flood-color="#000000" flood-opacity="0.15" />
-              </filter>
-              <filter id="pulse-glow" x="-40%" y="-40%" width="180%" height="180%">
-                <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#38c8ff" flood-opacity="0.95" />
-              </filter>
-            </defs>
-            
-            <!-- Layer 1: Sculpted Stage Contour with smooth 28px/36px fillets -->
-            <path id="sculpted-path" d="" fill="none" stroke="rgba(56, 200, 255, 0.3)" stroke-width="1.5" stroke-linejoin="round" />
-            <rect id="sculpted-glow" x="0" y="0" width="1440" height="820" fill="url(#lab-radial-glow)" pointer-events="none" />
-
-            <!-- Layer 2: Living Thick Pastel Vascular Circuit Routes (SVG Edges - 28px) -->
-            <g id="circuit-edges-layer" style="display: block;">
-              <!-- Injected dynamically via Scene Graph -->
-            </g>
-
-            <!-- Layer 2.5: Animated Signal Pulses flowing along 28px conduits -->
-            <g id="circuit-pulses-layer" style="display: block; pointer-events: none;">
-              <!-- Injected dynamically via requestAnimationFrame -->
-            </g>
-
-            <!-- Layer 3: Semantic Nodes & Mockups (Interactive Draggable, High-Contrast White Cards) -->
-            <g id="circuit-nodes-layer" style="display: block;">
-              <!-- Injected dynamically via Scene Graph with drag/hover handlers -->
-            </g>
-
-            <!-- Layer 3.5: Auto-Tour FX (Flying entry spin & Escrow confetti burst) -->
-            <g id="tour-fx-layer" style="display: block; pointer-events: none;">
-              <!-- Injected dynamically during Auto-Tour -->
-            </g>
-
-            <!-- Layer 4: Debug Clearance Halos, Bounds & Ports -->
-            <g id="debug-overlay-layer" style="display: block; pointer-events: none;">
-              <!-- Injected dynamically via Scene Graph -->
-            </g>
-          </svg>
-        </div>
-      </div>
-    </main>
-
-    <!-- Right Morph & Node Inspector Panel -->
-    <aside class="nexafy-panel right">
-      
-      <!-- Scene Validation HUD -->
-      <div class="panel-section">
-        <div class="panel-section-title">
-          <span>Scene Validation Status</span>
-        </div>
-        <div class="validation-hud" id="validation-hud-box">
-          <div class="validation-badge" id="validation-badge-text">
-            <span>●</span>
-            <span>0 Collisions (PASS)</span>
-          </div>
-          <div style="display: flex; gap: 0.35rem;">
-            <button type="button" class="nexafy-btn sm" id="btn-run-validation">Run Audit</button>
-            <button type="button" class="nexafy-btn sm primary" id="btn-resolve-collisions" title="Enforce zero overlap across all nodes">Zero Overlap</button>
-          </div>
-        </div>
-        <p style="font-size: 0.6875rem; color: var(--nexafy-muted);" id="collision-detail-text">
-          Semantic clearance verified across all active nodes and routed orthogonal edges.
-        </p>
-      </div>
-
-      <!-- Node / Entity Inspector -->
-      <div class="panel-section" id="node-inspector-section">
-        <div class="panel-section-title">
-          <span>Entity Inspector</span>
-          <span class="item-tag" id="inspector-entity-type">NODE</span>
-        </div>
-        <div class="control-row">
-          <div class="control-label-group">
-            <span>Entity ID</span>
-            <span class="control-value" id="inspect-id">node-company</span>
-          </div>
-        </div>
-        <div class="control-row">
-          <div class="control-label-group">
-            <span>Semantic Role</span>
-            <span class="control-value" id="inspect-role">origin</span>
-          </div>
-        </div>
-        <div class="control-row">
-          <div class="control-label-group">
-            <span>Bounds [X, Y, W, H]</span>
-            <span class="control-value" id="inspect-bounds">180, 250, 220, 104</span>
-          </div>
-        </div>
-        <div class="control-row">
-          <div class="control-label-group">
-            <span>Ports Count</span>
-            <span class="control-value" id="inspect-ports">1 (source: right)</span>
-          </div>
-        </div>
-        <div class="control-row">
-          <div class="control-label-group">
-            <span>Permitted Overlaps</span>
-            <span class="control-value" id="inspect-overlap">node-trunk-edge</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Reference Overlay Controls -->
-      <div class="panel-section">
-        <div class="panel-section-title">
-          <span>Reference Frame Compare</span>
-        </div>
-        <div class="control-row">
-          <div class="control-label-group">
-            <span>Overlay Opacity</span>
-            <span class="control-value" id="val-ref-opacity">50%</span>
-          </div>
-          <input type="range" id="input-ref-opacity" min="0" max="100" step="5" value="50">
-        </div>
-        <div class="control-row">
-          <label style="font-size: 0.75rem; color: var(--nexafy-muted);">Blend Mode</label>
-          <select id="select-ref-blend" class="nexa-select">
-            <option value="normal">Normal</option>
-            <option value="difference" selected>Difference (Residual Highlight)</option>
-            <option value="screen">Screen</option>
-            <option value="multiply">Multiply</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Morph Compatibility Lab -->
-      <div class="panel-section">
-        <div class="panel-section-title">
-          <span>Morph Compatibility Lab</span>
-        </div>
-        <div class="control-row">
-          <label style="font-size: 0.75rem; color: var(--nexafy-muted);">State A (Origin)</label>
-          <select id="morph-state-a" class="nexa-select">
-            <option value="DORMANT">DORMANT (Empty Stage)</option>
-            <option value="CHANNELS" selected>CHANNELS (Hero Chapter 01)</option>
-            <option value="SAAS">SAAS (Chapter 02 Morph)</option>
-            <option value="PAYMENT">PAYMENT (Safe Renting)</option>
-            <option value="INSURANCE">INSURANCE</option>
-            <option value="SUSTAINABILITY">SUSTAINABILITY</option>
-            <option value="ACCESS_CHANNELS">ACCESS_CHANNELS (Beige)</option>
-            <option value="FOOTER_BEIGE">FOOTER_BEIGE (Sculpted Beige)</option>
-          </select>
-        </div>
-        <div class="control-row">
-          <label style="font-size: 0.75rem; color: var(--nexafy-muted);">State B (Target)</label>
-          <select id="morph-state-b" class="nexa-select">
-            <option value="SAAS" selected>SAAS (Chapter 02 Morph)</option>
-            <option value="CHANNELS">CHANNELS (Hero Chapter 01)</option>
-            <option value="DORMANT">DORMANT (Empty Stage)</option>
-            <option value="PAYMENT">PAYMENT (Safe Renting)</option>
-            <option value="INSURANCE">INSURANCE</option>
-            <option value="SUSTAINABILITY">SUSTAINABILITY</option>
-            <option value="ACCESS_CHANNELS">ACCESS_CHANNELS (Beige)</option>
-            <option value="FOOTER_BEIGE">FOOTER_BEIGE (Sculpted Beige)</option>
-          </select>
-        </div>
-        <div class="control-row">
-          <div class="control-label-group">
-            <span>Interpolation (t)</span>
-            <span class="control-value" id="val-morph-t">0.00</span>
-          </div>
-          <input type="range" id="input-morph-t" min="0" max="1" step="0.01" value="0">
-        </div>
-        <div class="btn-group">
-          <button type="button" class="nexafy-btn primary" id="btn-play-morph">Play Morph Loop</button>
-        </div>
-      </div>
-
-      <!-- Generated SVG Path & Export -->
-      <div class="panel-section">
-        <div class="panel-section-title">
-          <span>Generated SVG Path</span>
-        </div>
-        <div class="code-preview-area" id="output-svg-code">
-          M 426 0 ...
-        </div>
-        <div class="btn-group" style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
-          <button type="button" class="nexafy-btn sm" id="btn-copy-path">Copy Path</button>
-          <button type="button" class="nexafy-btn sm" id="btn-copy-json">Copy JSON</button>
-          <button type="button" class="nexafy-btn sm" id="btn-download-svg">Download SVG</button>
-        </div>
-      </div>
-
-    </aside>
-
+  <!-- 2. Authentic Flecto Hero Stage -->
+  <div class="workbench-hero-stage" id="workbench-hero-stage">
+    <Hero />
   </div>
 
-  <!-- Bottom Master Timeline Scrubber -->
-  <footer class="nexafy-timeline-bar">
-    <div class="timeline-controls-row">
-      <div class="timeline-playback-group">
-        <button type="button" class="nexafy-btn sm primary" id="btn-play-timeline">Play</button>
-        <button type="button" class="nexafy-btn sm" id="btn-prev-marker">◀ Prev</button>
-        <button type="button" class="nexafy-btn sm" id="btn-next-marker">Next ▶</button>
-        <button type="button" class="nexafy-btn sm" id="btn-reset-timeline">Reset</button>
-        <div class="timeline-time-display" id="timeline-time-display">00.00s / 48.15s</div>
+  <!-- 3. Collapsible Primitives & Geometry Inspector Drawer -->
+  <section class="workbench-inspector-drawer" id="workbench-inspector-drawer" style="display: none;" aria-label="Inspector de Geometría y Primitivas">
+    <div class="inspector-header">
+      <div class="inspector-title-row">
+        <strong>Nexafy Living Geometry · Primitivas de Borde & Especificaciones Arquitectónicas</strong>
+        <span class="validation-badge"><i class="pi pi-check-circle"></i> 0 Colisiones (PASS · Validación Rigurosa)</span>
       </div>
-
-      <!-- Marker Pills -->
-      <div class="markers-pill-bar" id="timeline-markers-container">
-        <!-- Injected via JavaScript -->
-      </div>
+      <button type="button" class="inspector-close-btn" id="btn-close-inspector" aria-label="Cerrar inspector">✕</button>
     </div>
 
-    <!-- Scrubber Slider -->
-    <div class="timeline-slider-wrapper">
-      <input type="range" id="input-master-timeline" class="timeline-slider" min="0" max="48.15" step="0.05" value="0">
+    <div class="inspector-grid">
+      <!-- Primitives Panel -->
+      <div class="inspector-card">
+        <h4>Primitivas de Borde Nexafy 2.0</h4>
+        <div class="primitives-button-row">
+          <span class="primitive-tag active" title="Top Canopy Headline Crown">PROTRUDE (Canopy Notch)</span>
+          <span class="primitive-tag" title="White Notches">RECESS (Muescas Blancas)</span>
+          <span class="primitive-tag" title="Lateral Stepped Curves">STEP (Escalón Lateral)</span>
+          <span class="primitive-tag" title="Bottom Center Floor">SHELF (Shelf Inferior 888px)</span>
+          <span class="primitive-tag" title="Indicator Tabs">TAB (Pestaña)</span>
+          <span class="primitive-tag" title="28px Thick Vascular Lines">CHANNEL (Conducto 28px)</span>
+          <span class="primitive-tag" title="Down Arrow Notch">CUTOUT (Muesca Flecha ↓)</span>
+        </div>
+        <p class="primitive-info">
+          Geometría Bürocratik SOTD: Radio base de 36px, filetes tangenciales continuos G2, sin discontinuidades de curvatura ni solapamiento.
+        </p>
+      </div>
+
+      <!-- Geometry Specs Panel -->
+      <div class="inspector-card">
+        <h4>Métricas Canónicas del Canvas</h4>
+        <div class="metrics-spec-grid">
+          <div class="spec-item">
+            <span class="spec-label">Dimensiones Canvas:</span>
+            <strong class="spec-value text-mono">1440 × 820 px</strong>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Grosor de Conducto:</span>
+            <strong class="spec-value text-mono">28 px sólido (0 raster)</strong>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Top Canopy Crown:</span>
+            <strong class="spec-value text-mono">568 px ancho · 105 px drop</strong>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Bottom Shelf Notch:</span>
+            <strong class="spec-value text-mono">888 px ancho · 85 px extend</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Export SVG & Commands -->
+      <div class="inspector-card">
+        <h4>Exportación de Geometría</h4>
+        <div class="export-actions-row">
+          <button type="button" class="action-sm-btn" id="btn-copy-svg-path">Copiar SVG Path</button>
+          <a href="/nexafy" class="action-sm-btn primary">Ver Landing Completa →</a>
+        </div>
+        <pre class="path-preview-box text-mono" id="preview-path-text">commandsToSvgPath(generateContainerCommands(NEXAFY_PRESETS.CHANNELS))</pre>
+      </div>
     </div>
-  </footer>
+  </section>
 </div>
 
 <style>
-  :root {
-    --nexafy-bg: #f6faff;
-    --nexafy-sidebar: #ffffff;
-    --nexafy-panel-bg: #f8fafc;
-    --nexafy-border: #e2e8f0;
-    --nexafy-border-highlight: #cbd5e1;
-    --nexafy-text: #0f172a;
-    --nexafy-muted: #64748b;
-    --nexafy-accent: #2a67d9;
-    --nexafy-accent-dark: #1b4fb8;
-    --nexafy-mint: #56f09f;
-    --nexafy-danger: #dc2626;
-    --nexafy-warning: #d97706;
-    --nexafy-info: #0284c7;
-  }
-
-  .nexafy-studio-container {
+  .workbench-master-container {
+    width: 100%;
+    margin: 0 auto;
+    background: #ffffff;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 120px);
-    min-height: 700px;
-    background: var(--nexafy-bg);
-    border-radius: var(--nexa-radius-card);
-    border: 1px solid var(--nexafy-border);
-    overflow: hidden;
-    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+    overflow-x: clip;
   }
 
-  .nexafy-studio {
-    display: grid;
-    grid-template-columns: 320px 1fr 320px;
-    flex: 1;
-    height: calc(100% - 58px);
-    overflow: hidden;
-  }
-
-  .nexafy-panel {
-    background: var(--nexafy-sidebar);
-    border-right: 1px solid var(--nexafy-border);
-    overflow-y: auto;
-    padding: 0.85rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-  }
-
-  .nexafy-panel.right {
-    border-right: none;
-    border-left: 1px solid var(--nexafy-border);
-  }
-
-  .panel-section {
-    background: var(--nexafy-panel-bg);
-    border: 1px solid var(--nexafy-border);
-    border-radius: 8px;
-    padding: 0.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .panel-section-title {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--nexafy-accent);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  /* --------------------------------------------------------------------------
+     1. WORKBENCH MASTER TOOLBAR
+     -------------------------------------------------------------------------- */
+  .workbench-toolbar-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    padding: 0.65rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
   }
 
-  .control-row {
+  .toolbar-left-group {
     display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+    align-items: center;
+    gap: 1.25rem;
   }
 
-  .control-label-group {
+  .toolbar-title-wrap {
     display: flex;
-    justify-content: space-between;
-    font-size: 0.75rem;
-    color: var(--nexafy-muted);
+    align-items: center;
+    gap: 0.6rem;
   }
 
-  .control-value {
-    color: var(--nexafy-text);
-    font-family: var(--nexa-font-family-mono);
-    font-weight: 600;
+  .toolbar-live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #059669;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: var(--nexa-font-family-mono, monospace);
+    letter-spacing: 0.06em;
+    padding: 2px 7px;
+    border-radius: 9999px;
   }
 
-  input[type="range"] {
-    width: 100%;
-    accent-color: var(--nexafy-accent);
-    background: #cbd5e1;
-    height: 4px;
-    border-radius: 2px;
-    outline: none;
+  .live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #10b981;
+    display: inline-block;
+    animation: livePulse 2s infinite ease-in-out;
   }
 
-  .nexa-select, input[type="text"], input[type="number"] {
-    background: #ffffff;
-    border: 1px solid var(--nexafy-border);
-    color: var(--nexafy-text);
-    padding: 0.4rem 0.6rem;
-    border-radius: 6px;
-    font-size: 0.8125rem;
-    outline: none;
-    width: 100%;
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
   }
 
-  .nexa-select:focus, input:focus {
-    border-color: var(--nexafy-accent);
-    box-shadow: 0 0 0 2px rgba(42, 103, 217, 0.15);
+  .toolbar-main-title {
+    font-family: var(--nexa-font-family-heading, 'Plus Jakarta Sans', sans-serif);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.01em;
   }
 
-  .btn-group {
+  .preset-selector-wrap {
     display: flex;
+    align-items: center;
     gap: 0.4rem;
   }
 
-  .nexafy-btn {
-    background: #ffffff;
-    color: var(--nexafy-text);
-    border: 1px solid var(--nexafy-border);
-    padding: 0.4rem 0.75rem;
+  .selector-label {
+    font-size: 11.5px;
+    color: #64748b;
+    font-weight: 600;
+  }
+
+  .workbench-select {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
     border-radius: 6px;
-    font-size: 0.75rem;
+    padding: 0.35rem 0.65rem;
+    font-size: 12px;
     font-weight: 600;
+    color: #0f172a;
+    outline: none;
     cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.35rem;
-    transition: all 0.15s ease;
-    flex: 1;
-    text-decoration: none;
+    transition: border-color 0.15s ease;
   }
 
-  .nexafy-btn:hover {
-    background: #f1f5f9;
-    border-color: var(--nexafy-border-highlight);
+  .workbench-select:focus {
+    border-color: #2a67d9;
   }
 
-  .nexafy-btn.primary {
-    background: var(--nexafy-accent);
-    color: #ffffff;
-    font-weight: 700;
-    border: none;
-  }
-
-  .nexafy-btn.primary:hover {
-    background: var(--nexafy-accent-dark);
-  }
-
-  .nexafy-btn.sm {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.6875rem;
-  }
-
-  /* Center Viewport */
-  .nexafy-viewport {
-    display: flex;
-    flex-direction: column;
-    background: var(--nexa-surface-page, #f6faff);
-    overflow: hidden;
-    position: relative;
-  }
-
-  .viewport-toolbar {
+  .toolbar-center-group {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0.4rem 0.85rem;
-    background: #ffffff;
-    border-bottom: 1px solid var(--nexafy-border);
-    gap: 0.5rem;
-    flex-shrink: 0;
+    gap: 1.25rem;
+    flex-wrap: wrap;
   }
 
-  .viewport-presets {
-    display: flex;
-    gap: 0.3rem;
-  }
-
-  .viewport-chip {
-    background: #f1f5f9;
-    color: var(--nexafy-muted);
-    border: 1px solid var(--nexafy-border);
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.6875rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-
-  .viewport-chip:hover {
-    color: var(--nexafy-text);
-    background: #e2e8f0;
-  }
-
-  .viewport-chip.active {
-    background: var(--nexa-color-primary-50, #f0f5ff);
-    color: var(--nexafy-accent);
-    border-color: var(--nexafy-accent);
-  }
-
-  .view-toggles {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-
+  /* Human Ergonomic Tones Switcher */
   .human-tones-toggle {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 3px;
+    gap: 0.35rem;
     background: #f1f5f9;
-    padding: 2px 4px;
-    border-radius: 6px;
-    border: 1px solid var(--nexafy-border);
+    padding: 3px 5px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+  }
+
+  .tones-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    margin: 0 4px;
   }
 
   .tone-pill {
-    background: transparent;
-    border: 0;
-    color: var(--nexafy-muted);
-    font-size: 0.6875rem;
-    font-weight: 600;
-    padding: 0.2rem 0.45rem;
-    border-radius: 4px;
-    cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    transition: all 0.15s ease;
+    gap: 5px;
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #334155;
+    cursor: pointer;
+    transition: all 0.2s ease;
   }
 
   .tone-pill:hover {
-    color: var(--nexafy-text);
+    background: rgba(255, 255, 255, 0.7);
+    color: #0f172a;
   }
 
   .tone-pill.active {
     background: #ffffff;
-    color: var(--nexafy-accent);
-    font-weight: 700;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-  }
-
-  .conduit-palette-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    background: #f1f5f9;
-    padding: 2px 5px;
-    border-radius: 6px;
-    border: 1px solid var(--nexafy-border);
-  }
-
-  .conduit-toggle-label {
-    font-size: 0.6875rem;
-    font-weight: 700;
-    color: var(--nexafy-muted);
-    margin-right: 2px;
-  }
-
-  .conduit-pill {
-    background: transparent;
-    border: 0;
-    color: var(--nexafy-muted);
-    font-size: 0.6875rem;
-    font-weight: 600;
-    padding: 0.2rem 0.4rem;
-    border-radius: 4px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    transition: all 0.15s ease;
-  }
-
-  .conduit-pill:hover {
-    color: var(--nexafy-text);
-  }
-
-  .conduit-pill.active {
-    background: #ffffff;
-    color: var(--nexafy-accent-dark);
-    font-weight: 700;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-  }
-
-  .auto-tour-btn {
-    background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
-    color: #ffffff;
-    border: none;
-    padding: 0.28rem 0.75rem;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
-    transition: all 0.2s ease;
-  }
-
-  .auto-tour-btn:hover {
-    background: linear-gradient(135deg, #0369a1 0%, #1d4ed8 100%);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35);
-  }
-
-  .auto-tour-btn.running {
-    background: #dc2626 !important;
-    box-shadow: 0 2px 6px rgba(220, 38, 38, 0.35);
-  }
-
-  .tour-status-banner {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 40;
-    background: rgba(8, 40, 70, 0.94);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(56, 200, 255, 0.4);
-    border-radius: 999px;
-    padding: 6px 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    color: #ffffff;
-    font-size: 0.75rem;
-    animation: fadeInDown 0.25s ease;
-  }
-
-  @keyframes fadeInDown {
-    from { opacity: 0; transform: translate(-50%, -10px); }
-    to { opacity: 1; transform: translate(-50%, 0); }
-  }
-
-  .tour-live-dot {
-    width: 8px;
-    height: 8px;
-    background: #38c8ff;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #38c8ff;
-    animation: pulseDot 1.2s infinite ease-in-out;
-  }
-
-  @keyframes pulseDot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.8); }
-  }
-
-  .tour-step-badge {
-    background: rgba(56, 200, 255, 0.2);
-    color: #38c8ff;
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 0.6875rem;
-    font-weight: 700;
-    padding: 2px 6px;
-    border-radius: 4px;
-    letter-spacing: 0.04em;
-  }
-
-  .tour-step-desc {
-    font-weight: 600;
-    color: #f8fafc;
-    letter-spacing: 0.02em;
-  }
-
-  .tour-stop-btn {
-    background: rgba(255, 255, 255, 0.15);
-    border: none;
-    color: #ffffff;
-    font-size: 0.6875rem;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 999px;
-    cursor: pointer;
-    transition: background 0.15s ease;
-  }
-
-  .tour-stop-btn:hover {
-    background: rgba(220, 38, 38, 0.85);
+    border-color: #cbd5e1;
+    color: #0f172a;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   }
 
   .color-swatch {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     display: inline-block;
   }
 
-  .toggle-checkbox {
+  /* Conduit Palette Toggle */
+  .conduit-palette-toggle {
     display: flex;
     align-items: center;
     gap: 0.3rem;
-    font-size: 0.6875rem;
-    cursor: pointer;
-    color: var(--nexafy-muted);
-    user-select: none;
-  }
-
-  .toggle-checkbox input {
-    accent-color: var(--nexafy-accent);
-    width: 14px;
-    height: 14px;
-  }
-
-  .viewport-controls-group {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
     background: #f1f5f9;
-    padding: 0.15rem 0.35rem;
-    border-radius: 6px;
-    border: 1px solid var(--nexafy-border);
-    margin-left: 0.25rem;
+    padding: 3px 5px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
   }
 
-  .viewport-btn-sm {
-    background: transparent;
-    border: none;
-    color: var(--nexafy-text);
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 0.2rem 0.45rem;
-    border-radius: 4px;
-    cursor: pointer;
+  .conduit-toggle-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    margin: 0 4px;
+  }
+
+  .conduit-pill {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    transition: all 0.15s ease;
-  }
-
-  .viewport-btn-sm:hover {
-    background: #e2e8f0;
-    color: var(--nexafy-accent);
-  }
-
-  .canvas-stage-wrapper {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.25rem;
-    overflow: hidden;
-    background: #ffffff;
-    background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
-    background-size: 24px 24px;
-    position: relative;
-    user-select: none;
-  }
-
-  .canvas-frame {
-    position: relative;
-    box-shadow: 0 25px 60px -15px rgba(8, 40, 70, 0.3), 0 10px 25px -5px rgba(8, 40, 70, 0.15);
-    background-color: #082846;
-    border: none !important;
-    overflow: hidden;
-    transform-origin: center center;
-    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
-    border-radius: 28px;
-  }
-
-  .canvas-svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  /* Scene Tree */
-  .scene-tree-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    max-height: 180px;
-    overflow-y: auto;
-  }
-
-  .scene-tree-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.35rem 0.6rem;
-    border-radius: 4px;
-    background: #ffffff;
-    border: 1px solid var(--nexafy-border);
-    cursor: pointer;
-    font-size: 0.75rem;
-    color: var(--nexafy-text);
-    transition: all 0.15s ease;
-  }
-
-  .scene-tree-item:hover {
-    background: #f1f5f9;
-    border-color: var(--nexafy-border-highlight);
-  }
-
-  .scene-tree-item.selected {
-    background: var(--nexa-color-primary-50, #f0f5ff);
-    border-color: var(--nexafy-accent);
-    color: var(--nexafy-accent);
-    font-weight: 600;
-  }
-
-  .item-tag {
-    font-size: 0.625rem;
-    padding: 0.15rem 0.35rem;
-    border-radius: 3px;
-    background: #f1f5f9;
-    color: var(--nexafy-muted);
-    font-family: var(--nexa-font-family-mono);
-  }
-
-  /* Primitives */
-  .primitives-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.3rem;
-  }
-
-  .primitive-btn {
-    background: #ffffff;
-    border: 1px solid var(--nexafy-border);
-    color: var(--nexafy-muted);
-    padding: 0.3rem 0.2rem;
-    border-radius: 4px;
-    font-size: 0.625rem;
-    font-weight: 700;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.15s ease;
-  }
-
-  .primitive-btn:hover {
-    color: var(--nexafy-text);
-    background: #f1f5f9;
-  }
-
-  .primitive-btn.active {
-    background: var(--nexa-color-primary-50, #f0f5ff);
-    border-color: var(--nexafy-accent);
-    color: var(--nexafy-accent);
-  }
-
-  /* Validation HUD */
-  .validation-hud {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 0.75rem;
+    gap: 4px;
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 3px 7px;
     border-radius: 6px;
-    background: var(--nexa-color-success-50, #f0fdf4);
-    border: 1px solid var(--nexa-color-success-border, #bbf7d0);
+    font-size: 11px;
+    font-weight: 600;
+    color: #334155;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .conduit-pill:hover {
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .conduit-pill.active {
+    background: #ffffff;
+    border-color: #cbd5e1;
+    color: #0f172a;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  .toolbar-right-group {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .workbench-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.35rem 0.85rem;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.15s ease;
+  }
+
+  .workbench-action-btn.primary {
+    background: #004737;
+    color: #57f09e;
+    border-color: #004737;
+  }
+
+  .workbench-action-btn.primary:hover {
+    background: #003629;
+  }
+
+  .workbench-action-btn.primary.running {
+    background: #dc2626;
+    color: #ffffff;
+    border-color: #dc2626;
+  }
+
+  .workbench-action-btn.secondary {
+    background: #f8fafc;
+    color: #334155;
+    border-color: #cbd5e1;
+  }
+
+  .workbench-action-btn.secondary:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+  }
+
+  /* --------------------------------------------------------------------------
+     2. WORKBENCH HERO STAGE (Hosts the Authentic Hero)
+     -------------------------------------------------------------------------- */
+  .workbench-hero-stage {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    background: #ffffff;
+    overflow-x: clip;
+  }
+
+  /* --------------------------------------------------------------------------
+     3. COLLAPSIBLE INSPECTOR DRAWER
+     -------------------------------------------------------------------------- */
+  .workbench-inspector-drawer {
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    padding: 1.5rem 2rem 2.5rem;
+    animation: slideDown 0.25s ease-out;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .inspector-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .inspector-title-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 13px;
+    color: #0f172a;
   }
 
   .validation-badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
-    font-size: 0.75rem;
+    gap: 5px;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #059669;
+    font-size: 11px;
     font-weight: 700;
-    color: var(--nexa-color-success-700, #15803d);
+    padding: 2px 8px;
+    border-radius: 9999px;
   }
 
-  .validation-badge.has-error {
-    color: var(--nexafy-danger);
-  }
-
-  /* Code Preview */
-  .code-preview-area {
-    background: #ffffff;
-    border: 1px solid var(--nexafy-border);
-    padding: 0.5rem;
+  .inspector-close-btn {
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    color: #64748b;
+    cursor: pointer;
+    padding: 4px 8px;
     border-radius: 4px;
-    font-family: var(--nexa-font-family-mono);
-    font-size: 0.6875rem;
-    color: var(--nexafy-muted);
-    max-height: 70px;
-    overflow-y: auto;
-    word-break: break-all;
   }
 
-  /* Timeline Bar */
-  .nexafy-timeline-bar {
-    height: 58px;
+  .inspector-close-btn:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+  }
+
+  .inspector-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .inspector-card {
     background: #ffffff;
-    border-top: 1px solid var(--nexafy-border);
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1.15rem;
+  }
+
+  .inspector-card h4 {
+    font-size: 12px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .primitives-button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .primitive-tag {
+    display: inline-block;
+    padding: 3px 8px;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #334155;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .primitive-tag.active {
+    background: #0284c7;
+    color: #ffffff;
+    border-color: #0284c7;
+  }
+
+  .primitive-info {
+    font-size: 11.5px;
+    color: #64748b;
+    line-height: 1.45;
+  }
+
+  .metrics-spec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+
+  .spec-item {
     display: flex;
     flex-direction: column;
-    padding: 0.35rem 1.25rem;
-    gap: 0.3rem;
-    flex-shrink: 0;
+    gap: 2px;
   }
 
-  .timeline-controls-row {
+  .spec-label {
+    font-size: 10.5px;
+    color: #64748b;
+  }
+
+  .spec-value {
+    font-size: 11.5px;
+    color: #0f172a;
+  }
+
+  .export-actions-row {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
   }
 
-  .timeline-playback-group {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  .timeline-time-display {
-    font-family: var(--nexa-font-family-mono);
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--nexafy-accent);
-    background: #f1f5f9;
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    border: 1px solid var(--nexafy-border);
-  }
-
-  .markers-pill-bar {
-    display: flex;
-    gap: 0.25rem;
-    overflow-x: auto;
-    max-width: 60%;
-    padding-bottom: 2px;
-  }
-
-  .marker-chip {
-    background: #f1f5f9;
-    color: var(--nexafy-muted);
-    border: 1px solid var(--nexafy-border);
-    border-radius: 12px;
-    padding: 0.15rem 0.45rem;
-    font-size: 0.625rem;
+  .action-sm-btn {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
     font-weight: 600;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+    text-decoration: none;
     cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.15s ease;
   }
 
-  .marker-chip:hover {
-    color: var(--nexafy-text);
+  .action-sm-btn:hover {
     background: #e2e8f0;
   }
 
-  .marker-chip.active {
-    background: var(--nexafy-accent);
-    color: #ffffff;
-    border-color: var(--nexafy-accent);
+  .action-sm-btn.primary {
+    background: #004737;
+    color: #57f09e;
+    border-color: #004737;
   }
 
-  .timeline-slider-wrapper {
-    display: flex;
-    align-items: center;
+  .path-preview-box {
+    background: #0f172a;
+    color: #94a3b8;
+    padding: 0.5rem;
+    border-radius: 6px;
+    font-size: 10px;
+    overflow-x: auto;
+    max-height: 70px;
   }
 
-  @media (max-width: 1024px) {
-    .nexafy-studio {
-      grid-template-columns: 260px 1fr 260px;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .nexafy-studio {
-      display: flex;
+  @media (max-width: 900px) {
+    .workbench-toolbar-bar {
       flex-direction: column;
-      height: auto;
+      align-items: stretch;
+      gap: 0.75rem;
     }
-    .nexafy-panel {
+    .toolbar-left-group,
+    .toolbar-center-group,
+    .toolbar-right-group {
+      justify-content: space-between;
       width: 100%;
     }
   }
 </style>
 
 <script>
-  import { generateContainerCommands, commandsToSvgPath } from '../../lib/nexafy/geometry';
-  import { NEXAFY_PRESETS } from '../../lib/nexafy/presets';
-  import { interpolateCommands } from '../../lib/nexafy/interpolation';
-  import { SceneCollisionDetector } from '../../lib/nexafy/scene-graph/collision';
-  import { createSceneForPreset } from '../../lib/nexafy/scene-graph/presets-scenes';
-  import { OrthogonalFilletRouter } from '../../lib/nexafy/scene-graph/router';
-  import type { SceneNode } from '../../lib/nexafy/scene-graph/types';
-
-  // State
-  let currentConfig = JSON.parse(JSON.stringify(NEXAFY_PRESETS.CHANNELS));
-  let scene = createSceneForPreset(currentConfig.id, currentConfig.width, currentConfig.height);
-  let selectedNodeId: string = scene.nodes[0]?.id || 'node-company';
-  let isPlayingMorph = false;
-  let morphDirection = 1;
-  let morphAnimId: number | null = null;
-
-  let isPlayingTimeline = false;
-  let timelineAnimId: number | null = null;
-  let currentTimelineTime = 0.0;
-
-  // Interactive direct manipulation state
-  let isDraggingNode = false;
-  let draggedNode: SceneNode | null = null;
-  let dragOffset = { x: 0, y: 0 };
-
-  // Viewport pan & zoom state
-  let currentZoom = 1.0;
-  let panOffset = { x: 0, y: 0 };
-  let isPanningViewport = false;
-  let panStart = { x: 0, y: 0 };
-
-  // Living motion & pulse state
-  let isLivingMotionEnabled = true;
-  let isPulsesEnabled = true;
-  let pulseProgress: Record<string, number> = {};
-  let _livingEngineAnimId: number | null = null;
-
-  // Human Tones System (Ergonomic OKLCH & Calibrated Nexa Palette)
-  interface HumanToneConfig {
-    id: string;
-    name: string;
+  // Human Tones System Switcher (Drives the Authentic Hero in real-time)
+  interface HumanTone {
     plateBg: string;
     accent: string;
-    defaultPastel: string;
-    conduitGlow: string;
-    pulseColor: string;
-    oklchFormula: string;
+    conduit: string;
   }
 
-  const HUMAN_TONES: Record<string, HumanToneConfig> = {
+  const TONES: Record<string, HumanTone> = {
     nexa: {
-      id: 'nexa',
-      name: 'Nexa Calibrated Dark Blue',
       plateBg: '#082846',
       accent: '#38c8ff',
-      defaultPastel: '#bae6fd', // Celeste Pastel
-      conduitGlow: 'rgba(56, 200, 255, 0.25)',
-      pulseColor: '#38c8ff',
-      oklchFormula: 'oklch(28% 0.07 240)'
+      conduit: '#bae6fd',
     },
     cashmere: {
-      id: 'cashmere',
-      name: 'Cashmere Arctic Mist',
-      plateBg: '#283a48', // oklch(33% 0.06 258)
+      plateBg: '#283a48',
       accent: '#7dd3fc',
-      defaultPastel: '#bae6fd', // Celeste Pastel
-      conduitGlow: 'rgba(125, 211, 252, 0.25)',
-      pulseColor: '#bae6fd',
-      oklchFormula: 'oklch(33% 0.06 258)'
+      conduit: '#bae6fd',
     },
     ceramic: {
-      id: 'ceramic',
-      name: 'Ceramic Azure Harmony',
-      plateBg: '#1d3d63', // oklch(35% 0.08 245)
+      plateBg: '#1d3d63',
       accent: '#38bdf8',
-      defaultPastel: '#a5f3fc', // Soft Cyan
-      conduitGlow: 'rgba(165, 243, 252, 0.25)',
-      pulseColor: '#a5f3fc',
-      oklchFormula: 'oklch(35% 0.08 245)'
+      conduit: '#a5f3fc',
     },
     oceanic: {
-      id: 'oceanic',
-      name: 'Oceanic Sage Blue',
-      plateBg: '#163b45', // oklch(32% 0.07 215)
+      plateBg: '#004737',
       accent: '#4ade80',
-      defaultPastel: '#bbf7d0', // Mint Pastel
-      conduitGlow: 'rgba(187, 247, 208, 0.25)',
-      pulseColor: '#56f09f',
-      oklchFormula: 'oklch(32% 0.07 215)'
-    }
+      conduit: '#57f09e',
+    },
   };
 
-  let currentTone: HumanToneConfig = HUMAN_TONES.nexa;
-  let currentConduitPastel: string = currentTone.defaultPastel;
+  function applyTone(toneKey: string) {
+    const tone = TONES[toneKey];
+    if (!tone) return;
 
-  // Auto-Tour Cinematic State
-  let isAutoTourRunning = false;
-  let tourTimeouts: any[] = [];
-  let tourAnimFrameId: number | null = null;
-  let isTourFlying = false;
-  let tourConfettiParticles: any[] = [];
+    // Update Hero silhouette path fill
+    const path = document.querySelector<SVGPathElement>('.hero-silhouette-path');
+    if (path) path.setAttribute('fill', tone.plateBg);
 
-  const EVENT_MARKERS = [
-    { time: 0.00, label: '0.00s Stage' },
-    { time: 0.87, label: '0.87s Company' },
-    { time: 2.25, label: '2.25s Hub' },
-    { time: 3.30, label: '3.30s Trunk' },
-    { time: 6.10, label: '6.10s Inquiry' },
-    { time: 7.67, label: '7.67s Store' },
-    { time: 10.02, label: '10.02s Online' },
-    { time: 10.75, label: '10.75s Shield' },
-    { time: 14.17, label: '14.17s SaaS Morph' },
-    { time: 18.50, label: '18.50s SaaS Settle' },
-    { time: 27.50, label: '27.50s Payment' },
-    { time: 34.00, label: '34.00s Confetti' },
-    { time: 48.15, label: '48.15s Loop' },
-  ];
+    // Update Radial glow
+    const stop1 = document.querySelector('#canvas-radial-glow stop:nth-child(1)');
+    const stop2 = document.querySelector('#canvas-radial-glow stop:nth-child(2)');
+    if (stop1) stop1.setAttribute('stop-color', tone.accent);
+    if (stop2) stop2.setAttribute('stop-color', tone.plateBg);
 
-  // DOM Elements
-  const presetSelector = document.getElementById('preset-selector') as HTMLSelectElement | null;
-  if (presetSelector) {
-    const inputW = document.getElementById('input-width') as HTMLInputElement;
-    const inputH = document.getElementById('input-height') as HTMLInputElement;
-    const inputBaseR = document.getElementById('input-base-radius') as HTMLInputElement;
-
-    const checkCrown = document.getElementById('check-crown-enabled') as HTMLInputElement;
-    const inputCrownW = document.getElementById('input-crown-w') as HTMLInputElement;
-    const inputCrownH = document.getElementById('input-crown-h') as HTMLInputElement;
-    const inputCrownFillet = document.getElementById('input-crown-fillet') as HTMLInputElement;
-
-    const checkShelf = document.getElementById('check-shelf-enabled') as HTMLInputElement;
-    const inputShelfW = document.getElementById('input-shelf-w') as HTMLInputElement;
-    const inputShelfH = document.getElementById('input-shelf-h') as HTMLInputElement;
-    const inputShelfFillet = document.getElementById('input-shelf-fillet') as HTMLInputElement;
-
-    const pathElem = document.getElementById('sculpted-path') as unknown as SVGPathElement;
-    const svgElem = document.getElementById('nexafy-svg') as unknown as SVGSVGElement;
-    const canvasFrame = document.getElementById('canvas-frame') as HTMLDivElement;
-    const stageWrapper = document.getElementById('stage-wrapper') as HTMLDivElement;
-    const outputArea = document.getElementById('output-svg-code') as HTMLDivElement;
-
-    const edgesLayer = document.getElementById('circuit-edges-layer') as unknown as SVGGElement;
-    const pulsesLayer = document.getElementById('circuit-pulses-layer') as unknown as SVGGElement;
-    const nodesLayer = document.getElementById('circuit-nodes-layer') as unknown as SVGGElement;
-    const tourFxLayer = document.getElementById('tour-fx-layer') as unknown as SVGGElement;
-    const debugLayer = document.getElementById('debug-overlay-layer') as unknown as SVGGElement;
-
-    const toggleLivingMotion = document.getElementById('toggle-living-motion') as HTMLInputElement;
-    const togglePulses = document.getElementById('toggle-pulses') as HTMLInputElement;
-    const toggleCircuit = document.getElementById('toggle-circuit') as HTMLInputElement;
-    const toggleDebug = document.getElementById('toggle-debug-mode') as HTMLInputElement;
-    const toggleRef = document.getElementById('toggle-ref-overlay') as HTMLInputElement;
-    const refImg = document.getElementById('ref-overlay-img') as HTMLImageElement;
-    const inputRefOpacity = document.getElementById('input-ref-opacity') as HTMLInputElement;
-    const selectRefBlend = document.getElementById('select-ref-blend') as HTMLSelectElement;
-
-    const btnAutoTour = document.getElementById('btn-auto-tour') as HTMLButtonElement;
-    const autoTourBtnText = document.getElementById('auto-tour-btn-text') as HTMLSpanElement;
-    const tourBtnIcon = document.getElementById('tour-btn-icon') as HTMLSpanElement;
-    const tourStatusBanner = document.getElementById('tour-status-banner') as HTMLDivElement;
-    const tourStepBadge = document.getElementById('tour-step-badge') as HTMLSpanElement;
-    const tourStepDesc = document.getElementById('tour-step-desc') as HTMLSpanElement;
-    const tourStopBtn = document.getElementById('tour-stop-btn') as HTMLButtonElement;
-
-    // Human Tones System Switcher
-    function setHumanTone(toneKey: string) {
-      const tone = HUMAN_TONES[toneKey];
-      if (!tone) return;
-      currentTone = tone;
-      currentConduitPastel = tone.defaultPastel;
-
-      canvasFrame.style.backgroundColor = tone.plateBg;
-      pathElem.setAttribute('stroke', tone.accent);
-
-      document.querySelectorAll('.tone-pill').forEach(btn => {
-        btn.classList.toggle('active', (btn as HTMLElement).dataset.tone === toneKey);
-      });
-
-      document.querySelectorAll('.conduit-pill').forEach(btn => {
-        btn.classList.toggle('active', (btn as HTMLElement).dataset.pastel === currentConduitPastel);
-      });
-
-      renderCircuitLayers();
-    }
-
+    // Update active pill
     document.querySelectorAll('.tone-pill').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const toneKey = (btn as HTMLElement).dataset.tone || 'nexa';
-        setHumanTone(toneKey);
-      });
-    });
-
-    document.querySelectorAll('.conduit-pill').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.conduit-pill').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentConduitPastel = (btn as HTMLElement).dataset.pastel || '#bae6fd';
-        renderCircuitLayers();
-      });
-    });
-
-    function clearTourTimeouts() {
-      tourTimeouts.forEach(t => clearTimeout(t));
-      tourTimeouts = [];
-      if (tourAnimFrameId) {
-        cancelAnimationFrame(tourAnimFrameId);
-        tourAnimFrameId = null;
-      }
-      if (tourFxLayer) tourFxLayer.innerHTML = '';
-      tourConfettiParticles = [];
-      isTourFlying = false;
-    }
-
-    function showTourBanner(badge: string, desc: string) {
-      if (tourStatusBanner && tourStepBadge && tourStepDesc) {
-        tourStatusBanner.style.display = 'flex';
-        tourStepBadge.textContent = badge;
-        tourStepDesc.textContent = desc;
-      }
-    }
-
-    function startAutoTour() {
-      if (isAutoTourRunning) {
-        stopAutoTour();
-        return;
-      }
-
-      isAutoTourRunning = true;
-      btnAutoTour.classList.add('running');
-      autoTourBtnText.textContent = 'Stop Tour';
-      tourBtnIcon.textContent = '■';
-
-      runTourStep1_Dormant();
-    }
-
-    function stopAutoTour() {
-      isAutoTourRunning = false;
-      btnAutoTour.classList.remove('running');
-      autoTourBtnText.textContent = 'Auto-Tour';
-      tourBtnIcon.textContent = '▶';
-      if (tourStatusBanner) tourStatusBanner.style.display = 'none';
-      clearTourTimeouts();
-
-      currentConfig = JSON.parse(JSON.stringify(NEXAFY_PRESETS.CHANNELS));
-      scene = createSceneForPreset('CHANNELS', currentConfig.width, currentConfig.height);
-      syncUIFromConfig();
-      updateStagePath();
-      initSceneTree();
-      renderCircuitLayers();
-      runSceneValidation();
-    }
-
-    tourStopBtn?.addEventListener('click', stopAutoTour);
-    btnAutoTour?.addEventListener('click', startAutoTour);
-
-    // 1. DORMANT STAGE
-    function runTourStep1_Dormant() {
-      if (!isAutoTourRunning) return;
-      showTourBanner('STAGE 1/5', 'DORMANT STAGE · PURE ARCHITECTURAL FOUNDATION');
-      if (presetSelector) presetSelector.value = 'DORMANT';
-      currentConfig = JSON.parse(JSON.stringify(NEXAFY_PRESETS.DORMANT));
-      scene = createSceneForPreset('DORMANT', currentConfig.width, currentConfig.height);
-      syncUIFromConfig();
-      updateStagePath();
-      initSceneTree();
-      renderCircuitLayers();
-      runSceneValidation();
-
-      const tId = setTimeout(() => {
-        if (isAutoTourRunning) runTourStep2_FlyingEntry();
-      }, 2600);
-      tourTimeouts.push(tId);
-    }
-
-    // 2. FLYING ENTRY (-280° ROTATION & ELASTIC DOCKING)
-    function runTourStep2_FlyingEntry() {
-      if (!isAutoTourRunning) return;
-      showTourBanner('STAGE 2/5', 'FLYING ENTRY · -280° KINETIC ROTATIONAL DOCKING');
-      if (presetSelector) presetSelector.value = 'CHANNELS';
-      currentConfig = JSON.parse(JSON.stringify(NEXAFY_PRESETS.CHANNELS));
-      scene = createSceneForPreset('CHANNELS', currentConfig.width, currentConfig.height);
-
-      scene.nodes.forEach(n => {
-        n.visibility = (n.id === 'node-company' || n.id === 'node-hub') ? 'visible' : 'hidden';
-      });
-
-      syncUIFromConfig();
-      updateStagePath();
-      initSceneTree();
-      renderCircuitLayers();
-
-      isTourFlying = true;
-      const startTime = performance.now();
-      const duration = 1800;
-
-      function animFlying(now: number) {
-        if (!isAutoTourRunning) return;
-        const elapsed = now - startTime;
-        const p = Math.min(1, elapsed / duration);
-        const c1 = 1.70158;
-        const c3 = c1 + 1;
-        const ease = 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2);
-
-        const curRotation = -280 * (1 - ease);
-        const curScale = 0.15 + 0.85 * Math.max(0, ease);
-        const curOpacity = Math.min(1, p * 1.5);
-
-        const hubEl = document.getElementById('svg-node-hub');
-        const compEl = document.getElementById('svg-node-company');
-
-        const hubNode = scene.nodes.find(n => n.id === 'node-hub');
-        const compNode = scene.nodes.find(n => n.id === 'node-company');
-
-        if (hubEl && hubNode) {
-          const cx = hubNode.visualBounds.x + hubNode.visualBounds.width / 2;
-          const cy = hubNode.visualBounds.y + hubNode.visualBounds.height / 2;
-          hubEl.setAttribute('transform', `translate(${cx}, ${cy}) rotate(${curRotation}) scale(${curScale}) translate(${-cx}, ${-cy}) translate(${hubNode.visualBounds.x}, ${hubNode.visualBounds.y})`);
-          hubEl.setAttribute('opacity', `${curOpacity}`);
-        }
-
-        if (compEl && compNode) {
-          const cx = compNode.visualBounds.x + compNode.visualBounds.width / 2;
-          const cy = compNode.visualBounds.y + compNode.visualBounds.height / 2;
-          compEl.setAttribute('transform', `translate(${cx}, ${cy}) rotate(${curRotation * 0.7}) scale(${curScale}) translate(${-cx}, ${-cy}) translate(${compNode.visualBounds.x}, ${compNode.visualBounds.y})`);
-          compEl.setAttribute('opacity', `${curOpacity}`);
-        }
-
-        if (p < 1) {
-          tourAnimFrameId = requestAnimationFrame(animFlying);
-        } else {
-          isTourFlying = false;
-          if (hubEl && hubNode) {
-            hubEl.setAttribute('transform', `translate(${hubNode.visualBounds.x}, ${hubNode.visualBounds.y})`);
-            hubEl.setAttribute('opacity', '1');
-          }
-          if (compEl && compNode) {
-            compEl.setAttribute('transform', `translate(${compNode.visualBounds.x}, ${compNode.visualBounds.y})`);
-            compEl.setAttribute('opacity', '1');
-          }
-        }
-      }
-      tourAnimFrameId = requestAnimationFrame(animFlying);
-
-      const tId = setTimeout(() => {
-        if (isAutoTourRunning) runTourStep3_ChannelsArrival();
-      }, 2900);
-      tourTimeouts.push(tId);
-    }
-
-    // 3. CHANNELS ARRIVAL (28px PASTEL VASCULAR CIRCUIT)
-    function runTourStep3_ChannelsArrival() {
-      if (!isAutoTourRunning) return;
-      showTourBanner('STAGE 3/5', 'CHANNELS ARRIVAL · 28px PASTEL VASCULAR CIRCUIT');
-      isTourFlying = false;
-
-      scene.nodes.forEach(n => { n.visibility = 'visible'; });
-      renderCircuitLayers();
-      runSceneValidation();
-
-      scene.nodes.forEach((n, idx) => {
-        const el = document.getElementById(`svg-${n.id}`);
-        if (el) {
-          el.style.transition = 'transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)';
-          el.setAttribute('transform', `translate(${n.visualBounds.x}, ${n.visualBounds.y - 12}) scale(1.05)`);
-          setTimeout(() => {
-            if (el) {
-              el.setAttribute('transform', `translate(${n.visualBounds.x}, ${n.visualBounds.y}) scale(1)`);
-              setTimeout(() => { if (el) el.style.transition = ''; }, 450);
-            }
-          }, 120 + idx * 80);
-        }
-      });
-
-      const tId = setTimeout(() => {
-        if (isAutoTourRunning) runTourStep4_SaaSMorph();
-      }, 3400);
-      tourTimeouts.push(tId);
-    }
-
-    // 4. SAAS MORPH (CANVAS SHAPE INTERPOLATION & DASHBOARD COCKPIT)
-    function runTourStep4_SaaSMorph() {
-      if (!isAutoTourRunning) return;
-      showTourBanner('STAGE 4/5', 'SAAS MORPH · WORKBENCH & ACTIVE LEDGER COCKPIT');
-      if (presetSelector) presetSelector.value = 'SAAS';
-
-      const cfgA = NEXAFY_PRESETS.CHANNELS;
-      const cfgB = NEXAFY_PRESETS.SAAS;
-      const cmdsA = generateContainerCommands(cfgA);
-      const cmdsB = generateContainerCommands(cfgB);
-
-      const startTime = performance.now();
-      const morphDuration = 1800;
-
-      function animMorph(now: number) {
-        if (!isAutoTourRunning) return;
-        const elapsed = now - startTime;
-        const p = Math.min(1, elapsed / morphDuration);
-        const ease = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
-
-        const morphed = interpolateCommands(cmdsA, cmdsB, ease);
-        const d = commandsToSvgPath(morphed);
-        pathElem.setAttribute('d', d);
-
-        if (p < 1) {
-          tourAnimFrameId = requestAnimationFrame(animMorph);
-        } else {
-          currentConfig = JSON.parse(JSON.stringify(NEXAFY_PRESETS.SAAS));
-          scene = createSceneForPreset('SAAS', currentConfig.width, currentConfig.height);
-          syncUIFromConfig();
-          updateStagePath();
-          initSceneTree();
-          renderCircuitLayers();
-          runSceneValidation();
-        }
-      }
-      tourAnimFrameId = requestAnimationFrame(animMorph);
-
-      const tId = setTimeout(() => {
-        if (isAutoTourRunning) runTourStep5_EscrowConfetti();
-      }, 3800);
-      tourTimeouts.push(tId);
-    }
-
-    // 5. ESCROW CONFETTI FINALE
-    function runTourStep5_EscrowConfetti() {
-      if (!isAutoTourRunning) return;
-      showTourBanner('STAGE 5/5', 'ESCROW GUARANTEE & CONFETTI FINALE · 100% CUSTODY VERIFIED!');
-      if (presetSelector) presetSelector.value = 'PAYMENT';
-
-      currentConfig = JSON.parse(JSON.stringify(NEXAFY_PRESETS.PAYMENT));
-      scene = createSceneForPreset('PAYMENT', currentConfig.width, currentConfig.height);
-      syncUIFromConfig();
-      updateStagePath();
-      initSceneTree();
-      renderCircuitLayers();
-      runSceneValidation();
-
-      if (tourFxLayer) {
-        tourFxLayer.innerHTML = '';
-        tourConfettiParticles = [];
-        const colors = ['#38c8ff', '#56f09f', '#bae6fd', '#fef08a', '#f472b6', '#ffffff'];
-        const centerX = currentConfig.width / 2;
-        const centerY = currentConfig.height * 0.42;
-
-        for (let i = 0; i < 50; i++) {
-          const angle = Math.random() * Math.PI * 2;
-          const speed = 4 + Math.random() * 9;
-          const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-          rect.setAttribute('width', `${6 + Math.random() * 8}`);
-          rect.setAttribute('height', `${8 + Math.random() * 10}`);
-          rect.setAttribute('rx', '2');
-          rect.setAttribute('fill', colors[Math.floor(Math.random() * colors.length)]);
-
-          tourFxLayer.appendChild(rect);
-
-          tourConfettiParticles.push({
-            el: rect,
-            x: centerX,
-            y: centerY,
-            vx: Math.cos(angle) * speed,
-            vy: Math.sin(angle) * speed - 3,
-            rot: Math.random() * 360,
-            vRot: (Math.random() - 0.5) * 15,
-            opacity: 1
-          });
-        }
-
-        const confettiStart = performance.now();
-        function animConfetti(now: number) {
-          if (!isAutoTourRunning) return;
-          const elapsed = now - confettiStart;
-          const p = Math.min(1, elapsed / 3200);
-
-          tourConfettiParticles.forEach(pt => {
-            pt.x += pt.vx;
-            pt.y += pt.vy;
-            pt.vy += 0.22;
-            pt.vx *= 0.985;
-            pt.rot += pt.vRot;
-            pt.opacity = Math.max(0, 1 - p * 1.1);
-
-            pt.el.setAttribute('transform', `translate(${pt.x}, ${pt.y}) rotate(${pt.rot})`);
-            pt.el.setAttribute('opacity', `${pt.opacity}`);
-          });
-
-          if (p < 1) {
-            tourAnimFrameId = requestAnimationFrame(animConfetti);
-          } else {
-            if (tourFxLayer) tourFxLayer.innerHTML = '';
-            tourConfettiParticles = [];
-          }
-        }
-        tourAnimFrameId = requestAnimationFrame(animConfetti);
-      }
-
-      const tId = setTimeout(() => {
-        if (isAutoTourRunning) {
-          runTourStep1_Dormant();
-        }
-      }, 4200);
-      tourTimeouts.push(tId);
-    }
-
-    const btnZoomIn = document.getElementById('btn-zoom-in') as HTMLButtonElement;
-    const btnZoomOut = document.getElementById('btn-zoom-out') as HTMLButtonElement;
-    const btnZoomReset = document.getElementById('btn-zoom-reset') as HTMLButtonElement;
-    const btnZoomFit = document.getElementById('btn-zoom-fit') as HTMLButtonElement;
-    const scaleIndicator = document.getElementById('scale-indicator') as HTMLSpanElement;
-
-    const inputTimeline = document.getElementById('input-master-timeline') as HTMLInputElement;
-    const displayTimeline = document.getElementById('timeline-time-display') as HTMLDivElement;
-    const btnPlayTimeline = document.getElementById('btn-play-timeline') as HTMLButtonElement;
-    const btnResetTimeline = document.getElementById('btn-reset-timeline') as HTMLButtonElement;
-    const btnPrevMarker = document.getElementById('btn-prev-marker') as HTMLButtonElement;
-    const btnNextMarker = document.getElementById('btn-next-marker') as HTMLButtonElement;
-    const markersContainer = document.getElementById('timeline-markers-container') as HTMLDivElement;
-
-    const sceneNodeList = document.getElementById('scene-node-list') as HTMLDivElement;
-    const nodeCountBadge = document.getElementById('node-count-badge') as HTMLSpanElement;
-    const inspectId = document.getElementById('inspect-id') as HTMLSpanElement;
-    const inspectRole = document.getElementById('inspect-role') as HTMLSpanElement;
-    const inspectBounds = document.getElementById('inspect-bounds') as HTMLSpanElement;
-    const inspectPorts = document.getElementById('inspect-ports') as HTMLSpanElement;
-    const inspectOverlap = document.getElementById('inspect-overlap') as HTMLSpanElement;
-
-    const btnRunValidation = document.getElementById('btn-run-validation') as HTMLButtonElement;
-    const btnResolveCollisions = document.getElementById('btn-resolve-collisions') as HTMLButtonElement;
-    const validationBadgeText = document.getElementById('validation-badge-text') as HTMLDivElement;
-    const collisionDetailText = document.getElementById('collision-detail-text') as HTMLParagraphElement;
-
-    const morphA = document.getElementById('morph-state-a') as HTMLSelectElement;
-    const morphB = document.getElementById('morph-state-b') as HTMLSelectElement;
-    const morphT = document.getElementById('input-morph-t') as HTMLInputElement;
-    const valMorphT = document.getElementById('val-morph-t') as HTMLSpanElement;
-    const btnPlayMorph = document.getElementById('btn-play-morph') as HTMLButtonElement;
-
-    function getSvgCoordinates(e: MouseEvent): { x: number; y: number } {
-      const ctm = svgElem.getScreenCTM();
-      if (!ctm) return { x: 0, y: 0 };
-      const pt = svgElem.createSVGPoint();
-      pt.x = e.clientX;
-      pt.y = e.clientY;
-      const transformed = pt.matrixTransform(ctm.inverse());
-      return { x: transformed.x, y: transformed.y };
-    }
-
-    function setZoom(z: number) {
-      currentZoom = Math.max(0.35, Math.min(2.2, z));
-      scaleIndicator.textContent = `${Math.round(currentZoom * 100)}%`;
-      applyCanvasTransform();
-    }
-
-    function fitStageToViewport() {
-      panOffset = { x: 0, y: 0 };
-      const availW = Math.max(300, stageWrapper.clientWidth - 40);
-      const availH = Math.max(300, stageWrapper.clientHeight - 40);
-      const scale = Math.max(0.35, Math.min(availW / currentConfig.width, availH / currentConfig.height, 1.15));
-      currentZoom = scale;
-      scaleIndicator.textContent = `${Math.round(currentZoom * 100)}%`;
-      applyCanvasTransform();
-    }
-    window.addEventListener('resize', fitStageToViewport);
-
-    function resetZoom() {
-      panOffset = { x: 0, y: 0 };
-      setZoom(1.0);
-    }
-
-    function applyCanvasTransform() {
-      canvasFrame.style.width = `${currentConfig.width}px`;
-      canvasFrame.style.height = `${currentConfig.height}px`;
-      canvasFrame.style.transform = `translate(${panOffset.x}px, ${panOffset.y}px) scale(${currentZoom})`;
-    }
-
-    btnZoomIn.addEventListener('click', () => setZoom(currentZoom + 0.1));
-    btnZoomOut.addEventListener('click', () => setZoom(currentZoom - 0.1));
-    btnZoomReset.addEventListener('click', resetZoom);
-    btnZoomFit.addEventListener('click', fitStageToViewport);
-
-    stageWrapper.addEventListener('wheel', (e: WheelEvent) => {
-      e.preventDefault();
-      const delta = e.deltaY < 0 ? 0.06 : -0.06;
-      setZoom(currentZoom + delta);
-    }, { passive: false });
-
-    stageWrapper.addEventListener('mousedown', (e: MouseEvent) => {
-      if ((e.target as HTMLElement).closest('.interactive-node')) return;
-      isPanningViewport = true;
-      panStart = { x: e.clientX - panOffset.x, y: e.clientY - panOffset.y };
-      stageWrapper.style.cursor = 'grab';
-    });
-
-    window.addEventListener('mousemove', (e: MouseEvent) => {
-      if (!isPanningViewport) return;
-      panOffset.x = e.clientX - panStart.x;
-      panOffset.y = e.clientY - panStart.y;
-      applyCanvasTransform();
-    });
-
-    window.addEventListener('mouseup', () => {
-      if (isPanningViewport) {
-        isPanningViewport = false;
-        stageWrapper.style.cursor = 'default';
-      }
-    });
-
-    function initTimelineMarkers() {
-      markersContainer.innerHTML = '';
-      EVENT_MARKERS.forEach((marker, idx) => {
-        const chip = document.createElement('button');
-        chip.type = 'button';
-        chip.className = 'marker-chip';
-        chip.textContent = marker.label;
-        chip.dataset.index = idx.toString();
-        chip.addEventListener('click', () => {
-          jumpTimelineTo(marker.time);
-        });
-        markersContainer.appendChild(chip);
-      });
-    }
-
-    function jumpTimelineTo(time: number) {
-      currentTimelineTime = Math.min(Math.max(0, time), 48.15);
-      inputTimeline.value = currentTimelineTime.toFixed(2);
-      displayTimeline.textContent = `${currentTimelineTime.toFixed(2).padStart(5, '0')}s / 48.15s`;
-      applyTimelineFrame(currentTimelineTime);
-    }
-
-    btnPrevMarker.addEventListener('click', () => {
-      const prev = [...EVENT_MARKERS].reverse().find(m => m.time < currentTimelineTime - 0.1) || EVENT_MARKERS[0];
-      jumpTimelineTo(prev.time);
-    });
-
-    btnNextMarker.addEventListener('click', () => {
-      const next = EVENT_MARKERS.find(m => m.time > currentTimelineTime + 0.1) || EVENT_MARKERS[EVENT_MARKERS.length - 1];
-      jumpTimelineTo(next.time);
-    });
-
-    function applyTimelineFrame(t: number) {
-      const chips = markersContainer.querySelectorAll<HTMLButtonElement>('.marker-chip');
-      chips.forEach((c, idx) => {
-        const m = EVENT_MARKERS[idx];
-        const nextTime = EVENT_MARKERS[idx + 1]?.time ?? 48.15;
-        if (t >= m.time && t < nextTime) {
-          c.classList.add('active');
-        } else {
-          c.classList.remove('active');
-        }
-      });
-
-      scene.nodes.forEach(node => {
-        let visible = false;
-        if (node.id === 'node-company' && t >= 0.867) visible = true;
-        if (node.id === 'node-hub' && t >= 2.25) visible = true;
-        if (node.id === 'node-card-email' && t >= 6.10) visible = true;
-        if (node.id === 'node-card-store' && t >= 7.67) visible = true;
-        if (node.id === 'node-card-online' && t >= 10.02) visible = true;
-        if (node.id === 'node-shield' && t >= 10.75) visible = true;
-        if (!['node-company', 'node-hub', 'node-card-email', 'node-card-store', 'node-card-online', 'node-shield'].includes(node.id)) {
-          visible = true;
-        }
-        node.visibility = visible ? 'visible' : 'hidden';
-      });
-
-      renderCircuitLayers();
-    }
-
-    function initSceneTree() {
-      sceneNodeList.innerHTML = '';
-      nodeCountBadge.textContent = `${scene.nodes.length} Nodes`;
-      scene.nodes.forEach(node => {
-        const item = document.createElement('div');
-        item.className = `scene-tree-item ${node.id === selectedNodeId ? 'selected' : ''}`;
-        item.dataset.nodeId = node.id;
-        item.innerHTML = `
-          <span>${node.name}</span>
-          <span class="item-tag">${node.semanticRole}</span>
-        `;
-        item.addEventListener('click', () => {
-          selectNode(node.id);
-        });
-        sceneNodeList.appendChild(item);
-      });
-    }
-
-    function selectNode(id: string) {
-      selectedNodeId = id;
-      document.querySelectorAll('.scene-tree-item').forEach(el => {
-        el.classList.toggle('selected', (el as HTMLElement).dataset.nodeId === id);
-      });
-      document.querySelectorAll('.interactive-node').forEach(el => {
-        el.classList.toggle('selected', el.id === `svg-${id}`);
-      });
-      updateInspector();
-    }
-
-    function updateInspector() {
-      const node = scene.nodes.find(n => n.id === selectedNodeId);
-      if (node) {
-        inspectId.textContent = node.id;
-        inspectRole.textContent = node.semanticRole;
-        inspectBounds.textContent = `${Math.round(node.visualBounds.x)}, ${Math.round(node.visualBounds.y)}, ${node.visualBounds.width}, ${node.visualBounds.height}`;
-        inspectPorts.textContent = `${node.ports.length} (${node.ports.map(p => `${p.role}: ${p.direction}`).join(', ') || 'None'})`;
-        inspectOverlap.textContent = node.allowOverlapWith?.join(', ') || 'None (Zero Overlap Enforced)';
-      }
-    }
-
-    function startNodeDrag(node: SceneNode, e: MouseEvent) {
-      isDraggingNode = true;
-      draggedNode = node;
-      selectNode(node.id);
-
-      const svgPt = getSvgCoordinates(e);
-      dragOffset = {
-        x: svgPt.x - node.visualBounds.x,
-        y: svgPt.y - node.visualBounds.y
-      };
-
-      const g = document.getElementById(`svg-${node.id}`);
-      if (g) g.classList.add('dragging');
-    }
-
-    window.addEventListener('mousemove', (e: MouseEvent) => {
-      if (!isDraggingNode || !draggedNode) return;
-
-      const svgPt = getSvgCoordinates(e);
-      const targetX = svgPt.x - dragOffset.x;
-      const targetY = svgPt.y - dragOffset.y;
-
-      const safePos = SceneCollisionDetector.preventOverlapOnDrag(
-        draggedNode,
-        scene.nodes,
-        targetX,
-        targetY,
-        { x: 0, y: 0, width: currentConfig.width, height: currentConfig.height },
-        20
-      );
-
-      draggedNode.visualBounds.x = safePos.x;
-      draggedNode.visualBounds.y = safePos.y;
-      SceneCollisionDetector.syncNodePositions(draggedNode);
-
-      const g = document.getElementById(`svg-${draggedNode.id}`);
-      if (g) {
-        g.setAttribute('transform', `translate(${safePos.x}, ${safePos.y})`);
-      }
-
-      recomputeConnectedEdges(draggedNode);
-      updateDebugOverlays();
-      updateInspector();
-      runSceneValidation();
-    });
-
-    window.addEventListener('mouseup', () => {
-      if (isDraggingNode && draggedNode) {
-        const g = document.getElementById(`svg-${draggedNode.id}`);
-        if (g) g.classList.remove('dragging');
-
-        SceneCollisionDetector.resolveCollisions(
-          scene.nodes,
-          undefined,
-          { x: 0, y: 0, width: currentConfig.width, height: currentConfig.height },
-          20
-        );
-        scene.nodes.forEach(n => recomputeConnectedEdges(n));
-
-        isDraggingNode = false;
-        draggedNode = null;
-        renderCircuitLayers();
-        runSceneValidation();
-      }
-    });
-
-    function recomputeConnectedEdges(node: SceneNode) {
-      scene.edges.forEach(edge => {
-        if (edge.sourceNodeId === node.id || edge.targetNodeId === node.id) {
-          const sNode = scene.nodes.find(n => n.id === edge.sourceNodeId);
-          const tNode = scene.nodes.find(n => n.id === edge.targetNodeId);
-          if (sNode && tNode) {
-            const sPort = sNode.ports.find(p => p.id === edge.sourcePortId);
-            const tPort = tNode.ports.find(p => p.id === edge.targetPortId);
-            if (sPort && tPort) {
-              const route = OrthogonalFilletRouter.route(sPort, tPort, 20);
-              edge.svgPathData = route.svgPathData;
-              const path = document.getElementById(`edge-path-${edge.id}`);
-              if (path) path.setAttribute('d', route.svgPathData);
-            }
-          }
-        }
-      });
-    }
-
-    function runSceneValidation() {
-      const collisions = SceneCollisionDetector.detectCollisions(scene.nodes);
-      const accidental = collisions.filter(c => !c.isPermitted);
-
-      if (accidental.length === 0) {
-        validationBadgeText.className = 'validation-badge';
-        validationBadgeText.innerHTML = `<span>●</span><span>0 Violations (PASS)</span>`;
-        collisionDetailText.textContent = `Scene clearance verified. All ${scene.nodes.length} nodes and routed edges preserve safe bounds.`;
-      } else {
-        validationBadgeText.className = 'validation-badge has-error';
-        validationBadgeText.innerHTML = `<span>▲</span><span>${accidental.length} Collision(s) Detected</span>`;
-        collisionDetailText.textContent = `Violations: ${accidental.map(c => `${c.nodeAId} & ${c.nodeBId} (${Math.round(c.overlapArea)}px²)`).join(', ')}`;
-      }
-    }
-
-    btnRunValidation.addEventListener('click', runSceneValidation);
-
-    btnResolveCollisions.addEventListener('click', () => {
-      SceneCollisionDetector.resolveCollisions(
-        scene.nodes,
-        undefined,
-        { x: 0, y: 0, width: currentConfig.width, height: currentConfig.height },
-        20
-      );
-      scene.nodes.forEach(n => recomputeConnectedEdges(n));
-      renderCircuitLayers();
-      runSceneValidation();
-    });
-
-    function renderCircuitLayers() {
-      edgesLayer.innerHTML = '';
-      scene.edges.forEach(edge => {
-        const sNode = scene.nodes.find(n => n.id === edge.sourceNodeId);
-        const tNode = scene.nodes.find(n => n.id === edge.targetNodeId);
-        if (!sNode || !tNode) return;
-        if (sNode.visibility === 'hidden' || tNode.visibility === 'hidden') return;
-
-        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        g.setAttribute('class', 'circuit-edge-group');
-        g.setAttribute('data-edge-id', edge.id);
-
-        // 1. Semi-transparent glowing underlay (38px halo)
-        const pathUnderlay = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        pathUnderlay.setAttribute('d', edge.svgPathData);
-        pathUnderlay.setAttribute('fill', 'none');
-        pathUnderlay.setAttribute('stroke', currentTone.conduitGlow);
-        pathUnderlay.setAttribute('stroke-width', '38');
-        pathUnderlay.setAttribute('stroke-linecap', 'round');
-        pathUnderlay.setAttribute('stroke-linejoin', 'round');
-        pathUnderlay.setAttribute('opacity', '0.6');
-        pathUnderlay.setAttribute('filter', 'url(#conduit-glow)');
-
-        // 2. Thick Pastel Vascular Conduit Body (28px with 20px fillet corners)
-        const pathMain = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        pathMain.id = `edge-path-${edge.id}`;
-        pathMain.setAttribute('d', edge.svgPathData);
-        pathMain.setAttribute('fill', 'none');
-        pathMain.setAttribute('stroke', currentConduitPastel);
-        pathMain.setAttribute('stroke-width', '28');
-        pathMain.setAttribute('stroke-linecap', 'round');
-        pathMain.setAttribute('stroke-linejoin', 'round');
-
-        // 3. Central luminescent core lumen track (3px smooth guide)
-        const pathCore = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        pathCore.setAttribute('d', edge.svgPathData);
-        pathCore.setAttribute('fill', 'none');
-        pathCore.setAttribute('stroke', 'rgba(255, 255, 255, 0.45)');
-        pathCore.setAttribute('stroke-width', '3');
-        pathCore.setAttribute('stroke-linecap', 'round');
-        pathCore.setAttribute('stroke-linejoin', 'round');
-
-        g.appendChild(pathUnderlay);
-        g.appendChild(pathMain);
-        g.appendChild(pathCore);
-        edgesLayer.appendChild(g);
-      });
-
-      nodesLayer.innerHTML = '';
-      scene.nodes.forEach(node => {
-        if (node.visibility === 'hidden') return;
-
-        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        g.id = `svg-${node.id}`;
-        g.setAttribute('class', `interactive-node ${node.id === selectedNodeId ? 'selected' : ''}`);
-        g.setAttribute('transform', `translate(${node.visualBounds.x}, ${node.visualBounds.y})`);
-
-        g.addEventListener('mousedown', (e: MouseEvent) => {
-          e.stopPropagation();
-          startNodeDrag(node, e);
-        });
-
-        g.addEventListener('click', (e: MouseEvent) => {
-          e.stopPropagation();
-          selectNode(node.id);
-        });
-
-        // 1. Crisp White Card Surface with 1px border and refined drop shadow
-        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        rect.setAttribute('class', 'node-card-bg');
-        rect.setAttribute('width', `${node.visualBounds.width}`);
-        rect.setAttribute('height', `${node.visualBounds.height}`);
-        rect.setAttribute('rx', '14');
-        rect.setAttribute('ry', '14');
-        rect.setAttribute('fill', '#ffffff');
-        rect.setAttribute('stroke', node.id === selectedNodeId ? 'var(--nexafy-accent)' : '#e2e8f0');
-        rect.setAttribute('stroke-width', node.id === selectedNodeId ? '2' : '1');
-        rect.setAttribute('filter', 'url(#card-shadow)');
-        g.appendChild(rect);
-
-        // 2. Active status indicator dot in top-right
-        const statusDot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        statusDot.setAttribute('cx', `${node.visualBounds.width - 16}`);
-        statusDot.setAttribute('cy', '16');
-        statusDot.setAttribute('r', '4');
-        statusDot.setAttribute('fill', '#10b981');
-        g.appendChild(statusDot);
-
-        // 3. Bold Node Title (WCAG AAA dark slate on white - no black on dark blue!)
-        const textName = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        textName.setAttribute('class', 'node-title-text');
-        textName.setAttribute('x', '16');
-        textName.setAttribute('y', '27');
-        textName.setAttribute('fill', '#0f172a');
-        textName.setAttribute('font-family', 'Plus Jakarta Sans, sans-serif');
-        textName.setAttribute('font-size', '12.5');
-        textName.setAttribute('font-weight', '700');
-        textName.textContent = node.name.length > 24 ? node.name.slice(0, 22) + '...' : node.name;
-        g.appendChild(textName);
-
-        // 4. Monospace Role Badge container & label
-        const rolePill = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        const roleTextContent = node.semanticRole.toUpperCase();
-        const rolePillW = Math.max(68, roleTextContent.length * 6.5 + 14);
-        rolePill.setAttribute('x', '16');
-        rolePill.setAttribute('y', '36');
-        rolePill.setAttribute('width', `${rolePillW}`);
-        rolePill.setAttribute('height', '18');
-        rolePill.setAttribute('rx', '4');
-        rolePill.setAttribute('fill', '#f1f5f9');
-        rolePill.setAttribute('stroke', '#cbd5e1');
-        rolePill.setAttribute('stroke-width', '0.75');
-        g.appendChild(rolePill);
-
-        const textRole = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        textRole.setAttribute('class', 'node-role-text');
-        textRole.setAttribute('x', '22');
-        textRole.setAttribute('y', '49');
-        textRole.setAttribute('fill', '#0369a1');
-        textRole.setAttribute('font-family', 'JetBrains Mono, monospace');
-        textRole.setAttribute('font-size', '9.5');
-        textRole.setAttribute('font-weight', '700');
-        textRole.textContent = roleTextContent;
-        g.appendChild(textRole);
-
-        // 5. Telemetry / Metrics sub-row if card has sufficient height (>= 75px)
-        if (node.visualBounds.height >= 75) {
-          const telemetryText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-          telemetryText.setAttribute('x', '16');
-          telemetryText.setAttribute('y', `${Math.min(74, node.visualBounds.height - 12)}`);
-          telemetryText.setAttribute('fill', '#64748b');
-          telemetryText.setAttribute('font-family', 'Inter, sans-serif');
-          telemetryText.setAttribute('font-size', '10');
-          telemetryText.setAttribute('font-weight', '500');
-
-          let subInfo = '0ms latency · sync active';
-          if (node.semanticRole === 'origin') subInfo = 'Port 443 · Root Authority';
-          else if (node.semanticRole === 'hub') subInfo = 'Living Orthogonal Router';
-          else if (node.id.includes('shield') || node.id.includes('escrow')) subInfo = '100% Custody · Zero Risk';
-
-          telemetryText.textContent = subInfo;
-          g.appendChild(telemetryText);
-        }
-
-        // 6. Ports on Card Perimeter with white border ring
-        node.ports.forEach(port => {
-          const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-          const px = port.computedAbsolutePosition ? port.computedAbsolutePosition.x - node.visualBounds.x : port.offsetRatio.x * node.visualBounds.width;
-          const py = port.computedAbsolutePosition ? port.computedAbsolutePosition.y - node.visualBounds.y : port.offsetRatio.y * node.visualBounds.height;
-          circle.setAttribute('cx', `${px}`);
-          circle.setAttribute('cy', `${py}`);
-          circle.setAttribute('r', '6');
-          circle.setAttribute('fill', port.role === 'source' ? '#0284c7' : '#10b981');
-          circle.setAttribute('stroke', '#ffffff');
-          circle.setAttribute('stroke-width', '2');
-          g.appendChild(circle);
-        });
-
-        nodesLayer.appendChild(g);
-      });
-
-      updateDebugOverlays();
-    }
-
-    function updateDebugOverlays() {
-      debugLayer.innerHTML = '';
-      if (!toggleDebug.checked) return;
-
-      scene.nodes.forEach(node => {
-        if (node.visibility === 'hidden') return;
-        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        rect.setAttribute('x', `${node.visualBounds.x - 10}`);
-        rect.setAttribute('y', `${node.visualBounds.y - 10}`);
-        rect.setAttribute('width', `${node.visualBounds.width + 20}`);
-        rect.setAttribute('height', `${node.visualBounds.height + 20}`);
-        rect.setAttribute('rx', '16');
-        rect.setAttribute('ry', '16');
-        rect.setAttribute('fill', 'none');
-        rect.setAttribute('stroke', '#2a67d9');
-        rect.setAttribute('stroke-width', '1');
-        rect.setAttribute('stroke-dasharray', '3 3');
-        rect.setAttribute('stroke-opacity', '0.4');
-        debugLayer.appendChild(rect);
-      });
-    }
-
-    function startLivingEngine() {
-      let t = 0;
-      function loop() {
-        t += 0.035;
-        // Floating breathing motion for nodes (y = +/- 3px sinusoidal wave)
-        if (isLivingMotionEnabled && !isDraggingNode && !isTourFlying) {
-          scene.nodes.forEach((node, idx) => {
-            const el = document.getElementById(`svg-${node.id}`);
-            if (el && node.visibility !== 'hidden') {
-              const deltaY = Math.sin(t * 1.5 + idx * 0.9) * 3.0;
-              el.setAttribute('transform', `translate(${node.visualBounds.x}, ${node.visualBounds.y + deltaY})`);
-            }
-          });
-        }
-
-        // Animated signal pulse particles (r=6, glowing white/cyan flowing through 28px conduits)
-        if (isPulsesEnabled) {
-          pulsesLayer.innerHTML = '';
-          scene.edges.forEach((edge, idx) => {
-            const sNode = scene.nodes.find(n => n.id === edge.sourceNodeId);
-            const tNode = scene.nodes.find(n => n.id === edge.targetNodeId);
-            if (!sNode || !tNode || sNode.visibility === 'hidden' || tNode.visibility === 'hidden') return;
-
-            const path = document.getElementById(`edge-path-${edge.id}`) as unknown as SVGPathElement;
-            if (path && path.getTotalLength) {
-              const len = path.getTotalLength();
-              if (len <= 0) return;
-
-              // Run two staggered pulse particles per conduit
-              const offsets = [0, 0.5];
-              offsets.forEach(offset => {
-                let p = ((pulseProgress[edge.id] || (idx * 0.25)) + offset) % 1;
-                const pt = path.getPointAtLength(len * p);
-
-                const pulseGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-
-                // Outer glowing halo
-                const glow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                glow.setAttribute('cx', `${pt.x}`);
-                glow.setAttribute('cy', `${pt.y}`);
-                glow.setAttribute('r', '9');
-                glow.setAttribute('fill', currentTone.pulseColor);
-                glow.setAttribute('opacity', '0.5');
-                glow.setAttribute('filter', 'url(#pulse-glow)');
-
-                // Inner crisp white core (r=6)
-                const core = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                core.setAttribute('cx', `${pt.x}`);
-                core.setAttribute('cy', `${pt.y}`);
-                core.setAttribute('r', '6');
-                core.setAttribute('fill', '#ffffff');
-                core.setAttribute('stroke', currentTone.accent);
-                core.setAttribute('stroke-width', '1.5');
-
-                pulseGroup.appendChild(glow);
-                pulseGroup.appendChild(core);
-                pulsesLayer.appendChild(pulseGroup);
-              });
-
-              pulseProgress[edge.id] = ((pulseProgress[edge.id] || 0) + 0.007) % 1;
-            }
-          });
-        }
-
-        _livingEngineAnimId = requestAnimationFrame(loop);
-      }
-      _livingEngineAnimId = requestAnimationFrame(loop);
-    }
-
-    function updateStagePath() {
-      const cmds = generateContainerCommands(currentConfig);
-      const d = commandsToSvgPath(cmds);
-      pathElem.setAttribute('d', d);
-      outputArea.textContent = d;
-      svgElem.setAttribute('viewBox', `0 0 ${currentConfig.width} ${currentConfig.height}`);
-      const glow = document.getElementById('sculpted-glow');
-      if (glow) {
-        glow.setAttribute('width', `${currentConfig.width}`);
-        glow.setAttribute('height', `${currentConfig.height}`);
-      }
-    }
-
-    function syncUIFromConfig() {
-      inputW.value = `${currentConfig.width}`;
-      inputH.value = `${currentConfig.height}`;
-      inputBaseR.value = `${currentConfig.baseRadius}`;
-      document.getElementById('val-width')!.textContent = `${currentConfig.width}`;
-      document.getElementById('val-height')!.textContent = `${currentConfig.height}`;
-      document.getElementById('val-base-radius')!.textContent = `${currentConfig.baseRadius}`;
-
-      checkCrown.checked = currentConfig.crown.enabled;
-      inputCrownW.value = `${currentConfig.crown.width}`;
-      document.getElementById('val-crown-w')!.textContent = `${currentConfig.crown.width}`;
-      inputCrownH.value = `${currentConfig.crown.height}`;
-      document.getElementById('val-crown-h')!.textContent = `${currentConfig.crown.height}`;
-      inputCrownFillet.value = `${currentConfig.crown.filletRadius}`;
-      document.getElementById('val-crown-fillet')!.textContent = `${currentConfig.crown.filletRadius}`;
-
-      checkShelf.checked = currentConfig.shelf.enabled;
-      inputShelfW.value = `${currentConfig.shelf.width}`;
-      document.getElementById('val-shelf-w')!.textContent = `${currentConfig.shelf.width}`;
-      inputShelfH.value = `${currentConfig.shelf.height}`;
-      document.getElementById('val-shelf-h')!.textContent = `${currentConfig.shelf.height}`;
-      inputShelfFillet.value = `${currentConfig.shelf.filletRadius}`;
-      document.getElementById('val-shelf-fillet')!.textContent = `${currentConfig.shelf.filletRadius}`;
-    }
-
-    function readUIIntoConfig() {
-      currentConfig.width = parseInt(inputW.value, 10);
-      currentConfig.height = parseInt(inputH.value, 10);
-      currentConfig.baseRadius = parseInt(inputBaseR.value, 10);
-
-      currentConfig.crown.enabled = checkCrown.checked;
-      currentConfig.crown.width = parseInt(inputCrownW.value, 10);
-      currentConfig.crown.height = parseInt(inputCrownH.value, 10);
-      currentConfig.crown.filletRadius = parseInt(inputCrownFillet.value, 10);
-
-      currentConfig.shelf.enabled = checkShelf.checked;
-      currentConfig.shelf.width = parseInt(inputShelfW.value, 10);
-      currentConfig.shelf.height = parseInt(inputShelfH.value, 10);
-      currentConfig.shelf.filletRadius = parseInt(inputShelfFillet.value, 10);
-
-      syncUIFromConfig();
-      updateStagePath();
-    }
-
-    [inputW, inputH, inputBaseR, checkCrown, inputCrownW, inputCrownH, inputCrownFillet, checkShelf, inputShelfW, inputShelfH, inputShelfFillet].forEach(input => {
-      input.addEventListener('input', readUIIntoConfig);
-    });
-
-    document.querySelectorAll('.viewport-chip').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.viewport-chip').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const w = parseInt(btn.getAttribute('data-w')!, 10);
-        const h = parseInt(btn.getAttribute('data-h')!, 10);
-        currentConfig.width = w;
-        currentConfig.height = h;
-        syncUIFromConfig();
-        updateStagePath();
-        fitStageToViewport();
-      });
-    });
-
-    presetSelector.addEventListener('change', () => {
-      const pKey = presetSelector.value as keyof typeof NEXAFY_PRESETS;
-      if (NEXAFY_PRESETS[pKey]) {
-        currentConfig = JSON.parse(JSON.stringify(NEXAFY_PRESETS[pKey]));
-        scene = createSceneForPreset(currentConfig.id, currentConfig.width, currentConfig.height);
-        selectedNodeId = scene.nodes[0]?.id || '';
-
-        syncUIFromConfig();
-        updateStagePath();
-        fitStageToViewport();
-        initSceneTree();
-        renderCircuitLayers();
-        runSceneValidation();
-      }
-    });
-
-    toggleLivingMotion.addEventListener('change', () => {
-      isLivingMotionEnabled = toggleLivingMotion.checked;
-    });
-
-    togglePulses.addEventListener('change', () => {
-      isPulsesEnabled = togglePulses.checked;
-      if (!isPulsesEnabled) pulsesLayer.innerHTML = '';
-    });
-
-    toggleCircuit.addEventListener('change', () => {
-      edgesLayer.style.display = toggleCircuit.checked ? 'block' : 'none';
-      pulsesLayer.style.display = toggleCircuit.checked ? 'block' : 'none';
-    });
-
-    toggleDebug.addEventListener('change', updateDebugOverlays);
-
-    toggleRef.addEventListener('change', () => {
-      refImg.style.display = toggleRef.checked ? 'block' : 'none';
-      refImg.style.opacity = toggleRef.checked ? `${parseInt(inputRefOpacity.value) / 100}` : '0';
-    });
-
-    inputRefOpacity.addEventListener('input', () => {
-      refImg.style.opacity = `${parseInt(inputRefOpacity.value) / 100}`;
-      document.getElementById('val-ref-opacity')!.textContent = `${inputRefOpacity.value}%`;
-    });
-
-    selectRefBlend.addEventListener('change', () => {
-      refImg.style.mixBlendMode = selectRefBlend.value;
-    });
-
-    // Morph Logic
-    function applyMorph(t: number) {
-      const cfgA = NEXAFY_PRESETS[morphA.value as keyof typeof NEXAFY_PRESETS] || NEXAFY_PRESETS.CHANNELS;
-      const cfgB = NEXAFY_PRESETS[morphB.value as keyof typeof NEXAFY_PRESETS] || NEXAFY_PRESETS.SAAS;
-      const cmdsA = generateContainerCommands(cfgA);
-      const cmdsB = generateContainerCommands(cfgB);
-      const morphedCmds = interpolateCommands(cmdsA, cmdsB, t);
-      const d = commandsToSvgPath(morphedCmds);
-      pathElem.setAttribute('d', d);
-      outputArea.textContent = d;
-    }
-
-    morphT.addEventListener('input', () => {
-      const t = parseFloat(morphT.value);
-      valMorphT.textContent = t.toFixed(2);
-      applyMorph(t);
-    });
-
-    function playMorphStep() {
-      if (!isPlayingMorph) return;
-      let t = parseFloat(morphT.value) + 0.012 * morphDirection;
-      if (t >= 1) {
-        t = 1;
-        morphDirection = -1;
-      } else if (t <= 0) {
-        t = 0;
-        morphDirection = 1;
-      }
-      morphT.value = t.toString();
-      valMorphT.textContent = t.toFixed(2);
-      applyMorph(t);
-      morphAnimId = requestAnimationFrame(playMorphStep);
-    }
-
-    btnPlayMorph.addEventListener('click', () => {
-      if (isPlayingMorph) {
-        isPlayingMorph = false;
-        btnPlayMorph.textContent = 'Play Morph Loop';
-        if (morphAnimId) cancelAnimationFrame(morphAnimId);
-      } else {
-        isPlayingMorph = true;
-        btnPlayMorph.textContent = 'Pause Morph Loop';
-        playMorphStep();
-      }
-    });
-
-    // Primitives description selector
-    const PRIM_DESCRIPTIONS: Record<string, string> = {
-      PROTRUDE: 'PROTRUDE: Outward plateau extrusion. Used for Hero top canopy headline crown.',
-      RECESS: 'RECESS: Inward cavity indentation. Used for top nav bar clearance & access channels.',
-      STEP: 'STEP: Terraced elevation change. Used for Sustainability aerial terrace balance.',
-      SHELF: 'SHELF: Suspended platform drop. Used for guarantee ticker shelf (CHANNELS).',
-      TAB: 'TAB: Compact protrusion for interactive anchors (Down-arrow circle, Book demo).',
-      CHANNEL: 'CHANNEL: Longitudinal wiring conduit for 28px vascular circuit docking.',
-      CUTOUT: 'CUTOUT: Subtractive relief for floating UI (Chapter tracker, chat pill).',
-      ALL: 'CANONICAL: Full 58-command loop providing 100% deterministic morphing.'
-    };
-
-    document.querySelectorAll('.primitive-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.primitive-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const prim = btn.getAttribute('data-prim') || 'PROTRUDE';
-        document.getElementById('primitive-desc')!.textContent = PRIM_DESCRIPTIONS[prim] || '';
-      });
-    });
-
-    // Copy Path
-    document.getElementById('btn-copy-path')?.addEventListener('click', () => {
-      navigator.clipboard.writeText(pathElem.getAttribute('d') || '');
-      alert('SVG Path copied to clipboard!');
-    });
-
-    // Timeline Playback
-    btnPlayTimeline.addEventListener('click', () => {
-      isPlayingTimeline = !isPlayingTimeline;
-      btnPlayTimeline.textContent = isPlayingTimeline ? 'Pause' : 'Play';
-      if (isPlayingTimeline) {
-        let lastT = performance.now();
-        function tLoop(now: number) {
-          const dt = (now - lastT) / 1000;
-          lastT = now;
-          currentTimelineTime += dt;
-          if (currentTimelineTime > 48.15) currentTimelineTime = 0;
-          inputTimeline.value = currentTimelineTime.toFixed(2);
-          displayTimeline.textContent = `${currentTimelineTime.toFixed(2).padStart(5, '0')}s / 48.15s`;
-          applyTimelineFrame(currentTimelineTime);
-          if (isPlayingTimeline) timelineAnimId = requestAnimationFrame(tLoop);
-        }
-        timelineAnimId = requestAnimationFrame(tLoop);
-      } else if (timelineAnimId) {
-        cancelAnimationFrame(timelineAnimId);
-      }
-    });
-
-    btnResetTimeline.addEventListener('click', () => {
-      if (isPlayingTimeline) {
-        isPlayingTimeline = false;
-        btnPlayTimeline.textContent = 'Play';
-        if (timelineAnimId) cancelAnimationFrame(timelineAnimId);
-      }
-      jumpTimelineTo(0.0);
-    });
-
-    inputTimeline.addEventListener('input', () => {
-      jumpTimelineTo(parseFloat(inputTimeline.value));
-    });
-
-    // Initialize
-    syncUIFromConfig();
-    updateStagePath();
-    fitStageToViewport();
-    initTimelineMarkers();
-    initSceneTree();
-    renderCircuitLayers();
-    runSceneValidation();
-    startLivingEngine();
-
-    window.addEventListener('beforeunload', () => {
-      clearTourTimeouts();
-      if (_livingEngineAnimId) cancelAnimationFrame(_livingEngineAnimId);
-      if (timelineAnimId) cancelAnimationFrame(timelineAnimId);
-      if (morphAnimId) cancelAnimationFrame(morphAnimId);
+      btn.classList.toggle('active', (btn as HTMLElement).dataset.tone === toneKey);
     });
   }
+
+  function applyConduitPastel(pastel: string) {
+    const hub = document.getElementById('circuit-hub');
+    if (hub) hub.style.backgroundColor = pastel;
+
+    const pipes = document.querySelectorAll<SVGPathElement>('.circuit-pipe-line:not(.line-flecto-mark)');
+    pipes.forEach(p => p.setAttribute('stroke', pastel));
+
+    const mark = document.querySelector<SVGPathElement>('.line-flecto-mark');
+    if (mark) mark.setAttribute('fill', pastel);
+
+    document.querySelectorAll('.conduit-pill').forEach(btn => {
+      btn.classList.toggle('active', (btn as HTMLElement).dataset.pastel === pastel);
+    });
+  }
+
+  // Tone buttons click
+  document.querySelectorAll('.tone-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tone = (btn as HTMLElement).dataset.tone || 'oceanic';
+      applyTone(tone);
+    });
+  });
+
+  // Conduit pastel buttons click
+  document.querySelectorAll('.conduit-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pastel = (btn as HTMLElement).dataset.pastel || '#57f09e';
+      applyConduitPastel(pastel);
+    });
+  });
+
+  // Auto-Tour Choreography
+  let isTourPlaying = false;
+  let tourTimer: any = null;
+  const btnAutoTour = document.getElementById('btn-auto-tour');
+  const tourBtnIcon = document.getElementById('tour-btn-icon');
+  const tourBtnText = document.getElementById('auto-tour-btn-text');
+
+  function startAutoTour() {
+    isTourPlaying = true;
+    if (tourBtnIcon) tourBtnIcon.textContent = '■';
+    if (tourBtnText) tourBtnText.textContent = 'Detener Tour';
+    btnAutoTour?.classList.add('running');
+
+    let currentCh = 1;
+    function cycle() {
+      if (!isTourPlaying) return;
+      const fn = (window as any).__nexafyHeroGoToChapter;
+      if (typeof fn === 'function') {
+        fn(currentCh);
+      }
+      const select = document.getElementById('workbench-preset-select') as HTMLSelectElement;
+      if (select) select.value = String(currentCh);
+
+      currentCh = currentCh >= 3 ? 1 : currentCh + 1;
+      tourTimer = setTimeout(cycle, 4500);
+    }
+    cycle();
+  }
+
+  function stopAutoTour() {
+    isTourPlaying = false;
+    clearTimeout(tourTimer);
+    if (tourBtnIcon) tourBtnIcon.textContent = '▶';
+    if (tourBtnText) tourBtnText.textContent = 'Auto-Tour En Vivo';
+    btnAutoTour?.classList.remove('running');
+  }
+
+  btnAutoTour?.addEventListener('click', () => {
+    if (isTourPlaying) stopAutoTour();
+    else startAutoTour();
+  });
+
+  // Preset Select change
+  const presetSelect = document.getElementById('workbench-preset-select') as HTMLSelectElement;
+  presetSelect?.addEventListener('change', (e) => {
+    const val = parseInt((e.target as HTMLSelectElement).value, 10);
+    const fn = (window as any).__nexafyHeroGoToChapter;
+    if (typeof fn === 'function') {
+      fn(val);
+    }
+  });
+
+  // Toggle Inspector Drawer
+  const inspectorDrawer = document.getElementById('workbench-inspector-drawer');
+  const btnToggleInspector = document.getElementById('btn-toggle-inspector');
+  const btnCloseInspector = document.getElementById('btn-close-inspector');
+
+  btnToggleInspector?.addEventListener('click', () => {
+    if (inspectorDrawer) {
+      const isVisible = inspectorDrawer.style.display !== 'none';
+      inspectorDrawer.style.display = isVisible ? 'none' : 'block';
+      if (!isVisible) {
+        inspectorDrawer.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  });
+
+  btnCloseInspector?.addEventListener('click', () => {
+    if (inspectorDrawer) inspectorDrawer.style.display = 'none';
+  });
+
+  // Copy SVG Path Button
+  const btnCopySvg = document.getElementById('btn-copy-svg-path');
+  btnCopySvg?.addEventListener('click', () => {
+    const path = document.querySelector<SVGPathElement>('.hero-silhouette-path');
+    if (path) {
+      const d = path.getAttribute('d') || '';
+      navigator.clipboard.writeText(d).then(() => {
+        btnCopySvg.textContent = '✓ ¡Copiado!';
+        setTimeout(() => { btnCopySvg.textContent = 'Copiar SVG Path'; }, 2000);
+      });
+    }
+  });
 </script>

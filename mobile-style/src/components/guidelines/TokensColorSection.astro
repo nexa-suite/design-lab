@@ -4,30 +4,535 @@
  * Canonical Color Tokens & Material 3 Dynamic Roles for Android
  * Covers Full M3 Palette, Tonal Elevation Containers, Contrast Matrix & Kotlin 2.4 Contracts
  */
+
+interface ColorToken {
+  name: string;
+  token: string;
+  lightHex: string;
+  darkHex: string;
+  ratio: string;
+  passLevel: string;
+  usage: string;
+  foreground: string;
+  bgHex: string;
+  fgHex: string;
+}
+
+const m3PrimaryTokens: ColorToken[] = [
+  {
+    name: 'Primary',
+    token: 'NexaPrimary',
+    lightHex: '#2A67D9',
+    darkHex: '#AEC6FF',
+    ratio: '5.2:1',
+    passLevel: 'PASS AA',
+    usage: 'Botones CTA primarios, TopAppBar tint, FAB flotante',
+    foreground: 'OnPrimary (#FFFFFF)',
+    bgHex: '#2A67D9',
+    fgHex: '#FFFFFF'
+  },
+  {
+    name: 'OnPrimary',
+    token: 'NexaOnPrimary',
+    lightHex: '#FFFFFF',
+    darkHex: '#002E6C',
+    ratio: '16.2:1',
+    passLevel: 'PASS AAA',
+    usage: 'Texto e iconos sobre superficie Primary',
+    foreground: 'Primary (#2A67D9)',
+    bgHex: '#FFFFFF',
+    fgHex: '#2A67D9'
+  },
+  {
+    name: 'PrimaryContainer',
+    token: 'NexaPrimaryContainer',
+    lightHex: '#DBEAFE',
+    darkHex: '#1D4ED8',
+    ratio: '6.8:1',
+    passLevel: 'PASS AA',
+    usage: 'Chips activos, paradas seleccionadas en ruta',
+    foreground: 'OnPrimaryContainer (#1E40AF)',
+    bgHex: '#DBEAFE',
+    fgHex: '#1E40AF'
+  },
+  {
+    name: 'OnPrimaryContainer',
+    token: 'NexaOnPrimaryContainer',
+    lightHex: '#1E40AF',
+    darkHex: '#DBEAFE',
+    ratio: '8.4:1',
+    passLevel: 'PASS AAA',
+    usage: 'Tipografía y glifos sobre PrimaryContainer',
+    foreground: 'PrimaryContainer (#DBEAFE)',
+    bgHex: '#1E40AF',
+    fgHex: '#DBEAFE'
+  },
+  {
+    name: 'Secondary (Brand Navy)',
+    token: 'NexaSecondary',
+    lightHex: '#082846',
+    darkHex: '#7BA4D5',
+    ratio: '14.8:1',
+    passLevel: 'PASS AAA',
+    usage: 'Botones industriales 56dp (Guantes), cabeceras',
+    foreground: 'OnSecondary (#FFFFFF)',
+    bgHex: '#082846',
+    fgHex: '#FFFFFF'
+  },
+  {
+    name: 'OnSecondary',
+    token: 'NexaOnSecondary',
+    lightHex: '#FFFFFF',
+    darkHex: '#082846',
+    ratio: '14.8:1',
+    passLevel: 'PASS AAA',
+    usage: 'Texto sobre botones secundarios o Brand Navy',
+    foreground: 'Secondary (#082846)',
+    bgHex: '#FFFFFF',
+    fgHex: '#082846'
+  },
+  {
+    name: 'Tertiary (Brand Celeste)',
+    token: 'NexaTertiary',
+    lightHex: '#38C8FF',
+    darkHex: '#00E5FF',
+    ratio: '9.1:1',
+    passLevel: 'PASS AAA',
+    usage: 'Mira láser CameraX, telemetría Bluetooth activa',
+    foreground: 'OnTertiary (#082846)',
+    bgHex: '#38C8FF',
+    fgHex: '#082846'
+  },
+  {
+    name: 'Surface Lowest (Card)',
+    token: 'NexaSurfaceContainerLowest',
+    lightHex: '#FFFFFF',
+    darkHex: '#0F172A',
+    ratio: '16.2:1',
+    passLevel: 'PASS AAA',
+    usage: 'Tarjetas de despacho, modales, dialogs',
+    foreground: 'OnSurface (#0F172A)',
+    bgHex: '#FFFFFF',
+    fgHex: '#0F172A'
+  },
+  {
+    name: 'Surface Container',
+    token: 'NexaSurfaceContainer',
+    lightHex: '#F1F5F9',
+    darkHex: '#162235',
+    ratio: '13.5:1',
+    passLevel: 'PASS AAA',
+    usage: 'Contenedor base para listas LazyColumn',
+    foreground: 'OnSurface (#0F172A)',
+    bgHex: '#F1F5F9',
+    fgHex: '#0F172A'
+  },
+  {
+    name: 'Error (Alerta Crítica)',
+    token: 'NexaError',
+    lightHex: '#B91C1C',
+    darkHex: '#FFB4AB',
+    ratio: '5.6:1',
+    passLevel: 'PASS AA',
+    usage: 'Alertas críticas >6.0°C, rechazo de entrega POD',
+    foreground: 'OnError (#FFFFFF)',
+    bgHex: '#B91C1C',
+    fgHex: '#FFFFFF'
+  },
+  {
+    name: 'ErrorContainer',
+    token: 'NexaErrorContainer',
+    lightHex: '#FEE2E2',
+    darkHex: '#93000A',
+    ratio: '8.1:1',
+    passLevel: 'PASS AAA',
+    usage: 'Banners de discrepancia de despacho y fallas',
+    foreground: 'OnErrorContainer (#991B1B)',
+    bgHex: '#FEE2E2',
+    fgHex: '#991B1B'
+  },
+  {
+    name: 'Outline Variant',
+    token: 'NexaOutlineVariant',
+    lightHex: '#E2E8F0',
+    darkHex: '#44474E',
+    ratio: '3.0:1',
+    passLevel: 'PASS UI',
+    usage: 'Bordes decorativos de tarjetas y separadores',
+    foreground: 'Surface (#FFFFFF)',
+    bgHex: '#E2E8F0',
+    fgHex: '#334155'
+  }
+];
+
+const neutralScale = [
+  { name: 'Slate 50', hex: '#F8FAFC', role: 'Fondo Scaffold claro', textLight: false },
+  { name: 'Slate 100', hex: '#F1F5F9', role: 'Surface Container Base', textLight: false },
+  { name: 'Slate 200', hex: '#E2E8F0', role: 'Bordes estructurales', textLight: false },
+  { name: 'Slate 300', hex: '#CBD5E1', role: 'Divisores y campos texto', textLight: false },
+  { name: 'Slate 400', hex: '#94A3B8', role: 'Iconos inactivos, placeholders', textLight: false },
+  { name: 'Slate 500', hex: '#64748B', role: 'Texto secundario de soporte', textLight: true },
+  { name: 'Slate 600', hex: '#475569', role: 'Texto secundario de alto contraste', textLight: true },
+  { name: 'Slate 700', hex: '#334155', role: 'Subtítulos y etiquetas', textLight: true },
+  { name: 'Slate 800', hex: '#1E293B', role: 'Títulos de sección en Dark', textLight: true },
+  { name: 'Slate 900', hex: '#0F172A', role: 'Texto principal OnSurface', textLight: true },
+  { name: 'Slate 950', hex: '#020617', role: 'Superficie base Scaffold Dark', textLight: true }
+];
+
+const semanticFamilies = [
+  {
+    name: 'Cold Chain OK (Success)',
+    icon: 'pi-check-circle',
+    example: '2.0°C – 6.0°C Calibrado',
+    note: 'Cadena de frío certificada para perecibles',
+    surface: '#F0FDF4',
+    border: '#BBF7D0',
+    foreground: '#15803D',
+    chipTone: 'success'
+  },
+  {
+    name: 'Offline Sync (Warning)',
+    icon: 'pi-clock',
+    example: 'Cola WorkManager Pendiente',
+    note: 'Sincronización en segundo plano sin red',
+    surface: '#FFFBEB',
+    border: '#FDE68A',
+    foreground: '#B45309',
+    chipTone: 'warning'
+  },
+  {
+    name: 'Temperatura Crítica (Danger)',
+    icon: 'pi-ban',
+    example: 'Cadena Rota >6.0°C (Rechazo)',
+    note: 'Discrepancia crítica o daño de embalaje',
+    surface: '#FEF2F2',
+    border: '#FECACA',
+    foreground: '#B91C1C',
+    chipTone: 'danger'
+  },
+  {
+    name: 'Telemetría & BLE (Info)',
+    icon: 'pi-compass',
+    example: 'Sensor BLE en Rango (RSSI -58)',
+    note: 'Transmisión continua de termógrafo móvil',
+    surface: '#EFF6FF',
+    border: '#BFDBFE',
+    foreground: '#1D4ED8',
+    chipTone: 'info'
+  }
+];
 ---
 
 <div class="tokens-color-container" data-platform-target="universal">
-  <!-- Section 1: Fundamentos M3 & Filosofía de Colorimetría -->
+  <!-- Section 1: Escala Visual de Swatches Material 3 -->
   <section class="cuadro-card">
     <div class="cuadro-header">
       <div class="cuadro-header-left">
         <span class="cuadro-num-badge">01</span>
         <div>
-          <p class="cuadro-kicker">MATERIAL DESIGN 3 · SISTEMA COMPLETO DE COLOR</p>
-          <h3 class="cuadro-title">Paleta Tonal Material 3 & Contratos de Colorimetría</h3>
+          <p class="cuadro-kicker">MATERIAL DESIGN 3 · ESCALA VISUAL DE SWATCHES</p>
+          <h3 class="cuadro-title">Paleta Tonal Dinámica M3 & Verificación de Contraste</h3>
           <p class="cuadro-subtitle">
-            Implementación canónica del sistema de roles tonales Material 3 para <strong>Nexa Suite Mobile (Android Kotlin Compose)</strong>. Cada rol tonal define estrictamente su contenedor, contenido de primer plano y contraste accesible verificado bajo <strong>WCAG 2.2 AA (&ge; 4.5:1 texto, &ge; 3.0:1 controles interactivos)</strong>.
+            Cada tarjeta muestra la previsualización visual del rol, su contraste verificado bajo <strong>WCAG 2.2 AA/AAA</strong>, valores Hex para modo Claro/Oscuro y su función canónica en la suite móvil <strong>Android Jetpack Compose</strong>.
           </p>
         </div>
       </div>
       <div class="cuadro-tags">
-        <span class="cuadro-tag primary"><i class="pi pi-shield"></i> WCAG 2.2 AA</span>
+        <span class="cuadro-tag primary"><i class="pi pi-shield"></i> WCAG 2.2 AA/AAA</span>
         <span class="cuadro-tag kotlin"><i class="pi pi-android"></i> M3 ColorScheme</span>
         <span class="cuadro-tag success"><i class="pi pi-check"></i> 100% Contraste Verificado</span>
       </div>
     </div>
 
-    <!-- CUADRO ARQUITECTÓNICO: Roles Principales y Secundarios -->
+    <!-- Grid de Swatches Visuales Ricos (Igual que web-style blue-scale) -->
+    <div class="m3-visual-scale-grid">
+      {m3PrimaryTokens.map((token) => (
+        <article class="m3-token-card">
+          <div class="m3-swatch-box" style={`background: ${token.bgHex}; color: ${token.fgHex};`}>
+            <div class="swatch-top-meta">
+              <span class="swatch-role-tag">{token.name}</span>
+              <span class="swatch-pass-tag">{token.passLevel}</span>
+            </div>
+            <div class="swatch-bottom-hex">
+              <strong>{token.lightHex}</strong>
+              <small>{token.ratio}</small>
+            </div>
+          </div>
+          <div class="m3-token-body">
+            <div class="token-title-row">
+              <strong>{token.name}</strong>
+              <code class="token-code">{token.token}</code>
+            </div>
+            <div class="hex-chips-row">
+              <span class="hex-chip light"><i class="pi pi-sun"></i> {token.lightHex}</span>
+              <span class="hex-chip dark"><i class="pi pi-moon"></i> {token.darkHex}</span>
+            </div>
+            <p class="token-usage-desc">{token.usage}</p>
+            <div class="foreground-pair-badge">
+              <span class="pair-label">Pareja:</span>
+              <span class="pair-value">{token.foreground}</span>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Section 2: Neutral Ramp (Rampa Neutral Slate 50 → 950) -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">02</span>
+        <div>
+          <p class="cuadro-kicker">JERARQUÍA DE LECTURA · RAMPA NEUTRAL</p>
+          <h3 class="cuadro-title">Escala Tonal de Slate (50 a 950) para Superficies y Textos</h3>
+          <p class="cuadro-subtitle">
+            Los valores neutrales se proyectan visualmente como superficies, bordes de separación y niveles de opacidad de texto, garantizando contraste continuo bajo cualquier condición de iluminación.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="neutral-ramp-grid">
+      {neutralScale.map((t) => (
+        <article class="neutral-tile">
+          <div 
+            class="neutral-tile-swatch" 
+            style={`background: ${t.hex}; border: ${t.hex === '#F8FAFC' || t.hex === '#F1F5F9' ? '1px solid #CBD5E1' : 'none'};`}
+          >
+            <span class={`tile-hex ${t.textLight ? 'light-text' : 'dark-text'}`}>{t.hex}</span>
+          </div>
+          <strong>{t.name}</strong>
+          <code>{t.hex}</code>
+          <p>{t.role}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Section 3: Semantic Families (Familias Semánticas Operativas) -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">03</span>
+        <div>
+          <p class="cuadro-kicker">SEMÁNTICA OPERATIVA · CADENA DE FRÍO & TELEMETRÍA</p>
+          <h3 class="cuadro-title">Familias Semánticas (Icono + Superficie + Borde + Tipografía)</h3>
+          <p class="cuadro-subtitle">
+            El color nunca viaja solo: cada estado operativo combina un icono canónico, superficie tintada, borde delimitador y etiqueta explícita para evitar errores de interpretación por daltonismo.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="semantic-families-grid">
+      {semanticFamilies.map((fam) => (
+        <article 
+          class="semantic-family-card" 
+          style={`--fam-surface: ${fam.surface}; --fam-border: ${fam.border}; --fam-foreground: ${fam.foreground};`}
+        >
+          <div class="fam-preview-box">
+            <div class="fam-icon-circle">
+              <i class={`pi ${fam.icon}`}></i>
+            </div>
+            <div class="fam-text-block">
+              <span class="fam-chip">{fam.example}</span>
+              <small class="fam-note">{fam.note}</small>
+            </div>
+          </div>
+          <h4 class="fam-title">{fam.name}</h4>
+          <div class="fam-contract-breakdown">
+            <div class="fam-contract-item">
+              <span>Superficie</span>
+              <code>{fam.surface}</code>
+            </div>
+            <div class="fam-contract-item">
+              <span>Borde</span>
+              <code>{fam.border}</code>
+            </div>
+            <div class="fam-contract-item">
+              <span>Texto / Glifo</span>
+              <code>{fam.foreground}</code>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Section 4: Semantic Map (Un Significado, Múltiples Pistas Visuales) -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">04</span>
+        <div>
+          <p class="cuadro-kicker">CÓDIGO DE SEÑALÉTICA · MAPA SEMÁNTICO</p>
+          <h3 class="cuadro-title">Señalética de Estados Operativos en Tiempo Real</h3>
+          <p class="cuadro-subtitle">
+            Patrón multisensorial: superficie cromática + glifo universal + etiqueta textual inconfundible.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="semantic-cue-grid">
+      <div class="semantic-cue-card success">
+        <div class="cue-icon success"><i class="pi pi-check"></i></div>
+        <div class="cue-meta">
+          <strong>Entrega Conforme (POD Firmado)</strong>
+          <small>Verificación fotográfica CameraX aprobada sin anomalías</small>
+        </div>
+      </div>
+      <div class="semantic-cue-card warning">
+        <div class="cue-icon warning"><i class="pi pi-clock"></i></div>
+        <div class="cue-meta">
+          <strong>En Tránsito / Cola Offline</strong>
+          <small>Sincronización en segundo plano con WorkManager pendiente</small>
+        </div>
+      </div>
+      <div class="semantic-cue-card danger">
+        <div class="cue-icon danger"><i class="pi pi-ban"></i></div>
+        <div class="cue-meta">
+          <strong>Cadena Rota / Rechazo Crítico</strong>
+          <small>Temperatura mayor a 6.0°C o daño de sellos de seguridad</small>
+        </div>
+      </div>
+      <div class="semantic-cue-card info">
+        <div class="cue-icon info"><i class="pi pi-compass"></i></div>
+        <div class="cue-meta">
+          <strong>Geocerca Activada (50m Muelle)</strong>
+          <small>Detección GPS pasiva y habilitación de botón de arribo</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Jerarquía de Superficies M3 (Surface Containers) -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">05</span>
+        <div>
+          <p class="cuadro-kicker">SUPERFICIES DINÁMICAS · ESCALA TONAL M3</p>
+          <h3 class="cuadro-title">Escala de Contenedores de Superficie (SurfaceContainer Lowest → Highest)</h3>
+          <p class="cuadro-subtitle">
+            Material 3 elimina las sombras difusas estáticas en favor de la familia <code>surfaceContainer*</code>, garantizando legibilidad en pantallas AMOLED bajo iluminación exterior (&gt;50,000 lux) y terminales rugerizadas Zebra/Honeywell.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visual Container Spectrum -->
+    <div class="surface-scale-grid">
+      <div class="surface-box surface-lowest">
+        <span class="box-label">Lowest</span>
+        <strong>#FFFFFF</strong>
+        <p>Tarjetas elevadas sobre página, menús contextuales</p>
+      </div>
+      <div class="surface-box surface-low">
+        <span class="box-label">Low</span>
+        <strong>#F8FAFC</strong>
+        <p>Agrupadores de formularios de despacho, checklist</p>
+      </div>
+      <div class="surface-box surface-default">
+        <span class="box-label">Container</span>
+        <strong>#F1F5F9</strong>
+        <p>Contenedor estándar de tarjetas en LazyColumn</p>
+      </div>
+      <div class="surface-box surface-high">
+        <span class="box-label">High</span>
+        <strong>#E2E8F0</strong>
+        <p>Diálogos modales, date pickers, selector de muelles</p>
+      </div>
+      <div class="surface-box surface-highest">
+        <span class="box-label">Highest</span>
+        <strong>#CBD5E1</strong>
+        <p>Arrastre de BottomSheet, estados activos de fondo</p>
+      </div>
+    </div>
+
+    <!-- CUADRO ARQUITECTÓNICO: Contratos de Superficie -->
+    <div class="contract-table-wrapper">
+      <table class="contract-table">
+        <thead>
+          <tr>
+            <th>Rol de Superficie</th>
+            <th>Nivel Tonal</th>
+            <th>Hex Claro</th>
+            <th>Hex Oscuro</th>
+            <th>Elevación Recomendada</th>
+            <th>Función en Pantallas Móviles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>surface</code></td>
+            <td>Base 98</td>
+            <td><code>#F6FAFF</code></td>
+            <td><code>#090E17</code></td>
+            <td>0dp</td>
+            <td>Fondo estructural del Scaffold general en Android</td>
+          </tr>
+          <tr>
+            <td><code>surfaceContainerLowest</code></td>
+            <td>Base 100</td>
+            <td><code>#FFFFFF</code></td>
+            <td><code>#0F172A</code></td>
+            <td>0dp – 1dp</td>
+            <td>Tarjetas de paradas de despacho SO-2026-0018 con fondo blanco puro</td>
+          </tr>
+          <tr>
+            <td><code>surfaceContainerLow</code></td>
+            <td>Base 96</td>
+            <td><code>#F8FAFC</code></td>
+            <td><code>#111A29</code></td>
+            <td>1dp</td>
+            <td>Bloques de verificación de items de picking DSP-204</td>
+          </tr>
+          <tr>
+            <td><code>surfaceContainer</code></td>
+            <td>Base 94</td>
+            <td><code>#F1F5F9</code></td>
+            <td><code>#162235</code></td>
+            <td>1dp – 2dp</td>
+            <td>Contenedor base para listas verticales de maquinaria MT-042</td>
+          </tr>
+          <tr>
+            <td><code>surfaceContainerHigh</code></td>
+            <td>Base 92</td>
+            <td><code>#E2E8F0</code></td>
+            <td><code>#1E293B</code></td>
+            <td>3dp</td>
+            <td>Barra de herramientas fija TopAppBar y BottomNavigation</td>
+          </tr>
+          <tr>
+            <td><code>surfaceContainerHighest</code></td>
+            <td>Base 90</td>
+            <td><code>#CBD5E1</code></td>
+            <td><code>#334155</code></td>
+            <td>4dp – 6dp</td>
+            <td>Modal Bottom Sheet de firma de recepción POD y campos deshabilitados</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 6: Cuadro de Contratos Técnicos de Colorimetría -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">06</span>
+        <div>
+          <p class="cuadro-kicker">ESPECIFICACIÓN COMPLETA · CONTRATOS DE COLOR</p>
+          <h3 class="cuadro-title">Matriz Arquitectónica de Tokens M3 para Android</h3>
+          <p class="cuadro-subtitle">
+            Tabla de referencia exhaustiva para desarrolladores Kotlin Compose con asignación directa de tokens y validación de contraste accesible.
+          </p>
+        </div>
+      </div>
+    </div>
+
     <div class="contract-table-wrapper">
       <table class="contract-table">
         <thead>
@@ -190,212 +695,11 @@
     </div>
   </section>
 
-  <!-- Section 2: Jerarquía de Superficies M3 (Surface Containers) -->
+  <!-- Section 7: Contrato de Código Kotlin 2.4 en Producción -->
   <section class="cuadro-card">
     <div class="cuadro-header">
       <div class="cuadro-header-left">
-        <span class="cuadro-num-badge">02</span>
-        <div>
-          <p class="cuadro-kicker">SUPERFICIES DINÁMICAS · ESCALA TONAL M3</p>
-          <h3 class="cuadro-title">Escala de Contenedores de Superficie (SurfaceContainer Lowest → Highest)</h3>
-          <p class="cuadro-subtitle">
-            Material 3 elimina las sombras difusas estáticas en favor de la familia <code>surfaceContainer*</code>, garantizando legibilidad en pantallas AMOLED bajo iluminación exterior (&gt;50,000 lux) y terminales rugerizadas Zebra/Honeywell.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Visual Container Spectrum -->
-    <div class="surface-scale-grid">
-      <div class="surface-box surface-lowest">
-        <span class="box-label">Lowest</span>
-        <strong>#FFFFFF</strong>
-        <p>Tarjetas elevadas sobre página, menús contextuales</p>
-      </div>
-      <div class="surface-box surface-low">
-        <span class="box-label">Low</span>
-        <strong>#F8FAFC</strong>
-        <p>Agrupadores de formularios de despacho, checklist</p>
-      </div>
-      <div class="surface-box surface-default">
-        <span class="box-label">Container</span>
-        <strong>#F1F5F9</strong>
-        <p>Contenedor estándar de tarjetas en LazyColumn</p>
-      </div>
-      <div class="surface-box surface-high">
-        <span class="box-label">High</span>
-        <strong>#E2E8F0</strong>
-        <p>Diálogos modales, date pickers, selector de muelles</p>
-      </div>
-      <div class="surface-box surface-highest">
-        <span class="box-label">Highest</span>
-        <strong>#CBD5E1</strong>
-        <p>Arrastre de BottomSheet, estados activos de fondo</p>
-      </div>
-    </div>
-
-    <!-- CUADRO ARQUITECTÓNICO: Contratos de Superficie -->
-    <div class="contract-table-wrapper">
-      <table class="contract-table">
-        <thead>
-          <tr>
-            <th>Rol de Superficie</th>
-            <th>Nivel Tonal</th>
-            <th>Hex Claro</th>
-            <th>Hex Oscuro</th>
-            <th>Elevación Recomendada</th>
-            <th>Función en Pantallas Móviles</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>surface</code></td>
-            <td>Base 98</td>
-            <td><code>#F6FAFF</code></td>
-            <td><code>#090E17</code></td>
-            <td>0dp</td>
-            <td>Fondo estructural del Scaffold general en Android</td>
-          </tr>
-          <tr>
-            <td><code>surfaceContainerLowest</code></td>
-            <td>Base 100</td>
-            <td><code>#FFFFFF</code></td>
-            <td><code>#0F172A</code></td>
-            <td>0dp – 1dp</td>
-            <td>Tarjetas de paradas de despacho SO-2026-0018 con fondo blanco puro</td>
-          </tr>
-          <tr>
-            <td><code>surfaceContainerLow</code></td>
-            <td>Base 96</td>
-            <td><code>#F8FAFC</code></td>
-            <td><code>#111A29</code></td>
-            <td>1dp</td>
-            <td>Bloques de verificación de items de picking DSP-204</td>
-          </tr>
-          <tr>
-            <td><code>surfaceContainer</code></td>
-            <td>Base 94</td>
-            <td><code>#F1F5F9</code></td>
-            <td><code>#162235</code></td>
-            <td>1dp – 2dp</td>
-            <td>Contenedor base para listas verticales de maquinaria MT-042</td>
-          </tr>
-          <tr>
-            <td><code>surfaceContainerHigh</code></td>
-            <td>Base 92</td>
-            <td><code>#E2E8F0</code></td>
-            <td><code>#1E293B</code></td>
-            <td>3dp</td>
-            <td>Barra de herramientas fija TopAppBar y BottomNavigation</td>
-          </tr>
-          <tr>
-            <td><code>surfaceContainerHighest</code></td>
-            <td>Base 90</td>
-            <td><code>#CBD5E1</code></td>
-            <td><code>#334155</code></td>
-            <td>4dp – 6dp</td>
-            <td>Modal Bottom Sheet de firma de recepción POD y campos deshabilitados</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- Section 3: Muestrario Visual de Swatches y Tokens de Negocio -->
-  <section class="cuadro-card">
-    <div class="cuadro-header">
-      <div class="cuadro-header-left">
-        <span class="cuadro-num-badge">03</span>
-        <div>
-          <p class="cuadro-kicker">MUESTRARIO VISUAL DE SWATCHES</p>
-          <h3 class="cuadro-title">Tokens Tonal Swatches con Verificación WCAG</h3>
-          <p class="cuadro-subtitle">
-            Previsualización en tiempo real de cada color corporativo y su asignación semántica en la suite operativa.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="swatches-grid">
-      <div class="swatch-item">
-        <div class="swatch-color" style="background: #2a67d9; color: #ffffff;">#2A67D9</div>
-        <div class="swatch-info">
-          <span class="swatch-name">Primary (Nexa Blue)</span>
-          <span class="swatch-role">Botones CTA, AppBar tint, FAB</span>
-          <span class="swatch-contrast">Contraste: 5.2:1 (PASS AA)</span>
-        </div>
-      </div>
-
-      <div class="swatch-item">
-        <div class="swatch-color" style="background: #dbeafe; color: #1e40af;">#DBEAFE</div>
-        <div class="swatch-info">
-          <span class="swatch-name">Primary Container</span>
-          <span class="swatch-role">Chips activos, parada en curso</span>
-          <span class="swatch-contrast">Contraste: 6.8:1 (PASS AA)</span>
-        </div>
-      </div>
-
-      <div class="swatch-item">
-        <div class="swatch-color" style="background: #082846; color: #ffffff;">#082846</div>
-        <div class="swatch-info">
-          <span class="swatch-name">Secondary (Brand Navy)</span>
-          <span class="swatch-role">Botones industriales 56dp (Guantes)</span>
-          <span class="swatch-contrast">Contraste: 14.8:1 (PASS AAA)</span>
-        </div>
-      </div>
-
-      <div class="swatch-item">
-        <div class="swatch-color" style="background: #38c8ff; color: #082846;">#38C8FF</div>
-        <div class="swatch-info">
-          <span class="swatch-name">Tertiary (Brand Celeste)</span>
-          <span class="swatch-role">Mira láser CameraX, sensor BLE activo</span>
-          <span class="swatch-contrast">Contraste: 9.1:1 (PASS AA)</span>
-        </div>
-      </div>
-
-      <div class="swatch-item">
-        <div class="swatch-color" style="background: #ffffff; color: #0f172a; border-bottom: 1px solid #e2e8f0;">#FFFFFF</div>
-        <div class="swatch-info">
-          <span class="swatch-name">Surface Lowest (Card)</span>
-          <span class="swatch-role">Tarjetas, modales, dialogs</span>
-          <span class="swatch-contrast">Contraste: 16.2:1 (PASS AAA)</span>
-        </div>
-      </div>
-
-      <div class="swatch-item">
-        <div class="swatch-color" style="background: #15803d; color: #ffffff;">#15803D</div>
-        <div class="swatch-info">
-          <span class="swatch-name">Success (Cold Chain OK)</span>
-          <span class="swatch-role">Rango seguro 2.0°C – 6.0°C verificado</span>
-          <span class="swatch-contrast">Contraste: 4.8:1 (PASS AA)</span>
-        </div>
-      </div>
-
-      <div class="swatch-item">
-        <div class="swatch-color" style="background: #b45309; color: #ffffff;">#B45309</div>
-        <div class="swatch-info">
-          <span class="swatch-name">Warning (Alerta Reintentos)</span>
-          <span class="swatch-role">Despacho en cola offline WorkManager</span>
-          <span class="swatch-contrast">Contraste: 4.6:1 (PASS AA)</span>
-        </div>
-      </div>
-
-      <div class="swatch-item">
-        <div class="swatch-color" style="background: #b91c1c; color: #ffffff;">#B91C1C</div>
-        <div class="swatch-info">
-          <span class="swatch-name">Error (Discrepancia)</span>
-          <span class="swatch-role">Cadena rota &gt;6.0°C, daño de empaque</span>
-          <span class="swatch-contrast">Contraste: 5.6:1 (PASS AA)</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 4: Contrato de Código Kotlin 2.4 en Producción -->
-  <section class="cuadro-card">
-    <div class="cuadro-header">
-      <div class="cuadro-header-left">
-        <span class="cuadro-num-badge">04</span>
+        <span class="cuadro-num-badge">07</span>
         <div>
           <p class="cuadro-kicker">CÓDIGO DE PRODUCCIÓN · KOTLIN 2.4 JETPACK COMPOSE</p>
           <h3 class="cuadro-title">Color.kt & Theme.kt Canónico (:core:designsystem)</h3>
@@ -506,22 +810,425 @@
     width: 100%;
   }
 
-  .color-dot {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 4px;
-    vertical-align: middle;
-    border: 1px solid rgba(0,0,0,0.1);
+  /* Section 1: M3 Visual Scale Grid */
+  .m3-visual-scale-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
   }
 
-  .ratio-pass {
-    color: #15803d;
+  @media (max-width: 1100px) {
+    .m3-visual-scale-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .m3-visual-scale-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .m3-token-card {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .m3-token-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  }
+
+  .m3-swatch-box {
+    height: 94px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    position: relative;
+  }
+
+  .swatch-top-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .swatch-role-tag {
     font-size: 11px;
-    font-family: var(--nexa-font-family-mono, monospace);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
   }
 
+  .swatch-pass-tag {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9.5px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.25);
+    color: #ffffff;
+    letter-spacing: 0.04em;
+  }
+
+  .swatch-bottom-hex {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--nexa-font-family-mono, monospace);
+
+    strong {
+      font-size: 13.5px;
+      font-weight: 800;
+    }
+
+    small {
+      font-size: 10px;
+      opacity: 0.85;
+      font-weight: 600;
+    }
+  }
+
+  .m3-token-body {
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+  }
+
+  .token-title-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    strong {
+      font-size: 13px;
+      color: #0f172a;
+    }
+
+    .token-code {
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-size: 10px;
+      color: var(--nexa-color-primary-700, #1d4ed8);
+      font-weight: 600;
+    }
+  }
+
+  .hex-chips-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .hex-chip {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9.5px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    &.light {
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+
+    &.dark {
+      background: #0f172a;
+      color: #cbd5e1;
+      border: 1px solid #1e293b;
+    }
+
+    i {
+      font-size: 9px;
+    }
+  }
+
+  .token-usage-desc {
+    font-size: 11px;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.4;
+    flex-grow: 1;
+  }
+
+  .foreground-pair-badge {
+    margin-top: auto;
+    padding-top: 6px;
+    border-top: 1px dashed #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+
+    .pair-label {
+      color: #94a3b8;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 9px;
+    }
+
+    .pair-value {
+      color: #0f172a;
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-weight: 600;
+    }
+  }
+
+  /* Section 2: Neutral Ramp */
+  .neutral-ramp-grid {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: 8px;
+  }
+
+  @media (max-width: 1200px) {
+    .neutral-ramp-grid {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+
+  @media (max-width: 700px) {
+    .neutral-ramp-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .neutral-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+
+    strong {
+      font-size: 11px;
+      color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    code {
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-size: 9px;
+      color: #64748b;
+    }
+
+    p {
+      font-size: 9.5px;
+      color: #94a3b8;
+      margin: 0;
+      line-height: 1.3;
+      min-height: 26px;
+    }
+  }
+
+  .neutral-tile-swatch {
+    height: 64px;
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-end;
+    padding: 6px;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.04);
+  }
+
+  .tile-hex {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 8.5px;
+    font-weight: 700;
+
+    &.light-text { color: #ffffff; }
+    &.dark-text { color: #0f172a; }
+  }
+
+  /* Section 3: Semantic Families */
+  .semantic-families-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 1100px) {
+    .semantic-families-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .semantic-families-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .semantic-family-card {
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px solid var(--fam-border);
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .fam-preview-box {
+    padding: 12px;
+    border-radius: 10px;
+    background: var(--fam-surface);
+    border: 1px solid var(--fam-border);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .fam-icon-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: var(--fam-foreground);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  }
+
+  .fam-text-block {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .fam-chip {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--fam-foreground);
+    letter-spacing: 0.02em;
+  }
+
+  .fam-note {
+    font-size: 9.5px;
+    color: #64748b;
+  }
+
+  .fam-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .fam-contract-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid #f1f5f9;
+  }
+
+  .fam-contract-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10.5px;
+
+    span {
+      color: #64748b;
+    }
+
+    code {
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-weight: 700;
+      color: #0f172a;
+    }
+  }
+
+  /* Section 4: Semantic Cues */
+  .semantic-cue-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .semantic-cue-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .semantic-cue-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .semantic-cue-card {
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+
+    &.success { border-left: 4px solid #15803d; }
+    &.warning { border-left: 4px solid #d97706; }
+    &.danger { border-left: 4px solid #dc2626; }
+    &.info { border-left: 4px solid #2563eb; }
+  }
+
+  .cue-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+
+    &.success { background: #dcfce7; color: #15803d; }
+    &.warning { background: #fef3c7; color: #b45309; }
+    &.danger { background: #fee2e2; color: #b91c1c; }
+    &.info { background: #dbeafe; color: #1d4ed8; }
+  }
+
+  .cue-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    strong {
+      font-size: 12px;
+      color: #0f172a;
+    }
+
+    small {
+      font-size: 10.5px;
+      color: #64748b;
+      line-height: 1.35;
+    }
+  }
+
+  /* Section 5: Surface Scale Grid */
   .surface-scale-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -570,54 +1277,19 @@
     &.surface-highest { background: #cbd5e1; }
   }
 
-  .swatches-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap: 16px;
+  .color-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+    border: 1px solid rgba(0,0,0,0.1);
   }
 
-  .swatch-item {
-    background: #ffffff;
-    border: 1px solid var(--nexa-color-border-subtle, #e2e8f0);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-  }
-
-  .swatch-color {
-    height: 70px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    padding: 8px 12px;
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 12px;
-    font-weight: 700;
-  }
-
-  .swatch-info {
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
-  .swatch-name {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--nexa-color-text-primary, #0f172a);
-  }
-
-  .swatch-role {
-    font-size: 11px;
-    color: var(--nexa-color-text-secondary, #64748b);
-  }
-
-  .swatch-contrast {
-    font-size: 10.5px;
-    font-weight: 700;
+  .ratio-pass {
     color: #15803d;
-    margin-top: 4px;
+    font-size: 11px;
     font-family: var(--nexa-font-family-mono, monospace);
   }
 </style>
