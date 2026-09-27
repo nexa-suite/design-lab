@@ -57,168 +57,114 @@ const { currentSection = 'overview' } = Astro.props;
       </div>
     </div>
 
-    <!-- Navigation Groups with Accordions -->
+    <!-- Navigation Groups with Accordions (Full Visual Report Anchor Navigation) -->
     <nav class="lab-nav" aria-label="Secciones de la documentación móvil">
-      <!-- 1. Arquitectura & Stack -->
+      <!-- 1. Galería Multi-Dispositivo Android (100% Visual Report) -->
       <section class="lab-nav-group">
-        <button class="nav-section-button" type="button" data-nav-group="arch">
-          <span class="nav-section">1. ARQUITECTURA & STACK</span>
+        <button class="nav-section-button" type="button" data-nav-group="devices">
+          <span class="nav-section">1. GALERÍA MULTI-DISPOSITIVO</span>
           <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
         </button>
         <div class="lab-nav-items">
-          <a class="lab-nav-item active" href="#screen-arquitectura-android" data-screen="arquitectura-android">
-            <i class="pi pi-compass" aria-hidden="true"></i>
-            <span>¿Qué usan? (Android Kotlin)</span>
+          <a class="lab-nav-item active" href="#device-showcase" data-screen="device-showcase">
+            <i class="pi pi-th-large" aria-hidden="true"></i>
+            <span>Galería Completa (5 Dispositivos)</span>
           </a>
-          <a class="lab-nav-item" href="#screen-modelo-evidencia" data-screen="modelo-evidencia">
+          <a class="lab-nav-item" href="#device-samsung-s24" data-screen="device-samsung-s24">
+            <i class="pi pi-mobile" aria-hidden="true"></i>
+            <span>1. Galaxy S24 (390dp · Operaciones)</span>
+          </a>
+          <a class="lab-nav-item" href="#device-s24-ultra" data-screen="device-s24-ultra">
+            <i class="pi pi-mobile" aria-hidden="true"></i>
+            <span>2. S24 Ultra (412dp · Catálogo B2B)</span>
+          </a>
+          <a class="lab-nav-item" href="#device-zebra-tc58" data-screen="device-zebra-tc58">
             <i class="pi pi-shield" aria-hidden="true"></i>
-            <span>Modelo de Evidencia & C4</span>
+            <span>3. Zebra TC58 (412dp · Inspección)</span>
+          </a>
+          <a class="lab-nav-item" href="#device-tab-active" data-screen="device-tab-active">
+            <i class="pi pi-tablet" aria-hidden="true"></i>
+            <span>4. Tab Active 8" (600dp · Kanban)</span>
+          </a>
+          <a class="lab-nav-item" href="#device-tab-s9" data-screen="device-tab-s9">
+            <i class="pi pi-desktop" aria-hidden="true"></i>
+            <span>5. Tab S9 11" (TwoPane Patio)</span>
           </a>
         </div>
       </section>
 
-      <!-- 2. Fundamentos M3 -->
+      <!-- 2. Fundamentos de Diseño Visual M3 -->
       <section class="lab-nav-group">
         <button class="nav-section-button" type="button" data-nav-group="foundations">
-          <span class="nav-section">2. FUNDAMENTOS M3</span>
+          <span class="nav-section">2. FUNDAMENTOS VISUALES M3</span>
           <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
         </button>
         <div class="lab-nav-items">
-          <a class="lab-nav-item" href="#screen-tokens-color" data-screen="tokens-color">
+          <a class="lab-nav-item" href="#fundamentos-color" data-screen="fundamentos-color">
             <i class="pi pi-palette" aria-hidden="true"></i>
-            <span>Paleta M3 & Tonal Roles</span>
+            <span>Paleta M3 & Swatches WCAG</span>
           </a>
-          <a class="lab-nav-item" href="#screen-tipografia-sp" data-screen="tipografia-sp">
+          <a class="lab-nav-item" href="#fundamentos-tipografia" data-screen="fundamentos-tipografia">
             <i class="pi pi-align-left" aria-hidden="true"></i>
             <span>Tipografía Escalar en sp</span>
           </a>
-          <a class="lab-nav-item" href="#screen-cuadricula-8dp" data-screen="cuadricula-8dp">
+          <a class="lab-nav-item" href="#fundamentos-cuadricula" data-screen="fundamentos-cuadricula">
             <i class="pi pi-th-large" aria-hidden="true"></i>
             <span>Cuadrícula Espacial 8dp</span>
           </a>
-          <a class="lab-nav-item" href="#screen-elevaciones-m3" data-screen="elevaciones-m3">
+          <a class="lab-nav-item" href="#fundamentos-elevacion" data-screen="fundamentos-elevacion">
             <i class="pi pi-clone" aria-hidden="true"></i>
-            <span>Elevación & Surface Tint</span>
+            <span>Elevación & Surface Tint (0-5)</span>
           </a>
-        </div>
-      </section>
-
-      <!-- 3. Ergonomía Táctil -->
-      <section class="lab-nav-group">
-        <button class="nav-section-button" type="button" data-nav-group="ergonomics">
-          <span class="nav-section">3. ERGONOMÍA TÁCTIL</span>
-          <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
-        </button>
-        <div class="lab-nav-items">
-          <a class="lab-nav-item" href="#screen-ergonomia-48dp" data-screen="ergonomia-48dp">
+          <a class="lab-nav-item" href="#fundamentos-ergonomia" data-screen="fundamentos-ergonomia">
             <i class="pi pi-hand" aria-hidden="true"></i>
-            <span>Objetivo Mínimo 48dp / 56dp</span>
+            <span>Calibrador 48dp vs 56dp (Guantes)</span>
           </a>
-          <a class="lab-nav-item" href="#screen-zonas-alcance" data-screen="zonas-alcance">
+          <a class="lab-nav-item" href="#fundamentos-alcance" data-screen="fundamentos-alcance">
             <i class="pi pi-chart-pie" aria-hidden="true"></i>
             <span>Zonas de Alcance del Pulgar</span>
           </a>
         </div>
       </section>
 
-      <!-- 4. Componentes Canónicos Compose -->
+      <!-- 3. Especificaciones Técnicas & Código Kotlin :core:designsystem (Abajo) -->
       <section class="lab-nav-group">
-        <button class="nav-section-button" type="button" data-nav-group="components">
-          <span class="nav-section">4. COMPONENTES COMPOSE</span>
+        <button class="nav-section-button" type="button" data-nav-group="technical">
+          <span class="nav-section">3. ESPECIFICACIONES TÉCNICAS</span>
           <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
         </button>
         <div class="lab-nav-items">
-          <a class="lab-nav-item" href="#screen-componentes-compose" data-screen="componentes-compose">
+          <a class="lab-nav-item" href="#tech-arquitectura" data-screen="tech-arquitectura">
+            <i class="pi pi-compass" aria-hidden="true"></i>
+            <span>Arquitectura C4 & Stack Android</span>
+          </a>
+          <a class="lab-nav-item" href="#tech-evidencia" data-screen="tech-evidencia">
+            <i class="pi pi-shield" aria-hidden="true"></i>
+            <span>Modelo de Evidencia ADR-0018</span>
+          </a>
+          <a class="lab-nav-item" href="#tech-hardware" data-screen="tech-hardware">
+            <i class="pi pi-qrcode" aria-hidden="true"></i>
+            <span>Hardware CameraX & Escáner</span>
+          </a>
+          <a class="lab-nav-item" href="#tech-resiliencia" data-screen="tech-resiliencia">
+            <i class="pi pi-sync" aria-hidden="true"></i>
+            <span>WorkManager & SQLite Room Queue</span>
+          </a>
+          <a class="lab-nav-item" href="#tech-componentes" data-screen="tech-componentes">
             <i class="pi pi-id-card" aria-hidden="true"></i>
             <span>Catálogo Canónico Compose</span>
           </a>
-          <a class="lab-nav-item" href="#screen-codigo-nativo" data-screen="codigo-nativo">
+          <a class="lab-nav-item" href="#tech-codigo" data-screen="tech-codigo">
             <i class="pi pi-code" aria-hidden="true"></i>
-            <span>Generador de Código Kotlin</span>
+            <span>Generador de Código Kotlin 2.4</span>
           </a>
-        </div>
-      </section>
-
-      <!-- 5. Historias de Usuario (Blueprint Campo) -->
-      <section class="lab-nav-group">
-        <button class="nav-section-button" type="button" data-nav-group="stories">
-          <span class="nav-section">5. HISTORIAS BLUEPRINT</span>
-          <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
-        </button>
-        <div class="lab-nav-items">
-          <a class="lab-nav-item" href="#screen-historia-conductor" data-screen="historia-conductor">
-            <i class="pi pi-truck" aria-hidden="true"></i>
-            <span>Diego · Rutas & POD</span>
+          <a class="lab-nav-item" href="#tech-historias" data-screen="tech-historias">
+            <i class="pi pi-book" aria-hidden="true"></i>
+            <span>Historias Blueprint en Campo</span>
           </a>
-          <a class="lab-nav-item" href="#screen-historia-bodega" data-screen="historia-bodega">
-            <i class="pi pi-box" aria-hidden="true"></i>
-            <span>Alejandro · Picking FEFO</span>
-          </a>
-          <a class="lab-nav-item" href="#screen-historia-despacho" data-screen="historia-despacho">
-            <i class="pi pi-send" aria-hidden="true"></i>
-            <span>Mesa de Despachos & Staging</span>
-          </a>
-          <a class="lab-nav-item" href="#screen-inspeccion-maquinaria" data-screen="inspeccion-maquinaria">
-            <i class="pi pi-wrench" aria-hidden="true"></i>
-            <span>Checklist Pre-operacional</span>
-          </a>
-        </div>
-      </section>
-
-      <!-- 6. Hardware & Resiliencia -->
-      <section class="lab-nav-group">
-        <button class="nav-section-button" type="button" data-nav-group="hardware">
-          <span class="nav-section">6. HARDWARE & RED</span>
-          <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
-        </button>
-        <div class="lab-nav-items">
-          <a class="lab-nav-item" href="#screen-hardware-camerax" data-screen="hardware-camerax">
-            <i class="pi pi-qrcode" aria-hidden="true"></i>
-            <span>CameraX + ML Kit (Fallback)</span>
-          </a>
-          <a class="lab-nav-item" href="#screen-resiliencia-red" data-screen="resiliencia-red">
-            <i class="pi pi-sync" aria-hidden="true"></i>
-            <span>WorkManager & Cola Offline</span>
-          </a>
-        </div>
-      </section>
-
-      <!-- 7. Simulador Hardware -->
-      <section class="lab-nav-group">
-        <button class="nav-section-button" type="button" data-nav-group="simulator">
-          <span class="nav-section">7. SIMULADOR NATIVO</span>
-          <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
-        </button>
-        <div class="lab-nav-items">
-          <a class="lab-nav-item" href="#screen-simulador-hardware" data-screen="simulador-hardware">
-            <i class="pi pi-mobile" aria-hidden="true"></i>
-            <span>Inspección de Pantallas Canónicas</span>
-          </a>
-        </div>
-      </section>
-
-      <!-- 8. Módulos Interactivos en Vivo -->
-      <section class="lab-nav-group">
-        <button class="nav-section-button" type="button" data-nav-group="live-modules">
-          <span class="nav-section">8. MÓDULOS EN VIVO</span>
-          <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
-        </button>
-        <div class="lab-nav-items">
-          <a class="lab-nav-item" href="#screen-live-dispatch" data-screen="live-dispatch">
-            <i class="pi pi-send" aria-hidden="true"></i>
-            <span>Tablero Despacho (Live)</span>
-          </a>
-          <a class="lab-nav-item" href="#screen-live-catalog" data-screen="live-catalog">
-            <i class="pi pi-shopping-bag" aria-hidden="true"></i>
-            <span>Catálogo Mayorista (Live)</span>
-          </a>
-          <a class="lab-nav-item" href="#screen-live-forms" data-screen="live-forms">
-            <i class="pi pi-pencil" aria-hidden="true"></i>
-            <span>Formularios & POD (Live)</span>
-          </a>
-          <a class="lab-nav-item" href="#screen-live-navbar" data-screen="live-navbar">
-            <i class="pi pi-bars" aria-hidden="true"></i>
-            <span>Navbar & Sucursales (Live)</span>
+          <a class="lab-nav-item" href="#tech-modulos-vivos" data-screen="tech-modulos-vivos">
+            <i class="pi pi-sliders-h" aria-hidden="true"></i>
+            <span>Módulos Interactivos en Vivo</span>
           </a>
         </div>
       </section>
@@ -844,60 +790,57 @@ const { currentSection = 'overview' } = Astro.props;
   });
 
   // ==========================================================================
-  // SCREEN SWITCHING & HASH ROUTING ENGINE (One-screen-at-a-time architecture)
+  // FULL VISUAL REPORT ANCHOR NAVIGATION & SCROLL TRACKING
   // ==========================================================================
   const navItems = document.querySelectorAll<HTMLAnchorElement>('.lab-nav-item');
   const topbarTitle = document.getElementById('topbar-screen-title');
   const breadcrumbCurrent = document.getElementById('breadcrumb-current-screen');
 
-  function switchToScreen(screenId: string) {
-    const cleanId = screenId.replace(/^screen-/, '');
-    const allScreens = document.querySelectorAll<HTMLElement>('.mobile-screen-view');
-    
-    // Find target screen element by ID
-    let target = document.getElementById(`screen-${cleanId}`) || document.getElementById(cleanId);
-    
-    if (target) {
-      // 1. Hide all screens and show only target
-      allScreens.forEach(s => s.classList.remove('active'));
-      target.classList.add('active');
+  function navigateToTarget(targetId: string, shouldScroll = true) {
+    const cleanId = targetId.replace(/^#/, '').replace(/^screen-/, '');
+    const targetElement = document.getElementById(cleanId) || 
+                          document.getElementById(`screen-${cleanId}`) || 
+                          document.getElementById(`device-${cleanId}`) ||
+                          document.getElementById(`fundamentos-${cleanId}`) ||
+                          document.getElementById(`tech-${cleanId}`);
 
-      // 2. Update active nav link and expand parent group
-      let screenTitle = '';
-      navItems.forEach(item => {
-        const itemTarget = item.getAttribute('data-screen');
-        const isMatch = itemTarget === cleanId || item.getAttribute('href') === `#screen-${cleanId}`;
-        item.classList.toggle('active', isMatch);
-        if (isMatch) {
-          screenTitle = item.querySelector('span')?.textContent || cleanId;
-          const group = item.closest('.lab-nav-group');
-          group?.classList.remove('collapsed');
-        }
-      });
-
-      // 3. Update topbar title
-      if (topbarTitle && screenTitle) {
-        topbarTitle.textContent = `Design documentation · ${screenTitle}`;
+    let screenTitle = '';
+    navItems.forEach(item => {
+      const href = item.getAttribute('href') || '';
+      const dataScreen = item.getAttribute('data-screen') || '';
+      const isMatch = href === `#${cleanId}` || 
+                      href === `#screen-${cleanId}` || 
+                      dataScreen === cleanId ||
+                      href.includes(cleanId);
+      item.classList.toggle('active', isMatch);
+      if (isMatch && !screenTitle) {
+        screenTitle = item.querySelector('span')?.textContent || cleanId;
+        const group = item.closest('.lab-nav-group');
+        group?.classList.remove('collapsed');
       }
+    });
 
-      // 4. Update breadcrumb
-      if (breadcrumbCurrent && screenTitle) {
-        breadcrumbCurrent.textContent = screenTitle;
-      }
+    if (topbarTitle && screenTitle) {
+      topbarTitle.textContent = `Reporte Visual · ${screenTitle}`;
+    }
+    if (breadcrumbCurrent && screenTitle) {
+      breadcrumbCurrent.textContent = screenTitle;
+    }
 
-      // 5. Scroll to top smoothly
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (targetElement && shouldScroll) {
+      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 
   // Intercept navigation clicks
   navItems.forEach(item => {
     item.addEventListener('click', (e) => {
-      const screenId = item.getAttribute('data-screen');
-      if (screenId) {
+      const href = item.getAttribute('href');
+      if (href && href.startsWith('#')) {
         e.preventDefault();
-        window.location.hash = `screen-${screenId}`;
-        switchToScreen(screenId);
+        const targetId = href.replace(/^#/, '');
+        history.pushState(null, '', href);
+        navigateToTarget(targetId, true);
         sidebar?.classList.remove('open');
       }
     });
@@ -907,14 +850,13 @@ const { currentSection = 'overview' } = Astro.props;
   function onHashChange() {
     const rawHash = window.location.hash.replace(/^#/, '');
     if (rawHash) {
-      switchToScreen(rawHash);
+      navigateToTarget(rawHash, true);
     } else {
-      switchToScreen('arquitectura-android');
+      navigateToTarget('device-showcase', false);
     }
   }
 
   window.addEventListener('hashchange', onHashChange);
-  // Initial check on DOMContentLoaded / load
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', onHashChange);
   } else {

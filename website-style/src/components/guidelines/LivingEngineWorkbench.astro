@@ -1,61 +1,92 @@
 ---
 /**
- * LIVING GEOMETRY GRAPHICS ENGINE & ARTIFACT WORKBENCH
- * Authentic Flecto Architectural Hero & Forensic Living Geometry Sandbox.
- * Renders the authentic sculpted Flecto Hero (100% fidelity to flecto-reconstruction/Hero.astro & Image 2)
- * equipped with the Human Tone Switcher (Nexa Dark Blue, Cashmere Arctic Mist, Ceramic Azure, Oceanic Sage),
- * Conduit Pastel Palettes, and Auto-Tour & Chapter Morph controls.
+ * LIVING ENGINE WORKBENCH & INTERACTIVE MODULAR GRAPHICS ENGINE
+ * Authority: Nexafy living geometry system, pure solid colorimetry, and interactive modular puzzle blocks.
+ * 
+ * Features:
+ *  - 100% Nexa Colorimetry: Nexa Dark Blue (#082846) sculpted plate, Nexa Celeste (#38c8ff) accents,
+ *    28px thick vascular conduits in Celeste Pastel (#bae6fd) / Soft Cyan (#a5f3fc), pure white (#ffffff) frame.
+ *  - True Interactive Living Graphics Engine: Drag & drop blocks with real-time Manhattan orthogonal
+ *    28px conduit recalculation and rounded fillets (r=20-28px) at 60 FPS.
+ *  - Signal pulse particles (r=6) continuously flowing through the center lumen of conduits.
+ *  - Minimalist Modular Blocks inspired by Image 2:
+ *    * Hub Core Block (Nexa Modular Hub)
+ *    * Interlocking Logic Blocks (A, B, C)
+ *    * Origin Hub: YOUR COMPANY (#38c8ff, #082846 text)
+ *    * Physical Store POS Card ($100/caja or 100€/Day)
+ *    * Customer Inquiry Card (John Cooper avatar)
+ *    * Online Store Card (acme.store, $100/Caja | DESPACHAR)
+ *    * Escrow Terminal Card (100% Custody · Zero Risk)
+ *  - NO overlapping blocks ("no esten sobrepuestos"): Generous spacing and dedicated clearances.
+ *  - Dynamic Assembly "✦ Construir Motor (Build)" sequential spring docking animation.
+ *  - Presets: [✦ Distribución Canales], [⚡ Matriz Operativa], [🛡 Custodia Escrow], [↺ Resetear].
+ *  - Sculpted Bürocratik container with carved canopy notch and monumental headline.
  */
-import Hero from '../hero/Hero.astro';
+import { generateContainerCommands, commandsToSvgPath } from '../../lib/nexafy/geometry';
+import { NEXAFY_PRESETS } from '../../lib/nexafy/presets';
+
+const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PRESETS.CHANNELS));
 ---
 
-<div class="workbench-master-container">
-  <!-- 1. Interactive Master Toolbar -->
-  <header class="workbench-toolbar-bar" aria-label="Living Engine Workbench Controls">
+<div class="workbench-master-container" id="workbench-master">
+  <!-- 1. Interactive Master Engine Toolbar -->
+  <header class="workbench-toolbar-bar" aria-label="Living Engine Master Controls">
     <div class="toolbar-left-group">
       <div class="toolbar-title-wrap">
         <span class="toolbar-live-badge"><i class="live-dot"></i> EN VIVO</span>
-        <strong class="toolbar-main-title">Motor Gráfico Vivo</strong>
+        <strong class="toolbar-main-title">Motor Gráfico Nexafy</strong>
       </div>
 
-      <!-- Preset / Chapter Selector -->
-      <div class="preset-selector-wrap">
-        <label for="workbench-preset-select" class="selector-label">Capítulo:</label>
-        <select id="workbench-preset-select" class="workbench-select" aria-label="Seleccionar capítulo del Hero">
-          <option value="1" selected>01 Canales & Seguridad (Hero Oficial)</option>
-          <option value="2">02 Plataforma SaaS (Ledger Morph)</option>
-          <option value="3">03 Flecto Link & Pago Seguro (Checkout & Confetti)</option>
-        </select>
+      <!-- Action Button: Construir Motor (Build Animation) -->
+      <button type="button" class="btn-engine-build" id="btn-build-engine" title="Construir y ensamblar el motor gráfico paso a paso con acople elástico">
+        <i class="pi pi-sparkles"></i>
+        <span>✦ Construir Motor (Build)</span>
+      </button>
+
+      <!-- Presets Group -->
+      <div class="preset-pill-group" role="group" aria-label="Presets de distribución">
+        <button type="button" class="preset-btn active" data-preset="channels" title="Distribución de Canales Canónica">
+          <span>✦ Canales</span>
+        </button>
+        <button type="button" class="preset-btn" data-preset="matrix" title="Matriz Operativa Pipeline">
+          <span>⚡ Matriz Operativa</span>
+        </button>
+        <button type="button" class="preset-btn" data-preset="escrow" title="Arquitectura Custodia Escrow">
+          <span>🛡 Custodia Escrow</span>
+        </button>
+        <button type="button" class="preset-btn reset-btn" data-preset="reset" title="Restablecer posiciones canónicas">
+          <span>↺ Resetear</span>
+        </button>
       </div>
     </div>
 
     <div class="toolbar-center-group">
       <!-- Human Ergonomic Tones Switcher -->
-      <div class="human-tones-toggle" role="group" aria-label="Human Ergonomic Tones">
-        <span class="tones-label">Tono Humano:</span>
+      <div class="human-tones-toggle" role="group" aria-label="Tono del Canvas">
+        <span class="tones-label">Tono:</span>
         <button 
           type="button" 
           class="tone-pill active" 
-          data-tone="oceanic" 
-          data-plate="#004737" 
-          data-accent="#4ade80" 
-          data-conduit="#57f09e" 
-          title="Oceanic Sage / Flecto Authentic (#004737 & #57f09e)"
-        >
-          <span class="color-swatch" style="background: #004737; border: 1.5px solid #57f09e;"></span>
-          <span>Oceanic Sage</span>
-        </button>
-        <button 
-          type="button" 
-          class="tone-pill" 
           data-tone="nexa" 
           data-plate="#082846" 
           data-accent="#38c8ff" 
           data-conduit="#bae6fd" 
-          title="Nexa Calibrated Dark Blue (#082846 & #38c8ff)"
+          title="Nexa Dark Blue (#082846 & #38c8ff)"
         >
           <span class="color-swatch" style="background: #082846; border: 1.5px solid #38c8ff;"></span>
           <span>Nexa Blue</span>
+        </button>
+        <button 
+          type="button" 
+          class="tone-pill" 
+          data-tone="ceramic" 
+          data-plate="#1d3d63" 
+          data-accent="#38bdf8" 
+          data-conduit="#a5f3fc" 
+          title="Ceramic Azure (#1d3d63 & #38bdf8)"
+        >
+          <span class="color-swatch" style="background: #1d3d63; border: 1.5px solid #38bdf8;"></span>
+          <span>Ceramic Azure</span>
         </button>
         <button 
           type="button" 
@@ -72,116 +103,511 @@ import Hero from '../hero/Hero.astro';
         <button 
           type="button" 
           class="tone-pill" 
-          data-tone="ceramic" 
-          data-plate="#1d3d63" 
-          data-accent="#38bdf8" 
-          data-conduit="#a5f3fc" 
-          title="Ceramic Azure Harmony (#1d3d63 & #38bdf8)"
+          data-tone="oceanic" 
+          data-plate="#004737" 
+          data-accent="#4ade80" 
+          data-conduit="#57f09e" 
+          title="Oceanic Sage / Flecto (#004737 & #57f09e)"
         >
-          <span class="color-swatch" style="background: #1d3d63; border: 1.5px solid #38bdf8;"></span>
-          <span>Ceramic Azure</span>
+          <span class="color-swatch" style="background: #004737; border: 1.5px solid #57f09e;"></span>
+          <span>Oceanic Sage</span>
         </button>
       </div>
 
       <!-- Conduit Pastel Tone Selector -->
-      <div class="conduit-palette-toggle" role="group" aria-label="Conduit Pastel Tone">
-        <span class="conduit-toggle-label">Conducto 28px:</span>
-        <button type="button" class="conduit-pill active" data-pastel="#57f09e" title="Mint SOTD (#57f09e)">
-          <span class="color-swatch" style="background: #57f09e;"></span> Mint
-        </button>
-        <button type="button" class="conduit-pill" data-pastel="#bae6fd" title="Celeste Pastel (#bae6fd)">
+      <div class="conduit-palette-toggle" role="group" aria-label="Conductos 28px">
+        <span class="conduit-toggle-label">Conductos 28px:</span>
+        <button type="button" class="conduit-pill active" data-pastel="#bae6fd" title="Celeste Pastel (#bae6fd)">
           <span class="color-swatch" style="background: #bae6fd;"></span> Celeste
         </button>
         <button type="button" class="conduit-pill" data-pastel="#a5f3fc" title="Soft Cyan (#a5f3fc)">
           <span class="color-swatch" style="background: #a5f3fc;"></span> Cyan
         </button>
+        <button type="button" class="conduit-pill" data-pastel="#57f09e" title="Mint Clásico (#57f09e)">
+          <span class="color-swatch" style="background: #57f09e;"></span> Mint
+        </button>
       </div>
     </div>
 
     <div class="toolbar-right-group">
-      <!-- Auto-Tour / Play Live Button -->
-      <button type="button" class="workbench-action-btn primary" id="btn-auto-tour" title="Reproducir Auto-Tour Cinematográfico">
-        <span class="tour-icon" id="tour-btn-icon">▶</span>
-        <span id="auto-tour-btn-text">Auto-Tour En Vivo</span>
-      </button>
+      <!-- Collision Status Badge -->
+      <div class="collision-pill" id="workbench-collision-badge" title="Validación topológica sin solapamientos">
+        <i class="pi pi-check-circle"></i>
+        <span id="collision-text">0 Colisiones</span>
+      </div>
 
       <!-- Toggle Developer Inspector -->
-      <button type="button" class="workbench-action-btn secondary" id="btn-toggle-inspector" title="Ver Primitivas de Borde y Geometría C4">
-        <span>📐 Primitivas & SVG</span>
+      <button type="button" class="workbench-action-btn secondary" id="btn-toggle-inspector" title="Abrir Inspector de Coordenadas y Topología">
+        <i class="pi pi-code"></i>
+        <span>📐 Inspector</span>
       </button>
     </div>
   </header>
 
-  <!-- 2. Authentic Flecto Hero Stage -->
-  <div class="workbench-hero-stage" id="workbench-hero-stage">
-    <Hero />
-  </div>
+  <!-- 2. Sculpted Bürocratik Canvas Stage Frame -->
+  <section class="workbench-hero-stage" id="workbench-hero-stage" aria-label="Escenario Motor Gráfico Nexafy">
+    <div class="hero-sculpted-canvas" id="hero-sculpted-canvas">
 
-  <!-- 3. Collapsible Primitives & Geometry Inspector Drawer -->
-  <section class="workbench-inspector-drawer" id="workbench-inspector-drawer" style="display: none;" aria-label="Inspector de Geometría y Primitivas">
+      <!-- 2.1 Unified Architectural SVG Silhouette Background -->
+      <svg 
+        class="hero-silhouette-svg" 
+        viewBox="0 0 1440 820" 
+        preserveAspectRatio="none" 
+        aria-hidden="true"
+      >
+        <defs>
+          <radialGradient id="workbench-radial-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#0e3d6b" stop-opacity="0.45" />
+            <stop offset="100%" stop-color="#082846" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+        <!-- The continuous sculpted contour path matching Bürocratik SOTD geometry -->
+        <path 
+          class="hero-silhouette-path" 
+          d={heroSilhouettePath}
+          fill="#082846"
+        />
+        <!-- Ambient Radial Backlight Glow within the frame -->
+        <rect x="0" y="0" width="1440" height="820" fill="url(#workbench-radial-glow)" />
+      </svg>
+
+      <!-- 2.2 TOP LAYER (Notches & Monumental Headline Canopy) -->
+      <header class="hero-top-layer">
+        <!-- Top-Left White Notch: Nexa Brand & Primary Links -->
+        <div class="hero-top-left">
+          <a href="#" class="nexa-brand" aria-label="Nexafy Homepage">
+            <span class="nexa-logo-bricks" aria-hidden="true">
+              <span class="brick brick-sm"></span>
+              <span class="brick brick-lg"></span>
+              <span class="brick brick-lg"></span>
+              <span class="brick brick-sm"></span>
+            </span>
+            <span class="nexa-logo-word">Nexafy</span>
+          </a>
+
+          <nav class="hero-nav-links" aria-label="Primary navigation">
+            <a href="/about" class="hero-nav-link">About</a>
+            <a href="/nexafy" class="hero-nav-link active">Motor Gráfico</a>
+            <a href="/interactive-suite" class="hero-nav-link">Canales</a>
+            <a href="/artifacts" class="hero-nav-link">Custodia</a>
+          </nav>
+        </div>
+
+        <!-- Top-Center Crown: Monumental Editorial Headline -->
+        <div class="hero-top-center">
+          <div class="hero-crown-content">
+            <h1 id="hero-heading" class="hero-main-title">
+              Unlock your B2B supply <br />
+              network
+            </h1>
+            <p class="hero-main-sub">
+              The easiest way to access wholesale cold-chain and direct deliveries
+            </p>
+          </div>
+        </div>
+
+        <!-- Top-Right White Notch: Language, CTA & Login -->
+        <div class="hero-top-right">
+          <div class="hero-lang-pill" aria-label="Language selector">
+            <button type="button" class="lang-toggle-btn active" aria-label="Selected language English">EN</button>
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polyline points="2 4 6 8 10 4"></polyline>
+            </svg>
+          </div>
+
+          <a href="#book-demo" class="hero-book-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>Book a Demo</span>
+          </a>
+
+          <a href="#login" class="hero-login-btn">
+            <span>Login</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- 2.3 CENTER STAGE (Interactive Living Graphics Engine Canvas) -->
+      <div class="hero-center-stage" id="workbench-center-stage">
+        
+        <!-- Live Dragging HUD / Coordinates Tooltip -->
+        <div class="drag-coords-hud" id="workbench-drag-hud" style="display: none;">
+          <span class="hud-pill-tag">MOTOR VIVO</span>
+          <span class="hud-coords-text" id="hud-coords-text">X: 0px · Y: 0px</span>
+        </div>
+
+        <!-- Dynamic Vascular Conduit SVG Layer (Recalculated in Real-Time 60 FPS) -->
+        <svg 
+          class="circuit-svg-dynamic" 
+          id="workbench-circuit-svg"
+          viewBox="0 0 1130 580" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg" 
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <defs>
+            <filter id="glow-conduit" x="-10%" y="-10%" width="120%" height="120%">
+              <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#38c8ff" flood-opacity="0.3" />
+            </filter>
+          </defs>
+
+          <!-- Dynamic 28px Thick Vascular Conduits Group -->
+          <g class="circuit-conduits-group" id="conduits-group">
+            <path id="path-trunk" class="circuit-conduit-path" d="" stroke="#bae6fd" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+            <path id="path-core-logicA" class="circuit-conduit-path" d="" stroke="#bae6fd" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+            <path id="path-core-logicB" class="circuit-conduit-path" d="" stroke="#bae6fd" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+            <path id="path-logicA-logicC" class="circuit-conduit-path" d="" stroke="#bae6fd" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+            <path id="path-logicB-logicC" class="circuit-conduit-path" d="" stroke="#bae6fd" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+            <path id="path-branch-store" class="circuit-conduit-path" d="" stroke="#bae6fd" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+            <path id="path-branch-inquiry" class="circuit-conduit-path" d="" stroke="#bae6fd" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+            <path id="path-branch-online" class="circuit-conduit-path" d="" stroke="#bae6fd" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+            <path id="path-branch-escrow" class="circuit-conduit-path" d="" stroke="#bae6fd" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+          </g>
+
+          <!-- Signal Pulse Particles Flowing through the Conduits (r=6px) -->
+          <g class="circuit-particles-group" id="particles-group">
+            <circle id="particle-trunk" class="pulse-particle" r="6" fill="#38c8ff" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
+            <circle id="particle-core-logicA" class="pulse-particle" r="6" fill="#38c8ff" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
+            <circle id="particle-core-logicB" class="pulse-particle" r="6" fill="#38c8ff" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
+            <circle id="particle-logicA-logicC" class="pulse-particle" r="6" fill="#38c8ff" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
+            <circle id="particle-logicB-logicC" class="pulse-particle" r="6" fill="#38c8ff" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
+            <circle id="particle-branch-store" class="pulse-particle" r="6" fill="#38c8ff" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
+            <circle id="particle-branch-inquiry" class="pulse-particle" r="6" fill="#38c8ff" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
+            <circle id="particle-branch-online" class="pulse-particle" r="6" fill="#38c8ff" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
+            <circle id="particle-branch-escrow" class="pulse-particle" r="6" fill="#38c8ff" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
+          </g>
+        </svg>
+
+        <!-- Inline Badges Anchored on Conduits -->
+        <div class="circuit-badge badge-store" id="badge-store" aria-hidden="true" title="Canal POS Físico">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#082846" stroke-width="2.2">
+            <path d="M3 9l1-5h16l1 5"></path>
+            <path d="M3 9a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 3 0"></path>
+            <path d="M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"></path>
+            <path d="M9 20v-6h6v6"></path>
+          </svg>
+        </div>
+
+        <div class="circuit-badge badge-email" id="badge-email" aria-hidden="true" title="Consulta Directa">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#082846" stroke-width="2.2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </div>
+
+        <div class="circuit-badge badge-online" id="badge-online" aria-hidden="true" title="Catálogo Online">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#082846" stroke-width="2.2">
+            <rect x="5" y="2" width="14" height="20" rx="3"></rect>
+            <circle cx="12" cy="11" r="5"></circle>
+            <line x1="7" y1="11" x2="17" y2="11"></line>
+            <path d="M12 6a7 7 0 0 1 0 10"></path>
+          </svg>
+        </div>
+
+        <div class="circuit-badge badge-shield" id="badge-shield" aria-hidden="true" title="Custodia Escrow 100%">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#082846" stroke-width="2.2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+
+        <!-- ======================================================================
+             THE 9 INTERACTIVE MODULAR PUZZLE BLOCKS (DRAGGABLE & NON-OVERLAPPING)
+             ====================================================================== -->
+
+        <!-- BLOCK 1: Origin Hub (YOUR COMPANY) -->
+        <div class="modular-block node-origin-hub" id="origin-hub" role="region" aria-label="Origen: Your Company">
+          <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
+          <div class="hub-label">
+            <span class="hub-word">YOUR</span>
+            <span class="hub-word">COMPANY</span>
+          </div>
+          <span class="block-tag-sub">ORIGIN ROOT</span>
+        </div>
+
+        <!-- BLOCK 2: Nexa Modular Hub Core -->
+        <div class="modular-block node-hub-core" id="hub-core" role="region" aria-label="Nexa Hub Core">
+          <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
+          <div class="core-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38c8ff" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path>
+              <path d="M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+            </svg>
+          </div>
+          <strong class="core-title">NEXA HUB</strong>
+          <span class="core-sub">Core Bus</span>
+          <span class="core-dot-indicator"></span>
+        </div>
+
+        <!-- BLOCK 3: Interlocking Logic Block A (Dispatch Router) -->
+        <div class="modular-block node-logic-puzzle node-logic-a" id="logic-a" role="region" aria-label="Bloque Lógico A: Despacho">
+          <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
+          <div class="puzzle-header">
+            <span class="puzzle-badge">01</span>
+            <strong class="puzzle-title">BLOCK A</strong>
+          </div>
+          <span class="puzzle-role">Route Dispatch</span>
+          <div class="puzzle-indicator-bar"><span class="bar-fill"></span></div>
+        </div>
+
+        <!-- BLOCK 4: Interlocking Logic Block B (Escrow Verifier) -->
+        <div class="modular-block node-logic-puzzle node-logic-b" id="logic-b" role="region" aria-label="Bloque Lógico B: Verificación Escrow">
+          <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
+          <div class="puzzle-header">
+            <span class="puzzle-badge">02</span>
+            <strong class="puzzle-title">BLOCK B</strong>
+          </div>
+          <span class="puzzle-role">Escrow Verify</span>
+          <div class="puzzle-indicator-bar"><span class="bar-fill"></span></div>
+        </div>
+
+        <!-- BLOCK 5: Interlocking Logic Block C (Supply Mesh) -->
+        <div class="modular-block node-logic-puzzle node-logic-c" id="logic-c" role="region" aria-label="Bloque Lógico C: Malla de Suministro">
+          <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
+          <div class="puzzle-header">
+            <span class="puzzle-badge">03</span>
+            <strong class="puzzle-title">BLOCK C</strong>
+          </div>
+          <span class="puzzle-role">Cold Chain</span>
+          <div class="puzzle-indicator-bar"><span class="bar-fill"></span></div>
+        </div>
+
+        <!-- BLOCK 6: Physical Store POS Card -->
+        <article class="modular-block channel-card card-store" id="store-card" aria-label="Canal: Physical Store POS">
+          <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
+          <div class="card-thumb-wrap">
+            <img 
+              src="/assets/synthetic/store-schematic.svg" 
+              alt="Physical Store Showroom POS" 
+              class="card-thumb-img" 
+              loading="eager"
+              width="80"
+              height="80"
+            />
+          </div>
+          <div class="card-details-col">
+            <p class="card-sub-label">Gopro available</p>
+            <p class="card-sub-label">for renting at</p>
+            <p class="card-sub-label"><strong class="channel-bold">Physical Store</strong></p>
+            <span class="card-price-value text-mono">100€/Day</span>
+          </div>
+        </article>
+
+        <!-- BLOCK 7: Customer Inquiry Card (John Cooper) -->
+        <article class="modular-block channel-card card-email" id="inquiry-card" aria-label="Canal: Consulta Directa">
+          <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
+          <div class="email-card-header">
+            <div class="email-avatar-wrap">
+              <img 
+                src="/assets/synthetic/avatar-customer.svg" 
+                alt="John Cooper Avatar" 
+                class="email-avatar-img" 
+                loading="eager"
+                width="32"
+                height="32"
+              />
+            </div>
+            <div class="email-meta-info">
+              <strong class="email-author-name">John Cooper</strong>
+              <span class="email-timestamp text-mono">3h</span>
+            </div>
+          </div>
+          <p class="email-body-text">
+            Hi! <span class="wave-hand-icon" aria-hidden="true">👋</span> I want to order 2xGoPro for 4 days, for an event.
+          </p>
+        </article>
+
+        <!-- BLOCK 8: Online Store Card (acme.store) -->
+        <article class="modular-block channel-card card-online" id="online-card" aria-label="Canal: Catálogo Online">
+          <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
+          <div class="online-card-topbar">
+            <svg class="browser-lock-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <span class="browser-domain-text text-mono">acme.store</span>
+          </div>
+
+          <div class="online-card-body">
+            <div class="card-thumb-wrap gopro-wrap">
+              <img 
+                src="/assets/synthetic/camera-vector.svg" 
+                alt="Action Camera" 
+                class="card-thumb-img" 
+                loading="eager"
+                width="50"
+                height="42"
+              />
+            </div>
+            <div class="card-details-col">
+              <p class="card-sub-label">
+                Online Catalog <br />
+                for renting <strong class="channel-bold">Online</strong>
+              </p>
+            </div>
+          </div>
+
+          <div class="online-action-capsule">
+            <span class="capsule-price text-mono">100€/Day</span>
+            <span class="capsule-divider" aria-hidden="true">|</span>
+            <span class="capsule-rent-btn">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+              <span>DESPACHAR</span>
+            </span>
+          </div>
+        </article>
+
+        <!-- BLOCK 9: Escrow Terminal Card (100% Custodia) -->
+        <article class="modular-block card-escrow" id="escrow-card" aria-label="Terminal de Custodia Escrow">
+          <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
+          <div class="escrow-header">
+            <div class="escrow-icon-bubble">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38c8ff" stroke-width="2.4" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <div class="escrow-title-wrap">
+              <strong class="escrow-title">100% Custody</strong>
+              <span class="escrow-sub">Zero Risk Escrow</span>
+            </div>
+          </div>
+          <p class="escrow-desc">Pre-autorización instantánea y liberación automática sin reclamos en frío.</p>
+          <div class="escrow-footer-status">
+            <span class="status-live-dot"></span>
+            <span class="text-mono">AUTORIZADO · RED ACTIVA</span>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- 2.4 BOTTOM LAYER (Notches, Guarantee Microcopy & Tracker) -->
+      <footer class="hero-bottom-layer">
+        <!-- Bottom-Left White Notch: Down Arrow Button -->
+        <div class="hero-bottom-left">
+          <a href="#scrollytelling" class="hero-down-circle" aria-label="Bajar a la siguiente sección">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Bottom-Center Green/Blue Floor: Real-time Status Ticker -->
+        <div class="hero-bottom-center">
+          <p class="hero-guarantee-text" id="hero-guarantee-text">
+            <span class="ticker-prefix text-mono">✦ NEXAFY LIVING ENGINE:</span>
+            <span id="workbench-ticker-msg">Conduits 28px dinámicos · Motor gráfico editable · Arrastra cualquier bloque libremente</span>
+          </p>
+        </div>
+
+        <!-- Bottom-Right White Notch: Presentation Tracker & Chat Support -->
+        <div class="hero-bottom-right">
+          <div class="hero-chapter-tracker" aria-label="Progreso de capítulos">
+            <div class="tracker-track-line" aria-hidden="true">
+              <span class="tracker-progress-segment"></span>
+            </div>
+            <div class="tracker-steps-row">
+              <button type="button" class="tracker-step active" data-chapter="1" aria-label="Chapter 1: Channels & Security" aria-pressed="true">
+                <span class="step-num text-mono">01</span>
+                <span class="step-title">Channels & Security</span>
+              </button>
+              <button type="button" class="tracker-step" data-chapter="2" aria-label="Chapter 2: Platform & SaaS" aria-pressed="false">
+                <span class="step-num text-mono">02</span>
+                <span class="step-title">SaaS</span>
+              </button>
+              <button type="button" class="tracker-step" data-chapter="3" aria-label="Chapter 3: Safe Payments" aria-pressed="false">
+                <span class="step-num text-mono">03</span>
+                <span class="step-title">Escrow Link</span>
+              </button>
+            </div>
+          </div>
+
+          <button type="button" class="hero-chat-bubble" aria-label="Abrir soporte en vivo">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-6 9c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-4 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-2-4h12v1H8V7z"/>
+            </svg>
+          </button>
+        </div>
+      </footer>
+
+    </div>
+  </section>
+
+  <!-- 3. Collapsible Primitives & Topologic Inspector Drawer -->
+  <section class="workbench-inspector-drawer" id="workbench-inspector-drawer" style="display: none;" aria-label="Inspector de Geometría y Topología">
     <div class="inspector-header">
       <div class="inspector-title-row">
-        <strong>Nexafy Living Geometry · Primitivas de Borde & Especificaciones Arquitectónicas</strong>
-        <span class="validation-badge"><i class="pi pi-check-circle"></i> 0 Colisiones (PASS · Validación Rigurosa)</span>
+        <strong>Nexafy Living Geometry · Inspector de Topología & Conduits 28px</strong>
+        <span class="validation-badge" id="inspector-badge"><i class="pi pi-check-circle"></i> 0 Colisiones (PASS · Validación Rigurosa)</span>
       </div>
       <button type="button" class="inspector-close-btn" id="btn-close-inspector" aria-label="Cerrar inspector">✕</button>
     </div>
 
     <div class="inspector-grid">
-      <!-- Primitives Panel -->
+      <!-- Node Coordinates Matrix -->
       <div class="inspector-card">
-        <h4>Primitivas de Borde Nexafy 2.0</h4>
-        <div class="primitives-button-row">
-          <span class="primitive-tag active" title="Top Canopy Headline Crown">PROTRUDE (Canopy Notch)</span>
-          <span class="primitive-tag" title="White Notches">RECESS (Muescas Blancas)</span>
-          <span class="primitive-tag" title="Lateral Stepped Curves">STEP (Escalón Lateral)</span>
-          <span class="primitive-tag" title="Bottom Center Floor">SHELF (Shelf Inferior 888px)</span>
-          <span class="primitive-tag" title="Indicator Tabs">TAB (Pestaña)</span>
-          <span class="primitive-tag" title="28px Thick Vascular Lines">CHANNEL (Conducto 28px)</span>
-          <span class="primitive-tag" title="Down Arrow Notch">CUTOUT (Muesca Flecha ↓)</span>
+        <h4>Matriz de Coordenadas de Bloques (Stage: 1130 × 580 px)</h4>
+        <div class="coords-table-wrap">
+          <table class="coords-table text-mono" id="inspector-coords-table">
+            <thead>
+              <tr>
+                <th>Bloque</th>
+                <th>X (px)</th>
+                <th>Y (px)</th>
+                <th>Ancho</th>
+                <th>Alto</th>
+              </tr>
+            </thead>
+            <tbody id="coords-table-body">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
         </div>
-        <p class="primitive-info">
-          Geometría Bürocratik SOTD: Radio base de 36px, filetes tangenciales continuos G2, sin discontinuidades de curvatura ni solapamiento.
-        </p>
       </div>
 
-      <!-- Geometry Specs Panel -->
+      <!-- Conduits Specs Panel -->
       <div class="inspector-card">
-        <h4>Métricas Canónicas del Canvas</h4>
+        <h4>Especificaciones de Conductos Vasculares</h4>
         <div class="metrics-spec-grid">
-          <div class="spec-item">
-            <span class="spec-label">Dimensiones Canvas:</span>
-            <strong class="spec-value text-mono">1440 × 820 px</strong>
-          </div>
           <div class="spec-item">
             <span class="spec-label">Grosor de Conducto:</span>
             <strong class="spec-value text-mono">28 px sólido (0 raster)</strong>
           </div>
           <div class="spec-item">
-            <span class="spec-label">Top Canopy Crown:</span>
-            <strong class="spec-value text-mono">568 px ancho · 105 px drop</strong>
+            <span class="spec-label">Radio de Filete (Fillet):</span>
+            <strong class="spec-value text-mono">24 px (Cubic Bezier κ=0.552)</strong>
           </div>
           <div class="spec-item">
-            <span class="spec-label">Bottom Shelf Notch:</span>
-            <strong class="spec-value text-mono">888 px ancho · 85 px extend</strong>
+            <span class="spec-label">Partículas de Pulso:</span>
+            <strong class="spec-value text-mono">r=6 px lumen continuo</strong>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Enrutamiento Ortogonal:</span>
+            <strong class="spec-value text-mono">Manhattan dinámico a 60 FPS</strong>
           </div>
         </div>
-      </div>
-
-      <!-- Export SVG & Commands -->
-      <div class="inspector-card">
-        <h4>Exportación de Geometría</h4>
-        <div class="export-actions-row">
-          <button type="button" class="action-sm-btn" id="btn-copy-svg-path">Copiar SVG Path</button>
+        <div class="export-actions-row" style="margin-top: 1rem;">
+          <button type="button" class="action-sm-btn" id="btn-copy-svg-path">Copiar SVG Path Canvas</button>
           <a href="/nexafy" class="action-sm-btn primary">Ver Landing Completa →</a>
         </div>
-        <pre class="path-preview-box text-mono" id="preview-path-text">commandsToSvgPath(generateContainerCommands(NEXAFY_PRESETS.CHANNELS))</pre>
       </div>
     </div>
   </section>
 </div>
 
 <style>
+  /* --------------------------------------------------------------------------
+     1. WORKBENCH MASTER CONTAINER & TOOLBAR
+     -------------------------------------------------------------------------- */
   .workbench-master-container {
     width: 100%;
     margin: 0 auto;
@@ -189,32 +615,35 @@ import Hero from '../hero/Hero.astro';
     display: flex;
     flex-direction: column;
     overflow-x: clip;
+    --stage-plate: #082846;
+    --stage-accent: #38c8ff;
+    --stage-conduit: #bae6fd;
+    --stage-card-bg: #38c8ff;
+    --stage-card-text: #082846;
   }
 
-  /* --------------------------------------------------------------------------
-     1. WORKBENCH MASTER TOOLBAR
-     -------------------------------------------------------------------------- */
   .workbench-toolbar-bar {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(255, 255, 255, 0.96);
+    background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-bottom: 1px solid #e2e8f0;
     padding: 0.65rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1.25rem;
     flex-wrap: wrap;
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    box-shadow: 0 2px 10px rgba(8, 40, 70, 0.05);
   }
 
   .toolbar-left-group {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
 
   .toolbar-title-wrap {
@@ -227,24 +656,25 @@ import Hero from '../hero/Hero.astro';
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    background: rgba(16, 185, 129, 0.12);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    color: #059669;
+    background: rgba(56, 200, 255, 0.15);
+    border: 1px solid rgba(56, 200, 255, 0.4);
+    color: #0284c7;
     font-size: 10px;
     font-weight: 700;
     font-family: var(--nexa-font-family-mono, monospace);
     letter-spacing: 0.06em;
-    padding: 2px 7px;
+    padding: 3px 8px;
     border-radius: 9999px;
   }
 
   .live-dot {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    background-color: #10b981;
+    background-color: #38c8ff;
+    box-shadow: 0 0 6px #38c8ff;
     display: inline-block;
-    animation: livePulse 2s infinite ease-in-out;
+    animation: livePulse 1.8s infinite ease-in-out;
   }
 
   @keyframes livePulse {
@@ -254,91 +684,129 @@ import Hero from '../hero/Hero.astro';
 
   .toolbar-main-title {
     font-family: var(--nexa-font-family-heading, 'Plus Jakarta Sans', sans-serif);
-    font-size: 0.9375rem;
-    font-weight: 700;
-    color: #0f172a;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #082846;
     letter-spacing: -0.01em;
   }
 
-  .preset-selector-wrap {
-    display: flex;
+  /* Special Build Engine Action Button */
+  .btn-engine-build {
+    display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-  }
-
-  .selector-label {
-    font-size: 11.5px;
-    color: #64748b;
-    font-weight: 600;
-  }
-
-  .workbench-select {
-    background: #f8fafc;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    padding: 0.35rem 0.65rem;
+    gap: 6px;
+    background: #082846;
+    color: #38c8ff;
+    border: 1.5px solid #38c8ff;
+    padding: 0.4rem 0.9rem;
+    border-radius: 8px;
     font-size: 12px;
-    font-weight: 600;
-    color: #0f172a;
-    outline: none;
+    font-weight: 700;
     cursor: pointer;
-    transition: border-color 0.15s ease;
+    box-shadow: 0 2px 8px rgba(56, 200, 255, 0.2);
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
-  .workbench-select:focus {
-    border-color: #2a67d9;
+  .btn-engine-build:hover {
+    background: #0d3862;
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 4px 14px rgba(56, 200, 255, 0.35);
+  }
+
+  .btn-engine-build:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  /* Preset Pills */
+  .preset-pill-group {
+    display: inline-flex;
+    align-items: center;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 2px;
+    gap: 2px;
+  }
+
+  .preset-btn {
+    background: transparent;
+    border: none;
+    padding: 4px 9px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #475569;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .preset-btn:hover {
+    color: #082846;
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  .preset-btn.active {
+    background: #ffffff;
+    color: #0284c7;
+    font-weight: 700;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .preset-btn.reset-btn {
+    color: #64748b;
   }
 
   .toolbar-center-group {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1rem;
     flex-wrap: wrap;
   }
 
-  /* Human Ergonomic Tones Switcher */
-  .human-tones-toggle {
+  /* Human Tones Switcher */
+  .human-tones-toggle,
+  .conduit-palette-toggle {
     display: flex;
     align-items: center;
     gap: 0.35rem;
-    background: #f1f5f9;
-    padding: 3px 5px;
-    border-radius: 8px;
-    border: 1px solid #e2e8f0;
+    font-size: 11.5px;
   }
 
-  .tones-label {
-    font-size: 11px;
-    font-weight: 600;
+  .tones-label,
+  .conduit-toggle-label {
     color: #64748b;
-    margin: 0 4px;
+    font-weight: 600;
+    margin-right: 2px;
   }
 
-  .tone-pill {
+  .tone-pill,
+  .conduit-pill {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    background: transparent;
-    border: 1px solid transparent;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
     padding: 3px 8px;
     border-radius: 6px;
     font-size: 11px;
     font-weight: 600;
     color: #334155;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.15s ease;
   }
 
-  .tone-pill:hover {
-    background: rgba(255, 255, 255, 0.7);
-    color: #0f172a;
+  .tone-pill:hover,
+  .conduit-pill:hover {
+    border-color: #94a3b8;
+    background: #f1f5f9;
   }
 
-  .tone-pill.active {
+  .tone-pill.active,
+  .conduit-pill.active {
     background: #ffffff;
-    border-color: #cbd5e1;
-    color: #0f172a;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    border-color: #0284c7;
+    color: #0284c7;
+    box-shadow: 0 1px 4px rgba(2, 132, 199, 0.15);
   }
 
   .color-swatch {
@@ -348,109 +816,939 @@ import Hero from '../hero/Hero.astro';
     display: inline-block;
   }
 
-  /* Conduit Palette Toggle */
-  .conduit-palette-toggle {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    background: #f1f5f9;
-    padding: 3px 5px;
-    border-radius: 8px;
-    border: 1px solid #e2e8f0;
-  }
-
-  .conduit-toggle-label {
-    font-size: 11px;
-    font-weight: 600;
-    color: #64748b;
-    margin: 0 4px;
-  }
-
-  .conduit-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: transparent;
-    border: 1px solid transparent;
-    padding: 3px 7px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 600;
-    color: #334155;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .conduit-pill:hover {
-    background: rgba(255, 255, 255, 0.7);
-  }
-
-  .conduit-pill.active {
-    background: #ffffff;
-    border-color: #cbd5e1;
-    color: #0f172a;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  }
-
   .toolbar-right-group {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.75rem;
+  }
+
+  .collision-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    color: #059669;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 9999px;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .collision-pill.has-collision {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #dc2626;
   }
 
   .workbench-action-btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 0.35rem 0.85rem;
+    gap: 5px;
+    padding: 0.35rem 0.75rem;
     border-radius: 6px;
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 600;
     cursor: pointer;
-    border: 1px solid transparent;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    color: #334155;
     transition: all 0.15s ease;
   }
 
-  .workbench-action-btn.primary {
-    background: #004737;
-    color: #57f09e;
-    border-color: #004737;
-  }
-
-  .workbench-action-btn.primary:hover {
-    background: #003629;
-  }
-
-  .workbench-action-btn.primary.running {
-    background: #dc2626;
-    color: #ffffff;
-    border-color: #dc2626;
-  }
-
-  .workbench-action-btn.secondary {
-    background: #f8fafc;
-    color: #334155;
-    border-color: #cbd5e1;
-  }
-
-  .workbench-action-btn.secondary:hover {
+  .workbench-action-btn:hover {
     background: #f1f5f9;
     color: #0f172a;
   }
 
   /* --------------------------------------------------------------------------
-     2. WORKBENCH HERO STAGE (Hosts the Authentic Hero)
+     2. HERO SCULPTED STAGE & BUROCRATIK SILHOUETTE
      -------------------------------------------------------------------------- */
   .workbench-hero-stage {
-    width: 100%;
-    margin: 0 auto;
     position: relative;
-    background: #ffffff;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 1.5rem 2rem 2.5rem;
     overflow-x: clip;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-sculpted-canvas {
+    position: relative;
+    width: 100%;
+    max-width: 1560px;
+    min-height: 820px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hero-silhouette-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  .hero-silhouette-path {
+    transition: fill 0.3s ease;
+  }
+
+  /* 2.1 Top Layer */
+  .hero-top-layer {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .hero-top-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.25rem 1.75rem;
+    background: #ffffff;
+    border-bottom-right-radius: 36px;
+  }
+
+  .nexa-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: #082846;
+  }
+
+  .nexa-logo-bricks {
+    display: inline-grid;
+    grid-template-columns: 8px 14px;
+    grid-template-rows: 8px 8px;
+    gap: 2.5px;
+    transform: rotate(45deg);
+  }
+
+  .brick {
+    background-color: #38c8ff;
+    border-radius: 2px;
+  }
+
+  .brick-sm { width: 8px; height: 8px; }
+  .brick-lg { width: 14px; height: 8px; }
+
+  .nexa-logo-word {
+    font-family: var(--nexa-font-family-heading, 'Plus Jakarta Sans', sans-serif);
+    font-size: 1.45rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: #082846;
+  }
+
+  .hero-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .hero-nav-link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #475569;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .hero-nav-link:hover,
+  .hero-nav-link.active {
+    color: #0284c7;
+  }
+
+  /* Top Center Monumental Headline inside Canopy Notch */
+  .hero-top-center {
+    display: flex;
+    justify-content: center;
+    width: 568px;
+    margin-top: 0;
+  }
+
+  .hero-crown-content {
+    text-align: center;
+    padding: 1.25rem 1rem 0;
+    color: #ffffff;
+  }
+
+  .hero-main-title {
+    font-family: var(--nexa-font-family-heading, 'Plus Jakarta Sans', sans-serif);
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    color: #ffffff;
+    margin-bottom: 0.45rem;
+  }
+
+  .hero-main-sub {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #cbd5e1;
+    max-width: 440px;
+    margin: 0 auto;
+    line-height: 1.35;
+  }
+
+  /* Top Right */
+  .hero-top-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 1.75rem;
+    background: #ffffff;
+    border-bottom-left-radius: 36px;
+  }
+
+  .hero-lang-pill {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border: 1px solid #cbd5e1;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #082846;
+  }
+
+  .lang-toggle-btn {
+    background: none;
+    border: none;
+    font-weight: 700;
+    color: #082846;
+    cursor: pointer;
+  }
+
+  .hero-book-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #082846;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .hero-book-btn:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+  }
+
+  .hero-login-btn {
+    padding: 6px 16px;
+    background-color: #38c8ff;
+    color: #082846;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .hero-login-btn:hover {
+    background-color: #7dd3fc;
   }
 
   /* --------------------------------------------------------------------------
-     3. COLLAPSIBLE INSPECTOR DRAWER
+     2.2 CENTER STAGE (THE INTERACTIVE LIVING CIRCUIT CANVAS)
+     -------------------------------------------------------------------------- */
+  .hero-center-stage {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    max-width: 1130px;
+    height: 580px;
+    margin: 0 auto;
+    user-select: none;
+  }
+
+  .circuit-svg-dynamic {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  .circuit-conduit-path {
+    transition: stroke 0.3s ease;
+  }
+
+  .pulse-particle {
+    filter: drop-shadow(0 0 6px #38c8ff);
+    transition: fill 0.3s ease;
+  }
+
+  /* Floating Drag Coordinates Tooltip */
+  .drag-coords-hud {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    z-index: 80;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(8, 40, 70, 0.9);
+    border: 1px solid #38c8ff;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    color: #ffffff;
+    font-size: 11px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .hud-pill-tag {
+    background: #38c8ff;
+    color: #082846;
+    font-weight: 800;
+    font-size: 9px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .hud-coords-text {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-weight: 600;
+    color: #bae6fd;
+  }
+
+  /* Inline Conduit Badges */
+  .circuit-badge {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background-color: var(--stage-conduit, #bae6fd);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 8;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(8, 40, 70, 0.15);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease;
+  }
+
+  /* ==========================================================================
+     MODULAR PUZZLE BLOCKS (DRAGGABLE, SOLID COLORIMETRY, HIGH FINISH)
+     ========================================================================== */
+  .modular-block {
+    position: absolute;
+    z-index: 10;
+    cursor: grab;
+    transition: box-shadow 0.2s ease, transform 0.15s ease;
+    user-select: none;
+    touch-action: none;
+  }
+
+  .modular-block:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(56, 200, 255, 0.25);
+  }
+
+  .modular-block.is-dragging {
+    cursor: grabbing !important;
+    z-index: 60 !important;
+    transform: scale(1.03) !important;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35), 0 0 0 2px #38c8ff !important;
+  }
+
+  .drag-handle-grip {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    font-size: 11px;
+    color: rgba(8, 40, 70, 0.35);
+    line-height: 1;
+    pointer-events: none;
+    font-weight: 900;
+  }
+
+  /* 1. Origin Hub (YOUR COMPANY) */
+  .node-origin-hub {
+    width: 154px;
+    height: 140px;
+    background-color: var(--stage-card-bg, #38c8ff);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: var(--stage-card-text, #082846);
+  }
+
+  .hub-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--nexa-font-family-heading, 'Plus Jakarta Sans', sans-serif);
+    font-size: 1.35rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: inherit;
+    text-align: center;
+  }
+
+  .hub-word { display: block; }
+
+  .block-tag-sub {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: rgba(8, 40, 70, 0.6);
+  }
+
+  /* 2. Nexa Modular Hub Core */
+  .node-hub-core {
+    width: 110px;
+    height: 110px;
+    background: #082846;
+    border: 2px solid #38c8ff;
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(56, 200, 255, 0.25);
+    color: #ffffff;
+    position: absolute;
+  }
+
+  .core-icon-wrap {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(56, 200, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+
+  .core-title {
+    font-family: var(--nexa-font-family-heading, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11.5px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+  }
+
+  .core-sub {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9px;
+    color: #38c8ff;
+    font-weight: 600;
+  }
+
+  .core-dot-indicator {
+    position: absolute;
+    bottom: 8px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #38c8ff;
+    box-shadow: 0 0 6px #38c8ff;
+  }
+
+  /* 3, 4, 5. Interlocking Logic Puzzle Blocks (A, B, C) */
+  .node-logic-puzzle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.65rem 0.75rem;
+    border-radius: 18px;
+    color: #082846;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .node-logic-a {
+    width: 100px;
+    height: 95px;
+    background-color: #bae6fd; /* Soft Celeste */
+  }
+
+  .node-logic-b {
+    width: 100px;
+    height: 95px;
+    background-color: #7dd3fc; /* Mid Celeste */
+  }
+
+  .node-logic-c {
+    width: 105px;
+    height: 95px;
+    background-color: #38c8ff; /* Vibrant Celeste */
+  }
+
+  .puzzle-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .puzzle-badge {
+    background: #082846;
+    color: #ffffff;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9px;
+    font-weight: 800;
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  .puzzle-title {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  .puzzle-role {
+    font-size: 10px;
+    font-weight: 600;
+    opacity: 0.85;
+    line-height: 1.2;
+  }
+
+  .puzzle-indicator-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(8, 40, 70, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    display: block;
+    height: 100%;
+    width: 75%;
+    background: #082846;
+  }
+
+  /* 6. Channel Card: Physical Store POS */
+  .channel-card {
+    background-color: var(--stage-card-bg, #38c8ff);
+    border-radius: 16px;
+    color: var(--stage-card-text, #082846);
+  }
+
+  .card-store {
+    width: 260px;
+    height: 115px;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.65rem 0.85rem;
+  }
+
+  .card-thumb-wrap {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .card-details-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.1rem;
+  }
+
+  .card-sub-label {
+    font-size: 0.8125rem;
+    line-height: 1.2;
+    color: inherit;
+  }
+
+  .channel-bold {
+    font-weight: 800;
+    color: inherit;
+  }
+
+  .card-price-value {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: inherit;
+    margin-top: 0.2rem;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  /* 7. Channel Card: Customer Inquiry (John Cooper) */
+  .card-email {
+    width: 275px;
+    height: 110px;
+    padding: 0.75rem 0.95rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .email-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .email-avatar-wrap {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background-color: #ffffff;
+  }
+
+  .email-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .email-meta-info {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .email-author-name {
+    font-size: 0.875rem;
+    font-weight: 800;
+    color: inherit;
+  }
+
+  .email-timestamp {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .email-body-text {
+    font-size: 0.8125rem;
+    line-height: 1.35;
+    color: inherit;
+  }
+
+  /* 8. Channel Card: Online Store (acme.store) */
+  .card-online {
+    width: 260px;
+    height: 190px;
+    padding: 0.75rem 0.95rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .online-card-topbar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: #082846;
+    color: #bae6fd;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    align-self: flex-start;
+  }
+
+  .browser-domain-text {
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .online-card-body {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .gopro-wrap {
+    width: 50px;
+    height: 44px;
+  }
+
+  .online-action-capsule {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #082846;
+    color: #ffffff;
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .capsule-price {
+    color: #38c8ff;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .capsule-divider {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .capsule-rent-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #ffffff;
+  }
+
+  /* 9. Escrow Terminal Card */
+  .card-escrow {
+    width: 250px;
+    height: 145px;
+    background: #082846;
+    border: 2px solid #38c8ff;
+    border-radius: 18px;
+    padding: 1rem 1.15rem;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .escrow-header {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .escrow-icon-bubble {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(56, 200, 255, 0.15);
+    border: 1px solid rgba(56, 200, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .escrow-title-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .escrow-title {
+    font-size: 0.875rem;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.15;
+  }
+
+  .escrow-sub {
+    font-size: 0.6875rem;
+    color: #38c8ff;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .escrow-desc {
+    font-size: 0.75rem;
+    line-height: 1.35;
+    color: #cbd5e1;
+    margin: 0;
+  }
+
+  .escrow-footer-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #38c8ff;
+    letter-spacing: 0.05em;
+  }
+
+  .status-live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #38c8ff;
+    box-shadow: 0 0 6px #38c8ff;
+  }
+
+  /* --------------------------------------------------------------------------
+     2.4 BOTTOM LAYER (NOTCHES, TICKER & TRACKER)
+     -------------------------------------------------------------------------- */
+  .hero-bottom-layer {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .hero-bottom-left {
+    padding: 1.25rem 1.75rem;
+    background: #ffffff;
+    border-top-right-radius: 36px;
+  }
+
+  .hero-down-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    color: #082846;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .hero-down-circle:hover {
+    background: #38c8ff;
+    transform: translateY(2px);
+  }
+
+  .hero-bottom-center {
+    flex: 1;
+    max-width: 888px;
+    text-align: center;
+    padding-bottom: 1.15rem;
+  }
+
+  .hero-guarantee-text {
+    font-size: 0.8125rem;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .ticker-prefix {
+    color: #38c8ff;
+    font-weight: 800;
+    font-size: 10px;
+    background: rgba(56, 200, 255, 0.15);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .hero-bottom-right {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem 1.75rem;
+    background: #ffffff;
+    border-top-left-radius: 36px;
+  }
+
+  .hero-chapter-tracker {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .tracker-track-line {
+    width: 100%;
+    height: 3px;
+    background: #e2e8f0;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .tracker-progress-segment {
+    display: block;
+    width: 33.3%;
+    height: 100%;
+    background: #38c8ff;
+  }
+
+  .tracker-steps-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .tracker-step {
+    background: none;
+    border: none;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    cursor: pointer;
+    padding: 0;
+    color: #64748b;
+  }
+
+  .tracker-step.active {
+    color: #082846;
+  }
+
+  .step-num {
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .step-title {
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .tracker-step:not(.active) .step-title {
+    display: none;
+  }
+
+  .hero-chat-bubble {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #082846;
+    color: #38c8ff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.15s ease, background-color 0.2s ease;
+  }
+
+  .hero-chat-bubble:hover {
+    transform: scale(1.06);
+    background-color: #0f375e;
+  }
+
+  /* --------------------------------------------------------------------------
+     3. COLLAPSIBLE TOPOLOGIC INSPECTOR DRAWER
      -------------------------------------------------------------------------- */
   .workbench-inspector-drawer {
     background: #f8fafc;
@@ -478,7 +1776,7 @@ import Hero from '../hero/Hero.astro';
     align-items: center;
     gap: 1rem;
     font-size: 13px;
-    color: #0f172a;
+    color: #082846;
   }
 
   .validation-badge {
@@ -504,14 +1802,9 @@ import Hero from '../hero/Hero.astro';
     border-radius: 4px;
   }
 
-  .inspector-close-btn:hover {
-    background: #e2e8f0;
-    color: #0f172a;
-  }
-
   .inspector-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: 1.25rem;
   }
 
@@ -525,41 +1818,37 @@ import Hero from '../hero/Hero.astro';
   .inspector-card h4 {
     font-size: 12px;
     font-weight: 700;
-    color: #0f172a;
+    color: #082846;
     margin-bottom: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
 
-  .primitives-button-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-bottom: 0.75rem;
+  .coords-table-wrap {
+    overflow-x: auto;
   }
 
-  .primitive-tag {
-    display: inline-block;
-    padding: 3px 8px;
-    background: #f1f5f9;
-    border: 1px solid #cbd5e1;
-    border-radius: 4px;
-    font-size: 10.5px;
-    font-weight: 600;
-    color: #334155;
-    font-family: var(--nexa-font-family-mono, monospace);
+  .coords-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
   }
 
-  .primitive-tag.active {
-    background: #0284c7;
-    color: #ffffff;
-    border-color: #0284c7;
+  .coords-table th,
+  .coords-table td {
+    padding: 4px 8px;
+    text-align: left;
+    border-bottom: 1px solid #f1f5f9;
   }
 
-  .primitive-info {
-    font-size: 11.5px;
+  .coords-table th {
+    background: #f8fafc;
     color: #64748b;
-    line-height: 1.45;
+    font-weight: 600;
+  }
+
+  .coords-table td {
+    color: #082846;
   }
 
   .metrics-spec-grid {
@@ -581,13 +1870,12 @@ import Hero from '../hero/Hero.astro';
 
   .spec-value {
     font-size: 11.5px;
-    color: #0f172a;
+    color: #082846;
   }
 
   .export-actions-row {
     display: flex;
     gap: 0.5rem;
-    margin-bottom: 0.75rem;
   }
 
   .action-sm-btn {
@@ -602,204 +1890,735 @@ import Hero from '../hero/Hero.astro';
     cursor: pointer;
   }
 
-  .action-sm-btn:hover {
-    background: #e2e8f0;
-  }
-
   .action-sm-btn.primary {
-    background: #004737;
-    color: #57f09e;
-    border-color: #004737;
-  }
-
-  .path-preview-box {
-    background: #0f172a;
-    color: #94a3b8;
-    padding: 0.5rem;
-    border-radius: 6px;
-    font-size: 10px;
-    overflow-x: auto;
-    max-height: 70px;
-  }
-
-  @media (max-width: 900px) {
-    .workbench-toolbar-bar {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0.75rem;
-    }
-    .toolbar-left-group,
-    .toolbar-center-group,
-    .toolbar-right-group {
-      justify-content: space-between;
-      width: 100%;
-    }
+    background: #082846;
+    color: #38c8ff;
+    border-color: #082846;
   }
 </style>
 
 <script>
-  // Human Tones System Switcher (Drives the Authentic Hero in real-time)
-  interface HumanTone {
-    plateBg: string;
-    accent: string;
-    conduit: string;
+  /**
+   * NEXAFY LIVING GRAPHICS ENGINE — CLIENT-SIDE REAL-TIME CONTROLLER
+   * Handles:
+   *  - Mouse and touch Drag & Drop for all 9 modular blocks.
+   *  - Real-time Manhattan orthogonal 28px conduit path recalculation.
+   *  - Continuous Cubic Bezier Fillet curves (r=24px, κ=0.5522847).
+   *  - Continuous pulse particles streaming along the conduits.
+   *  - Dynamic Assembly "Construir Motor (Build)" spring sequence.
+   *  - Non-overlapping presets [Canales, Matriz, Escrow, Reset].
+   *  - Human tone & conduit color transitions.
+   *  - Real-time collision monitoring.
+   */
+
+  interface Point {
+    x: number;
+    y: number;
   }
 
-  const TONES: Record<string, HumanTone> = {
-    nexa: {
-      plateBg: '#082846',
-      accent: '#38c8ff',
-      conduit: '#bae6fd',
+  type Direction = 'left' | 'right' | 'top' | 'bottom';
+
+  interface BlockPort {
+    x: number;
+    y: number;
+    dir: Direction;
+  }
+
+  interface BlockNode {
+    id: string;
+    name: string;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    ports: Record<string, BlockPort>;
+  }
+
+  interface BlockEdge {
+    id: string;
+    sourceId: string;
+    sourcePort: string;
+    targetId: string;
+    targetPort: string;
+    badgeId?: string;
+    pulseProgress?: number;
+  }
+
+  // Canonical Non-Overlapping Presets
+  const PRESET_CHANNELS: Record<string, Point> = {
+    'origin-hub':   { x: 20,  y: 210 },
+    'hub-core':     { x: 260, y: 230 },
+    'logic-a':      { x: 410, y: 140 },
+    'logic-b':      { x: 410, y: 280 },
+    'logic-c':      { x: 545, y: 210 },
+    'store-card':   { x: 150, y: 430 },
+    'inquiry-card': { x: 470, y: 430 },
+    'online-card':  { x: 740, y: 130 },
+    'escrow-card':  { x: 810, y: 390 },
+  };
+
+  const PRESET_MATRIX: Record<string, Point> = {
+    'origin-hub':   { x: 20,  y: 230 },
+    'hub-core':     { x: 220, y: 230 },
+    'logic-a':      { x: 380, y: 130 },
+    'logic-b':      { x: 380, y: 320 },
+    'logic-c':      { x: 530, y: 230 },
+    'online-card':  { x: 700, y: 120 },
+    'store-card':   { x: 700, y: 340 },
+    'inquiry-card': { x: 870, y: 130 },
+    'escrow-card':  { x: 870, y: 340 },
+  };
+
+  const PRESET_ESCROW: Record<string, Point> = {
+    'origin-hub':   { x: 20,  y: 240 },
+    'hub-core':     { x: 220, y: 240 },
+    'logic-b':      { x: 380, y: 240 },
+    'escrow-card':  { x: 540, y: 200 },
+    'logic-a':      { x: 380, y: 110 },
+    'online-card':  { x: 780, y: 110 },
+    'logic-c':      { x: 820, y: 350 },
+    'store-card':   { x: 140, y: 430 },
+    'inquiry-card': { x: 460, y: 430 },
+  };
+
+  // Node Definitions
+  const NODES: Record<string, BlockNode> = {
+    'origin-hub': {
+      id: 'origin-hub',
+      name: 'YOUR COMPANY',
+      x: 20, y: 210, width: 154, height: 140,
+      ports: {
+        right: { x: 154, y: 70, dir: 'right' }
+      }
     },
-    cashmere: {
-      plateBg: '#283a48',
-      accent: '#7dd3fc',
-      conduit: '#bae6fd',
+    'hub-core': {
+      id: 'hub-core',
+      name: 'NEXA CORE HUB',
+      x: 260, y: 230, width: 110, height: 110,
+      ports: {
+        left:   { x: 0,   y: 55, dir: 'left' },
+        top:    { x: 55,  y: 0,  dir: 'top' },
+        bottom: { x: 55,  y: 110, dir: 'bottom' },
+        right:  { x: 110, y: 55, dir: 'right' }
+      }
     },
-    ceramic: {
-      plateBg: '#1d3d63',
-      accent: '#38bdf8',
-      conduit: '#a5f3fc',
+    'logic-a': {
+      id: 'logic-a',
+      name: 'BLOCK A (Dispatch)',
+      x: 410, y: 140, width: 100, height: 95,
+      ports: {
+        left:   { x: 0,   y: 48, dir: 'left' },
+        right:  { x: 100, y: 48, dir: 'right' },
+        bottom: { x: 50,  y: 95, dir: 'bottom' }
+      }
     },
-    oceanic: {
-      plateBg: '#004737',
-      accent: '#4ade80',
-      conduit: '#57f09e',
+    'logic-b': {
+      id: 'logic-b',
+      name: 'BLOCK B (Escrow)',
+      x: 410, y: 280, width: 100, height: 95,
+      ports: {
+        left:   { x: 0,   y: 48, dir: 'left' },
+        right:  { x: 100, y: 48, dir: 'right' },
+        bottom: { x: 50,  y: 95, dir: 'bottom' }
+      }
     },
+    'logic-c': {
+      id: 'logic-c',
+      name: 'BLOCK C (Mesh)',
+      x: 545, y: 210, width: 105, height: 95,
+      ports: {
+        left:   { x: 0,   y: 48, dir: 'left' },
+        top:    { x: 52,  y: 0,  dir: 'top' },
+        bottom: { x: 52,  y: 95, dir: 'bottom' },
+        right:  { x: 105, y: 48, dir: 'right' }
+      }
+    },
+    'store-card': {
+      id: 'store-card',
+      name: 'Physical Store POS',
+      x: 150, y: 430, width: 260, height: 115,
+      ports: {
+        top:  { x: 130, y: 0,  dir: 'top' },
+        left: { x: 0,   y: 57, dir: 'left' }
+      }
+    },
+    'inquiry-card': {
+      id: 'inquiry-card',
+      name: 'Customer Inquiry',
+      x: 470, y: 430, width: 275, height: 110,
+      ports: {
+        top: { x: 137, y: 0, dir: 'top' }
+      }
+    },
+    'online-card': {
+      id: 'online-card',
+      name: 'Online Store',
+      x: 740, y: 130, width: 260, height: 190,
+      ports: {
+        left:   { x: 0,   y: 95,  dir: 'left' },
+        bottom: { x: 130, y: 190, dir: 'bottom' }
+      }
+    },
+    'escrow-card': {
+      id: 'escrow-card',
+      name: 'Escrow Terminal',
+      x: 810, y: 390, width: 250, height: 145,
+      ports: {
+        left: { x: 0,   y: 72, dir: 'left' },
+        top:  { x: 125, y: 0,  dir: 'top' }
+      }
+    }
+  };
+
+  // 9 Continuous Vascular Conduit Edges
+  const EDGES: BlockEdge[] = [
+    { id: 'trunk',         sourceId: 'origin-hub', sourcePort: 'right',  targetId: 'hub-core',    targetPort: 'left' },
+    { id: 'core-logicA',   sourceId: 'hub-core',   sourcePort: 'top',    targetId: 'logic-a',     targetPort: 'left' },
+    { id: 'core-logicB',   sourceId: 'hub-core',   sourcePort: 'bottom', targetId: 'logic-b',     targetPort: 'left' },
+    { id: 'logicA-logicC', sourceId: 'logic-a',    sourcePort: 'right',  targetId: 'logic-c',     targetPort: 'top' },
+    { id: 'logicB-logicC', sourceId: 'logic-b',    sourcePort: 'right',  targetId: 'logic-c',     targetPort: 'bottom' },
+    { id: 'branch-store',  sourceId: 'hub-core',   sourcePort: 'bottom', targetId: 'store-card',   targetPort: 'top', badgeId: 'badge-store' },
+    { id: 'branch-inquiry',sourceId: 'logic-c',    sourcePort: 'bottom', targetId: 'inquiry-card', targetPort: 'top', badgeId: 'badge-email' },
+    { id: 'branch-online', sourceId: 'logic-c',    sourcePort: 'right',  targetId: 'online-card',  targetPort: 'left', badgeId: 'badge-online' },
+    { id: 'branch-escrow', sourceId: 'online-card',sourcePort: 'bottom', targetId: 'escrow-card',  targetPort: 'top',  badgeId: 'badge-shield' }
+  ];
+
+  // Helper: Vector normal by direction
+  function getNormal(dir: Direction): Point {
+    switch (dir) {
+      case 'right':  return { x: 1,  y: 0 };
+      case 'left':   return { x: -1, y: 0 };
+      case 'top':    return { x: 0,  y: -1 };
+      case 'bottom': return { x: 0,  y: 1 };
+    }
+  }
+
+  /**
+   * Deterministic Manhattan Orthogonal Fillet Router
+   */
+  function routeOrthogonal(
+    p1: Point, dir1: Direction,
+    p2: Point, dir2: Direction,
+    filletRadius: number = 24
+  ): { d: string; waypoints: Point[]; midPoint: Point } {
+    const n1 = getNormal(dir1);
+    const n2 = getNormal(dir2);
+    const esc = 24;
+
+    const w1: Point = { x: p1.x + n1.x * esc, y: p1.y + n1.y * esc };
+    const w2: Point = { x: p2.x + n2.x * esc, y: p2.y + n2.y * esc };
+
+    const raw: Point[] = [p1, w1];
+
+    if (dir1 === 'right' && dir2 === 'left') {
+      if (w1.x <= w2.x) {
+        const midX = (w1.x + w2.x) / 2;
+        raw.push({ x: midX, y: w1.y });
+        raw.push({ x: midX, y: w2.y });
+      } else {
+        const detourY = (w1.y + w2.y) / 2 + (w1.y < w2.y ? -40 : 40);
+        raw.push({ x: w1.x, y: detourY });
+        raw.push({ x: w2.x, y: detourY });
+      }
+    } else if (dir1 === 'top' && dir2 === 'left') {
+      raw.push({ x: w1.x, y: w2.y });
+    } else if (dir1 === 'bottom' && dir2 === 'left') {
+      raw.push({ x: w1.x, y: w2.y });
+    } else if (dir1 === 'right' && dir2 === 'top') {
+      raw.push({ x: w2.x, y: w1.y });
+    } else if (dir1 === 'right' && dir2 === 'bottom') {
+      raw.push({ x: w2.x, y: w1.y });
+    } else if (dir1 === 'bottom' && dir2 === 'top') {
+      const midY = (w1.y + w2.y) / 2;
+      raw.push({ x: w1.x, y: midY });
+      raw.push({ x: w2.x, y: midY });
+    } else if (dir1 === 'top' && dir2 === 'bottom') {
+      const midY = (w1.y + w2.y) / 2;
+      raw.push({ x: w1.x, y: midY });
+      raw.push({ x: w2.x, y: midY });
+    } else {
+      raw.push({ x: w2.x, y: w1.y });
+    }
+
+    raw.push(w2);
+    raw.push(p2);
+
+    // Simplify collinear points
+    const pts: Point[] = [raw[0]];
+    for (let i = 1; i < raw.length - 1; i++) {
+      const prev = pts[pts.length - 1];
+      const curr = raw[i];
+      const next = raw[i + 1];
+
+      const dx1 = curr.x - prev.x;
+      const dy1 = curr.y - prev.y;
+      const dx2 = next.x - curr.x;
+      const dy2 = next.y - curr.y;
+
+      const isCollinearX = Math.abs(dy1) < 0.2 && Math.abs(dy2) < 0.2;
+      const isCollinearY = Math.abs(dx1) < 0.2 && Math.abs(dx2) < 0.2;
+
+      if (Math.hypot(dx1, dy1) < 1) continue;
+      if (!isCollinearX && !isCollinearY) {
+        pts.push(curr);
+      }
+    }
+    pts.push(raw[raw.length - 1]);
+
+    // Build Cubic Bezier Fillet path
+    const KAPPA = 0.552284749831;
+    let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+
+    if (pts.length <= 2) {
+      d += ` L ${pts[pts.length - 1].x.toFixed(1)} ${pts[pts.length - 1].y.toFixed(1)}`;
+    } else {
+      for (let i = 1; i < pts.length - 1; i++) {
+        const prev = pts[i - 1];
+        const curr = pts[i];
+        const next = pts[i + 1];
+
+        const v1 = { x: prev.x - curr.x, y: prev.y - curr.y };
+        const v2 = { x: next.x - curr.x, y: next.y - curr.y };
+
+        const len1 = Math.hypot(v1.x, v1.y);
+        const len2 = Math.hypot(v2.x, v2.y);
+
+        const r = Math.min(filletRadius, len1 / 2, len2 / 2);
+
+        if (r < 2) {
+          d += ` L ${curr.x.toFixed(1)} ${curr.y.toFixed(1)}`;
+          continue;
+        }
+
+        const u1 = { x: v1.x / len1, y: v1.y / len1 };
+        const u2 = { x: v2.x / len2, y: v2.y / len2 };
+
+        const t1 = { x: curr.x + u1.x * r, y: curr.y + u1.y * r };
+        const t2 = { x: curr.x + u2.x * r, y: curr.y + u2.y * r };
+
+        const cp1 = { x: t1.x + (curr.x - t1.x) * KAPPA, y: t1.y + (curr.y - t1.y) * KAPPA };
+        const cp2 = { x: t2.x + (curr.x - t2.x) * KAPPA, y: t2.y + (curr.y - t2.y) * KAPPA };
+
+        d += ` L ${t1.x.toFixed(1)} ${t1.y.toFixed(1)}`;
+        d += ` C ${cp1.x.toFixed(1)} ${cp1.y.toFixed(1)}, ${cp2.x.toFixed(1)} ${cp2.y.toFixed(1)}, ${t2.x.toFixed(1)} ${t2.y.toFixed(1)}`;
+      }
+      const last = pts[pts.length - 1];
+      d += ` L ${last.x.toFixed(1)} ${last.y.toFixed(1)}`;
+    }
+
+    const midIdx = Math.floor(pts.length / 2);
+    const midPoint = pts[midIdx] || { x: (p1.x + p2.x) / 2, y: (p1.y + p2.y) / 2 };
+
+    return { d, waypoints: pts, midPoint };
+  }
+
+  // State Management
+  let isDraggingNode = false;
+  let activeNodeId: string | null = null;
+  let dragOffset: Point = { x: 0, y: 0 };
+  let isBuilding = false;
+
+  const dragHud = document.getElementById('workbench-drag-hud');
+  const hudCoordsText = document.getElementById('hud-coords-text');
+  const tickerMsg = document.getElementById('workbench-ticker-msg');
+  const collisionBadge = document.getElementById('workbench-collision-badge');
+  const collisionText = document.getElementById('collision-text');
+
+  /**
+   * Recalculate and update all conduit paths and badges in real-time
+   */
+  function rerouteAll() {
+    EDGES.forEach(edge => {
+      const srcNode = NODES[edge.sourceId];
+      const tgtNode = NODES[edge.targetId];
+      if (!srcNode || !tgtNode) return;
+
+      const srcPort = srcNode.ports[edge.sourcePort];
+      const tgtPort = tgtNode.ports[edge.targetPort];
+      if (!srcPort || !tgtPort) return;
+
+      const p1: Point = { x: srcNode.x + srcPort.x, y: srcNode.y + srcPort.y };
+      const p2: Point = { x: tgtNode.x + tgtPort.x, y: tgtNode.y + tgtPort.y };
+
+      const route = routeOrthogonal(p1, srcPort.dir, p2, tgtPort.dir, 24);
+
+      const pathEl = document.getElementById(`path-${edge.id}`) as SVGPathElement | null;
+      if (pathEl) {
+        pathEl.setAttribute('d', route.d);
+      }
+
+      // Update attached badge position
+      if (edge.badgeId) {
+        const badgeEl = document.getElementById(edge.badgeId);
+        if (badgeEl) {
+          badgeEl.style.left = `${route.midPoint.x - 17}px`;
+          badgeEl.style.top = `${route.midPoint.y - 17}px`;
+        }
+      }
+    });
+
+    checkCollisions();
+    updateInspectorCoords();
+  }
+
+  /**
+   * Collision Detection Validator
+   */
+  function checkCollisions() {
+    const ids = Object.keys(NODES);
+    let collisionCount = 0;
+
+    for (let i = 0; i < ids.length; i++) {
+      for (let j = i + 1; j < ids.length; j++) {
+        const a = NODES[ids[i]];
+        const b = NODES[ids[j]];
+
+        const overlapX = a.x < b.x + b.width - 6 && a.x + a.width - 6 > b.x;
+        const overlapY = a.y < b.y + b.height - 6 && a.y + a.height - 6 > b.y;
+
+        if (overlapX && overlapY) {
+          collisionCount++;
+        }
+      }
+    }
+
+    if (collisionBadge && collisionText) {
+      if (collisionCount === 0) {
+        collisionBadge.className = 'collision-pill';
+        collisionBadge.innerHTML = '<i class="pi pi-check-circle"></i> 0 Colisiones';
+      } else {
+        collisionBadge.className = 'collision-pill has-collision';
+        collisionBadge.innerHTML = `<i class="pi pi-exclamation-triangle"></i> ${collisionCount} Colisión(es)`;
+      }
+    }
+  }
+
+  /**
+   * Update Inspector Coordinates Table
+   */
+  function updateInspectorCoords() {
+    const tbody = document.getElementById('coords-table-body');
+    if (!tbody) return;
+
+    tbody.innerHTML = Object.values(NODES).map(node => `
+      <tr>
+        <td><strong>${node.name}</strong></td>
+        <td>${Math.round(node.x)}</td>
+        <td>${Math.round(node.y)}</td>
+        <td>${node.width}</td>
+        <td>${node.height}</td>
+      </tr>
+    `).join('');
+  }
+
+  /**
+   * Continuous 60 FPS Particle Flow Loop
+   */
+  function animateParticles() {
+    EDGES.forEach(edge => {
+      edge.pulseProgress = ((edge.pulseProgress || 0) + 0.006) % 1;
+
+      const pathEl = document.getElementById(`path-${edge.id}`) as SVGPathElement | null;
+      const particleEl = document.getElementById(`particle-${edge.id}`) as SVGCircleElement | null;
+
+      if (pathEl && particleEl) {
+        const len = pathEl.getTotalLength();
+        if (len > 0) {
+          const pt = pathEl.getPointAtLength(edge.pulseProgress * len);
+          particleEl.setAttribute('cx', pt.x.toFixed(1));
+          particleEl.setAttribute('cy', pt.y.toFixed(1));
+        }
+      }
+    });
+
+    requestAnimationFrame(animateParticles);
+  }
+
+  /**
+   * Interactive Drag & Drop System
+   */
+  function setupDragAndDrop() {
+    const stage = document.getElementById('workbench-center-stage');
+    if (!stage) return;
+
+    Object.keys(NODES).forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      // Set initial absolute positions
+      el.style.left = `${NODES[id].x}px`;
+      el.style.top = `${NODES[id].y}px`;
+
+      el.addEventListener('pointerdown', (e: PointerEvent) => {
+        if (isBuilding) return;
+        isDraggingNode = true;
+        activeNodeId = id;
+        el.setPointerCapture(e.pointerId);
+
+        const rect = el.getBoundingClientRect();
+        dragOffset = {
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top
+        };
+
+        el.classList.add('is-dragging');
+        if (dragHud) dragHud.style.display = 'flex';
+        if (hudCoordsText) {
+          hudCoordsText.textContent = `${NODES[id].name} · X: ${Math.round(NODES[id].x)}px · Y: ${Math.round(NODES[id].y)}px`;
+        }
+
+        e.preventDefault();
+      });
+
+      el.addEventListener('pointermove', (e: PointerEvent) => {
+        if (!isDraggingNode || activeNodeId !== id) return;
+
+        const stageRect = stage.getBoundingClientRect();
+        let newX = e.clientX - stageRect.left - dragOffset.x;
+        let newY = e.clientY - stageRect.top - dragOffset.y;
+
+        // Stage Boundary Clamping (1130 × 580)
+        newX = Math.max(5, Math.min(stageRect.width - NODES[id].width - 5, newX));
+        newY = Math.max(5, Math.min(stageRect.height - NODES[id].height - 5, newY));
+
+        NODES[id].x = newX;
+        NODES[id].y = newY;
+
+        el.style.left = `${newX}px`;
+        el.style.top = `${newY}px`;
+
+        if (hudCoordsText) {
+          hudCoordsText.textContent = `${NODES[id].name} · X: ${Math.round(newX)}px · Y: ${Math.round(newY)}px`;
+        }
+
+        rerouteAll();
+      });
+
+      const onPointerEnd = () => {
+        if (activeNodeId === id) {
+          isDraggingNode = false;
+          activeNodeId = null;
+          el.classList.remove('is-dragging');
+          if (dragHud) dragHud.style.display = 'none';
+
+          if (tickerMsg) {
+            tickerMsg.textContent = `✦ Bloque [${NODES[id].name}] posicionado en (${Math.round(NODES[id].x)}, ${Math.round(NODES[id].y)}) · Red recalculada`;
+          }
+        }
+      };
+
+      el.addEventListener('pointerup', onPointerEnd);
+      el.addEventListener('pointercancel', onPointerEnd);
+    });
+  }
+
+  /**
+   * Dynamic Assembly "Construir Motor (Build)"
+   */
+  function buildEngineAssembly() {
+    if (isBuilding) return;
+    isBuilding = true;
+
+    if (tickerMsg) {
+      tickerMsg.textContent = '✦ Ensamblando motor gráfico Nexafy paso a paso...';
+    }
+
+    // Step 0: Disperse
+    Object.keys(NODES).forEach((id, idx) => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.style.transition = 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
+        el.style.opacity = '0.3';
+        el.style.transform = `scale(0.88) translate(${(idx % 2 === 0 ? -12 : 12)}px, ${(idx % 3 === 0 ? -12 : 12)}px)`;
+      }
+    });
+
+    const sequence = [
+      { ids: ['origin-hub'], delay: 100, msg: '✦ 1/5: Origen [YOUR COMPANY] acoplado' },
+      { ids: ['hub-core'], delay: 350, msg: '✦ 2/5: Núcleo Bus [NEXA HUB] conectado' },
+      { ids: ['logic-a', 'logic-b'], delay: 650, msg: '✦ 3/5: Bloques Lógicos A (Despacho) y B (Escrow) interconectados' },
+      { ids: ['logic-c'], delay: 950, msg: '✦ 4/5: Bloque Lógico C (Malla Cadena de Frío) integrado' },
+      { ids: ['store-card', 'inquiry-card', 'online-card', 'escrow-card'], delay: 1250, msg: '✦ 5/5: Canales POS, Consulta, Online y Escrow 100% Custodia sincronizados' },
+    ];
+
+    sequence.forEach(step => {
+      setTimeout(() => {
+        step.ids.forEach(id => {
+          const el = document.getElementById(id);
+          const target = PRESET_CHANNELS[id];
+          if (el && target) {
+            NODES[id].x = target.x;
+            NODES[id].y = target.y;
+            el.style.transition = 'left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.4s ease, opacity 0.3s ease';
+            el.style.left = `${target.x}px`;
+            el.style.top = `${target.y}px`;
+            el.style.transform = 'scale(1) translate(0, 0)';
+            el.style.opacity = '1';
+          }
+        });
+        rerouteAll();
+        if (tickerMsg) tickerMsg.textContent = step.msg;
+      }, step.delay);
+    });
+
+    setTimeout(() => {
+      isBuilding = false;
+      if (tickerMsg) {
+        tickerMsg.textContent = '✦ Motor Gráfico Nexafy Construido y 100% Operativo · Arrastra cualquier bloque libremente';
+      }
+      // Remove inline transitions so dragging remains 0ms lag
+      Object.keys(NODES).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.transition = 'none';
+      });
+    }, 1800);
+  }
+
+  /**
+   * Apply Preset Positions Smoothly
+   */
+  function applyPreset(presetKey: string) {
+    let preset = PRESET_CHANNELS;
+    if (presetKey === 'matrix') preset = PRESET_MATRIX;
+    else if (presetKey === 'escrow') preset = PRESET_ESCROW;
+
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.classList.toggle('active', (btn as HTMLElement).dataset.preset === presetKey);
+    });
+
+    Object.keys(preset).forEach(id => {
+      const target = preset[id];
+      const el = document.getElementById(id);
+      if (el && target) {
+        NODES[id].x = target.x;
+        NODES[id].y = target.y;
+        el.style.transition = 'left 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        el.style.left = `${target.x}px`;
+        el.style.top = `${target.y}px`;
+      }
+    });
+
+    rerouteAll();
+
+    setTimeout(() => {
+      Object.keys(NODES).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.transition = 'none';
+      });
+    }, 500);
+
+    if (tickerMsg) {
+      tickerMsg.textContent = `✦ Preset [${presetKey.toUpperCase()}] aplicado con 0 colisiones`;
+    }
+  }
+
+  /**
+   * Human Tones Switcher
+   */
+  const TONES: Record<string, { plate: string; accent: string; conduit: string }> = {
+    nexa:     { plate: '#082846', accent: '#38c8ff', conduit: '#bae6fd' },
+    ceramic:  { plate: '#1d3d63', accent: '#38bdf8', conduit: '#a5f3fc' },
+    cashmere: { plate: '#283a48', accent: '#7dd3fc', conduit: '#bae6fd' },
+    oceanic:  { plate: '#004737', accent: '#4ade80', conduit: '#57f09e' }
   };
 
   function applyTone(toneKey: string) {
     const tone = TONES[toneKey];
     if (!tone) return;
 
-    // Update Hero silhouette path fill
     const path = document.querySelector<SVGPathElement>('.hero-silhouette-path');
-    if (path) path.setAttribute('fill', tone.plateBg);
+    if (path) path.setAttribute('fill', tone.plate);
 
-    // Update Radial glow
-    const stop1 = document.querySelector('#canvas-radial-glow stop:nth-child(1)');
-    const stop2 = document.querySelector('#canvas-radial-glow stop:nth-child(2)');
+    const stop1 = document.querySelector('#workbench-radial-glow stop:nth-child(1)');
+    const stop2 = document.querySelector('#workbench-radial-glow stop:nth-child(2)');
     if (stop1) stop1.setAttribute('stop-color', tone.accent);
-    if (stop2) stop2.setAttribute('stop-color', tone.plateBg);
+    if (stop2) stop2.setAttribute('stop-color', tone.plate);
 
-    // Update active pill
     document.querySelectorAll('.tone-pill').forEach(btn => {
       btn.classList.toggle('active', (btn as HTMLElement).dataset.tone === toneKey);
     });
+
+    applyConduitColor(tone.conduit);
   }
 
-  function applyConduitPastel(pastel: string) {
-    const hub = document.getElementById('circuit-hub');
-    if (hub) hub.style.backgroundColor = pastel;
+  function applyConduitColor(colorHex: string) {
+    document.querySelectorAll<SVGPathElement>('.circuit-conduit-path').forEach(p => {
+      p.setAttribute('stroke', colorHex);
+    });
 
-    const pipes = document.querySelectorAll<SVGPathElement>('.circuit-pipe-line:not(.line-flecto-mark)');
-    pipes.forEach(p => p.setAttribute('stroke', pastel));
-
-    const mark = document.querySelector<SVGPathElement>('.line-flecto-mark');
-    if (mark) mark.setAttribute('fill', pastel);
+    document.querySelectorAll<HTMLElement>('.circuit-badge').forEach(b => {
+      b.style.backgroundColor = colorHex;
+    });
 
     document.querySelectorAll('.conduit-pill').forEach(btn => {
-      btn.classList.toggle('active', (btn as HTMLElement).dataset.pastel === pastel);
+      btn.classList.toggle('active', (btn as HTMLElement).dataset.pastel === colorHex);
     });
   }
 
-  // Tone buttons click
-  document.querySelectorAll('.tone-pill').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tone = (btn as HTMLElement).dataset.tone || 'oceanic';
-      applyTone(tone);
-    });
-  });
+  // Event Listeners Setup
+  document.addEventListener('DOMContentLoaded', () => {
+    setupDragAndDrop();
+    rerouteAll();
+    animateParticles();
 
-  // Conduit pastel buttons click
-  document.querySelectorAll('.conduit-pill').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const pastel = (btn as HTMLElement).dataset.pastel || '#57f09e';
-      applyConduitPastel(pastel);
-    });
-  });
+    // Build Engine Button
+    const btnBuild = document.getElementById('btn-build-engine');
+    btnBuild?.addEventListener('click', buildEngineAssembly);
 
-  // Auto-Tour Choreography
-  let isTourPlaying = false;
-  let tourTimer: any = null;
-  const btnAutoTour = document.getElementById('btn-auto-tour');
-  const tourBtnIcon = document.getElementById('tour-btn-icon');
-  const tourBtnText = document.getElementById('auto-tour-btn-text');
-
-  function startAutoTour() {
-    isTourPlaying = true;
-    if (tourBtnIcon) tourBtnIcon.textContent = '■';
-    if (tourBtnText) tourBtnText.textContent = 'Detener Tour';
-    btnAutoTour?.classList.add('running');
-
-    let currentCh = 1;
-    function cycle() {
-      if (!isTourPlaying) return;
-      const fn = (window as any).__nexafyHeroGoToChapter;
-      if (typeof fn === 'function') {
-        fn(currentCh);
-      }
-      const select = document.getElementById('workbench-preset-select') as HTMLSelectElement;
-      if (select) select.value = String(currentCh);
-
-      currentCh = currentCh >= 3 ? 1 : currentCh + 1;
-      tourTimer = setTimeout(cycle, 4500);
-    }
-    cycle();
-  }
-
-  function stopAutoTour() {
-    isTourPlaying = false;
-    clearTimeout(tourTimer);
-    if (tourBtnIcon) tourBtnIcon.textContent = '▶';
-    if (tourBtnText) tourBtnText.textContent = 'Auto-Tour En Vivo';
-    btnAutoTour?.classList.remove('running');
-  }
-
-  btnAutoTour?.addEventListener('click', () => {
-    if (isTourPlaying) stopAutoTour();
-    else startAutoTour();
-  });
-
-  // Preset Select change
-  const presetSelect = document.getElementById('workbench-preset-select') as HTMLSelectElement;
-  presetSelect?.addEventListener('change', (e) => {
-    const val = parseInt((e.target as HTMLSelectElement).value, 10);
-    const fn = (window as any).__nexafyHeroGoToChapter;
-    if (typeof fn === 'function') {
-      fn(val);
-    }
-  });
-
-  // Toggle Inspector Drawer
-  const inspectorDrawer = document.getElementById('workbench-inspector-drawer');
-  const btnToggleInspector = document.getElementById('btn-toggle-inspector');
-  const btnCloseInspector = document.getElementById('btn-close-inspector');
-
-  btnToggleInspector?.addEventListener('click', () => {
-    if (inspectorDrawer) {
-      const isVisible = inspectorDrawer.style.display !== 'none';
-      inspectorDrawer.style.display = isVisible ? 'none' : 'block';
-      if (!isVisible) {
-        inspectorDrawer.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  });
-
-  btnCloseInspector?.addEventListener('click', () => {
-    if (inspectorDrawer) inspectorDrawer.style.display = 'none';
-  });
-
-  // Copy SVG Path Button
-  const btnCopySvg = document.getElementById('btn-copy-svg-path');
-  btnCopySvg?.addEventListener('click', () => {
-    const path = document.querySelector<SVGPathElement>('.hero-silhouette-path');
-    if (path) {
-      const d = path.getAttribute('d') || '';
-      navigator.clipboard.writeText(d).then(() => {
-        btnCopySvg.textContent = '✓ ¡Copiado!';
-        setTimeout(() => { btnCopySvg.textContent = 'Copiar SVG Path'; }, 2000);
+    // Preset Buttons
+    document.querySelectorAll<HTMLButtonElement>('.preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const preset = btn.dataset.preset || 'channels';
+        applyPreset(preset);
       });
-    }
+    });
+
+    // Tone Buttons
+    document.querySelectorAll<HTMLButtonElement>('.tone-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tone = btn.dataset.tone || 'nexa';
+        applyTone(tone);
+      });
+    });
+
+    // Conduit Pastel Buttons
+    document.querySelectorAll<HTMLButtonElement>('.conduit-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const pastel = btn.dataset.pastel || '#bae6fd';
+        applyConduitColor(pastel);
+      });
+    });
+
+    // Inspector Toggle
+    const inspectorDrawer = document.getElementById('workbench-inspector-drawer');
+    const btnToggleInspector = document.getElementById('btn-toggle-inspector');
+    const btnCloseInspector = document.getElementById('btn-close-inspector');
+
+    btnToggleInspector?.addEventListener('click', () => {
+      if (inspectorDrawer) {
+        const isVisible = inspectorDrawer.style.display !== 'none';
+        inspectorDrawer.style.display = isVisible ? 'none' : 'block';
+        if (!isVisible) {
+          inspectorDrawer.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+
+    btnCloseInspector?.addEventListener('click', () => {
+      if (inspectorDrawer) inspectorDrawer.style.display = 'none';
+    });
+
+    // Copy SVG Path
+    const btnCopySvg = document.getElementById('btn-copy-svg-path');
+    btnCopySvg?.addEventListener('click', () => {
+      const path = document.querySelector<SVGPathElement>('.hero-silhouette-path');
+      if (path) {
+        const d = path.getAttribute('d') || '';
+        navigator.clipboard.writeText(d).then(() => {
+          btnCopySvg.textContent = '✓ ¡Copiado!';
+          setTimeout(() => { btnCopySvg.textContent = 'Copiar SVG Path Canvas'; }, 2000);
+        });
+      }
+    });
   });
 </script>
