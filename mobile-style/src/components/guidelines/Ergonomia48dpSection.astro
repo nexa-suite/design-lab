@@ -1,0 +1,615 @@
+---
+/**
+ * Ergonomia48dpSection.astro
+ * Canonical Touch Target Ergonomics & 48dp/56dp Bounding Box Rules
+ * WCAG 2.2 AA (Criterion 2.5.8 Target Size Minimum) & Cold-Chain Gloves Operation
+ */
+---
+
+<div class="ergonomia-48dp-container" data-platform-target="universal">
+  <!-- Section 1: Caliper Visual Side-by-Side: 48dp Estándar vs 56dp Industrial con Guantes -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">01</span>
+        <div>
+          <p class="cuadro-kicker">ERGONOMÍA TÁCTIL · CALIBRADOR VISUAL DE BOUNDING BOX</p>
+          <h3 class="cuadro-title">Comparativa de Objetivos Táctiles: 48dp Estándar vs 56dp Guantes Térmicos</h3>
+          <p class="cuadro-subtitle">
+            En cámaras frigoríficas (-20°C a 4°C), los operarios utilizan guantes térmicos gruesos de nitrilo o cuero. Nexa Mobile implementa una regla dual de accesibilidad táctil: <strong>48×48dp como piso absoluto WCAG 2.2 AA</strong> y <strong>56dp de altura industrial</strong> para eliminar toques erróneos bajo vibración vehicular.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-hand"></i> 48dp WCAG 2.2 AA</span>
+        <span class="cuadro-tag warning"><i class="pi pi-truck"></i> 56dp Cold-Chain Gloves</span>
+        <span class="cuadro-tag success"><i class="pi pi-check"></i> Calibrador Milimétrico</span>
+      </div>
+    </div>
+
+    <!-- Caliper Cards Stage -->
+    <div class="caliper-stage-grid">
+      <!-- Caliper Card 1: 48dp Standard -->
+      <article class="caliper-card standard">
+        <div class="caliper-card-header">
+          <div class="operator-profile">
+            <span class="profile-icon urban"><i class="pi pi-user"></i></span>
+            <div>
+              <strong>Operador Urbano / Buyer</strong>
+              <small>Mano libre · Sin guantes · Smartphone 6.1"</small>
+            </div>
+          </div>
+          <span class="caliper-badge std">48×48dp Estándar</span>
+        </div>
+
+        <!-- Caliper Measurement Rig -->
+        <div class="caliper-rig">
+          <!-- Horizontal Caliper Ruler -->
+          <div class="caliper-ruler horizontal">
+            <span class="ruler-line"></span>
+            <span class="ruler-val">48dp (48px)</span>
+            <span class="ruler-line"></span>
+          </div>
+
+          <div class="caliper-rig-body">
+            <!-- Vertical Caliper Ruler -->
+            <div class="caliper-ruler vertical">
+              <span class="ruler-line"></span>
+              <span class="ruler-val">48dp</span>
+              <span class="ruler-line"></span>
+            </div>
+
+            <!-- Bounding Box Caliper Area -->
+            <div class="caliper-bounding-box std-box">
+              <div class="caliper-corner top-left"></div>
+              <div class="caliper-corner top-right"></div>
+              <div class="caliper-corner bottom-left"></div>
+              <div class="caliper-corner bottom-right"></div>
+              <span class="caliper-box-label">Modifier.minimumInteractiveComponentSize()</span>
+
+              <!-- Live Interactive Button -->
+              <button type="button" class="live-caliper-btn std-btn" id="btn-demo-std">
+                <i class="pi pi-check-circle" aria-hidden="true"></i>
+                <span>Aceptar Despacho (48dp)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="caliper-meta">
+          <div class="caliper-spec-chips">
+            <span class="chip-spec">Piso WCAG 2.2 AA</span>
+            <span class="chip-spec">Radio: 10dp</span>
+            <span class="chip-spec">Haptic: Light Tick</span>
+          </div>
+          <p>
+            Mínimo accesible para navegación, checkboxes, chips de filtro y acciones secundarias en condiciones normales de oficina y comercio.
+          </p>
+        </div>
+      </article>
+
+      <!-- Caliper Card 2: 56dp Industrial Cold-Chain -->
+      <article class="caliper-card industrial">
+        <div class="caliper-card-header">
+          <div class="operator-profile">
+            <span class="profile-icon cold"><i class="pi pi-shield"></i></span>
+            <div>
+              <strong>Chofer &amp; Operador Frigorífico</strong>
+              <small>Cámara Fría -18°C · Guantes Criogénicos Gruesos</small>
+            </div>
+          </div>
+          <span class="caliper-badge ind">56dp Industrial</span>
+        </div>
+
+        <!-- Caliper Measurement Rig -->
+        <div class="caliper-rig">
+          <!-- Horizontal Caliper Ruler -->
+          <div class="caliper-ruler horizontal industrial-ruler">
+            <span class="ruler-line"></span>
+            <span class="ruler-val">Ancho Completo &times; 56dp (56px)</span>
+            <span class="ruler-line"></span>
+          </div>
+
+          <div class="caliper-rig-body">
+            <!-- Vertical Caliper Ruler -->
+            <div class="caliper-ruler vertical industrial-ruler">
+              <span class="ruler-line"></span>
+              <span class="ruler-val">56dp</span>
+              <span class="ruler-line"></span>
+            </div>
+
+            <!-- Bounding Box Caliper Area -->
+            <div class="caliper-bounding-box ind-box">
+              <div class="caliper-corner top-left amber"></div>
+              <div class="caliper-corner top-right amber"></div>
+              <div class="caliper-corner bottom-left amber"></div>
+              <div class="caliper-corner bottom-right amber"></div>
+              <span class="caliper-box-label amber">Área de Impacto para Guantes Industriales (56dp)</span>
+
+              <!-- Live Interactive Button -->
+              <button type="button" class="live-caliper-btn ind-btn" id="btn-demo-ind">
+                <i class="pi pi-truck" aria-hidden="true"></i>
+                <span>CONFIRMAR ENTREGA EN SITIO (56DP)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="caliper-meta">
+          <div class="caliper-spec-chips">
+            <span class="chip-spec ind">ADR-0018 Field Safety</span>
+            <span class="chip-spec ind">Radio: 12dp</span>
+            <span class="chip-spec ind">Haptic: LongPress + Beep</span>
+          </div>
+          <p>
+            Superficie sobredimensionada con borde Brand Celeste contrastado (#38C8FF) que elimina falsos toques bajo vibración de cabina o rigidez térmica.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Section 2: Matriz Arquitectónica de Contratos Táctiles -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">02</span>
+        <div>
+          <p class="cuadro-kicker">MATRIZ DE CONTRATOS · PERFILES OPERATIVOS</p>
+          <h3 class="cuadro-title">Requisitos Táctiles y Retroalimentación Háptica por Escenario</h3>
+          <p class="cuadro-subtitle">
+            Garantías mecánicas según el tipo de entorno físico, equipamiento de protección personal (EPP) y vibración ambiental.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contract-table-wrapper">
+      <table class="contract-table">
+        <thead>
+          <tr>
+            <th>Perfil Operativo</th>
+            <th>Entorno de Trabajo</th>
+            <th>Objetivo Visual</th>
+            <th>Bounding Box Táctil</th>
+            <th>Haptic Feedback</th>
+            <th>Componentes Afectados</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Chofer en Ruta (Diego Morales)</strong></td>
+            <td>Cabina de camión en movimiento, vibración en autopista, sol directo</td>
+            <td>Ancho completo &times; 56dp</td>
+            <td><strong class="mono-chip">56dp Mínimo</strong></td>
+            <td>Heavy confirm (HapticFeedbackType.LongPress)</td>
+            <td>"Registrar Arribo a Muelle", "Confirmar Despacho en Sitio"</td>
+          </tr>
+          <tr>
+            <td><strong>Bodeguero Frigorífico (Alejandro Ríos)</strong></td>
+            <td>Cámara de congelados (-20°C), guantes térmicos criogénicos</td>
+            <td>Fila de picking &times; 56dp</td>
+            <td><strong class="mono-chip">56dp Mínimo</strong></td>
+            <td>Beep sonoro + Heavy tick</td>
+            <td>Botón de escaneo con CameraX, confirmación de lote FEFO</td>
+          </tr>
+          <tr>
+            <td><strong>Inspector de Maquinaria (Carlos V.)</strong></td>
+            <td>Patio de tolvas, grasa, guantes de trabajo mecánico</td>
+            <td>Píldoras tri-estado 56dp</td>
+            <td><strong class="mono-chip">56 &times; 80dp Mín</strong></td>
+            <td>Virtual click</td>
+            <td>Checklist MT-042 (OK / OBSERVADO / CRÍTICO)</td>
+          </tr>
+          <tr>
+            <td><strong>Comprador B2B (Buyer Mobile)</strong></td>
+            <td>Oficina / Teléfono personal, uso con una mano</td>
+            <td>Botón estándar 48dp</td>
+            <td><strong class="mono-chip">48 &times; 48dp Mín</strong></td>
+            <td>Light tick</td>
+            <td>Navegación general, carritos de compra, filtros y tabs</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 3: Contrato de Código Kotlin Compose Touch Targets -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">03</span>
+        <div>
+          <p class="cuadro-kicker">CÓDIGO DE PRODUCCIÓN · KOTLIN JETPACK COMPOSE</p>
+          <h3 class="cuadro-title">Garantía de Touch Targets en Compose</h3>
+          <p class="cuadro-subtitle">
+            Implementación nativa utilizando <code>Modifier.minimumInteractiveComponentSize()</code> y extensiones industriales de 56dp.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag kotlin"><i class="pi pi-code"></i> Button.kt</span>
+        <span class="cuadro-tag primary"><i class="pi pi-hand"></i> 56dp Industrial</span>
+      </div>
+    </div>
+
+    <div class="code-container-block">
+      <div class="code-header-bar">
+        <div class="code-header-title">
+          <i class="pi pi-file"></i>
+          <span>core/designsystem/src/main/kotlin/com/nexa/core/designsystem/component/Button.kt</span>
+        </div>
+        <span class="code-lang-pill">Kotlin 2.4</span>
+      </div>
+      <pre class="code-pre-box" is:raw><code><span class="comm">// Canonical Touch Target Implementation for Standard (48dp) and Industrial (56dp)</span>
+<span class="kw">package</span> com.nexa.core.designsystem.component
+
+<span class="kw">import</span> androidx.compose.foundation.layout.fillMaxWidth
+<span class="kw">import</span> androidx.compose.foundation.layout.height
+<span class="kw">import</span> androidx.compose.foundation.layout.size
+<span class="kw">import</span> androidx.compose.foundation.shape.RoundedCornerShape
+<span class="kw">import</span> androidx.compose.material3.Button
+<span class="kw">import</span> androidx.compose.material3.ButtonDefaults
+<span class="kw">import</span> androidx.compose.material3.IconButton
+<span class="kw">import</span> androidx.compose.material3.Text
+<span class="kw">import</span> androidx.compose.material3.minimumInteractiveComponentSize
+<span class="kw">import</span> androidx.compose.runtime.Composable
+<span class="kw">import</span> androidx.compose.ui.Modifier
+<span class="kw">import</span> androidx.compose.ui.hapticfeedback.HapticFeedbackType
+<span class="kw">import</span> androidx.compose.ui.platform.LocalHapticFeedback
+<span class="kw">import</span> androidx.compose.ui.unit.dp
+<span class="kw">import</span> com.nexa.core.designsystem.theme.NexaPrimary
+<span class="kw">import</span> com.nexa.core.designsystem.theme.NexaSecondary
+<span class="kw">import</span> com.nexa.core.designsystem.theme.NexaTypography
+
+<span class="comm">// 1. Botón Industrial de 56dp para Choferes y Bodega</span>
+<span class="ann">@Composable</span>
+<span class="kw">fun</span> <span class="fn">NexaIndustrialButton</span>(
+    text: <span class="type">String</span>,
+    onClick: () -> <span class="type">Unit</span>,
+    modifier: <span class="type">Modifier</span> = Modifier,
+    enabled: <span class="type">Boolean</span> = <span class="kw">true</span>
+) {
+    <span class="kw">val</span> haptic = <span class="fn">LocalHapticFeedback</span>.current
+
+    <span class="fn">Button</span>(
+        onClick = {
+            haptic.<span class="fn">performHapticFeedback</span>(HapticFeedbackType.LongPress)
+            onClick()
+        },
+        modifier = modifier
+            .fillMaxWidth()
+            .height(<span class="num">56.dp</span>),     <span class="comm">// Altura industrial para guantes de seguridad</span>
+        enabled = enabled,
+        shape = <span class="fn">RoundedCornerShape</span>(<span class="num">12.dp</span>),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = NexaSecondary, <span class="comm">// Brand Navy</span>
+            contentColor = androidx.compose.ui.graphics.Color.White
+        )
+    ) {
+        <span class="fn">Text</span>(text = text.uppercase(), style = NexaTypography.labelLarge)
+    }
+}
+
+<span class="comm">// 2. Icono con Bounding Box accesible de 48dp</span>
+<span class="ann">@Composable</span>
+<span class="kw">fun</span> <span class="fn">NexaAccessibleIconButton</span>(
+    onClick: () -> <span class="type">Unit</span>,
+    contentDescription: <span class="type">String</span>,
+    modifier: <span class="type">Modifier</span> = Modifier,
+    content: <span class="ann">@Composable</span> () -> <span class="type">Unit</span>
+) {
+    <span class="fn">IconButton</span>(
+        onClick = onClick,
+        modifier = modifier
+            .minimumInteractiveComponentSize() <span class="comm">// Garantiza 48x48dp mínimo</span>
+            .size(<span class="num">48.dp</span>)
+    ) {
+        content()
+    }
+}</code></pre>
+    </div>
+  </section>
+</div>
+
+<style>
+  .ergonomia-48dp-container {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    width: 100%;
+  }
+
+  /* Section 1: Caliper Stage Grid */
+  .caliper-stage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  @media (max-width: 900px) {
+    .caliper-stage-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .caliper-card {
+    padding: 20px;
+    border-radius: 14px;
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+
+    &.industrial {
+      border-color: #fde68a;
+      background: #fffdf5;
+    }
+  }
+
+  .caliper-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .operator-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    strong {
+      font-size: 13.5px;
+      color: #0f172a;
+      display: block;
+    }
+
+    small {
+      font-size: 11px;
+      color: #64748b;
+    }
+  }
+
+  .profile-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+
+    &.urban {
+      background: var(--nexa-color-primary-50, #eff6ff);
+      color: var(--nexa-color-primary-700, #1d4ed8);
+    }
+
+    &.cold {
+      background: #fef3c7;
+      color: #b45309;
+    }
+  }
+
+  .caliper-badge {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10.5px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 6px;
+
+    &.std {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    &.ind {
+      background: #fef3c7;
+      color: #92400e;
+    }
+  }
+
+  /* Caliper Measurement Rig */
+  .caliper-rig {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  .caliper-ruler {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #3b82f6;
+
+    &.industrial-ruler {
+      color: #d97706;
+    }
+
+    .ruler-line {
+      flex: 1;
+      height: 1px;
+      background: currentColor;
+      position: relative;
+
+      &::before, &::after {
+        content: '';
+        position: absolute;
+        width: 1px;
+        height: 6px;
+        background: currentColor;
+        top: -2.5px;
+      }
+
+      &::before { left: 0; }
+      &::after { right: 0; }
+    }
+  }
+
+  .caliper-rig-body {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .caliper-ruler.vertical {
+    flex-direction: column;
+    width: 24px;
+    height: 68px;
+
+    .ruler-val {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 9px;
+    }
+
+    .ruler-line {
+      width: 1px;
+      height: 100%;
+
+      &::before, &::after {
+        width: 6px;
+        height: 1px;
+        left: -2.5px;
+      }
+      &::before { top: 0; }
+      &::after { bottom: 0; }
+    }
+  }
+
+  .caliper-bounding-box {
+    position: relative;
+    flex: 1;
+    border: 2px dashed #3b82f6;
+    background: rgba(59, 130, 246, 0.03);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+
+    &.ind-box {
+      border-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.05);
+    }
+  }
+
+  .caliper-corner {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 2px solid #2563eb;
+
+    &.top-left { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+    &.top-right { top: -2px; right: -2px; border-left: none; border-bottom: none; }
+    &.bottom-left { bottom: -2px; left: -2px; border-right: none; border-top: none; }
+    &.bottom-right { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+    &.amber {
+      border-color: #d97706;
+    }
+  }
+
+  .caliper-box-label {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9px;
+    font-weight: 700;
+    color: #1d4ed8;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+
+    &.amber {
+      color: #b45309;
+    }
+  }
+
+  /* Live Interactive Buttons */
+  .live-caliper-btn {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    font-family: inherit;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.15s ease;
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    &.std-btn {
+      height: 48px;
+      font-size: 13.5px;
+      background: #2a67d9;
+      box-shadow: 0 2px 4px rgba(42, 103, 217, 0.25);
+
+      &:hover {
+        background: #1d4ed8;
+      }
+    }
+
+    &.ind-btn {
+      height: 56px;
+      font-size: 14px;
+      background: #082846;
+      border: 1.5px solid #38c8ff;
+      letter-spacing: 0.02em;
+      box-shadow: 0 4px 10px rgba(8, 40, 70, 0.35);
+
+      &:hover {
+        background: #0d365d;
+      }
+    }
+  }
+
+  .caliper-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    p {
+      font-size: 12px;
+      color: #64748b;
+      margin: 0;
+      line-height: 1.45;
+    }
+  }
+
+  .caliper-spec-chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .chip-spec {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: #f1f5f9;
+    color: #334155;
+
+    &.ind {
+      background: #fef3c7;
+      color: #78350f;
+    }
+  }
+</style>

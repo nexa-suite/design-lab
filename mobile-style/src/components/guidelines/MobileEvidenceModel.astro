@@ -1,0 +1,425 @@
+---
+/**
+ * MobileEvidenceModel.astro
+ * Canonical Evidence Model & C4 Architecture Traceability for Nexa Mobile
+ * Formal State Machines (Logistics, Warehouse, Machinery), Room SQLite Persistence,
+ * DDD Domain Entities, Value Objects & Quality Gates (Academic Rubric Sobresaliente E).
+ */
+---
+
+<div class="evidence-model-container" data-platform-target="universal">
+
+  <!-- ==========================================================================
+       1. C4 ARCHITECTURE MODEL (Context, Container, Component, Code)
+       ========================================================================== -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">01</span>
+        <div>
+          <p class="cuadro-kicker">C4 ARCHITECTURAL SPECIFICATION · NIVELES 1 AL 4</p>
+          <h3 class="cuadro-title">Modelo C4 Canónico para Aplicaciones Móviles (UPC Sobresaliente E)</h3>
+          <p class="cuadro-subtitle">
+            Trazabilidad completa de la arquitectura de software móvil según la rúbrica oficial del curso <strong>1ACC0238 Aplicaciones para Dispositivos Móviles</strong>. Delimita niveles de Contexto, Contenedor, Componente y Código nativo.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-sitemap"></i> C4 Levels 1-4</span>
+        <span class="cuadro-tag success"><i class="pi pi-check"></i> Rubric TB1 / TB2 / TF1</span>
+      </div>
+    </div>
+
+    <!-- CUADRO ARQUITECTÓNICO: Niveles C4 -->
+    <div class="contract-table-wrapper">
+      <table class="contract-table">
+        <thead>
+          <tr>
+            <th>Nivel C4</th>
+            <th>Nombre del Diagrama</th>
+            <th>Alcance & Responsabilidad</th>
+            <th>Artefactos Involucrados</th>
+            <th>Protocolos & Tecnologías</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Nivel 1</strong></td>
+            <td><strong>Contexto del Sistema (Context)</strong></td>
+            <td>Interacción entre el usuario de campo (Chofer / Bodeguero), terminal Android, sensores BLE/GPS y el backend central Nexa Suite API.</td>
+            <td>Chofer, Operario, Terminal Rugerizado Zebra, Backend NestJS/Spring, GPS Satelital</td>
+            <td>HTTPS / RESTful, Bluetooth Low Energy (GATT), GPS NMEA</td>
+          </tr>
+          <tr>
+            <td><strong>Nivel 2</strong></td>
+            <td><strong>Contenedores (Container)</strong></td>
+            <td>Límites de despliegue entre la aplicación cliente Android (APK/AAB nativo), el almacenamiento local SQLite/Room y el API Gateway.</td>
+            <td><code>OperationsAndroidApp</code>, <code>RoomSqliteDatabase</code>, <code>NexaApiGateway</code>, <code>CloudflareCDN</code></td>
+            <td>Kotlin Coroutines, WorkManager, OkHttp3, EncryptedSharedPreferences</td>
+          </tr>
+          <tr>
+            <td><strong>Nivel 3</strong></td>
+            <td><strong>Componentes (Component)</strong></td>
+            <td>Estructuración interna de módulos bajo Clean Architecture dentro de <code>apps/operations-android</code>.</td>
+            <td><code>:core:designsystem</code>, <code>:core:database</code>, <code>:core:hardware</code>, <code>:feature:route</code>, <code>:feature:picking</code></td>
+            <td>Jetpack Compose M3, ViewModels UDF, Hilt Dependency Injection</td>
+          </tr>
+          <tr>
+            <td><strong>Nivel 4</strong></td>
+            <td><strong>Código & Clases (Code / DDD)</strong></td>
+            <td>Clases del Dominio, Entidades, Value Objects, DAOs de Room y StateFlows reactivos.</td>
+            <td><code>DeliveryOrder</code>, <code>PickingSession</code>, <code>DeliveryOrderDao</code>, <code>RouteStateMachine</code></td>
+            <td>Kotlin 2.4, Room 2.6 KSP, kotlinx.coroutines.flow</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       2. MÁQUINAS DE ESTADO FORMALES (State Machines con Error Recovery)
+       ========================================================================== -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">02</span>
+        <div>
+          <p class="cuadro-kicker">DOMAIN-DRIVEN DESIGN · MÁQUINAS DE ESTADO FINITO</p>
+          <h3 class="cuadro-title">Máquinas de Estado Formales con Recuperación de Error</h3>
+          <p class="cuadro-subtitle">
+            Cada proceso clave del negocio se modela como una máquina de estados finita determinista (FSM). Las transiciones no válidas son rechazadas por el compilador mediante <em>Kotlin Sealed Interfaces</em>.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag kotlin"><i class="pi pi-sync"></i> Deterministic FSM</span>
+        <span class="cuadro-tag warning"><i class="pi pi-shield"></i> Fallback Recovery</span>
+      </div>
+    </div>
+
+    <!-- State Machine A: Delivery Order (SO-2026-0018) -->
+    <div class="fsm-spec-block">
+      <div class="fsm-header">
+        <span class="fsm-badge">MÁQUINA DE ESTADO 1: LOGÍSTICA & DESPACHO</span>
+        <h4>Ciclo de Vida de Despacho (SO-2026-0018)</h4>
+      </div>
+
+      <!-- State Flow Visual Steps -->
+      <div class="state-machine-container">
+        <div class="state-step-node">
+          <strong>ASSIGNED</strong>
+          <small>Ruta cargada en local</small>
+        </div>
+        <i class="pi pi-arrow-right state-arrow"></i>
+
+        <div class="state-step-node active">
+          <strong>EN_ROUTE</strong>
+          <small>Monitoreo GPS/BLE activo</small>
+        </div>
+        <i class="pi pi-arrow-right state-arrow"></i>
+
+        <div class="state-step-node">
+          <strong>ARRIVED_GEOFENCE</strong>
+          <small>Geocerca 200m validada</small>
+        </div>
+        <i class="pi pi-arrow-right state-arrow"></i>
+
+        <div class="state-step-node">
+          <strong>VERIFYING_ITEMS</strong>
+          <small>Escaneo CameraX / Manual</small>
+        </div>
+        <i class="pi pi-arrow-right state-arrow"></i>
+
+        <div class="state-step-node">
+          <strong>SIGNATURE_PENDING</strong>
+          <small>Firma POD / PIN OTP</small>
+        </div>
+        <i class="pi pi-arrow-right state-arrow"></i>
+
+        <div class="state-step-node">
+          <strong>DELIVERED</strong>
+          <small>Sincronizado / En cola</small>
+        </div>
+      </div>
+
+      <!-- Transition Table -->
+      <div class="contract-table-wrapper" style="margin-top: 12px;">
+        <table class="contract-table">
+          <thead>
+            <tr>
+              <th>Estado Origen</th>
+              <th>Evento / Trigger</th>
+              <th>Guardia / Validación de Negocio</th>
+              <th>Estado Destino</th>
+              <th>Mecanismo de Recuperación de Error</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ASSIGNED</code></td>
+              <td><code>StartRouteIntent</code></td>
+              <td>Checklist de vehículo MT-042 aprobado</td>
+              <td><code>EN_ROUTE</code></td>
+              <td>Bloquea inicio si checklist tiene faltas críticas</td>
+            </tr>
+            <tr>
+              <td><code>EN_ROUTE</code></td>
+              <td><code>GeofenceEnteredEvent</code></td>
+              <td>Distancia al muelle &le; 200m (GPS FusedLocation)</td>
+              <td><code>ARRIVED_GEOFENCE</code></td>
+              <td>Fallback manual de arribo con justificación de GPS nulo</td>
+            </tr>
+            <tr>
+              <td><code>ARRIVED_GEOFENCE</code></td>
+              <td><code>BeginScanIntent</code></td>
+              <td>Sensor BLE reporta temperatura &le; 6.0°C</td>
+              <td><code>VERIFYING_ITEMS</code></td>
+              <td>Si temp &gt; 6.0°C, alerta forzosa y registro de merma</td>
+            </tr>
+            <tr>
+              <td><code>VERIFYING_ITEMS</code></td>
+              <td><code>AllItemsScannedEvent</code></td>
+              <td>100% de bultos escaneados o marcados con discrepancia</td>
+              <td><code>SIGNATURE_PENDING</code></td>
+              <td>Fallback de entrada manual para códigos con grasa o rotos</td>
+            </tr>
+            <tr>
+              <td><code>SIGNATURE_PENDING</code></td>
+              <td><code>ConfirmDeliveryIntent</code></td>
+              <td>Firma vectorial capturada en Canvas o PIN de 6 dígitos</td>
+              <td><code>DELIVERED</code></td>
+              <td>Si no hay 4G/5G, guarda en <code>DeliveryQueueEntity</code> (WorkManager)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- State Machine B: Picking FEFO (DSP-204) -->
+    <div class="fsm-spec-block" style="margin-top: 20px;">
+      <div class="fsm-header">
+        <span class="fsm-badge">MÁQUINA DE ESTADO 2: BODEGA & PICKING FEFO</span>
+        <h4>Ciclo de Movimiento de Inventario FEFO (DSP-204)</h4>
+      </div>
+
+      <div class="state-machine-container">
+        <div class="state-step-node">
+          <strong>PENDING</strong>
+          <small>Orden en cola de picking</small>
+        </div>
+        <i class="pi pi-arrow-right state-arrow"></i>
+
+        <div class="state-step-node active">
+          <strong>NAVIGATING_RACK</strong>
+          <small>Ruta óptima en pasillo</small>
+        </div>
+        <i class="pi pi-arrow-right state-arrow"></i>
+
+        <div class="state-step-node">
+          <strong>SCANNING_LOT</strong>
+          <small>Validación FEFO estricta</small>
+        </div>
+        <i class="pi pi-arrow-right state-arrow"></i>
+
+        <div class="state-step-node">
+          <strong>QUANTITY_VERIFIED</strong>
+          <small>Conteo exacto de bultos</small>
+        </div>
+        <i class="pi pi-arrow-right state-arrow"></i>
+
+        <div class="state-step-node">
+          <strong>STAGED_AT_DOCK</strong>
+          <small>Posicionado en muelle</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       3. MODELO DE DOMINIO & ENTIDADES ROOM SQLITE
+       ========================================================================== -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">03</span>
+        <div>
+          <p class="cuadro-kicker">PERSISTENCIA LOCAL · ROOM SQLITE & CLEAN DDD</p>
+          <h3 class="cuadro-title">Especificación de Entidades Room (@Entity, @Dao, @Database)</h3>
+          <p class="cuadro-subtitle">
+            Esquema inmutable de base de datos local SQLite para soporte offline-first. Incluye índices para búsquedas en &lt;5ms y claves foráneas en cascada.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag kotlin"><i class="pi pi-database"></i> Room 2.6 KSP</span>
+        <span class="cuadro-tag primary"><i class="pi pi-lock"></i> SQL Cipher Ready</span>
+      </div>
+    </div>
+
+    <!-- CUADRO ARQUITECTÓNICO: Tablas de Base de Datos Local -->
+    <div class="contract-table-wrapper">
+      <table class="contract-table">
+        <thead>
+          <tr>
+            <th>Tabla SQLite / @Entity</th>
+            <th>Primary Key</th>
+            <th>Índices Secundarios</th>
+            <th>Campos Clave</th>
+            <th>Uso Offline</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>delivery_orders</code></td>
+            <td><code>order_id (VARCHAR)</code></td>
+            <td><code>idx_orders_status</code>, <code>idx_orders_geofence</code></td>
+            <td><code>client_name</code>, <code>dock_number</code>, <code>temperature_celsius</code>, <code>delivery_status</code></td>
+            <td>Caché de rutas asignadas durante el día de trabajo</td>
+          </tr>
+          <tr>
+            <td><code>delivery_sync_queue</code></td>
+            <td><code>queue_id (UUID)</code></td>
+            <td><code>idx_queue_attempts</code>, <code>idx_queue_created</code></td>
+            <td><code>idempotency_key</code>, <code>payload_json</code>, <code>attempt_count</code>, <code>sync_status</code></td>
+            <td>Cola persistente para WorkManager con backoff exponencial</td>
+          </tr>
+          <tr>
+            <td><code>picking_items</code></td>
+            <td><code>item_id (VARCHAR)</code></td>
+            <td><code>idx_picking_order</code>, <code>idx_picking_fefo</code></td>
+            <td><code>sku</code>, <code>lot_number</code>, <code>quantity_required</code>, <code>quantity_scanned</code></td>
+            <td>Validación offline de código GS1-128 sin necesidad de red</td>
+          </tr>
+          <tr>
+            <td><code>machinery_checklists</code></td>
+            <td><code>checklist_id (VARCHAR)</code></td>
+            <td><code>idx_checklist_equipment</code></td>
+            <td><code>equipment_id</code>, <code>overall_result</code>, <code>defect_notes</code>, <code>inspector_id</code></td>
+            <td>Historial de checklists pre-operacionales guardados localmente</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Room Kotlin 2.4 Code Contract -->
+    <div class="code-container-block">
+      <div class="code-header-bar">
+        <div class="code-header-title">
+          <i class="pi pi-file"></i>
+          <span>core/database/src/main/kotlin/com/nexa/core/database/entity/DeliveryOrderEntity.kt</span>
+        </div>
+        <span class="code-lang-pill">Kotlin 2.4</span>
+      </div>
+      <pre class="code-pre-box" is:raw><code><span class="comm">// Canonical Room SQLite Entity & DAO for Nexa Suite Operations Android</span>
+<span class="kw">package</span> com.nexa.core.database.entity
+
+<span class="kw">import</span> androidx.room.ColumnInfo
+<span class="kw">import</span> androidx.room.Dao
+<span class="kw">import</span> androidx.room.Database
+<span class="kw">import</span> androidx.room.Entity
+<span class="kw">import</span> androidx.room.Index
+<span class="kw">import</span> androidx.room.Insert
+<span class="kw">import</span> androidx.room.OnConflictStrategy
+<span class="kw">import</span> androidx.room.PrimaryKey
+<span class="kw">import</span> androidx.room.Query
+<span class="kw">import</span> androidx.room.RoomDatabase
+<span class="kw">import</span> kotlinx.coroutines.flow.Flow
+
+<span class="ann">@Entity</span>(
+    tableName = <span class="str">"delivery_orders"</span>,
+    indices = [
+        <span class="fn">Index</span>(value = [<span class="str">"delivery_status"</span>], name = <span class="str">"idx_orders_status"</span>),
+        <span class="fn">Index</span>(value = [<span class="str">"geofence_id"</span>], name = <span class="str">"idx_orders_geofence"</span>)
+    ]
+)
+<span class="kw">data class</span> <span class="type">DeliveryOrderEntity</span>(
+    <span class="ann">@PrimaryKey</span>
+    <span class="ann">@ColumnInfo</span>(name = <span class="str">"order_id"</span>)
+    <span class="kw">val</span> orderId: <span class="type">String</span>,                  <span class="comm">// Ej. "SO-2026-0018"</span>
+
+    <span class="ann">@ColumnInfo</span>(name = <span class="str">"client_name"</span>)
+    <span class="kw">val</span> clientName: <span class="type">String</span>,               <span class="comm">// Ej. "ICISA Distribuciones S.A."</span>
+
+    <span class="ann">@ColumnInfo</span>(name = <span class="str">"dock_number"</span>)
+    <span class="kw">val</span> dockNumber: <span class="type">String</span>,               <span class="comm">// Ej. "Muelle 3"</span>
+
+    <span class="ann">@ColumnInfo</span>(name = <span class="str">"temperature_celsius"</span>)
+    <span class="kw">val</span> temperatureCelsius: <span class="type">Double</span>,       <span class="comm">// Ej. 3.8</span>
+
+    <span class="ann">@ColumnInfo</span>(name = <span class="str">"delivery_status"</span>)
+    <span class="kw">val</span> deliveryStatus: <span class="type">String</span>,           <span class="comm">// "EN_ROUTE", "DELIVERED", etc.</span>
+
+    <span class="ann">@ColumnInfo</span>(name = <span class="str">"idempotency_key"</span>)
+    <span class="kw">val</span> idempotencyKey: <span class="type">String</span>,           <span class="comm">// UUID v4</span>
+
+    <span class="ann">@ColumnInfo</span>(name = <span class="str">"geofence_id"</span>)
+    <span class="kw">val</span> geofenceId: <span class="type">String</span>? = <span class="kw">null</span>
+)
+
+<span class="ann">@Dao</span>
+<span class="kw">interface</span> <span class="type">DeliveryOrderDao</span> {
+    <span class="ann">@Query</span>(<span class="str">"SELECT * FROM delivery_orders ORDER BY order_id ASC"</span>)
+    <span class="kw">fun</span> <span class="fn">observeAllOrders</span>(): <span class="type">Flow</span>&lt;<span class="type">List</span>&lt;<span class="type">DeliveryOrderEntity</span>&gt;&gt;
+
+    <span class="ann">@Query</span>(<span class="str">"SELECT * FROM delivery_orders WHERE order_id = :orderId LIMIT 1"</span>)
+    <span class="kw">suspend fun</span> <span class="fn">getOrderById</span>(orderId: <span class="type">String</span>): <span class="type">DeliveryOrderEntity</span>?
+
+    <span class="ann">@Insert</span>(onConflict = OnConflictStrategy.REPLACE)
+    <span class="kw">suspend fun</span> <span class="fn">upsertOrder</span>(order: <span class="type">DeliveryOrderEntity</span>)
+
+    <span class="ann">@Query</span>(<span class="str">"UPDATE delivery_orders SET delivery_status = :status WHERE order_id = :orderId"</span>)
+    <span class="kw">suspend fun</span> <span class="fn">updateStatus</span>(orderId: <span class="type">String</span>, status: <span class="type">String</span>)
+}
+
+<span class="ann">@Database</span>(
+    entities = [<span class="type">DeliveryOrderEntity</span>::<span class="kw">class</span>],
+    version = <span class="num">1</span>,
+    exportSchema = <span class="kw">false</span>
+)
+<span class="kw">abstract class</span> <span class="type">NexaAppDatabase</span> : <span class="type">RoomDatabase</span>() {
+    <span class="kw">abstract fun</span> <span class="fn">deliveryOrderDao</span>(): <span class="type">DeliveryOrderDao</span>
+}</code></pre>
+    </div>
+  </section>
+
+</div>
+
+<style>
+  .evidence-model-container {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    width: 100%;
+  }
+
+  .fsm-spec-block {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    background: #f8fafc;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 12px;
+  }
+
+  .fsm-header {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    .fsm-badge {
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--nexa-color-primary-700, #1d4ed8);
+      text-transform: uppercase;
+    }
+
+    h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0;
+    }
+  }
+</style>

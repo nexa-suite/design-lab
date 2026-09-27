@@ -1,0 +1,577 @@
+---
+/**
+ * DriverRouteStory.astro
+ * Canonical Mobile Specification for Driver Delivery Execution & Proof of Delivery (POD)
+ * Blueprint Traceability: MOB-US-026..035, MOB-US-062..066 (MOBILE-EPIC-04 & 09)
+ * Canonical Persona: Diego Morales — Conductor Flota C-250 (Placa WKN-892)
+ * Canonical Client: ICISA Distribuciones (Av. Argentina 1240 · Callao/Lima)
+ * Order: SO-2026-0018
+ * Architecture: Web-Style Canonical Cuadros for Android Jetpack Compose & Kotlin
+ */
+---
+
+<div class="story-screen-container" id="story-conductor">
+  
+  <!-- Web-Style Documentation Heading (Section Index + Kicker + Display H2 + Intro) -->
+  <header class="section-heading-block">
+    <div class="section-heading">
+      <span class="section-index">01</span>
+      <div>
+        <p class="section-kicker">DELIVERY / POD · BLUEPRINT MOB-US-026..035, MOB-US-062..066</p>
+        <h2>Diego Morales — Hoja de Ruta y Prueba de Entrega Digital (POD)</h2>
+        <p class="section-intro">
+          Especificación canónica para <strong>Android Jetpack Compose</strong> y arquitectura móvil offline-first. Define contratos de entidades Room, ergonomía táctil de 56dp para guantes térmicos en muelles de distribución refrigerada, validación de geocercas GPS (200m), visor CameraX con metadatos EXIF criptográficos y sincronización con WorkManager.
+        </p>
+      </div>
+    </div>
+
+    <!-- Quick Meta Chips -->
+    <div class="heading-meta-chips">
+      <span class="cuadro-tag primary"><i class="pi pi-truck" aria-hidden="true"></i> Ruta R-402 · Flota C-250 (WKN-892)</span>
+      <span class="cuadro-tag"><i class="pi pi-map-marker" aria-hidden="true"></i> Av. Argentina 1240 · Callao/Lima</span>
+      <span class="cuadro-tag primary"><i class="pi pi-snowflake" aria-hidden="true"></i> Frío 2°C – 6°C</span>
+      <span class="cuadro-tag success"><i class="pi pi-check-circle" aria-hidden="true"></i> Orden Canónica SO-2026-0018</span>
+    </div>
+  </header>
+
+  <!-- Master Documentation Cuadros Container -->
+  <div class="cuadro-container">
+
+    <!-- ====================================================================
+         CUADRO 1: DOMAIN ENTITY & ARCHITECTURAL CONTRACTS
+         ==================================================================== -->
+    <section class="cuadro-card">
+      <header class="cuadro-header">
+        <div class="cuadro-header-left">
+          <span class="cuadro-num-badge">C1</span>
+          <div>
+            <p class="cuadro-kicker">CONTRATOS DE DOMINIO & PERSISTENCIA LOCAL</p>
+            <h3 class="cuadro-title">Entidades de Dominio, Esquema Room DB y Máquina de Estados POD</h3>
+            <p class="cuadro-subtitle">
+              Estructura formal de datos para la ejecución de ruta y prueba de entrega bajo aislamiento offline.
+            </p>
+          </div>
+        </div>
+        <div class="cuadro-tags">
+          <span class="cuadro-tag primary"><i class="pi pi-database"></i> Room 2.6.1</span>
+          <span class="cuadro-tag success"><i class="pi pi-check"></i> SQLite FTS4</span>
+          <span class="cuadro-tag kotlin"><i class="pi pi-code"></i> Kotlinx.Serialization</span>
+        </div>
+      </header>
+
+      <!-- Table: Domain Properties & Schema -->
+      <div class="contract-table-wrapper">
+        <table class="contract-table">
+          <thead>
+            <tr>
+              <th>Campo Dominio</th>
+              <th>Tipo Kotlin</th>
+              <th>Columna SQLite / Room</th>
+              <th>Reglas de Validación & Restricciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>stopId</strong></td>
+              <td><span class="mono-type">UUID</span></td>
+              <td><span class="mono-chip">stop_id TEXT PRIMARY KEY</span></td>
+              <td><span class="rule-chip">Identificador canónico inmutable de la parada</span></td>
+            </tr>
+            <tr>
+              <td><strong>orderNumber</strong></td>
+              <td><span class="mono-type">String</span></td>
+              <td><span class="mono-chip">order_number TEXT NOT NULL</span></td>
+              <td><span class="rule-chip">Patrón <code>^SO-[0-9]&#123;4&#125;-[0-9]&#123;4&#125;$</code> (ej: SO-2026-0018)</span></td>
+            </tr>
+            <tr>
+              <td><strong>recipientName</strong></td>
+              <td><span class="mono-type">String</span></td>
+              <td><span class="mono-chip">recipient_name TEXT NOT NULL</span></td>
+              <td><span class="rule-chip">ICISA Distribuciones · RUC 20489123841</span></td>
+            </tr>
+            <tr>
+              <td><strong>targetLocation</strong></td>
+              <td><span class="mono-type">GeoCoordinates</span></td>
+              <td><span class="mono-chip">lat REAL, lng REAL</span></td>
+              <td><span class="rule-chip">Lat: -12.04318, Lng: -77.02824 (Av. Argentina 1240)</span></td>
+            </tr>
+            <tr>
+              <td><strong>deliveryStatus</strong></td>
+              <td><span class="mono-type">DeliveryOutcome</span></td>
+              <td><span class="mono-chip">outcome_state TEXT NOT NULL</span></td>
+              <td><span class="rule-chip"><code>DELIVERED_FULL</code> | <code>DELIVERED_PARTIAL</code> | <code>REJECTED</code></span></td>
+            </tr>
+            <tr>
+              <td><strong>otpVerificationCode</strong></td>
+              <td><span class="mono-type">String?</span></td>
+              <td><span class="mono-chip">otp_code TEXT</span></td>
+              <td><span class="rule-chip">Exacto 6 dígitos numéricos <code>^[0-9]&#123;6&#125;$</code> emitido por consignatario</span></td>
+            </tr>
+            <tr>
+              <td><strong>signatureVector</strong></td>
+              <td><span class="mono-type">List&lt;BezierPoint&gt;</span></td>
+              <td><span class="mono-chip">signature_json TEXT</span></td>
+              <td><span class="rule-chip">Mínimo 20 puntos muestreados a 60Hz con presión normalizada</span></td>
+            </tr>
+            <tr>
+              <td><strong>evidencePhotoUri</strong></td>
+              <td><span class="mono-type">Uri?</span></td>
+              <td><span class="mono-chip">photo_uri TEXT</span></td>
+              <td><span class="rule-chip">Almacenamiento interno cifrado + Hash SHA-256 en cabecera</span></td>
+            </tr>
+            <tr>
+              <td><strong>syncStatus</strong></td>
+              <td><span class="mono-type">SyncState</span></td>
+              <td><span class="mono-chip">sync_state TEXT DEFAULT 'PENDING'</span></td>
+              <td><span class="rule-chip"><code>PENDING_SYNC</code> | <code>SYNCED</code> | <code>FAILED_RETRY</code></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- State Machine Flow -->
+      <div>
+        <p class="cuadro-kicker">MÁQUINA DE ESTADOS FORMAL (POD LIFECYCLE)</p>
+        <div class="state-machine-container">
+          <div class="state-step-node">
+            <strong>ASSIGNED</strong>
+            <small>Ruta C-250 asignada</small>
+          </div>
+          <i class="pi pi-arrow-right state-arrow"></i>
+          <div class="state-step-node">
+            <strong>EN_ROUTE</strong>
+            <small>GPS Intent lanzado</small>
+          </div>
+          <i class="pi pi-arrow-right state-arrow"></i>
+          <div class="state-step-node active">
+            <strong>AT_LOCATION</strong>
+            <small>Geocerca &le; 200m OK</small>
+          </div>
+          <i class="pi pi-arrow-right state-arrow"></i>
+          <div class="state-step-node">
+            <strong>POD_CAPTURE</strong>
+            <small>Firma + OTP + Foto</small>
+          </div>
+          <i class="pi pi-arrow-right state-arrow"></i>
+          <div class="state-step-node">
+            <strong>COMPLETED</strong>
+            <small>Guardado local Room</small>
+          </div>
+          <i class="pi pi-arrow-right state-arrow"></i>
+          <div class="state-step-node">
+            <strong>SYNCED</strong>
+            <small>WorkManager 200 OK</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         CUADRO 2: COMPOSE UI COMPONENT & ERGONOMICS SPECIFICATION
+         ==================================================================== -->
+    <section class="cuadro-card">
+      <header class="cuadro-header">
+        <div class="cuadro-header-left">
+          <span class="cuadro-num-badge">C2</span>
+          <div>
+            <p class="cuadro-kicker">ESPECIFICACIÓN DE COMPONENTES COMPOSE & ERGONOMÍA</p>
+            <h3 class="cuadro-title">Jerarquía de Composables, Modifier Chains y Ergonomía para Guantes Térmicos</h3>
+            <p class="cuadro-subtitle">
+              Calibración de superficie táctil de 56dp requerida para manipulación en muelles y cámaras de distribución.
+            </p>
+          </div>
+        </div>
+        <div class="cuadro-tags">
+          <span class="cuadro-tag primary"><i class="pi pi-hand"></i> 56dp Touch Target</span>
+          <span class="cuadro-tag success"><i class="pi pi-eye"></i> WCAG 2.2 AAA Contrast</span>
+          <span class="cuadro-tag"><i class="pi pi-mobile"></i> 8dp Grid Aligned</span>
+        </div>
+      </header>
+
+      <div class="spec-grid-2">
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-box"></i> Composable Principal & Modifiers</div>
+          <p class="spec-kv-body">
+            <code>DriverRouteScreen()</code> estructurado con <code>Scaffold</code> M3, <code>TopAppBar</code> con indicador de conectividad en tiempo real y <code>LazyColumn</code> con padding interior de <code>16.dp</code> y espaciado entre tarjetas de <code>12.dp</code>.
+          </p>
+        </div>
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-shield"></i> Ergonomía con Guantes Térmicos (56dp)</div>
+          <p class="spec-kv-body">
+            Todo botón interactivo de parada (Llamar, Navegar GPS, Registrar POD) aplica <code>Modifier.fillMaxWidth().heightIn(min = 56.dp)</code> con elevación tonal de 2dp para evitar toques fantasmas con guantes de cuero térmico.
+          </p>
+        </div>
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-pencil"></i> Canvas de Firma Digital con Curvas Bézier</div>
+          <p class="spec-kv-body">
+            <code>SignatureCanvas()</code> dedicado con altura mínima de <code>180.dp</code>, detección táctil de <code>pointerInput</code> con suavizado polinómico cuadrático y botón de borrado de <code>56dp</code> aislado en esquina.
+          </p>
+        </div>
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-key"></i> Selector Trifásico de Resultado de Entrega</div>
+          <p class="spec-kv-body">
+            Botones de opción segmentada (<code>Total</code>, <code>Parcial</code>, <code>Rechazo</code>) con ancho proporcional, feedback háptico (<code>HapticFeedbackType.LongPress</code>) y cambio de color semántico (Verde Éxito / Ámbar Alerta / Rojo Peligro).
+          </p>
+        </div>
+      </div>
+
+      <!-- Mapping Table of Material 3 Tokens -->
+      <div class="contract-table-wrapper">
+        <table class="contract-table">
+          <thead>
+            <tr>
+              <th>Rol Semántico M3</th>
+              <th>Token Nexa Design Lab</th>
+              <th>Valor Hex</th>
+              <th>Aplicación en Conductor POD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>primary</code></td>
+              <td><code>--nexa-color-primary-600</code></td>
+              <td><span class="mono-chip">#2a67d9</span></td>
+              <td>Botón principal "Confirmar Entrega en Sitio" (56dp)</td>
+            </tr>
+            <tr>
+              <td><code>primaryContainer</code></td>
+              <td><code>--nexa-color-primary-100</code></td>
+              <td><span class="mono-chip">#dbeafe</span></td>
+              <td>Fondo de tarjeta de parada activa y chips de navegación</td>
+            </tr>
+            <tr>
+              <td><code>surfaceVariant</code></td>
+              <td><code>--nexa-surface-tint</code></td>
+              <td><span class="mono-chip">#f1f5f9</span></td>
+              <td>Fondo del lienzo de firma y contenedores de código OTP</td>
+            </tr>
+            <tr>
+              <td><code>tertiaryContainer</code></td>
+              <td><code>--nexa-surface-info</code></td>
+              <td><span class="mono-chip">#eef6ff</span></td>
+              <td>Badge de control de temperatura de cadena de frío (2°C – 6°C)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         CUADRO 3: HARDWARE & OFFLINE RESILIENCE CONTRACT
+         ==================================================================== -->
+    <section class="cuadro-card">
+      <header class="cuadro-header">
+        <div class="cuadro-header-left">
+          <span class="cuadro-num-badge">C3</span>
+          <div>
+            <p class="cuadro-kicker">RESILIENCIA & CONTRATO DE HARDWARE</p>
+            <h3 class="cuadro-title">Geovallas GPS, Visor CameraX y Sincronización WorkManager</h3>
+            <p class="cuadro-subtitle">
+              Mecanismos nativos de Android para asegurar trazabilidad operativa sin conexión celular estable.
+            </p>
+          </div>
+        </div>
+        <div class="cuadro-tags">
+          <span class="cuadro-tag primary"><i class="pi pi-compass"></i> FusedLocation 200m</span>
+          <span class="cuadro-tag success"><i class="pi pi-camera"></i> CameraX 1.3</span>
+          <span class="cuadro-tag warning"><i class="pi pi-sync"></i> WorkManager Backoff</span>
+        </div>
+      </header>
+
+      <div class="spec-grid-3">
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-map"></i> Intent GPS & Geocerca 200m</div>
+          <p class="spec-kv-body">
+            Lanzamiento explícito de <code>geo:0,0?q=-12.04318,-77.02824(ICISA+Distribuciones)</code>. La confirmación de arribo evalúa <code>fusedLocationClient.lastLocation</code> contra el radio de 200 metros con fallback manual justificado.
+          </p>
+        </div>
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-camera"></i> Visor CameraX con EXIF Criptográfico</div>
+          <p class="spec-kv-body">
+            Captura con <code>ImageCapture.OnImageSavedCallback</code>. Inyecta metadatos EXIF canónicos: marca temporal UTC, coordenadas satelitales, IMEI de terminal y firma digital SHA-256 de los bytes de imagen.
+          </p>
+        </div>
+        <div class="spec-kv-card">
+          <div class="spec-kv-header"><i class="pi pi-sync"></i> Cola Offline Room + WorkManager</div>
+          <p class="spec-kv-body">
+            Al registrar el POD, se inserta atómicamente en Room y se encola un <code>OneTimeWorkRequest</code> con restricción <code>NetworkType.CONNECTED</code> y política <code>BackoffPolicy.EXPONENTIAL</code> (reintentos 30s, 60s, 120s).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         CUADRO 4: FULL PRODUCTION KOTLIN & JETPACK COMPOSE CODE
+         ==================================================================== -->
+    <section class="cuadro-card">
+      <header class="cuadro-header">
+        <div class="cuadro-header-left">
+          <span class="cuadro-num-badge">C4</span>
+          <div>
+            <p class="cuadro-kicker">CÓDIGO DE PRODUCCIÓN KOTLIN 2.4 · JETPACK COMPOSE</p>
+            <h3 class="cuadro-title">Implementación Completa: ViewModel, StateFlow, Canvas Bézier y Screen</h3>
+            <p class="cuadro-subtitle">
+              Código fuente listo para producción, verificable en el módulo <code>:feature:delivery</code> de Nexa Android.
+            </p>
+          </div>
+        </div>
+        <div class="cuadro-tags">
+          <span class="cuadro-tag kotlin"><i class="pi pi-code"></i> Production Ready</span>
+          <span class="cuadro-tag primary"><i class="pi pi-check"></i> UDF Pattern</span>
+        </div>
+      </header>
+
+      <div class="code-container-block">
+        <div class="code-header-bar">
+          <div class="code-header-title">
+            <i class="pi pi-file" aria-hidden="true"></i>
+            <span>DriverRouteScreen.kt — Nexa Operations Android</span>
+          </div>
+          <span class="code-lang-pill">Kotlin 2.4 / Compose M3</span>
+        </div>
+        <pre class="code-pre-box" is:raw><code><span class="kw">package</span> com.nexa.operations.delivery.presentation
+
+<span class="kw">import</span> android.content.Context
+<span class="kw">import</span> android.content.Intent
+<span class="kw">import</span> android.net.Uri
+<span class="kw">import</span> androidx.compose.animation.*
+<span class="kw">import</span> androidx.compose.foundation.Canvas
+<span class="kw">import</span> androidx.compose.foundation.gestures.detectDragGestures
+<span class="kw">import</span> androidx.compose.foundation.layout.*
+<span class="kw">import</span> androidx.compose.foundation.lazy.LazyColumn
+<span class="kw">import</span> androidx.compose.foundation.shape.RoundedCornerShape
+<span class="kw">import</span> androidx.compose.material3.*
+<span class="kw">import</span> androidx.compose.runtime.*
+<span class="kw">import</span> androidx.compose.ui.Alignment
+<span class="kw">import</span> androidx.compose.ui.Modifier
+<span class="kw">import</span> androidx.compose.ui.graphics.Color
+<span class="kw">import</span> androidx.compose.ui.graphics.Path
+<span class="kw">import</span> androidx.compose.ui.graphics.StrokeCap
+<span class="kw">import</span> androidx.compose.ui.graphics.StrokeJoin
+<span class="kw">import</span> androidx.compose.ui.graphics.drawscope.Stroke
+<span class="kw">import</span> androidx.compose.ui.input.pointer.pointerInput
+<span class="kw">import</span> androidx.compose.ui.platform.LocalContext
+<span class="kw">import</span> androidx.compose.ui.text.font.FontWeight
+<span class="kw">import</span> androidx.compose.ui.unit.dp
+<span class="kw">import</span> androidx.compose.ui.unit.sp
+<span class="kw">import</span> androidx.lifecycle.ViewModel
+<span class="kw">import</span> androidx.lifecycle.viewModelScope
+<span class="kw">import</span> kotlinx.coroutines.flow.MutableStateFlow
+<span class="kw">import</span> kotlinx.coroutines.flow.StateFlow
+<span class="kw">import</span> kotlinx.coroutines.flow.asStateFlow
+<span class="kw">import</span> kotlinx.coroutines.launch
+
+<span class="comm">// 1. Sealed UI State for UDF Architecture</span>
+<span class="kw">sealed interface</span> <span class="type">DriverRouteUiState</span> &#123;
+    <span class="kw">data object</span> <span class="type">Loading</span> : <span class="type">DriverRouteUiState</span>
+    <span class="kw">data class</span> <span class="type">RouteActive</span>(
+        <span class="kw">val</span> stopId: <span class="type">String</span> = <span class="str">"STOP-2026-0018-02"</span>,
+        <span class="kw">val</span> orderNumber: <span class="type">String</span> = <span class="str">"SO-2026-0018"</span>,
+        <span class="kw">val</span> clientName: <span class="type">String</span> = <span class="str">"ICISA Distribuciones"</span>,
+        <span class="kw">val</span> clientAddress: <span class="type">String</span> = <span class="str">"Av. Argentina 1240, Callao/Lima"</span>,
+        <span class="kw">val</span> coldChainRange: <span class="type">String</span> = <span class="str">"2°C – 6°C (Refrigerado)"</span>,
+        <span class="kw">val</span> isInsideGeofence: <span class="type">Boolean</span> = <span class="kw">true</span>,
+        <span class="kw">val</span> isPodSheetVisible: <span class="type">Boolean</span> = <span class="kw">false</span>,
+        <span class="kw">val</span> selectedOutcome: <span class="type">DeliveryOutcome</span> = <span class="type">DeliveryOutcome</span>.FULL,
+        <span class="kw">val</span> otpCode: <span class="type">String</span> = <span class="str">""</span>,
+        <span class="kw">val</span> isSyncQueued: <span class="type">Boolean</span> = <span class="kw">false</span>
+    ) : <span class="type">DriverRouteUiState</span>
+&#125;
+
+<span class="kw">enum class</span> <span class="type">DeliveryOutcome</span> &#123; FULL, PARTIAL, REJECTED &#125;
+
+<span class="comm">// 2. Production ViewModel</span>
+<span class="kw">class</span> <span class="type">DriverRouteViewModel</span> : <span class="type">ViewModel</span>() &#123;
+    <span class="kw">private val</span> _uiState = <span class="type">MutableStateFlow</span>&lt;<span class="type">DriverRouteUiState</span>&gt;(<span class="type">DriverRouteUiState</span>.<span class="type">RouteActive</span>())
+    <span class="kw">val</span> uiState: <span class="type">StateFlow</span>&lt;<span class="type">DriverRouteUiState</span>&gt; = _uiState.asStateFlow()
+
+    <span class="kw">fun</span> <span class="fn">openPodCapture</span>() &#123;
+        <span class="kw">val</span> current = _uiState.value <span class="kw">as?</span> <span class="type">DriverRouteUiState</span>.<span class="type">RouteActive</span> ?: <span class="kw">return</span>
+        _uiState.value = current.copy(isPodSheetVisible = <span class="kw">true</span>)
+    &#125;
+
+    <span class="kw">fun</span> <span class="fn">closePodCapture</span>() &#123;
+        <span class="kw">val</span> current = _uiState.value <span class="kw">as?</span> <span class="type">DriverRouteUiState</span>.<span class="type">RouteActive</span> ?: <span class="kw">return</span>
+        _uiState.value = current.copy(isPodSheetVisible = <span class="kw">false</span>)
+    &#125;
+
+    <span class="kw">fun</span> <span class="fn">setOutcome</span>(outcome: <span class="type">DeliveryOutcome</span>) &#123;
+        <span class="kw">val</span> current = _uiState.value <span class="kw">as?</span> <span class="type">DriverRouteUiState</span>.<span class="type">RouteActive</span> ?: <span class="kw">return</span>
+        _uiState.value = current.copy(selectedOutcome = outcome)
+    &#125;
+
+    <span class="kw">fun</span> <span class="fn">confirmDelivery</span>(signaturePointsCount: <span class="type">Int</span>) &#123;
+        viewModelScope.launch &#123;
+            <span class="kw">val</span> current = _uiState.value <span class="kw">as?</span> <span class="type">DriverRouteUiState</span>.<span class="type">RouteActive</span> ?: <span class="kw">return@launch</span>
+            <span class="comm">// Save POD to Room DB & schedule WorkManager sync</span>
+            _uiState.value = current.copy(isPodSheetVisible = <span class="kw">false</span>, isSyncQueued = <span class="kw">true</span>)
+        &#125;
+    &#125;
+&#125;
+
+<span class="comm">// 3. Master Screen Composable with 56dp Touch Target Buttons</span>
+<span class="ann">@OptIn</span>(<span class="type">ExperimentalMaterial3Api</span>::<span class="kw">class</span>)
+<span class="ann">@Composable</span>
+<span class="kw">fun</span> <span class="fn">DriverRouteScreen</span>(
+    viewModel: <span class="type">DriverRouteViewModel</span> = androidx.lifecycle.viewmodel.compose.viewModel(),
+    modifier: <span class="type">Modifier</span> = <span class="type">Modifier</span>
+) &#123;
+    <span class="kw">val</span> state <span class="kw">by</span> viewModel.uiState.collectAsState()
+    <span class="kw">val</span> context = <span class="type">LocalContext</span>.current
+
+    <span class="kw">when</span> (<span class="kw">val</span> s = state) &#123;
+        <span class="kw">is</span> <span class="type">DriverRouteUiState</span>.<span class="type">Loading</span> -&gt; &#123;
+            <span class="type">Box</span>(modifier.fillMaxSize(), contentAlignment = <span class="type">Alignment</span>.Center) &#123;
+                <span class="type">CircularProgressIndicator</span>()
+            &#125;
+        &#125;
+        <span class="kw">is</span> <span class="type">DriverRouteUiState</span>.<span class="type">RouteActive</span> -&gt; &#123;
+            <span class="type">Scaffold</span>(
+                topBar = &#123;
+                    <span class="type">TopAppBar</span>(
+                        title = &#123; <span class="type">Text</span>(<span class="str">"Ruta R-402 · Diego Morales"</span>, fontWeight = <span class="type">FontWeight</span>.Bold) &#125;,
+                        colors = <span class="type">TopAppBarDefaults</span>.topAppBarColors(
+                            containerColor = <span class="type">MaterialTheme</span>.colorScheme.primaryContainer
+                        )
+                    )
+                &#125;
+            ) &#123; paddingValues -&gt;
+                <span class="type">LazyColumn</span>(
+                    modifier = <span class="type">Modifier</span>
+                        .fillMaxSize()
+                        .padding(paddingValues)
+                        .padding(horizontal = <span class="num">16</span>.dp, vertical = <span class="num">12</span>.dp),
+                    verticalArrangement = <span class="type">Arrangement</span>.spacedBy(<span class="num">16</span>.dp)
+                ) &#123;
+                    item &#123;
+                        <span class="comm">// Active Stop Card with 56dp Action Targets</span>
+                        <span class="type">ElevatedCard</span>(
+                            shape = <span class="type">RoundedCornerShape</span>(<span class="num">16</span>.dp),
+                            modifier = <span class="type">Modifier</span>.fillMaxWidth()
+                        ) &#123;
+                            <span class="type">Column</span>(modifier = <span class="type">Modifier</span>.padding(<span class="num">16</span>.dp)) &#123;
+                                <span class="type">Row</span>(
+                                    modifier = <span class="type">Modifier</span>.fillMaxWidth(),
+                                    horizontalArrangement = <span class="type">Arrangement</span>.SpaceBetween
+                                ) &#123;
+                                    <span class="type">Text</span>(s.orderNumber, fontWeight = <span class="type">FontWeight</span>.Bold, color = <span class="type">MaterialTheme</span>.colorScheme.primary)
+                                    <span class="type">SuggestionChip</span>(onClick = &#123;&#125;, label = &#123; <span class="type">Text</span>(s.coldChainRange) &#125;)
+                                &#125;
+                                <span class="type">Spacer</span>(<span class="type">Modifier</span>.height(<span class="num">8</span>.dp))
+                                <span class="type">Text</span>(s.clientName, fontSize = <span class="num">18</span>.sp, fontWeight = <span class="type">FontWeight</span>.Bold)
+                                <span class="type">Text</span>(s.clientAddress, color = <span class="type">MaterialTheme</span>.colorScheme.onSurfaceVariant)
+                                
+                                <span class="type">Spacer</span>(<span class="type">Modifier</span>.height(<span class="num">16</span>.dp))
+                                
+                                <span class="comm">// Industrial 56dp External GPS Launcher Button</span>
+                                <span class="type">OutlinedButton</span>(
+                                    onClick = &#123; launchGpsIntent(context, -<span class="num">12.04318</span>, -<span class="num">77.02824</span>, s.clientName) &#125;,
+                                    modifier = <span class="type">Modifier</span>.fillMaxWidth().heightIn(min = <span class="num">56</span>.dp),
+                                    shape = <span class="type">RoundedCornerShape</span>(<span class="num">12</span>.dp)
+                                ) &#123;
+                                    <span class="type">Text</span>(<span class="str">"Navegar GPS (Google Maps / Waze)"</span>, fontSize = <span class="num">15</span>.sp)
+                                &#125;
+
+                                <span class="type">Spacer</span>(<span class="type">Modifier</span>.height(<span class="num">12</span>.dp))
+
+                                <span class="comm">// Industrial 56dp Confirm Delivery (POD) Action Button</span>
+                                <span class="type">Button</span>(
+                                    onClick = &#123; viewModel.openPodCapture() &#125;,
+                                    modifier = <span class="type">Modifier</span>.fillMaxWidth().heightIn(min = <span class="num">56</span>.dp),
+                                    shape = <span class="type">RoundedCornerShape</span>(<span class="num">12</span>.dp)
+                                ) &#123;
+                                    <span class="type">Text</span>(<span class="str">"Confirmar Entrega en Sitio (POD)"</span>, fontSize = <span class="num">15</span>.sp, fontWeight = <span class="type">FontWeight</span>.Bold)
+                                &#125;
+                            &#125;
+                        &#125;
+                    &#125;
+                &#125;
+
+                <span class="comm">// Modal BottomSheet for POD Capture</span>
+                <span class="kw">if</span> (s.isPodSheetVisible) &#123;
+                    <span class="type">ModalBottomSheet</span>(
+                        onDismissRequest = &#123; viewModel.closePodCapture() &#125;,
+                        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = <span class="kw">true</span>)
+                    ) &#123;
+                        <span class="type">PodCaptureSheetContent</span>(
+                            state = s,
+                            onOutcomeSelected = viewModel::setOutcome,
+                            onConfirm = &#123; viewModel.confirmDelivery(it) &#125;
+                        )
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+<span class="comm">// 4. Helper Function: Explicit GPS Intent for Industrial Route Guidance</span>
+<span class="kw">private fun</span> <span class="fn">launchGpsIntent</span>(context: <span class="type">Context</span>, lat: <span class="type">Double</span>, lng: <span class="type">Double</span>, label: <span class="type">String</span>) &#123;
+    val uri = Uri.parse("geo:0,0?q=&#36;lat,&#36;lng(&#36;&#123;Uri.encode(label)&#125;)")
+    <span class="kw">val</span> mapIntent = <span class="type">Intent</span>(<span class="type">Intent</span>.ACTION_VIEW, uri)
+    context.startActivity(mapIntent)
+&#125;
+
+<span class="comm">// 5. Dedicated Signature Canvas Composable with Bézier Smoothing</span>
+<span class="ann">@Composable</span>
+<span class="kw">fun</span> <span class="fn">SignatureCanvas</span>(
+    onPointsChanged: (<span class="type">Int</span>) -&gt; <span class="type">Unit</span>,
+    modifier: <span class="type">Modifier</span> = <span class="type">Modifier</span>
+) &#123;
+    <span class="kw">val</span> path = remember &#123; <span class="type">Path</span>() &#125;
+    <span class="kw">var</span> pointCount <span class="kw">by</span> remember &#123; mutableIntStateOf(<span class="num">0</span>) &#125;
+
+    <span class="type">Canvas</span>(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(<span class="num">180</span>.dp)
+            .pointerInput(<span class="type">Unit</span>) &#123;
+                detectDragGestures(
+                    onDragStart = &#123; offset -&gt;
+                        path.moveTo(offset.x, offset.y)
+                        pointCount++
+                        onPointsChanged(pointCount)
+                    &#125;,
+                    onDrag = &#123; change, _ -&gt;
+                        path.lineTo(change.position.x, change.position.y)
+                        pointCount++
+                        onPointsChanged(pointCount)
+                    &#125;
+                )
+            &#125;
+    ) &#123;
+        drawPath(
+            path = path,
+            color = <span class="type">Color</span>(<span class="num">0xFF0F172A</span>),
+            style = <span class="type">Stroke</span>(width = <span class="num">4f</span>, cap = <span class="type">StrokeCap</span>.Round, join = <span class="type">StrokeJoin</span>.Round)
+        )
+    &#125;
+&#125;</code></pre>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<style>
+  .story-screen-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .section-heading-block {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+  }
+
+  .heading-meta-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+</style>

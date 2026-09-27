@@ -1,0 +1,245 @@
+---
+/**
+ * SaasItemsTableCard Component
+ * Chapter 2 (SaaS Platform): Rental items and additional services table.
+ */
+interface Props {
+  itemName?: string;
+  unitPrice?: string;
+  depositPrice?: string;
+  totalPrice?: string;
+  isIsolated?: boolean;
+}
+
+const {
+  itemName = 'GoPro HERO10',
+  unitPrice = '€100 /day',
+  depositPrice = '€200 /booking',
+  totalPrice = '€700.00',
+  isIsolated = false
+} = Astro.props;
+---
+
+<div class={`saas-card-frame ${isIsolated ? 'is-isolated' : ''}`}>
+  <div class="saas-modal-top-tags">
+    <span class="saas-pill-tag ongoing">On Going</span>
+    <span class="saas-pill-tag notpaid">• Not Paid</span>
+  </div>
+
+  <div class="saas-items-table-section">
+    <div class="saas-table-header-row">
+      <strong class="section-title">Items</strong>
+      <div class="table-col-labels text-mono">
+        <span>Unit Price</span>
+        <span>Deposit Price</span>
+        <span>Total (5d)</span>
+      </div>
+    </div>
+    <div class="saas-item-row">
+      <div class="item-name-group">
+        <img src="/assets/synthetic/camera-vector.svg" width="28" height="24" alt="Action Camera" style="border-radius: 4px; object-fit: contain;" />
+        <span class="item-title">{itemName}</span>
+      </div>
+      <div class="item-prices-group text-mono">
+        <span>{unitPrice}</span>
+        <span>{depositPrice}</span>
+        <span class="item-total-bold">{totalPrice}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="saas-services-table-section">
+    <strong class="section-title">Additional Services</strong>
+    <div class="saas-service-row">
+      <div class="service-name-group">
+        <span class="service-icon delivery" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="1" y="3" width="15" height="13"></rect>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon>
+            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+          </svg>
+        </span>
+        <div>
+          <strong>Delivery</strong>
+          <small>Pick-up & Return</small>
+        </div>
+      </div>
+      <div class="service-prices text-mono">
+        <span>€20 <small>/booking</small></span>
+        <span class="service-total">€20.00</span>
+      </div>
+    </div>
+
+    <div class="saas-service-row">
+      <div class="service-name-group">
+        <span class="service-icon insurance" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </span>
+        <div>
+          <strong>Insurance</strong>
+        </div>
+      </div>
+      <div class="service-prices text-mono">
+        <span>€20 <small>/booking</small></span>
+        <span class="service-total">€20.00</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .saas-card-frame {
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    transform: translate(-50%, -50%);
+    width: 580px;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 1.25rem;
+    z-index: 5;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .saas-card-frame.is-isolated {
+    position: relative;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .saas-modal-top-tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .saas-pill-tag {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+
+  .saas-pill-tag.ongoing {
+    background: #e0f2fe;
+    color: #075985;
+    font-weight: 800;
+  }
+
+  .saas-pill-tag.notpaid {
+    background: #fee2e2;
+    color: #991b1b;
+    font-weight: 800;
+  }
+
+  .saas-table-header-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
+    color: #334155;
+  }
+
+  .table-col-labels {
+    display: flex;
+    gap: 1.25rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: #334155;
+    font-weight: 600;
+  }
+
+  .saas-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8125rem;
+    padding: 0.4rem 0;
+  }
+
+  .item-name-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .item-prices-group {
+    display: flex;
+    gap: 1.25rem;
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: #1e293b;
+    font-weight: 600;
+  }
+
+  .item-total-bold {
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  .saas-services-table-section {
+    margin-top: 0.85rem;
+    border-top: 1px solid #cbd5e1;
+    padding-top: 0.65rem;
+  }
+
+  .section-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #0f172a;
+    display: block;
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .saas-service-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    padding: 0.35rem 0;
+  }
+
+  .service-name-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #0f172a;
+    font-weight: 700;
+  }
+
+  .service-name-group small {
+    display: block;
+    color: #334155;
+    font-size: 0.6875rem;
+    font-weight: 600;
+  }
+
+  .service-prices {
+    font-family: 'JetBrains Mono', monospace;
+    color: #1e293b;
+    font-weight: 600;
+  }
+
+  .service-prices small {
+    color: #334155;
+    font-weight: 600;
+  }
+
+  .service-total {
+    color: #0f172a;
+    font-weight: 800;
+  }
+</style>

@@ -1,0 +1,137 @@
+---
+/**
+ * SaasCustomerProfileCard Component
+ * Chapter 2 (SaaS Platform): Customer profile summary with quick actions (email/mobile).
+ */
+interface Props {
+  name?: string;
+  role?: string;
+  isIsolated?: boolean;
+}
+
+const {
+  name = 'John Cooper',
+  role = 'Photography Store',
+  isIsolated = false
+} = Astro.props;
+---
+
+<div class={`saas-customer-profile-card ${isIsolated ? 'is-isolated' : ''}`}>
+  <div class="profile-avatar-wrap">
+    <img src="/assets/synthetic/avatar-customer.svg" alt={name} width="44" height="44" class="profile-avatar-img" />
+  </div>
+  <strong class="profile-name">{name}</strong>
+  <span class="profile-role">{role}</span>
+  <div class="profile-actions-row">
+    <button type="button" class="profile-btn" aria-label={`Email ${name}`}>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </svg>
+      <span>email</span>
+    </button>
+    <button type="button" class="profile-btn" aria-label={`Call ${name}`}>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="5" y="2" width="14" height="20" rx="3"></rect>
+        <line x1="12" y1="18" x2="12.01" y2="18"></line>
+      </svg>
+      <span>mobile</span>
+    </button>
+  </div>
+</div>
+
+<style>
+  .saas-customer-profile-card {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 220px;
+    background-color: var(--stage-card, #0a3359);
+    border: 1px solid rgba(56, 200, 255, 0.28);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+    padding: 1.15rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.35rem;
+    z-index: 6;
+    color: #ffffff;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .saas-customer-profile-card.is-isolated {
+    position: relative;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  .profile-avatar-wrap {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #ffffff;
+    border: 2px solid #38c8ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .profile-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .profile-name {
+    font-size: 0.9375rem;
+    font-weight: 800;
+    color: #ffffff !important;
+    letter-spacing: -0.01em;
+  }
+
+  .profile-role {
+    font-size: 0.75rem;
+    color: #cbd5e1 !important;
+    font-weight: 500;
+  }
+
+  .profile-actions-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .profile-btn {
+    background: var(--stage-capsule-bg, rgba(255, 255, 255, 0.12));
+    color: var(--stage-capsule-text, #ffffff) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    font-size: 0.6875rem;
+    padding: 5px 10px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .profile-btn:hover {
+    background: rgba(255, 255, 255, 0.24);
+    color: #ffffff !important;
+    border-color: rgba(56, 200, 255, 0.4);
+  }
+
+  .profile-btn svg {
+    stroke: #ffffff;
+  }
+
+  .profile-btn span {
+    color: #ffffff !important;
+    font-weight: 500;
+  }
+</style>

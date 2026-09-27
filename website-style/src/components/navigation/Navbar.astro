@@ -1,0 +1,457 @@
+---
+// Navbar Component: Minimal, sticky, backdrop-blur, responsive drawer
+---
+
+<header class="site-header" id="site-header">
+  <div class="nav-container">
+    <a href="#" class="brand-logo" aria-label="Flecto Homepage">
+      <span class="logo-mark" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="2" width="20" height="20" rx="6" stroke="#56f09f" stroke-width="2.5" />
+          <circle cx="12" cy="12" r="4" fill="#56f09f" />
+        </svg>
+      </span>
+      <span class="logo-text">Flecto</span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-links">
+        <li><a href="/about" class="nav-link">About</a></li>
+        <li><a href="/nexafy" class="nav-link nav-link-nexafy">Nexafy</a></li>
+        <li><a href="#channels" class="nav-link">Market</a></li>
+        <li><a href="#features" class="nav-link">Platform</a></li>
+        <li><a href="#sustainability" class="nav-link">Sustainability</a></li>
+        <li><a href="#insurance" class="nav-link">Security</a></li>
+      </ul>
+    </nav>
+
+    <!-- Desktop Actions -->
+    <div class="nav-actions">
+      <div class="lang-selector" aria-label="Language selection">
+        <button type="button" class="lang-btn active" aria-label="Switch language to English" aria-pressed="true">EN</button>
+        <span class="lang-divider" aria-hidden="true">/</span>
+        <button type="button" class="lang-btn" aria-label="Switch language to Portuguese" aria-pressed="false">PT</button>
+      </div>
+
+      <a href="#login" class="login-link">Login</a>
+      <a href="#book-demo" class="cta-pill-button">
+        <span>Book a Demo</span>
+        <svg class="cta-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M2.5 7H11.5M11.5 7L7 2.5M11.5 7L7 11.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Mobile Menu Trigger -->
+    <button 
+      type="button" 
+      class="mobile-toggle" 
+      id="mobile-menu-trigger" 
+      aria-label="Open mobile navigation menu" 
+      aria-expanded="false" 
+      aria-controls="mobile-drawer"
+    >
+      <span class="hamburger-line line-1"></span>
+      <span class="hamburger-line line-2"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+    <div class="drawer-header">
+      <span class="drawer-logo">Flecto</span>
+      <button type="button" class="drawer-close" id="mobile-menu-close" aria-label="Close navigation menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="drawer-nav">
+      <ul class="drawer-links">
+        <li><a href="/about" class="drawer-link monumental-drawer-link">About</a></li>
+        <li><a href="/nexafy" class="drawer-link monumental-drawer-link">Nexafy</a></li>
+        <li><a href="#channels" class="drawer-link monumental-drawer-link">Market</a></li>
+        <li><a href="#news" class="drawer-sublink">Blog</a></li>
+        <li><a href="#careers" class="drawer-sublink">Careers</a></li>
+        <li><a href="#contact" class="drawer-sublink">Contact Sales</a></li>
+        <li><a href="#support" class="drawer-sublink">Support / Feedback</a></li>
+      </ul>
+    </nav>
+
+    <div class="drawer-footer">
+      <div class="drawer-follow-section">
+        <span class="drawer-follow-label">Follow Us</span>
+        <div class="drawer-socials-row">
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="drawer-social-circle" aria-label="LinkedIn">in</a>
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="drawer-social-circle" aria-label="Facebook">f</a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="drawer-social-circle" aria-label="Instagram">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#004737" stroke-width="2.5">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+            </svg>
+          </a>
+          <a href="https://medium.com" target="_blank" rel="noopener noreferrer" class="drawer-social-circle" aria-label="Medium">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="#004737">
+              <circle cx="6" cy="12" r="5"/>
+              <ellipse cx="15" cy="12" rx="3.5" ry="5"/>
+              <ellipse cx="21" cy="12" rx="1.5" ry="4.5"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-height-desktop);
+    background: var(--nav-bg);
+    backdrop-filter: blur(var(--nav-blur));
+    -webkit-backdrop-filter: blur(var(--nav-blur));
+    border-bottom: 1px solid var(--border-on-dark);
+    z-index: 1000;
+    transition: transform var(--primitive-duration-normal) var(--primitive-ease-out-quint),
+                opacity var(--primitive-duration-normal) ease;
+  }
+
+  /* Smart appearance: hides when top sculpted hero is in view, slides down when scrolled */
+  .site-header:not(.is-scrolled) {
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .site-header.is-scrolled {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-container {
+    max-width: var(--layout-max-width);
+    margin: 0 auto;
+    height: 100%;
+    padding: 0 var(--layout-gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Brand Logo */
+  .brand-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    text-decoration: none;
+    color: var(--text-primary-on-dark);
+  }
+
+  .logo-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-text {
+    font-family: var(--primitive-font-display);
+    font-size: 1.5rem;
+    font-weight: var(--primitive-weight-bold);
+    letter-spacing: -0.04em;
+    color: var(--primitive-color-cream-100);
+  }
+
+  /* Desktop Nav */
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+  }
+
+  .nav-link {
+    font-size: 0.9375rem;
+    font-weight: var(--primitive-weight-medium);
+    color: var(--text-secondary-on-dark);
+    text-decoration: none;
+    transition: color var(--primitive-duration-fast) ease;
+    padding: 0.5rem 0;
+  }
+
+  .nav-link:hover {
+    color: var(--primitive-color-mint-500);
+  }
+
+  /* Actions */
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .lang-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-family: var(--primitive-font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted-on-dark);
+  }
+
+  .lang-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted-on-dark);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 2px 4px;
+    border-radius: var(--primitive-radius-xs);
+    transition: color var(--primitive-duration-fast) ease;
+  }
+
+  .lang-btn.active, .lang-btn:hover {
+    color: var(--primitive-color-mint-500);
+    font-weight: var(--primitive-weight-semibold);
+  }
+
+  .login-link {
+    font-size: 0.9375rem;
+    font-weight: var(--primitive-weight-medium);
+    color: var(--text-secondary-on-dark);
+    text-decoration: none;
+    transition: color var(--primitive-duration-fast) ease;
+  }
+
+  .login-link:hover {
+    color: var(--primitive-color-cream-100);
+  }
+
+  /* CTA Pill Button */
+  .cta-pill-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--primitive-color-mint-500);
+    color: var(--primitive-color-forest-900);
+    font-family: var(--primitive-font-display);
+    font-size: 0.875rem;
+    font-weight: var(--primitive-weight-bold);
+    padding: 0.625rem 1.25rem;
+    border-radius: var(--pill-radius);
+    text-decoration: none;
+    transition: all var(--primitive-duration-fast) var(--primitive-ease-out-quint);
+    box-shadow: 0 4px 12px rgba(86, 240, 159, 0.2);
+  }
+
+  .cta-pill-button:hover {
+    background: var(--primitive-color-mint-400);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(86, 240, 159, 0.35);
+  }
+
+  .cta-arrow {
+    transition: transform var(--primitive-duration-fast) ease;
+  }
+
+  .cta-pill-button:hover .cta-arrow {
+    transform: translateX(3px);
+  }
+
+  /* Mobile Toggle */
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    z-index: 1010;
+    pointer-events: auto;
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--primitive-color-cream-100);
+    border-radius: 1px;
+    transition: all var(--primitive-duration-normal) var(--primitive-ease-out-quint);
+  }
+
+  /* Mobile Drawer */
+  .mobile-drawer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    background: var(--primitive-color-forest-950);
+    z-index: 2000;
+    padding: 1.5rem;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-100%);
+    transition: all var(--primitive-duration-flow) var(--primitive-ease-out-quint);
+  }
+
+  .mobile-drawer.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-on-dark);
+  }
+
+  .drawer-logo {
+    font-family: var(--primitive-font-display);
+    font-size: 1.5rem;
+    font-weight: var(--primitive-weight-bold);
+    color: var(--primitive-color-cream-100);
+  }
+
+  .drawer-close {
+    background: none;
+    border: none;
+    color: var(--primitive-color-cream-100);
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .drawer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .drawer-link {
+    font-family: var(--primitive-font-display);
+    font-size: 1.75rem;
+    font-weight: var(--primitive-weight-bold);
+    color: var(--primitive-color-cream-100);
+    text-decoration: none;
+    transition: color var(--primitive-duration-fast) ease;
+  }
+
+  .drawer-link:hover {
+    color: var(--primitive-color-mint-500);
+  }
+
+  .drawer-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-on-dark);
+  }
+
+  .monumental-drawer-link {
+    font-size: 2.75rem !important;
+    font-weight: 700 !important;
+    line-height: 1.1;
+  }
+
+  .drawer-sublink {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .drawer-sublink:hover {
+    color: #57f09e;
+  }
+
+  .nexafy-sublink {
+    color: #57f09e;
+    font-weight: 600;
+  }
+
+  .drawer-follow-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-top: 1rem;
+  }
+
+  .drawer-follow-label {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .drawer-socials-row {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .drawer-social-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: #57f09e;
+    color: #004737;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+
+  .drawer-social-circle:hover {
+    transform: scale(1.1);
+  }
+
+  /* Responsive Rules */
+  @media (max-width: 900px) {
+    .site-header {
+      height: var(--nav-height-mobile);
+    }
+
+    .desktop-nav, .nav-actions {
+      display: none;
+    }
+
+    .mobile-toggle {
+      display: flex;
+    }
+
+    .mobile-drawer {
+      display: flex;
+    }
+  }
+</style>

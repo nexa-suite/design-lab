@@ -1,0 +1,129 @@
+---
+/**
+ * SaasFloatingDateCard Component
+ * Chapter 2 (SaaS Platform): Floating rental dates card with calendar scheduling toggle.
+ */
+interface Props {
+  duration?: string;
+  range?: string;
+  isIsolated?: boolean;
+}
+
+const {
+  duration = '5-day rental',
+  range = '20/03/2022 - 24/03/2022',
+  isIsolated = false
+} = Astro.props;
+---
+
+<div class={`saas-floating-date-card ${isIsolated ? 'is-isolated' : ''}`}>
+  <span class="date-card-label">Dates</span>
+  <span class="date-card-duration">{duration}</span>
+  <div class="date-card-range text-mono">
+    <span>{range}</span>
+    <span class="date-arrow" aria-hidden="true">∨</span>
+  </div>
+  <div class="date-toggle-row">
+    <span class="toggle-pill-switch" aria-hidden="true"></span>
+    <span class="toggle-label-text">Schedule Delivery & Pick up on my Calendar</span>
+  </div>
+</div>
+
+<style>
+  .saas-floating-date-card {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 240px;
+    background-color: var(--stage-card, #0a3359);
+    border: 1px solid rgba(56, 200, 255, 0.28);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+    padding: 1.15rem 1rem;
+    z-index: 6;
+    color: #ffffff;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .saas-floating-date-card.is-isolated {
+    position: relative;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  .date-card-label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #cbd5e1 !important;
+    letter-spacing: 0.05em;
+  }
+
+  .date-card-duration {
+    font-size: 0.9375rem;
+    font-weight: 800;
+    display: block;
+    margin: 0.25rem 0;
+    color: #ffffff !important;
+  }
+
+  .date-card-range {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    background: #ffffff;
+    padding: 6px 10px;
+    border-radius: 8px;
+    margin: 0.6rem 0;
+    font-weight: 700;
+    color: #0f172a !important;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .date-card-range span {
+    color: #0f172a !important;
+  }
+
+  .date-arrow {
+    color: #0284c7 !important;
+    font-weight: 800;
+  }
+
+  .date-toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.6875rem;
+    line-height: 1.25;
+  }
+
+  .toggle-pill-switch {
+    width: 24px;
+    height: 14px;
+    background: #38c8ff;
+    border-radius: 999px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .toggle-pill-switch::after {
+    content: '';
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #082846;
+  }
+
+  .toggle-label-text {
+    color: #cbd5e1 !important;
+    font-weight: 500;
+  }
+</style>

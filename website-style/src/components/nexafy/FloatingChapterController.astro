@@ -1,0 +1,144 @@
+---
+/**
+ * FloatingChapterController Component
+ * Floating chapter navigation pills and auto-loop playback controls.
+ */
+---
+
+<div class="nexafy-floating-controls" id="nexafy-floating-controls">
+  <div class="chapter-pills-group" role="tablist" aria-label="Living Engine Chapters">
+    <button type="button" class="chapter-pill active" id="btn-ch1" data-ch="1" role="tab" aria-selected="true">
+      <span class="pill-number">01</span>
+      <span class="pill-label">Channels & Security</span>
+    </button>
+    <button type="button" class="chapter-pill" id="btn-ch2" data-ch="2" role="tab" aria-selected="false">
+      <span class="pill-number">02</span>
+      <span class="pill-label">Modular SaaS Platform</span>
+    </button>
+    <button type="button" class="chapter-pill" id="btn-ch3" data-ch="3" role="tab" aria-selected="false">
+      <span class="pill-number">03</span>
+      <span class="pill-label">Safe Renting & Link</span>
+    </button>
+  </div>
+
+  <div class="playback-controls-group">
+    <button type="button" class="playback-btn" id="btn-play-loop" title="Toggle automatic continuous morph loop">
+      <span id="play-icon">▶</span>
+      <span id="play-text">Auto Loop</span>
+    </button>
+    <button type="button" class="playback-btn secondary" id="btn-reset-scene" title="Reset to initial Chapter 01">
+      <span>↺ Reset</span>
+    </button>
+  </div>
+</div>
+
+<style>
+  .nexafy-floating-controls {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #07223b;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 6px 10px;
+    border-radius: 999px;
+    z-index: 30;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .chapter-pills-group {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .chapter-pill {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.2s ease;
+  }
+
+  .chapter-pill:hover {
+    color: #ffffff;
+  }
+
+  .chapter-pill.active {
+    background: var(--stage-card);
+    color: var(--stage-text);
+  }
+
+  .pill-number {
+    font-family: monospace;
+    opacity: 0.75;
+  }
+
+  .playback-controls-group {
+    display: flex;
+    gap: 0.35rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    padding-left: 0.65rem;
+  }
+
+  .playback-btn {
+    background: var(--stage-card);
+    border: none;
+    color: var(--stage-text);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: opacity 0.15s ease;
+  }
+
+  .playback-btn:hover {
+    opacity: 0.9;
+  }
+
+  .playback-btn.secondary {
+    background: transparent;
+    color: #94a3b8;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .playback-btn.secondary:hover {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .nexafy-floating-controls {
+      flex-direction: column;
+      border-radius: 18px;
+      bottom: 12px;
+      gap: 0.5rem;
+      padding: 8px;
+      width: calc(100% - 32px);
+      max-width: 380px;
+    }
+    .chapter-pills-group {
+      width: 100%;
+      justify-content: center;
+    }
+    .playback-controls-group {
+      border-left: none;
+      padding-left: 0;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

@@ -1,0 +1,80 @@
+---
+/**
+ * EscrowGuaranteeCard Component
+ * Chapter 3 (Safe Renting & Payments): Escrow Protection Guarantee card with shield emblem.
+ */
+interface Props {
+  title?: string;
+  description?: string;
+  isIsolated?: boolean;
+}
+
+const {
+  title = '100% Escrow Guarantee',
+  description = 'Automatic deposit pre-authorization with instant claimless release upon gear return.',
+  isIsolated = false
+} = Astro.props;
+---
+
+<div class={`ch3-right-protection ${isIsolated ? 'is-isolated' : ''}`}>
+  <div class="escrow-shield-card">
+    <div class="shield-icon-bubble">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+      </svg>
+    </div>
+    <strong class="shield-title">{title}</strong>
+    <p class="shield-body">{description}</p>
+  </div>
+</div>
+
+<style>
+  .ch3-right-protection {
+    width: 280px;
+    max-width: 100%;
+  }
+
+  .ch3-right-protection.is-isolated {
+    margin: 0 auto;
+  }
+
+  .escrow-shield-card {
+    background: var(--stage-card, #0a3359);
+    border: 1px solid rgba(56, 200, 255, 0.28);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    border-radius: 18px;
+    padding: 1.35rem 1.25rem;
+    color: #ffffff;
+    text-align: center;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .shield-icon-bubble {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(56, 200, 255, 0.15);
+    border: 1.5px solid rgba(56, 200, 255, 0.35);
+    margin: 0 auto 0.85rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #38c8ff;
+  }
+
+  .shield-title {
+    font-size: 0.9375rem;
+    font-weight: 800;
+    color: #ffffff !important;
+    display: block;
+    margin-bottom: 0.45rem;
+    letter-spacing: -0.01em;
+  }
+
+  .shield-body {
+    font-size: 0.75rem;
+    line-height: 1.45;
+    color: #cbd5e1 !important;
+    font-weight: 400;
+  }
+</style>

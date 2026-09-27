@@ -1,0 +1,111 @@
+---
+interface Props {
+  isIsolated?: boolean;
+}
+
+const {
+  isIsolated = false
+} = Astro.props;
+---
+
+<div class={`conduit-badges-container ${isIsolated ? 'is-isolated' : ''}`}>
+  <!-- 1. Storefront Badge (Left Step) -->
+  <div class="circuit-badge badge-store" aria-hidden="true" title="Physical Store Terminal">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.2">
+      <path d="M3 9l1-5h16l1 5"></path>
+      <path d="M3 9a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 3 0"></path>
+      <path d="M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"></path>
+      <path d="M9 20v-6h6v6"></path>
+    </svg>
+  </div>
+
+  <!-- 2. Email Inquiry Badge (Center Step) -->
+  <div class="circuit-badge badge-email" aria-hidden="true" title="Direct Customer Inquiry">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.2">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+      <polyline points="22,6 12,13 2,6"></polyline>
+    </svg>
+  </div>
+
+  <!-- 3. Online Store Globe/Phone Badge (Right Step) -->
+  <div class="circuit-badge badge-online" aria-hidden="true" title="Online Store Channel">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.2">
+      <rect x="5" y="2" width="14" height="20" rx="3"></rect>
+      <circle cx="12" cy="11" r="5"></circle>
+      <line x1="7" y1="11" x2="17" y2="11"></line>
+      <path d="M12 6a7 7 0 0 1 0 10"></path>
+      <path d="M12 6a7 7 0 0 0 0 10"></path>
+    </svg>
+  </div>
+
+  <!-- 4. Escrow Protection Shield Badge (Far Right) -->
+  <div class="circuit-badge badge-shield" aria-hidden="true" title="100% Escrow Protection">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.2">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+    </svg>
+  </div>
+</div>
+
+<style>
+  .conduit-badges-container.is-isolated {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    position: relative;
+  }
+
+  .circuit-badge {
+    position: absolute;
+    background-color: var(--stage-card, #38c8ff);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    box-shadow: none !important;
+    border: none !important;
+    transition: background-color 0.3s ease;
+  }
+
+  .conduit-badges-container.is-isolated .circuit-badge {
+    position: relative;
+    left: auto !important;
+    top: auto !important;
+  }
+
+  .circuit-badge svg {
+    stroke: var(--stage-text, #082846);
+    transition: stroke 0.3s ease;
+  }
+
+  .badge-store {
+    left: 436px;
+    top: 248px;
+    width: 44px;
+    height: 45px;
+  }
+
+  .badge-email {
+    left: 675px;
+    top: 248px;
+    width: 45px;
+    height: 45px;
+  }
+
+  .badge-online {
+    left: 770px;
+    top: 138px;
+    width: 44px;
+    height: 45px;
+  }
+
+  .badge-shield {
+    left: 1045px;
+    top: 180px;
+    width: 44px;
+    height: 50px;
+    border-radius: 12px;
+  }
+</style>

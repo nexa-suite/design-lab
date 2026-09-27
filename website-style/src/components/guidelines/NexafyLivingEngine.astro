@@ -1,0 +1,922 @@
+---
+/**
+ * NEXAFY LIVING ENGINE — Master Modular Component Assembly
+ * Integrates all individual living geometry artifact components:
+ *  - OklchVisionBar: Live ergonomic OKLCH palette switching
+ *  - YourCompanyHub: Origin node tile
+ *  - ConduitCircuit: 28px thick vascular lines & modular mark
+ *  - ConduitBadges: 4 satellite junction badges
+ *  - PhysicalStoreCard: Channel Card 1
+ *  - CustomerInquiryCard: Channel Card 2
+ *  - OnlineStoreCard: Channel Card 3
+ *  - SaasCustomerProfileCard: Chapter 2 customer profile
+ *  - SaasItemsTableCard: Chapter 2 items table
+ *  - SaasFloatingDateCard: Chapter 2 dates card
+ *  - PaymentCircuitMethods: Chapter 3 digital payment chips
+ *  - PhoneCheckoutSimulator: Chapter 3 milestone phone screen
+ *  - EscrowGuaranteeCard: Chapter 3 protection shield
+ *  - FloatingChapterController: Interactive chapter pills
+ */
+import OklchVisionBar from '../nexafy/OklchVisionBar.astro';
+import YourCompanyHub from '../nexafy/YourCompanyHub.astro';
+import ConduitCircuit from '../nexafy/ConduitCircuit.astro';
+import ConduitBadges from '../nexafy/ConduitBadges.astro';
+import PhysicalStoreCard from '../nexafy/PhysicalStoreCard.astro';
+import CustomerInquiryCard from '../nexafy/CustomerInquiryCard.astro';
+import OnlineStoreCard from '../nexafy/OnlineStoreCard.astro';
+import SaasCustomerProfileCard from '../nexafy/SaasCustomerProfileCard.astro';
+import SaasItemsTableCard from '../nexafy/SaasItemsTableCard.astro';
+import SaasFloatingDateCard from '../nexafy/SaasFloatingDateCard.astro';
+import PaymentCircuitMethods from '../nexafy/PaymentCircuitMethods.astro';
+import PhoneCheckoutSimulator from '../nexafy/PhoneCheckoutSimulator.astro';
+import EscrowGuaranteeCard from '../nexafy/EscrowGuaranteeCard.astro';
+import FloatingChapterController from '../nexafy/FloatingChapterController.astro';
+---
+
+<div class="nexafy-stage-wrapper" id="nexafy-stage-wrapper">
+  
+  <!-- 1. OKLCH Human Vision Bar Component -->
+  <OklchVisionBar initialPreset="cashmere" />
+
+  <!-- 1.5. Master Engine Interactive Controls & Resolution Toolbar -->
+  <div class="engine-master-toolbar" role="toolbar" aria-label="Controles del Motor Gráfico Nexafy">
+    
+    <!-- Group A: Canvas Resolution Presets -->
+    <div class="toolbar-group">
+      <span class="toolbar-label">RESOLUCIÓN:</span>
+      <div class="resolution-presets" role="group">
+        <button type="button" class="res-chip active" data-res-w="1440" data-res-h="720">1440×720 (Desktop)</button>
+        <button type="button" class="res-chip" data-res-w="1280" data-res-h="640">1280×640 (Laptop)</button>
+        <button type="button" class="res-chip" data-res-w="1024" data-res-h="560">1024×560 (Tablet)</button>
+        <button type="button" class="res-chip" data-res-w="auto" data-res-h="auto">Fluid Auto</button>
+      </div>
+    </div>
+
+    <!-- Group B: Zoom & Scaling Controls -->
+    <div class="toolbar-group">
+      <span class="toolbar-label">ZOOM:</span>
+      <div class="zoom-controls" role="group">
+        <button type="button" class="zoom-btn" id="btn-zoom-out" title="Disminuir tamaño (−)">−</button>
+        <button type="button" class="zoom-btn zoom-reset" id="btn-zoom-reset" title="Restablecer tamaño normal (100%)">100%</button>
+        <button type="button" class="zoom-btn" id="btn-zoom-in" title="Aumentar tamaño (+)">+</button>
+        <button type="button" class="zoom-btn zoom-fit" id="btn-zoom-fit" title="Ajustar al ancho de pantalla">Fit</button>
+        <span class="scale-badge" id="scale-badge-text">100%</span>
+      </div>
+    </div>
+
+    <!-- Group C: Live Movement & Simulation Controls ("Demostrar en vivo todos los movimientos") -->
+    <div class="toolbar-group">
+      <span class="toolbar-label">MOVIMIENTO EN VIVO:</span>
+      <div class="motion-toggles">
+        <button type="button" class="toggle-pill active" id="btn-toggle-living-motion" title="Activar/desactivar flotación armónica viva">
+          <i class="pi pi-compass"></i> Movimiento Vivo
+        </button>
+        <button type="button" class="toggle-pill active" id="btn-toggle-pulses" title="Activar/desactivar pulsos vasculares en 28px">
+          <i class="pi pi-bolt"></i> Pulsos Señal
+        </button>
+        <button type="button" class="toggle-pill active" id="btn-toggle-traffic" title="Activar/desactivar simulación de tráfico en tiempo real">
+          <i class="pi pi-sync"></i> Tráfico en Vivo
+        </button>
+        <button type="button" class="toggle-pill" id="btn-toggle-wireframe" title="Ver puertos de anclaje y cero colisiones">
+          <i class="pi pi-table"></i> Halos & Puertos
+        </button>
+      </div>
+    </div>
+
+    <!-- Speed Selector -->
+    <div class="toolbar-group speed-group">
+      <span class="toolbar-label">VELOCIDAD:</span>
+      <div class="speed-selector">
+        <button type="button" class="speed-btn" data-speed="0.5">0.5×</button>
+        <button type="button" class="speed-btn active" data-speed="1">1×</button>
+        <button type="button" class="speed-btn" data-speed="2">2×</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 2. Outer Sculpted Frame Contour with dynamic zoom wrapper -->
+  <div class="nexafy-viewport-container" id="nexafy-viewport-container">
+    <div class="nexafy-sculpted-frame" id="nexafy-frame">
+      
+      <!-- Authentic Sculpted Architectural Contour SVG -->
+      <svg 
+        class="nexafy-frame-svg" 
+        viewBox="0 0 1440 680" 
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path 
+          class="nexafy-frame-path"
+          d="M 0 110 C 0 85 20 70 45 70 L 415 70 C 435 70 445 55 445 35 L 445 15 C 445 0 460 0 480 0 L 960 0 C 980 0 995 0 995 15 L 995 35 C 995 55 1005 70 1025 70 L 1395 70 C 1420 70 1440 85 1440 110 L 1440 570 C 1440 595 1420 610 1395 610 L 1175 610 C 1155 610 1145 625 1145 645 L 1145 665 C 1145 680 1130 680 1110 680 L 330 680 C 310 680 295 680 295 665 L 295 645 C 295 625 285 610 265 610 L 45 610 C 20 610 0 595 0 570 Z" 
+        />
+      </svg>
+
+      <!-- 3. Center Stage Container: Zero-Overlap Forensic Docking Coordinates -->
+      <div class="nexafy-center-stage" id="nexafy-center-stage">
+        
+        <!-- CHAPTER 01: CHANNELS & SECURITY (FORENSIC ZERO OVERLAP) -->
+        <div class="chapter-view active" id="ch1-view">
+          <YourCompanyHub />
+          <ConduitCircuit />
+          <ConduitBadges />
+          <PhysicalStoreCard />
+          <CustomerInquiryCard />
+          <OnlineStoreCard />
+        </div>
+
+        <!-- CHAPTER 02: MODULAR SAAS DASHBOARD PLATFORM MORPH -->
+        <div class="chapter-view" id="ch2-view">
+          <div class="saas-morph-backdrop-plate" aria-hidden="true">
+            <button type="button" class="saas-send-link-btn" aria-label="Send Flecto Link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+              <span>Send Flecto Link</span>
+            </button>
+          </div>
+
+          <SaasCustomerProfileCard />
+          <SaasItemsTableCard />
+          <SaasFloatingDateCard />
+        </div>
+
+        <!-- CHAPTER 03: SAFE RENTING & PAYMENT MORPH -->
+        <div class="chapter-view" id="ch3-view">
+          <PaymentCircuitMethods />
+          <PhoneCheckoutSimulator />
+          <EscrowGuaranteeCard />
+        </div>
+
+      </div>
+
+      <!-- 4. Floating Chapter Controller Component -->
+      <FloatingChapterController />
+
+      <!-- 5. Node Inspector Overlay Pill -->
+      <div class="node-inspector-chip" id="node-inspector-chip" style="display: none;">
+        <div class="inspector-chip-header">
+          <span class="inspector-dot">●</span>
+          <strong id="inspector-node-title">YOUR COMPANY</strong>
+          <button type="button" class="btn-close-inspector" id="btn-close-inspector" aria-label="Cerrar inspector">✕</button>
+        </div>
+        <div class="inspector-chip-body">
+          <span id="inspector-node-role">Rol: Nodo Origen Raíz</span>
+          <span id="inspector-node-coords">Coords: X: 20px, Y: 135px [154×140]</span>
+          <span id="inspector-node-ports">Conduits: 1 Trunk Port (x:174, y:205)</span>
+          <span class="inspector-status-ok"><i class="pi pi-check"></i> Cero colisiones (PASS) · Latencia 3ms</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 6. Live Telemetry & Event Stream Ticker -->
+  <div class="engine-telemetry-strip" id="engine-telemetry-strip">
+    <div class="telemetry-badge">
+      <span class="pulse-indicator"></span>
+      <span>TRÁFICO EN VIVO</span>
+    </div>
+    <div class="telemetry-log" id="telemetry-log-stream">
+      <span class="telemetry-item active">● [10:48:01] ⚡ Conduit Trunk conectado: YOUR COMPANY → Central Hub (28px vascular)</span>
+      <span class="telemetry-item">● [10:48:03] 📦 Paquete #1042 (24KB) · Sincronizando catálogo POS Tienda Física</span>
+      <span class="telemetry-item">● [10:48:06] ✉️ Paquete #1043 (8KB) · Webhook consulta cliente: John Cooper (GoPro x2)</span>
+      <span class="telemetry-item">● [10:48:09] 🌐 Paquete #1044 (64KB) · Sesión acme.store en línea autorizada</span>
+      <span class="telemetry-item">● [10:48:12] 🛡️ Paquete #1045 (16KB) · Bloqueo de custodia Escrow 100% verificado</span>
+    </div>
+    <div class="telemetry-stat">
+      <span>Rendimiento: <b>60 FPS</b></span>
+      <span>Colisiones: <b style="color: #16a34a;">0 (PASS)</b></span>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  /* ==========================================================================
+     MASTER ENGINE TOOLBAR & RESOLUTION CONTROLS
+     ========================================================================== */
+
+  .engine-master-toolbar {
+    width: 100%;
+    max-width: 1440px;
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 14px;
+    padding: 10px 16px;
+    margin: 0.75rem 0 1.25rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .toolbar-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--nexa-color-neutral-500, #64748b);
+    text-transform: uppercase;
+  }
+
+  .resolution-presets, .zoom-controls, .motion-toggles, .speed-selector {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .res-chip, .speed-btn {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 9px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .res-chip:hover, .speed-btn:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+  }
+
+  .res-chip.active, .speed-btn.active {
+    background: var(--nexa-color-primary-100, #dbeafe);
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    border-color: var(--nexa-color-primary-300, #93c5fd);
+    font-weight: 700;
+  }
+
+  .zoom-btn {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 700;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .zoom-btn.zoom-reset, .zoom-btn.zoom-fit {
+    width: auto;
+    padding: 0 8px;
+    font-size: 11px;
+  }
+
+  .zoom-btn:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+  }
+
+  .scale-badge {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    background: var(--nexa-color-primary-50, #eff6ff);
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--nexa-color-primary-200, #bfdbfe);
+  }
+
+  .toggle-pill {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .toggle-pill i {
+    font-size: 11px;
+  }
+
+  .toggle-pill:hover {
+    background: #f1f5f9;
+  }
+
+  .toggle-pill.active {
+    background: #ecfdf5;
+    color: #047857;
+    border-color: #6ee7b7;
+    font-weight: 700;
+  }
+
+  /* Viewport Outer Container */
+  .nexafy-viewport-container {
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Architectural Sculpted Container */
+  .nexafy-sculpted-frame {
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    height: 720px;
+    border-radius: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--stage-bg);
+    transition: background-color 0.3s ease, width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nexafy-frame-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .nexafy-frame-path {
+    fill: var(--stage-bg);
+    transition: fill 0.3s ease;
+  }
+
+  /* Center Stage native coordinates: 1130px x 410px */
+  .nexafy-center-stage {
+    position: relative;
+    width: 1130px;
+    height: 410px;
+    z-index: 5;
+    flex-shrink: 0;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: center center;
+  }
+
+  /* Harmonic Living Motion Physics */
+  .living-motion-active .channel-card,
+  .living-motion-active .node-origin-hub,
+  .living-motion-active .circuit-badge {
+    animation: gentleLivingDrift 6s ease-in-out infinite alternate;
+  }
+
+  .living-motion-active .card-store {
+    animation-delay: -1.2s;
+  }
+
+  .living-motion-active .card-email {
+    animation-delay: -2.4s;
+  }
+
+  .living-motion-active .card-online {
+    animation-delay: -3.6s;
+  }
+
+  .living-motion-active .node-origin-hub {
+    animation-delay: -0.5s;
+  }
+
+  @keyframes gentleLivingDrift {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-3px) rotate(0.15deg); }
+    100% { transform: translateY(2px) rotate(-0.15deg); }
+  }
+
+  /* Wireframe Clearance Bounds Mode */
+  .wireframe-mode .channel-card,
+  .wireframe-mode .node-origin-hub {
+    outline: 2px dashed #38bdf8 !important;
+    outline-offset: 4px;
+  }
+
+  .wireframe-mode .circuit-pipe {
+    stroke-dasharray: 6 4 !important;
+  }
+
+  /* Chapter Views */
+  .chapter-view {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: scale(0.98);
+  }
+
+  .chapter-view.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+  }
+
+  /* SaaS Chapter 2 Plate */
+  #ch2-view {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .saas-morph-backdrop-plate {
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    transform: translate(-50%, -50%);
+    width: 630px;
+    height: 380px;
+    background-color: var(--stage-card);
+    border-radius: 18px;
+    z-index: 1;
+    transition: background-color 0.3s ease;
+  }
+
+  .saas-send-link-btn {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--stage-card);
+    border: 1.5px solid var(--stage-text);
+    color: var(--stage-text);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+
+  /* Chapter 3 Container */
+  #ch3-view {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+  }
+
+  /* Node Inspector Floating Chip */
+  .node-inspector-chip {
+    position: absolute;
+    bottom: 84px;
+    left: 24px;
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 10px 14px;
+    color: #ffffff;
+    font-size: 11px;
+    z-index: 50;
+    max-width: 320px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  .inspector-chip-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding-bottom: 4px;
+  }
+
+  .inspector-dot {
+    color: #10b981;
+    font-size: 12px;
+  }
+
+  .inspector-chip-header strong {
+    font-size: 12px;
+    letter-spacing: -0.01em;
+    flex: 1;
+  }
+
+  .btn-close-inspector {
+    background: transparent;
+    border: 0;
+    color: #94a3b8;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 0 4px;
+  }
+
+  .btn-close-inspector:hover {
+    color: #ffffff;
+  }
+
+  .inspector-chip-body {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    color: #cbd5e1;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10.5px;
+  }
+
+  .inspector-status-ok {
+    color: #34d399;
+    font-weight: 700;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* Live Telemetry Strip */
+  .engine-telemetry-strip {
+    width: 100%;
+    max-width: 1440px;
+    background: #0f172a;
+    color: #94a3b8;
+    border-radius: 10px;
+    padding: 8px 16px;
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+
+  .telemetry-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+
+  .pulse-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 8px #10b981;
+    animation: blinkPulse 1.2s infinite ease-in-out;
+  }
+
+  @keyframes blinkPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .telemetry-log {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #e2e8f0;
+  }
+
+  .telemetry-stat {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+    color: #64748b;
+  }
+
+  .telemetry-stat b {
+    color: #38bdf8;
+  }
+</style>
+
+<script>
+  // OKLCH Palette Configurations
+  const OKLCH_PRESETS = {
+    cashmere: {
+      bg: 'oklch(33% 0.06 258)',
+      card: 'oklch(88% 0.045 258)',
+      text: 'oklch(30% 0.06 258)',
+      capsuleBg: 'oklch(28% 0.06 258)',
+      capsuleText: 'oklch(92% 0.03 258)',
+      pulse: 'oklch(30% 0.06 258)'
+    },
+    oceanic: {
+      bg: 'oklch(31% 0.07 245)',
+      card: 'oklch(83% 0.06 230)',
+      text: 'oklch(28% 0.07 245)',
+      capsuleBg: 'oklch(25% 0.07 245)',
+      capsuleText: 'oklch(88% 0.04 230)',
+      pulse: 'oklch(28% 0.07 245)'
+    },
+    calibrated: {
+      bg: 'oklch(30% 0.08 262.6)',
+      card: 'oklch(85% 0.065 262.1)',
+      text: 'oklch(28% 0.08 262.6)',
+      capsuleBg: 'oklch(25% 0.08 262.6)',
+      capsuleText: 'oklch(88% 0.05 262.1)',
+      pulse: 'oklch(28% 0.08 262.6)'
+    },
+    ceramic: {
+      bg: 'oklch(29% 0.085 265)',
+      card: 'oklch(86% 0.05 268)',
+      text: 'oklch(26% 0.085 265)',
+      capsuleBg: 'oklch(24% 0.085 265)',
+      capsuleText: 'oklch(90% 0.04 268)',
+      pulse: 'oklch(26% 0.085 265)'
+    }
+  };
+
+  function initLivingEngine() {
+    const wrapper = document.getElementById('nexafy-stage-wrapper');
+    const stageFrame = document.getElementById('nexafy-frame');
+    const centerStage = document.getElementById('nexafy-center-stage');
+    const metricCardVal = document.getElementById('metric-card-val');
+    const metricBgVal = document.getElementById('metric-bg-val');
+    const scaleBadge = document.getElementById('scale-badge-text');
+
+    let currentScale = 1.0;
+
+    function applyScale(scale: number) {
+      currentScale = Math.max(0.4, Math.min(scale, 1.6));
+      if (centerStage) {
+        centerStage.style.transform = `scale(${currentScale})`;
+      }
+      if (scaleBadge) {
+        scaleBadge.textContent = `${Math.round(currentScale * 100)}%`;
+      }
+    }
+
+    // Zoom Buttons
+    document.getElementById('btn-zoom-in')?.addEventListener('click', () => applyScale(currentScale + 0.1));
+    document.getElementById('btn-zoom-out')?.addEventListener('click', () => applyScale(currentScale - 0.1));
+    document.getElementById('btn-zoom-reset')?.addEventListener('click', () => applyScale(1.0));
+    document.getElementById('btn-zoom-fit')?.addEventListener('click', () => {
+      const containerWidth = document.getElementById('nexafy-viewport-container')?.clientWidth || 1130;
+      const fitRatio = Math.min(1.0, (containerWidth - 40) / 1130);
+      applyScale(fitRatio);
+    });
+
+    // Resolution Presets
+    const resChips = document.querySelectorAll('.res-chip');
+    resChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        resChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+
+        const w = chip.getAttribute('data-res-w');
+        const h = chip.getAttribute('data-res-h');
+
+        if (stageFrame) {
+          if (w === 'auto') {
+            stageFrame.style.width = '100%';
+            stageFrame.style.maxWidth = '1440px';
+            stageFrame.style.height = '720px';
+          } else if (w && h) {
+            stageFrame.style.width = `${w}px`;
+            stageFrame.style.maxWidth = `${w}px`;
+            stageFrame.style.height = `${h}px`;
+          }
+        }
+      });
+    });
+
+    // Movement & Motion Toggles ("Demostrar en vivo todos los movimientos")
+    const btnLivingMotion = document.getElementById('btn-toggle-living-motion');
+    btnLivingMotion?.addEventListener('click', () => {
+      const active = btnLivingMotion.classList.toggle('active');
+      wrapper?.classList.toggle('living-motion-active', active);
+    });
+    // Set initial living motion active
+    wrapper?.classList.add('living-motion-active');
+
+    const btnPulses = document.getElementById('btn-toggle-pulses');
+    btnPulses?.addEventListener('click', () => {
+      const active = btnPulses.classList.toggle('active');
+      const pulses = document.querySelector('.circuit-pulses-group') as HTMLElement;
+      if (pulses) pulses.style.display = active ? 'block' : 'none';
+    });
+
+    const btnWireframe = document.getElementById('btn-toggle-wireframe');
+    btnWireframe?.addEventListener('click', () => {
+      const active = btnWireframe.classList.toggle('active');
+      wrapper?.classList.toggle('wireframe-mode', active);
+    });
+
+    // Live Traffic Simulation & Event Stream Ticker
+    const telemetryStream = document.getElementById('telemetry-log-stream');
+    const TELEMETRY_EVENTS = [
+      '● [10:48:15] ⚡ Conduit Trunk conectado: YOUR COMPANY → Central Hub (28px vascular)',
+      '● [10:48:18] 📦 Paquete #1046 (32KB) · Inventario actualizado en Tienda Física',
+      '● [10:48:21] ✉️ Paquete #1047 (14KB) · Notificación enviada a John Cooper (alquiler confirmado)',
+      '● [10:48:24] 🛒 Paquete #1048 (48KB) · Transacción acme.store procesada con éxito',
+      '● [10:48:27] 🛡️ Paquete #1049 (18KB) · Garantía Escrow validada contra contratos',
+      '● [10:48:30] 🔄 Conduit Trunk sincronizado · Cero retrasos de latencia'
+    ];
+    let eventIdx = 0;
+    let trafficTimer: any = null;
+
+    function emitTelemetry() {
+      if (!telemetryStream) return;
+      eventIdx = (eventIdx + 1) % TELEMETRY_EVENTS.length;
+      telemetryStream.innerHTML = `<span class="telemetry-item active">${TELEMETRY_EVENTS[eventIdx]}</span>`;
+    }
+    trafficTimer = setInterval(emitTelemetry, 3000);
+
+    const btnTraffic = document.getElementById('btn-toggle-traffic');
+    btnTraffic?.addEventListener('click', () => {
+      const active = btnTraffic.classList.toggle('active');
+      const telemetryStrip = document.getElementById('engine-telemetry-strip');
+      if (telemetryStrip) telemetryStrip.style.display = active ? 'flex' : 'none';
+      if (active) {
+        if (!trafficTimer) trafficTimer = setInterval(emitTelemetry, 3000);
+      } else {
+        if (trafficTimer) clearInterval(trafficTimer);
+        trafficTimer = null;
+      }
+    });
+
+    // Speed Controls
+    const speedButtons = document.querySelectorAll('.speed-btn');
+    speedButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        speedButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const sp = btn.getAttribute('data-speed') || '1';
+        const pulses = document.querySelectorAll<HTMLElement>('.pulse-particle');
+        pulses.forEach(p => {
+          p.style.animationDuration = `${2.4 / parseFloat(sp)}s`;
+        });
+      });
+    });
+
+    // Interactive Node Inspector
+    const inspectorChip = document.getElementById('node-inspector-chip');
+    const inspectorTitle = document.getElementById('inspector-node-title');
+    const inspectorRole = document.getElementById('inspector-node-role');
+    const inspectorCoords = document.getElementById('inspector-node-coords');
+    const inspectorPorts = document.getElementById('inspector-node-ports');
+
+    document.getElementById('btn-close-inspector')?.addEventListener('click', () => {
+      if (inspectorChip) inspectorChip.style.display = 'none';
+    });
+
+    function showInspector(title: string, role: string, coords: string, ports: string) {
+      if (!inspectorChip) return;
+      if (inspectorTitle) inspectorTitle.textContent = title;
+      if (inspectorRole) inspectorRole.textContent = `Rol: ${role}`;
+      if (inspectorCoords) inspectorCoords.textContent = `Coords: ${coords}`;
+      if (inspectorPorts) inspectorPorts.textContent = `Conduits: ${ports}`;
+      inspectorChip.style.display = 'block';
+    }
+
+    document.getElementById('node-origin-hub')?.addEventListener('click', () => {
+      showInspector('YOUR COMPANY', 'Nodo Origen Raíz', 'X: 20px, Y: 135px [154×140]', '1 Trunk Port (x:174, y:205)');
+    });
+
+    document.querySelector('.card-store')?.addEventListener('click', () => {
+      showInspector('PHYSICAL STORE', 'Canal POS Físico', 'X: 170px, Y: 295px [270×112]', '1 Inbound Port (x:305, y:295)');
+    });
+
+    document.querySelector('.card-email')?.addEventListener('click', () => {
+      showInspector('CUSTOMER INQUIRY (John Cooper)', 'Canal Consulta Directa', 'X: 560px, Y: 295px [275×105]', '1 Inbound Port (x:697, y:295)');
+    });
+
+    document.querySelector('.card-online')?.addEventListener('click', () => {
+      showInspector('ONLINE STORE (acme.store)', 'Canal Comercio Web', 'X: 850px, Y: 35px [260×200]', '1 Inbound Port (x:850, y:160)');
+    });
+
+    // Preset Chip Buttons
+    const presetChips = document.querySelectorAll('.oklch-chip');
+    presetChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        presetChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+
+        const key = chip.getAttribute('data-preset') as keyof typeof OKLCH_PRESETS;
+        const p = OKLCH_PRESETS[key] || OKLCH_PRESETS.cashmere;
+
+        if (wrapper) {
+          wrapper.style.setProperty('--stage-bg', p.bg);
+          wrapper.style.setProperty('--stage-card', p.card);
+          wrapper.style.setProperty('--stage-text', p.text);
+          wrapper.style.setProperty('--stage-capsule-bg', p.capsuleBg);
+          wrapper.style.setProperty('--stage-capsule-text', p.capsuleText);
+          wrapper.style.setProperty('--stage-pulse', p.pulse);
+        }
+
+        if (metricCardVal) metricCardVal.textContent = p.card;
+        if (metricBgVal) metricBgVal.textContent = p.bg;
+      });
+    });
+
+    // Chapter Switching Logic
+    const btnCh1 = document.getElementById('btn-ch1');
+    const btnCh2 = document.getElementById('btn-ch2');
+    const btnCh3 = document.getElementById('btn-ch3');
+    const ch1View = document.getElementById('ch1-view');
+    const ch2View = document.getElementById('ch2-view');
+    const ch3View = document.getElementById('ch3-view');
+    const btnPlayLoop = document.getElementById('btn-play-loop');
+    const btnReset = document.getElementById('btn-reset-scene');
+    const playIcon = document.getElementById('play-icon');
+    const playText = document.getElementById('play-text');
+
+    let currentChapter = 1;
+    let isLooping = false;
+    let loopTimer: any = null;
+
+    function setChapter(ch: number) {
+      currentChapter = ch;
+      
+      [btnCh1, btnCh2, btnCh3].forEach((btn, idx) => {
+        if (!btn) return;
+        const active = (idx + 1) === ch;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+
+      if (ch1View) ch1View.classList.toggle('active', ch === 1);
+      if (ch2View) ch2View.classList.toggle('active', ch === 2);
+      if (ch3View) ch3View.classList.toggle('active', ch === 3);
+    }
+
+    btnCh1?.addEventListener('click', () => { stopLoop(); setChapter(1); });
+    btnCh2?.addEventListener('click', () => { stopLoop(); setChapter(2); });
+    btnCh3?.addEventListener('click', () => { stopLoop(); setChapter(3); });
+
+    function startLoop() {
+      isLooping = true;
+      if (playIcon) playIcon.textContent = '⏸';
+      if (playText) playText.textContent = 'Pause';
+      
+      function nextStep() {
+        if (!isLooping) return;
+        let next = currentChapter + 1;
+        if (next > 3) next = 1;
+        setChapter(next);
+        loopTimer = setTimeout(nextStep, 4500);
+      }
+      loopTimer = setTimeout(nextStep, 4500);
+    }
+
+    function stopLoop() {
+      isLooping = false;
+      if (loopTimer) clearTimeout(loopTimer);
+      if (playIcon) playIcon.textContent = '▶';
+      if (playText) playText.textContent = 'Auto Loop';
+    }
+
+    btnPlayLoop?.addEventListener('click', () => {
+      if (isLooping) {
+        stopLoop();
+      } else {
+        startLoop();
+      }
+    });
+
+    btnReset?.addEventListener('click', () => {
+      stopLoop();
+      setChapter(1);
+    });
+
+    window.addEventListener('beforeunload', () => {
+      if (loopTimer) clearTimeout(loopTimer);
+      if (trafficTimer) clearInterval(trafficTimer);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLivingEngine);
+  } else {
+    initLivingEngine();
+  }
+</script>

@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.1.0] - 2026-09-27
+
+### Added
+
+- **Triad Monorepo Architecture**: Consolidated the Design Lab into three distinct environments (`web-style`, `mobile-style`, `website-style`) with unified hub (`gateway`) and shared resources (`shared/`).
+- **Centralized Shared Space (`shared/`)**: Moved canonical design tokens to `shared/tokens/` (primitives, semantics, components, data-viz, icons) and vector brand assets to `shared/brand/`.
+- **Mobile Multi-Device Simulator & Guidelines**: Complete overhaul of `mobile-style` with 5 Android hardware form factors (S24, S24 Ultra, Zebra TC58, Tab Active 8", Tab S9 11"), container-query responsive Kanban, persistent TopAppBar and BottomNav, and B2B cold-chain operations canonical screens.
+- **Living Geometry Engine (Nexafy)**: Interactive puzzle workbench in `website-style` with drag-and-drop collision avoidance, pure solid brand colorimetry (`#082846` & `#38c8ff`), 28px vascular connectors, and SOTD landing forensic analysis suite.
+- **Multi-Service Docker Orchestration**: Updated `docker-compose.yml` with port 8090 gateway and anti-caching HTTP response headers.
+
+### Changed
+
+- Root workspace cleanup: Removed obsolete untracked build artifacts (`dist/`, `tmp/`) and updated root `tsconfig.json` to properly reference workspace packages.
+- Docker Nginx configurations updated with `Cache-Control: no-store, no-cache, must-revalidate` across all Astro services.
+
+### Validation
+
+- All 3 monorepo environments build with 0 errors via `npm run build:all`.
+- Design token validation passes 100% via `npm run validate:tokens`.
+
 ## [1.0.2] - 2026-08-24
 
 ### Changed

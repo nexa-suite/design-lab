@@ -1,0 +1,619 @@
+---
+/**
+ * NEXA UI COMPONENT SPECIMENS & INTERACTION SHOWCASE
+ * Authority: projects/nexa-ui/src/lib/ (button, status, forms, toggle, segmented-control)
+ */
+---
+
+<section id="section-componentes" class="guideline-module">
+  <div class="module-header">
+    <div class="kicker-group">
+      <span class="index-pill">04</span>
+      <span class="kicker-text">CANDIDATE UI COMPONENTS</span>
+    </div>
+    <h2>Candidate components with honest interactive states</h2>
+    <p class="module-intro">
+      Buttons, status chips, segmented controls, toggles, and form inputs strictly follow semantic geometry, 
+      WCAG focus visibility, and purposeful states.
+    </p>
+  </div>
+
+  <!-- Buttons Showcase -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <h3 class="subsection-title">Nexa Buttons (Variants & States)</h3>
+      <span class="spec-badge">Control Height: 34px (sm) · 40px (md) · 48px (lg)</span>
+    </div>
+    <div class="component-demo-grid">
+      <div class="demo-card">
+        <h4>Variants (Height 40px)</h4>
+        <div class="control-row">
+          <button type="button" class="nexa-btn nexa-btn-primary">
+            <span>Primary Blue</span>
+            <i class="pi pi-arrow-right" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="nexa-btn nexa-btn-secondary">
+            <i class="pi pi-refresh" aria-hidden="true"></i>
+            <span>Secondary Slate</span>
+          </button>
+          <button type="button" class="nexa-btn nexa-btn-ghost">
+            <span>Ghost Action</span>
+          </button>
+          <button type="button" class="nexa-btn nexa-btn-danger">
+            <i class="pi pi-trash" aria-hidden="true"></i>
+            <span>Danger</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <h4>Interactive States (Rest · Focus · Disabled · Loading)</h4>
+        <div class="control-row">
+          <button type="button" class="nexa-btn nexa-btn-primary">Resting</button>
+          <button type="button" class="nexa-btn nexa-btn-primary focused-preview">Focus Visible</button>
+          <button type="button" class="nexa-btn nexa-btn-primary" disabled>Disabled</button>
+          <button type="button" class="nexa-btn nexa-btn-primary is-loading">
+            <span class="nexa-spinner"></span>
+            <span>Processing...</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Status Chips & Badges -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <h3 class="subsection-title">Status Chips & Semantic Badges</h3>
+      <span class="spec-badge">Height: 26px · Dot: 6px · Radius: 999px</span>
+    </div>
+    <div class="chips-demo-grid">
+      <div class="chip-item">
+        <span class="nexa-status-chip success">
+          <span class="status-dot"></span>
+          <span>Order Active</span>
+        </span>
+        <small>Success Family</small>
+      </div>
+      <div class="chip-item">
+        <span class="nexa-status-chip warning">
+          <span class="status-dot"></span>
+          <span>Pending KYC</span>
+        </span>
+        <small>Attention Family</small>
+      </div>
+      <div class="chip-item">
+        <span class="nexa-status-chip danger">
+          <span class="status-dot"></span>
+          <span>Payment Blocked</span>
+        </span>
+        <small>Danger Family</small>
+      </div>
+      <div class="chip-item">
+        <span class="nexa-status-chip info">
+          <span class="status-dot"></span>
+          <span>In Dispatch</span>
+        </span>
+        <small>Info Family</small>
+      </div>
+      <div class="chip-item">
+        <span class="nexa-status-chip neutral">
+          <span class="status-dot"></span>
+          <span>Archived</span>
+        </span>
+        <small>Neutral Family</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Segmented Controls, Toggles & Text Fields -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <h3 class="subsection-title">Input Controls (Segmented, Toggle, Fields, Stepper)</h3>
+      <span class="spec-badge">Shared Focus Ring & 10px Control Radius</span>
+    </div>
+    <div class="input-controls-grid">
+      <!-- Segmented Control -->
+      <div class="control-card">
+        <h4>Segmented Control</h4>
+        <p class="control-desc">Mutually exclusive options with smooth sliding selection.</p>
+        <div class="nexa-segmented-control" role="tablist">
+          <button type="button" class="segmented-opt active" role="tab" aria-selected="true">Monthly</button>
+          <button type="button" class="segmented-opt" role="tab" aria-selected="false">Quarterly</button>
+          <button type="button" class="segmented-opt" role="tab" aria-selected="false">Annual</button>
+        </div>
+      </div>
+
+      <!-- Toggle Switch -->
+      <div class="control-card">
+        <h4>Toggle Switch</h4>
+        <p class="control-desc">Immediate binary state acknowledgment.</p>
+        <div class="toggle-row">
+          <label class="nexa-toggle-label">
+            <input type="checkbox" checked class="nexa-toggle-input" />
+            <span class="nexa-toggle-track">
+              <span class="nexa-toggle-thumb"></span>
+            </span>
+            <span class="toggle-text">Real-time Telemetry Stream</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Text Field -->
+      <div class="control-card">
+        <h4>Text Input Field</h4>
+        <p class="control-desc">Accessible label, hint, and focus halo.</p>
+        <div class="nexa-field-group">
+          <label class="field-label" for="demo-field-org">Organization Tax ID</label>
+          <input 
+            type="text" 
+            id="demo-field-org" 
+            class="nexa-text-input" 
+            placeholder="e.g. ES-B12345678" 
+            value="ES-B88491024"
+          />
+          <small class="field-hint">Validated via Spanish VIES registry.</small>
+        </div>
+      </div>
+
+      <!-- Numeric Stepper -->
+      <div class="control-card">
+        <h4>Numeric Stepper</h4>
+        <p class="control-desc">Accessible increment/decrement controls.</p>
+        <div class="nexa-stepper">
+          <button type="button" class="stepper-btn" aria-label="Decrease quantity">
+            <i class="pi pi-minus" aria-hidden="true"></i>
+          </button>
+          <span class="stepper-value">12</span>
+          <button type="button" class="stepper-btn" aria-label="Increase quantity">
+            <i class="pi pi-plus" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .guideline-module {
+    padding: var(--nexa-space-8) var(--nexa-space-6);
+    background: var(--nexa-surface-card);
+    border-radius: var(--nexa-radius-card);
+    border: 1px solid var(--nexa-color-border-default);
+    margin-bottom: var(--nexa-space-8);
+  }
+
+  .module-header {
+    margin-bottom: var(--nexa-space-8);
+    border-bottom: 1px solid var(--nexa-color-border-default);
+    padding-bottom: var(--nexa-space-6);
+  }
+
+  .kicker-group {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--nexa-space-2);
+    margin-bottom: var(--nexa-space-2);
+  }
+
+  .index-pill {
+    background: var(--nexa-color-primary-50);
+    color: var(--nexa-color-primary-700);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: var(--nexa-radius-sm);
+    font-family: var(--nexa-font-family-mono);
+  }
+
+  .kicker-text {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--nexa-color-text-secondary);
+    text-transform: uppercase;
+  }
+
+  .module-header h2 {
+    font-family: var(--nexa-font-family-display);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary);
+    line-height: 1.25;
+    margin: var(--nexa-space-2) 0 var(--nexa-space-3) 0;
+  }
+
+  .module-intro {
+    font-size: 15px;
+    color: var(--nexa-color-text-secondary);
+    line-height: 1.5;
+    max-width: 840px;
+  }
+
+  .subsection {
+    margin-bottom: var(--nexa-space-8);
+  }
+
+  .subsection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--nexa-space-4);
+    flex-wrap: wrap;
+    gap: var(--nexa-space-2);
+  }
+
+  .subsection-title {
+    font-family: var(--nexa-font-family-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary);
+  }
+
+  .spec-badge {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--nexa-color-text-secondary);
+    background: var(--nexa-surface-inset);
+    padding: 3px 10px;
+    border-radius: var(--nexa-radius-pill);
+    border: 1px solid var(--nexa-color-border-default);
+  }
+
+  /* Buttons */
+  .component-demo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: var(--nexa-space-4);
+  }
+
+  .demo-card {
+    background: var(--nexa-surface-inset);
+    border: 1px solid var(--nexa-color-border-default);
+    border-radius: var(--nexa-radius-card);
+    padding: var(--nexa-space-5);
+  }
+
+  .demo-card h4 {
+    font-family: var(--nexa-font-family-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary);
+    margin-bottom: var(--nexa-space-4);
+  }
+
+  .control-row {
+    display: flex;
+    gap: var(--nexa-space-3);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .nexa-btn {
+    height: var(--nexa-control-height-md);
+    padding: 0 var(--nexa-control-padding-inline);
+    border-radius: var(--nexa-radius-control);
+    font-family: var(--nexa-font-family-body);
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    outline: none;
+    border: 1px solid transparent;
+  }
+
+  .nexa-btn-primary {
+    background: var(--nexa-color-primary-600);
+    color: var(--nexa-color-text-inverse);
+  }
+
+  .nexa-btn-primary:hover:not(:disabled) {
+    background: var(--nexa-color-primary-700);
+  }
+
+  .nexa-btn-primary:active:not(:disabled) {
+    background: var(--nexa-color-primary-800);
+  }
+
+  .nexa-btn-secondary {
+    background: var(--nexa-surface-card);
+    color: var(--nexa-color-text-primary);
+    border-color: var(--nexa-color-border-strong);
+  }
+
+  .nexa-btn-secondary:hover:not(:disabled) {
+    background: var(--nexa-surface-inset);
+  }
+
+  .nexa-btn-ghost {
+    background: transparent;
+    color: var(--nexa-color-primary-700);
+  }
+
+  .nexa-btn-ghost:hover:not(:disabled) {
+    background: var(--nexa-color-primary-50);
+  }
+
+  .nexa-btn-danger {
+    background: var(--nexa-color-danger-600);
+    color: var(--nexa-color-text-inverse);
+  }
+
+  .nexa-btn-danger:hover:not(:disabled) {
+    background: var(--nexa-color-danger-text);
+  }
+
+  .nexa-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .focused-preview {
+    box-shadow: var(--nexa-focus-ring);
+  }
+
+  .nexa-spinner {
+    width: var(--nexa-button-spinner-size, 14px);
+    height: var(--nexa-button-spinner-size, 14px);
+    border: var(--nexa-button-spinner-border, 2px) solid rgba(255,255,255,0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Status Chips */
+  .chips-demo-grid {
+    display: flex;
+    gap: var(--nexa-space-3);
+    flex-wrap: wrap;
+  }
+
+  .chip-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .chip-item small {
+    font-size: 11px;
+    color: var(--nexa-color-text-secondary);
+  }
+
+  .nexa-status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: var(--nexa-status-height);
+    padding: 0 var(--nexa-status-padding-inline);
+    border-radius: var(--nexa-radius-pill);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .nexa-status-chip .status-dot {
+    width: var(--nexa-status-dot-size);
+    height: var(--nexa-status-dot-size);
+    border-radius: 50%;
+  }
+
+  .nexa-status-chip.success {
+    background: var(--nexa-color-success-50);
+    color: var(--nexa-color-success-700);
+    border: 1px solid var(--nexa-color-success-border);
+  }
+  .nexa-status-chip.success .status-dot { background: var(--nexa-color-success-700); }
+
+  .nexa-status-chip.warning {
+    background: var(--nexa-color-warning-50);
+    color: var(--nexa-color-warning-text);
+    border: 1px solid var(--nexa-color-warning-border);
+  }
+  .nexa-status-chip.warning .status-dot { background: var(--nexa-color-warning-text); }
+
+  .nexa-status-chip.danger {
+    background: var(--nexa-color-danger-50);
+    color: var(--nexa-color-danger-text);
+    border: 1px solid var(--nexa-color-danger-subtle-border);
+  }
+  .nexa-status-chip.danger .status-dot { background: var(--nexa-color-danger-text); }
+
+  .nexa-status-chip.info {
+    background: var(--nexa-color-info-50);
+    color: var(--nexa-color-info-700);
+    border: 1px solid var(--nexa-color-info-standard-border);
+  }
+  .nexa-status-chip.info .status-dot { background: var(--nexa-color-info-700); }
+
+  .nexa-status-chip.neutral {
+    background: var(--nexa-surface-inset);
+    color: var(--nexa-color-neutral-700);
+    border: 1px solid var(--nexa-color-neutral-300);
+  }
+  .nexa-status-chip.neutral .status-dot { background: var(--nexa-color-neutral-700); }
+
+  /* Input Controls */
+  .input-controls-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--nexa-space-4);
+  }
+
+  .control-card {
+    background: var(--nexa-surface-inset);
+    border: 1px solid var(--nexa-color-border-default);
+    border-radius: var(--nexa-radius-card);
+    padding: var(--nexa-space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--nexa-space-2);
+  }
+
+  .control-card h4 {
+    font-family: var(--nexa-font-family-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary);
+  }
+
+  .control-desc {
+    font-size: 12px;
+    color: var(--nexa-color-text-secondary);
+    margin-bottom: var(--nexa-space-2);
+  }
+
+  /* Segmented */
+  .nexa-segmented-control {
+    display: flex;
+    background: var(--nexa-surface-card);
+    padding: 3px;
+    border-radius: var(--nexa-radius-control);
+    border: 1px solid var(--nexa-color-border-default);
+  }
+
+  .segmented-opt {
+    flex: 1;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--nexa-color-text-secondary);
+    background: transparent;
+    border: none;
+    border-radius: var(--nexa-radius-sm);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .segmented-opt.active {
+    background: var(--nexa-color-primary-50);
+    color: var(--nexa-color-primary-700);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+
+  /* Toggle */
+  .nexa-toggle-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--nexa-space-3);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--nexa-color-text-primary);
+  }
+
+  .nexa-toggle-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .nexa-toggle-track {
+    width: var(--nexa-toggle-width);
+    height: var(--nexa-toggle-height);
+    background: var(--nexa-color-neutral-300);
+    border-radius: var(--nexa-radius-pill);
+    display: flex;
+    align-items: center;
+    padding: var(--nexa-toggle-thumb-inset);
+    transition: background 0.2s ease;
+  }
+
+  .nexa-toggle-input:checked + .nexa-toggle-track {
+    background: var(--nexa-color-primary-600);
+  }
+
+  .nexa-toggle-thumb {
+    width: var(--nexa-toggle-thumb-size);
+    height: var(--nexa-toggle-thumb-size);
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    transition: transform 0.2s ease;
+  }
+
+  .nexa-toggle-input:checked + .nexa-toggle-track .nexa-toggle-thumb {
+    transform: translateX(20px);
+  }
+
+  /* Text Field */
+  .nexa-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .field-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--nexa-color-text-primary);
+  }
+
+  .nexa-text-input {
+    height: var(--nexa-control-height-md);
+    padding: 0 var(--nexa-control-padding-inline);
+    border-radius: var(--nexa-radius-control);
+    border: 1px solid var(--nexa-color-border-strong);
+    background: var(--nexa-surface-card);
+    font-size: 14px;
+    font-family: var(--nexa-font-family-body);
+    color: var(--nexa-color-text-primary);
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .nexa-text-input:focus {
+    border-color: var(--nexa-color-primary-500);
+    box-shadow: var(--nexa-focus-ring);
+  }
+
+  .field-hint {
+    font-size: 11px;
+    color: var(--nexa-color-text-secondary);
+  }
+
+  /* Stepper */
+  .nexa-stepper {
+    display: inline-flex;
+    align-items: center;
+    background: var(--nexa-surface-card);
+    border: 1px solid var(--nexa-color-border-strong);
+    border-radius: var(--nexa-radius-control);
+    overflow: hidden;
+    height: var(--nexa-control-height-sm);
+    align-self: flex-start;
+  }
+
+  .stepper-btn {
+    width: var(--nexa-control-height-sm);
+    height: 100%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--nexa-color-text-secondary);
+    transition: background 0.15s ease;
+  }
+
+  .stepper-btn:hover {
+    background: var(--nexa-surface-inset);
+    color: var(--nexa-color-text-primary);
+  }
+
+  .stepper-value {
+    padding: 0 16px;
+    font-family: var(--nexa-font-family-mono);
+    font-size: 13px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+</style>

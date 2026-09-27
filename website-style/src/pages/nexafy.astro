@@ -1,0 +1,275 @@
+---
+/**
+ * NEXAFY — FULL LIVING LANDING PLATFORM & FORENSIC CONVERGENCE
+ * Authority: Flecto living geometry reconstructed with Nexa visual authority.
+ * 
+ * Rules:
+ *  - Full landing page experience: Navbar, Hero, TrustStrip, Scrollytelling,
+ *    SaaSPlatform, InsuranceSection, AccessChannels, Sustainability, OwnerSwitcher,
+ *    NewsSection, Testimonials, sculpted Footer.
+ *  - 0 Raster Gradients (Solid colorimetry)
+ *  - 28px thick vascular conduits & 24-36px transition fillets
+ *  - Seamless client interactions via interactions.ts & GSAP
+ */
+import 'primeicons/primeicons.css';
+import '../styles/tokens.css';
+import '../styles/nexa-tokens.css';
+
+import Navbar from '../components/navigation/Navbar.astro';
+import Hero from '../components/hero/Hero.astro';
+import TrustStrip from '../components/hero/TrustStrip.astro';
+import Scrollytelling from '../components/scrollytelling/Scrollytelling.astro';
+import Sustainability from '../components/sections/Sustainability.astro';
+import SaaSPlatform from '../components/sections/SaaSPlatform.astro';
+import InsuranceSection from '../components/sections/InsuranceSection.astro';
+import AccessChannels from '../components/sections/AccessChannels.astro';
+import OwnerSwitcher from '../components/sections/OwnerSwitcher.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+import NewsSection from '../components/sections/NewsSection.astro';
+import Footer from '../components/footer/Footer.astro';
+---
+
+<!doctype html>
+<html lang="en" data-contrast-mode="standard">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Nexafy — The Next-Generation Circular Rental Operating System. Omnichannel inventory, automated insurance escrow, living geometric vascular dispatch." />
+    <meta name="theme-color" content="#082846" />
+
+    <title>Nexafy — Next-Gen Rental Operating System (Flecto Convergence)</title>
+
+    <!-- Google Fonts for Typography Hierarchy -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" 
+      rel="stylesheet" 
+    />
+
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        background-color: #082846;
+      }
+
+      body {
+        background-color: #082846;
+        color: #ffffff;
+        font-family: var(--nexa-font-family-body, 'Inter', sans-serif);
+        overflow-x: clip;
+        position: relative;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Forensic Floating Utility Banner */
+      .nexafy-forensic-hud {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(8, 40, 70, 0.94);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(56, 200, 255, 0.25);
+        padding: 6px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        font-size: 11.5px;
+      }
+
+      .hud-brand-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #38c8ff;
+        font-weight: 700;
+        font-family: var(--nexa-font-family-mono, monospace);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .hud-dot {
+        width: 7px;
+        height: 7px;
+        background: #38c8ff;
+        border-radius: 50%;
+        box-shadow: 0 0 8px #38c8ff;
+        animation: pulseDot 2s infinite ease-in-out;
+      }
+
+      @keyframes pulseDot {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(0.8); }
+      }
+
+      .hud-nav-links {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .hud-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: rgba(255, 255, 255, 0.08);
+        color: #ffffff;
+        text-decoration: none;
+        padding: 3px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 600;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        transition: all 0.15s ease;
+
+        &:hover {
+          background: rgba(56, 200, 255, 0.2);
+          border-color: #38c8ff;
+          color: #38c8ff;
+        }
+
+        &.active-pill {
+          background: #38c8ff;
+          color: #082846;
+          border-color: #38c8ff;
+          font-weight: 700;
+        }
+      }
+
+      .hud-quick-jump {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 10px;
+        font-family: var(--nexa-font-family-mono, monospace);
+      }
+
+      .jump-btn {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.8);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 10px;
+        cursor: pointer;
+        transition: all 0.12s ease;
+
+        &:hover {
+          background: rgba(56, 200, 255, 0.25);
+          color: #38c8ff;
+          border-color: #38c8ff;
+        }
+      }
+
+      /* Main container wrapper */
+      #main-content {
+        min-height: 100vh;
+        width: 100%;
+        position: relative;
+      }
+
+      @media (max-width: 900px) {
+        .hud-quick-jump {
+          display: none;
+        }
+        .nexafy-forensic-hud {
+          justify-content: center;
+          padding: 8px 12px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Forensic Floating HUD Controller -->
+    <header class="nexafy-forensic-hud" aria-label="Nexafy Forensic Controller">
+      <div class="hud-brand-pill">
+        <span class="hud-dot" aria-hidden="true"></span>
+        <span>✦ NEXAFY LIVE · FLECTO CONVERGENCE</span>
+      </div>
+
+      <nav class="hud-nav-links" aria-label="Quick links">
+        <a href="/flecto-forensic" class="hud-pill" title="Ver análisis frame-por-frame de las 8 escenas">
+          <i class="pi pi-search" aria-hidden="true"></i>
+          <span>🔬 Frame-by-Frame Forensic</span>
+        </a>
+        <a href="/" class="hud-pill" title="Volver al Design Lab Workbench">
+          <i class="pi pi-th-large" aria-hidden="true"></i>
+          <span>Living Workbench</span>
+        </a>
+        <a href="/artifacts" class="hud-pill" title="Explorar catálogo de artefactos vivos">
+          <i class="pi pi-compass" aria-hidden="true"></i>
+          <span>Artefactos Vivos</span>
+        </a>
+        <a href="/landing-spec" class="hud-pill" title="Especificación de arquitectura de landing">
+          <i class="pi pi-book" aria-hidden="true"></i>
+          <span>Landing Spec</span>
+        </a>
+      </nav>
+
+      <div class="hud-quick-jump">
+        <span>IR A:</span>
+        <a href="#hero-stage" class="jump-btn">01 Hero</a>
+        <a href="#flecto-link" class="jump-btn">02 Merchant</a>
+        <a href="#features" class="jump-btn">03 SaaS</a>
+        <a href="#insurance" class="jump-btn">04 Insurance</a>
+        <a href="#channels" class="jump-btn">05 Bento</a>
+        <a href="#footer" class="jump-btn">06 Footer</a>
+      </div>
+    </header>
+
+    <!-- 1. Authentic Sticky Navbar -->
+    <Navbar />
+
+    <!-- 2. Master Landing Page Sections Flow -->
+    <main id="main-content">
+      <!-- Scene 01: Hero Dormant, Channels & Security, SaaS Ledger, Safe Renting Confetti -->
+      <Hero />
+
+      <!-- Scene 01b: Forbes, TechCrunch, O Jornal Económico, ECO Press Trust Strip -->
+      <TrustStrip />
+
+      <!-- Scene 02: Scrollytelling Merchant Configurator (Bookings / Inventory) & 4-Step Phone Journey -->
+      <Scrollytelling />
+
+      <!-- Scene 03: SaaS Platform Ledger ("Built for humans. Designed for you.") -->
+      <SaaSPlatform />
+
+      <!-- Scene 04: Bürocratik Asymmetric Insurance Plate & 100% All-Risk Shield -->
+      <InsuranceSection />
+
+      <!-- Scene 05: Access Channels 8-Tile Warm Beige Bento Grid (#FDFAE7) -->
+      <AccessChannels />
+
+      <!-- Scene 06: Circular Economy & Terraced Canopy Sustainability Stage -->
+      <Sustainability />
+
+      <!-- Scene 07: Dual Owner / Business Mode Switcher -->
+      <OwnerSwitcher />
+
+      <!-- Scene 08: Latest News Editorial White Strip (Go Green, Smartphone, Balloon) -->
+      <NewsSection />
+
+      <!-- Scene 09: Rental Community Obsidian Green (#052018) Cascade Testimonials -->
+      <Testimonials />
+    </main>
+
+    <!-- 10. Sculpted Monolithic Warm Beige Footer (#FDFAE7) with Monumental Mark -->
+    <Footer />
+
+    <!-- Global Client Interactions Script -->
+    <script src="../scripts/interactions.ts"></script>
+  </body>
+</html>

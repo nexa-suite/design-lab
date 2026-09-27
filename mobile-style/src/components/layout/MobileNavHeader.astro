@@ -1,0 +1,622 @@
+---
+/**
+ * MobileNavHeader — Nexa Design Lab Navigation System for Mobile Style
+ * Angular Design-Lab inspired navbar with platform disclosure, search, category pills,
+ * and 1-click cross-monorepo triad switching.
+ */
+interface Props {
+  activeTab?: string;
+}
+
+const { activeTab = 'simulador' } = Astro.props;
+---
+
+<header class="mobile-top-header" role="banner">
+  <!-- Top Utility Bar: Brand Identity, Monorepo Triad, and Quick Controls -->
+  <div class="top-utility-row">
+    <div class="brand-identity-group">
+      <a href="/" class="brand-link" title="Ir al inicio de Mobile Style">
+        <div class="brand-logo-badge">
+          <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
+            <rect width="40" height="40" rx="10" fill="#2a67d9"/>
+            <path d="M12 28V12L28 28V12" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <div class="brand-title-row">
+            <span class="system-brand-name">DESIGN LAB</span>
+            <span class="system-release-tag">MOBILE STYLE · v1.0.0</span>
+          </div>
+          <span class="system-subcaption">Android Jetpack Compose (:core:designsystem) & Flutter Architecture</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Quick Utilities: Global Search, Theme & Monorepo Switcher -->
+    <div class="quick-utilities-group">
+      <!-- Search Input with Keyboard Shortcut '/' -->
+      <div class="quick-search-box">
+        <i class="pi pi-search search-icon" aria-hidden="true"></i>
+        <input 
+          type="search" 
+          id="mobile-search-input" 
+          placeholder="Buscar tokens, componentes M3 o specs... (/)" 
+          aria-label="Buscar tokens o especificaciones móviles"
+        />
+        <kbd class="kbd-shortcut" title="Presiona la tecla / para buscar">/</kbd>
+      </div>
+
+      <!-- Platform Filter Dropdown / Pills -->
+      <div class="platform-filter-group" role="group" aria-label="Filtro de plataforma móvil">
+        <button type="button" class="btn-platform-filter active" data-platform="all" title="Ver especificaciones de todas las plataformas">
+          <span>Todo</span>
+        </button>
+        <button type="button" class="btn-platform-filter" data-platform="kotlin" title="Filtrar por Android Jetpack Compose (Kotlin)">
+          <i class="pi pi-android" aria-hidden="true"></i>
+          <span>Kotlin</span>
+        </button>
+        <button type="button" class="btn-platform-filter" data-platform="flutter" title="Filtrar por Flutter (Dart)">
+          <i class="pi pi-code" aria-hidden="true"></i>
+          <span>Flutter</span>
+        </button>
+      </div>
+
+      <!-- Theme Switcher (Dark / Light) -->
+      <button 
+        type="button" 
+        class="utility-button" 
+        id="btn-theme-toggle" 
+        title="Alternar modo claro / oscuro"
+        aria-label="Alternar modo claro u oscuro"
+      >
+        <i class="pi pi-moon" id="theme-icon" aria-hidden="true"></i>
+        <span id="theme-label">Modo Oscuro</span>
+      </button>
+
+      <!-- Monorepo Triad Switcher -->
+      <div class="monorepo-triad-pills" role="navigation" aria-label="Selector de paquete del monorepo">
+        <span class="triad-label">MONOREPO:</span>
+        <a 
+          href="http://localhost:4200" 
+          class="triad-pill" 
+          target="_blank" 
+          rel="noopener"
+          title="Nexa Web Style Guidelines (Angular & PrimeNG)"
+        >
+          <i class="pi pi-desktop" aria-hidden="true"></i>
+          <span>Web :4200</span>
+          <i class="pi pi-external-link mini-ext" aria-hidden="true"></i>
+        </a>
+        <span class="triad-pill active" title="Paquete activo actual: Mobile Style">
+          <i class="pi pi-mobile" aria-hidden="true"></i>
+          <span>Mobile :4201</span>
+        </span>
+        <a 
+          href="http://localhost:4321" 
+          class="triad-pill" 
+          target="_blank" 
+          rel="noopener"
+          title="Nexa Website Style & Nexafy Living Geometry"
+        >
+          <i class="pi pi-globe" aria-hidden="true"></i>
+          <span>Website :4321</span>
+          <i class="pi pi-external-link mini-ext" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Secondary Categorized Navigation Bar (Angular Design-Lab Style) -->
+  <nav class="categorized-nav-bar" role="navigation" aria-label="Navegación principal de diseño móvil">
+    <div class="nav-links-cluster">
+      <!-- 1. Simulador & Hardware -->
+      <a 
+        href="#sec-simulador" 
+        class={`nav-link-btn ${activeTab === 'simulador' ? 'active' : ''}`}
+        data-nav-tab="simulador"
+      >
+        <i class="pi pi-mobile" aria-hidden="true"></i>
+        <span>Simulador Móvil M3</span>
+        <span class="status-pill live">HARDWARE FRAME</span>
+      </a>
+
+      <!-- 2. Ergonomía Táctil 48dp -->
+      <a 
+        href="#sec-ergonomia" 
+        class={`nav-link-btn ${activeTab === 'ergonomia' ? 'active' : ''}`}
+        data-nav-tab="ergonomia"
+      >
+        <i class="pi pi-hand" aria-hidden="true"></i>
+        <span>Ergonomía & Bounding Box</span>
+        <span class="status-pill min-target">MIN 48DP</span>
+      </a>
+
+      <!-- 3. Cuadrícula Espacial 8dp -->
+      <a 
+        href="#sec-espaciado" 
+        class={`nav-link-btn ${activeTab === 'espaciado' ? 'active' : ''}`}
+        data-nav-tab="espaciado"
+      >
+        <i class="pi pi-th-large" aria-hidden="true"></i>
+        <span>Cuadrícula 8dp & Márgenes</span>
+        <span class="status-pill grid-pill">8DP GRID</span>
+      </a>
+
+      <!-- 4. Elevaciones & Material 3 -->
+      <a 
+        href="#sec-elevaciones" 
+        class={`nav-link-btn ${activeTab === 'elevaciones' ? 'active' : ''}`}
+        data-nav-tab="elevaciones"
+      >
+        <i class="pi pi-clone" aria-hidden="true"></i>
+        <span>Elevación & Surface Tint</span>
+        <span class="status-pill m3-pill">M3 ELEVATION</span>
+      </a>
+
+      <!-- 5. Android Kotlin Jetpack Compose (Operations) -->
+      <a 
+        href="#sec-kotlin-compose" 
+        class={`nav-link-btn ${activeTab === 'kotlin-compose' ? 'active' : ''}`}
+        data-nav-tab="kotlin-compose"
+      >
+        <i class="pi pi-android" aria-hidden="true"></i>
+        <span>Operaciones (Kotlin Compose)</span>
+        <span class="status-pill kotlin-pill">KOTLIN 2.4</span>
+      </a>
+
+      <!-- 6. Flutter Dart (Buyer) -->
+      <a 
+        href="#sec-flutter-buyer" 
+        class={`nav-link-btn ${activeTab === 'flutter-buyer' ? 'active' : ''}`}
+        data-nav-tab="flutter-buyer"
+      >
+        <i class="pi pi-code" aria-hidden="true"></i>
+        <span>Comprador (Flutter Dart)</span>
+        <span class="status-pill flutter-pill">ADR-0019</span>
+      </a>
+    </div>
+
+    <!-- Right Side Badges -->
+    <div class="nav-badges-cluster">
+      <div class="compliance-badge" title="Cumple con WCAG 2.2 AA en objetivos táctiles y contraste">
+        <i class="pi pi-verified" aria-hidden="true"></i>
+        <span>WCAG 2.2 AA</span>
+      </div>
+      <div class="compliance-badge offline" title="Diseñado para operaciones móviles y retry seguro sin duplicar autoridad">
+        <i class="pi pi-wifi" aria-hidden="true"></i>
+        <span>OFFLINE RESILIENT</span>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .mobile-top-header {
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    border-bottom: 1px solid var(--nexa-mobile-border, #e2e8f0);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  /* Top Utility Row */
+  .top-utility-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 1.5rem;
+    gap: 1.25rem;
+    border-bottom: 1px solid var(--nexa-mobile-border, #f1f5f9);
+    flex-wrap: wrap;
+  }
+
+  .brand-identity-group {
+    display: flex;
+    align-items: center;
+  }
+
+  .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .brand-logo-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .brand-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .system-brand-name {
+    font-family: var(--nexa-mobile-font-family-display, sans-serif);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--nexa-mobile-primary, #2a67d9);
+  }
+
+  .system-release-tag {
+    font-family: var(--nexa-mobile-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+    background: var(--nexa-mobile-surface-tint, #f1f5f9);
+    padding: 1px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--nexa-mobile-border, #e2e8f0);
+  }
+
+  .system-subcaption {
+    font-size: 11px;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+    font-weight: 500;
+  }
+
+  /* Quick Utilities */
+  .quick-utilities-group {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+  }
+
+  .quick-search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 0.75rem;
+    font-size: 12px;
+    color: var(--nexa-mobile-text-secondary, #94a3b8);
+    pointer-events: none;
+  }
+
+  .quick-search-box input {
+    height: 32px;
+    width: 250px;
+    padding: 0 2rem 0 2.1rem;
+    border-radius: 8px;
+    border: 1px solid var(--nexa-mobile-border, #cbd5e1);
+    background: var(--nexa-mobile-surface-tint, #f8fafc);
+    color: var(--nexa-mobile-text-primary, #0f172a);
+    font-size: 12px;
+    font-family: var(--nexa-mobile-font-family, sans-serif);
+    transition: all 0.15s ease;
+
+    &:focus {
+      outline: none;
+      border-color: var(--nexa-mobile-primary, #2a67d9);
+      background: var(--nexa-mobile-surface-card, #ffffff);
+      box-shadow: 0 0 0 3px rgba(42, 103, 217, 0.12);
+      width: 280px;
+    }
+  }
+
+  .kbd-shortcut {
+    position: absolute;
+    right: 0.5rem;
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    border: 1px solid var(--nexa-mobile-border, #cbd5e1);
+    color: var(--nexa-mobile-text-secondary, #64748b);
+    font-size: 10px;
+    font-family: var(--nexa-mobile-font-family-mono, monospace);
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 4px;
+    pointer-events: none;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+  }
+
+  /* Platform Filter Pills */
+  .platform-filter-group {
+    display: flex;
+    align-items: center;
+    background: var(--nexa-mobile-surface-tint, #f1f5f9);
+    border: 1px solid var(--nexa-mobile-border, #e2e8f0);
+    padding: 2px;
+    border-radius: 8px;
+    gap: 2px;
+  }
+
+  .btn-platform-filter {
+    background: transparent;
+    border: none;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s ease;
+
+    &:hover {
+      color: var(--nexa-mobile-text-primary, #0f172a);
+    }
+
+    &.active {
+      background: var(--nexa-mobile-surface-card, #ffffff);
+      color: var(--nexa-mobile-primary, #2a67d9);
+      font-weight: 700;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+    }
+  }
+
+  .utility-button {
+    height: 32px;
+    padding: 0 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--nexa-mobile-border, #cbd5e1);
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    color: var(--nexa-mobile-text-secondary, #475569);
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: var(--nexa-mobile-surface-tint, #f8fafc);
+      color: var(--nexa-mobile-primary, #2a67d9);
+      border-color: #94a3b8;
+    }
+  }
+
+  /* Monorepo Triad */
+  .monorepo-triad-pills {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--nexa-mobile-surface-tint, #f1f5f9);
+    border: 1px solid var(--nexa-mobile-border, #e2e8f0);
+    padding: 3px 6px;
+    border-radius: 8px;
+  }
+
+  .triad-label {
+    font-size: 9px;
+    font-weight: 800;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+    letter-spacing: 0.06em;
+    padding: 0 4px;
+  }
+
+  .triad-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--nexa-mobile-text-secondary, #475569);
+    border: 1px solid transparent;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: var(--nexa-mobile-surface-card, #ffffff);
+      color: var(--nexa-mobile-primary, #2563eb);
+      border-color: #cbd5e1;
+    }
+
+    &.active {
+      background: var(--nexa-mobile-primary, #2a67d9);
+      color: #ffffff;
+      font-weight: 700;
+      box-shadow: 0 1px 2px rgba(42, 103, 217, 0.25);
+    }
+  }
+
+  .mini-ext {
+    font-size: 9px;
+    opacity: 0.7;
+  }
+
+  /* Categorized Nav Bar */
+  .categorized-nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    gap: 1rem;
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    border-top: 1px solid var(--nexa-mobile-border, #f1f5f9);
+    overflow-x: auto;
+  }
+
+  .nav-links-cluster {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    white-space: nowrap;
+  }
+
+  .nav-link-btn {
+    padding: 0.65rem 0.85rem;
+    font-family: var(--nexa-mobile-font-family, sans-serif);
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    transition: all 0.15s ease;
+
+    i {
+      font-size: 13px;
+    }
+
+    &:hover {
+      color: var(--nexa-mobile-text-primary, #0f172a);
+      border-bottom-color: #cbd5e1;
+    }
+
+    &.active {
+      color: var(--nexa-mobile-primary, #2a67d9);
+      border-bottom-color: var(--nexa-mobile-primary, #2a67d9);
+      font-weight: 700;
+    }
+  }
+
+  .status-pill {
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    padding: 1px 5px;
+    border-radius: 4px;
+    text-transform: uppercase;
+
+    &.live {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    &.min-target {
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
+    }
+
+    &.grid-pill {
+      background: #f5f3ff;
+      color: #6d28d9;
+      border: 1px solid #ddd6fe;
+    }
+
+    &.m3-pill {
+      background: #fdf2f8;
+      color: #be185d;
+      border: 1px solid #fbcfe8;
+    }
+
+    &.kotlin-pill {
+      background: #7f52ff18;
+      color: #7f52ff;
+      border: 1px solid #7f52ff55;
+    }
+
+    &.flutter-pill {
+      background: #02569b18;
+      color: #02569b;
+      border: 1px solid #02569b55;
+    }
+  }
+
+  .nav-badges-cluster {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0;
+  }
+
+  .compliance-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #166534;
+    background: #f0fdf4;
+    padding: 2px 7px;
+    border-radius: 6px;
+    border: 1px solid #bbf7d0;
+    white-space: nowrap;
+
+    i {
+      font-size: 11px;
+      color: #16a34a;
+    }
+
+    &.offline {
+      color: #1e40af;
+      background: #eff6ff;
+      border-color: #bfdbfe;
+      i {
+        color: #2563eb;
+      }
+    }
+  }
+
+  @media (max-width: 900px) {
+    .top-utility-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .quick-utilities-group {
+      width: 100%;
+      justify-content: space-between;
+    }
+    .quick-search-box input {
+      width: 180px;
+    }
+  }
+</style>
+
+<script>
+  // Keyboard shortcut '/' to focus search input
+  const searchInput = document.getElementById('mobile-search-input') as HTMLInputElement | null;
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== searchInput) {
+      e.preventDefault();
+      searchInput?.focus();
+    }
+  });
+
+  // Client-side quick filter for mobile cards and tokens
+  searchInput?.addEventListener('input', () => {
+    const term = searchInput.value.trim().toLowerCase();
+    const searchableCards = document.querySelectorAll<HTMLElement>('.spec-card, .token-preview-card, .metric-row');
+    searchableCards.forEach(card => {
+      const text = card.textContent?.toLowerCase() || '';
+      card.style.display = term && !text.includes(term) ? 'none' : '';
+    });
+  });
+
+  // Platform Filter Buttons (All, Kotlin, Flutter)
+  const platformButtons = document.querySelectorAll<HTMLButtonElement>('.btn-platform-filter');
+  platformButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      platformButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const targetPlatform = btn.getAttribute('data-platform');
+      const platformCards = document.querySelectorAll<HTMLElement>('[data-platform-target]');
+      
+      platformCards.forEach(card => {
+        const cardPlatform = card.getAttribute('data-platform-target');
+        if (targetPlatform === 'all' || cardPlatform === targetPlatform || cardPlatform === 'universal') {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

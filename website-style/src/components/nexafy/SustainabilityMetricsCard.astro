@@ -1,0 +1,188 @@
+---
+/**
+ * SustainabilityMetricsCard Component
+ * Reconstructs the 3 quantitative sustainability metric cards from the aerial canvas.
+ * Highlights circular economy ROI, tons of CO2 offset, and manufacturing emissions avoidance.
+ * 
+ * Strict WCAG AAA Contrast on dark background or standalone card.
+ */
+interface Props {
+  isIsolated?: boolean;
+}
+
+const { isIsolated = false } = Astro.props;
+---
+
+<div class={`sustainability-metrics-suite ${isIsolated ? 'is-isolated' : ''}`} role="region" aria-label="Métricas de Impacto de Sostenibilidad y Economía Circular">
+  <!-- Header Card -->
+  <div class="sust-statement-banner">
+    <div class="sust-badge-pill">
+      <i class="pi pi-globe"></i>
+      <span>ECONOMÍA CIRCULAR</span>
+    </div>
+    <h4 class="sust-statement-title">
+      Reimaginar la propiedad para un futuro sostenible.
+    </h4>
+    <p class="sust-statement-desc">
+      El modelo de suscripción y alquiler alarga el ciclo de vida del producto, disminuyendo la necesidad de sobreproducción y reduciendo la huella de carbono.
+    </p>
+  </div>
+
+  <!-- 3 Metric Cards Grid -->
+  <div class="sust-cards-grid">
+    <!-- Card 1: 20k tons -->
+    <div class="sust-metric-card">
+      <div class="metric-top-row">
+        <span class="metric-number text-mono">20k</span>
+        <span class="metric-pill-tag">Meta 2028</span>
+      </div>
+      <p class="metric-desc">
+        toneladas de ahorro de CO2 para 2024 y 200,000 toneladas proyectadas para 2028.
+      </p>
+    </div>
+
+    <!-- Card 2: 15kg CO2 -->
+    <div class="sust-metric-card highlight">
+      <div class="metric-top-row">
+        <span class="metric-number text-mono">15kg</span>
+        <span class="metric-pill-tag active">Por Alquiler</span>
+      </div>
+      <p class="metric-desc">
+        de CO2 ahorrado por cada alquiler activo al día comparado con la adquisición unitaria.
+      </p>
+    </div>
+
+    <!-- Card 3: 55kg CO2 -->
+    <div class="sust-metric-card">
+      <div class="metric-top-row">
+        <span class="metric-number text-mono">55kg</span>
+        <span class="metric-pill-tag">Delta Fábrica</span>
+      </div>
+      <p class="metric-desc">
+        de emisiones de CO2 generadas en la fabricación de un producto tecnológico típico.
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sustainability-metrics-suite {
+    width: 100%;
+    max-width: 580px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-sizing: border-box;
+  }
+
+  .sustainability-metrics-suite.is-isolated {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .sust-statement-banner {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 1.15rem 1.25rem;
+    color: #ffffff;
+  }
+
+  .sust-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.35);
+    color: #4ade80;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-bottom: 0.65rem;
+  }
+
+  .sust-statement-title {
+    font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.25;
+    color: #ffffff;
+    margin-bottom: 0.35rem;
+  }
+
+  .sust-statement-desc {
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: #cbd5e1;
+  }
+
+  .sust-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .sust-metric-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .sust-metric-card.highlight {
+    background: rgba(56, 200, 255, 0.1);
+    border-color: rgba(56, 200, 255, 0.35);
+  }
+
+  .sust-metric-card:hover {
+    transform: translateY(-2px);
+    border-color: #38c8ff;
+  }
+
+  .metric-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .metric-number {
+    font-size: 20px;
+    font-weight: 800;
+    color: #38c8ff;
+  }
+
+  .metric-pill-tag {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 8.5px;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .metric-pill-tag.active {
+    background: #38c8ff;
+    color: #082846;
+  }
+
+  .metric-desc {
+    font-size: 10px;
+    line-height: 1.35;
+    color: #cbd5e1;
+  }
+
+  @media (max-width: 600px) {
+    .sust-cards-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

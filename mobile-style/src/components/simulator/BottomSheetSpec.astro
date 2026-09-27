@@ -1,0 +1,176 @@
+---
+/**
+ * BottomSheetSpec — Specimen for Modal Bottom Sheet in Nexa Mobile
+ * Canonical Wholesale Cold-Chain & FEFO Filtering Specification.
+ * Adheres to 24dp top-radius, 48dp drag handle target, and thumb-friendly elevation.
+ */
+---
+
+<div class="sheet-backdrop">
+  <div class="m3-bottom-sheet">
+    <!-- Drag Handle (48dp target) -->
+    <div class="drag-handle-container">
+      <div class="drag-handle"></div>
+    </div>
+
+    <!-- Sheet Header -->
+    <div class="sheet-header">
+      <h3 class="sheet-title">Filtrar Productos & Cadena de Frío</h3>
+      <button type="button" class="btn-close-sheet" aria-label="Cerrar"><i class="pi pi-times" aria-hidden="true"></i></button>
+    </div>
+
+    <div class="sheet-body">
+      <!-- Regimen Térmico -->
+      <span class="filter-title">RÉGIMEN TÉRMICO REQUERIDO</span>
+      <div class="sheet-chips">
+        <span class="chip-item active"><i class="pi pi-snowflake" aria-hidden="true"></i> Refrigerado (2°C – 6°C)</span>
+        <span class="chip-item">Congelado (-18°C)</span>
+        <span class="chip-item">Ultra-Congelado (-25°C)</span>
+      </div>
+
+      <!-- Disponibilidad & Muelle -->
+      <span class="filter-title">DISPONIBILIDAD & MUELLE DE SALIDA</span>
+      <div class="sheet-chips">
+        <span class="chip-item active"><i class="pi pi-check" aria-hidden="true"></i> Stock Muelle 3 (Inmediato)</span>
+        <span class="chip-item">En Tránsito Frío</span>
+        <span class="chip-item">Arribo Programado</span>
+      </div>
+
+      <!-- Vida Útil FEFO -->
+      <span class="filter-title">VENTANA DE VIDA ÚTIL (FEFO)</span>
+      <div class="sheet-chips">
+        <span class="chip-item">&gt; 15 días vcto.</span>
+        <span class="chip-item active">&gt; 30 días vcto.</span>
+        <span class="chip-item">&gt; 60 días vcto.</span>
+      </div>
+
+      <!-- Action Button (Min 52dp) -->
+      <button type="button" class="btn-sheet-apply">
+        <span>Aplicar Filtros (18 Productos B2B)</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sheet-backdrop {
+    height: 100%;
+    background: rgba(15, 23, 42, 0.45);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .m3-bottom-sheet {
+    background: var(--nexa-mobile-surface-card, #ffffff);
+    border-radius: var(--nexa-mobile-radius-sheet, 24px) var(--nexa-mobile-radius-sheet, 24px) 0 0;
+    box-shadow: var(--nexa-mobile-elevation-4);
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 24px;
+    animation: slideUp 0.25s cubic-bezier(0.1, 0.9, 0.2, 1);
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .drag-handle-container {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+  }
+
+  .drag-handle {
+    width: 38px;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--nexa-mobile-border, #cbd5e1);
+  }
+
+  .sheet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 20px 12px;
+    border-bottom: 1px solid var(--nexa-mobile-border, #f1f5f9);
+  }
+
+  .sheet-title {
+    font-family: var(--nexa-mobile-font-family-display, sans-serif);
+    font-size: 15.5px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .btn-close-sheet {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #f1f5f9;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .sheet-body {
+    padding: 14px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .filter-title {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--nexa-mobile-text-secondary, #64748b);
+  }
+
+  .sheet-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .chip-item {
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--nexa-mobile-border, #e2e8f0);
+    background: var(--nexa-mobile-surface-bg, #f8fafc);
+    color: var(--nexa-mobile-text-secondary, #475569);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+
+  .chip-item.active {
+    background: #eff6ff;
+    color: #2563eb;
+    border-color: #93c5fd;
+    font-weight: 700;
+  }
+
+  .btn-sheet-apply {
+    min-height: 52px;
+    background: var(--nexa-mobile-primary, #2a67d9);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--nexa-mobile-radius-button, 12px);
+    font-weight: 700;
+    font-size: 13.5px;
+    cursor: pointer;
+    margin-top: 6px;
+    box-shadow: 0 2px 4px rgba(42, 103, 217, 0.2);
+  }
+</style>

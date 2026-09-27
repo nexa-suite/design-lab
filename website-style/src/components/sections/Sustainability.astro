@@ -1,0 +1,363 @@
+---
+// Sustainability Section: Forensic Bürocratik Awwwards SOTD Reconstruction
+// Aerial Drone Agricultural Landscape, Sculpted Contour Frame, Floating Editorial Information Cards
+---
+
+<section class="sustainability-section" id="sustainability" aria-labelledby="sustain-heading">
+  <div class="sustain-stage-wrap">
+    
+    <!-- Outer Contour Frame with Aerial Agricultural Earth Photography Background -->
+    <div class="sustain-aerial-canvas" id="sustain-canvas">
+      
+      <!-- Ambient Image Background Overlay -->
+      <div class="sustain-bg-layer" aria-hidden="true">
+        <img 
+          src="/assets/sustainability-aerial-independent.webp" 
+          alt="Aerial view of green agricultural terraced landscape" 
+          class="sustain-aerial-img" 
+          loading="lazy" 
+          width="1600" 
+          height="1200"
+        />
+        <div class="sustain-photo-scrim"></div>
+      </div>
+
+      <!-- Content Stage Grid hosting the Floating Dark Forest Cards -->
+      <div class="sustain-content-grid">
+        
+        <!-- CARD 1: Left Intro Hook ("We exist to") -->
+        <div class="sustain-card intro-card">
+          <span class="intro-eyebrow text-eyebrow">Mission & Purpose</span>
+          <h2 id="sustain-heading" class="intro-headline">
+            We <br />
+            exist to
+          </h2>
+        </div>
+
+        <!-- CARD 2: Center Monumental Editorial Statement -->
+        <div class="sustain-card main-statement-card">
+          <h3 class="main-statement-title">
+            Reimagine ownership <br />
+            for a sustainable <br />
+            future.
+          </h3>
+          <p class="main-statement-body">
+            Renting means your products are used more often throughout their life cycle with a more conscious purpose. You need less products, save resources and cut down on CO2. Access a greener future here.
+          </p>
+        </div>
+
+        <!-- CARD 3: Metric Top-Right (20k tons) -->
+        <div class="sustain-card metric-card metric-top-right">
+          <div class="metric-val-wrap">
+            <span class="metric-val-number text-mono" data-target="20">20k</span>
+          </div>
+          <p class="metric-val-desc">
+            tons of CO2 savings by 2024 and 200,000 tons by 2028
+          </p>
+          <div class="metric-card-pill text-mono">Goal 2028</div>
+        </div>
+
+        <!-- CARD 4: Metric Bottom-Left (15kg) -->
+        <div class="sustain-card metric-card metric-bottom-left">
+          <div class="metric-val-wrap">
+            <span class="metric-val-number text-mono" data-target="15">15kg</span>
+          </div>
+          <p class="metric-val-desc">
+            of CO2 saved per one rental a day
+          </p>
+          <div class="metric-card-pill text-mono">Impact Metric #01</div>
+        </div>
+
+        <!-- CARD 5: Metric Bottom-Right (55kg) -->
+        <div class="sustain-card metric-card metric-bottom-right">
+          <div class="metric-val-wrap">
+            <span class="metric-val-number text-mono" data-target="55">55kg</span>
+          </div>
+          <p class="metric-val-desc">
+            of CO2 emissions from the manufacturing of a typical rental product
+          </p>
+          <div class="metric-card-pill text-mono">Manufacturing Delta</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* --------------------------------------------------------------------------
+     1. SUSTAINABILITY SECTION & MONUMENTAL STAGE
+     -------------------------------------------------------------------------- */
+  .sustainability-section {
+    position: relative;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 3.5rem 2.5rem 4rem 2.5rem;
+    display: flex;
+    justify-content: center;
+    overflow-x: clip;
+  }
+
+  .sustain-stage-wrap {
+    width: 100%;
+    max-width: 1560px;
+    position: relative;
+  }
+
+  /* Aerial Drone Earth Canvas */
+  .sustain-aerial-canvas {
+    position: relative;
+    width: 100%;
+    min-height: 840px;
+    border-radius: 36px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 24px 60px rgba(0, 71, 55, 0.12);
+  }
+
+  .sustain-bg-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .sustain-aerial-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: saturate(1.15) brightness(0.92);
+    transform: scale(1.03);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .sustain-aerial-canvas:hover .sustain-aerial-img {
+    transform: scale(1.0);
+  }
+
+  .sustain-photo-scrim {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(0, 45, 34, 0.3) 0%, rgba(0, 71, 55, 0.6) 100%);
+  }
+
+  /* --------------------------------------------------------------------------
+     2. FLOATING ARCHITECTURAL FOREST GREEN CARDS
+     -------------------------------------------------------------------------- */
+  .sustain-content-grid {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 1360px;
+    min-height: 740px;
+    margin: 2rem;
+    display: grid;
+    grid-template-columns: 240px 1fr 280px;
+    grid-template-rows: auto 1fr auto;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .sustain-card {
+    background-color: var(--primitive-color-forest-900);
+    border-radius: 24px;
+    color: #ffffff;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(86, 240, 159, 0.12);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  }
+
+  .sustain-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
+    border-color: rgba(86, 240, 159, 0.25);
+  }
+
+  /* CARD 1: Intro Card ("We exist to") */
+  .intro-card {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 2.25rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-self: start;
+    margin-top: 1rem;
+  }
+
+  .intro-eyebrow {
+    color: var(--primitive-color-mint-500);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+
+  .intro-headline {
+    font-family: var(--primitive-font-display);
+    font-size: clamp(2rem, 2.75vw, 3rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  /* CARD 2: Main Statement Card */
+  .main-statement-card {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    padding: 3rem 3.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-self: center;
+  }
+
+  .main-statement-title {
+    font-family: var(--primitive-font-display);
+    font-size: clamp(2.25rem, 4vw, 4.25rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  .main-statement-body {
+    font-family: var(--primitive-font-sans);
+    font-size: clamp(1rem, 1.25vw, 1.25rem);
+    line-height: 1.6;
+    color: rgba(255, 251, 236, 0.85);
+    margin: 0;
+    max-width: 48ch;
+  }
+
+  /* CARD 3, 4, 5: Quantitative Metric Cards */
+  .metric-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem;
+    gap: 1.25rem;
+  }
+
+  .metric-top-right {
+    grid-column: 3;
+    grid-row: 1;
+    width: 260px;
+    align-self: start;
+    margin-top: 1rem;
+    margin-left: auto;
+  }
+
+  .metric-bottom-left {
+    grid-column: 1;
+    grid-row: 3;
+    width: 250px;
+    align-self: end;
+    margin-bottom: 1rem;
+  }
+
+  .metric-bottom-right {
+    grid-column: 3;
+    grid-row: 3;
+    width: 270px;
+    align-self: end;
+    margin-bottom: 1rem;
+    margin-left: auto;
+  }
+
+  .metric-val-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+  }
+
+  .metric-val-number {
+    font-family: var(--primitive-font-display);
+    font-size: clamp(2.75rem, 3.8vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--primitive-color-mint-500);
+  }
+
+  .metric-val-desc {
+    font-family: var(--primitive-font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+    color: rgba(255, 251, 236, 0.85);
+    margin: 0;
+  }
+
+  .metric-card-pill {
+    align-self: flex-start;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.3rem 0.65rem;
+    background: rgba(86, 240, 159, 0.12);
+    color: var(--primitive-color-mint-400);
+    border-radius: 100px;
+  }
+
+  /* --------------------------------------------------------------------------
+     3. RESPONSIVE ADAPTATIONS
+     -------------------------------------------------------------------------- */
+  @media (max-width: 1200px) {
+    .sustain-content-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto;
+    }
+    .intro-card {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    .metric-top-right {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    .main-statement-card {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+    .metric-bottom-left {
+      grid-column: 1;
+      grid-row: 3;
+    }
+    .metric-bottom-right {
+      grid-column: 2;
+      grid-row: 3;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .sustainability-section {
+      padding: 2rem 1rem;
+    }
+    .sustain-aerial-canvas {
+      min-height: auto;
+      border-radius: 24px;
+    }
+    .sustain-content-grid {
+      display: flex;
+      flex-direction: column;
+      margin: 1.5rem 1rem;
+      gap: 1.25rem;
+    }
+    .intro-card, .main-statement-card, .metric-card {
+      width: 100%;
+      margin: 0;
+      padding: 1.75rem 1.5rem;
+    }
+    .main-statement-title {
+      font-size: 2.25rem;
+    }
+  }
+</style>

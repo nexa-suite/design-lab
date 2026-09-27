@@ -1,0 +1,338 @@
+---
+/**
+ * WEBSITE STYLE — MASTER NEXAFY LIVING GEOMETRY SYSTEM & WORKBENCH
+ * Authority: Nexafy living geometry system, pure solid colorimetry, and landing guidelines.
+ */
+import 'primeicons/primeicons.css';
+import '../styles/tokens.css';
+import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
+import Hero from '../components/hero/Hero.astro';
+import LivingEngineWorkbench from '../components/guidelines/LivingEngineWorkbench.astro';
+import ColorimetriaSection from '../components/guidelines/ColorimetriaSection.astro';
+import TipografiaSection from '../components/guidelines/TipografiaSection.astro';
+import GeometriaSpacingSection from '../components/guidelines/GeometriaSpacingSection.astro';
+import ComponentesNexaUiSection from '../components/guidelines/ComponentesNexaUiSection.astro';
+---
+
+<!DOCTYPE html>
+<html lang="en" data-contrast-mode="standard">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Website Style · Nexafy Living Geometry System (Nexa Suite)</title>
+
+  <!-- Google Fonts for Canonical Nexa Foundations -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" 
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--nexa-surface-page, #f6faff);
+      color: var(--nexa-color-text-primary, #0f172a);
+      font-family: var(--nexa-font-family-body, 'Inter', sans-serif);
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Main Container */
+    .guidelines-main {
+      flex: 1;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.active {
+      display: block;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    .guidelines-content-wrapper {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Footer Note */
+    .guidelines-footer {
+      background: #ffffff;
+      border-top: 1px solid var(--nexa-color-border-default, #e2e8f0);
+      padding: 1rem 1.5rem;
+      font-size: 12px;
+      color: var(--nexa-color-text-secondary, #64748b);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--nexa-color-primary-700, #1b4fb8);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Hero Live Showcase Switcher Bar */
+    .hero-live-showcase-container {
+      width: 100%;
+      background: #ffffff;
+    }
+
+    .hero-view-switch-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1.5rem;
+      background: #ffffff;
+      border-bottom: 1px solid var(--nexa-color-border-default, #e2e8f0);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .view-switch-group {
+      display: inline-flex;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 3px;
+      gap: 3px;
+    }
+
+    .view-switch-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 14px;
+      border: none;
+      background: transparent;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .view-switch-btn:hover {
+      color: #082846;
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .view-switch-btn.active {
+      background: #082846;
+      color: #ffffff;
+      box-shadow: 0 1px 4px rgba(8, 40, 70, 0.2);
+    }
+
+    .view-switch-btn.active strong {
+      color: #38c8ff;
+    }
+
+    .view-meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(56, 200, 255, 0.12);
+      border: 1px solid rgba(56, 200, 255, 0.35);
+      color: #0284c7;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 4px 11px;
+      border-radius: 9999px;
+    }
+
+    .pulse-cyan-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: #38c8ff;
+      box-shadow: 0 0 6px #38c8ff;
+      animation: cyanPulse 1.8s infinite ease-in-out;
+    }
+
+    @keyframes cyanPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Unified Design Lab Shell (Identical structure to Web and Mobile) -->
+  <UnifiedLabShell currentSection="workbench" activeTab="motor-grafico">
+    <!-- Main Content Panes -->
+    <main class="guidelines-main">
+      
+      <!-- Tab 1 (DEFAULT & PRIMARY): Motor Gráfico Nexafy Vivo & Hero Flecto Auténtico 1:1 -->
+      <div id="pane-motor-grafico" class="tab-pane active" role="tabpanel">
+        <div class="hero-live-showcase-container">
+          <!-- Top Sub-Nav to switch between Living Engine Workbench and Historic Hero -->
+          <div class="hero-view-switch-bar">
+            <div class="view-switch-group">
+              <button type="button" class="view-switch-btn active" id="btn-show-workbench">
+                <i class="pi pi-bolt" style="color: #38c8ff; margin-right: 6px;"></i>
+                <strong>✦ Motor Gráfico Vivo Nexafy (Interactivo · Arrastrar Bloques)</strong>
+              </button>
+              <button type="button" class="view-switch-btn" id="btn-show-authentic-hero">
+                <i class="pi pi-history" style="margin-right: 6px;"></i>
+                <span>Hero Flecto Histórico 1:1</span>
+              </button>
+            </div>
+            <div class="view-meta-badge">
+              <span class="pulse-cyan-dot"></span>
+              <span>Colorimetría Nexa (#082846 & #38c8ff) · Conduits 28px Vivos · Drag & Drop Activo</span>
+            </div>
+          </div>
+
+          <!-- Mode 1: Workbench Engine with Draggable Blocks & Dynamic Conduits (DEFAULT & PRIMARY) -->
+          <div id="view-workbench-stage" class="hero-stage-view active">
+            <LivingEngineWorkbench />
+          </div>
+
+          <!-- Mode 2: Historic 1:1 Flecto Hero (accessible via toggle) -->
+          <div id="view-authentic-hero-stage" class="hero-stage-view" style="display: none;">
+            <Hero />
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Colorimetría -->
+      <div id="pane-colorimetria" class="tab-pane" role="tabpanel">
+        <div class="guidelines-content-wrapper">
+          <ColorimetriaSection />
+        </div>
+      </div>
+
+      <!-- Tab 3: Tipografía -->
+      <div id="pane-tipografia" class="tab-pane" role="tabpanel">
+        <div class="guidelines-content-wrapper">
+          <TipografiaSection />
+        </div>
+      </div>
+
+      <!-- Tab 4: Espaciado & Geometría -->
+      <div id="pane-geometria" class="tab-pane" role="tabpanel">
+        <div class="guidelines-content-wrapper">
+          <GeometriaSpacingSection />
+        </div>
+      </div>
+
+      <!-- Tab 5: Componentes Nexa UI -->
+      <div id="pane-componentes" class="tab-pane" role="tabpanel">
+        <div class="guidelines-content-wrapper">
+          <ComponentesNexaUiSection />
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="guidelines-footer">
+      <div>
+        <strong>Nexafy · Living Geometry System (Website Style)</strong> · Pure flat solid colorimetry (Nexa Dark Blue #082846 & Celeste #38c8ff · 0 Gradients · 28px Conduits).
+      </div>
+      <div class="footer-links">
+        <a href="/nexafy">✦ Ver Nexafy Live Landing &rarr;</a>
+        <a href="/flecto-forensic">🔬 Ver Análisis Forense Frame-by-Frame &rarr;</a>
+        <a href="/artifacts">Catálogo de Artefactos &rarr;</a>
+        <a href="/landing-spec">Landing Specs &rarr;</a>
+      </div>
+    </footer>
+  </UnifiedLabShell>
+
+  <script>
+    // Tab Switching Logic wired to MonorepoNavHeader data-nav-tab links
+    const navTabLinks = document.querySelectorAll<HTMLAnchorElement>('[data-nav-tab]');
+    const tabPanes = document.querySelectorAll<HTMLElement>('.tab-pane');
+
+    function switchTab(tabId: string) {
+      navTabLinks.forEach(link => {
+        const isTarget = link.getAttribute('data-nav-tab') === tabId;
+        link.classList.toggle('active', isTarget);
+      });
+
+      tabPanes.forEach(pane => {
+        pane.classList.toggle('active', pane.id === `pane-${tabId}`);
+      });
+    }
+
+    navTabLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const tabId = link.getAttribute('data-nav-tab');
+        if (tabId) {
+          e.preventDefault();
+          switchTab(tabId);
+          window.location.hash = tabId;
+          if (tabId !== 'motor-grafico') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }
+      });
+    });
+
+    // Hash routing on initial load
+    if (window.location.hash) {
+      const hash = window.location.hash.replace('#', '');
+      const validTabs = ['motor-grafico', 'colorimetria', 'tipografia', 'geometria', 'componentes'];
+      if (validTabs.includes(hash)) {
+        switchTab(hash);
+      }
+    }
+
+    // Sub-view toggle between Living Engine Workbench and Historic Hero
+    const btnShowWorkbench = document.getElementById('btn-show-workbench');
+    const btnShowAuthenticHero = document.getElementById('btn-show-authentic-hero');
+    const viewWorkbenchStage = document.getElementById('view-workbench-stage');
+    const viewAuthenticHeroStage = document.getElementById('view-authentic-hero-stage');
+
+    btnShowWorkbench?.addEventListener('click', () => {
+      btnShowWorkbench.classList.add('active');
+      btnShowAuthenticHero?.classList.remove('active');
+      if (viewWorkbenchStage) viewWorkbenchStage.style.display = 'block';
+      if (viewAuthenticHeroStage) viewAuthenticHeroStage.style.display = 'none';
+    });
+
+    btnShowAuthenticHero?.addEventListener('click', () => {
+      btnShowAuthenticHero.classList.add('active');
+      btnShowWorkbench?.classList.remove('active');
+      if (viewAuthenticHeroStage) viewAuthenticHeroStage.style.display = 'block';
+      if (viewWorkbenchStage) viewWorkbenchStage.style.display = 'none';
+    });
+  </script>
+
+  <!-- Load Interactions Engine for Hero, Scrollytelling, and GSAP Choreography -->
+  <script src="../scripts/interactions.ts"></script>
+</body>
+</html>

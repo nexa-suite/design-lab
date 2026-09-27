@@ -1,0 +1,376 @@
+---
+import { TYPE_ROWS } from '../../lib/nexa-guidelines/data';
+---
+
+<section id="section-tipografia" class="guideline-module">
+  <div class="module-header">
+    <div class="kicker-group">
+      <span class="index-pill">02</span>
+      <span class="kicker-text">TYPOGRAPHIC MATRIX & HIERARCHY</span>
+    </div>
+    <h2>Actual text roles, actual hierarchy</h2>
+    <p class="module-intro">
+      Nexa's typography system pairs <strong>Plus Jakarta Sans</strong> for commanding display and headings with <strong>Inter</strong> for high-density operational UI and reading comfort, alongside <strong>JetBrains Mono</strong> for token and numeric tabular alignments.
+    </p>
+  </div>
+
+  <!-- Type Hierarchy Matrix -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <h3 class="subsection-title">Type Matrix (10 Canonical Semantic Roles)</h3>
+      <span class="spec-badge">Line-height · Weight · Tracking Standards</span>
+    </div>
+    <div class="type-matrix-card">
+      <div class="matrix-head">
+        <span class="col-role">Semantic Role</span>
+        <span class="col-spec">Specs (Size / Leading / Weight)</span>
+        <span class="col-preview">Live Specimen ("Nexa Intelligent Platform")</span>
+      </div>
+      <div class="matrix-body">
+        {TYPE_ROWS.map((row) => (
+          <div class="matrix-row">
+            <div class="row-role-col">
+              <strong>{row.role}</strong>
+              <span class="family-tag">{row.family}</span>
+            </div>
+            <div class="row-spec-col">
+              <code>{row.size} / {row.leading}</code>
+              <small>{row.weight} wt · {row.tracking}</small>
+              <span class="usage-note">{row.usage}</span>
+            </div>
+            <div class="row-preview-col">
+              <p
+                class="specimen-text"
+                style={`
+                  font-family: ${row.family === 'Inter' ? 'var(--nexa-font-family-body)' : row.family === 'JetBrains Mono' ? 'var(--nexa-font-family-mono)' : 'var(--nexa-font-family-display)'};
+                  font-size: ${row.size};
+                  font-weight: ${row.weight};
+                  line-height: ${row.leading};
+                  letter-spacing: ${row.tracking};
+                `}
+              >
+                Nexa Intelligent Platform · Circular Asset Logistics
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabular Numbers & Numeric Data Proof -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <h3 class="subsection-title">Tabular Numbers & Currency Data Alignment</h3>
+      <span class="spec-badge">font-variant-numeric: tabular-nums</span>
+    </div>
+    <div class="tabular-demo-grid">
+      <div class="tabular-card">
+        <h4>Operational Ledger Specimen</h4>
+        <p class="card-desc">Columns align perfectly across differing digit glyph widths without jitter or horizontal drift.</p>
+        <div class="ledger-table">
+          <div class="ledger-row header">
+            <span>Asset Category</span>
+            <span>Batch ID</span>
+            <span>Monthly Rate</span>
+            <span>Status</span>
+          </div>
+          <div class="ledger-row">
+            <span class="asset-name">Industrial Generator G-90</span>
+            <code class="tabular-code">BAT-2026-8812</code>
+            <span class="tabular-num">€1,450.00</span>
+            <span class="status-pill active">Deployed</span>
+          </div>
+          <div class="ledger-row">
+            <span class="asset-name">Heavy Excavator CAT-320</span>
+            <code class="tabular-code">BAT-2026-9041</code>
+            <span class="tabular-num">€3,820.50</span>
+            <span class="status-pill active">Deployed</span>
+          </div>
+          <div class="ledger-row">
+            <span class="asset-name">Mobile Telemetry Terminal</span>
+            <code class="tabular-code">BAT-2026-1145</code>
+            <span class="tabular-num">€&nbsp;&nbsp;185.00</span>
+            <span class="status-pill queued">Queued</span>
+          </div>
+          <div class="ledger-row total">
+            <span>Total Circular Asset Run-rate</span>
+            <code>3 Active Units</code>
+            <span class="tabular-num bold">€5,455.50</span>
+            <span>Monthly</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .guideline-module {
+    padding: var(--nexa-space-8) var(--nexa-space-6);
+    background: var(--nexa-surface-card);
+    border-radius: var(--nexa-radius-card);
+    border: 1px solid var(--nexa-color-border-default);
+    margin-bottom: var(--nexa-space-8);
+  }
+
+  .module-header {
+    margin-bottom: var(--nexa-space-8);
+    border-bottom: 1px solid var(--nexa-color-border-default);
+    padding-bottom: var(--nexa-space-6);
+  }
+
+  .kicker-group {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--nexa-space-2);
+    margin-bottom: var(--nexa-space-2);
+  }
+
+  .index-pill {
+    background: var(--nexa-color-primary-50);
+    color: var(--nexa-color-primary-700);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: var(--nexa-radius-sm);
+    font-family: var(--nexa-font-family-mono);
+  }
+
+  .kicker-text {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--nexa-color-text-secondary);
+    text-transform: uppercase;
+  }
+
+  .module-header h2 {
+    font-family: var(--nexa-font-family-display);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary);
+    line-height: 1.25;
+    margin: var(--nexa-space-2) 0 var(--nexa-space-3) 0;
+  }
+
+  .module-intro {
+    font-size: 15px;
+    color: var(--nexa-color-text-secondary);
+    line-height: 1.5;
+    max-width: 840px;
+  }
+
+  .subsection {
+    margin-bottom: var(--nexa-space-8);
+  }
+
+  .subsection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--nexa-space-4);
+    flex-wrap: wrap;
+    gap: var(--nexa-space-2);
+  }
+
+  .subsection-title {
+    font-family: var(--nexa-font-family-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary);
+  }
+
+  .spec-badge {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--nexa-color-text-secondary);
+    background: var(--nexa-surface-inset);
+    padding: 3px 10px;
+    border-radius: var(--nexa-radius-pill);
+    border: 1px solid var(--nexa-color-border-default);
+  }
+
+  /* Type Matrix */
+  .type-matrix-card {
+    border: 1px solid var(--nexa-color-border-default);
+    border-radius: var(--nexa-radius-control);
+    overflow: hidden;
+  }
+
+  .matrix-head {
+    display: grid;
+    grid-template-columns: 180px 220px 1fr;
+    background: var(--nexa-surface-table-header);
+    padding: 12px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--nexa-color-text-secondary);
+    border-bottom: 1px solid var(--nexa-color-border-default);
+  }
+
+  .matrix-row {
+    display: grid;
+    grid-template-columns: 180px 220px 1fr;
+    padding: 16px;
+    border-bottom: 1px solid var(--nexa-color-border-default);
+    align-items: center;
+    gap: var(--nexa-space-4);
+  }
+
+  .matrix-row:last-child {
+    border-bottom: none;
+  }
+
+  .row-role-col strong {
+    display: block;
+    font-size: 14px;
+    color: var(--nexa-color-text-primary);
+  }
+
+  .family-tag {
+    font-size: 11px;
+    color: var(--nexa-color-primary-700);
+    background: var(--nexa-color-primary-50);
+    padding: 1px 6px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 4px;
+  }
+
+  .row-spec-col code {
+    display: block;
+    font-family: var(--nexa-font-family-mono);
+    font-size: 12px;
+    color: var(--nexa-color-text-primary);
+  }
+
+  .row-spec-col small {
+    display: block;
+    font-size: 11px;
+    color: var(--nexa-color-text-secondary);
+    margin-top: 2px;
+  }
+
+  .usage-note {
+    font-size: 10px;
+    color: var(--nexa-color-text-muted);
+    margin-top: 4px;
+  }
+
+  .row-preview-col {
+    overflow: hidden;
+  }
+
+  .specimen-text {
+    margin: 0;
+    color: var(--nexa-color-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Tabular Demo */
+  .tabular-demo-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .tabular-card {
+    background: var(--nexa-surface-inset);
+    border: 1px solid var(--nexa-color-border-default);
+    border-radius: var(--nexa-radius-card);
+    padding: var(--nexa-space-6);
+  }
+
+  .tabular-card h4 {
+    font-family: var(--nexa-font-family-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary);
+    margin-bottom: 4px;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: var(--nexa-color-text-secondary);
+    margin-bottom: var(--nexa-space-4);
+  }
+
+  .ledger-table {
+    background: var(--nexa-surface-card);
+    border: 1px solid var(--nexa-color-border-default);
+    border-radius: var(--nexa-radius-control);
+    overflow: hidden;
+  }
+
+  .ledger-row {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr 1fr;
+    padding: 10px 16px;
+    align-items: center;
+    border-bottom: 1px solid var(--nexa-color-border-default);
+    font-size: 13px;
+  }
+
+  .ledger-row.header {
+    background: var(--nexa-surface-table-header);
+    font-weight: 600;
+    color: var(--nexa-color-text-secondary);
+    font-size: 12px;
+  }
+
+  .ledger-row.total {
+    background: var(--nexa-color-primary-50);
+    border-bottom: none;
+    font-weight: 600;
+  }
+
+  .tabular-code {
+    font-family: var(--nexa-font-family-mono);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tabular-num {
+    font-family: var(--nexa-font-family-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+
+  .tabular-num.bold {
+    font-weight: 700;
+    color: var(--nexa-color-primary-800);
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: var(--nexa-radius-pill);
+    font-size: 11px;
+    font-weight: 600;
+    justify-self: start;
+  }
+
+  .status-pill.active {
+    background: var(--nexa-color-success-50);
+    color: var(--nexa-color-success-700);
+  }
+
+  .status-pill.queued {
+    background: var(--nexa-color-warning-50);
+    color: var(--nexa-color-warning-text);
+  }
+
+  @media (max-width: 900px) {
+    .matrix-head, .matrix-row {
+      grid-template-columns: 1fr;
+      gap: var(--nexa-space-2);
+    }
+    .ledger-row {
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+  }
+</style>

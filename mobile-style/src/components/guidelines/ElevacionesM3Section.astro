@@ -1,0 +1,712 @@
+---
+/**
+ * ElevacionesM3Section.astro
+ * Canonical Material 3 Tonal Elevation & Primary Tinting for Android Jetpack Compose
+ * Covers Levels 0 to 5, Primary Tint Overlays, Ambient Sunlight Behavior & Kotlin Contracts
+ */
+
+interface ElevationSpecimen {
+  level: string;
+  dp: string;
+  tintPercent: string;
+  tintHex: string;
+  shadowCss: string;
+  component: string;
+  description: string;
+  specimenType: 'scaffold' | 'card' | 'bar' | 'fab' | 'sheet' | 'dialog';
+}
+
+const elevationSpecimens: ElevationSpecimen[] = [
+  {
+    level: 'Level 0',
+    dp: '0dp',
+    tintPercent: '0% Tinte',
+    tintHex: '#F6FAFF',
+    shadowCss: 'none',
+    component: 'Fondo del Scaffold',
+    description: 'Plano base estructural inmutable en Android. Cero sombras difusas.',
+    specimenType: 'scaffold'
+  },
+  {
+    level: 'Level 1',
+    dp: '1dp – 2dp',
+    tintPercent: '5% NexaPrimary Tint',
+    tintHex: '#F3F7FD',
+    shadowCss: '0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04)',
+    component: 'Tarjetas de Despacho & Picking',
+    description: 'Tarjetas agrupadoras en LazyColumn. Diferenciación visual sutil bajo sol directo.',
+    specimenType: 'card'
+  },
+  {
+    level: 'Level 2',
+    dp: '3dp',
+    tintPercent: '8% NexaPrimary Tint',
+    tintHex: '#EDF4FC',
+    shadowCss: '0 3px 6px rgba(15, 23, 42, 0.10), 0 2px 4px rgba(15, 23, 42, 0.06)',
+    component: 'NexaTopAppBar & NexaBottomNav',
+    description: 'Barras fijas persistentes en scroll que delimitan el área de contenido.',
+    specimenType: 'bar'
+  },
+  {
+    level: 'Level 3',
+    dp: '6dp',
+    tintPercent: '11% NexaPrimary Tint',
+    tintHex: '#E5EFFB',
+    shadowCss: '0 6px 14px rgba(15, 23, 42, 0.12), 0 3px 6px rgba(15, 23, 42, 0.08)',
+    component: 'FAB Flotante CameraX & Snackbars',
+    description: 'Botón de escaneo rápido que flota sobre el contenido scrolleable.',
+    specimenType: 'fab'
+  },
+  {
+    level: 'Level 4',
+    dp: '8dp',
+    tintPercent: '12% NexaPrimary Tint',
+    tintHex: '#DFEAF9',
+    shadowCss: '0 10px 22px rgba(15, 23, 42, 0.14), 0 4px 8px rgba(15, 23, 42, 0.08)',
+    component: 'NexaModalBottomSheet (Firma POD)',
+    description: 'Hojas modales inferiores que se deslizan sobre la pantalla para firmas o filtros.',
+    specimenType: 'sheet'
+  },
+  {
+    level: 'Level 5',
+    dp: '12dp',
+    tintPercent: '14% NexaPrimary Tint',
+    tintHex: '#D7E5F8',
+    shadowCss: '0 16px 32px rgba(15, 23, 42, 0.18), 0 6px 12px rgba(15, 23, 42, 0.10)',
+    component: 'Diálogos de Confirmación Crítica',
+    description: 'Modales de interrupción máxima para confirmación de rechazos o cancelación de ruta.',
+    specimenType: 'dialog'
+  }
+];
+---
+
+<div class="elevaciones-m3-container" data-platform-target="universal">
+  <!-- Section 1: 6 Especímenes Visuales con Sombras Reales y Tonal Tinting -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">01</span>
+        <div>
+          <p class="cuadro-kicker">MATERIAL DESIGN 3 · ESPECÍMENES VISUALES DE ELEVACIÓN</p>
+          <h3 class="cuadro-title">Muestrario Visual de Elevaciones (Level 0 a Level 5) con Tinte Tonal M3</h3>
+          <p class="cuadro-subtitle">
+            Cada espécimen renderiza en vivo su capa tonal combinada con overlay de tinte primario (<strong>NexaPrimary #2A67D9</strong>) y sombras proyectadas reales, demostrando legibilidad garantizada en exteriores (>50,000 lux).
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-clone"></i> Tonal Elevation 0-12dp</span>
+        <span class="cuadro-tag kotlin"><i class="pi pi-android"></i> surfaceTint</span>
+        <span class="cuadro-tag success"><i class="pi pi-sun"></i> Legible &gt;50k Lux</span>
+      </div>
+    </div>
+
+    <!-- 6 Visual Elevation Specimens Grid -->
+    <div class="elevation-specimens-grid">
+      {elevationSpecimens.map((spec) => (
+        <article class="elevation-specimen-card">
+          <div class="spec-header-row">
+            <div class="spec-level-badge">
+              <strong>{spec.level}</strong>
+              <span class="spec-dp-chip">{spec.dp}</span>
+            </div>
+            <span class="spec-tint-pill">{spec.tintPercent}</span>
+          </div>
+
+          <!-- Live Rendered Physical Specimen Stage -->
+          <div 
+            class="elevation-stage-box"
+            style={`background: ${spec.tintHex}; box-shadow: ${spec.shadowCss};`}
+          >
+            {spec.specimenType === 'scaffold' && (
+              <div class="mini-specimen scaffold-specimen">
+                <span class="mini-label">SCAFFOLD BASE PLANE</span>
+                <div class="mini-divider"></div>
+                <div class="mini-content-ghost">
+                  <span class="ghost-line full"></span>
+                  <span class="ghost-line half"></span>
+                </div>
+              </div>
+            )}
+
+            {spec.specimenType === 'card' && (
+              <div class="mini-specimen card-specimen">
+                <div class="card-mini-top">
+                  <i class="pi pi-truck mini-icon primary"></i>
+                  <span class="mini-badge">SO-2026-0018</span>
+                </div>
+                <strong>ICISA Distribuciones · Muelle 3</strong>
+                <small>2.0°C – 6.0°C Calibrado (FEFO OK)</small>
+              </div>
+            )}
+
+            {spec.specimenType === 'bar' && (
+              <div class="mini-specimen bar-specimen">
+                <div class="bar-mini-inner">
+                  <i class="pi pi-bars"></i>
+                  <strong>Nexa Operations</strong>
+                  <i class="pi pi-search"></i>
+                </div>
+                <div class="bottom-nav-mini">
+                  <span class="nav-dot active"></span>
+                  <span class="nav-dot"></span>
+                  <span class="nav-dot"></span>
+                </div>
+              </div>
+            )}
+
+            {spec.specimenType === 'fab' && (
+              <div class="mini-specimen fab-specimen">
+                <div class="fab-circle-btn">
+                  <i class="pi pi-camera"></i>
+                </div>
+                <span class="fab-label">Escanear Lote con CameraX</span>
+              </div>
+            )}
+
+            {spec.specimenType === 'sheet' && (
+              <div class="mini-specimen sheet-specimen">
+                <div class="sheet-drag-handle"></div>
+                <div class="sheet-title-mini">Firma de Recepción POD</div>
+                <div class="signature-box-placeholder">
+                  <i class="pi pi-pencil"></i>
+                  <span>Trazar firma digital</span>
+                </div>
+              </div>
+            )}
+
+            {spec.specimenType === 'dialog' && (
+              <div class="mini-specimen dialog-specimen">
+                <div class="dialog-icon-alert"><i class="pi pi-exclamation-triangle"></i></div>
+                <strong>¿Rechazar Despacho?</strong>
+                <p>Temperatura mayor a 6.0°C</p>
+                <div class="dialog-buttons-mini">
+                  <span class="btn-mini cancel">Cancelar</span>
+                  <span class="btn-mini confirm">Rechazar</span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div class="spec-footer-meta">
+            <strong>{spec.component}</strong>
+            <p>{spec.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Section 2: Matriz Arquitectónica de Elevaciones M3 -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">02</span>
+        <div>
+          <p class="cuadro-kicker">ESPECIFICACIÓN ARQUITECTÓNICA · TABLA DE CONTRATOS</p>
+          <h3 class="cuadro-title">Matriz Arquitectónica de Elevaciones y Sombras M3</h3>
+          <p class="cuadro-subtitle">
+            Asignación estricta de componentes de la flota operativa a niveles de elevación tonal.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contract-table-wrapper">
+      <table class="contract-table">
+        <thead>
+          <tr>
+            <th>Nivel M3</th>
+            <th>Elevación (dp)</th>
+            <th>Tinte Tonal Primario (% NexaPrimary)</th>
+            <th>Sombra Proyectada</th>
+            <th>Componentes Asignados en Nexa Mobile</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Level 0</strong></td>
+            <td><code>0.dp</code></td>
+            <td>0% (Sin tinte)</td>
+            <td>Ninguna</td>
+            <td>Fondo estructural del Scaffold (<code>#F6FAFF</code>)</td>
+          </tr>
+          <tr>
+            <td><strong>Level 1</strong></td>
+            <td><code>1.dp – 2.dp</code></td>
+            <td>5% (Alpha 0.05 sobre fondo)</td>
+            <td><code>0 1px 3px rgba(15,23,42,0.08)</code></td>
+            <td>Tarjetas de paradas de despacho, tarjetas de picking FEFO, checklist de maquinaria</td>
+          </tr>
+          <tr>
+            <td><strong>Level 2</strong></td>
+            <td><code>3.dp</code></td>
+            <td>8% (Alpha 0.08 sobre fondo)</td>
+            <td><code>0 3px 6px rgba(15,23,42,0.10)</code></td>
+            <td>NexaTopAppBar fija en scroll y barra de navegación inferior NexaBottomNav (64dp)</td>
+          </tr>
+          <tr>
+            <td><strong>Level 3</strong></td>
+            <td><code>6.dp</code></td>
+            <td>11% (Alpha 0.11 sobre fondo)</td>
+            <td><code>0 6px 14px rgba(15,23,42,0.12)</code></td>
+            <td>Floating Action Button (FAB) de escáner CameraX, Extended FAB y Snackbars con acción</td>
+          </tr>
+          <tr>
+            <td><strong>Level 4</strong></td>
+            <td><code>8.dp</code></td>
+            <td>12% (Alpha 0.12 sobre fondo)</td>
+            <td><code>0 10px 22px rgba(15,23,42,0.14)</code></td>
+            <td>NexaModalBottomSheet para firma de entrega (POD), selectores densos y search bar activo</td>
+          </tr>
+          <tr>
+            <td><strong>Level 5</strong></td>
+            <td><code>12.dp</code></td>
+            <td>14% (Alpha 0.14 sobre fondo)</td>
+            <td><code>0 16px 32px rgba(15,23,42,0.18)</code></td>
+            <td>Diálogos críticos de confirmación (rechazar entrega, cancelar ruta), time pickers</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 3: Contrato de Código Kotlin Compose Elevation -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">03</span>
+        <div>
+          <p class="cuadro-kicker">CÓDIGO DE PRODUCCIÓN · KOTLIN JETPACK COMPOSE</p>
+          <h3 class="cuadro-title">Implementación de Elevación y Surface Tint en Compose</h3>
+          <p class="cuadro-subtitle">
+            Uso canónico de <code>Surface</code>, <code>CardDefaults.cardElevation</code> y tinte automático de MaterialTheme.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag kotlin"><i class="pi pi-code"></i> Elevation.kt</span>
+        <span class="cuadro-tag primary"><i class="pi pi-clone"></i> CardElevation</span>
+      </div>
+    </div>
+
+    <div class="code-container-block">
+      <div class="code-header-bar">
+        <div class="code-header-title">
+          <i class="pi pi-file"></i>
+          <span>core/designsystem/src/main/kotlin/com/nexa/core/designsystem/component/Elevation.kt</span>
+        </div>
+        <span class="code-lang-pill">Kotlin 2.4</span>
+      </div>
+      <pre class="code-pre-box" is:raw><code><span class="comm">// Canonical Material 3 Elevation & Tonal Tint Pattern in Jetpack Compose</span>
+<span class="kw">package</span> com.nexa.core.designsystem.component
+
+<span class="kw">import</span> androidx.compose.foundation.layout.fillMaxWidth
+<span class="kw">import</span> androidx.compose.foundation.layout.padding
+<span class="kw">import</span> androidx.compose.foundation.shape.RoundedCornerShape
+<span class="kw">import</span> androidx.compose.material3.Card
+<span class="kw">import</span> androidx.compose.material3.CardDefaults
+<span class="kw">import</span> androidx.compose.material3.MaterialTheme
+<span class="kw">import</span> androidx.compose.material3.Surface
+<span class="kw">import</span> androidx.compose.runtime.Composable
+<span class="kw">import</span> androidx.compose.ui.Modifier
+<span class="kw">import</span> androidx.compose.ui.unit.dp
+
+<span class="ann">@Composable</span>
+<span class="kw">fun</span> <span class="fn">NexaElevatedCard</span>(
+    modifier: <span class="type">Modifier</span> = Modifier,
+    content: <span class="ann">@Composable</span> () -> <span class="type">Unit</span>
+) {
+    <span class="fn">Card</span>(
+        modifier = modifier.fillMaxWidth(),
+        shape = <span class="fn">RoundedCornerShape</span>(<span class="num">16.dp</span>),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface,
+            contentColor = MaterialTheme.colorScheme.onSurface
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = <span class="num">1.dp</span>,    <span class="comm">// Level 1 tonal tint (5%)</span>
+            pressedElevation = <span class="num">4.dp</span>,    <span class="comm">// Level 2/3 feedback</span>
+            focusedElevation = <span class="num">2.dp</span>,
+            hoveredElevation = <span class="num">2.dp</span>
+        )
+    ) {
+        content()
+    }
+}
+
+<span class="ann">@Composable</span>
+<span class="kw">fun</span> <span class="fn">NexaStickyBottomBar</span>(
+    modifier: <span class="type">Modifier</span> = Modifier,
+    content: <span class="ann">@Composable</span> () -> <span class="type">Unit</span>
+) {
+    <span class="fn">Surface</span>(
+        modifier = modifier.fillMaxWidth(),
+        tonalElevation = <span class="num">3.dp</span>,          <span class="comm">// Level 2: 8% primary tint for sticky bars</span>
+        shadowElevation = <span class="num">6.dp</span>,
+        color = MaterialTheme.colorScheme.surfaceContainerHigh
+    ) {
+        content()
+    }
+}</code></pre>
+    </div>
+  </section>
+</div>
+
+<style>
+  .elevaciones-m3-container {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    width: 100%;
+  }
+
+  /* Section 1: Elevation Specimens Grid */
+  .elevation-specimens-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 1024px) {
+    .elevation-specimens-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .elevation-specimens-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .elevation-specimen-card {
+    padding: 18px;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 14px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .spec-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .spec-level-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    strong {
+      font-size: 13.5px;
+      color: #0f172a;
+    }
+
+    .spec-dp-chip {
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--nexa-color-primary-50, #eff6ff);
+      color: var(--nexa-color-primary-700, #1d4ed8);
+    }
+  }
+
+  .spec-tint-pill {
+    font-size: 9.5px;
+    font-weight: 700;
+    font-family: var(--nexa-font-family-mono, monospace);
+    color: #7c3aed;
+    background: #f5f3ff;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  /* Elevation Stage Box: Renders the actual elevation */
+  .elevation-stage-box {
+    border-radius: 12px;
+    padding: 16px;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease;
+  }
+
+  .mini-specimen {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  /* Scaffold Base Specimen */
+  .scaffold-specimen {
+    align-items: center;
+    text-align: center;
+
+    .mini-label {
+      font-size: 9px;
+      font-weight: 800;
+      color: #94a3b8;
+      letter-spacing: 0.1em;
+      font-family: var(--nexa-font-family-mono, monospace);
+    }
+
+    .mini-divider {
+      width: 80%;
+      height: 1px;
+      background: #cbd5e1;
+      margin: 6px 0;
+    }
+
+    .mini-content-ghost {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      width: 70%;
+      align-items: center;
+
+      .ghost-line {
+        height: 6px;
+        border-radius: 3px;
+        background: #e2e8f0;
+
+        &.full { width: 100%; }
+        &.half { width: 60%; }
+      }
+    }
+  }
+
+  /* Card Specimen */
+  .card-specimen {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+
+    .card-mini-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2px;
+    }
+
+    .mini-icon.primary {
+      color: #2a67d9;
+      font-size: 13px;
+    }
+
+    .mini-badge {
+      font-size: 8.5px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 3px;
+      background: #dbeafe;
+      color: #1e40af;
+      font-family: var(--nexa-font-family-mono, monospace);
+    }
+
+    strong {
+      font-size: 11.5px;
+      color: #0f172a;
+    }
+
+    small {
+      font-size: 10px;
+      color: #15803d;
+      font-weight: 600;
+    }
+  }
+
+  /* Bar Specimen */
+  .bar-specimen {
+    gap: 8px;
+
+    .bar-mini-inner {
+      background: #ffffff;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #0f172a;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+
+      i { font-size: 12px; color: #2a67d9; }
+      strong { font-size: 11px; }
+    }
+
+    .bottom-nav-mini {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 4px;
+      background: #ffffff;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+
+      .nav-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #cbd5e1;
+
+        &.active {
+          background: #2a67d9;
+          width: 14px;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+
+  /* FAB Specimen */
+  .fab-specimen {
+    align-items: center;
+    gap: 8px;
+
+    .fab-circle-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #2a67d9;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 4px 10px rgba(42, 103, 217, 0.35);
+    }
+
+    .fab-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #1d4ed8;
+    }
+  }
+
+  /* Bottom Sheet Specimen */
+  .sheet-specimen {
+    background: #ffffff;
+    border-radius: 10px 10px 0 0;
+    border: 1px solid #e2e8f0;
+    border-bottom: none;
+    padding: 8px 10px;
+    align-items: center;
+    margin-top: 10px;
+
+    .sheet-drag-handle {
+      width: 28px;
+      height: 3px;
+      border-radius: 2px;
+      background: #cbd5e1;
+      margin-bottom: 4px;
+    }
+
+    .sheet-title-mini {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .signature-box-placeholder {
+      width: 100%;
+      height: 40px;
+      border: 1px dashed #93c5fd;
+      background: #f8fafc;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #3b82f6;
+      font-size: 10px;
+    }
+  }
+
+  /* Dialog Specimen */
+  .dialog-specimen {
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+
+    .dialog-icon-alert {
+      color: #dc2626;
+      font-size: 16px;
+    }
+
+    strong {
+      font-size: 11px;
+      color: #0f172a;
+    }
+
+    p {
+      font-size: 9.5px;
+      color: #64748b;
+      margin: 0;
+    }
+
+    .dialog-buttons-mini {
+      display: flex;
+      gap: 6px;
+      margin-top: 6px;
+      width: 100%;
+
+      .btn-mini {
+        flex: 1;
+        font-size: 9px;
+        font-weight: 700;
+        padding: 4px 0;
+        border-radius: 4px;
+        text-align: center;
+
+        &.cancel {
+          background: #f1f5f9;
+          color: #475569;
+        }
+
+        &.confirm {
+          background: #dc2626;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+
+  .spec-footer-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    strong {
+      font-size: 12.5px;
+      color: #0f172a;
+    }
+
+    p {
+      font-size: 11px;
+      color: #64748b;
+      margin: 0;
+      line-height: 1.35;
+    }
+  }
+</style>

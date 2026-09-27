@@ -1,0 +1,312 @@
+---
+/**
+ * RentalRoiSimulator Component
+ * Interactive Rental ROI & Revenue Simulator.
+ * Allows operators to dynamically adjust fleet size, daily rental rate, and utilization percentage
+ * to project monthly revenue, annual run-rate, and circular carbon savings.
+ * 
+ * Strict WCAG AAA Contrast on dark blue or standalone card.
+ */
+interface Props {
+  isIsolated?: boolean;
+}
+
+const { isIsolated = false } = Astro.props;
+---
+
+<div class={`roi-simulator-card ${isIsolated ? 'is-isolated' : ''}`} role="region" aria-label="Simulador de Rentabilidad ROI de Alquiler">
+  <div class="roi-header">
+    <div class="roi-icon-bubble">
+      <i class="pi pi-chart-line"></i>
+    </div>
+    <div class="roi-header-text">
+      <strong class="roi-title">Simulador Financiero de Alquiler</strong>
+      <span class="roi-subtitle">Calcula ingresos mensuales y ROI anual</span>
+    </div>
+  </div>
+
+  <div class="roi-body">
+    <!-- Slider 1: Fleet Size -->
+    <div class="roi-input-group">
+      <div class="slider-row-labels">
+        <label for="roi-fleet-slider" class="input-lbl">Unidades en Flota Activa</label>
+        <span class="input-val text-mono" id="roi-fleet-val">15 unidades</span>
+      </div>
+      <input 
+        type="range" 
+        id="roi-fleet-slider" 
+        min="5" 
+        max="100" 
+        step="1" 
+        value="15" 
+        class="roi-range-input"
+        aria-label="Ajustar número de unidades en flota"
+      />
+    </div>
+
+    <!-- Slider 2: Daily Rate -->
+    <div class="roi-input-group">
+      <div class="slider-row-labels">
+        <label for="roi-rate-slider" class="input-lbl">Tarifa Diaria Promedio (€/día)</label>
+        <span class="input-val text-mono" id="roi-rate-val">€45.00</span>
+      </div>
+      <input 
+        type="range" 
+        id="roi-rate-slider" 
+        min="15" 
+        max="250" 
+        step="5" 
+        value="45" 
+        class="roi-range-input"
+        aria-label="Ajustar tarifa diaria promedio"
+      />
+    </div>
+
+    <!-- Slider 3: Utilization Rate -->
+    <div class="roi-input-group">
+      <div class="slider-row-labels">
+        <label for="roi-util-slider" class="input-lbl">Tasa de Ocupación / Utilización</label>
+        <span class="input-val text-mono" id="roi-util-val">75%</span>
+      </div>
+      <input 
+        type="range" 
+        id="roi-util-slider" 
+        min="30" 
+        max="95" 
+        step="5" 
+        value="75" 
+        class="roi-range-input"
+        aria-label="Ajustar porcentaje de ocupación mensual"
+      />
+    </div>
+
+    <!-- Reactive Outputs Grid -->
+    <div class="roi-results-board">
+      <div class="result-tile highlight">
+        <span class="res-label">Ingresos Mensuales Proyectados</span>
+        <strong class="res-num text-mono" id="roi-monthly-out">€15,187</strong>
+        <span class="res-sub">Facturación recurrente recurrente</span>
+      </div>
+      <div class="result-tile">
+        <span class="res-label">Run-rate Anual</span>
+        <strong class="res-num text-mono" id="roi-annual-out">€182,250</strong>
+        <span class="res-sub">Margen operativo neto ~78%</span>
+      </div>
+    </div>
+
+    <!-- Sustainability Impact Offset Banner -->
+    <div class="roi-co2-offset-banner">
+      <i class="pi pi-globe"></i>
+      <div>
+        <span class="offset-title">Impacto Ecológico Circular Estimado:</span>
+        <strong class="offset-val text-mono" id="roi-co2-out">6.75 toneladas de CO2 evitadas / año</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const fleetSlider = document.getElementById('roi-fleet-slider') as HTMLInputElement | null;
+  const rateSlider = document.getElementById('roi-rate-slider') as HTMLInputElement | null;
+  const utilSlider = document.getElementById('roi-util-slider') as HTMLInputElement | null;
+
+  const fleetVal = document.getElementById('roi-fleet-val');
+  const rateVal = document.getElementById('roi-rate-val');
+  const utilVal = document.getElementById('roi-util-val');
+
+  const monthlyOut = document.getElementById('roi-monthly-out');
+  const annualOut = document.getElementById('roi-annual-out');
+  const co2Out = document.getElementById('roi-co2-out');
+
+  function calculateRoi() {
+    if (!fleetSlider || !rateSlider || !utilSlider) return;
+    const units = parseFloat(fleetSlider.value);
+    const rate = parseFloat(rateSlider.value);
+    const util = parseFloat(utilSlider.value) / 100;
+
+    if (fleetVal) fleetVal.textContent = `${units} unidades`;
+    if (rateVal) rateVal.textContent = `€${rate.toFixed(2)}`;
+    if (utilVal) utilVal.textContent = `${Math.round(util * 100)}%`;
+
+    // Monthly calculation: units * rate * 30 days * util
+    const monthly = units * rate * 30 * util;
+    const annual = monthly * 12;
+    // CO2 offset: 15kg CO2 per day of active rental
+    const activeDaysPerYear = units * 365 * util;
+    const co2Tons = (activeDaysPerYear * 15) / 1000;
+
+    if (monthlyOut) monthlyOut.textContent = `€${Math.round(monthly).toLocaleString('en-US')}`;
+    if (annualOut) annualOut.textContent = `€${Math.round(annual).toLocaleString('en-US')}`;
+    if (co2Out) co2Out.textContent = `${co2Tons.toFixed(2)} toneladas de CO2 evitadas / año`;
+  }
+
+  fleetSlider?.addEventListener('input', calculateRoi);
+  rateSlider?.addEventListener('input', calculateRoi);
+  utilSlider?.addEventListener('input', calculateRoi);
+</script>
+
+<style>
+  .roi-simulator-card {
+    background: #082846;
+    border: 1px solid rgba(56, 200, 255, 0.25);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 8px 24px rgba(8, 40, 70, 0.2);
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    color: #ffffff;
+  }
+
+  .roi-simulator-card.is-isolated {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .roi-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .roi-icon-bubble {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #38c8ff;
+    color: #082846;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .roi-header-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .roi-title {
+    font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 14px;
+    font-weight: 800;
+    color: #ffffff;
+    display: block;
+    line-height: 1.2;
+  }
+
+  .roi-subtitle {
+    font-size: 11px;
+    color: #94a3b8;
+  }
+
+  .roi-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .roi-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .slider-row-labels {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .input-lbl {
+    font-size: 11px;
+    font-weight: 600;
+    color: #cbd5e1;
+  }
+
+  .input-val {
+    font-size: 12px;
+    font-weight: 800;
+    color: #38c8ff;
+  }
+
+  .roi-range-input {
+    width: 100%;
+    accent-color: #38c8ff;
+    cursor: pointer;
+  }
+
+  .roi-results-board {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 0.25rem;
+  }
+
+  .result-tile {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .result-tile.highlight {
+    background: rgba(56, 200, 255, 0.12);
+    border-color: rgba(56, 200, 255, 0.35);
+  }
+
+  .res-label {
+    font-size: 10px;
+    color: #94a3b8;
+    line-height: 1.2;
+  }
+
+  .res-num {
+    font-size: 17px;
+    font-weight: 800;
+    color: #38c8ff;
+  }
+
+  .res-sub {
+    font-size: 9.5px;
+    color: #cbd5e1;
+  }
+
+  .roi-co2-offset-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(34, 197, 94, 0.12);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 10.5px;
+    color: #86efac;
+    line-height: 1.35;
+  }
+
+  .roi-co2-offset-banner i {
+    font-size: 16px;
+    color: #4ade80;
+    flex-shrink: 0;
+  }
+
+  .offset-title {
+    display: block;
+    color: #cbd5e1;
+    font-size: 10px;
+  }
+
+  .offset-val {
+    color: #ffffff;
+    font-weight: 700;
+  }
+</style>

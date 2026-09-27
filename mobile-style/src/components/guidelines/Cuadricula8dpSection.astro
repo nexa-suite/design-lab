@@ -1,0 +1,823 @@
+---
+/**
+ * Cuadricula8dpSection.astro
+ * Canonical 8dp Spatial Grid System & Responsive Breakpoints for Android Jetpack Compose
+ * Covers Margins, Gutters, Columns (4, 8, 12), WindowSizeClass & Production Kotlin Contracts
+ */
+
+interface SpacingSpec {
+  token: string;
+  dp: number;
+  barPx: number;
+  role: string;
+  usage: string;
+}
+
+const spacingSpecs: SpacingSpec[] = [
+  { token: 'space.micro', dp: 4, barPx: 32, role: 'Micro-alineación', usage: 'Separación entre icono y texto en chip; padding interior de badges' },
+  { token: 'space.small', dp: 8, barPx: 64, role: 'Espaciado base', usage: 'Separación mínima entre botones contiguos; gap vertical en subgrupos' },
+  { token: 'space.medium', dp: 12, barPx: 96, role: 'Gutter de lista', usage: 'Gutter vertical estándar entre tarjetas de despacho en LazyColumn' },
+  { token: 'space.normal', dp: 16, barPx: 128, role: 'Margen de pantalla', usage: 'Márgenes laterales del Scaffold; padding interior de tarjetas de parada' },
+  { token: 'space.large', dp: 24, barPx: 192, role: 'Intervalo de sección', usage: 'Separación entre bloques temáticos (ej. entre cliente y lista SKU)' },
+  { token: 'space.xlarge', dp: 32, barPx: 256, role: 'Respiro inferior', usage: 'Espaciado previo a la barra fija inferior (BottomBar sticky)' },
+  { token: 'space.touch-std', dp: 48, barPx: 320, role: 'Touch Target Estándar', usage: 'Piso de accesibilidad táctil para iconos y botones estándar (WCAG 2.2 AA)' },
+  { token: 'space.touch-ind', dp: 56, barPx: 360, role: 'Touch Target Industrial', usage: 'Altura de botones industriales para operarios con guantes en cámara fría' }
+];
+
+const spacingCode = `// Canonical 8dp Spatial System & Adaptive Window Size Helper
+package com.nexa.core.designsystem.theme
+
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+
+@Immutable
+data class NexaSpacing(
+    val micro: Dp = 4.dp,
+    val small: Dp = 8.dp,
+    val medium: Dp = 12.dp,
+    val normal: Dp = 16.dp,
+    val large: Dp = 24.dp,
+    val extraLarge: Dp = 32.dp,
+    val touchStandard: Dp = 48.dp,
+    val touchIndustrial: Dp = 56.dp
+)
+
+val LocalNexaSpacing = staticCompositionLocalOf { NexaSpacing() }
+
+@Immutable
+data class NexaAdaptiveLayoutConfig(
+    val columns: Int,
+    val horizontalMargin: Dp,
+    val cardGutter: Dp
+)
+
+fun resolveAdaptiveConfig(widthClass: WindowWidthSizeClass): NexaAdaptiveLayoutConfig =
+    when (widthClass) {
+        WindowWidthSizeClass.Compact -> NexaAdaptiveLayoutConfig(
+            columns = 4,
+            horizontalMargin = 16.dp,
+            cardGutter = 12.dp
+        )
+        WindowWidthSizeClass.Medium -> NexaAdaptiveLayoutConfig(
+            columns = 8,
+            horizontalMargin = 24.dp,
+            cardGutter = 16.dp
+        )
+        WindowWidthSizeClass.Expanded -> NexaAdaptiveLayoutConfig(
+            columns = 12,
+            horizontalMargin = 32.dp,
+            cardGutter = 24.dp
+        )
+        else -> NexaAdaptiveLayoutConfig(columns = 4, horizontalMargin = 16.dp, cardGutter = 12.dp)
+    }`;
+---
+
+<div class="cuadricula-8dp-container" data-platform-target="universal">
+  <!-- Section 1: Spacing Rhythm Board Visual (Idéntico a Web Style) -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">01</span>
+        <div>
+          <p class="cuadro-kicker">FUNDAMENTOS M3 · TABLERO DE RITMO ESPACIAL 8DP</p>
+          <h3 class="cuadro-title">Tablero Visual de Espaciado (4dp a 56dp) con Barras Proporcionales</h3>
+          <p class="cuadro-subtitle">
+            Todo componente, padding, margen y gutter en <strong>Nexa Mobile</strong> se construye en múltiplos matemáticos de <strong>8dp con subpasos ópticos de 4dp</strong>. Las barras visuales reflejan fielmente la escala y su rol en la jerarquía táctil.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-th-large"></i> 8dp Grid</span>
+        <span class="cuadro-tag kotlin"><i class="pi pi-android"></i> Modifier.padding()</span>
+        <span class="cuadro-tag success"><i class="pi pi-check"></i> Pixel-Perfect Alignment</span>
+      </div>
+    </div>
+
+    <!-- Spacing Rhythm Board con Barras Visuales Proporcionales (como web-style) -->
+    <div class="spacing-board">
+      {spacingSpecs.map((item) => (
+        <div class="spacing-row">
+          <div class="spacing-meta">
+            <code>{item.token}</code>
+            <span class="dp-tag">{item.dp}dp</span>
+          </div>
+          <div class="spacing-bar-container">
+            <span class="spacing-bar" style={`width: ${item.barPx}px;`}>
+              {item.dp}dp
+            </span>
+          </div>
+          <div class="spacing-desc">
+            <strong>{item.role}</strong>
+            <small>{item.usage}</small>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Section 2: Wireframes Visuales de Layout Responsivo (4 / 8 / 12 Columnas) -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">02</span>
+        <div>
+          <p class="cuadro-kicker">ARQUITECTURA RESPONSIVA · WINDOW SIZE CLASSES</p>
+          <h3 class="cuadro-title">Wireframes Visuales de Distribución de Columnas (Compact, Medium, Expanded)</h3>
+          <p class="cuadro-subtitle">
+            Ilustración esquemática de la grilla de columnas para smartphones en ruta (4 cols), terminales plegables de supervisión (8 cols) y tablets de montacargas (12 cols).
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary">4 / 8 / 12 Columnas</span>
+        <span class="cuadro-tag kotlin">WindowWidthSizeClass</span>
+      </div>
+    </div>
+
+    <!-- Wireframes Stage: 3 Form Factors Side by Side -->
+    <div class="wireframes-stage-grid">
+      <!-- Wireframe 1: Compact (4 cols) -->
+      <article class="wireframe-card compact">
+        <div class="wireframe-header">
+          <div class="wf-device-badge">
+            <i class="pi pi-mobile"></i>
+            <span>COMPACT (&lt;600dp)</span>
+          </div>
+          <span class="wf-cols-pill">4 Columnas · 16dp Margin</span>
+        </div>
+        <div class="device-mockup phone-mockup">
+          <div class="mockup-top-bar">
+            <span class="mock-back-btn"><i class="pi pi-arrow-left"></i></span>
+            <span class="mock-title">Despacho SO-2026</span>
+          </div>
+          <!-- 4 Grid Columns Overlay -->
+          <div class="mockup-grid-columns cols-4">
+            <span class="grid-col"></span>
+            <span class="grid-col"></span>
+            <span class="grid-col"></span>
+            <span class="grid-col"></span>
+          </div>
+          <!-- Sample UI Elements -->
+          <div class="mockup-content">
+            <div class="mock-card primary-card">
+              <div class="mock-line title"></div>
+              <div class="mock-line sub"></div>
+            </div>
+            <div class="mock-card">
+              <div class="mock-line item"></div>
+              <div class="mock-line item short"></div>
+            </div>
+          </div>
+          <div class="mockup-bottom-bar">
+            <div class="mock-btn-action">CONFIRMAR (56DP)</div>
+          </div>
+        </div>
+        <div class="wireframe-meta">
+          <strong>Smartphones en Ruta (Zebra TC26)</strong>
+          <p>Columna única vertical fluida, margen 16dp, gutter 12dp, acción principal fija en el fondo.</p>
+        </div>
+      </article>
+
+      <!-- Wireframe 2: Medium (8 cols) -->
+      <article class="wireframe-card medium">
+        <div class="wireframe-header">
+          <div class="wf-device-badge">
+            <i class="pi pi-table"></i>
+            <span>MEDIUM (600–840dp)</span>
+          </div>
+          <span class="wf-cols-pill">8 Columnas · 24dp Margin</span>
+        </div>
+        <div class="device-mockup foldable-mockup">
+          <div class="mockup-top-bar">
+            <span class="mock-title">Supervisión de Patio · Muelle Central</span>
+            <span class="mock-chip-active">8 Activos</span>
+          </div>
+          <!-- 8 Grid Columns Overlay -->
+          <div class="mockup-grid-columns cols-8">
+            <span class="grid-col"></span>
+            <span class="grid-col"></span>
+            <span class="grid-col"></span>
+            <span class="grid-col"></span>
+            <span class="grid-col"></span>
+            <span class="grid-col"></span>
+            <span class="grid-col"></span>
+            <span class="grid-col"></span>
+          </div>
+          <!-- Sample UI Elements: Split Layout -->
+          <div class="mockup-content split-layout">
+            <div class="mock-panel-left">
+              <div class="mock-card"><div class="mock-line item"></div></div>
+              <div class="mock-card"><div class="mock-line item"></div></div>
+            </div>
+            <div class="mock-panel-right">
+              <div class="mock-card map-placeholder">
+                <i class="pi pi-map-marker"></i>
+                <span>Monitoreo GPS Patio</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wireframe-meta">
+          <strong>Plegables &amp; Tablets de Patio (Zebra TC57)</strong>
+          <p>Layout dividido de 2 columnas (panel maestro + detalle), margen 24dp, gutter 16dp.</p>
+        </div>
+      </article>
+
+      <!-- Wireframe 3: Expanded (12 cols) -->
+      <article class="wireframe-card expanded">
+        <div class="wireframe-header">
+          <div class="wf-device-badge">
+            <i class="pi pi-desktop"></i>
+            <span>EXPANDED (&gt;840dp)</span>
+          </div>
+          <span class="wf-cols-pill">12 Columnas · 32dp Margin</span>
+        </div>
+        <div class="device-mockup tablet-mockup">
+          <div class="mockup-with-rail">
+            <div class="mock-nav-rail">
+              <i class="pi pi-th-large active"></i>
+              <i class="pi pi-box"></i>
+              <i class="pi pi-truck"></i>
+              <i class="pi pi-cog"></i>
+            </div>
+            <div class="mock-rail-body">
+              <div class="mockup-top-bar">
+                <span class="mock-title">Terminal de Montacargas #04 · Bodega Fría</span>
+              </div>
+              <!-- 12 Grid Columns Overlay -->
+              <div class="mockup-grid-columns cols-12">
+                <span class="grid-col"></span>
+                <span class="grid-col"></span>
+                <span class="grid-col"></span>
+                <span class="grid-col"></span>
+                <span class="grid-col"></span>
+                <span class="grid-col"></span>
+                <span class="grid-col"></span>
+                <span class="grid-col"></span>
+                <span class="grid-col"></span>
+                <span class="grid-col"></span>
+                <span class="grid-col"></span>
+                <span class="grid-col"></span>
+              </div>
+              <div class="mockup-content triple-layout">
+                <div class="mock-card col-span-4"><div class="mock-line title"></div><div class="mock-line sub"></div></div>
+                <div class="mock-card col-span-8"><div class="mock-line item"></div><div class="mock-line item"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wireframe-meta">
+          <strong>Tablets Industriales (Zebra ET51 10"+)</strong>
+          <p>NavigationRail lateral fijo, vistas TwoPane complejas de alta densidad para guantes pesados.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Section 3: Especificación Completa de Tokens de Espaciado -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">03</span>
+        <div>
+          <p class="cuadro-kicker">CONTRATOS DE ESPACIADO · JETPACK COMPOSE</p>
+          <h3 class="cuadro-title">Matriz Arquitectónica de Tokens de Espaciado Canónico</h3>
+          <p class="cuadro-subtitle">
+            Valores inmutables consumidos a través de <code>LocalNexaSpacing.current</code> en toda la aplicación móvil.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contract-table-wrapper">
+      <table class="contract-table">
+        <thead>
+          <tr>
+            <th>Token Nexa</th>
+            <th>Valor (dp)</th>
+            <th>Equivalente Compose</th>
+            <th>Caso de Uso Canónico en Nexa Mobile</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="mono-chip">space.micro</code></td>
+            <td>4dp</td>
+            <td><code>4.dp</code></td>
+            <td>Separación entre icono y texto en chips; padding interno de badges de estado</td>
+          </tr>
+          <tr>
+            <td><code class="mono-chip">space.small</code></td>
+            <td>8dp</td>
+            <td><code>8.dp</code></td>
+            <td>Separación mínima entre botones adyacentes; gap vertical en subgrupos</td>
+          </tr>
+          <tr>
+            <td><code class="mono-chip">space.medium</code></td>
+            <td>12dp</td>
+            <td><code>12.dp</code></td>
+            <td>Gutter vertical estándar entre tarjetas en <code>LazyColumn</code></td>
+          </tr>
+          <tr>
+            <td><code class="mono-chip">space.normal</code></td>
+            <td>16dp</td>
+            <td><code>16.dp</code></td>
+            <td>Márgenes laterales del <code>Scaffold</code>; padding interior de tarjetas de despacho</td>
+          </tr>
+          <tr>
+            <td><code class="mono-chip">space.large</code></td>
+            <td>24dp</td>
+            <td><code>24.dp</code></td>
+            <td>Separación entre bloques temáticos de pantalla (ej. entre cliente y lista de items)</td>
+          </tr>
+          <tr>
+            <td><code class="mono-chip">space.xlarge</code></td>
+            <td>32dp</td>
+            <td><code>32.dp</code></td>
+            <td>Espaciado previo a la barra fija inferior (BottomBar sticky)</td>
+          </tr>
+          <tr>
+            <td><code class="mono-chip">space.touch-std</code></td>
+            <td>48dp</td>
+            <td><code>48.dp</code></td>
+            <td>Altura mínima táctil accesible para botones estándar e iconos</td>
+          </tr>
+          <tr>
+            <td><code class="mono-chip">space.touch-ind</code></td>
+            <td>56dp</td>
+            <td><code>56.dp</code></td>
+            <td>Altura de botones industriales para choferes con guantes de seguridad</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 4: Especificación de WindowSizeClass -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">04</span>
+        <div>
+          <p class="cuadro-kicker">ADAPTABILIDAD RESPONSIVA · WINDOW SIZE CLASSES</p>
+          <h3 class="cuadro-title">Matriz de Columnas, Márgenes y Gutters Adaptativos</h3>
+          <p class="cuadro-subtitle">
+            El sistema adopta las tres clases estándar de <code>WindowWidthSizeClass</code> de Jetpack Compose.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contract-table-wrapper">
+      <table class="contract-table">
+        <thead>
+          <tr>
+            <th>Clase de Ventana (M3)</th>
+            <th>Ancho de Pantalla</th>
+            <th>Columnas</th>
+            <th>Márgenes</th>
+            <th>Gutters</th>
+            <th>Dispositivos Típicos en Nexa</th>
+            <th>Comportamiento de Layout</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Compact</strong></td>
+            <td><code>&lt; 600dp</code></td>
+            <td><strong class="mono-chip">4 cols</strong></td>
+            <td>16dp</td>
+            <td>8dp – 12dp</td>
+            <td>Smartphones de choferes (6.1" – 6.7"), terminales de mano Zebra TC21/TC26</td>
+            <td>Columna única vertical fluida, botones fijos al pie (BottomBar), BottomSheet modal</td>
+          </tr>
+          <tr>
+            <td><strong>Medium</strong></td>
+            <td><code>600dp – 840dp</code></td>
+            <td><strong class="mono-chip">8 cols</strong></td>
+            <td>24dp</td>
+            <td>16dp</td>
+            <td>Dispositivos plegables abiertos (Foldables), tablets de supervisores de 8" en patio</td>
+            <td>Layout de dos columnas o panel dividido (lista de paradas a la izquierda, mapa a la derecha)</td>
+          </tr>
+          <tr>
+            <td><strong>Expanded</strong></td>
+            <td><code>&gt; 840dp</code></td>
+            <td><strong class="mono-chip">12 cols</strong></td>
+            <td>32dp</td>
+            <td>24dp</td>
+            <td>Tablets industriales de montacargas (10"+ Zebra ET51, Samsung Active Tab)</td>
+            <td>Navegación lateral fija (NavigationRail), vista TwoPane persistente de despacho y bodega</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 5: Contrato de Código Kotlin Spacing.kt & AdaptiveLayout.kt -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">05</span>
+        <div>
+          <p class="cuadro-kicker">CÓDIGO DE PRODUCCIÓN · KOTLIN JETPACK COMPOSE</p>
+          <h3 class="cuadro-title">Spacing.kt & AdaptiveLayout.kt (:core:designsystem)</h3>
+          <p class="cuadro-subtitle">
+            Contrato inmutable de espaciado mediante CompositionLocal y selector reactivo de layout por WindowSizeClass.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag kotlin"><i class="pi pi-code"></i> Spacing.kt</span>
+        <span class="cuadro-tag primary"><i class="pi pi-th-large"></i> LocalNexaSpacing</span>
+      </div>
+    </div>
+
+    <div class="code-container-block">
+      <div class="code-header-bar">
+        <div class="code-header-title">
+          <i class="pi pi-file"></i>
+          <span>core/designsystem/src/main/kotlin/com/nexa/core/designsystem/theme/Spacing.kt</span>
+        </div>
+        <span class="code-lang-pill">Kotlin 2.4</span>
+      </div>
+      <pre class="code-pre-box"><code>{spacingCode}</code></pre>
+    </div>
+  </section>
+</div>
+
+<style>
+  .cuadricula-8dp-container {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    width: 100%;
+  }
+
+  /* Section 1: Spacing Board */
+  .spacing-board {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .spacing-row {
+    display: grid;
+    grid-template-columns: 170px minmax(140px, 380px) 1fr;
+    gap: 16px;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid #f8fafc;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .spacing-row {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+  }
+
+  .spacing-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+
+    code {
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-size: 11px;
+      color: var(--nexa-color-primary-700, #1d4ed8);
+      font-weight: 700;
+    }
+
+    .dp-tag {
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: #f1f5f9;
+      color: #475569;
+    }
+  }
+
+  .spacing-bar-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .spacing-bar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 8px;
+    height: 26px;
+    border-left: 4px solid var(--nexa-color-primary-600, #2a67d9);
+    border-radius: 0 6px 6px 0;
+    background: var(--nexa-color-primary-50, #eff6ff);
+    color: var(--nexa-color-primary-800, #1e40af);
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10.5px;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow: 0 1px 2px rgba(42, 103, 217, 0.08);
+  }
+
+  .spacing-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+
+    strong {
+      font-size: 11.5px;
+      color: #0f172a;
+    }
+
+    small {
+      font-size: 11px;
+      color: #64748b;
+      line-height: 1.35;
+    }
+  }
+
+  /* Section 2: Wireframes Visual Stage */
+  .wireframes-stage-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 1024px) {
+    .wireframes-stage-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .wireframe-card {
+    padding: 18px;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 14px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .wireframe-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .wf-device-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+  }
+
+  .wf-cols-pill {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: #f1f5f9;
+    color: #334155;
+  }
+
+  /* Device Mockups Simulation */
+  .device-mockup {
+    position: relative;
+    background: #f8fafc;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .phone-mockup {
+    height: 240px;
+  }
+
+  .foldable-mockup {
+    height: 240px;
+  }
+
+  .tablet-mockup {
+    height: 240px;
+  }
+
+  .mockup-top-bar {
+    height: 36px;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #0f172a;
+    z-index: 2;
+  }
+
+  .mock-back-btn {
+    color: var(--nexa-color-primary-600, #2a67d9);
+    font-size: 11px;
+    margin-right: 6px;
+  }
+
+  .mock-chip-active {
+    font-size: 9px;
+    font-weight: 800;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: #dcfce7;
+    color: #166534;
+  }
+
+  /* Grid Overlay Columns */
+  .mockup-grid-columns {
+    position: absolute;
+    inset: 36px 0 0 0;
+    display: grid;
+    gap: 8px;
+    padding: 0 12px;
+    pointer-events: none;
+    z-index: 1;
+
+    &.cols-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    &.cols-8 {
+      grid-template-columns: repeat(8, 1fr);
+    }
+    &.cols-12 {
+      grid-template-columns: repeat(12, 1fr);
+      padding: 0 16px;
+    }
+
+    .grid-col {
+      background: rgba(42, 103, 217, 0.04);
+      border-left: 1px dashed rgba(42, 103, 217, 0.15);
+      border-right: 1px dashed rgba(42, 103, 217, 0.15);
+      height: 100%;
+    }
+  }
+
+  .mockup-content {
+    position: relative;
+    z-index: 2;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+
+    &.split-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    &.triple-layout {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 8px;
+    }
+  }
+
+  .mock-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+
+    &.primary-card {
+      border-left: 3px solid #2a67d9;
+    }
+
+    &.map-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 100%;
+      background: #eff6ff;
+      border: 1px dashed #93c5fd;
+      color: #1d4ed8;
+      font-size: 10px;
+      font-weight: 700;
+
+      i { font-size: 18px; }
+    }
+
+    &.col-span-4 { grid-column: span 4; }
+    &.col-span-8 { grid-column: span 8; }
+  }
+
+  .mock-line {
+    height: 6px;
+    border-radius: 3px;
+    background: #cbd5e1;
+
+    &.title { width: 75%; background: #0f172a; height: 8px; }
+    &.sub { width: 45%; }
+    &.item { width: 90%; }
+    &.short { width: 55%; }
+  }
+
+  .mockup-bottom-bar {
+    position: relative;
+    z-index: 2;
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    padding: 8px 12px;
+  }
+
+  .mock-btn-action {
+    height: 32px;
+    background: #2a67d9;
+    color: #ffffff;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+  }
+
+  /* Navigation Rail in Tablet Mockup */
+  .mockup-with-rail {
+    display: flex;
+    height: 100%;
+  }
+
+  .mock-nav-rail {
+    width: 36px;
+    background: #082846;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 0;
+    color: #94a3b8;
+    font-size: 13px;
+    z-index: 3;
+
+    i.active {
+      color: #38c8ff;
+    }
+  }
+
+  .mock-rail-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .wireframe-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    strong {
+      font-size: 13px;
+      color: #0f172a;
+    }
+
+    p {
+      font-size: 11.5px;
+      color: #64748b;
+      margin: 0;
+      line-height: 1.4;
+    }
+  }
+</style>

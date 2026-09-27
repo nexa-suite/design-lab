@@ -1,0 +1,55 @@
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circular Portrait Clipping Disc -->
+  <circle cx="40" cy="40" r="40" fill="#f8edd2"/>
+  
+  <g clip-path="url(#avatar-clip)">
+    <!-- Soft Background Ambient Tone -->
+    <rect width="80" height="80" fill="#e8dac0"/>
+    
+    <!-- Torso / Jacket (Forest Green with Flannel Touch) -->
+    <path d="M12 78 C12 60 22 55 40 55 C58 55 68 60 68 78 Z" fill="#1b3a2f"/>
+    <!-- Red Accent Inner Collar -->
+    <path d="M30 55 L40 68 L50 55 Z" fill="#b91c1c"/>
+    <!-- Backpack Strap -->
+    <path d="M22 58 L30 78" stroke="#0f172a" stroke-width="4" stroke-linecap="round"/>
+    
+    <!-- Neck -->
+    <rect x="34" y="44" width="12" height="15" rx="3" fill="#dfa273"/>
+    
+    <!-- Head / Face -->
+    <ellipse cx="40" cy="38" rx="14" ry="16" fill="#e8b184"/>
+    
+    <!-- Beard / Stubble -->
+    <path d="M27 38 C27 49 33 53 40 53 C47 53 53 49 53 38 C53 43 47 48 40 48 C33 48 27 43 27 38 Z" fill="#8d562b" fill-opacity="0.8"/>
+    
+    <!-- Ears -->
+    <circle cx="26" cy="38" r="3.5" fill="#dfa273"/>
+    <circle cx="54" cy="38" r="3.5" fill="#dfa273"/>
+    
+    <!-- Eyes & Brows -->
+    <circle cx="35" cy="36" r="1.8" fill="#2c1a0e"/>
+    <circle cx="45" cy="36" r="1.8" fill="#2c1a0e"/>
+    <path d="M32 32 Q35 30 38 32" stroke="#4a2e19" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M42 32 Q45 30 48 32" stroke="#4a2e19" stroke-width="1.5" stroke-linecap="round"/>
+    
+    <!-- Nose & Smile -->
+    <path d="M40 36 L39 41 L41 41" stroke="#c98a58" stroke-width="1.2" stroke-linecap="round"/>
+    <path d="M37 44 Q40 46 43 44" stroke="#6b3e1c" stroke-width="1.4" stroke-linecap="round"/>
+    
+    <!-- Warm Rust Beanie (Knit Cap) -->
+    <path d="M24 33 C24 18 30 14 40 14 C50 14 56 18 56 33 Z" fill="#c2410c"/>
+    <!-- Folded Cuff -->
+    <rect x="23" y="27" width="34" height="7" rx="3.5" fill="#ea580c"/>
+    <line x1="28" y1="27" x2="28" y2="34" stroke="#9a3412" stroke-width="1"/>
+    <line x1="34" y1="27" x2="34" y2="34" stroke="#9a3412" stroke-width="1"/>
+    <line x1="40" y1="27" x2="40" y2="34" stroke="#9a3412" stroke-width="1"/>
+    <line x1="46" y1="27" x2="46" y2="34" stroke="#9a3412" stroke-width="1"/>
+    <line x1="52" y1="27" x2="52" y2="34" stroke="#9a3412" stroke-width="1"/>
+  </g>
+  
+  <defs>
+    <clipPath id="avatar-clip">
+      <circle cx="40" cy="40" r="40"/>
+    </clipPath>
+  </defs>
+</svg>

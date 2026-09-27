@@ -1,0 +1,223 @@
+---
+/**
+ * ChannelBadges Component
+ * Dedicated showcase of the 4 canonical satellite channel badges from Flecto Hero Scene 01:
+ *  1. Store POS Terminal (Physical counter sync)
+ *  2. Direct Inquiry Channel (Inbound message quote)
+ *  3. Online Web Store (E-commerce catalog)
+ *  4. Escrow Guarantee Shield (All-risk custody hold)
+ * 
+ * Strict WCAG AAA contrast and interactive telemetry data.
+ */
+interface Props {
+  isIsolated?: boolean;
+}
+
+const { isIsolated = false } = Astro.props;
+---
+
+<div class={`channel-badges-suite ${isIsolated ? 'is-isolated' : ''}`} role="region" aria-label="Nodos Satélites de Canales Comerciales">
+  <div class="channel-badges-grid">
+    <!-- 1. Store POS Badge -->
+    <div class="channel-badge-tile" data-channel="pos">
+      <div class="badge-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+          <path d="M3 9l1-5h16l1 5"></path>
+          <path d="M3 9a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 3 0"></path>
+          <path d="M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"></path>
+          <path d="M9 20v-6h6v6"></path>
+        </svg>
+      </div>
+      <div class="badge-meta">
+        <div class="badge-top-row">
+          <span class="badge-title">Tienda Física POS</span>
+          <span class="live-dot" title="Sincronizado"></span>
+        </div>
+        <span class="badge-sub">Mostrador & Retiro Inmediato</span>
+        <div class="badge-telemetry">
+          <span class="telem-tag text-mono">100€ / DÍA</span>
+          <span class="telem-status">ACTIVO</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Direct Inquiry Channel Badge -->
+    <div class="channel-badge-tile" data-channel="inquiry">
+      <div class="badge-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+      </div>
+      <div class="badge-meta">
+        <div class="badge-top-row">
+          <span class="badge-title">Cotización Directa</span>
+          <span class="live-dot" title="Sincronizado"></span>
+        </div>
+        <span class="badge-sub">John Cooper · Link 1-Click</span>
+        <div class="badge-telemetry">
+          <span class="telem-tag text-mono">4 DÍAS · 2x GOPRO</span>
+          <span class="telem-status">COTIZADO</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Online Store Badge -->
+    <div class="channel-badge-tile" data-channel="online">
+      <div class="badge-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+          <rect x="5" y="2" width="14" height="20" rx="3"></rect>
+          <circle cx="12" cy="11" r="5"></circle>
+          <line x1="7" y1="11" x2="17" y2="11"></line>
+          <path d="M12 6a7 7 0 0 1 0 10"></path>
+          <path d="M12 6a7 7 0 0 0 0 10"></path>
+        </svg>
+      </div>
+      <div class="badge-meta">
+        <div class="badge-top-row">
+          <span class="badge-title">E-commerce Web</span>
+          <span class="live-dot" title="Sincronizado"></span>
+        </div>
+        <span class="badge-sub">acme.store · Catálogo Live</span>
+        <div class="badge-telemetry">
+          <span class="telem-tag text-mono">STOCK EN LÍNEA</span>
+          <span class="telem-status">EN VIVO</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Escrow Guarantee Shield Badge -->
+    <div class="channel-badge-tile" data-channel="escrow">
+      <div class="badge-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+      </div>
+      <div class="badge-meta">
+        <div class="badge-top-row">
+          <span class="badge-title">Garantía Escrow</span>
+          <span class="live-dot" title="Sincronizado"></span>
+        </div>
+        <span class="badge-sub">Preautorización Lloyd's</span>
+        <div class="badge-telemetry">
+          <span class="telem-tag text-mono">100% BLINDADO</span>
+          <span class="telem-status">SEGURO</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .channel-badges-suite {
+    width: 100%;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  .channel-badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+  }
+
+  .channel-badge-tile {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
+  }
+
+  .channel-badge-tile:hover {
+    background: rgba(56, 200, 255, 0.12);
+    border-color: rgba(56, 200, 255, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .badge-icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #38c8ff;
+    color: #082846;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .channel-badge-tile:hover .badge-icon-box {
+    transform: scale(1.06);
+  }
+
+  .badge-meta {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .badge-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .badge-title {
+    font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #38c8ff;
+    box-shadow: 0 0 6px #38c8ff;
+    flex-shrink: 0;
+  }
+
+  .badge-sub {
+    font-size: 11px;
+    color: #cbd5e1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .badge-telemetry {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .telem-tag {
+    font-size: 9.5px;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.1);
+    color: #38c8ff;
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  .telem-status {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 8.5px;
+    font-weight: 700;
+    color: #94a3b8;
+    letter-spacing: 0.05em;
+  }
+</style>

@@ -1,0 +1,508 @@
+/**
+ * NEXA MOBILE DESIGN TOKENS
+ * Canonical tokens for Android Jetpack Compose & Flutter implementations.
+ * Unified with Nexa Design Lab Web Foundations.
+ */
+:root {
+  /* Layout Dimensions */
+  --nexa-layout-content-max: 1400px;
+  --nexa-layout-sidebar-width: 284px;
+  --nexa-layout-section-gap: 40px;
+
+  /* Surfaces & Canvas (matching web-style) */
+  --nexa-surface-page: #f6faff;
+  --nexa-surface-card: #ffffff;
+  --nexa-surface-tint: #f1f5f9;
+  --nexa-surface-nav-active: #edf4fe;
+  --nexa-surface-info: #eef6ff;
+  --nexa-surface-success: #f0fdf4;
+  --nexa-surface-warning: #fffbeb;
+  --nexa-surface-danger: #fef2f2;
+
+  /* Spatial Grid & Ergonomics (Mobile Canonical) */
+  --nexa-mobile-touch-target-min: 48px;
+  --nexa-mobile-touch-target-gloves: 56px;
+  --nexa-mobile-grid-baseline: 8px;
+  --nexa-mobile-grid-half: 4px;
+  --nexa-mobile-margin-screen: 16px;
+  --nexa-mobile-gutter-cards: 12px;
+  
+  /* Radii */
+  --nexa-radius-xs: 4px;
+  --nexa-radius-sm: 6px;
+  --nexa-radius-md: 8px;
+  --nexa-radius-lg: 12px;
+  --nexa-radius-xl: 16px;
+  --nexa-radius-card: 16px;
+  --nexa-radius-button: 12px;
+  --nexa-radius-chip: 8px;
+  --nexa-radius-sheet: 24px;
+  --nexa-radius-nav-active: 10px;
+  --nexa-radius-pill: 9999px;
+
+  /* Material 3 & Android Surface Elevations */
+  --nexa-elevation-0: none;
+  --nexa-elevation-1: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --nexa-elevation-2: 0 3px 6px rgba(15, 23, 42, 0.10), 0 2px 4px rgba(15, 23, 42, 0.06);
+  --nexa-elevation-3: 0 6px 12px rgba(15, 23, 42, 0.12), 0 3px 6px rgba(15, 23, 42, 0.08);
+  --nexa-elevation-4: 0 10px 20px rgba(15, 23, 42, 0.14), 0 4px 8px rgba(15, 23, 42, 0.08);
+  --nexa-elevation-5: 0 14px 28px rgba(15, 23, 42, 0.16), 0 6px 10px rgba(15, 23, 42, 0.10);
+
+  /* Primary Blue Palette */
+  --nexa-color-primary-50: #eff6ff;
+  --nexa-color-primary-100: #dbeafe;
+  --nexa-color-primary-200: #bfdbfe;
+  --nexa-color-primary-300: #93c5fd;
+  --nexa-color-primary-400: #60a5fa;
+  --nexa-color-primary-500: #3b82f6;
+  --nexa-color-primary-600: #2a67d9;
+  --nexa-color-primary-700: #1d4ed8;
+  --nexa-color-primary-800: #1e40af;
+  --nexa-color-primary-900: #1e3a8a;
+  --nexa-color-primary-950: #172554;
+
+  /* Canonical Brand Solid Tones */
+  --nexa-brand-navy: #082846;
+  --nexa-brand-celeste: #38c8ff;
+  --nexa-color-kotlin: #7f52ff;
+  --nexa-color-flutter: #02569b;
+
+  /* Neutral Palette */
+  --nexa-color-neutral-50: #f8fafc;
+  --nexa-color-neutral-100: #f1f5f9;
+  --nexa-color-neutral-200: #e2e8f0;
+  --nexa-color-neutral-300: #cbd5e1;
+  --nexa-color-neutral-400: #94a3b8;
+  --nexa-color-neutral-500: #64748b;
+  --nexa-color-neutral-600: #475569;
+  --nexa-color-neutral-700: #334155;
+  --nexa-color-neutral-800: #1e293b;
+  --nexa-color-neutral-900: #0f172a;
+
+  /* Semantic Text & Borders */
+  --nexa-color-text-primary: #0f172a;
+  --nexa-color-text-secondary: #64748b;
+  --nexa-color-text-muted: #94a3b8;
+  --nexa-color-text-inverse: #ffffff;
+
+  --nexa-color-border-default: #e2e8f0;
+  --nexa-color-border-strong: #cbd5e1;
+  --nexa-color-border-structural: #e2e8f0;
+  --nexa-color-border-subtle: #f1f5f9;
+  --nexa-color-border-interactive: #cbd5e1;
+  --nexa-focus-ring: 0 0 0 3px rgba(42, 103, 217, 0.18);
+
+  /* Status Semantics */
+  --nexa-color-success-50: #f0fdf4;
+  --nexa-color-success-200: #bbf7d0;
+  --nexa-color-success-700: #15803d;
+  --nexa-color-warning-50: #fffbeb;
+  --nexa-color-warning-200: #fde68a;
+  --nexa-color-warning-600: #d97706;
+  --nexa-color-warning-text: #92400e;
+  --nexa-color-danger-50: #fef2f2;
+  --nexa-color-danger-200: #fecaca;
+  --nexa-color-danger-600: #dc2626;
+  --nexa-color-danger-text: #991b1b;
+
+  /* Typography Fonts */
+  --nexa-font-family-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --nexa-font-family-display: 'Plus Jakarta Sans', sans-serif;
+  --nexa-font-family-mono: 'JetBrains Mono', monospace;
+
+  /* Typography Scales (Desktop + Mobile sp equivalent) */
+  --nexa-font-size-xs: 11px;
+  --nexa-font-size-sm: 12.5px;
+  --nexa-font-size-base: 14px;
+  --nexa-font-size-md: 15px;
+  --nexa-font-size-lg: 18px;
+  --nexa-font-size-xl: 20px;
+  --nexa-font-size-2xl: 24px;
+  --nexa-font-size-3xl: 30px;
+
+  /* Backward Compatibility Aliases for mobile components */
+  --nexa-mobile-touch-target-min: 48px;
+  --nexa-mobile-surface-bg: var(--nexa-surface-page);
+  --nexa-mobile-surface-card: var(--nexa-surface-card);
+  --nexa-mobile-surface-tint: var(--nexa-surface-tint);
+  --nexa-mobile-border: var(--nexa-color-border-default);
+  --nexa-mobile-primary: var(--nexa-color-primary-600);
+  --nexa-mobile-primary-container: var(--nexa-color-primary-100);
+  --nexa-mobile-text-primary: var(--nexa-color-text-primary);
+  --nexa-mobile-text-secondary: var(--nexa-color-text-secondary);
+  --nexa-mobile-font-family: var(--nexa-font-family-body);
+  --nexa-mobile-font-family-display: var(--nexa-font-family-display);
+  --nexa-mobile-font-family-mono: var(--nexa-font-family-mono);
+}
+
+[data-theme="dark"] {
+  --nexa-surface-page: #090e17;
+  --nexa-surface-card: #111a29;
+  --nexa-surface-tint: #162235;
+  --nexa-surface-nav-active: #172844;
+  --nexa-color-text-primary: #f8fafc;
+  --nexa-color-text-secondary: #94a3b8;
+  --nexa-color-text-muted: #64748b;
+  --nexa-color-border-default: #1e293b;
+  --nexa-color-border-structural: #1e293b;
+  --nexa-color-border-interactive: #334155;
+  --nexa-color-neutral-50: #111a29;
+  --nexa-color-neutral-100: #162235;
+  --nexa-color-neutral-200: #1e293b;
+  
+  --nexa-mobile-surface-bg: #090e17;
+  --nexa-mobile-surface-card: #111a29;
+  --nexa-mobile-surface-tint: #162235;
+  --nexa-mobile-border: #1e293b;
+  --nexa-mobile-text-primary: #f8fafc;
+  --nexa-mobile-text-secondary: #94a3b8;
+}
+
+[data-contrast-mode="increased"] {
+  --nexa-color-text-primary: #000000;
+  --nexa-color-text-secondary: #1e293b;
+  --nexa-color-border-default: #64748b;
+  --nexa-color-border-structural: #475569;
+  --nexa-color-primary-600: #1a4fb8;
+}
+
+/* ==========================================================================
+   CANONICAL WEB-STYLE CUADROS & ARCHITECTURAL SPECIFICATION UTILITIES
+   ========================================================================== */
+.cuadro-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: 100%;
+}
+
+.cuadro-card {
+  background: var(--nexa-surface-card, #ffffff);
+  border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+  border-radius: var(--nexa-radius-card, 16px);
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cuadro-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
+  flex-wrap: wrap;
+}
+
+.cuadro-header-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.cuadro-num-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--nexa-color-primary-50, #eff6ff);
+  color: var(--nexa-color-primary-700, #1d4ed8);
+  font: 700 13px/1 var(--nexa-font-family-mono, monospace);
+  border: 1px solid var(--nexa-color-primary-200, #bfdbfe);
+  flex-shrink: 0;
+}
+
+.cuadro-kicker {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--nexa-color-primary-700, #1d4ed8);
+  text-transform: uppercase;
+  margin: 0 0 3px;
+}
+
+.cuadro-title {
+  font-family: var(--nexa-font-family-display, sans-serif);
+  font-size: 16.5px;
+  font-weight: 700;
+  color: var(--nexa-color-text-primary, #0f172a);
+  margin: 0;
+}
+
+.cuadro-subtitle {
+  font-size: 13.5px;
+  color: var(--nexa-color-text-secondary, #64748b);
+  margin: 4px 0 0;
+  line-height: 1.5;
+}
+
+.cuadro-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cuadro-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--nexa-color-neutral-50, #f8fafc);
+  color: var(--nexa-color-neutral-700, #334155);
+  border: 1px solid var(--nexa-color-border-default, #cbd5e1);
+}
+
+.cuadro-tag.primary {
+  background: var(--nexa-color-primary-50, #eff6ff);
+  color: var(--nexa-color-primary-800, #1e40af);
+  border-color: var(--nexa-color-primary-200, #bfdbfe);
+}
+
+.cuadro-tag.success {
+  background: var(--nexa-color-success-50, #f0fdf4);
+  color: var(--nexa-color-success-700, #15803d);
+  border-color: var(--nexa-color-success-200, #bbf7d0);
+}
+
+.cuadro-tag.warning {
+  background: var(--nexa-color-warning-50, #fffbeb);
+  color: var(--nexa-color-warning-600, #d97706);
+  border-color: var(--nexa-color-warning-200, #fde68a);
+}
+
+.cuadro-tag.kotlin {
+  background: #f3e8ff;
+  color: #7e22ce;
+  border-color: #d8b4fe;
+}
+
+/* Tables */
+.contract-table-wrapper {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+}
+
+.contract-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  text-align: left;
+}
+
+.contract-table th {
+  background: var(--nexa-color-neutral-50, #f8fafc);
+  padding: 10px 14px;
+  color: var(--nexa-color-text-secondary, #64748b);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--nexa-color-border-default, #e2e8f0);
+}
+
+.contract-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
+  color: var(--nexa-color-text-primary, #0f172a);
+  vertical-align: middle;
+}
+
+.contract-table tr:last-child td {
+  border-bottom: none;
+}
+
+.contract-table tr:hover td {
+  background: var(--nexa-color-neutral-50, #f8fafc);
+}
+
+.mono-chip {
+  font-family: var(--nexa-font-family-mono, monospace);
+  font-size: 11px;
+  color: var(--nexa-color-primary-700, #1d4ed8);
+  background: var(--nexa-color-primary-50, #eff6ff);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--nexa-color-primary-200, #bfdbfe);
+  display: inline-block;
+}
+
+.mono-type {
+  font-family: var(--nexa-font-family-mono, monospace);
+  font-size: 11px;
+  color: #7c3aed;
+  background: #f5f3ff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #ddd6fe;
+  display: inline-block;
+}
+
+.rule-chip {
+  font-size: 11px;
+  color: var(--nexa-color-neutral-700, #334155);
+  line-height: 1.4;
+}
+
+/* State Machine Flow */
+.state-machine-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 14px 16px;
+  background: var(--nexa-color-neutral-50, #f8fafc);
+  border-radius: 10px;
+  border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+}
+
+.state-step-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--nexa-surface-card, #ffffff);
+  border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+  border-radius: 8px;
+  min-width: 120px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.state-step-node.active {
+  border-color: var(--nexa-color-primary-500, #3b82f6);
+  background: var(--nexa-color-primary-50, #eff6ff);
+}
+
+.state-step-node strong {
+  font-size: 11px;
+  color: var(--nexa-color-text-primary, #0f172a);
+  font-family: var(--nexa-font-family-mono, monospace);
+}
+
+.state-step-node small {
+  font-size: 10px;
+  color: var(--nexa-color-text-secondary, #64748b);
+  margin-top: 2px;
+}
+
+.state-arrow {
+  color: var(--nexa-color-text-muted, #94a3b8);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* Spec Grid & KV */
+.spec-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.spec-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 860px) {
+  .spec-grid-2, .spec-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.spec-kv-card {
+  padding: 14px 16px;
+  border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+  border-radius: 10px;
+  background: var(--nexa-surface-card, #ffffff);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.spec-kv-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--nexa-color-text-primary, #0f172a);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.spec-kv-header i {
+  color: var(--nexa-color-primary-600, #2a67d9);
+}
+
+.spec-kv-body {
+  font-size: 12.5px;
+  color: var(--nexa-color-text-secondary, #64748b);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Code Container */
+.code-container-block {
+  background: #0a0f1d;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+  overflow: hidden;
+  font-family: var(--nexa-font-family-mono, monospace);
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.code-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: #060a13;
+  border-bottom: 1px solid #1e293b;
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.code-header-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #f1f5f9;
+  font-weight: 600;
+}
+
+.code-lang-pill {
+  background: rgba(127, 82, 255, 0.2);
+  color: #c084fc;
+  border: 1px solid rgba(127, 82, 255, 0.4);
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.code-pre-box {
+  margin: 0;
+  padding: 18px;
+  overflow-x: auto;
+  color: #cbd5e1;
+  line-height: 1.6;
+  font-size: 12px;
+}
+
+.code-pre-box .kw { color: #f472b6; font-weight: bold; }
+.code-pre-box .type { color: #38bdf8; font-weight: 600; }
+.code-pre-box .fn { color: #a78bfa; }
+.code-pre-box .str { color: #4ade80; }
+.code-pre-box .num { color: #fbbf24; }
+.code-pre-box .ann { color: #f59e0b; }
+.code-pre-box .comm { color: #64748b; font-style: italic; }
+

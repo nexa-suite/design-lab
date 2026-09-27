@@ -1,0 +1,116 @@
+---
+interface Props {
+  isIsolated?: boolean;
+}
+
+const {
+  isIsolated = false
+} = Astro.props;
+---
+
+<div class={`ch3-left-circuit ${isIsolated ? 'is-isolated' : ''}`}>
+  <div class="ch3-stem-horizontal">
+    <span class="ch3-stem-label">Multiple Payment Methods</span>
+  </div>
+  <div class="ch3-toggle-capsule">
+    <div class="ch3-switch-pill active" role="switch" aria-checked="true" aria-label="Digital Payments toggle">
+      <span class="ch3-switch-ball"></span>
+    </div>
+    <span class="ch3-toggle-text">Digital Payments</span>
+  </div>
+  
+  <div class="ch3-chips-grid">
+    <div class="ch3-chip chip-mbway" title="MB WAY">
+      <span class="chip-mb-text">MB</span>
+    </div>
+    <div class="ch3-chip chip-paypal" title="PayPal">
+      <span style="font-weight: 800; font-size: 13px;">PayPal</span>
+    </div>
+    <div class="ch3-chip chip-mastercard" title="Mastercard">
+      <span style="font-weight: 800; font-size: 13px;">Mastercard</span>
+    </div>
+    <div class="ch3-chip chip-visa" title="Visa">
+      <span style="font-weight: 800; font-size: 13px;">VISA</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .ch3-left-circuit {
+    width: 280px;
+    max-width: 100%;
+    background: var(--stage-card, #0a3359);
+    border: 1px solid rgba(56, 200, 255, 0.28);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    border-radius: 18px;
+    padding: 1.35rem 1.25rem;
+    color: #ffffff;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .ch3-left-circuit.is-isolated {
+    margin: 0 auto;
+  }
+
+  .ch3-stem-label {
+    font-size: 0.875rem;
+    font-weight: 800;
+    color: #ffffff !important;
+    display: block;
+    letter-spacing: -0.01em;
+  }
+
+  .ch3-toggle-capsule {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0.85rem 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #cbd5e1 !important;
+  }
+
+  .ch3-switch-pill {
+    width: 34px;
+    height: 18px;
+    background: #38c8ff;
+    border-radius: 999px;
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ch3-switch-ball {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #082846;
+  }
+
+  .ch3-chips-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin-top: 0.85rem;
+  }
+
+  .ch3-chip {
+    background: #ffffff;
+    border-radius: 8px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #082846 !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  .chip-mb-text {
+    font-weight: 900;
+    font-size: 14px;
+    color: #082846 !important;
+  }
+</style>

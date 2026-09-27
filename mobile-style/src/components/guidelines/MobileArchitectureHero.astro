@@ -1,0 +1,383 @@
+---
+/**
+ * MobileArchitectureHero.astro
+ * Canonical Mobile Architecture Authority & C4 Model Foundations
+ * Covers Bounded Contexts (Logistics SO-2026-0018, Warehouse DSP-204, Machinery MT-042),
+ * Technology Stack Disambiguation (Operations Android 100% Kotlin vs Buyer Mobile Flutter),
+ * and C4 Architectural Alignment for Academic Rubric (Sobresaliente E).
+ */
+---
+
+<div class="arch-hero-container" id="sec-clarificacion-stack" data-platform-target="universal">
+  <!-- Top Badges -->
+  <div class="hero-top-badges">
+    <span class="arch-kicker">AUTORIDAD CANÓNICA DE ARQUITECTURA MÓVIL</span>
+    <span class="arch-badge">ADR-0018 (Android Kotlin)</span>
+    <span class="arch-badge">ADR-0019 (Buyer Mobile)</span>
+    <span class="arch-badge frozen">FROZEN CANDIDATE (UPC SOBRESALIENTE E)</span>
+  </div>
+
+  <h2 class="hero-heading">
+    Arquitectura de Software Móvil: Bounded Contexts & C4 Model
+  </h2>
+
+  <p class="hero-intro">
+    La suite móvil de <strong>Nexa</strong> está arquitectónicamente desacoplada en dos aplicaciones con tecnologías y responsabilidades estrictas según el perfil operativo, hardware de campo y condiciones ambientales: <strong>Operations Android (100% Kotlin Nativo Jetpack Compose M3)</strong> y <strong>Buyer Mobile (Flutter / Dart)</strong>.
+  </p>
+
+  <!-- Stack Comparison Grid -->
+  <div class="arch-comparison-grid">
+    <!-- Operations Android -->
+    <div class="arch-box kotlin-box" data-platform-target="kotlin">
+      <div class="arch-box-header">
+        <div class="platform-icon-tag kotlin-tag">
+          <i class="pi pi-android" aria-hidden="true"></i>
+          <span>OPERATIONS MOBILE (CAMPO & BODEGA)</span>
+        </div>
+        <span class="tech-pill kotlin-pill">100% KOTLIN A FULL</span>
+      </div>
+
+      <h3 class="arch-app-name">Operations Android (:apps:operations-android)</h3>
+      <p class="arch-box-desc">
+        Desarrollada íntegramente en <strong>Android Nativo con Kotlin 2.4+ y Jetpack Compose Material 3</strong>. Módulos bajo Clean Architecture: <code>:core:designsystem</code>, <code>:core:database</code> (Room SQLite), <code>:core:hardware</code> (CameraX + BLE + GPS) y <code>:feature:*</code>.
+      </p>
+
+      <ul class="arch-bullets">
+        <li>
+          <i class="pi pi-check"></i>
+          <span><strong>Hardware Scanner:</strong> Integración de bajo nivel con <strong>CameraX 1.4 + ML Kit</strong> para escaneo burst de GS1-128 y DataMatrix, con <em>fallback manual numérico obligatorio de 48dp</em>.</span>
+        </li>
+        <li>
+          <i class="pi pi-check"></i>
+          <span><strong>Resiliencia Determinista:</strong> Cola de sincronización en segundo plano con <strong>WorkManager CoroutineWorker</strong>, <code>X-Idempotency-Key</code> (UUID v4) y backoff exponencial (15s inicial).</span>
+        </li>
+        <li>
+          <i class="pi pi-check"></i>
+          <span><strong>Sensores BLE & GPS:</strong> Monitoreo de cadena de frío en tiempo real (calibrado 2.0°C – 6.0°C) vía BLE GATT y geocercas automáticas de 200m con <code>FusedLocationProviderClient</code>.</span>
+        </li>
+        <li>
+          <i class="pi pi-check"></i>
+          <span><strong>Ergonomía de Guantes:</strong> Botones táctiles ampliados a <strong>56dp</strong> para cámaras de congelados (-20°C) y vibración vehicular en cabina de chofer.</span>
+        </li>
+      </ul>
+
+      <div class="arch-stack-row">
+        <span class="tag-stack">Kotlin 2.4</span>
+        <span class="tag-stack">Compose M3</span>
+        <span class="tag-stack">Room 2.6 SQLite</span>
+        <span class="tag-stack">WorkManager 2.9</span>
+        <span class="tag-stack">CameraX 1.4</span>
+        <span class="tag-stack">Navigation 3</span>
+      </div>
+    </div>
+
+    <!-- Buyer Mobile -->
+    <div class="arch-box flutter-box" data-platform-target="flutter">
+      <div class="arch-box-header">
+        <div class="platform-icon-tag flutter-tag">
+          <i class="pi pi-apple" aria-hidden="true"></i>
+          <span>BUYER MOBILE (CLIENTES B2B)</span>
+        </div>
+        <span class="tech-pill flutter-pill">FLUTTER / DART</span>
+      </div>
+
+      <h3 class="arch-app-name">Buyer Mobile (Portal B2B de Compras)</h3>
+      <p class="arch-box-desc">
+        Construida con <strong>Flutter / Dart</strong> para despliegue multiplataforma simultáneo en iOS y Android bajo el estándar canónico <strong>ADR-0019</strong>. Orientada a smartphones personales de clientes corporativos.
+      </p>
+
+      <ul class="arch-bullets">
+        <li>
+          <i class="pi pi-check"></i>
+          <span><strong>Experiencia B2B Comercial:</strong> Catálogo de equipos, solicitudes de cotización, arriendos y seguimiento en mapa en vivo de recepciones en obra.</span>
+        </li>
+        <li>
+          <i class="pi pi-check"></i>
+          <span><strong>Arquitectura Limpia:</strong> Organización <em>feature-first</em> en <code>app/core/features</code> con ViewModels inmutables y <code>provider</code>.</span>
+        </li>
+        <li>
+          <i class="pi pi-check"></i>
+          <span><strong>Navegación Declarativa:</strong> <code>go_router</code> con soporte de deep-linking y preservación de historial de navegación web y móvil.</span>
+        </li>
+        <li>
+          <i class="pi pi-check"></i>
+          <span><strong>Generación de PIN OTP:</strong> Genera códigos de 6 dígitos que los choferes validan en su Operations Android para la entrega de carga.</span>
+        </li>
+      </ul>
+
+      <div class="arch-stack-row">
+        <span class="tag-stack">Flutter 3.x</span>
+        <span class="tag-stack">Dart</span>
+        <span class="tag-stack">Provider</span>
+        <span class="tag-stack">go_router</span>
+        <span class="tag-stack">SwiftPM iOS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUADRO ARQUITECTÓNICO: Bounded Contexts en Operations Android -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">01</span>
+        <div>
+          <p class="cuadro-kicker">DOMAIN-DRIVEN DESIGN · BOUNDED CONTEXTS</p>
+          <h3 class="cuadro-title">Matriz de Bounded Contexts y Entidades del Dominio</h3>
+          <p class="cuadro-subtitle">
+            Delimitación estricta de responsabilidades del modelo de dominio según las reglas de negocio canónicas de Nexa Suite.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary">Logistics Context</span>
+        <span class="cuadro-tag success">Warehouse Context</span>
+        <span class="cuadro-tag warning">Machinery Context</span>
+      </div>
+    </div>
+
+    <div class="contract-table-wrapper">
+      <table class="contract-table">
+        <thead>
+          <tr>
+            <th>Bounded Context</th>
+            <th>Código de Muestra</th>
+            <th>Entidad Raíz (Aggregate Root)</th>
+            <th>Value Objects Clave</th>
+            <th>Sensores de Hardware Involucrados</th>
+            <th>Mecanismo de Persistencia Local</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Logistics & Delivery</strong></td>
+            <td><code class="mono-chip">SO-2026-0018</code></td>
+            <td><code>DeliveryOrder</code></td>
+            <td><code>OrderId</code>, <code>GpsCoordinate</code>, <code>TemperatureReading</code>, <code>SignatureData</code></td>
+            <td>GPS Geofence (200m), BLE Thermometer (2.0°C – 6.0°C), Pantalla táctil (Firma POD)</td>
+            <td><code>DeliveryOrderEntity</code>, <code>DeliveryQueueEntity</code> (Room SQLite)</td>
+          </tr>
+          <tr>
+            <td><strong>Warehouse & Inventory</strong></td>
+            <td><code class="mono-chip">DSP-204</code></td>
+            <td><code>PickingOrder</code></td>
+            <td><code>BatchNumber</code>, <code>ExpirationDate</code>, <code>RackLocation</code>, <code>BarcodeGs128</code></td>
+            <td>CameraX Barcode Scanner (GS1-128 burst), Zebra DataWedge Laser Intent</td>
+            <td><code>PickingItemEntity</code>, <code>InventoryLotEntity</code> (Room SQLite)</td>
+          </tr>
+          <tr>
+            <td><strong>Machinery Inspection</strong></td>
+            <td><code class="mono-chip">MT-042</code></td>
+            <td><code>InspectionChecklist</code></td>
+            <td><code>EquipmentId</code>, <code>InspectionResult</code>, <code>DefectSeverity</code>, <code>PhotoEvidenceUri</code></td>
+            <td>CameraX Photo Capture (evidencia de falla), Linterna LED (Torch)</td>
+            <td><code>InspectionChecklistEntity</code>, <code>ChecklistItemEntity</code> (Room SQLite)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Authority Note -->
+  <div class="authority-note">
+    <i class="pi pi-info-circle"></i>
+    <p>
+      <strong>Regla de Autoridad Canónica (C4 DDD):</strong> La API de Nexa Suite es la <em>única autoridad</em> de negocio. Ni la base de datos local SQLite/Room en Android ni el estado local de Flutter son fuente de verdad de inventario ni de confirmación de órdenes. El éxito offline representa un borrador inocuo en cola de reintentos administrada por WorkManager.
+    </p>
+  </div>
+</div>
+
+<style>
+  .arch-hero-container {
+    background: var(--nexa-surface-card, #ffffff);
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: var(--nexa-radius-card, 16px);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .hero-top-badges {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .arch-kicker {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    text-transform: uppercase;
+  }
+
+  .arch-badge {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--nexa-color-neutral-600, #475569);
+    background: var(--nexa-color-neutral-100, #f1f5f9);
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+
+    &.frozen {
+      color: #1e40af;
+      background: #dbeafe;
+      border-color: #bfdbfe;
+    }
+  }
+
+  .hero-heading {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--nexa-color-text-primary, #0f172a);
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+
+  .hero-intro {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--nexa-color-text-secondary, #64748b);
+    margin: 0;
+  }
+
+  .arch-comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 900px) {
+    .arch-comparison-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .arch-box {
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    background: var(--nexa-color-neutral-50, #f8fafc);
+
+    &.kotlin-box { border-left: 4px solid #7f52ff; }
+    &.flutter-box { border-left: 4px solid #0284c7; }
+  }
+
+  .arch-box-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .platform-icon-tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+
+    &.kotlin-tag { color: #7f52ff; }
+    &.flutter-tag { color: #0284c7; }
+  }
+
+  .tech-pill {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9.5px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 999px;
+
+    &.kotlin-pill { background: #7f52ff; color: #ffffff; }
+    &.flutter-pill { background: #0284c7; color: #ffffff; }
+  }
+
+  .arch-app-name {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 0;
+  }
+
+  .arch-box-desc {
+    font-size: 12.5px;
+    color: var(--nexa-color-text-secondary, #64748b);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .arch-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 4px 0;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--nexa-color-text-primary, #0f172a);
+
+      i {
+        font-size: 11px;
+        color: #16a34a;
+        margin-top: 3px;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  .arch-stack-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
+  }
+
+  .tag-stack {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 600;
+    background: #ffffff;
+    color: #334155;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid #cbd5e1;
+  }
+
+  .authority-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 18px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 12px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: #1e40af;
+
+    i {
+      font-size: 16px;
+      color: #2563eb;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+  }
+</style>

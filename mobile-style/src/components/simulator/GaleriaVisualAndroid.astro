@@ -1,0 +1,2904 @@
+---
+/**
+ * GaleriaVisualAndroid.astro
+ * Master Multi-Device Android Showcase & Visual Report Gallery
+ *
+ * Fully visual-first presentation for executive reports, PDF exports, and multi-device studio validation.
+ * Features 5 Android Form Factors with clean white backgrounds, zero dark blue cards,
+ * persistent M3 TopAppBar, and ALWAYS ACTIVE BottomNav / NavigationRail:
+ *
+ * 1. Samsung Galaxy S24 / Pixel 8 (390×844dp Compact Phone): Operaciones Nexa · Despacho en Ruta (Exact Image 4 gold standard!)
+ * 2. Samsung Galaxy S24 Ultra (412×915dp Phablet): Catálogo Mayorista B2B Frigorífico
+ * 3. Zebra TC58 Rugged Enterprise Terminal (412×820dp Industrial Phone): Inspección ISO 3691 & Prueba POD
+ * 4. Samsung Galaxy Tab Active 8" (600×960dp Compact Tablet): Tablero Kanban de Despacho (Spacious 4 columns, FIXED from Image 3!)
+ * 5. Samsung Galaxy Tab S9 11" (800×1280dp Expanded Tablet): Consola de Patio & Telemetría TwoPane con GPS y Curva de Frío 2°C-6°C
+ */
+---
+
+<section class="android-showcase-section" id="device-showcase">
+  <!-- Section Header -->
+  <header class="showcase-header">
+    <div class="header-content">
+      <span class="section-kicker-badge">
+        <i class="pi pi-android" aria-hidden="true"></i> ANDROID MULTI-DEVICE STUDIO · JETPACK COMPOSE M3
+      </span>
+      <h2 class="showcase-title">Galería Visual Multi-Dispositivo Android (100% Visual Report)</h2>
+      <p class="showcase-intro">
+        Demostración 1:1 de interfaces nativas sobre los 5 factores de forma Android estándar de la suite <strong>Nexa Mobile</strong>.
+        Diseño minimalista puro con <strong>fondo blanco, tarjetas limpias, TopAppBar persistente y Navbar activa en todas las pantallas</strong>.
+      </p>
+    </div>
+
+    <!-- Quick Filter / Device Jump Bar -->
+    <div class="device-switcher-bar" role="tablist" aria-label="Filtro de factor de forma Android">
+      <button type="button" class="dev-filter-btn active" data-filter="all">
+        <i class="pi pi-th-large"></i> Todos los Dispositivos (5)
+      </button>
+      <button type="button" class="dev-filter-btn" data-filter="s24">
+        <i class="pi pi-mobile"></i> Galaxy S24 (390dp)
+      </button>
+      <button type="button" class="dev-filter-btn" data-filter="s24ultra">
+        <i class="pi pi-mobile"></i> S24 Ultra (412dp)
+      </button>
+      <button type="button" class="dev-filter-btn" data-filter="zebra">
+        <i class="pi pi-shield"></i> Zebra TC58 (412dp)
+      </button>
+      <button type="button" class="dev-filter-btn" data-filter="tab-active">
+        <i class="pi pi-tablet"></i> Tab Active 8" (600dp)
+      </button>
+      <button type="button" class="dev-filter-btn" data-filter="tab-s9">
+        <i class="pi pi-desktop"></i> Tab S9 11" (TwoPane)
+      </button>
+    </div>
+  </header>
+
+  <!-- Showcase Gallery Grid -->
+  <div class="showcase-devices-grid">
+
+    <!-- =========================================================================
+         DEVICE 1: Samsung Galaxy S24 / Pixel 8 (390×844dp Compact Phone)
+         EXACT GOLD STANDARD FROM USER'S IMAGE 4!
+         ========================================================================= -->
+    <div class="device-card-wrapper" data-device="s24" id="device-samsung-s24">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">DISPOSITIVO 1 · SMARTPHONE COMPACTO (390×844dp)</span>
+          <h3 class="device-name">Samsung Galaxy S24 / Google Pixel 8</h3>
+          <p class="device-sub">Pantalla: Operaciones Nexa · Despacho en Ruta (Cadena de Frío)</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill role"><i class="pi pi-truck"></i> Chofer en Ruta</span>
+          <span class="meta-pill touch"><i class="pi pi-check"></i> 48dp / 56dp OK</span>
+          <span class="meta-pill gold"><i class="pi pi-star-fill"></i> Gold Standard</span>
+        </div>
+      </div>
+
+      <!-- Physical Device Chassis -->
+      <div class="android-chassis phone-s24">
+        <div class="chassis-speaker-slit"></div>
+        <div class="chassis-punch-hole"></div>
+
+        <!-- Screen Surface -->
+        <div class="android-screen-surface">
+          <!-- Android 14 System Bar -->
+          <div class="m3-system-bar">
+            <span class="sys-time">14:35</span>
+            <div class="sys-icons">
+              <span class="sys-tech">5G LTE</span>
+              <i class="pi pi-wifi"></i>
+              <i class="pi pi-bolt"></i>
+              <span class="sys-battery">94%</span>
+            </div>
+          </div>
+
+          <!-- M3 TopAppBar (Image 4 exact) -->
+          <header class="m3-top-bar">
+            <button type="button" class="top-bar-btn" aria-label="Menú">
+              <i class="pi pi-bars"></i>
+            </button>
+            <h4 class="top-bar-title">Operaciones Nexa</h4>
+            <button type="button" class="top-bar-btn notif" aria-label="Notificaciones">
+              <i class="pi pi-bell"></i>
+              <span class="notif-red-dot"></span>
+            </button>
+          </header>
+
+          <!-- Screen Body: Operaciones Despacho (Image 4 exact) -->
+          <div class="screen-scroll-body">
+            <!-- Driver Card -->
+            <div class="driver-card-white">
+              <div class="driver-avatar-circle">
+                <i class="pi pi-user"></i>
+              </div>
+              <div class="driver-info-block">
+                <div class="driver-name-row">
+                  <strong class="driver-name">Diego Morales</strong>
+                  <span class="status-pill-green">● EN RUTA</span>
+                </div>
+                <span class="driver-detail-text">Conductor Flota C-250 · ID #4829</span>
+                <span class="driver-detail-sub">Furgón Refrigerado · Placa WKN-892</span>
+              </div>
+            </div>
+
+            <!-- Section Label -->
+            <div class="screen-section-label">DESPACHO EN CURSO · CADENA DE FRÍO</div>
+
+            <!-- Dispatch Card (Image 4 exact) -->
+            <div class="dispatch-card-white">
+              <div class="dispatch-card-top">
+                <span class="order-code-mono">SO-2026-0018</span>
+                <span class="cold-chip-pill">
+                  <i class="pi pi-snowflake"></i> 2°C – 6°C
+                </span>
+              </div>
+
+              <div class="dispatch-buyer-info">
+                <h5 class="buyer-company-name">ICISA Distribuciones</h5>
+                <p class="buyer-cargo-desc">24x Salmón Salar (ALM-LMO-982) + 12x Merluza Austral</p>
+              </div>
+
+              <!-- Route Timeline with blue and green dots -->
+              <div class="route-timeline-box">
+                <div class="timeline-stop">
+                  <span class="timeline-dot blue"></span>
+                  <div class="timeline-stop-text">
+                    <strong class="stop-name">Almacén Frigorífico Central</strong>
+                    <span class="stop-time">Salida Muelle 3 Frío · 13:45</span>
+                  </div>
+                </div>
+                <div class="timeline-vertical-line"></div>
+                <div class="timeline-stop">
+                  <span class="timeline-dot green"></span>
+                  <div class="timeline-stop-text">
+                    <strong class="stop-name">ICISA Distribuciones (Av. Argentina 1240)</strong>
+                    <span class="stop-time">ETA 14:20 · Sensor Calibrado 3.8°C</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Full-width solid blue CTA button (Image 4 exact) -->
+              <button type="button" class="btn-solid-blue-cta">
+                <i class="pi pi-check-circle"></i>
+                <span>Confirmar Entrega en Sitio (POD)</span>
+              </button>
+            </div>
+
+            <!-- Extra Order Summary Card -->
+            <div class="quick-telemetry-card">
+              <div class="telemetry-item">
+                <span class="tel-label">Temperatura Caja</span>
+                <strong class="tel-val success"><i class="pi pi-check-circle"></i> 3.8°C</strong>
+              </div>
+              <div class="telemetry-separator"></div>
+              <div class="telemetry-item">
+                <span class="tel-label">Batería Termógrafo</span>
+                <strong class="tel-val">88% (Sensirion)</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Navigation Bar (Image 5 exact - ALWAYS ACTIVE!) -->
+          <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal">
+            <div class="bnav-item active">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-map-marker"></i>
+              </div>
+              <span class="bnav-label">Rutas</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-send"></i>
+              </div>
+              <span class="bnav-label">Despacho</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-box"></i>
+              </div>
+              <span class="bnav-label">Picking</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-check-square"></i>
+              </div>
+              <span class="bnav-label">Checklist</span>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- =========================================================================
+         DEVICE 2: Samsung Galaxy S24 Ultra (412×915dp Flagship Phablet)
+         B2B WHOLESALE REFRIGERATED CATALOG WITH BOX STEPPERS & TIER PRICING
+         ========================================================================= -->
+    <div class="device-card-wrapper" data-device="s24ultra" id="device-s24-ultra">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">DISPOSITIVO 2 · PHABLET MAYORISTA (412×915dp)</span>
+          <h3 class="device-name">Samsung Galaxy S24 Ultra</h3>
+          <p class="device-sub">Pantalla: Catálogo Mayorista B2B Frigorífico & Tier Pricing</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill role"><i class="pi pi-shopping-bag"></i> Comprador B2B</span>
+          <span class="meta-pill touch"><i class="pi pi-check"></i> Steppers 48dp</span>
+          <span class="meta-pill feature"><i class="pi pi-percentage"></i> Tier Volume -8%</span>
+        </div>
+      </div>
+
+      <!-- Physical Device Chassis -->
+      <div class="android-chassis phone-s24-ultra">
+        <div class="chassis-speaker-slit"></div>
+        <div class="chassis-punch-hole"></div>
+
+        <!-- Screen Surface -->
+        <div class="android-screen-surface">
+          <!-- Android 14 System Bar -->
+          <div class="m3-system-bar">
+            <span class="sys-time">14:35</span>
+            <div class="sys-icons">
+              <span class="sys-tech">5G Ultra</span>
+              <i class="pi pi-wifi"></i>
+              <span class="sys-battery">89%</span>
+            </div>
+          </div>
+
+          <!-- M3 TopAppBar -->
+          <header class="m3-top-bar">
+            <button type="button" class="top-bar-btn" aria-label="Volver">
+              <i class="pi pi-arrow-left"></i>
+            </button>
+            <h4 class="top-bar-title">Catálogo Mayorista B2B</h4>
+            <div class="top-bar-actions">
+              <button type="button" class="top-bar-btn notif" aria-label="Carrito de Compras">
+                <i class="pi pi-shopping-cart"></i>
+                <span class="notif-badge-number">3</span>
+              </button>
+            </div>
+          </header>
+
+          <!-- Screen Body: Wholesale Catalog -->
+          <div class="screen-scroll-body">
+            <!-- Search & Quick Filter Chips -->
+            <div class="catalog-search-row">
+              <div class="catalog-search-field">
+                <i class="pi pi-search"></i>
+                <input type="text" placeholder="Buscar salmón, merluza, cortes..." readonly value="Salmón Salar" />
+              </div>
+            </div>
+
+            <!-- Horizontal Filter Chips -->
+            <div class="catalog-chips-scroll">
+              <span class="cat-chip active">Todos (48)</span>
+              <span class="cat-chip">❄️ Congelados (-18°C)</span>
+              <span class="cat-chip">🧊 Frescos (2°-6°C)</span>
+              <span class="cat-chip">🔥 Oferta Volumen</span>
+            </div>
+
+            <!-- Volume Discount Banner -->
+            <div class="volume-discount-banner">
+              <i class="pi pi-bolt"></i>
+              <div>
+                <strong>Descuento por Volumen Escalonado (-8%)</strong>
+                <span>Aplicado automáticamente al superar 20 cajas en categoría Frigorífico</span>
+              </div>
+            </div>
+
+            <!-- Product Card 1: Salmón Salar -->
+            <div class="b2b-product-card">
+              <div class="prod-badge-row">
+                <span class="prod-sku">SKU: SAL-LMO-982</span>
+                <span class="cold-chip-pill"><i class="pi pi-snowflake"></i> -18.0°C</span>
+              </div>
+              <h5 class="prod-title">Salmón Salar Premium IQF (4-5 kg)</h5>
+              <p class="prod-desc">Cajas de 20kg selladas al vacío · Origen Calbuco</p>
+
+              <div class="prod-pricing-row">
+                <div class="prod-price-block">
+                  <span class="prod-unit-price">$14.20 / kg</span>
+                  <span class="prod-box-price">$284.00 por caja</span>
+                </div>
+
+                <!-- Box Stepper (min 48dp touch targets) -->
+                <div class="box-stepper-control">
+                  <button type="button" class="btn-stepper minus" aria-label="Restar caja">−</button>
+                  <span class="stepper-val">12 cjs</span>
+                  <button type="button" class="btn-stepper plus" aria-label="Sumar caja">+</button>
+                </div>
+              </div>
+
+              <div class="prod-subtotal-bar">
+                <span>Subtotal (240 kg):</span>
+                <strong>$3,408.00</strong>
+              </div>
+            </div>
+
+            <!-- Product Card 2: Merluza Austral -->
+            <div class="b2b-product-card">
+              <div class="prod-badge-row">
+                <span class="prod-sku">SKU: MER-AUS-104</span>
+                <span class="cold-chip-pill"><i class="pi pi-snowflake"></i> -18.0°C</span>
+              </div>
+              <h5 class="prod-title">Merluza Austral Filete Interfoliado</h5>
+              <p class="prod-desc">Cajas de 10kg · Grado Exportación A</p>
+
+              <div class="prod-pricing-row">
+                <div class="prod-price-block">
+                  <span class="prod-unit-price">$9.80 / kg</span>
+                  <span class="prod-box-price">$98.00 por caja</span>
+                </div>
+
+                <div class="box-stepper-control">
+                  <button type="button" class="btn-stepper minus" aria-label="Restar caja">−</button>
+                  <span class="stepper-val">6 cjs</span>
+                  <button type="button" class="btn-stepper plus" aria-label="Sumar caja">+</button>
+                </div>
+              </div>
+
+              <div class="prod-subtotal-bar">
+                <span>Subtotal (60 kg):</span>
+                <strong>$588.00</strong>
+              </div>
+            </div>
+
+            <!-- Product Card 3: Trucha Arcoíris -->
+            <div class="b2b-product-card">
+              <div class="prod-badge-row">
+                <span class="prod-sku">SKU: TRU-AND-302</span>
+                <span class="cold-chip-pill"><i class="pi pi-snowflake"></i> 3.2°C Fresco</span>
+              </div>
+              <h5 class="prod-title">Trucha Arcoíris Deshuesada Fresca</h5>
+              <p class="prod-desc">Cajas de 15kg con hielo gel · Cadena 2°C a 4°C</p>
+
+              <div class="prod-pricing-row">
+                <div class="prod-price-block">
+                  <span class="prod-unit-price">$11.50 / kg</span>
+                  <span class="prod-box-price">$172.50 por caja</span>
+                </div>
+
+                <div class="box-stepper-control">
+                  <button type="button" class="btn-stepper minus" aria-label="Restar caja">−</button>
+                  <span class="stepper-val">2 cjs</span>
+                  <button type="button" class="btn-stepper plus" aria-label="Sumar caja">+</button>
+                </div>
+              </div>
+
+              <div class="prod-subtotal-bar">
+                <span>Subtotal (30 kg):</span>
+                <strong>$345.00</strong>
+              </div>
+            </div>
+
+            <!-- Floating Order Summary Floating Bar (above BottomNav) -->
+            <div class="b2b-order-summary-dock">
+              <div class="summary-left">
+                <span class="summary-qty">20 Cajas · 330 kg (Tier -8% activo)</span>
+                <strong class="summary-total">$4,341.00 USD</strong>
+              </div>
+              <button type="button" class="btn-solid-blue-cta sm">
+                <span>Emitir Orden B2B</span>
+                <i class="pi pi-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Bottom Navigation Bar (ALWAYS ACTIVE!) -->
+          <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal">
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-map-marker"></i>
+              </div>
+              <span class="bnav-label">Rutas</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-send"></i>
+              </div>
+              <span class="bnav-label">Despacho</span>
+            </div>
+            <div class="bnav-item active">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-box"></i>
+              </div>
+              <span class="bnav-label">Picking</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-check-square"></i>
+              </div>
+              <span class="bnav-label">Checklist</span>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- =========================================================================
+         DEVICE 3: Zebra TC58 Rugged Enterprise Terminal (412×820dp Industrial)
+         ISO 3691 FORKLIFT SAFETY INSPECTION & POD SIGNATURE
+         ========================================================================= -->
+    <div class="device-card-wrapper" data-device="zebra" id="device-zebra-tc58">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">DISPOSITIVO 3 · TERMINAL INDUSTRIAL RUGGED (412×820dp)</span>
+          <h3 class="device-name">Zebra TC58 Rugged Enterprise</h3>
+          <p class="device-sub">Pantalla: Inspección Pre-operacional ISO 3691 & Firma Digital POD</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill industrial"><i class="pi pi-shield"></i> IP68 · Mil-STD-810H</span>
+          <span class="meta-pill touch"><i class="pi pi-hand"></i> 56dp Guantes Frío</span>
+          <span class="meta-pill zebra"><i class="pi pi-qrcode"></i> Lector SE55</span>
+        </div>
+      </div>
+
+      <!-- Physical Device Chassis (Rugged Industrial Bumper) -->
+      <div class="android-chassis phone-zebra">
+        <!-- Rugged Scanner Window Accent -->
+        <div class="zebra-top-scanner-bumper">
+          <div class="scanner-amber-stripe"></div>
+          <span class="zebra-brand-label">ZEBRA TC58 · ENTERPRISE SE55</span>
+          <div class="scanner-amber-stripe"></div>
+        </div>
+
+        <!-- Screen Surface -->
+        <div class="android-screen-surface">
+          <!-- Industrial System Bar -->
+          <div class="m3-system-bar zebra-bar">
+            <span class="sys-time">14:35</span>
+            <div class="sys-icons">
+              <span class="sys-tech">Zebra Wi-Fi 6E</span>
+              <i class="pi pi-qrcode text-warning"></i>
+              <span class="sys-battery">96%</span>
+            </div>
+          </div>
+
+          <!-- M3 TopAppBar -->
+          <header class="m3-top-bar">
+            <button type="button" class="top-bar-btn" aria-label="Menú">
+              <i class="pi pi-bars"></i>
+            </button>
+            <div class="top-bar-dual-title">
+              <h4 class="top-bar-title">Inspección ISO 3691</h4>
+              <span class="unit-code-badge">Montacargas Linde H30 #04</span>
+            </div>
+            <button type="button" class="top-bar-btn notif" aria-label="Alertas">
+              <i class="pi pi-bell"></i>
+            </button>
+          </header>
+
+          <!-- Screen Body: Forklift Inspection & POD -->
+          <div class="screen-scroll-body">
+            <!-- Ignition Interlock Warning Banner -->
+            <div class="ignition-warning-banner">
+              <div class="warning-icon-box">
+                <i class="pi pi-exclamation-triangle"></i>
+              </div>
+              <div class="warning-text-col">
+                <strong>BLOQUEO DE IGNICIÓN ACTIVO</strong>
+                <span>Completar los 4 puntos de seguridad para habilitar el arranque del equipo</span>
+              </div>
+            </div>
+
+            <!-- ISO 3691 Safety Switches (56dp touch targets with high-contrast tactile toggles) -->
+            <div class="screen-section-label">LISTA DE COMPROBACIÓN PREVIA AL TURNO (56DP)</div>
+
+            <div class="safety-switches-card">
+              <!-- Switch 1 -->
+              <div class="safety-switch-row">
+                <div class="switch-info">
+                  <strong class="switch-title">Freno de Mano & Presión Hidráulica</strong>
+                  <span class="switch-desc">Presión &gt;160 bar sin fugas en vástagos</span>
+                </div>
+                <div class="tactile-toggle-green" role="switch" aria-checked="true">
+                  <span class="toggle-track active">
+                    <span class="toggle-thumb"></span>
+                  </span>
+                  <span class="toggle-status">CONFORME</span>
+                </div>
+              </div>
+
+              <!-- Switch 2 -->
+              <div class="safety-switch-row">
+                <div class="switch-info">
+                  <strong class="switch-title">Horquillas & Cadena de Elevación</strong>
+                  <span class="switch-desc">Sin fisuras, desgaste &lt;10%, pasadores fijos</span>
+                </div>
+                <div class="tactile-toggle-green" role="switch" aria-checked="true">
+                  <span class="toggle-track active">
+                    <span class="toggle-thumb"></span>
+                  </span>
+                  <span class="toggle-status">CONFORME</span>
+                </div>
+              </div>
+
+              <!-- Switch 3 -->
+              <div class="safety-switch-row">
+                <div class="switch-info">
+                  <strong class="switch-title">Extintor PQS & Alarma Reversa Sonora</strong>
+                  <span class="switch-desc">Manómetro en verde · Alarma audible &gt;95dB</span>
+                </div>
+                <div class="tactile-toggle-green" role="switch" aria-checked="true">
+                  <span class="toggle-track active">
+                    <span class="toggle-thumb"></span>
+                  </span>
+                  <span class="toggle-status">CONFORME</span>
+                </div>
+              </div>
+
+              <!-- Switch 4 -->
+              <div class="safety-switch-row">
+                <div class="switch-info">
+                  <strong class="switch-title">Sensor Presencia Operador (Deadman)</strong>
+                  <span class="switch-desc">Interruptor de asiento calibrado en frío</span>
+                </div>
+                <div class="tactile-toggle-green" role="switch" aria-checked="true">
+                  <span class="toggle-track active">
+                    <span class="toggle-thumb"></span>
+                  </span>
+                  <span class="toggle-status">CONFORME</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Proof of Delivery (POD) Digital Signature Pad -->
+            <div class="screen-section-label">PRUEBA DE RECEPCIÓN (POD) & FIRMA DIGITAL</div>
+
+            <div class="pod-signature-card">
+              <div class="pod-signer-meta">
+                <div>
+                  <strong class="signer-name">Carlos Santillana</strong>
+                  <span class="signer-doc">DNI: 44.921.804 · Jefe de Muelle 3</span>
+                </div>
+                <span class="signer-badge-ok"><i class="pi pi-check"></i> Verificado</span>
+              </div>
+
+              <!-- HTML5 / SVG Digital Signature Pad -->
+              <div class="signature-canvas-box">
+                <!-- Vector stylized signature -->
+                <svg class="sig-svg" viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M 20 50 Q 50 15, 75 40 T 130 35 Q 160 10, 180 55 T 230 45 Q 260 20, 290 40" fill="none" stroke="#1d4ed8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M 60 48 Q 110 58, 220 50" fill="none" stroke="#1d4ed8" stroke-width="1.8" stroke-linecap="round" />
+                  <circle cx="280" cy="38" r="2.5" fill="#1d4ed8" />
+                </svg>
+                <div class="sig-watermark-row">
+                  <span>Timestamp: 2026-09-27 14:22:18 COT</span>
+                  <span class="sig-hash">SHA-256: d8f3a9e4...</span>
+                </div>
+              </div>
+
+              <!-- Industrial 56dp Action Button -->
+              <button type="button" class="btn-solid-blue-cta industrial-56dp">
+                <i class="pi pi-shield"></i>
+                <span>Validar Inspección & Liberar Ignición</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Bottom Navigation Bar (ALWAYS ACTIVE!) -->
+          <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal">
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-map-marker"></i>
+              </div>
+              <span class="bnav-label">Rutas</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-send"></i>
+              </div>
+              <span class="bnav-label">Despacho</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-box"></i>
+              </div>
+              <span class="bnav-label">Picking</span>
+            </div>
+            <div class="bnav-item active">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-check-square"></i>
+              </div>
+              <span class="bnav-label">Checklist</span>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- =========================================================================
+         DEVICE 4: Samsung Galaxy Tab Active 8" (600×960dp Compact Tablet)
+         FIXED KANBAN BOARD WITH 4 SPACIOUS UNCONGESTED COLUMNS! (Fixed Image 3!)
+         ========================================================================= -->
+    <div class="device-card-wrapper full-width-tablet" data-device="tab-active" id="device-tab-active">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">DISPOSITIVO 4 · TABLET COMPACTA ANDROID 8" (600×960dp)</span>
+          <h3 class="device-name">Samsung Galaxy Tab Active 8" (Rugged Industrial Tablet)</h3>
+          <p class="device-sub">Pantalla: Tablero Kanban de Despacho & Movimiento (Solución al colapso de Imagen 3: 4 columnas amplias y legibles)</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill tablet"><i class="pi pi-tablet"></i> Tablet 600dp</span>
+          <span class="meta-pill fix"><i class="pi pi-check-circle"></i> 4 Columnas Espaciosas</span>
+          <span class="meta-pill role"><i class="pi pi-th-large"></i> Mesa de Despacho</span>
+        </div>
+      </div>
+
+      <!-- Physical Tablet Chassis -->
+      <div class="android-chassis tablet-active-8">
+        <div class="tablet-camera-notch"></div>
+
+        <!-- Screen Surface -->
+        <div class="android-screen-surface">
+          <!-- Tablet System Bar -->
+          <div class="m3-system-bar">
+            <span class="sys-time">14:35</span>
+            <div class="tablet-center-status">
+              <span class="tab-chip-pill"><i class="pi pi-building"></i> Hub Frigorífico Lima Norte · Muelle 3</span>
+            </div>
+            <div class="sys-icons">
+              <span class="sys-tech">Wi-Fi 6</span>
+              <span class="connectivity-dot-online">● En Línea</span>
+              <span class="sys-battery">91%</span>
+            </div>
+          </div>
+
+          <!-- Tablet M3 TopAppBar -->
+          <header class="m3-top-bar tablet-bar">
+            <div class="top-bar-left-cluster">
+              <button type="button" class="top-bar-btn" aria-label="Menú">
+                <i class="pi pi-bars"></i>
+              </button>
+              <div class="tablet-brand-wrap">
+                <span class="tablet-brand-sub">NEXA OPERATIONS TABLET</span>
+                <h4 class="top-bar-title">Tablero de Despacho & Flujo de Patio</h4>
+              </div>
+            </div>
+
+            <div class="top-bar-right-cluster">
+              <div class="filter-pill-group">
+                <span class="tab-filter-btn active">Todos (30)</span>
+                <span class="tab-filter-btn">Congelados (-18°C)</span>
+                <span class="tab-filter-btn">Frescos (2°-6°C)</span>
+              </div>
+              <button type="button" class="top-bar-btn" title="Refrescar">
+                <i class="pi pi-refresh"></i>
+              </button>
+              <button type="button" class="top-bar-btn notif" title="Notificaciones">
+                <i class="pi pi-bell"></i>
+                <span class="notif-badge-number">3</span>
+              </button>
+            </div>
+          </header>
+
+          <!-- Screen Body: 4 SPACIOUS KANBAN COLUMNS (FIXED from Image 3!) -->
+          <div class="tablet-kanban-canvas">
+            
+            <!-- COLUMN 1: Órdenes (4) -->
+            <div class="kanban-col-wide">
+              <div class="kanban-col-header">
+                <div class="col-dot-title">
+                  <span class="col-status-dot blue"></span>
+                  <span class="col-header-text">Órdenes</span>
+                </div>
+                <span class="col-count-badge">4</span>
+              </div>
+
+              <div class="kanban-cards-stack">
+                <div class="kanban-order-card">
+                  <div class="kcard-header">
+                    <span class="kcard-id">DSP-204</span>
+                    <span class="cold-chip-pill"><i class="pi pi-snowflake"></i> -18.4°C</span>
+                  </div>
+                  <strong class="kcard-client">La Cava Fría S.A.C.</strong>
+                  <p class="kcard-cargo">24x Salmón Salar IQF · 480 kg</p>
+                  <div class="kcard-carrier-row">
+                    <i class="pi pi-truck"></i>
+                    <span>Sugerido: Flota C-250</span>
+                  </div>
+                  <button type="button" class="btn-kanban-next">
+                    <span>Avanzar a Prep</span> <i class="pi pi-arrow-right"></i>
+                  </button>
+                </div>
+
+                <div class="kanban-order-card">
+                  <div class="kcard-header">
+                    <span class="kcard-id">DSP-207</span>
+                    <span class="cold-chip-pill"><i class="pi pi-snowflake"></i> -18.0°C</span>
+                  </div>
+                  <strong class="kcard-client">Pescadería del Mar</strong>
+                  <p class="kcard-cargo">15x Merluza Austral · 150 kg</p>
+                  <div class="kcard-carrier-row">
+                    <i class="pi pi-clock"></i>
+                    <span>Sin asignar · Muelle 2</span>
+                  </div>
+                  <button type="button" class="btn-kanban-next">
+                    <span>Avanzar a Prep</span> <i class="pi pi-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- COLUMN 2: Preparación (3) -->
+            <div class="kanban-col-wide">
+              <div class="kanban-col-header">
+                <div class="col-dot-title">
+                  <span class="col-status-dot amber"></span>
+                  <span class="col-header-text">Preparación</span>
+                </div>
+                <span class="col-count-badge">3</span>
+              </div>
+
+              <div class="kanban-cards-stack">
+                <div class="kanban-order-card">
+                  <div class="kcard-header">
+                    <span class="kcard-id">DSP-198</span>
+                    <span class="cold-chip-pill"><i class="pi pi-snowflake"></i> -22.0°C</span>
+                  </div>
+                  <strong class="kcard-client">Restaurante Central</strong>
+                  <p class="kcard-cargo">8x Atún Rojo Aleta Azul · Rampa 4</p>
+                  <div class="kcard-carrier-row">
+                    <i class="pi pi-box"></i>
+                    <span>En Paletizado · Check FEFO OK</span>
+                  </div>
+                  <button type="button" class="btn-kanban-next">
+                    <span>Avanzar a Distrib</span> <i class="pi pi-arrow-right"></i>
+                  </button>
+                </div>
+
+                <div class="kanban-order-card">
+                  <div class="kcard-header">
+                    <span class="kcard-id">DSP-201</span>
+                    <span class="cold-chip-pill"><i class="pi pi-snowflake"></i> -18.0°C</span>
+                  </div>
+                  <strong class="kcard-client">Catering Gourmet Lima</strong>
+                  <p class="kcard-cargo">12x Pulpo Gallego Cocido · Muelle 2</p>
+                  <div class="kcard-carrier-row">
+                    <i class="pi pi-check"></i>
+                    <span>Sellos Verificados</span>
+                  </div>
+                  <button type="button" class="btn-kanban-next">
+                    <span>Avanzar a Distrib</span> <i class="pi pi-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- COLUMN 3: En Distribución (5) -->
+            <div class="kanban-col-wide">
+              <div class="kanban-col-header">
+                <div class="col-dot-title">
+                  <span class="col-status-dot purple"></span>
+                  <span class="col-header-text">En Distribución</span>
+                </div>
+                <span class="col-count-badge">5</span>
+              </div>
+
+              <div class="kanban-cards-stack">
+                <div class="kanban-order-card active-delivery">
+                  <div class="kcard-header">
+                    <span class="kcard-id">SO-2026-0018</span>
+                    <span class="cold-chip-pill live"><i class="pi pi-wifi"></i> 3.8°C OK</span>
+                  </div>
+                  <strong class="kcard-client">ICISA Distribuciones</strong>
+                  <p class="kcard-cargo">Diego Morales · Furgón WKN-892</p>
+                  <div class="kcard-carrier-row">
+                    <i class="pi pi-compass"></i>
+                    <span>Av. Argentina 1240 · ETA 14:20</span>
+                  </div>
+                  <div class="kcard-progress-bar">
+                    <div class="kcard-fill" style="width: 75%;"></div>
+                  </div>
+                </div>
+
+                <div class="kanban-order-card">
+                  <div class="kcard-header">
+                    <span class="kcard-id">DSP-195</span>
+                    <span class="cold-chip-pill"><i class="pi pi-snowflake"></i> 2.4°C</span>
+                  </div>
+                  <strong class="kcard-client">Hotel Miraflores Park</strong>
+                  <p class="kcard-cargo">Camión Isotérmico F-12 · Jorge Rivas</p>
+                  <div class="kcard-carrier-row">
+                    <i class="pi pi-map-marker"></i>
+                    <span>Ruta Costanera · ETA 14:55</span>
+                  </div>
+                  <div class="kcard-progress-bar">
+                    <div class="kcard-fill" style="width: 45%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- COLUMN 4: Entregado (18) -->
+            <div class="kanban-col-wide">
+              <div class="kanban-col-header">
+                <div class="col-dot-title">
+                  <span class="col-status-dot green"></span>
+                  <span class="col-header-text">Entregado</span>
+                </div>
+                <span class="col-count-badge">18</span>
+              </div>
+
+              <div class="kanban-cards-stack">
+                <div class="kanban-order-card delivered">
+                  <div class="kcard-header">
+                    <span class="kcard-id">DSP-185</span>
+                    <span class="badge-delivered-check"><i class="pi pi-check"></i> POD OK</span>
+                  </div>
+                  <strong class="kcard-client">Distribuidora San Juan</strong>
+                  <p class="kcard-cargo">Entrega completada · 13:12 COT</p>
+                  <div class="kcard-carrier-row">
+                    <i class="pi pi-user-check"></i>
+                    <span>Firmado: Roberto Alva (DNI 08291)</span>
+                  </div>
+                </div>
+
+                <div class="kanban-order-card delivered">
+                  <div class="kcard-header">
+                    <span class="kcard-id">DSP-188</span>
+                    <span class="badge-delivered-check"><i class="pi pi-check"></i> POD OK</span>
+                  </div>
+                  <strong class="kcard-client">Mercado Mayorista Frío</strong>
+                  <p class="kcard-cargo">Entrega completada · 13:40 COT</p>
+                  <div class="kcard-carrier-row">
+                    <i class="pi pi-user-check"></i>
+                    <span>Firmado: Ana Ramos (Muelle 4)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Tablet Bottom Nav Bar (ALWAYS ACTIVE!) -->
+          <nav class="m3-bottom-nav tablet-bnav" aria-label="Navegación Tablet">
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-map-marker"></i>
+              </div>
+              <span class="bnav-label">Rutas de Patio</span>
+            </div>
+            <div class="bnav-item active">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-send"></i>
+              </div>
+              <span class="bnav-label">Tablero Despacho</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-box"></i>
+              </div>
+              <span class="bnav-label">Picking FEFO</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-check-square"></i>
+              </div>
+              <span class="bnav-label">Checklist Equipos</span>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- =========================================================================
+         DEVICE 5: Samsung Galaxy Tab S9 11" (800×1280dp Expanded Tablet)
+         TWOPANE PATIO CONSOLE WITH LIVE GPS MAP & 2°C - 6°C TELEMETRY CHART
+         ========================================================================= -->
+    <div class="device-card-wrapper full-width-tablet" data-device="tab-s9" id="device-tab-s9">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">DISPOSITIVO 5 · TABLET EXPANDIDA ANDROID 11" (800×1280dp)</span>
+          <h3 class="device-name">Samsung Galaxy Tab S9 11" (TwoPane Yard & Cold Telemetry Console)</h3>
+          <p class="device-sub">Pantalla: Consola de Patio TwoPane con NavigationRail, Mapa GPS en Vivo y Gráfica Termográfica (2.0°C – 6.0°C)</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill twopane"><i class="pi pi-table"></i> TwoPane Layout</span>
+          <span class="meta-pill rail"><i class="pi pi-bars"></i> NavigationRail M3</span>
+          <span class="meta-pill telemetry"><i class="pi pi-chart-line"></i> Telemetría BLE/GPS</span>
+        </div>
+      </div>
+
+      <!-- Physical Tablet Chassis (Landscape Aspect Ratio) -->
+      <div class="android-chassis tablet-s9-twopane">
+        <div class="tablet-top-lens"></div>
+
+        <!-- Screen Surface -->
+        <div class="android-screen-surface twopane-surface">
+          <!-- Persistent NavigationRail on Left -->
+          <aside class="m3-navigation-rail" aria-label="Navegación Lateral Tablet">
+            <div class="rail-logo-mark">
+              <span class="rail-brand-n">N</span>
+            </div>
+
+            <nav class="rail-destinations">
+              <button type="button" class="rail-item">
+                <i class="pi pi-compass"></i>
+                <span>Rutas</span>
+              </button>
+              <button type="button" class="rail-item active">
+                <div class="rail-pill-indicator">
+                  <i class="pi pi-truck"></i>
+                </div>
+                <span>Patio</span>
+              </button>
+              <button type="button" class="rail-item">
+                <i class="pi pi-box"></i>
+                <span>Picking</span>
+              </button>
+              <button type="button" class="rail-item">
+                <i class="pi pi-chart-line"></i>
+                <span>Telemetría</span>
+              </button>
+              <button type="button" class="rail-item">
+                <i class="pi pi-cog"></i>
+                <span>Config</span>
+              </button>
+            </nav>
+
+            <div class="rail-footer-profile">
+              <span class="rail-avatar">DM</span>
+            </div>
+          </aside>
+
+          <!-- Main TwoPane Canvas -->
+          <div class="twopane-main-stage">
+            <!-- Top Bar across two panes -->
+            <header class="twopane-topbar">
+              <div class="topbar-title-block">
+                <span class="topbar-kicker">CONTROL CENTRAL DE FLOTA EN RUTA & CADENA DE FRÍO</span>
+                <h4 class="topbar-headline">Consola de Telemetría Frigorífica en Vivo</h4>
+              </div>
+
+              <div class="topbar-telemetry-meta">
+                <span class="badge-utc"><i class="pi pi-clock"></i> 14:35:12 COT</span>
+                <span class="badge-sat"><i class="pi pi-wifi"></i> 5G NSA · Latencia 18ms</span>
+                <button type="button" class="btn-topbar-action">
+                  <i class="pi pi-download"></i> Exportar Informe
+                </button>
+              </div>
+            </header>
+
+            <!-- TwoPane Split Grid -->
+            <div class="twopane-split-container">
+              
+              <!-- LEFT PANE: Fleet Manifest & Vehicle Queue (340px) -->
+              <div class="twopane-left-list">
+                <div class="left-pane-header">
+                  <strong>Vehículos en Ruta Activa (3)</strong>
+                  <span class="left-pane-filter"><i class="pi pi-filter"></i> Filtro</span>
+                </div>
+
+                <div class="fleet-manifest-list">
+                  <!-- Selected Vehicle 1: Diego Morales -->
+                  <div class="manifest-card selected">
+                    <div class="manifest-top-row">
+                      <strong class="vehicle-plate">WKN-892</strong>
+                      <span class="status-pill-green">● EN RUTA (75%)</span>
+                    </div>
+                    <div class="vehicle-model">Furgón Refrigerado C-250 · Diego Morales</div>
+                    <div class="manifest-order-row">
+                      <span class="m-order">SO-2026-0018</span>
+                      <span class="m-client">ICISA Distribuciones</span>
+                    </div>
+                    <div class="manifest-metrics-row">
+                      <span class="m-temp success"><i class="pi pi-snowflake"></i> 3.8°C (Normal)</span>
+                      <span class="m-speed"><i class="pi pi-compass"></i> 42 km/h</span>
+                      <span class="m-eta">ETA: 14:20</span>
+                    </div>
+                  </div>
+
+                  <!-- Vehicle 2: Jorge Rivas -->
+                  <div class="manifest-card">
+                    <div class="manifest-top-row">
+                      <strong class="vehicle-plate">BDL-409</strong>
+                      <span class="status-pill-amber">CARGANDO MUELLE 2</span>
+                    </div>
+                    <div class="vehicle-model">Camión Isotérmico #12 · Jorge Rivas</div>
+                    <div class="manifest-order-row">
+                      <span class="m-order">SO-2026-0019</span>
+                      <span class="m-client">Supermercados Andinos</span>
+                    </div>
+                    <div class="manifest-metrics-row">
+                      <span class="m-temp success"><i class="pi pi-snowflake"></i> 4.1°C</span>
+                      <span class="m-eta">Salida: 15:00</span>
+                    </div>
+                  </div>
+
+                  <!-- Vehicle 3: Mario Paredes -->
+                  <div class="manifest-card">
+                    <div class="manifest-top-row">
+                      <strong class="vehicle-plate">TRK-881</strong>
+                      <span class="status-pill-blue">EN TRÁNSITO</span>
+                    </div>
+                    <div class="vehicle-model">Tracto ThermoKing #08 · Mario Paredes</div>
+                    <div class="manifest-order-row">
+                      <span class="m-order">SO-2026-0020</span>
+                      <span class="m-client">Distribuidora Sur</span>
+                    </div>
+                    <div class="manifest-metrics-row">
+                      <span class="m-temp success"><i class="pi pi-snowflake"></i> 2.9°C</span>
+                      <span class="m-eta">ETA: 16:15</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- RIGHT PANE: Live GPS Map & 2°C - 6°C Telemetry Chart -->
+              <div class="twopane-right-detail">
+                
+                <!-- Quick Metric Cards Row -->
+                <div class="right-stats-grid">
+                  <div class="stat-mini-card">
+                    <span class="stat-kicker">SENSOR SHT40 (FRÍO)</span>
+                    <strong class="stat-number success">3.8°C</strong>
+                    <span class="stat-desc">Rango Calibrado: 2.0°C – 6.0°C</span>
+                  </div>
+                  <div class="stat-mini-card">
+                    <span class="stat-kicker">COMPRESOR THERMOKING</span>
+                    <strong class="stat-number text-primary">ACTIVO</strong>
+                    <span class="stat-desc">Setpoint: -18.2°C · Batería 88%</span>
+                  </div>
+                  <div class="stat-mini-card">
+                    <span class="stat-kicker">SATÉLITES GPS / GLONASS</span>
+                    <strong class="stat-number">11 SATS</strong>
+                    <span class="stat-desc">Precisión: ±1.2m · Fix RTK</span>
+                  </div>
+                  <div class="stat-mini-card">
+                    <span class="stat-kicker">TIEMPO ESTIMADO ARRIBO</span>
+                    <strong class="stat-number">12 MIN</strong>
+                    <span class="stat-desc">ETA 14:20 · Av. Argentina</span>
+                  </div>
+                </div>
+
+                <!-- Two Side-by-Side Detail Widgets: Map + Temp Chart -->
+                <div class="widgets-dual-row">
+                  
+                  <!-- Widget 1: Live GPS Route Vector Map -->
+                  <div class="telemetry-widget-box">
+                    <div class="widget-header">
+                      <div class="widget-title-wrap">
+                        <i class="pi pi-map text-primary"></i>
+                        <strong>Ruta GPS en Tiempo Real · Corredor Logístico</strong>
+                      </div>
+                      <span class="live-blink-badge">● TRANSMITIENDO</span>
+                    </div>
+
+                    <div class="vector-map-canvas">
+                      <!-- Rendered SVG Route Map -->
+                      <svg class="gps-map-svg" viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
+                        <!-- City Grid Base -->
+                        <path d="M 0 40 L 400 40 M 0 90 L 400 90 M 0 140 L 400 140" stroke="#f1f5f9" stroke-width="2" />
+                        <path d="M 80 0 L 80 180 M 180 0 L 180 180 M 280 0 L 280 180 M 350 0 L 350 180" stroke="#f1f5f9" stroke-width="2" />
+                        
+                        <!-- Main Avenue Highway -->
+                        <path d="M 30 130 C 100 130, 140 60, 220 60 S 320 110, 370 110" fill="none" stroke="#e2e8f0" stroke-width="12" stroke-linecap="round" />
+                        
+                        <!-- Active GPS Route Path (Blue) -->
+                        <path d="M 30 130 C 100 130, 140 60, 220 60 S 320 110, 370 110" fill="none" stroke="#2563eb" stroke-width="4" stroke-dasharray="6,4" />
+
+                        <!-- Origin Pin: Almacén Central -->
+                        <circle cx="30" cy="130" r="7" fill="#1e40af" stroke="#ffffff" stroke-width="2" />
+                        <text x="35" y="148" font-size="9" font-weight="700" fill="#0f172a">Almacén Central Frío</text>
+
+                        <!-- Moving Vehicle Pulse & Marker -->
+                        <circle cx="270" cy="85" r="14" fill="rgba(37,99,235,0.2)" />
+                        <circle cx="270" cy="85" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
+                        <text x="250" y="75" font-size="10" font-weight="800" fill="#1d4ed8">WKN-892 (42 km/h)</text>
+
+                        <!-- Destination Pin: ICISA -->
+                        <circle cx="370" cy="110" r="7" fill="#16a34a" stroke="#ffffff" stroke-width="2" />
+                        <text x="310" y="130" font-size="9" font-weight="700" fill="#15803d">ICISA (ETA 14:20)</text>
+                      </svg>
+
+                      <div class="map-footer-coords">
+                        <span>Lat: -12.046374 · Lon: -77.042793</span>
+                        <span>Corredor Av. Argentina · Tráfico Fluido</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Widget 2: Cold-Chain Telemetry Chart (2.0°C - 6.0°C) -->
+                  <div class="telemetry-widget-box">
+                    <div class="widget-header">
+                      <div class="widget-title-wrap">
+                        <i class="pi pi-chart-line text-primary"></i>
+                        <strong>Curva Termográfica · Últimos 60 Minutos</strong>
+                      </div>
+                      <span class="safe-range-chip">Rango Seguro: 2°C a 6°C</span>
+                    </div>
+
+                    <div class="chart-canvas-box">
+                      <!-- Rendered SVG Temperature Chart -->
+                      <svg class="temp-chart-svg" viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Chart Grid Lines -->
+                        <line x1="40" y1="20" x2="380" y2="20" stroke="#fecaca" stroke-dasharray="4,4" stroke-width="1.5" />
+                        <text x="5" y="24" font-size="9" font-weight="700" fill="#b91c1c">6.0°C (Máx)</text>
+
+                        <line x1="40" y1="140" x2="380" y2="140" stroke="#bfdbfe" stroke-dasharray="4,4" stroke-width="1.5" />
+                        <text x="5" y="144" font-size="9" font-weight="700" fill="#1d4ed8">2.0°C (Mín)</text>
+
+                        <!-- Safe Temperature Shaded Zone (Between 2.0°C and 6.0°C) -->
+                        <rect x="40" y="20" width="340" height="120" fill="rgba(240, 253, 244, 0.5)" />
+
+                        <!-- Center Target Line (4.0°C) -->
+                        <line x1="40" y1="80" x2="380" y2="80" stroke="#e2e8f0" stroke-width="1" />
+                        <text x="12" y="84" font-size="9" fill="#94a3b8">4.0°C</text>
+
+                        <!-- Temperature Curve Path -->
+                        <path d="M 40 85 Q 80 82, 120 86 T 200 80 T 260 84 T 320 82 T 380 83" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" />
+
+                        <!-- Data Points -->
+                        <circle cx="40" cy="85" r="3.5" fill="#16a34a" stroke="#fff" stroke-width="1.5" />
+                        <circle cx="120" cy="86" r="3.5" fill="#16a34a" stroke="#fff" stroke-width="1.5" />
+                        <circle cx="200" cy="80" r="3.5" fill="#16a34a" stroke="#fff" stroke-width="1.5" />
+                        <circle cx="260" cy="84" r="3.5" fill="#16a34a" stroke="#fff" stroke-width="1.5" />
+                        <circle cx="320" cy="82" r="3.5" fill="#16a34a" stroke="#fff" stroke-width="1.5" />
+
+                        <!-- Current Reading Node at 14:35 -->
+                        <circle cx="380" cy="83" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
+                        
+                        <!-- Tooltip Callout -->
+                        <rect x="300" y="45" width="85" height="24" rx="4" fill="#0f172a" />
+                        <text x="310" y="61" font-size="10" font-weight="700" fill="#ffffff">14:35 · 3.8°C</text>
+                        <polygon points="375,69 385,69 380,75" fill="#0f172a" />
+
+                        <!-- X Axis Time Marks -->
+                        <text x="40" y="168" font-size="8.5" fill="#94a3b8">13:40</text>
+                        <text x="120" y="168" font-size="8.5" fill="#94a3b8">13:55</text>
+                        <text x="200" y="168" font-size="8.5" fill="#94a3b8">14:10</text>
+                        <text x="280" y="168" font-size="8.5" fill="#94a3b8">14:25</text>
+                        <text x="355" y="168" font-size="8.5" font-weight="700" fill="#2563eb">14:35</text>
+                      </svg>
+
+                      <div class="chart-footer-note">
+                        <span class="note-green"><i class="pi pi-check"></i> Variación máxima ±0.3°C · Certificación HACCP Conforme</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Device Filter Buttons
+    const filterButtons = document.querySelectorAll<HTMLButtonElement>('.dev-filter-btn');
+    const deviceCards = document.querySelectorAll<HTMLElement>('.device-card-wrapper');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const target = btn.getAttribute('data-filter');
+        deviceCards.forEach(card => {
+          const dev = card.getAttribute('data-device');
+          if (target === 'all' || dev === target) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  /* ==========================================================================
+     MASTER SHOWCASE SECTION STYLES
+     Clean white canvas, high-contrast, pure Nexa minimal styling
+     ========================================================================== */
+  .android-showcase-section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+    margin-bottom: 48px;
+  }
+
+  /* Header */
+  .showcase-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: var(--nexa-radius-card, 16px);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .section-kicker-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    text-transform: uppercase;
+  }
+
+  .showcase-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: clamp(20px, 2.5vw, 26px);
+    font-weight: 800;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 4px 0 0;
+    letter-spacing: -0.02em;
+  }
+
+  .showcase-intro {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--nexa-color-text-secondary, #64748b);
+    max-width: 950px;
+    margin: 4px 0 0;
+  }
+
+  .device-switcher-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
+  }
+
+  .dev-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    background: var(--nexa-color-neutral-50, #f8fafc);
+    color: var(--nexa-color-text-secondary, #475569);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .dev-filter-btn:hover {
+    background: #ffffff;
+    color: var(--nexa-color-primary-600, #2563eb);
+    border-color: var(--nexa-color-primary-300, #93c5fd);
+  }
+
+  .dev-filter-btn.active {
+    background: var(--nexa-color-primary-600, #2563eb);
+    color: #ffffff;
+    border-color: transparent;
+    font-weight: 700;
+  }
+
+  /* Grid of Devices */
+  .showcase-devices-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+  }
+
+  .device-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+    align-items: center;
+  }
+
+  .device-card-wrapper.full-width-tablet {
+    align-items: stretch;
+  }
+
+  .device-meta-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
+  }
+
+  .device-eyebrow {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .device-name {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 0;
+  }
+
+  .device-sub {
+    font-size: 13px;
+    color: var(--nexa-color-text-secondary, #64748b);
+    margin: 2px 0 0;
+  }
+
+  .meta-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .meta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+  }
+
+  .meta-pill.role { background: #f1f5f9; color: #334155; }
+  .meta-pill.touch { background: #f0fdf4; color: #166534; border-color: #bbf7d0; }
+  .meta-pill.gold { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+  .meta-pill.feature { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
+  .meta-pill.industrial { background: #fff7ed; color: #9a3412; border-color: #ffedd5; }
+  .meta-pill.zebra { background: #0f172a; color: #f8fafc; }
+  .meta-pill.tablet { background: #f5f3ff; color: #5b21b6; border-color: #ddd6fe; }
+  .meta-pill.fix { background: #ecfdf5; color: #047857; border-color: #a7f3d0; }
+  .meta-pill.twopane { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
+  .meta-pill.rail { background: #eff6ff; color: #1d4ed8; }
+  .meta-pill.telemetry { background: #faf5ff; color: #6b21a8; border-color: #e9d5ff; }
+
+  /* ==========================================================================
+     PHYSICAL ANDROID CHASSIS FRAMES
+     ========================================================================== */
+  .android-chassis {
+    background: #0f172a;
+    border-radius: 36px;
+    padding: 10px;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.18), inset 0 0 0 2px #334155;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 12px auto;
+  }
+
+  /* Phone 1: S24 / Pixel 8 (390dp) */
+  .android-chassis.phone-s24 {
+    width: min(390px, 100%);
+    min-height: 740px;
+    border-radius: 40px;
+  }
+
+  /* Phone 2: S24 Ultra (412dp) */
+  .android-chassis.phone-s24-ultra {
+    width: min(412px, 100%);
+    min-height: 820px;
+    border-radius: 28px; /* Sharper Samsung Ultra frame */
+  }
+
+  /* Phone 3: Zebra TC58 Rugged Industrial */
+  .android-chassis.phone-zebra {
+    width: min(412px, 100%);
+    min-height: 840px;
+    border-radius: 26px;
+    border: 4px solid #334155;
+    box-shadow: 0 16px 44px rgba(15, 23, 42, 0.25), inset 0 0 0 3px #0f172a;
+  }
+
+  .zebra-top-scanner-bumper {
+    height: 24px;
+    background: #1e293b;
+    border-radius: 14px 14px 4px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    margin-bottom: 6px;
+  }
+
+  .scanner-amber-stripe {
+    width: 28px;
+    height: 6px;
+    background: #eab308;
+    border-radius: 3px;
+  }
+
+  .zebra-brand-label {
+    font-size: 8.5px;
+    font-weight: 800;
+    color: #94a3b8;
+    letter-spacing: 0.1em;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  /* Tablet 4: Tab Active 8" */
+  .android-chassis.tablet-active-8 {
+    width: min(780px, 100%);
+    min-height: 660px;
+    border-radius: 24px;
+  }
+
+  /* Tablet 5: Tab S9 11" TwoPane */
+  .android-chassis.tablet-s9-twopane {
+    width: 100%;
+    min-height: 640px;
+    border-radius: 24px;
+  }
+
+  .chassis-speaker-slit {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 4px;
+    background: #334155;
+    border-radius: 2px;
+    z-index: 20;
+  }
+
+  .chassis-punch-hole {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background: #000000;
+    border-radius: 50%;
+    border: 1px solid #1e293b;
+    z-index: 20;
+  }
+
+  .tablet-camera-notch, .tablet-top-lens {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background: #000000;
+    border-radius: 50%;
+    z-index: 20;
+  }
+
+  /* ==========================================================================
+     ANDROID SCREEN SURFACE (WHITE MINIMALIST)
+     ========================================================================== */
+  .android-screen-surface {
+    background: #f8fafc;
+    border-radius: 28px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    color: var(--nexa-color-text-primary, #0f172a);
+    font-family: var(--nexa-font-family-body, 'Inter', sans-serif);
+    font-size: 13px;
+  }
+
+  .android-screen-surface.twopane-surface {
+    flex-direction: row;
+  }
+
+  /* System Bar */
+  .m3-system-bar {
+    height: 28px;
+    background: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #475569;
+    border-bottom: 1px solid #f1f5f9;
+    flex-shrink: 0;
+  }
+
+  .m3-system-bar.zebra-bar {
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .sys-time {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .sys-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sys-tech {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #2563eb;
+  }
+
+  .sys-battery {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10.5px;
+  }
+
+  .tablet-center-status {
+    display: flex;
+    align-items: center;
+  }
+
+  .tab-chip-pill {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #1e40af;
+    background: #eff6ff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .connectivity-dot-online {
+    color: #16a34a;
+    font-weight: 700;
+    font-size: 11px;
+  }
+
+  /* M3 TopAppBar */
+  .m3-top-bar {
+    height: 52px;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    flex-shrink: 0;
+  }
+
+  .top-bar-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    border: none;
+    background: transparent;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .top-bar-btn.notif .notif-red-dot {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 8px;
+    height: 8px;
+    background: #ef4444;
+    border-radius: 50%;
+    border: 1.5px solid #ffffff;
+  }
+
+  .notif-badge-number {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 800;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .top-bar-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .top-bar-dual-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .unit-code-badge {
+    font-size: 10px;
+    color: #2563eb;
+    font-weight: 700;
+  }
+
+  .tablet-bar {
+    height: 56px;
+    padding: 0 16px;
+  }
+
+  .top-bar-left-cluster {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .tablet-brand-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tablet-brand-sub {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #2563eb;
+    text-transform: uppercase;
+  }
+
+  .top-bar-right-cluster {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .filter-pill-group {
+    display: flex;
+    gap: 6px;
+  }
+
+  .tab-filter-btn {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: #475569;
+    cursor: pointer;
+  }
+
+  .tab-filter-btn.active {
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-weight: 700;
+  }
+
+  /* Screen Scroll Body */
+  .screen-scroll-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .screen-section-label {
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #64748b;
+    text-transform: uppercase;
+    margin: 4px 2px;
+  }
+
+  /* ==========================================================================
+     EXACT GOLD STANDARD CARDS (IMAGE 4)
+     ========================================================================== */
+  .driver-card-white {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .driver-avatar-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #e0f2fe;
+    color: #0284c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .driver-info-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .driver-name-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .driver-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .status-pill-green {
+    font-size: 9.5px;
+    font-weight: 800;
+    background: #dcfce7;
+    color: #15803d;
+    padding: 2px 7px;
+    border-radius: 999px;
+  }
+
+  .status-pill-amber {
+    font-size: 9.5px;
+    font-weight: 800;
+    background: #fef3c7;
+    color: #92400e;
+    padding: 2px 7px;
+    border-radius: 999px;
+  }
+
+  .status-pill-blue {
+    font-size: 9.5px;
+    font-weight: 800;
+    background: #eff6ff;
+    color: #1e40af;
+    padding: 2px 7px;
+    border-radius: 999px;
+  }
+
+  .driver-detail-text, .driver-detail-sub {
+    font-size: 11.5px;
+    color: #64748b;
+  }
+
+  .dispatch-card-white {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .dispatch-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .order-code-mono {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 12.5px;
+    font-weight: 800;
+    color: #2563eb;
+  }
+
+  .cold-chip-pill {
+    background: #eff6ff;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .cold-chip-pill.live {
+    background: #f0fdf4;
+    color: #166534;
+    border-color: #bbf7d0;
+  }
+
+  .dispatch-buyer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .buyer-company-name {
+    font-size: 14.5px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .buyer-cargo-desc {
+    font-size: 11.5px;
+    color: #475569;
+    margin: 0;
+  }
+
+  /* Timeline */
+  .route-timeline-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .timeline-stop {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .timeline-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .timeline-dot.blue { background: #2563eb; }
+  .timeline-dot.green { background: #16a34a; }
+
+  .timeline-vertical-line {
+    width: 2px;
+    height: 16px;
+    background: #cbd5e1;
+    margin-left: 4px;
+  }
+
+  .timeline-stop-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stop-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .stop-time {
+    font-size: 10.5px;
+    color: #64748b;
+  }
+
+  /* Solid Blue CTA Button (Min 52dp touch target) */
+  .btn-solid-blue-cta {
+    min-height: 52px;
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 13.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+    transition: opacity 0.15s ease;
+  }
+
+  .btn-solid-blue-cta.sm {
+    min-height: 42px;
+    padding: 0 16px;
+    font-size: 12.5px;
+  }
+
+  .btn-solid-blue-cta.industrial-56dp {
+    min-height: 56px;
+    font-size: 14px;
+    background: #1d4ed8;
+  }
+
+  .btn-solid-blue-cta:hover { opacity: 0.92; }
+
+  .quick-telemetry-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .telemetry-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: center;
+  }
+
+  .tel-label {
+    font-size: 10px;
+    color: #64748b;
+  }
+
+  .tel-val {
+    font-size: 12px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .tel-val.success { color: #16a34a; }
+  .telemetry-separator { width: 1px; height: 28px; background: #e2e8f0; }
+
+  /* ==========================================================================
+     M3 BOTTOM NAVIGATION BAR (ALWAYS ACTIVE!)
+     ========================================================================== */
+  .m3-bottom-nav {
+    height: 64px;
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 8px;
+    flex-shrink: 0;
+  }
+
+  .bnav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    min-width: 56px;
+    min-height: 48px;
+    justify-content: center;
+    cursor: pointer;
+    color: #64748b;
+    transition: all 0.15s ease;
+  }
+
+  .bnav-pill-indicator {
+    padding: 3px 14px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    transition: all 0.15s ease;
+  }
+
+  .bnav-label {
+    font-size: 10.5px;
+    font-weight: 600;
+  }
+
+  .bnav-item.active {
+    color: #1d4ed8;
+  }
+
+  .bnav-item.active .bnav-pill-indicator {
+    background: #dbeafe;
+    color: #1d4ed8;
+  }
+
+  .bnav-item.active .bnav-label {
+    font-weight: 800;
+  }
+
+  /* ==========================================================================
+     DEVICE 2: B2B CATALOG SPECIFIC STYLES
+     ========================================================================== */
+  .catalog-search-row { width: 100%; }
+
+  .catalog-search-field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 12.5px;
+  }
+
+  .catalog-search-field input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 12.5px;
+    color: #0f172a;
+    background: transparent;
+  }
+
+  .catalog-chips-scroll {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
+  .cat-chip {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    white-space: nowrap;
+  }
+
+  .cat-chip.active {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border-color: #bfdbfe;
+    font-weight: 700;
+  }
+
+  .volume-discount-banner {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: #92400e;
+    font-size: 11.5px;
+  }
+
+  .volume-discount-banner i { font-size: 16px; color: #d97706; }
+
+  .b2b-product-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .prod-badge-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .prod-sku {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    color: #64748b;
+  }
+
+  .prod-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .prod-desc {
+    font-size: 11px;
+    color: #64748b;
+    margin: 0;
+  }
+
+  .prod-pricing-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 4px;
+  }
+
+  .prod-price-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .prod-unit-price {
+    font-size: 15px;
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  .prod-box-price {
+    font-size: 10.5px;
+    color: #64748b;
+  }
+
+  .box-stepper-control {
+    display: flex;
+    align-items: center;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .btn-stepper {
+    width: 38px;
+    height: 38px;
+    border: none;
+    background: #f8fafc;
+    color: #0f172a;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stepper-val {
+    padding: 0 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .prod-subtotal-bar {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 6px;
+    border-top: 1px dashed #e2e8f0;
+    font-size: 11.5px;
+    color: #475569;
+  }
+
+  .b2b-order-summary-dock {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  }
+
+  .summary-left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .summary-qty {
+    font-size: 10px;
+    color: #166534;
+    font-weight: 700;
+  }
+
+  .summary-total {
+    font-size: 16px;
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  /* ==========================================================================
+     DEVICE 3: ZEBRA TC58 INDUSTRIAL STYLES
+     ========================================================================== */
+  .ignition-warning-banner {
+    background: #fef3c7;
+    border: 1px solid #fde68a;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: #92400e;
+  }
+
+  .warning-icon-box {
+    font-size: 22px;
+    color: #d97706;
+  }
+
+  .warning-text-col strong {
+    font-size: 12px;
+    display: block;
+  }
+
+  .warning-text-col span {
+    font-size: 11px;
+    line-height: 1.3;
+  }
+
+  .safety-switches-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .safety-switch-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    border-bottom: 1px solid #f1f5f9;
+    min-height: 56px;
+  }
+
+  .safety-switch-row:last-child { border-bottom: none; }
+
+  .switch-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .switch-title {
+    font-size: 12.5px;
+    color: #0f172a;
+  }
+
+  .switch-desc {
+    font-size: 10.5px;
+    color: #64748b;
+  }
+
+  .tactile-toggle-green {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+
+  .toggle-track {
+    width: 44px;
+    height: 24px;
+    background: #cbd5e1;
+    border-radius: 12px;
+    position: relative;
+    transition: background 0.2s ease;
+  }
+
+  .toggle-track.active {
+    background: #16a34a;
+  }
+
+  .toggle-thumb {
+    width: 20px;
+    height: 20px;
+    background: #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 22px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    transition: left 0.2s ease;
+  }
+
+  .toggle-status {
+    font-size: 10px;
+    font-weight: 800;
+    color: #166534;
+  }
+
+  .pod-signature-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .pod-signer-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .signer-name {
+    font-size: 13px;
+    display: block;
+    color: #0f172a;
+  }
+
+  .signer-doc {
+    font-size: 11px;
+    color: #64748b;
+  }
+
+  .signer-badge-ok {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #166534;
+    background: #dcfce7;
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+
+  .signature-canvas-box {
+    background: #ffffff;
+    border: 1.5px dashed #94a3b8;
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    height: 95px;
+    position: relative;
+  }
+
+  .sig-svg {
+    width: 100%;
+    height: 60px;
+  }
+
+  .sig-watermark-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: #94a3b8;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  /* ==========================================================================
+     DEVICE 4: TAB ACTIVE 8" KANBAN STYLES (FIXED 4-COLUMN LAYOUT)
+     ========================================================================== */
+  .tablet-kanban-canvas {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    padding: 14px;
+    background: #f1f5f9;
+    overflow-x: auto;
+  }
+
+  .kanban-col-wide {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .kanban-col-header {
+    padding: 10px 12px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .col-dot-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .col-status-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+  }
+
+  .col-status-dot.blue { background: #2563eb; }
+  .col-status-dot.amber { background: #f59e0b; }
+  .col-status-dot.purple { background: #8b5cf6; }
+  .col-status-dot.green { background: #10b981; }
+
+  .col-header-text {
+    font-size: 12px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .col-count-badge {
+    font-size: 10px;
+    font-weight: 800;
+    background: #e2e8f0;
+    color: #334155;
+    padding: 1px 7px;
+    border-radius: 10px;
+  }
+
+  .kanban-cards-stack {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+  }
+
+  .kanban-order-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  }
+
+  .kanban-order-card.active-delivery {
+    border-left: 3px solid #8b5cf6;
+  }
+
+  .kanban-order-card.delivered {
+    background: #fafafa;
+    border-left: 3px solid #10b981;
+  }
+
+  .kcard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .kcard-id {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 800;
+    color: #2563eb;
+  }
+
+  .badge-delivered-check {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #047857;
+    background: #d1fae5;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .kcard-client {
+    font-size: 12.5px;
+    color: #0f172a;
+    display: block;
+  }
+
+  .kcard-cargo {
+    font-size: 11px;
+    color: #475569;
+    margin: 0;
+  }
+
+  .kcard-carrier-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10.5px;
+    color: #64748b;
+  }
+
+  .btn-kanban-next {
+    margin-top: 4px;
+    padding: 6px 10px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .kcard-progress-bar {
+    height: 4px;
+    background: #e2e8f0;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+
+  .kcard-fill {
+    height: 100%;
+    background: #8b5cf6;
+  }
+
+  /* ==========================================================================
+     DEVICE 5: TAB S9 11" TWOPANE STYLES
+     ========================================================================== */
+  .m3-navigation-rail {
+    width: 76px;
+    background: #ffffff;
+    border-right: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 0;
+    flex-shrink: 0;
+  }
+
+  .rail-logo-mark {
+    width: 40px;
+    height: 40px;
+    background: #2563eb;
+    color: #ffffff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 24px;
+  }
+
+  .rail-destinations {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    align-items: center;
+    flex: 1;
+  }
+
+  .rail-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .rail-item i { font-size: 18px; }
+
+  .rail-pill-indicator {
+    background: #dbeafe;
+    color: #1d4ed8;
+    padding: 4px 16px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rail-item.active { color: #1d4ed8; font-weight: 800; }
+
+  .rail-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-weight: 800;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #bfdbfe;
+  }
+
+  .twopane-main-stage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #f8fafc;
+  }
+
+  .twopane-topbar {
+    height: 56px;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+  }
+
+  .topbar-kicker {
+    font-size: 8.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #2563eb;
+    text-transform: uppercase;
+  }
+
+  .topbar-headline {
+    font-size: 15px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .topbar-telemetry-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .badge-utc, .badge-sat {
+    font-size: 11px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    background: #f1f5f9;
+    padding: 4px 8px;
+    border-radius: 6px;
+    color: #475569;
+  }
+
+  .btn-topbar-action {
+    font-size: 11px;
+    font-weight: 700;
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .twopane-split-container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    overflow: hidden;
+  }
+
+  @media (max-width: 900px) {
+    .twopane-split-container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .twopane-left-list {
+    background: #ffffff;
+    border-right: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .left-pane-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+  }
+
+  .left-pane-filter { color: #2563eb; font-weight: 600; cursor: pointer; }
+
+  .fleet-manifest-list {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+  }
+
+  .manifest-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+  }
+
+  .manifest-card.selected {
+    border-color: #2563eb;
+    background: #eff6ff;
+    box-shadow: 0 0 0 1px #2563eb;
+  }
+
+  .manifest-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .vehicle-plate {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 13px;
+    color: #0f172a;
+  }
+
+  .vehicle-model {
+    font-size: 11.5px;
+    color: #475569;
+  }
+
+  .manifest-order-row {
+    display: flex;
+    gap: 8px;
+    font-size: 11px;
+    color: #64748b;
+  }
+
+  .m-order { font-family: var(--nexa-font-family-mono, monospace); font-weight: 700; color: #2563eb; }
+
+  .manifest-metrics-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10.5px;
+    padding-top: 4px;
+    border-top: 1px dashed #cbd5e1;
+  }
+
+  .m-temp.success { color: #15803d; font-weight: 700; }
+
+  .twopane-right-detail {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+  }
+
+  .right-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  @media (max-width: 1000px) {
+    .right-stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .stat-mini-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .stat-kicker {
+    font-size: 8.5px;
+    font-weight: 800;
+    color: #64748b;
+    letter-spacing: 0.05em;
+  }
+
+  .stat-number {
+    font-size: 17px;
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  .stat-number.success { color: #16a34a; }
+  .stat-desc { font-size: 9.5px; color: #64748b; }
+
+  .widgets-dual-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 950px) {
+    .widgets-dual-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .telemetry-widget-box {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .widget-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #0f172a;
+  }
+
+  .live-blink-badge {
+    font-size: 9px;
+    font-weight: 800;
+    color: #2563eb;
+    background: #eff6ff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    animation: pulseBlink 2s infinite;
+  }
+
+  @keyframes pulseBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .safe-range-chip {
+    font-size: 9px;
+    font-weight: 700;
+    color: #166534;
+    background: #dcfce7;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .vector-map-canvas, .chart-canvas-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .gps-map-svg, .temp-chart-svg {
+    width: 100%;
+    height: 150px;
+  }
+
+  .map-footer-coords, .chart-footer-note {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9.5px;
+    color: #64748b;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .note-green { color: #16a34a; font-weight: 600; }
+</style>

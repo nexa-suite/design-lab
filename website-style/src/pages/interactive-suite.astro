@@ -1,0 +1,483 @@
+---
+/**
+ * WEBSITE STYLE — INTERACTIVE SUITE FLECTO & NEXAFY
+ * Dedicated interactive experience showcasing the five macro living artifacts:
+ * 1. Scrollytelling.astro (Dual [Bookings]/[Inventory] switcher + 4-step smartphone checkout simulator with date picker & dynamic calculations)
+ * 2. AccessChannels.astro (Authentic Bürocratik Awwwards SOTD 8-tile Bento Grid on warm beige #FDFAE7)
+ * 3. SaaSPlatform.astro ("Built for humans. Designed for you." operational OS with searchable ledger)
+ * 4. InsuranceSection.astro (Bürocratik asymmetric notch plate with 100% protection toggle)
+ * 5. Sustainability.astro (Circular economy canvas with European aerial photography)
+ */
+import 'primeicons/primeicons.css';
+import '../styles/tokens.css';
+import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
+import Scrollytelling from '../components/scrollytelling/Scrollytelling.astro';
+import AccessChannels from '../components/sections/AccessChannels.astro';
+import SaaSPlatform from '../components/sections/SaaSPlatform.astro';
+import InsuranceSection from '../components/sections/InsuranceSection.astro';
+import Sustainability from '../components/sections/Sustainability.astro';
+---
+
+<!DOCTYPE html>
+<html lang="es" data-contrast-mode="standard">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>✦ Suite Interactiva Flecto & Nexafy · Living Artifacts (Nexa Suite)</title>
+
+  <!-- Google Fonts for Canonical Nexa & Flecto Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" 
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--nexa-surface-page, #f6faff);
+      color: var(--nexa-color-text-primary, #0f172a);
+      font-family: var(--nexa-font-family-body, 'Inter', sans-serif);
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .suite-container {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* Suite Header Banner */
+    .suite-hero-banner {
+      background: #082846;
+      color: #ffffff;
+      padding: 3rem 2rem 2.5rem;
+      border-bottom: 1px solid #1a4971;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .banner-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(56, 200, 255, 0.15);
+      border: 1px solid rgba(56, 200, 255, 0.35);
+      color: #38c8ff;
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .banner-title {
+      font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+      font-size: clamp(26px, 3.5vw, 38px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: #ffffff;
+      margin-bottom: 0.75rem;
+    }
+
+    .banner-lead {
+      font-size: 15px;
+      color: #cbd5e1;
+      max-width: 920px;
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
+    }
+
+    /* Sticky Quick Jump Navigation */
+    .suite-nav-sticky {
+      position: sticky;
+      top: 56px;
+      z-index: 80;
+      background: rgba(8, 40, 70, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(56, 200, 255, 0.2);
+      padding: 0.65rem 1.5rem;
+    }
+
+    .suite-nav-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .suite-nav-inner::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-pills-list {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .nav-pill-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #94a3b8;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.16s ease;
+    }
+
+    .nav-pill-item:hover {
+      background: rgba(56, 200, 255, 0.15);
+      color: #38c8ff;
+      border-color: rgba(56, 200, 255, 0.3);
+    }
+
+    .nav-pill-item.active {
+      background: #38c8ff;
+      color: #082846;
+      border-color: #38c8ff;
+      font-weight: 700;
+    }
+
+    .suite-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .action-link {
+      font-size: 12px;
+      color: #38c8ff;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 6px;
+      background: rgba(56, 200, 255, 0.1);
+      transition: background 0.15s ease;
+    }
+
+    .action-link:hover {
+      background: rgba(56, 200, 255, 0.2);
+    }
+
+    /* Section Wrapper & Architectural Eyebrow */
+    .artifact-section-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .artifact-eyebrow-strip {
+      background: #0b1f35;
+      color: #94a3b8;
+      padding: 0.6rem 2rem;
+      border-top: 1px solid #1e3a5f;
+      border-bottom: 1px solid #1e3a5f;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 11.5px;
+      font-family: var(--nexa-font-family-mono, monospace);
+    }
+
+    .eyebrow-title {
+      font-weight: 700;
+      color: #38c8ff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .eyebrow-meta {
+      color: #64748b;
+      font-size: 11px;
+    }
+
+    /* Suite Master Footer */
+    .suite-master-footer {
+      background: #082846;
+      border-top: 1px solid #1a4971;
+      padding: 2.5rem 2rem;
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-left strong {
+      color: #ffffff;
+      display: block;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 1.25rem;
+    }
+
+    .footer-nav a {
+      color: #38c8ff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-nav a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .suite-hero-banner {
+        padding: 2rem 1.25rem 1.75rem;
+      }
+      .artifact-eyebrow-strip {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.6rem 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <UnifiedLabShell currentSection="interactive-suite">
+    <div class="suite-container">
+      
+      <!-- Top Hero Banner -->
+      <header class="suite-hero-banner">
+        <div class="banner-inner">
+          <div class="banner-badge">
+            <i class="pi pi-sparkles" aria-hidden="true"></i>
+            <span>NEXAFY SUITE INTERACTIVA · RECONSTRUCCIÓN FORENSE COMPLETA</span>
+          </div>
+
+          <h1 class="banner-title">
+            Suite Interactiva de Artefactos Vivos Flecto & Nexafy
+          </h1>
+
+          <p class="banner-lead">
+            Orquestación integral de los cinco artefactos clave premiados con Awwwards Site of the Day (Bürocratik, 2022). Cada módulo opera bajo las reglas fundacionales de Nexa: <strong>cero degradados raster</strong>, colorimetría sólida pura, geometría de muesca asimétrica, conductos vasculares y calculadoras interactivas de conversión en tiempo real.
+          </p>
+        </div>
+      </header>
+
+      <!-- Sticky Quick Jump Bar -->
+      <nav class="suite-nav-sticky" aria-label="Navegación de artefactos de la suite">
+        <div class="suite-nav-inner">
+          <div class="nav-pills-list">
+            <a href="#scrollytelling" class="nav-pill-item active" data-jump="scrollytelling">
+              <i class="pi pi-mobile" aria-hidden="true"></i>
+              <span>1. Scrollytelling & Smartphone</span>
+            </a>
+            <a href="#channels" class="nav-pill-item" data-jump="channels">
+              <i class="pi pi-th-large" aria-hidden="true"></i>
+              <span>2. Access Channels Bento (#FDFAE7)</span>
+            </a>
+            <a href="#features" class="nav-pill-item" data-jump="features">
+              <i class="pi pi-table" aria-hidden="true"></i>
+              <span>3. SaaS Operational OS</span>
+            </a>
+            <a href="#insurance" class="nav-pill-item" data-jump="insurance">
+              <i class="pi pi-shield" aria-hidden="true"></i>
+              <span>4. Seguro Notch & 100% Toggle</span>
+            </a>
+            <a href="#sustainability" class="nav-pill-item" data-jump="sustainability">
+              <i class="pi pi-globe" aria-hidden="true"></i>
+              <span>5. Circular Economy Canvas</span>
+            </a>
+          </div>
+
+          <div class="suite-nav-actions">
+            <a href="/artifacts" class="action-link" title="Ver catálogo de micro-artefactos aislados">
+              Catálogo &rarr;
+            </a>
+            <a href="/landing-spec" class="action-link" title="Ver especificación técnica de arquitectura">
+              Specs &rarr;
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- ==================================================================
+           ARTEFACTO 1: Scrollytelling & Live Smartphone Simulator
+           ================================================================== -->
+      <section class="artifact-section-wrapper" aria-label="Scrollytelling y Simulador de Smartphone">
+        <div class="artifact-eyebrow-strip">
+          <span class="eyebrow-title">
+            <i class="pi pi-mobile" aria-hidden="true"></i>
+            ARTEFACTO 01 · SCROLLYTELLING & SIMULADOR SMARTPHONE DE CHECKOUT (4 PANTALLAS)
+          </span>
+          <span class="eyebrow-meta">
+            Pestañas duales [Bookings] / [Inventory] · Selector de Fechas · Cálculo en Tiempo Real · Confetti
+          </span>
+        </div>
+
+        <Scrollytelling />
+      </section>
+
+      <!-- ==================================================================
+           ARTEFACTO 2: Access Channels Bento Grid (Warm Beige #FDFAE7)
+           ================================================================== -->
+      <section class="artifact-section-wrapper" aria-label="Access Channels Bento Grid">
+        <div class="artifact-eyebrow-strip">
+          <span class="eyebrow-title">
+            <i class="pi pi-th-large" aria-hidden="true"></i>
+            ARTEFACTO 02 · ACCESS CHANNELS BENTO GRID (#FDFAE7)
+          </span>
+          <span class="eyebrow-meta">
+            Bürocratik Awwwards SOTD · 8 Tiles Asimétricos · Flecto Market, Online Store, Escrow & Analytics
+          </span>
+        </div>
+
+        <AccessChannels />
+      </section>
+
+      <!-- ==================================================================
+           ARTEFACTO 3: SaaS Platform ("Built for humans. Designed for you.")
+           ================================================================== -->
+      <section class="artifact-section-wrapper" aria-label="Plataforma SaaS OS">
+        <div class="artifact-eyebrow-strip">
+          <span class="eyebrow-title">
+            <i class="pi pi-table" aria-hidden="true"></i>
+            ARTEFACTO 03 · SAAS OPERATIONAL OS · "BUILT FOR HUMANS. DESIGNED FOR YOU."
+          </span>
+          <span class="eyebrow-meta">
+            Gestor de reservas tabular en tiempo real · Búsqueda reactiva por arrendatario y número de serie
+          </span>
+        </div>
+
+        <SaaSPlatform />
+      </section>
+
+      <!-- ==================================================================
+           ARTEFACTO 4: Insurance Section (Bürocratik Asymmetric Notch + 100% Toggle)
+           ================================================================== -->
+      <section class="artifact-section-wrapper" aria-label="Sección de Seguro y Protección">
+        <div class="artifact-eyebrow-strip">
+          <span class="eyebrow-title">
+            <i class="pi pi-shield" aria-hidden="true"></i>
+            ARTEFACTO 04 · SEGURO ASIMÉTRICO & TOGGLE DE PROTECCIÓN 100%
+          </span>
+          <span class="eyebrow-meta">
+            Placa de muesca asimétrica Bézier · Alternador reactivo de póliza cero deducible
+          </span>
+        </div>
+
+        <InsuranceSection />
+      </section>
+
+      <!-- ==================================================================
+           ARTEFACTO 5: Sustainability (Circular Economy Canvas)
+           ================================================================== -->
+      <section class="artifact-section-wrapper" aria-label="Canvas de Sostenibilidad">
+        <div class="artifact-eyebrow-strip">
+          <span class="eyebrow-title">
+            <i class="pi pi-globe" aria-hidden="true"></i>
+            ARTEFACTO 05 · CANVAS DE SOSTENIBILIDAD & ECONOMÍA CIRCULAR
+          </span>
+          <span class="eyebrow-meta">
+            Fotografía aérea europea independiente 1600x1200 · Contadores animados de ahorro de CO2
+          </span>
+        </div>
+
+        <Sustainability />
+      </section>
+
+      <!-- Master Footer -->
+      <footer class="suite-master-footer">
+        <div class="footer-inner">
+          <div class="footer-left">
+            <strong>Nexa Suite · Website Style Interactive Laboratory</strong>
+            <span>Evidencia histórica Awwwards SOTD (2022-07-20) convertida a estándares de diseño de Nexa Suite.</span>
+          </div>
+          <nav class="footer-nav" aria-label="Enlaces de navegación de cierre">
+            <a href="/">&larr; Volver al Motor Gráfico</a>
+            <a href="/artifacts">Catálogo de Micro-Artefactos</a>
+            <a href="/landing-spec">Landing Architecture Spec</a>
+          </nav>
+        </div>
+      </footer>
+
+    </div>
+  </UnifiedLabShell>
+
+  <!-- Wire client-side interactions across all artifacts -->
+  <script src="../scripts/interactions.ts"></script>
+
+  <script>
+    // Smooth scroll and active pill observer for quick jump nav
+    const jumpLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-pill-item');
+    const sections = ['scrollytelling', 'channels', 'features', 'insurance', 'sustainability'];
+
+    jumpLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const targetId = link.getAttribute('data-jump');
+        if (targetId) {
+          const targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            e.preventDefault();
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+
+    // Scrollspy to mark active pill
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          const top = el.getBoundingClientRect().top;
+          if (top <= 140) {
+            current = id;
+          }
+        }
+      });
+
+      if (current) {
+        jumpLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('data-jump') === current);
+        });
+      }
+    }, { passive: true });
+  </script>
+</body>
+</html>

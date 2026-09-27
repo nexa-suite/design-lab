@@ -4,6 +4,7 @@ Release notes are scoped to the Nexa Design Lab executable evidence repository.
 
 | Published release | Summary |
 | --- | --- |
+| [v1.1.0](./v1.1.0.md) | Triad monorepo architecture, Living Geometry Engine, mobile simulator & shared design tokens |
 | [v1.0.1](./v1.0.1.md) | Metadata-correction patch for the stable Angular design-system baseline |
 | [v1.0.0](./v1.0.0.md) | Stable Angular design-system and visual-evidence baseline |
 

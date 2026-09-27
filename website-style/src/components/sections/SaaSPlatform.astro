@@ -1,0 +1,540 @@
+---
+// SaaSPlatform: Bento layout with believable, rich tabular rental management interface
+---
+
+<section class="saas-section" id="features" aria-labelledby="saas-heading">
+  <div class="saas-container">
+    <div class="saas-header">
+      <div class="saas-tag text-eyebrow">
+        <span>Flecto Platform</span>
+        <span class="tag-sep" aria-hidden="true">—</span>
+        <span>Operational OS</span>
+      </div>
+
+      <div class="saas-headline-row">
+        <h2 id="saas-heading" class="saas-title">
+          Built for humans. <br />
+          <span class="text-mint">Designed for you.</span>
+        </h2>
+
+        <div class="saas-actions">
+          <a href="#book-demo" class="saas-btn primary">Early Access</a>
+          <a href="#demo-modal" class="saas-btn secondary">Interactive Tour</a>
+        </div>
+      </div>
+
+      <p class="saas-lead body-lead">
+        A flexible operating system for all rental operations: enterprise fleets or boutique creators, with a storefront counter or purely online. Control bookings, synchronize inventory, and dispatch digital agreements seamlessly.
+      </p>
+    </div>
+
+    <!-- The Bento Dashboard Grid -->
+    <div class="bento-grid">
+      <!-- Main Bento Card 1: Tabular Bookings Manager (Span 2 cols) -->
+      <div class="bento-card bento-wide">
+        <div class="bento-card-header">
+          <div>
+            <h3 class="bento-card-title">Manage your bookings</h3>
+            <p class="bento-card-sub">Centralize online and counter bookings in real-time.</p>
+          </div>
+          
+          <div class="table-search-bar" role="search">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="bookings-search-input" placeholder="Search renter or serial..." aria-label="Filter bookings" />
+          </div>
+        </div>
+
+        <!-- Rich Tabular Booking Manager -->
+        <div class="table-responsive-wrapper" tabindex="0" role="region" aria-label="Bookings ledger table">
+          <table class="bookings-table" id="bookings-table">
+            <thead>
+              <tr>
+                <th scope="col">Renter</th>
+                <th scope="col">Items</th>
+                <th scope="col">Status</th>
+                <th scope="col">Payment</th>
+                <th scope="col">Value</th>
+                <th scope="col">Dates</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="renter-cell">
+                    <span class="avatar-circle">JC</span>
+                    <div>
+                      <strong>John Cooper</strong>
+                      <span>Direct Quote Link</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <span class="item-tag">2x GoPro HERO10</span>
+                </td>
+                <td>
+                  <span class="status-chip active">Active</span>
+                </td>
+                <td>
+                  <span class="pay-method text-mono">MB Way (Paid)</span>
+                </td>
+                <td>
+                  <strong class="text-mint text-mono">€690.00</strong>
+                </td>
+                <td>
+                  <span class="dates-text text-mono">20/03 — 24/03</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="renter-cell">
+                    <span class="avatar-circle">SJ</span>
+                    <div>
+                      <strong>Sarah Jenkins</strong>
+                      <span>Online Web Store</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <span class="item-tag">Sony FX3 Cinema Kit</span>
+                </td>
+                <td>
+                  <span class="status-chip pending">ID Pending</span>
+                </td>
+                <td>
+                  <span class="pay-method text-mono">Stripe (Hold)</span>
+                </td>
+                <td>
+                  <strong class="text-mint text-mono">€1,450.00</strong>
+                </td>
+                <td>
+                  <span class="dates-text text-mono">22/03 — 28/03</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="renter-cell">
+                    <span class="avatar-circle">MS</span>
+                    <div>
+                      <strong>Marco Silva</strong>
+                      <span>Flagship POS</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <span class="item-tag">DJI Mavic 3 Pro Drone</span>
+                </td>
+                <td>
+                  <span class="status-chip completed">Returned</span>
+                </td>
+                <td>
+                  <span class="pay-method text-mono">Card (Settled)</span>
+                </td>
+                <td>
+                  <strong class="text-mint text-mono">€320.00</strong>
+                </td>
+                <td>
+                  <span class="dates-text text-mono">14/03 — 18/03</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Bento Card 2: Inventory Availability Schedule -->
+      <div class="bento-card">
+        <div class="bento-card-header">
+          <div>
+            <h3 class="bento-card-title">Control your inventory</h3>
+            <p class="bento-card-sub">Fleet tracking & dynamic stock buffers.</p>
+          </div>
+          <span class="fleet-count text-mono">94% Utilized</span>
+        </div>
+
+        <div class="inventory-bars">
+          <div class="inv-item-progress">
+            <div class="progress-labels">
+              <span>GoPro HERO10 Fleet (12 units)</span>
+              <span class="text-mono">10 Rented</span>
+            </div>
+            <div class="progress-track" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" aria-label="GoPro utilization">
+              <div class="progress-fill" style="width: 83%;"></div>
+            </div>
+          </div>
+
+          <div class="inv-item-progress">
+            <div class="progress-labels">
+              <span>Sony Cinema Bodies (6 units)</span>
+              <span class="text-mono">5 Rented</span>
+            </div>
+            <div class="progress-track" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" aria-label="Sony utilization">
+              <div class="progress-fill" style="width: 83%;"></div>
+            </div>
+          </div>
+
+          <div class="inv-item-progress">
+            <div class="progress-labels">
+              <span>Lighting & Grip Packs (20 units)</span>
+              <span class="text-mono">18 Rented</span>
+            </div>
+            <div class="progress-track" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="Lighting utilization">
+              <div class="progress-fill" style="width: 90%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer-metric">
+          <div class="metric-col">
+            <span class="met-num text-mono">0.0%</span>
+            <span class="met-txt">Overbooking Conflict Rate</span>
+          </div>
+          <div class="metric-col">
+            <span class="met-num text-mono">100%</span>
+            <span class="met-txt">Insured In-Transit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .saas-section {
+    padding: var(--layout-section-padding) 0;
+    background-color: var(--surface-primary-deep);
+    color: var(--text-primary-on-dark);
+    overflow-x: clip;
+  }
+
+  .saas-container {
+    max-width: var(--layout-max-width);
+    margin: 0 auto;
+    padding: 0 var(--layout-gutter);
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .saas-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .saas-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--primitive-color-mint-400);
+  }
+
+  .saas-headline-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+  }
+
+  .saas-title {
+    color: var(--primitive-color-cream-100);
+    line-height: 1.05;
+  }
+
+  .text-mint {
+    color: var(--primitive-color-mint-500);
+  }
+
+  .saas-lead {
+    color: var(--text-secondary-on-dark);
+    max-width: 65ch;
+  }
+
+  .saas-actions {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .saas-btn {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--primitive-font-display);
+    font-size: 0.875rem;
+    font-weight: var(--primitive-weight-bold);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--pill-radius);
+    text-decoration: none;
+    transition: all var(--primitive-duration-fast) ease;
+  }
+
+  .saas-btn.primary {
+    background: var(--primitive-color-mint-500);
+    color: var(--primitive-color-forest-900);
+  }
+
+  .saas-btn.primary:hover {
+    background: var(--primitive-color-mint-400);
+    transform: translateY(-2px);
+  }
+
+  .saas-btn.secondary {
+    background: transparent;
+    color: var(--primitive-color-cream-100);
+    border: 1px solid var(--border-on-dark);
+  }
+
+  .saas-btn.secondary:hover {
+    background: rgba(255, 251, 236, 0.08);
+  }
+
+  /* Bento Grid */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .bento-card {
+    background: rgba(1, 56, 44, 0.5);
+    border: 1px solid var(--border-on-dark);
+    border-radius: var(--primitive-radius-2xl);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .bento-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .bento-card-title {
+    font-size: 1.35rem;
+    color: var(--primitive-color-cream-100);
+    margin-bottom: 4px;
+  }
+
+  .bento-card-sub {
+    font-size: 0.875rem;
+    color: var(--text-secondary-on-dark);
+  }
+
+  .table-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(3, 32, 25, 0.8);
+    border: 1px solid var(--border-on-dark);
+    padding: 6px 14px;
+    border-radius: var(--pill-radius);
+    color: var(--text-muted-on-dark);
+  }
+
+  .table-search-bar input {
+    background: transparent;
+    border: none;
+    color: var(--primitive-color-cream-100);
+    font-size: 0.8125rem;
+    outline: none;
+    width: 170px;
+  }
+
+  /* Table styling */
+  .table-responsive-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .bookings-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    text-align: left;
+  }
+
+  .bookings-table th {
+    padding: 10px 14px;
+    color: var(--text-muted-on-dark);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border-on-dark);
+  }
+
+  .bookings-table td {
+    padding: 14px;
+    border-bottom: 1px solid rgba(86, 240, 159, 0.08);
+    white-space: nowrap;
+  }
+
+  .renter-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .avatar-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(86, 240, 159, 0.15);
+    color: var(--primitive-color-mint-400);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--primitive-weight-bold);
+    font-size: 0.75rem;
+  }
+
+  .renter-cell strong {
+    display: block;
+    color: var(--primitive-color-cream-100);
+    font-size: 0.875rem;
+  }
+
+  .renter-cell span {
+    font-size: 0.6875rem;
+    color: var(--text-muted-on-dark);
+  }
+
+  .item-tag {
+    background: rgba(3, 32, 25, 0.7);
+    padding: 4px 10px;
+    border-radius: var(--primitive-radius-sm);
+    color: var(--text-secondary-on-dark);
+    font-size: 0.8125rem;
+    border: 1px solid rgba(86, 240, 159, 0.1);
+  }
+
+  .status-chip {
+    padding: 3px 10px;
+    border-radius: var(--pill-radius);
+    font-size: 0.6875rem;
+    font-weight: var(--primitive-weight-semibold);
+  }
+
+  .status-chip.active {
+    background: rgba(86, 240, 159, 0.15);
+    color: var(--primitive-color-mint-400);
+  }
+
+  .status-chip.pending {
+    background: rgba(255, 201, 0, 0.15);
+    color: var(--primitive-color-alert-500);
+  }
+
+  .status-chip.completed {
+    background: rgba(255, 251, 236, 0.1);
+    color: var(--text-secondary-on-dark);
+  }
+
+  .pay-method {
+    font-size: 0.75rem;
+    color: var(--text-secondary-on-dark);
+  }
+
+  .dates-text {
+    font-size: 0.75rem;
+    color: var(--text-muted-on-dark);
+  }
+
+  /* Fleet Card */
+  .fleet-count {
+    background: rgba(86, 240, 159, 0.15);
+    color: var(--primitive-color-mint-400);
+    padding: 4px 12px;
+    border-radius: var(--pill-radius);
+    font-size: 0.75rem;
+    font-weight: var(--primitive-weight-bold);
+  }
+
+  .inventory-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .inv-item-progress {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8125rem;
+    color: var(--text-secondary-on-dark);
+  }
+
+  .progress-track {
+    width: 100%;
+    height: 8px;
+    background: rgba(3, 32, 25, 0.8);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--primitive-color-mint-500);
+    border-radius: 4px;
+  }
+
+  .card-footer-metric {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-on-dark);
+    margin-top: auto;
+  }
+
+  .metric-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .met-num {
+    font-size: 1.25rem;
+    font-weight: var(--primitive-weight-bold);
+    color: var(--primitive-color-mint-400);
+  }
+
+  .met-txt {
+    font-size: 0.6875rem;
+    color: var(--text-muted-on-dark);
+  }
+
+  @media (max-width: 1024px) {
+    .saas-headline-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .bento-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .bento-card {
+      padding: 1.5rem 1.25rem;
+    }
+  }
+</style>

@@ -1,0 +1,1010 @@
+---
+/**
+ * InteractiveWholesaleCatalog.astro
+ * Canonical Wholesale Seafood & Cold-Chain B2B Catalog Specification
+ * Includes:
+ *  - Category filter chips (Todos, Congelados -18°C, Refrigerados 2°C - 6°C, Pescados & Mariscos, Carnes)
+ *  - Product cards: Salmón Salar, Merluza Austral, Trucha Arcoíris, Langostino Entero
+ *  - Live interactive stepper with Volume Tier Pricing ($100 vs $85 > 20 cajas)
+ *  - Live "Añadir a Despacho" and sticky dispatch summary bar
+ *  - Production-ready Kotlin 2.4 & Jetpack Compose Material 3 code cuadro
+ */
+---
+
+<div class="wholesale-catalog-container">
+  
+  <!-- Interactive Catalog Screen Stage -->
+  <div class="catalog-stage-card">
+    
+    <!-- Top Filter Header -->
+    <header class="catalog-header-bar">
+      <div class="search-input-wrap">
+        <i class="pi pi-search search-icon"></i>
+        <input 
+          type="text" 
+          id="catalog-search-input" 
+          class="catalog-search" 
+          placeholder="Buscar salmón, merluza, langostino..." 
+          aria-label="Buscar producto en catálogo mayorista"
+        />
+      </div>
+
+      <!-- Filter Chips Row (Horizontal Scroll) -->
+      <div class="filter-chips-scroll" role="tablist" aria-label="Filtro de categorías">
+        <button type="button" class="catalog-chip active" data-category="all">
+          <i class="pi pi-th-large"></i> Todos (4)
+        </button>
+        <button type="button" class="catalog-chip" data-category="congelado">
+          <i class="pi pi-snowflake"></i> Congelados -18°C (3)
+        </button>
+        <button type="button" class="catalog-chip" data-category="refrigerado">
+          <i class="pi pi-sun"></i> Refrigerados 2°C – 6°C (1)
+        </button>
+        <button type="button" class="catalog-chip" data-category="pescados">
+          <i class="pi pi-compass"></i> Pescados & Mariscos (4)
+        </button>
+        <button type="button" class="catalog-chip" data-category="carnes">
+          <i class="pi pi-tag"></i> Carnes Exportación (0)
+        </button>
+      </div>
+    </header>
+
+    <!-- Product Cards List -->
+    <div class="catalog-products-list" id="catalog-products-list">
+      
+      <!-- Product 1: Salmón Salar Congelado -->
+      <article class="product-item-card" data-category="congelado pescados" data-sku="ALM-LMO-982" data-base-price="100" data-tier-price="85">
+        <div class="card-badges-row">
+          <span class="temp-badge cold"><i class="pi pi-snowflake"></i> -18°C Congelado</span>
+          <span class="stock-badge in-stock"><i class="pi pi-check"></i> Stock: 340 cajas</span>
+        </div>
+
+        <div class="product-info-block">
+          <h3 class="product-title">Salmón Salar Congelado 4-5kg</h3>
+          <span class="product-sku">SKU: ALM-LMO-982 · Origen: Puerto Montt (HACCP)</span>
+          <p class="product-spec">Caja master x 20kg neto. Filete con piel, sellado individual IQF.</p>
+        </div>
+
+        <!-- Tier Pricing Matrix Table Pill -->
+        <div class="tier-matrix-pill">
+          <span class="tier-step" id="tier-p1-base">1 a 20 cajas: <b>$100 / caja</b></span>
+          <span class="tier-divider">|</span>
+          <span class="tier-step tier-highlight" id="tier-p1-volume">&gt; 20 cajas: <b>$85 / caja</b> (-15%)</span>
+        </div>
+
+        <!-- Interactive Stepper & Add Button -->
+        <div class="product-action-footer">
+          <div class="stepper-cluster">
+            <button type="button" class="btn-stepper btn-decrement" aria-label="Disminuir cajas" data-id="p1">-</button>
+            <input type="number" class="stepper-input" id="stepper-p1" value="1" min="1" max="100" aria-label="Cantidad de cajas" />
+            <button type="button" class="btn-stepper btn-increment" aria-label="Aumentar cajas" data-id="p1">+</button>
+          </div>
+
+          <div class="price-calc-block">
+            <span class="calc-subtotal" id="subtotal-p1">$100.00</span>
+            <span class="calc-tier-status" id="tier-status-p1">Tarifa Estándar</span>
+          </div>
+
+          <button type="button" class="btn-add-dispatch" data-id="p1" data-name="Salmón Salar 4-5kg">
+            <i class="pi pi-plus-circle"></i>
+            <span>Añadir a Despacho</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- Product 2: Merluza Austral Filete 10kg -->
+      <article class="product-item-card" data-category="congelado pescados" data-sku="MER-AUS-412" data-base-price="72" data-tier-price="62">
+        <div class="card-badges-row">
+          <span class="temp-badge cold"><i class="pi pi-snowflake"></i> -18°C Congelado</span>
+          <span class="stock-badge in-stock"><i class="pi pi-check"></i> Stock: 190 cajas</span>
+        </div>
+
+        <div class="product-info-block">
+          <h3 class="product-title">Merluza Austral Filete 10kg</h3>
+          <span class="product-sku">SKU: MER-AUS-412 · Origen: Chiloé / Caleta Tortel</span>
+          <p class="product-spec">Filete sin espinas, interfoliado al vacío, bloque de 10kg.</p>
+        </div>
+
+        <div class="tier-matrix-pill">
+          <span class="tier-step">1 a 20 cajas: <b>$72 / caja</b></span>
+          <span class="tier-divider">|</span>
+          <span class="tier-step tier-highlight">&gt; 20 cajas: <b>$62 / caja</b> (-14%)</span>
+        </div>
+
+        <div class="product-action-footer">
+          <div class="stepper-cluster">
+            <button type="button" class="btn-stepper btn-decrement" aria-label="Disminuir cajas" data-id="p2">-</button>
+            <input type="number" class="stepper-input" id="stepper-p2" value="1" min="1" max="100" />
+            <button type="button" class="btn-stepper btn-increment" aria-label="Aumentar cajas" data-id="p2">+</button>
+          </div>
+
+          <div class="price-calc-block">
+            <span class="calc-subtotal" id="subtotal-p2">$72.00</span>
+            <span class="calc-tier-status" id="tier-status-p2">Tarifa Estándar</span>
+          </div>
+
+          <button type="button" class="btn-add-dispatch" data-id="p2" data-name="Merluza Austral 10kg">
+            <i class="pi pi-plus-circle"></i>
+            <span>Añadir a Despacho</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- Product 3: Trucha Arcoíris Evicerada -->
+      <article class="product-item-card" data-category="refrigerado pescados" data-sku="TRU-ARC-105" data-base-price="55" data-tier-price="48">
+        <div class="card-badges-row">
+          <span class="temp-badge fresh"><i class="pi pi-sun"></i> 2°C – 6°C Refrigerado</span>
+          <span class="stock-badge in-stock"><i class="pi pi-check"></i> Stock: 85 cajas</span>
+        </div>
+
+        <div class="product-info-block">
+          <h3 class="product-title">Trucha Arcoíris Evicerada</h3>
+          <span class="product-sku">SKU: TRU-ARC-105 · Origen: Huancayo / Titicaca</span>
+          <p class="product-spec">Calibre 300-400g, fresca con escarcha en gel pack térmico.</p>
+        </div>
+
+        <div class="tier-matrix-pill">
+          <span class="tier-step">1 a 20 cajas: <b>$55 / caja</b></span>
+          <span class="tier-divider">|</span>
+          <span class="tier-step tier-highlight">&gt; 20 cajas: <b>$48 / caja</b> (-13%)</span>
+        </div>
+
+        <div class="product-action-footer">
+          <div class="stepper-cluster">
+            <button type="button" class="btn-stepper btn-decrement" aria-label="Disminuir cajas" data-id="p3">-</button>
+            <input type="number" class="stepper-input" id="stepper-p3" value="1" min="1" max="100" />
+            <button type="button" class="btn-stepper btn-increment" aria-label="Aumentar cajas" data-id="p3">+</button>
+          </div>
+
+          <div class="price-calc-block">
+            <span class="calc-subtotal" id="subtotal-p3">$55.00</span>
+            <span class="calc-tier-status" id="tier-status-p3">Tarifa Estándar</span>
+          </div>
+
+          <button type="button" class="btn-add-dispatch" data-id="p3" data-name="Trucha Arcoíris Evicerada">
+            <i class="pi pi-plus-circle"></i>
+            <span>Añadir a Despacho</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- Product 4: Langostino Entero Congelado -->
+      <article class="product-item-card" data-category="congelado pescados" data-sku="LNG-ENT-608" data-base-price="120" data-tier-price="99">
+        <div class="card-badges-row">
+          <span class="temp-badge cold"><i class="pi pi-snowflake"></i> -18°C Congelado</span>
+          <span class="stock-badge in-stock"><i class="pi pi-check"></i> Stock: 210 cajas</span>
+        </div>
+
+        <div class="product-info-block">
+          <h3 class="product-title">Langostino Entero Congelado</h3>
+          <span class="product-sku">SKU: LNG-ENT-608 · Origen: Tumbes (Calibre 20/30)</span>
+          <p class="product-spec">Caja de 12kg máster, glaseado al 10% protector de frío.</p>
+        </div>
+
+        <div class="tier-matrix-pill">
+          <span class="tier-step">1 a 20 cajas: <b>$120 / caja</b></span>
+          <span class="tier-divider">|</span>
+          <span class="tier-step tier-highlight">&gt; 20 cajas: <b>$99 / caja</b> (-17.5%)</span>
+        </div>
+
+        <div class="product-action-footer">
+          <div class="stepper-cluster">
+            <button type="button" class="btn-stepper btn-decrement" aria-label="Disminuir cajas" data-id="p4">-</button>
+            <input type="number" class="stepper-input" id="stepper-p4" value="1" min="1" max="100" />
+            <button type="button" class="btn-stepper btn-increment" aria-label="Aumentar cajas" data-id="p4">+</button>
+          </div>
+
+          <div class="price-calc-block">
+            <span class="calc-subtotal" id="subtotal-p4">$120.00</span>
+            <span class="calc-tier-status" id="tier-status-p4">Tarifa Estándar</span>
+          </div>
+
+          <button type="button" class="btn-add-dispatch" data-id="p4" data-name="Langostino Entero Congelado">
+            <i class="pi pi-plus-circle"></i>
+            <span>Añadir a Despacho</span>
+          </button>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Sticky Bottom Dispatch Draft Bar (Live Summary) -->
+    <div class="dispatch-draft-bar" id="dispatch-draft-bar">
+      <div class="draft-summary-left">
+        <div class="draft-badge-counter">
+          <i class="pi pi-truck text-primary"></i>
+          <span class="draft-count-chip" id="draft-total-items">0 ítems</span>
+        </div>
+        <div class="draft-totals-text">
+          <span class="draft-total-amount" id="draft-total-amount">$0.00 USD</span>
+          <span class="draft-total-sub" id="draft-total-boxes">0 cajas seleccionadas</span>
+        </div>
+      </div>
+      <button type="button" class="btn-confirm-staging" id="btn-confirm-dispatch-order" disabled>
+        <span>Enviar a Staging</span>
+        <i class="pi pi-arrow-right"></i>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Documentation Cuadro: Production-Ready Kotlin 2.4 & Jetpack Compose Material 3 Code -->
+  <section class="cuadro-card">
+    <header class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">CAT</span>
+        <div>
+          <p class="cuadro-kicker">JETPACK COMPOSE MATERIAL 3 · CATÁLOGO MAYORISTA & TIER PRICING</p>
+          <h3 class="cuadro-title">Especificación de Listas Virtuales, Stepper Ergonómico y Precios Escalonados</h3>
+          <p class="cuadro-subtitle">
+            Arquitectura Compose en Kotlin 2.4 con <code>LazyColumn</code>, <code>FilterChip</code> reactivo, control de cantidad con área de toque de 48dp y cálculo inmutable de descuentos de volumen B2B.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-android"></i> Android 14 M3</span>
+        <span class="cuadro-tag kotlin"><i class="pi pi-code"></i> Kotlin 2.4</span>
+        <span class="cuadro-tag success"><i class="pi pi-dollar"></i> Tier Pricing</span>
+      </div>
+    </header>
+
+    <!-- Kotlin 2.4 Production Snippet -->
+    <div class="code-box-wrapper">
+      <div class="code-box-header">
+        <div class="file-name">
+          <i class="pi pi-file"></i>
+          <span>WholesaleCatalogScreen.kt — Jetpack Compose Material 3</span>
+        </div>
+        <span class="code-badge">Production Kotlin 2.4</span>
+      </div>
+      <pre class="code-content" is:raw><code><span class="kw">package</span> com.nexa.buyer.presentation.catalog
+
+<span class="kw">import</span> androidx.compose.foundation.background
+<span class="kw">import</span> androidx.compose.foundation.layout.*
+<span class="kw">import</span> androidx.compose.foundation.lazy.LazyColumn
+<span class="kw">import</span> androidx.compose.foundation.lazy.LazyRow
+<span class="kw">import</span> androidx.compose.foundation.lazy.items
+<span class="kw">import</span> androidx.compose.foundation.shape.RoundedCornerShape
+<span class="kw">import</span> androidx.compose.material.icons.Icons
+<span class="kw">import</span> androidx.compose.material.icons.filled.*
+<span class="kw">import</span> androidx.compose.material3.*
+<span class="kw">import</span> androidx.compose.runtime.*
+<span class="kw">import</span> androidx.compose.ui.Alignment
+<span class="kw">import</span> androidx.compose.ui.Modifier
+<span class="kw">import</span> androidx.compose.ui.graphics.Color
+<span class="kw">import</span> androidx.compose.ui.unit.dp
+<span class="kw">import</span> kotlinx.coroutines.flow.StateFlow
+
+<span class="cmt">/**
+ * Entidad de dominio inmutable para producto mayorista con escalado de precios.
+ */</span>
+<span class="kw">data class</span> <span class="type">WholesaleProduct</span>(
+    <span class="kw">val</span> sku: <span class="type">String</span>,
+    <span class="kw">val</span> title: <span class="type">String</span>,
+    <span class="kw">val</span> origin: <span class="type">String</span>,
+    <span class="kw">val</span> basePrice: <span class="type">Double</span>,
+    <span class="kw">val</span> tierVolumePrice: <span class="type">Double</span>,
+    <span class="kw">val</span> tierThresholdBoxes: <span class="type">Int</span> = <span class="num">20</span>,
+    <span class="kw">val</span> tempRange: <span class="type">String</span>,
+    <span class="kw">val</span> stockBoxes: <span class="type">Int</span>
+) {
+    <span class="kw">fun</span> <span class="fn">calculatePricePerBox</span>(quantity: <span class="type">Int</span>): <span class="type">Double</span> =
+        <span class="kw">if</span> (quantity &gt; tierThresholdBoxes) tierVolumePrice <span class="kw">else</span> basePrice
+
+    <span class="kw">fun</span> <span class="fn">calculateSubtotal</span>(quantity: <span class="type">Int</span>): <span class="type">Double</span> =
+        quantity * calculatePricePerBox(quantity)
+}
+
+<span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">WholesaleProductCard</span>(
+    product: <span class="type">WholesaleProduct</span>,
+    quantity: <span class="type">Int</span>,
+    onQuantityChange: (<span class="type">Int</span>) -&gt; <span class="type">Unit</span>,
+    onAddToDispatch: (<span class="type">WholesaleProduct</span>, <span class="type">Int</span>) -&gt; <span class="type">Unit</span>,
+    modifier: <span class="type">Modifier</span> = <span class="type">Modifier</span>
+) {
+    <span class="kw">val</span> pricePerBox = product.calculatePricePerBox(quantity)
+    <span class="kw">val</span> subtotal = product.calculateSubtotal(quantity)
+    <span class="kw">val</span> isTierActive = quantity &gt; product.tierThresholdBoxes
+
+    <span class="fn">Card</span>(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = <span class="num">16.dp</span>, vertical = <span class="num">8.dp</span>),
+        shape = RoundedCornerShape(<span class="num">16.dp</span>),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = <span class="num">2.dp</span>)
+    ) {
+        <span class="fn">Column</span>(modifier = Modifier.padding(<span class="num">16.dp</span>)) {
+            <span class="cmt">// Badges de Temperatura y Stock</span>
+            <span class="fn">Row</span>(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                <span class="fn">SuggestionChip</span>(
+                    onClick = {},
+                    label = { <span class="fn">Text</span>(product.tempRange, style = MaterialTheme.typography.labelSmall) },
+                    colors = SuggestionChipDefaults.suggestionChipColors(containerColor = Color(<span class="num">0xFFE0F2FE</span>))
+                )
+                <span class="fn">Text</span>(
+                    text = <span class="str">"Stock: ${product.stockBoxes} cajas"</span>,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = Color(<span class="num">0xFF15803D</span>)
+                )
+            }
+
+            <span class="fn">Spacer</span>(modifier = Modifier.height(<span class="num">8.dp</span>))
+            <span class="fn">Text</span>(text = product.title, style = MaterialTheme.typography.titleMedium)
+            <span class="fn">Text</span>(text = <span class="str">"SKU: ${product.sku} · ${product.origin}"</span>, style = MaterialTheme.typography.bodySmall)
+
+            <span class="fn">Spacer</span>(modifier = Modifier.height(<span class="num">12.dp</span>))
+
+            <span class="cmt">// Indicador de Descuento por Volumen</span>
+            <span class="fn">Surface</span>(
+                color = <span class="kw">if</span> (isTierActive) Color(<span class="num">0xFFDCFCE7</span>) <span class="kw">else</span> Color(<span class="num">0xFFF1F5F9</span>),
+                shape = RoundedCornerShape(<span class="num">8.dp</span>),
+                modifier = Modifier.fillMaxWidth().padding(vertical = <span class="num">4.dp</span>)
+            ) {
+                <span class="fn">Row</span>(
+                    modifier = Modifier.padding(horizontal = <span class="num">10.dp</span>, vertical = <span class="num">6.dp</span>),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    <span class="fn">Text</span>(<span class="str">"Base: $${product.basePrice}"</span>, style = MaterialTheme.typography.labelSmall)
+                    <span class="fn">Text</span>(
+                        <span class="str">"&gt;20 cajas: $${product.tierVolumePrice} (-15%)"</span>,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = <span class="kw">if</span> (isTierActive) Color(<span class="num">0xFF15803D</span>) <span class="kw">else</span> Color.Unspecified
+                    )
+                }
+            }
+
+            <span class="fn">Spacer</span>(modifier = Modifier.height(<span class="num">12.dp</span>))
+
+            <span class="cmt">// Stepper táctil (56dp altura ergonómica)</span>
+            <span class="fn">Row</span>(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                <span class="fn">Row</span>(verticalAlignment = Alignment.CenterVertically) {
+                    <span class="fn">FilledTonalIconButton</span>(
+                        onClick = { <span class="kw">if</span> (quantity &gt; <span class="num">1</span>) onQuantityChange(quantity - <span class="num">1</span>) },
+                        modifier = Modifier.size(<span class="num">48.dp</span>)
+                    ) {
+                        <span class="fn">Icon</span>(Icons.Default.Remove, contentDescription = <span class="str">"Menos"</span>)
+                    }
+                    <span class="fn">Text</span>(
+                        text = <span class="str">"$quantity"</span>,
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.padding(horizontal = <span class="num">16.dp</span>)
+                    )
+                    <span class="fn">FilledTonalIconButton</span>(
+                        onClick = { onQuantityChange(quantity + <span class="num">1</span>) },
+                        modifier = Modifier.size(<span class="num">48.dp</span>)
+                    ) {
+                        <span class="fn">Icon</span>(Icons.Default.Add, contentDescription = <span class="str">"Más"</span>)
+                    }
+                }
+
+                <span class="fn">Column</span>(horizontalAlignment = Alignment.End) {
+                    <span class="fn">Text</span>(text = <span class="str">"$$subtotal"</span>, style = MaterialTheme.typography.titleLarge)
+                    <span class="fn">Text</span>(
+                        text = <span class="kw">if</span> (isTierActive) <span class="str">"¡Tarifa Mayorista!"</span> <span class="kw">else</span> <span class="str">"Tarifa estándar"</span>,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = <span class="kw">if</span> (isTierActive) Color(<span class="num">0xFF15803D</span>) <span class="kw">else</span> Color.Gray
+                    )
+                }
+            }
+
+            <span class="fn">Spacer</span>(modifier = Modifier.height(<span class="num">12.dp</span>))
+
+            <span class="fn">Button</span>(
+                onClick = { onAddToDispatch(product, quantity) },
+                modifier = Modifier.fillMaxWidth().heightIn(min = <span class="num">48.dp</span>),
+                shape = RoundedCornerShape(<span class="num">12.dp</span>)
+            ) {
+                <span class="fn">Icon</span>(Icons.Default.AddShoppingCart, contentDescription = <span class="kw">null</span>)
+                <span class="fn">Spacer</span>(modifier = Modifier.width(<span class="num">8.dp</span>))
+                <span class="fn">Text</span>(<span class="str">"Añadir a Despacho"</span>)
+            }
+        }
+    }
+}</code></pre>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Steppers and calculations
+    interface ProductState {
+      id: string;
+      basePrice: number;
+      tierPrice: number;
+      qty: number;
+      name: string;
+    }
+
+    const products: Record<string, ProductState> = {
+      p1: { id: 'p1', basePrice: 100, tierPrice: 85, qty: 1, name: 'Salmón Salar Congelado' },
+      p2: { id: 'p2', basePrice: 72, tierPrice: 62, qty: 1, name: 'Merluza Austral Filete' },
+      p3: { id: 'p3', basePrice: 55, tierPrice: 48, qty: 1, name: 'Trucha Arcoíris Evicerada' },
+      p4: { id: 'p4', basePrice: 120, tierPrice: 99, qty: 1, name: 'Langostino Entero Congelado' }
+    };
+
+    let cartTotalBoxes = 0;
+    let cartTotalAmount = 0;
+    let cartItemCount = 0;
+
+    function updateCardCalculation(id: string) {
+      const prod = products[id];
+      if (!prod) return;
+
+      const subtotalEl = document.getElementById(`subtotal-${id}`);
+      const statusEl = document.getElementById(`tier-status-${id}`);
+      const stepperInput = document.getElementById(`stepper-${id}`) as HTMLInputElement | null;
+
+      if (stepperInput) {
+        prod.qty = Math.max(1, parseInt(stepperInput.value) || 1);
+        stepperInput.value = String(prod.qty);
+      }
+
+      const isTier = prod.qty > 20;
+      const unitPrice = isTier ? prod.tierPrice : prod.basePrice;
+      const subtotal = prod.qty * unitPrice;
+
+      if (subtotalEl) subtotalEl.textContent = `$${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      if (statusEl) {
+        if (isTier) {
+          statusEl.textContent = '¡Tarifa Mayorista Activada (-15%)!';
+          statusEl.className = 'calc-tier-status tier-active';
+        } else {
+          statusEl.textContent = 'Tarifa Estándar ($' + prod.basePrice + '/caja)';
+          statusEl.className = 'calc-tier-status';
+        }
+      }
+    }
+
+    // Bind +/- buttons
+    document.querySelectorAll('.btn-increment').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        if (id && products[id]) {
+          const input = document.getElementById(`stepper-${id}`) as HTMLInputElement;
+          if (input) {
+            input.value = String((parseInt(input.value) || 1) + 1);
+            updateCardCalculation(id);
+          }
+        }
+      });
+    });
+
+    document.querySelectorAll('.btn-decrement').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        if (id && products[id]) {
+          const input = document.getElementById(`stepper-${id}`) as HTMLInputElement;
+          if (input) {
+            const current = parseInt(input.value) || 1;
+            if (current > 1) {
+              input.value = String(current - 1);
+              updateCardCalculation(id);
+            }
+          }
+        }
+      });
+    });
+
+    document.querySelectorAll('.stepper-input').forEach(input => {
+      input.addEventListener('change', () => {
+        const id = input.id.replace('stepper-', '');
+        updateCardCalculation(id);
+      });
+    });
+
+    // Add to dispatch cart
+    const draftTotalBoxes = document.getElementById('draft-total-boxes');
+    const draftTotalAmount = document.getElementById('draft-total-amount');
+    const draftTotalItems = document.getElementById('draft-total-items');
+    const btnConfirm = document.getElementById('btn-confirm-dispatch-order') as HTMLButtonElement | null;
+
+    document.querySelectorAll('.btn-add-dispatch').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        if (!id || !products[id]) return;
+        const prod = products[id];
+
+        const isTier = prod.qty > 20;
+        const unitPrice = isTier ? prod.tierPrice : prod.basePrice;
+        const subtotal = prod.qty * unitPrice;
+
+        cartTotalBoxes += prod.qty;
+        cartTotalAmount += subtotal;
+        cartItemCount += 1;
+
+        if (draftTotalBoxes) draftTotalBoxes.textContent = `${cartTotalBoxes} cajas en despacho`;
+        if (draftTotalAmount) draftTotalAmount.textContent = `$${cartTotalAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`;
+        if (draftTotalItems) draftTotalItems.textContent = `${cartItemCount} ítem${cartItemCount > 1 ? 's' : ''}`;
+        if (btnConfirm) btnConfirm.disabled = false;
+
+        // Visual flash feedback on button
+        const origText = btn.innerHTML;
+        btn.classList.add('added');
+        btn.innerHTML = '<i class="pi pi-check"></i> ¡Añadido!';
+        setTimeout(() => {
+          btn.innerHTML = origText;
+          btn.classList.remove('added');
+        }, 1500);
+      });
+    });
+
+    btnConfirm?.addEventListener('click', () => {
+      alert(`¡Orden enviada a Staging de Despacho!\nTotal: ${cartTotalBoxes} cajas · $${cartTotalAmount.toFixed(2)} USD.\nAsignado a Rampa 3 Frío.`);
+    });
+
+    // Category Filter Chips
+    const chips = document.querySelectorAll('.catalog-chip');
+    const cards = document.querySelectorAll('.product-item-card');
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+
+        const cat = chip.getAttribute('data-category') || 'all';
+        cards.forEach(card => {
+          const itemCat = card.getAttribute('data-category') || '';
+          if (cat === 'all' || itemCat.includes(cat)) {
+            (card as HTMLElement).style.display = 'flex';
+          } else {
+            (card as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Search filter
+    const searchInput = document.getElementById('catalog-search-input') as HTMLInputElement | null;
+    searchInput?.addEventListener('input', () => {
+      const query = searchInput.value.trim().toLowerCase();
+      cards.forEach(card => {
+        const text = card.textContent?.toLowerCase() || '';
+        (card as HTMLElement).style.display = text.includes(query) ? 'flex' : 'none';
+      });
+    });
+  });
+</script>
+
+<style>
+  .wholesale-catalog-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .catalog-stage-card {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: var(--nexa-radius-card, 16px);
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  /* Header & Filter Controls */
+  .catalog-header-bar {
+    padding: 14px 16px;
+    background: #f8fafc;
+    border-bottom: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .search-input-wrap {
+    position: relative;
+    width: 100%;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 14px;
+  }
+
+  .catalog-search {
+    width: 100%;
+    height: 44px;
+    padding: 0 12px 0 36px;
+    border-radius: 10px;
+    border: 1px solid var(--nexa-color-border-default, #cbd5e1);
+    background: #ffffff;
+    font-size: 13px;
+    color: var(--nexa-color-text-primary, #0f172a);
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+
+  .catalog-search:focus {
+    border-color: var(--nexa-color-primary-600, #2a67d9);
+    box-shadow: 0 0 0 3px rgba(42, 103, 217, 0.15);
+  }
+
+  .filter-chips-scroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+
+  .filter-chips-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .catalog-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 38px;
+    padding: 0 14px;
+    border-radius: 20px;
+    border: 1px solid var(--nexa-color-border-default, #cbd5e1);
+    background: #ffffff;
+    color: var(--nexa-color-text-secondary, #475569);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+
+  .catalog-chip:hover {
+    background: #f1f5f9;
+  }
+
+  .catalog-chip.active {
+    background: var(--nexa-color-primary-600, #2a67d9);
+    color: #ffffff;
+    border-color: transparent;
+  }
+
+  /* Product Items List */
+  .catalog-products-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 16px;
+    max-height: 600px;
+    overflow-y: auto;
+    background: #f8fafc;
+  }
+
+  .product-item-card {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .card-badges-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .temp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .temp-badge.cold {
+    background: #e0f2fe;
+    color: #0284c7;
+    border: 1px solid #bae6fd;
+  }
+
+  .temp-badge.fresh {
+    background: #fef3c7;
+    color: #b45309;
+    border: 1px solid #fde68a;
+  }
+
+  .stock-badge {
+    font-size: 11px;
+    font-weight: 600;
+    color: #16a34a;
+  }
+
+  .product-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 0;
+  }
+
+  .product-sku {
+    font-size: 11px;
+    color: #64748b;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .product-spec {
+    font-size: 12px;
+    color: #475569;
+    margin: 4px 0 0;
+  }
+
+  .tier-matrix-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 11.5px;
+    color: #334155;
+  }
+
+  .tier-divider {
+    color: #cbd5e1;
+  }
+
+  .tier-highlight {
+    color: #15803d;
+  }
+
+  /* Stepper & Actions */
+  .product-action-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding-top: 8px;
+    border-top: 1px solid #f1f5f9;
+  }
+
+  .stepper-cluster {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--nexa-color-border-default, #cbd5e1);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .btn-stepper {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    border: none;
+    background: #f8fafc;
+    color: #0f172a;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .btn-stepper:hover {
+    background: #e2e8f0;
+  }
+
+  .stepper-input {
+    width: 46px;
+    height: 44px;
+    border: none;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+    outline: none;
+    -moz-appearance: textfield;
+  }
+
+  .stepper-input::-webkit-outer-spin-button,
+  .stepper-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .price-calc-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .calc-subtotal {
+    font-size: 16px;
+    font-weight: 800;
+    color: #0f172a;
+    font-family: var(--nexa-font-family-display, sans-serif);
+  }
+
+  .calc-tier-status {
+    font-size: 10.5px;
+    color: #64748b;
+  }
+
+  .calc-tier-status.tier-active {
+    color: #15803d;
+    font-weight: 700;
+  }
+
+  .btn-add-dispatch {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 48px;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: none;
+    background: var(--nexa-color-primary-600, #2a67d9);
+    color: #ffffff;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-add-dispatch:hover {
+    background: var(--nexa-color-primary-700, #1d4ed8);
+  }
+
+  .btn-add-dispatch.added {
+    background: #16a34a;
+  }
+
+  /* Sticky Draft Bar */
+  .dispatch-draft-bar {
+    padding: 12px 18px;
+    background: #0f172a;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid #1e293b;
+  }
+
+  .draft-summary-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .draft-badge-counter {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #1e293b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .draft-count-chip {
+    font-size: 9px;
+    font-weight: 800;
+    color: #94a3b8;
+  }
+
+  .draft-totals-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .draft-total-amount {
+    font-size: 16px;
+    font-weight: 800;
+    color: #60a5fa;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .draft-total-sub {
+    font-size: 11px;
+    color: #94a3b8;
+  }
+
+  .btn-confirm-staging {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 16px;
+    border-radius: 10px;
+    border: none;
+    background: #22c55e;
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-confirm-staging:hover:not(:disabled) {
+    background: #16a34a;
+    color: #ffffff;
+  }
+
+  .btn-confirm-staging:disabled {
+    background: #334155;
+    color: #64748b;
+    cursor: not-allowed;
+  }
+
+  /* Code snippet styling */
+  .code-box-wrapper {
+    background: #0f172a;
+    border-radius: 12px;
+    border: 1px solid #1e293b;
+    overflow: hidden;
+  }
+
+  .code-box-header {
+    background: #090d16;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1e293b;
+    color: #94a3b8;
+    font-size: 12px;
+  }
+
+  .file-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    color: #e2e8f0;
+  }
+
+  .code-badge {
+    background: #2563eb;
+    color: #ffffff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .code-content {
+    margin: 0;
+    padding: 16px;
+    overflow-x: auto;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 12px;
+    line-height: 1.6;
+    color: #f8fafc;
+  }
+
+  .kw { color: #f472b6; font-weight: 600; }
+  .type { color: #60a5fa; }
+  .fn { color: #38bdf8; }
+  .str { color: #4ade80; }
+  .num { color: #fb923c; }
+  .cmt { color: #64748b; font-style: italic; }
+</style>
