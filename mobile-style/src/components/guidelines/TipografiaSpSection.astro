@@ -1,178 +1,369 @@
 ---
 /**
  * TipografiaSpSection.astro
- * Canonical Typography in Scale-Independent Pixels (sp) for Android
+ * Canonical Typography in Scale-Independent Pixels (sp) for Android Jetpack Compose
+ * Full Material Design 3 15-Role Scale, Non-linear Font Scaling & Production Kotlin 2.4 Contracts
  */
 ---
 
 <div class="tipografia-sp-container" data-platform-target="universal">
-  <section class="spec-card">
-    <div class="card-header-row">
-      <div class="card-badge-icon"><i class="pi pi-align-left"></i></div>
-      <div>
-        <span class="card-eyebrow">FUNDAMENTOS M3 · TIPOGRAFÍA ESCALAR</span>
-        <h3 class="card-title">Escala Tipográfica en Unidades Escalares (sp)</h3>
+  <!-- Section 1: Fundamentos de Tipografía en sp y Escala Completa -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">01</span>
+        <div>
+          <p class="cuadro-kicker">MATERIAL DESIGN 3 · ESCALA TIPOGRÁFICA CANÓNICA</p>
+          <h3 class="cuadro-title">Escala Tipográfica Completa de 15 Roles en Unidades sp</h3>
+          <p class="cuadro-subtitle">
+            Toda la tipografía de <strong>Nexa Mobile</strong> se define estrictamente en <code>sp</code> (Scale-independent Pixels). Cumple con el estándar de escalado dinámico no lineal de Android 14+ (hasta <strong>200% de ampliación</strong> para usuarios con baja visión) sin provocar overflow ni truncamientos accidentales de órdenes de despacho.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-align-left"></i> 15 Roles M3</span>
+        <span class="cuadro-tag kotlin"><i class="pi pi-android"></i> Android 14+ 200% Font Scale</span>
+        <span class="cuadro-tag success"><i class="pi pi-check"></i> Zero Truncation Gate</span>
       </div>
     </div>
-    <p class="card-text">
-      Todo texto móvil en Nexa se define estrictamente en <strong>Scale-independent Pixels (sp)</strong> para Jetpack Compose. Esto garantiza accesibilidad y resiliencia ante usuarios que configuran fuentes ampliadas (hasta un 200%) en los ajustes de accesibilidad de Android.
-    </p>
 
-    <!-- Typography Metrics Table -->
-    <div class="table-responsive-wrapper">
-      <table class="metrics-table">
+    <!-- CUADRO ARQUITECTÓNICO: Matriz Completa de 15 Roles Tipográficos -->
+    <div class="contract-table-wrapper">
+      <table class="contract-table">
         <thead>
           <tr>
-            <th>Rol Tipográfico</th>
+            <th>Rol M3</th>
             <th>Tamaño (sp)</th>
-            <th>Interlineado</th>
-            <th>Peso</th>
-            <th>Fuente</th>
-            <th>Uso Canónico en Móvil</th>
+            <th>Line Height (sp)</th>
+            <th>Tracking</th>
+            <th>Peso / Familia</th>
+            <th>Caso de Uso Canónico en Nexa</th>
           </tr>
         </thead>
         <tbody>
+          <!-- Display -->
           <tr>
             <td><code>displayLarge</code></td>
-            <td><span class="code-pill">32sp</span></td>
+            <td><span class="mono-chip">57sp</span></td>
+            <td>64sp</td>
+            <td>-0.25sp</td>
+            <td>800 (Extrabold) · Jakarta Sans</td>
+            <td>Métricas gigantes de peso total de carga en muelle (ej. 24.5 TN)</td>
+          </tr>
+          <tr>
+            <td><code>displayMedium</code></td>
+            <td><span class="mono-chip">45sp</span></td>
+            <td>52sp</td>
+            <td>0sp</td>
+            <td>700 (Bold) · Jakarta Sans</td>
+            <td>Contador numérico de paradas restantes en ruta de chofer</td>
+          </tr>
+          <tr>
+            <td><code>displaySmall</code></td>
+            <td><span class="mono-chip">36sp</span></td>
+            <td>44sp</td>
+            <td>0sp</td>
+            <td>700 (Bold) · Jakarta Sans</td>
+            <td>Monto valorizado total en ruta activa (ej. $14,850.00 USD)</td>
+          </tr>
+
+          <!-- Headline -->
+          <tr>
+            <td><code>headlineLarge</code></td>
+            <td><span class="mono-chip">32sp</span></td>
             <td>40sp</td>
-            <td>800 (Extrabold)</td>
-            <td>Plus Jakarta Sans</td>
-            <td>KPIs numéricos de bodega y totales de despacho</td>
+            <td>0sp</td>
+            <td>800 (Extrabold) · Jakarta Sans</td>
+            <td>Títulos principales de resumen de orden y cierre de jornada</td>
           </tr>
           <tr>
             <td><code>headlineMedium</code></td>
-            <td><span class="code-pill">24sp</span></td>
+            <td><span class="mono-chip">28sp</span></td>
+            <td>36sp</td>
+            <td>0sp</td>
+            <td>700 (Bold) · Jakarta Sans</td>
+            <td>Cabeceras de pantalla en TopAppBar colapsable y modal sheets</td>
+          </tr>
+          <tr>
+            <td><code>headlineSmall</code></td>
+            <td><span class="mono-chip">24sp</span></td>
             <td>32sp</td>
-            <td>700 (Bold)</td>
-            <td>Plus Jakarta Sans</td>
-            <td>Títulos principales de pantalla y TopAppBar</td>
+            <td>0sp</td>
+            <td>700 (Bold) · Jakarta Sans</td>
+            <td>Nombre de cliente receptor en obra (ej. ICISA Distribuciones)</td>
+          </tr>
+
+          <!-- Title -->
+          <tr>
+            <td><code>titleLarge</code></td>
+            <td><span class="mono-chip">22sp</span></td>
+            <td>28sp</td>
+            <td>0sp</td>
+            <td>600 (SemiBold) · Jakarta Sans</td>
+            <td>Subsecciones en detalle de guía de remisión y comprobantes</td>
           </tr>
           <tr>
             <td><code>titleMedium</code></td>
-            <td><span class="code-pill">16sp</span></td>
+            <td><span class="mono-chip">16sp</span></td>
             <td>24sp</td>
-            <td>600 (SemiBold)</td>
-            <td>Inter</td>
-            <td>Cabeceras de tarjetas de despacho, clientes y paradas</td>
+            <td>+0.15sp</td>
+            <td>600 (SemiBold) · Inter</td>
+            <td>Cabeceras de tarjetas de parada SO-2026-0018 y nombres de ítems SKU</td>
           </tr>
           <tr>
+            <td><code>titleSmall</code></td>
+            <td><span class="mono-chip">14sp</span></td>
+            <td>20sp</td>
+            <td>+0.1sp</td>
+            <td>600 (SemiBold) · Inter</td>
+            <td>Encabezados de tablas de picking FEFO y checklists de maquinaria</td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
             <td><code>bodyLarge</code></td>
-            <td><span class="code-pill">15sp</span></td>
-            <td>22sp</td>
-            <td>400 (Regular)</td>
-            <td>Inter</td>
-            <td>Textos de lectura principal, descripciones de ruta</td>
+            <td><span class="mono-chip">16sp</span></td>
+            <td>24sp</td>
+            <td>+0.5sp</td>
+            <td>400 (Regular) · Inter</td>
+            <td>Texto de lectura principal, instrucciones de entrega y direcciones</td>
           </tr>
           <tr>
             <td><code>bodyMedium</code></td>
-            <td><span class="code-pill">13.5sp</span></td>
+            <td><span class="mono-chip">14sp</span></td>
             <td>20sp</td>
-            <td>400 (Regular)</td>
-            <td>Inter</td>
-            <td>Subtextos de guía, direcciones y notas de campo</td>
+            <td>+0.25sp</td>
+            <td>400 (Regular) · Inter</td>
+            <td>Descripciones de contingencia, motivos de parada no programada</td>
+          </tr>
+          <tr>
+            <td><code>bodySmall</code></td>
+            <td><span class="mono-chip">12sp</span></td>
+            <td>16sp</td>
+            <td>+0.4sp</td>
+            <td>400 (Regular) · Inter</td>
+            <td>Marcas de tiempo GPS, coordenadas geocerca, UUIDs de transacción</td>
+          </tr>
+
+          <!-- Label -->
+          <tr>
+            <td><code>labelLarge</code></td>
+            <td><span class="mono-chip">14sp</span></td>
+            <td>20sp</td>
+            <td>+0.1sp</td>
+            <td>700 (Bold) · Inter</td>
+            <td>Etiquetas de botones primarios 48dp y botones industriales 56dp</td>
+          </tr>
+          <tr>
+            <td><code>labelMedium</code></td>
+            <td><span class="mono-chip">12sp</span></td>
+            <td>16sp</td>
+            <td>+0.5sp</td>
+            <td>600 (SemiBold) · Inter</td>
+            <td>Pestañas de navegación BottomNav, chips de filtro y badges de estado</td>
           </tr>
           <tr>
             <td><code>labelSmall</code></td>
-            <td><span class="code-pill">11sp</span></td>
+            <td><span class="mono-chip">11sp</span></td>
             <td>16sp</td>
-            <td>700 (Bold)</td>
-            <td>Inter</td>
-            <td>Chips de estado (EN TURNO, ENTREGADO), badges M3</td>
+            <td>+0.5sp</td>
+            <td>700 (Bold) · Inter</td>
+            <td>Microchips (EN RUTA, FEFO OK, 3.8°C), captions de telemetría</td>
           </tr>
         </tbody>
       </table>
     </div>
   </section>
 
-  <!-- Section 2: Live Type Specimens Preview -->
-  <section class="spec-card">
-    <div class="card-header-row">
-      <div class="card-badge-icon preview-badge"><i class="pi pi-eye"></i></div>
-      <div>
-        <span class="card-eyebrow">EVIDENCIA VISUAL EN VIVO</span>
-        <h3 class="card-title">Muestrario de Jerarquía Visual en Dispositivo</h3>
+  <!-- Section 2: Resiliencia ante Escalado de Fuentes (100% → 200%) -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">02</span>
+        <div>
+          <p class="cuadro-kicker">ACCESIBILIDAD MÓVIL · NON-LINEAR FONT SCALING</p>
+          <h3 class="cuadro-title">Comportamiento con Escalado de Accesibilidad (Android 14+)</h3>
+          <p class="cuadro-subtitle">
+            Android 14 introduce el escalado no lineal, donde las fuentes pequeñas crecen hasta 200% mientras que los títulos grandes crecen de forma moderada para evitar romper la UI.
+          </p>
+        </div>
       </div>
     </div>
 
-    <div class="type-specimen-grid">
-      <div class="specimen-card">
-        <span class="specimen-role">DISPLAY LARGE · 32sp</span>
-        <h1 class="sample-display">$14,850.00 USD</h1>
-        <small>Total valorizado en ruta activa R-402</small>
+    <div class="scaling-preview-grid">
+      <div class="scaling-card scale-100">
+        <div class="scale-badge">Escala Estándar (100%)</div>
+        <h4 class="scale-title">SO-2026-0018 · ICISA</h4>
+        <p class="scale-body">Entrega en Muelle 3 · Av. Argentina 1240. Sensor calibrado a 3.8°C (Rango OK).</p>
+        <span class="scale-footer">Altura de tarjeta: 96dp</span>
       </div>
 
-      <div class="specimen-card">
-        <span class="specimen-role">HEADLINE MEDIUM · 24sp</span>
-        <h2 class="sample-headline">ICISA Distribuciones</h2>
-        <small>Destinatario de orden SO-2026-0018</small>
+      <div class="scaling-card scale-150">
+        <div class="scale-badge">Escala Accesible (150%)</div>
+        <h4 class="scale-title">SO-2026-0018 · ICISA</h4>
+        <p class="scale-body">Entrega en Muelle 3 · Av. Argentina 1240. Sensor calibrado a 3.8°C (Rango OK).</p>
+        <span class="scale-footer">Altura adaptativa: 128dp (Sin truncamiento)</span>
       </div>
 
-      <div class="specimen-card">
-        <span class="specimen-role">TITLE MEDIUM · 16sp</span>
-        <h3 class="sample-title">Salmón Salar Congelado 4-5kg</h3>
-        <small>SKU ALM-LMO-982 en lista de picking</small>
-      </div>
-
-      <div class="specimen-card">
-        <span class="specimen-role">BODY LARGE · 15sp</span>
-        <p class="sample-body">
-          Entrega programada en Av. Argentina 1240 · Callao/Lima. Requiere transporte refrigerado (2°C – 6°C) y descarga en Muelle 2.
-        </p>
+      <div class="scaling-card scale-200">
+        <div class="scale-badge">Escala Máxima (200%)</div>
+        <h4 class="scale-title">SO-2026-0018 · ICISA</h4>
+        <p class="scale-body">Entrega en Muelle 3 · Av. Argentina 1240. Sensor calibrado a 3.8°C (Rango OK).</p>
+        <span class="scale-footer">Layout vertical fluido: 164dp (WCAG 2.2 AA)</span>
       </div>
     </div>
   </section>
 
-  <!-- Section 3: Kotlin Compose Type.kt Contract -->
-  <section class="spec-card">
-    <div class="card-header-row">
-      <div class="card-badge-icon code-badge"><i class="pi pi-code"></i></div>
-      <div>
-        <span class="card-eyebrow">IMPLEMENTACIÓN NATIVA · JETPACK COMPOSE</span>
-        <h3 class="card-title">Contrato de Tipografía Kotlin (:core:designsystem)</h3>
+  <!-- Section 3: Contrato de Código Kotlin Compose Type.kt -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">03</span>
+        <div>
+          <p class="cuadro-kicker">IMPLEMENTACIÓN NATIVA · JETPACK COMPOSE</p>
+          <h3 class="cuadro-title">Type.kt Canónico (:core:designsystem)</h3>
+          <p class="cuadro-subtitle">
+            Definición en Kotlin 2.4 con <code>androidx.compose.material3.Typography</code> para los 15 roles canónicos.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag kotlin"><i class="pi pi-code"></i> Type.kt</span>
+        <span class="cuadro-tag primary"><i class="pi pi-font"></i> Plus Jakarta Sans & Inter</span>
       </div>
     </div>
 
-    <div class="code-preview-block">
-      <pre is:raw><code>// core/designsystem/src/main/kotlin/com/nexa/core/designsystem/theme/Type.kt
-package com.nexa.core.designsystem.theme
+    <div class="code-container-block">
+      <div class="code-header-bar">
+        <div class="code-header-title">
+          <i class="pi pi-file"></i>
+          <span>core/designsystem/src/main/kotlin/com/nexa/core/designsystem/theme/Type.kt</span>
+        </div>
+        <span class="code-lang-pill">Kotlin 2.4</span>
+      </div>
+      <pre class="code-pre-box" is:raw><code><span class="comm">// Canonical Material 3 Typography Scale for Nexa Suite Operations Android</span>
+<span class="kw">package</span> com.nexa.core.designsystem.theme
 
-import androidx.compose.material3.Typography
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
+<span class="kw">import</span> androidx.compose.material3.Typography
+<span class="kw">import</span> androidx.compose.ui.text.TextStyle
+<span class="kw">import</span> androidx.compose.ui.text.font.FontFamily
+<span class="kw">import</span> androidx.compose.ui.text.font.FontWeight
+<span class="kw">import</span> androidx.compose.ui.unit.sp
 
-val NexaTypography = Typography(
-    displayLarge = TextStyle(
+<span class="kw">val</span> NexaTypography = <span class="type">Typography</span>(
+    <span class="comm">// 1. Display (Jakarta Sans 700/800)</span>
+    displayLarge = <span class="type">TextStyle</span>(
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.ExtraBold,
-        fontSize = 32.sp,
-        lineHeight = 40.sp
+        fontSize = <span class="num">57.sp</span>,
+        lineHeight = <span class="num">64.sp</span>,
+        letterSpacing = (-<span class="num">0.25</span>).sp
     ),
-    headlineMedium = TextStyle(
+    displayMedium = <span class="type">TextStyle</span>(
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Bold,
-        fontSize = 24.sp,
-        lineHeight = 32.sp
+        fontSize = <span class="num">45.sp</span>,
+        lineHeight = <span class="num">52.sp</span>,
+        letterSpacing = <span class="num">0.sp</span>
     ),
-    titleMedium = TextStyle(
+    displaySmall = <span class="type">TextStyle</span>(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.Bold,
+        fontSize = <span class="num">36.sp</span>,
+        lineHeight = <span class="num">44.sp</span>,
+        letterSpacing = <span class="num">0.sp</span>
+    ),
+
+    <span class="comm">// 2. Headline (Jakarta Sans 700/800)</span>
+    headlineLarge = <span class="type">TextStyle</span>(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = <span class="num">32.sp</span>,
+        lineHeight = <span class="num">40.sp</span>,
+        letterSpacing = <span class="num">0.sp</span>
+    ),
+    headlineMedium = <span class="type">TextStyle</span>(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.Bold,
+        fontSize = <span class="num">28.sp</span>,
+        lineHeight = <span class="num">36.sp</span>,
+        letterSpacing = <span class="num">0.sp</span>
+    ),
+    headlineSmall = <span class="type">TextStyle</span>(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.Bold,
+        fontSize = <span class="num">24.sp</span>,
+        lineHeight = <span class="num">32.sp</span>,
+        letterSpacing = <span class="num">0.sp</span>
+    ),
+
+    <span class="comm">// 3. Title (Jakarta Sans & Inter 600)</span>
+    titleLarge = <span class="type">TextStyle</span>(
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 16.sp,
-        lineHeight = 24.sp
+        fontSize = <span class="num">22.sp</span>,
+        lineHeight = <span class="num">28.sp</span>,
+        letterSpacing = <span class="num">0.sp</span>
     ),
-    bodyLarge = TextStyle(
+    titleMedium = <span class="type">TextStyle</span>(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = <span class="num">16.sp</span>,
+        lineHeight = <span class="num">24.sp</span>,
+        letterSpacing = <span class="num">0.15.sp</span>
+    ),
+    titleSmall = <span class="type">TextStyle</span>(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = <span class="num">14.sp</span>,
+        lineHeight = <span class="num">20.sp</span>,
+        letterSpacing = <span class="num">0.1.sp</span>
+    ),
+
+    <span class="comm">// 4. Body (Inter 400)</span>
+    bodyLarge = <span class="type">TextStyle</span>(
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Normal,
-        fontSize = 15.sp,
-        lineHeight = 22.sp
+        fontSize = <span class="num">16.sp</span>,
+        lineHeight = <span class="num">24.sp</span>,
+        letterSpacing = <span class="num">0.5.sp</span>
     ),
-    labelSmall = TextStyle(
+    bodyMedium = <span class="type">TextStyle</span>(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.Normal,
+        fontSize = <span class="num">14.sp</span>,
+        lineHeight = <span class="num">20.sp</span>,
+        letterSpacing = <span class="num">0.25.sp</span>
+    ),
+    bodySmall = <span class="type">TextStyle</span>(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.Normal,
+        fontSize = <span class="num">12.sp</span>,
+        lineHeight = <span class="num">16.sp</span>,
+        letterSpacing = <span class="num">0.4.sp</span>
+    ),
+
+    <span class="comm">// 5. Label (Inter 600/700)</span>
+    labelLarge = <span class="type">TextStyle</span>(
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Bold,
-        fontSize = 11.sp,
-        lineHeight = 16.sp
+        fontSize = <span class="num">14.sp</span>,
+        lineHeight = <span class="num">20.sp</span>,
+        letterSpacing = <span class="num">0.1.sp</span>
+    ),
+    labelMedium = <span class="type">TextStyle</span>(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = <span class="num">12.sp</span>,
+        lineHeight = <span class="num">16.sp</span>,
+        letterSpacing = <span class="num">0.5.sp</span>
+    ),
+    labelSmall = <span class="type">TextStyle</span>(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.Bold,
+        fontSize = <span class="num">11.sp</span>,
+        lineHeight = <span class="num">16.sp</span>,
+        letterSpacing = <span class="num">0.5.sp</span>
     )
 )</code></pre>
     </div>
@@ -183,198 +374,75 @@ val NexaTypography = Typography(
   .tipografia-sp-container {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 28px;
     width: 100%;
   }
 
-  .spec-card {
-    background: var(--nexa-surface-card, #ffffff);
-    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
-    border-radius: var(--nexa-radius-card, 16px);
-    padding: 24px;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .card-header-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .card-badge-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background: var(--nexa-color-primary-50, #eff6ff);
-    color: var(--nexa-color-primary-600, #2a67d9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 17px;
-    flex-shrink: 0;
-
-    &.preview-badge {
-      background: #f0fdf4;
-      color: #16a34a;
-    }
-    &.code-badge {
-      background: #f1f5f9;
-      color: #0f172a;
-    }
-  }
-
-  .card-eyebrow {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    color: var(--nexa-color-primary-700, #1d4ed8);
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 2px;
-  }
-
-  .card-title {
-    font-family: var(--nexa-font-family-display, sans-serif);
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--nexa-color-text-primary, #0f172a);
-    margin: 0;
-  }
-
-  .card-text {
-    font-size: 13.5px;
-    color: var(--nexa-color-text-secondary, #64748b);
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  .table-responsive-wrapper {
-    width: 100%;
-    overflow-x: auto;
-    border: 1px solid var(--nexa-color-border-subtle, #e2e8f0);
-    border-radius: 12px;
-  }
-
-  .metrics-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12.5px;
-    text-align: left;
-
-    th {
-      background: var(--nexa-color-neutral-50, #f8fafc);
-      padding: 10px 14px;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--nexa-color-neutral-600, #475569);
-      border-bottom: 1px solid var(--nexa-color-border-structural, #e2e8f0);
-    }
-
-    td {
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
-      color: var(--nexa-color-text-secondary, #64748b);
-    }
-
-    tr:last-child td {
-      border-bottom: 0;
-    }
-  }
-
-  .code-pill {
-    display: inline-block;
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--nexa-color-primary-700, #1d4ed8);
-    background: var(--nexa-color-primary-50, #eff6ff);
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
-
-  .type-specimen-grid {
+  .scaling-preview-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
-    margin-top: 8px;
   }
 
-  @media (max-width: 900px) {
-    .type-specimen-grid {
+  @media (max-width: 860px) {
+    .scaling-preview-grid {
       grid-template-columns: 1fr;
     }
   }
 
-  .specimen-card {
+  .scaling-card {
     padding: 16px;
     background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
 
-    small {
-      color: #64748b;
-      font-size: 11px;
+    .scale-badge {
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--nexa-color-primary-700, #1d4ed8);
+      text-transform: uppercase;
     }
-  }
 
-  .specimen-role {
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    color: var(--nexa-color-primary-700, #1d4ed8);
-    text-transform: uppercase;
-  }
+    .scale-title {
+      font-family: var(--nexa-font-family-display, sans-serif);
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0;
+    }
 
-  .sample-display {
-    font-size: 32px;
-    font-weight: 800;
-    color: #0f172a;
-    line-height: 1.2;
-    margin: 0;
-  }
+    .scale-body {
+      color: #334155;
+      line-height: 1.5;
+      margin: 0;
+    }
 
-  .sample-headline {
-    font-size: 24px;
-    font-weight: 700;
-    color: #0f172a;
-    line-height: 1.25;
-    margin: 0;
-  }
-
-  .sample-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #0f172a;
-    margin: 0;
-  }
-
-  .sample-body {
-    font-size: 15px;
-    color: #334155;
-    line-height: 1.5;
-    margin: 0;
-  }
-
-  .code-preview-block {
-    background: #0f172a;
-    border-radius: 12px;
-    padding: 18px;
-    overflow-x: auto;
-
-    pre { margin: 0; }
-    code {
+    .scale-footer {
+      font-size: 10.5px;
       font-family: var(--nexa-font-family-mono, monospace);
-      font-size: 12px;
-      color: #e2e8f0;
-      line-height: 1.6;
+      color: #15803d;
+      font-weight: 600;
+      margin-top: auto;
+      padding-top: 6px;
+      border-top: 1px dashed #cbd5e1;
+    }
+
+    &.scale-100 {
+      .scale-title { font-size: 16px; }
+      .scale-body { font-size: 14px; }
+    }
+
+    &.scale-150 {
+      .scale-title { font-size: 20px; }
+      .scale-body { font-size: 17px; }
+    }
+
+    &.scale-200 {
+      .scale-title { font-size: 24px; }
+      .scale-body { font-size: 20px; }
     }
   }
 </style>

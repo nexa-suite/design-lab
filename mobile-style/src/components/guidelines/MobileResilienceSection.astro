@@ -1,156 +1,235 @@
 ---
 /**
- * MobileResilienceSection — Offline Resilience & Idempotent Retry Contracts
- * Explains WorkManager, idempotency keys, correlation IDs, and non-authoritative local cache.
+ * MobileResilienceSection.astro
+ * Offline Resilience, WorkManager CoroutineWorker & Idempotent Retry Contracts
+ * Covers Room SQLite Queue, Exponential Backoff, Network Constraints & Production Kotlin Contracts
  */
 ---
 
 <div class="resilience-container" id="sec-resiliencia-red" data-platform-target="universal">
-  <section class="spec-card">
-    <div class="card-header-row">
-      <div class="card-badge-icon sync-badge"><i class="pi pi-sync"></i></div>
-      <div>
-        <span class="card-eyebrow">RED & RESILIENCIA · CONEXIONES INESTABLES</span>
-        <h3 class="card-title">Resiliencia Offline & Reintentos Idempotentes en Campo</h3>
+
+  <!-- ==========================================================================
+       1. RESILIENCIA OFFLINE & COLA WORKMANAGER
+       ========================================================================== -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">01</span>
+        <div>
+          <p class="cuadro-kicker">RED & RESILIENCIA · CONEXIONES INESTABLES EN CAMPO</p>
+          <h3 class="cuadro-title">Cola de Reintentos Idempotentes con WorkManager & Room SQLite</h3>
+          <p class="cuadro-subtitle">
+            Las operaciones de transporte en autopistas interurbanas y almacenes subterráneos frecuentemente pierden conectividad 4G/5G. El sistema garantiza que <strong>ningún despacho confirmado o firma POD se pierda jamás</strong>, encapsulándolos en una cola atómica persistida en Room y administrada por <code>WorkManager CoroutineWorker</code> con retroceso exponencial (Exponential Backoff).
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-sync"></i> WorkManager 2.9</span>
+        <span class="cuadro-tag success"><i class="pi pi-shield"></i> X-Idempotency-Key</span>
+        <span class="cuadro-tag warning"><i class="pi pi-clock"></i> Backoff 15s → 5m</span>
       </div>
     </div>
-    <p class="card-text">
-      Las operaciones de campo en minas, obras y carreteras a menudo pierden señal 4G/5G. El sistema de diseño contempla <strong>estados de sincronización no intrusivos</strong> y cola de reintentos administrada por el sistema operativo (WorkManager en Android).
-    </p>
 
-    <!-- Sync Indicators Row -->
+    <!-- Sync Indicators Grid -->
     <div class="sync-indicators-grid">
       <div class="sync-indicator-card online">
         <div class="sync-status-dot online"></div>
         <div class="sync-status-info">
-          <strong>En Línea (Conectado a API)</strong>
-          <span>Latencia: 42ms · Sincronizado</span>
+          <strong>En Línea (Conectado a Nexa API)</strong>
+          <span>Latencia: 38ms · Token JWT Activo · Socket OK</span>
         </div>
+        <span class="indicator-badge online">SINCRONIZADO</span>
       </div>
 
       <div class="sync-indicator-card offline">
         <div class="sync-status-dot offline"></div>
         <div class="sync-status-info">
-          <strong>Modo Fuera de Línea (Ruta Local)</strong>
-          <span>2 despachos en cola segura</span>
+          <strong>Modo Fuera de Línea (Ruta Local SQLite)</strong>
+          <span>2 despachos persistidos en cola segura</span>
         </div>
+        <span class="indicator-badge offline">EN COLA</span>
       </div>
 
       <div class="sync-indicator-card syncing">
         <i class="pi pi-spin pi-spinner sync-spinner"></i>
         <div class="sync-status-info">
           <strong>Sincronizando con Nexa API...</strong>
-          <span>Reintentando con WorkManager</span>
+          <span>Reintentando con WorkManager (Intento 2/5)</span>
         </div>
+        <span class="indicator-badge syncing">EN PROCESO</span>
       </div>
     </div>
 
-    <!-- Idempotency Rules Table -->
-    <div class="table-responsive-wrapper">
-      <table class="metrics-table">
+    <!-- CUADRO ARQUITECTÓNICO: Matriz de Manejo de Red e Idempotencia -->
+    <div class="contract-table-wrapper" style="margin-top: 14px;">
+      <table class="contract-table">
         <thead>
           <tr>
-            <th>Encabezado / Mecanismo</th>
-            <th>Propósito en Móvil</th>
+            <th>Mecanismo / Encabezado</th>
+            <th>Propósito en Android</th>
+            <th>Valor / Algoritmo</th>
             <th>Comportamiento ante Caída de Red</th>
+            <th>Resolución de Conflictos</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><code>X-Idempotency-Key</code></td>
-            <td>Identificador único generado en el cliente (UUID v4) por cada comando de despacho.</td>
-            <td>Si la conexión falla durante la confirmación, el reintento reenvía la misma clave evitando duplicar despachos en backend.</td>
+            <td>Garantiza que una orden de despacho o firma no se duplique en backend tras un reintento.</td>
+            <td><code>UUID v4</code> generado al pulsar "Confirmar Entrega"</td>
+            <td>Si la red cae tras enviar la solicitud, el reintento reenvía la misma clave; el backend retorna la respuesta en caché sin reprocesar.</td>
+            <td>Servidor detecta hash idéntico y devuelve HTTP 200 con estado previo.</td>
           </tr>
           <tr>
             <td><code>X-Correlation-ID</code></td>
-            <td>Identificador diagnóstico para trazabilidad extremo a extremo entre dispositivo y servidor.</td>
-            <td>Se registra en los logs de depuración para auditar problemas de red sin exponer datos sensibles.</td>
+            <td>Trazabilidad de extremo a extremo entre el log local del móvil y el API Gateway.</td>
+            <td><code>prefix-timestamp-random</code></td>
+            <td>Permite diagnosticar fallas de ruteo o bloqueos de red sin exponer datos sensibles del cliente ni credenciales.</td>
+            <td>Inmutable a lo largo de toda la cadena de microservicios.</td>
           </tr>
           <tr>
-            <td><code>Room / SQLite Local</code></td>
-            <td>Caché de solo lectura de rutas asignadas y borrador de firmas.</td>
-            <td><strong>No autoritativo:</strong> Jamás declara confirmación de orden sin el acuse de recibo HTTP 200/204 del servidor.</td>
+            <td><code>WorkManager CoroutineWorker</code></td>
+            <td>Ejecución de sincronización en segundo plano garantizada por el sistema operativo.</td>
+            <td>Exponential Backoff: base 15 segundos, multiplicador 2x, máximo 5 intentos</td>
+            <td>Si el proceso es destruido por falta de memoria (OOM), el SO reinicia el worker tan pronto vuelva la red.</td>
+            <td>Constraint: <code>NetworkType.CONNECTED</code> obligatorio.</td>
+          </tr>
+          <tr>
+            <td><code>Room SQLite Local</code></td>
+            <td>Caché local inmutable de órdenes y borrador de firmas vectoriales.</td>
+            <td>SQLite cifrado con SQLCipher</td>
+            <td><strong>No autoritativo:</strong> Jamás declara éxito definitivo ante el usuario hasta recibir el acuse HTTP 200/204.</td>
+            <td>Si el backend rechaza por regla de negocio, el estado pasa a <code>DISCREPANCY_NEEDS_REVIEW</code>.</td>
           </tr>
         </tbody>
       </table>
     </div>
   </section>
+
+  <!-- ==========================================================================
+       2. CONTRATO DE CÓDIGO KOTLIN WORKMANAGER SYNC WORKER
+       ========================================================================== -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">02</span>
+        <div>
+          <p class="cuadro-kicker">CÓDIGO DE PRODUCCIÓN · KOTLIN WORKMANAGER 2.9</p>
+          <h3 class="cuadro-title">SyncDeliveryWorker (CoroutineWorker con Exponential Backoff)</h3>
+          <p class="cuadro-subtitle">
+            Implementación nativa de sincronización en segundo plano con inyección de dependencias Hilt y captura de fallos con reintentos controlados.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag kotlin"><i class="pi pi-code"></i> SyncDeliveryWorker.kt</span>
+      </div>
+    </div>
+
+    <div class="code-container-block">
+      <div class="code-header-bar">
+        <div class="code-header-title">
+          <i class="pi pi-file"></i>
+          <span>core/network/src/main/kotlin/com/nexa/core/network/worker/SyncDeliveryWorker.kt</span>
+        </div>
+        <span class="code-lang-pill">Kotlin 2.4</span>
+      </div>
+      <pre class="code-pre-box" is:raw><code><span class="comm">// Canonical WorkManager CoroutineWorker with Exponential Backoff & Constraints</span>
+<span class="kw">package</span> com.nexa.core.network.worker
+
+<span class="kw">import</span> android.content.Context
+<span class="kw">import</span> androidx.hilt.work.HiltWorker
+<span class="kw">import</span> androidx.work.Constraints
+<span class="kw">import</span> androidx.work.CoroutineWorker
+<span class="kw">import</span> androidx.work.NetworkType
+<span class="kw">import</span> androidx.work.OneTimeWorkRequestBuilder
+<span class="kw">import</span> androidx.work.WorkRequest
+<span class="kw">import</span> androidx.work.WorkerParameters
+<span class="kw">import</span> dagger.assisted.Assisted
+<span class="kw">import</span> dagger.assisted.AssistedInject
+<span class="kw">import</span> java.io.IOException
+<span class="kw">import</span> java.util.concurrent.TimeUnit
+
+<span class="ann">@HiltWorker</span>
+<span class="kw">class</span> <span class="type">SyncDeliveryWorker</span> <span class="ann">@AssistedInject constructor</span>(
+    <span class="ann">@Assisted</span> appContext: <span class="type">Context</span>,
+    <span class="ann">@Assisted</span> workerParams: <span class="type">WorkerParameters</span>
+) : <span class="type">CoroutineWorker</span>(appContext, workerParams) {
+
+    <span class="kw">override suspend fun</span> <span class="fn">doWork</span>(): <span class="type">Result</span> {
+        <span class="kw">val</span> orderId = inputData.getString(<span class="str">"KEY_ORDER_ID"</span>) ?: <span class="kw">return</span> Result.failure()
+        <span class="kw">val</span> idempotencyKey = inputData.getString(<span class="str">"KEY_IDEMPOTENCY_KEY"</span>) ?: <span class="kw">return</span> Result.failure()
+
+        <span class="kw">return try</span> {
+            <span class="comm">// Invocación al cliente HTTP seguro OkHttp3 / Retrofit con headers de idempotencia</span>
+            <span class="comm">// deliveryApi.confirmDelivery(orderId = orderId, idempotencyKey = idempotencyKey)</span>
+
+            Result.<span class="fn">success</span>()
+        } <span class="kw">catch</span> (e: <span class="type">IOException</span>) {
+            <span class="comm">// Error transitorio de red: reintenta según política de Exponential Backoff</span>
+            <span class="kw">if</span> (runAttemptCount &lt; <span class="num">5</span>) {
+                Result.<span class="fn">retry</span>()
+            } <span class="kw">else</span> {
+                <span class="comm">// Máximo de reintentos alcanzado: notifica para revisión manual</span>
+                Result.<span class="fn">failure</span>()
+            }
+        } <span class="kw">catch</span> (e: <span class="type">Exception</span>) {
+            <span class="comm">// Error de validación de negocio (ej. 422 Unprocessable): fallo permanente</span>
+            Result.<span class="fn">failure</span>()
+        }
+    }
+
+    <span class="kw">companion object</span> {
+        <span class="kw">fun</span> <span class="fn">buildWorkRequest</span>(orderId: <span class="type">String</span>, idempotencyKey: <span class="type">String</span>): <span class="type">WorkRequest</span> {
+            <span class="kw">val</span> constraints = <span class="fn">Constraints.Builder</span>()
+                .setRequiredNetworkType(NetworkType.CONNECTED) <span class="comm">// Requiere conectividad activa</span>
+                .build()
+
+            <span class="kw">return</span> <span class="fn">OneTimeWorkRequestBuilder</span>&lt;<span class="type">SyncDeliveryWorker</span>&gt;()
+                .setConstraints(constraints)
+                .setBackoffCriteria(
+                    androidx.work.BackoffPolicy.EXPONENTIAL,
+                    <span class="num">15L</span>,
+                    TimeUnit.SECONDS
+                )
+                .build()
+        }
+    }
+}</code></pre>
+    </div>
+  </section>
+
 </div>
 
 <style>
   .resilience-container {
-    width: 100%;
-  }
-
-  .spec-card {
-    background: var(--nexa-surface-card, #ffffff);
-    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
-    border-radius: var(--nexa-radius-card, 16px);
-    padding: 24px;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    scroll-margin-top: 80px;
-  }
-
-  .card-header-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .card-badge-icon.sync-badge {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background: #eff6ff;
-    color: #2563eb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 17px;
-    flex-shrink: 0;
-  }
-
-  .card-eyebrow {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    color: #2563eb;
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 2px;
-  }
-
-  .card-title {
-    font-family: var(--nexa-font-family-display, sans-serif);
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--nexa-color-text-primary, #0f172a);
-    margin: 0;
-  }
-
-  .card-text {
-    font-size: 13.5px;
-    color: var(--nexa-color-text-secondary, #64748b);
-    line-height: 1.6;
-    margin: 0;
+    gap: 28px;
+    width: 100%;
   }
 
   .sync-indicators-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 860px) {
+    .sync-indicators-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .sync-indicator-card {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 12px 14px;
-    border-radius: 10px;
-    border: 1px solid #e2e8f0;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
 
     &.online {
       background: #f0fdf4;
@@ -169,24 +248,24 @@
   }
 
   .sync-status-dot {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     flex-shrink: 0;
 
     &.online {
       background: #16a34a;
-      box-shadow: 0 0 6px rgba(22, 163, 74, 0.4);
+      box-shadow: 0 0 8px rgba(22, 163, 74, 0.5);
     }
 
     &.offline {
       background: #d97706;
-      box-shadow: 0 0 6px rgba(217, 119, 6, 0.4);
+      box-shadow: 0 0 8px rgba(217, 119, 6, 0.5);
     }
   }
 
   .sync-spinner {
-    font-size: 14px;
+    font-size: 16px;
     color: #2563eb;
     flex-shrink: 0;
   }
@@ -194,10 +273,11 @@
   .sync-status-info {
     display: flex;
     flex-direction: column;
-    gap: 1px;
+    gap: 2px;
+    flex: 1;
 
     strong {
-      font-size: 12px;
+      font-size: 12.5px;
       color: #0f172a;
     }
 
@@ -207,39 +287,15 @@
     }
   }
 
-  .table-responsive-wrapper {
-    width: 100%;
-    overflow-x: auto;
-    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
-    border-radius: 10px;
-  }
+  .indicator-badge {
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    border-radius: 6px;
 
-  .metrics-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12.5px;
-    text-align: left;
-    white-space: nowrap;
-
-    th {
-      background: var(--nexa-color-neutral-100, #f1f5f9);
-      color: var(--nexa-color-text-secondary, #64748b);
-      font-weight: 700;
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--nexa-color-border-default, #e2e8f0);
-      font-size: 11.5px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    td {
-      padding: 11px 14px;
-      border-bottom: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
-      color: var(--nexa-color-text-primary, #0f172a);
-    }
-
-    tr:last-child td {
-      border-bottom: none;
-    }
+    &.online { background: #dcfce7; color: #15803d; }
+    &.offline { background: #fef3c7; color: #92400e; }
+    &.syncing { background: #dbeafe; color: #1e40af; }
   }
 </style>

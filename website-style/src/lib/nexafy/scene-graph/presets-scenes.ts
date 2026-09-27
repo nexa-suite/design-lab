@@ -1263,6 +1263,8 @@ export function createSustainabilityScene(w: number, h: number): SceneGraph {
  */
 export function createSceneForPreset(presetId: string, stageWidth: number, stageHeight: number): SceneGraph {
   switch (presetId) {
+    case 'DORMANT':
+      return { nodes: [], edges: [] };
     case 'SAAS':
       return createSaaSScene(stageWidth, stageHeight);
     case 'PAYMENT':

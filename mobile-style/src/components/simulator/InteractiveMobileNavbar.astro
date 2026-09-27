@@ -1,0 +1,1113 @@
+---
+/**
+ * InteractiveMobileNavbar.astro
+ * Canonical Interactive TopAppBar & Navigation Specification (Material 3)
+ * Includes:
+ *  - Dynamic TopAppBar with module-aware title
+ *  - Sucursal/Almacén selector dropdown (Hub Frigorífico Lima Norte, Callao Muelle 2, Chiclayo Distribución)
+ *  - Live connectivity indicator: Online vs Offline (Room Queue: 2 pendientes)
+ *  - Notification bell with unread badge & interactive panel
+ *  - Operator profile chip (Carlos Mendoza · Jefe de Patio)
+ *  - Production-ready Kotlin 2.4 Jetpack Compose code cuadro
+ */
+---
+
+<div class="interactive-navbar-container">
+  
+  <!-- Interactive Navigation Bar Stage (Live Mock) -->
+  <div class="navbar-mock-stage">
+    
+    <!-- Top System Bar Mock -->
+    <div class="mock-system-bar">
+      <span class="system-time">14:35</span>
+      <div class="system-icons">
+        <span class="system-metric">5G LTE</span>
+        <i class="pi pi-wifi"></i>
+        <i class="pi pi-bolt"></i>
+        <span class="system-battery">92%</span>
+      </div>
+    </div>
+
+    <!-- M3 Top App Bar (56dp canonical touch height) -->
+    <header class="m3-navbar-surface" id="m3-navbar-root">
+      
+      <!-- Top Row: Drawer Toggle + Title + Action Badges -->
+      <div class="navbar-top-row">
+        <button type="button" class="nav-icon-btn" id="btn-navbar-menu" aria-label="Abrir menú de navegación">
+          <i class="pi pi-bars" aria-hidden="true"></i>
+        </button>
+
+        <div class="navbar-title-block">
+          <span class="app-brand-subtitle">NEXA OPERATIONS M3</span>
+          <h1 class="navbar-module-title" id="navbar-active-title">Tablero de Despacho</h1>
+        </div>
+
+        <div class="navbar-actions-cluster">
+          <!-- Notification Bell with Unread Badge -->
+          <button type="button" class="nav-icon-btn notification-btn" id="btn-navbar-notifications" aria-label="Notificaciones operacionales">
+            <i class="pi pi-bell" aria-hidden="true"></i>
+            <span class="notification-badge" id="navbar-notif-count">3</span>
+          </button>
+
+          <!-- Operator Profile Avatar Chip -->
+          <button type="button" class="operator-avatar-btn" id="btn-operator-profile" title="Carlos Mendoza · Jefe de Patio">
+            <span class="avatar-initials">CM</span>
+            <span class="online-indicator-dot"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Second Row: Warehouse Selector + Live Connectivity Mode Indicator -->
+      <div class="navbar-sub-row">
+        <!-- Sucursal / Almacén Dropdown Selector -->
+        <div class="warehouse-selector-wrapper">
+          <button type="button" class="warehouse-dropdown-btn" id="btn-warehouse-toggle" aria-haspopup="listbox" aria-expanded="false">
+            <i class="pi pi-building text-primary" aria-hidden="true"></i>
+            <span class="warehouse-selected-name" id="selected-warehouse-label">Hub Frigorífico Lima Norte</span>
+            <i class="pi pi-chevron-down caret-icon" aria-hidden="true"></i>
+          </button>
+
+          <!-- Dropdown Menu List -->
+          <ul class="warehouse-dropdown-menu" id="warehouse-menu-list" role="listbox" tabindex="-1">
+            <li class="warehouse-option active" role="option" aria-selected="true" data-warehouse="Hub Frigorífico Lima Norte" data-temp="-18°C a 4°C">
+              <div class="option-content">
+                <strong>Hub Frigorífico Lima Norte</strong>
+                <small>Principal · 8 Muelles · Temp: -18°C a 4°C</small>
+              </div>
+              <i class="pi pi-check checkmark"></i>
+            </li>
+            <li class="warehouse-option" role="option" aria-selected="false" data-warehouse="Callao Muelle 2" data-temp="-20°C Pescados">
+              <div class="option-content">
+                <strong>Callao Muelle 2</strong>
+                <small>Terminal Portuario · 4 Rampas Frío</small>
+              </div>
+              <i class="pi pi-check checkmark"></i>
+            </li>
+            <li class="warehouse-option" role="option" aria-selected="false" data-warehouse="Chiclayo Distribución" data-temp="2°C a 8°C">
+              <div class="option-content">
+                <strong>Chiclayo Distribución</strong>
+                <small>Cross-docking Norte · 3 Rampas</small>
+              </div>
+              <i class="pi pi-check checkmark"></i>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Live Connectivity Pill Toggle (Online vs Offline Room Queue) -->
+        <div class="connectivity-control-wrapper">
+          <button type="button" class="connectivity-pill is-online" id="btn-connectivity-toggle" title="Click para simular pérdida/recuperación de señal">
+            <span class="connectivity-dot"></span>
+            <span class="connectivity-text" id="connectivity-status-label">● En Línea</span>
+            <span class="connectivity-pill-badge" id="connectivity-queue-badge" style="display: none;">2</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Third Row: Module Fast Switcher (Interactive Tabs) -->
+      <nav class="navbar-module-tabs" aria-label="Módulos de simulación activa">
+        <button type="button" class="module-tab-btn active" data-module="dispatch" data-title="Tablero de Despacho">
+          <i class="pi pi-send"></i> Despacho
+        </button>
+        <button type="button" class="module-tab-btn" data-module="catalog" data-title="Catálogo Mayorista">
+          <i class="pi pi-shopping-bag"></i> Catálogo
+        </button>
+        <button type="button" class="module-tab-btn" data-module="pod" data-title="Registro POD & Firma">
+          <i class="pi pi-check-circle"></i> Entrega POD
+        </button>
+        <button type="button" class="module-tab-btn" data-module="inspection" data-title="Inspección Montacargas">
+          <i class="pi pi-wrench"></i> Inspección
+        </button>
+      </nav>
+
+    </header>
+
+    <!-- Dropdown Notification Drawer / Popover -->
+    <div class="navbar-notification-popover" id="navbar-notification-panel" style="display: none;">
+      <div class="notif-header">
+        <div class="notif-header-title">
+          <i class="pi pi-bell text-primary"></i>
+          <span>Notificaciones Operacionales</span>
+        </div>
+        <button type="button" class="btn-text-action" id="btn-clear-notifications">Marcar leídas</button>
+      </div>
+      <ul class="notif-list" id="notif-items-list">
+        <li class="notif-item unread">
+          <span class="notif-badge-dot cold"></span>
+          <div class="notif-item-body">
+            <strong>Sensor Frío Muelle 3 (Lima Norte)</strong>
+            <p>Temperatura estable a -18.4°C en cámara de congelados.</p>
+            <time>Hace 2 minutos</time>
+          </div>
+        </li>
+        <li class="notif-item unread">
+          <span class="notif-badge-dot dispatch"></span>
+          <div class="notif-item-body">
+            <strong>Nueva Orden Asignada (DSP-204)</strong>
+            <p>Cliente La Cava Fría · 24x Salmón Salar listo para estiba.</p>
+            <time>Hace 5 minutos</time>
+          </div>
+        </li>
+        <li class="notif-item unread">
+          <span class="notif-badge-dot alert"></span>
+          <div class="notif-item-body">
+            <strong>Checklist Pre-operacional Pendiente</strong>
+            <p>Montacargas Linde H30 #04 requiere inspección de turno.</p>
+            <time>Hace 18 minutos</time>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Operator Profile Quick Card (Popover) -->
+    <div class="navbar-profile-popover" id="navbar-profile-panel" style="display: none;">
+      <div class="profile-header-card">
+        <div class="profile-avatar-lg">CM</div>
+        <div class="profile-meta">
+          <strong>Carlos Mendoza</strong>
+          <span class="profile-role">Jefe de Patio & Coordinador de Muelle</span>
+          <span class="profile-id">ID Operador: #OP-8842 · Turno Mañana</span>
+        </div>
+      </div>
+      <div class="profile-device-info">
+        <div class="device-kv">
+          <i class="pi pi-android"></i>
+          <span>Terminal Zebra TC58 (Android 14 Industrial)</span>
+        </div>
+        <div class="device-kv">
+          <i class="pi pi-shield"></i>
+          <span>Rol: Supervisor de Despacho & Cadena de Frío</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Toast / Snackbar Alert Feedback -->
+    <div class="live-toast-bar" id="navbar-live-toast" style="display: none;">
+      <i class="pi pi-info-circle toast-icon" id="toast-icon"></i>
+      <span class="toast-message" id="toast-message">Almacén cambiado a Callao Muelle 2</span>
+    </div>
+
+  </div>
+
+  <!-- Documentation Cuadro: Production-Ready Kotlin 2.4 & Jetpack Compose Material 3 Code -->
+  <section class="cuadro-card">
+    <header class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">NAV</span>
+        <div>
+          <p class="cuadro-kicker">JETPACK COMPOSE MATERIAL 3 · TOP APP BAR CON ALMACÉN & OFFLINE QUEUE</p>
+          <h3 class="cuadro-title">Especificación de Navbar Dinámica y Sincronización de Red</h3>
+          <p class="cuadro-subtitle">
+            Implementación nativa en Kotlin 2.4 con <code>TopAppBar</code>, <code>DropdownMenu</code>, control reactivo de conectividad con WorkManager y perfiles de operador con touch target mínimo de 48dp/56dp.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-android"></i> Android 14 M3</span>
+        <span class="cuadro-tag kotlin"><i class="pi pi-code"></i> Kotlin 2.4</span>
+        <span class="cuadro-tag success"><i class="pi pi-sync"></i> StateFlow UDF</span>
+      </div>
+    </header>
+
+    <!-- Kotlin 2.4 Production Snippet -->
+    <div class="code-box-wrapper">
+      <div class="code-box-header">
+        <div class="file-name">
+          <i class="pi pi-file"></i>
+          <span>NexaInteractiveTopAppBar.kt — Jetpack Compose Material 3</span>
+        </div>
+        <span class="code-badge">Production Kotlin 2.4</span>
+      </div>
+      <pre class="code-content" is:raw><code><span class="kw">package</span> com.nexa.operations.presentation.components
+
+<span class="kw">import</span> androidx.compose.animation.*
+<span class="kw">import</span> androidx.compose.foundation.background
+<span class="kw">import</span> androidx.compose.foundation.clickable
+<span class="kw">import</span> androidx.compose.foundation.layout.*
+<span class="kw">import</span> androidx.compose.foundation.shape.CircleShape
+<span class="kw">import</span> androidx.compose.foundation.shape.RoundedCornerShape
+<span class="kw">import</span> androidx.compose.material.icons.Icons
+<span class="kw">import</span> androidx.compose.material.icons.filled.*
+<span class="kw">import</span> androidx.compose.material3.*
+<span class="kw">import</span> androidx.compose.runtime.*
+<span class="kw">import</span> androidx.compose.ui.Alignment
+<span class="kw">import</span> androidx.compose.ui.Modifier
+<span class="kw">import</span> androidx.compose.ui.draw.clip
+<span class="kw">import</span> androidx.compose.ui.graphics.Color
+<span class="kw">import</span> androidx.compose.ui.unit.dp
+<span class="kw">import</span> androidx.compose.ui.unit.sp
+<span class="kw">import</span> kotlinx.coroutines.flow.StateFlow
+
+<span class="cmt">/**
+ * Estado inmutable de la barra superior interactiva de Nexa Operations.
+ */</span>
+<span class="kw">data class</span> <span class="type">TopBarUiState</span>(
+    <span class="kw">val</span> activeModuleName: <span class="type">String</span> = <span class="str">"Tablero de Despacho"</span>,
+    <span class="kw">val</span> currentWarehouse: <span class="type">String</span> = <span class="str">"Hub Frigorífico Lima Norte"</span>,
+    <span class="kw">val</span> isOnline: <span class="type">Boolean</span> = <span class="kw">true</span>,
+    <span class="kw">val</span> pendingRoomQueueCount: <span class="type">Int</span> = <span class="num">0</span>,
+    <span class="kw">val</span> unreadNotificationsCount: <span class="type">Int</span> = <span class="num">3</span>,
+    <span class="kw">val</span> operatorName: <span class="type">String</span> = <span class="str">"Carlos Mendoza"</span>,
+    <span class="kw">val</span> operatorRole: <span class="type">String</span> = <span class="str">"Jefe de Patio"</span>
+)
+
+<span class="kw">@OptIn</span>(ExperimentalMaterial3Api::<span class="kw">class</span>)
+<span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">NexaInteractiveTopAppBar</span>(
+    uiState: <span class="type">TopBarUiState</span>,
+    onWarehouseSelected: (<span class="type">String</span>) -&gt; <span class="type">Unit</span>,
+    onToggleConnectivityMode: () -&gt; <span class="type">Unit</span>,
+    onNotificationClick: () -&gt; <span class="type">Unit</span>,
+    onProfileClick: () -&gt; <span class="type">Unit</span>,
+    onMenuClick: () -&gt; <span class="type">Unit</span>,
+    modifier: <span class="type">Modifier</span> = <span class="type">Modifier</span>
+) {
+    <span class="kw">var</span> warehouseExpanded <span class="kw">by</span> remember { mutableStateOf(<span class="kw">false</span>) }
+    <span class="kw">val</span> warehouses = listOf(
+        <span class="str">"Hub Frigorífico Lima Norte"</span>,
+        <span class="str">"Callao Muelle 2"</span>,
+        <span class="str">"Chiclayo Distribución"</span>
+    )
+
+    <span class="fn">Surface</span>(
+        modifier = modifier.fillMaxWidth(),
+        color = MaterialTheme.colorScheme.surface,
+        tonalElevation = <span class="num">2.dp</span>,
+        shadowElevation = <span class="num">1.dp</span>
+    ) {
+        <span class="fn">Column</span>(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = <span class="num">16.dp</span>, vertical = <span class="num">8.dp</span>)
+        ) {
+            <span class="cmt">// Fila Principal: Menú + Título Dinámico + Acciones (56dp target)</span>
+            <span class="fn">Row</span>(
+                modifier = Modifier.fillMaxWidth().height(<span class="num">56.dp</span>),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                <span class="fn">IconButton</span>(
+                    onClick = onMenuClick,
+                    modifier = Modifier.size(<span class="num">48.dp</span>) <span class="cmt">// Touch Target Mínimo WCAG</span>
+                ) {
+                    <span class="fn">Icon</span>(Icons.Default.Menu, contentDescription = <span class="str">"Menú Lateral"</span>)
+                }
+
+                <span class="fn">Column</span>(modifier = Modifier.weight(<span class="num">1f</span>).padding(horizontal = <span class="num">8.dp</span>)) {
+                    <span class="fn">Text</span>(
+                        text = <span class="str">"NEXA OPERATIONS M3"</span>,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.primary,
+                        letterSpacing = <span class="num">0.8.sp</span>
+                    )
+                    <span class="fn">Text</span>(
+                        text = uiState.activeModuleName,
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+
+                <span class="cmt">// Campana con Badge de Notificaciones</span>
+                <span class="fn">BadgedBox</span>(
+                    badge = {
+                        <span class="kw">if</span> (uiState.unreadNotificationsCount &gt; <span class="num">0</span>) {
+                            <span class="fn">Badge</span>(
+                                containerColor = MaterialTheme.colorScheme.error,
+                                contentColor = Color.White
+                            ) {
+                                <span class="fn">Text</span>(<span class="str">"${uiState.unreadNotificationsCount}"</span>)
+                            }
+                        }
+                    }
+                ) {
+                    <span class="fn">IconButton</span>(
+                        onClick = onNotificationClick,
+                        modifier = Modifier.size(<span class="num">48.dp</span>)
+                    ) {
+                        <span class="fn">Icon</span>(Icons.Default.Notifications, contentDescription = <span class="str">"Notificaciones"</span>)
+                    }
+                }
+
+                <span class="fn">Spacer</span>(modifier = Modifier.width(<span class="num">4.dp</span>))
+
+                <span class="cmt">// Avatar del Operador (Carlos Mendoza)</span>
+                <span class="fn">Box</span>(
+                    modifier = Modifier
+                        .size(<span class="num">40.dp</span>)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.primaryContainer)
+                        .clickable(onClick = onProfileClick),
+                    contentAlignment = Alignment.Center
+                ) {
+                    <span class="fn">Text</span>(
+                        text = <span class="str">"CM"</span>,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                }
+            }
+
+            <span class="cmt">// Segunda Fila: Selector de Almacén + Indicador de Conectividad</span>
+            <span class="fn">Row</span>(
+                modifier = Modifier.fillMaxWidth().padding(top = <span class="num">4.dp</span>),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                <span class="cmt">// Dropdown de Sucursal</span>
+                <span class="fn">Box</span> {
+                    <span class="fn">OutlinedButton</span>(
+                        onClick = { warehouseExpanded = !warehouseExpanded },
+                        shape = RoundedCornerShape(<span class="num">8.dp</span>),
+                        contentPadding = PaddingValues(horizontal = <span class="num">10.dp</span>, vertical = <span class="num">4.dp</span>),
+                        modifier = Modifier.heightIn(min = <span class="num">40.dp</span>)
+                    ) {
+                        <span class="fn">Icon</span>(Icons.Default.LocationOn, contentDescription = <span class="kw">null</span>, modifier = Modifier.size(<span class="num">16.dp</span>))
+                        <span class="fn">Spacer</span>(modifier = Modifier.width(<span class="num">6.dp</span>))
+                        <span class="fn">Text</span>(text = uiState.currentWarehouse, style = MaterialTheme.typography.labelMedium)
+                        <span class="fn">Icon</span>(Icons.Default.ArrowDropDown, contentDescription = <span class="kw">null</span>)
+                    }
+
+                    <span class="fn">DropdownMenu</span>(
+                        expanded = warehouseExpanded,
+                        onDismissRequest = { warehouseExpanded = <span class="kw">false</span> }
+                    ) {
+                        warehouses.forEach { warehouse -&gt;
+                            <span class="fn">DropdownMenuItem</span>(
+                                text = { <span class="fn">Text</span>(warehouse) },
+                                onClick = {
+                                    onWarehouseSelected(warehouse)
+                                    warehouseExpanded = <span class="kw">false</span>
+                                },
+                                leadingIcon = {
+                                    <span class="kw">if</span> (warehouse == uiState.currentWarehouse) {
+                                        <span class="fn">Icon</span>(Icons.Default.Check, contentDescription = <span class="kw">null</span>, tint = MaterialTheme.colorScheme.primary)
+                                    }
+                                }
+                            )
+                        }
+                    }
+                }
+
+                <span class="cmt">// Indicador Interactivo de Conectividad / Room Offline Queue</span>
+                <span class="fn">SuggestionChip</span>(
+                    onClick = onToggleConnectivityMode,
+                    label = {
+                        <span class="fn">Text</span>(
+                            text = <span class="kw">if</span> (uiState.isOnline) <span class="str">"● En Línea"</span> <span class="kw">else</span> <span class="str">"⚡ Offline (${uiState.pendingRoomQueueCount})"</span>,
+                            style = MaterialTheme.typography.labelSmall
+                        )
+                    },
+                    colors = SuggestionChipDefaults.suggestionChipColors(
+                        containerColor = <span class="kw">if</span> (uiState.isOnline) Color(<span class="num">0xFFDCFCE7</span>) <span class="kw">else</span> Color(<span class="num">0xFFFEF3C7</span>),
+                        labelColor = <span class="kw">if</span> (uiState.isOnline) Color(<span class="num">0xFF15803D</span>) <span class="kw">else</span> Color(<span class="num">0xFFB45309</span>)
+                    ),
+                    border = <span class="kw">null</span>,
+                    shape = RoundedCornerShape(<span class="num">16.dp</span>)
+                )
+            }
+        }
+    }
+}</code></pre>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Warehouse Dropdown logic
+    const btnWarehouse = document.getElementById('btn-warehouse-toggle');
+    const warehouseMenu = document.getElementById('warehouse-menu-list');
+    const warehouseLabel = document.getElementById('selected-warehouse-label');
+    const warehouseOptions = document.querySelectorAll('.warehouse-option');
+    const toastBar = document.getElementById('navbar-live-toast');
+    const toastMsg = document.getElementById('toast-message');
+
+    function showToast(message: string) {
+      if (!toastBar || !toastMsg) return;
+      toastMsg.textContent = message;
+      toastBar.style.display = 'flex';
+      setTimeout(() => {
+        toastBar.style.display = 'none';
+      }, 3000);
+    }
+
+    btnWarehouse?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isExpanded = btnWarehouse.getAttribute('aria-expanded') === 'true';
+      btnWarehouse.setAttribute('aria-expanded', String(!isExpanded));
+      if (warehouseMenu) {
+        warehouseMenu.style.display = isExpanded ? 'none' : 'block';
+      }
+    });
+
+    warehouseOptions.forEach(opt => {
+      opt.addEventListener('click', (e) => {
+        e.stopPropagation();
+        warehouseOptions.forEach(o => o.classList.remove('active'));
+        opt.classList.add('active');
+        const name = opt.getAttribute('data-warehouse') || '';
+        if (warehouseLabel) warehouseLabel.textContent = name;
+        if (warehouseMenu) warehouseMenu.style.display = 'none';
+        btnWarehouse?.setAttribute('aria-expanded', 'false');
+        showToast(`Almacén activo actualizado a: ${name}`);
+      });
+    });
+
+    // Connectivity Toggle Logic (Online vs Offline Room Queue)
+    const btnConnectivity = document.getElementById('btn-connectivity-toggle');
+    const statusLabel = document.getElementById('connectivity-status-label');
+    const queueBadge = document.getElementById('connectivity-queue-badge');
+    let isOnline = true;
+
+    btnConnectivity?.addEventListener('click', () => {
+      isOnline = !isOnline;
+      if (isOnline) {
+        btnConnectivity.className = 'connectivity-pill is-online';
+        if (statusLabel) statusLabel.textContent = '● En Línea';
+        if (queueBadge) queueBadge.style.display = 'none';
+        showToast('Conectividad restablecida: Cola Room sincronizada con servidor central');
+      } else {
+        btnConnectivity.className = 'connectivity-pill is-offline';
+        if (statusLabel) statusLabel.textContent = '⚡ Modo Offline';
+        if (queueBadge) {
+          queueBadge.textContent = '2';
+          queueBadge.style.display = 'inline-flex';
+        }
+        showToast('Modo Offline activado: 2 mutaciones en cola SQLite Room');
+      }
+    });
+
+    // Notification Panel Toggle
+    const btnNotif = document.getElementById('btn-navbar-notifications');
+    const panelNotif = document.getElementById('navbar-notification-panel');
+    const notifCount = document.getElementById('navbar-notif-count');
+    const btnClearNotif = document.getElementById('btn-clear-notifications');
+
+    btnNotif?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!panelNotif) return;
+      const isOpen = panelNotif.style.display === 'block';
+      panelNotif.style.display = isOpen ? 'none' : 'block';
+    });
+
+    btnClearNotif?.addEventListener('click', () => {
+      if (notifCount) notifCount.style.display = 'none';
+      document.querySelectorAll('.notif-item').forEach(item => item.classList.remove('unread'));
+      showToast('Todas las alertas operacionales han sido marcadas como leídas');
+    });
+
+    // Profile Panel Toggle
+    const btnProfile = document.getElementById('btn-operator-profile');
+    const panelProfile = document.getElementById('navbar-profile-panel');
+
+    btnProfile?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!panelProfile) return;
+      const isOpen = panelProfile.style.display === 'block';
+      panelProfile.style.display = isOpen ? 'none' : 'block';
+    });
+
+    // Module Switcher Tabs
+    const moduleTabs = document.querySelectorAll('.module-tab-btn');
+    const titleHeader = document.getElementById('navbar-active-title');
+
+    moduleTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        moduleTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const title = tab.getAttribute('data-title') || '';
+        if (titleHeader) titleHeader.textContent = title;
+        showToast(`Módulo cambiado a: ${title}`);
+      });
+    });
+
+    // Close popovers on click outside
+    document.addEventListener('click', () => {
+      if (warehouseMenu) warehouseMenu.style.display = 'none';
+      btnWarehouse?.setAttribute('aria-expanded', 'false');
+      if (panelNotif) panelNotif.style.display = 'none';
+      if (panelProfile) panelProfile.style.display = 'none';
+    });
+  });
+</script>
+
+<style>
+  .interactive-navbar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+
+  /* Mock Device Header & Navigation Surface */
+  .navbar-mock-stage {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: var(--nexa-radius-card, 16px);
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+    position: relative;
+  }
+
+  .mock-system-bar {
+    height: 28px;
+    background: #0f172a;
+    color: #94a3b8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 11px;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .system-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .m3-navbar-surface {
+    background: #ffffff;
+    border-bottom: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    padding: 10px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Top Row */
+  .navbar-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .nav-icon-btn {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--nexa-color-text-secondary, #475569);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    position: relative;
+  }
+
+  .nav-icon-btn:hover {
+    background: var(--nexa-color-neutral-100, #f1f5f9);
+    color: var(--nexa-color-text-primary, #0f172a);
+  }
+
+  .navbar-title-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-brand-subtitle {
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    text-transform: uppercase;
+  }
+
+  .navbar-module-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .navbar-actions-cluster {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .notification-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: #ef4444;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 800;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff;
+  }
+
+  .operator-avatar-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #eff6ff;
+    border: 2px solid var(--nexa-color-primary-300, #93c5fd);
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    font-weight: 800;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+  }
+
+  .online-indicator-dot {
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 10px;
+    height: 10px;
+    background: #22c55e;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+  }
+
+  /* Second Row: Warehouse Selector + Connectivity */
+  .navbar-sub-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .warehouse-selector-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 220px;
+  }
+
+  .warehouse-dropdown-btn {
+    width: 100%;
+    min-height: 44px;
+    padding: 6px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--nexa-color-border-default, #cbd5e1);
+    background: var(--nexa-color-neutral-50, #f8fafc);
+    color: var(--nexa-color-text-primary, #0f172a);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .warehouse-dropdown-btn:hover {
+    background: #ffffff;
+    border-color: var(--nexa-color-primary-500, #3b82f6);
+  }
+
+  .warehouse-selected-name {
+    flex: 1;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .caret-icon {
+    font-size: 11px;
+    color: #64748b;
+  }
+
+  .warehouse-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    list-style: none;
+    padding: 6px;
+    margin: 0;
+    z-index: 50;
+    display: none;
+  }
+
+  .warehouse-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+
+  .warehouse-option:hover {
+    background: var(--nexa-color-neutral-100, #f1f5f9);
+  }
+
+  .warehouse-option.active {
+    background: var(--nexa-color-primary-50, #eff6ff);
+    color: var(--nexa-color-primary-800, #1e40af);
+  }
+
+  .option-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .option-content small {
+    font-size: 10.5px;
+    color: #64748b;
+  }
+
+  .checkmark {
+    font-size: 12px;
+    color: var(--nexa-color-primary-600, #2a67d9);
+    display: none;
+  }
+
+  .warehouse-option.active .checkmark {
+    display: inline-block;
+  }
+
+  /* Connectivity Pill */
+  .connectivity-control-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .connectivity-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 40px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid transparent;
+    font-size: 11.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .connectivity-pill.is-online {
+    background: #f0fdf4;
+    color: #15803d;
+    border-color: #bbf7d0;
+  }
+
+  .connectivity-pill.is-offline {
+    background: #fffbeb;
+    color: #b45309;
+    border-color: #fde68a;
+  }
+
+  .connectivity-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .connectivity-pill-badge {
+    background: #ea580c;
+    color: #ffffff;
+    font-size: 9.5px;
+    font-weight: 800;
+    padding: 1px 6px;
+    border-radius: 10px;
+  }
+
+  /* Module Tabs Row */
+  .navbar-module-tabs {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-top: 4px;
+    scrollbar-width: none;
+  }
+
+  .navbar-module-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .module-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    background: var(--nexa-color-neutral-50, #f8fafc);
+    color: var(--nexa-color-text-secondary, #475569);
+    font-size: 11.5px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+
+  .module-tab-btn:hover {
+    background: #ffffff;
+    color: var(--nexa-color-text-primary, #0f172a);
+  }
+
+  .module-tab-btn.active {
+    background: var(--nexa-color-primary-600, #2a67d9);
+    color: #ffffff;
+    border-color: transparent;
+  }
+
+  /* Notification Popover */
+  .navbar-notification-popover {
+    position: absolute;
+    top: 100px;
+    right: 16px;
+    width: min(340px, calc(100% - 32px));
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+    z-index: 60;
+    padding: 12px;
+  }
+
+  .notif-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .btn-text-action {
+    background: transparent;
+    border: none;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .notif-list {
+    list-style: none;
+    padding: 8px 0 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .notif-item {
+    display: flex;
+    gap: 10px;
+    padding: 8px;
+    border-radius: 8px;
+    background: var(--nexa-color-neutral-50, #f8fafc);
+    font-size: 11.5px;
+  }
+
+  .notif-item.unread {
+    background: var(--nexa-color-primary-50, #eff6ff);
+  }
+
+  .notif-badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .notif-badge-dot.cold { background: #0284c7; }
+  .notif-badge-dot.dispatch { background: #16a34a; }
+  .notif-badge-dot.alert { background: #ea580c; }
+
+  .notif-item-body strong {
+    display: block;
+    color: var(--nexa-color-text-primary, #0f172a);
+    font-size: 11.5px;
+  }
+
+  .notif-item-body p {
+    margin: 2px 0 0;
+    color: var(--nexa-color-text-secondary, #64748b);
+    line-height: 1.4;
+  }
+
+  .notif-item-body time {
+    font-size: 10px;
+    color: #94a3b8;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* Profile Popover */
+  .navbar-profile-popover {
+    position: absolute;
+    top: 100px;
+    right: 16px;
+    width: min(320px, calc(100% - 32px));
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+    z-index: 60;
+    padding: 16px;
+  }
+
+  .profile-header-card {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
+  }
+
+  .profile-avatar-lg {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #eff6ff;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    font-weight: 800;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--nexa-color-primary-200, #bfdbfe);
+  }
+
+  .profile-meta strong {
+    font-size: 13.5px;
+    display: block;
+    color: var(--nexa-color-text-primary, #0f172a);
+  }
+
+  .profile-role {
+    font-size: 11.5px;
+    color: var(--nexa-color-text-secondary, #64748b);
+    display: block;
+  }
+
+  .profile-id {
+    font-size: 10.5px;
+    color: #94a3b8;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .profile-device-info {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 11.5px;
+    color: #475569;
+  }
+
+  .device-kv {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Live Toast */
+  .live-toast-bar {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0f172a;
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 70;
+    white-space: nowrap;
+    animation: toastPop 0.2s ease-out;
+  }
+
+  @keyframes toastPop {
+    from { opacity: 0; transform: translate(-50%, 8px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+  }
+
+  .toast-icon {
+    color: #60a5fa;
+  }
+
+  /* Kotlin Code Box */
+  .code-box-wrapper {
+    background: #0f172a;
+    border-radius: 12px;
+    border: 1px solid #1e293b;
+    overflow: hidden;
+  }
+
+  .code-box-header {
+    background: #090d16;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1e293b;
+    color: #94a3b8;
+    font-size: 12px;
+  }
+
+  .file-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    color: #e2e8f0;
+  }
+
+  .code-badge {
+    background: #2563eb;
+    color: #ffffff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .code-content {
+    margin: 0;
+    padding: 16px;
+    overflow-x: auto;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 12px;
+    line-height: 1.6;
+    color: #f8fafc;
+  }
+
+  .kw { color: #f472b6; font-weight: 600; }
+  .type { color: #60a5fa; }
+  .fn { color: #38bdf8; }
+  .str { color: #4ade80; }
+  .num { color: #fb923c; }
+  .cmt { color: #64748b; font-style: italic; }
+</style>

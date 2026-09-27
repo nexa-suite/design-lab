@@ -1,0 +1,388 @@
+---
+/**
+ * FooterSculptedPlate Component
+ * The authentic historical sculpted beige footer container (#FDFAE7).
+ * Features Bürocratik asymmetric perimeter notches, modular 4-brick mark,
+ * interactive newsletter subscription form, investor marks, and elevated canopy demo CTA.
+ * 
+ * Strict WCAG AAA Contrast with dark blue text (#082846) on warm beige (#FDFAE7).
+ */
+interface Props {
+  isIsolated?: boolean;
+}
+
+const { isIsolated = false } = Astro.props;
+---
+
+<div class={`footer-sculpted-plate-wrapper ${isIsolated ? 'is-isolated' : ''}`} role="contentinfo" aria-label="Placa de Pie de Página Esculpida">
+  <div class="footer-beige-canvas">
+    
+    <!-- Architectural SVG Silhouette Path Background -->
+    <svg 
+      class="footer-plate-svg" 
+      viewBox="0 0 1440 580" 
+      preserveAspectRatio="none" 
+      aria-hidden="true"
+    >
+      <path 
+        d="M 36 190 L 175 190 C 192 190 196 175 196 155 L 196 35 C 196 15 205 0 225 0 L 1285 0 C 1305 0 1315 15 1315 35 L 1315 55 C 1315 75 1325 88 1345 88 L 1404 88 C 1424 88 1440 104 1440 124 L 1440 415 C 1440 435 1424 445 1404 445 L 1040 445 C 1020 445 1010 460 1010 480 L 1010 540 C 1010 560 995 574 975 574 L 36 574 C 16 574 0 558 0 538 L 0 226 C 0 206 16 190 36 190 Z"
+        fill="#FDFAE7"
+      />
+    </svg>
+
+    <!-- Content Grid placed inside the envelope -->
+    <div class="footer-plate-content">
+      <!-- Left Column: Modular Logo, Newsletter, Backed By, Socials -->
+      <div class="footer-plate-left">
+        <!-- 4-Brick Modular Logo in Dark Blue #082846 -->
+        <div class="footer-brand-bricks" aria-label="Nexa">
+          <svg width="48" height="38" viewBox="0 0 52 42" fill="none" aria-hidden="true">
+            <rect x="0" y="0" width="22" height="12" rx="3" fill="#082846"/>
+            <rect x="28" y="0" width="12" height="12" rx="3" fill="#082846"/>
+            <rect x="0" y="18" width="12" height="12" rx="3" fill="#082846"/>
+            <rect x="18" y="18" width="22" height="12" rx="3" fill="#082846"/>
+          </svg>
+          <span class="footer-brand-name">Nexa</span>
+        </div>
+
+        <h4 class="footer-nl-title">
+          Suscríbete a nuestro boletín<br />
+          para novedades de economía circular
+        </h4>
+
+        <!-- Interactive Underline Newsletter Input -->
+        <form class="footer-nl-form" id="plate-nl-form" aria-label="Suscripción de newsletter">
+          <div class="nl-input-row">
+            <input 
+              type="email" 
+              id="plate-email-input" 
+              placeholder="tu@empresa.com" 
+              required 
+              aria-label="Correo para newsletter"
+            />
+            <button type="submit" class="btn-nl-submit" aria-label="Enviar suscripción">
+              <svg width="20" height="14" viewBox="0 0 24 16" fill="none" stroke="#082846" stroke-width="2.5">
+                <path d="M1 8h21M15 1l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <span class="nl-feedback" id="plate-nl-feedback" aria-live="polite"></span>
+        </form>
+
+        <!-- Proudly Backed By -->
+        <div class="footer-investors-row">
+          <span class="investor-label">Respaldado por:</span>
+          <div class="investor-tags">
+            <span class="inv-tag"><strong>techstars</strong>_</span>
+            <span class="inv-tag">ÜBERMORGEN</span>
+            <span class="inv-tag">maze</span>
+          </div>
+        </div>
+
+        <!-- Social Icons Row -->
+        <div class="footer-social-circles">
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="LinkedIn">
+            <span>in</span>
+          </a>
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Facebook">
+            <span>f</span>
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Instagram">
+            <i class="pi pi-instagram"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Elevated Canopy Demo CTA & Links -->
+      <div class="footer-plate-right">
+        <!-- Elevated Demo Canopy Button -->
+        <div class="footer-canopy-box">
+          <a href="#book-demo" class="btn-canopy-demo">
+            <i class="pi pi-calendar"></i>
+            <span>Reservar Demostración</span>
+          </a>
+        </div>
+
+        <nav class="footer-mini-nav" aria-label="Navegación de pie de página">
+          <ul class="mini-links-list">
+            <li><a href="/nexafy" class="f-link">Plataforma</a></li>
+            <li><a href="/artifacts" class="f-link">Artefactos</a></li>
+            <li><a href="#channels" class="f-link">Canales</a></li>
+            <li><a href="#insurance" class="f-link">Seguro</a></li>
+            <li><a href="#sustainability" class="f-link">Sostenibilidad</a></li>
+          </ul>
+        </nav>
+
+        <p class="footer-colophon-text">
+          Alquilar es el nuevo poseer.<br />
+          Arquitectura geométrica viva con contraste estricto WCAG AAA.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const nlForm = document.getElementById('plate-nl-form');
+  const nlFeedback = document.getElementById('plate-nl-feedback');
+  const emailInput = document.getElementById('plate-email-input') as HTMLInputElement | null;
+
+  if (nlForm && nlFeedback && emailInput) {
+    nlForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (emailInput.value.includes('@')) {
+        nlFeedback.textContent = '¡Gracias por suscribirte!';
+        nlFeedback.style.color = '#15803d';
+        emailInput.value = '';
+      }
+    });
+  }
+</script>
+
+<style>
+  .footer-sculpted-plate-wrapper {
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .footer-sculpted-plate-wrapper.is-isolated {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .footer-beige-canvas {
+    position: relative;
+    width: 100%;
+    background-color: #FDFAE7;
+    color: #082846;
+  }
+
+  .footer-plate-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .footer-plate-content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 2.5rem;
+    padding: 3rem 2.5rem;
+    box-sizing: border-box;
+  }
+
+  /* Left Column */
+  .footer-plate-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .footer-brand-bricks {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .footer-brand-name {
+    font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 20px;
+    font-weight: 800;
+    color: #082846;
+    letter-spacing: -0.02em;
+  }
+
+  .footer-nl-title {
+    font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: #082846;
+  }
+
+  .footer-nl-form {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .nl-input-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #082846;
+    padding-bottom: 4px;
+  }
+
+  .nl-input-row input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 13px;
+    font-weight: 500;
+    color: #082846;
+    font-family: inherit;
+  }
+
+  .nl-input-row input::placeholder {
+    color: rgba(8, 40, 70, 0.6);
+  }
+
+  .btn-nl-submit {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 4px;
+    transition: transform 0.15s ease;
+  }
+
+  .btn-nl-submit:hover {
+    transform: translateX(3px);
+  }
+
+  .nl-feedback {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 4px;
+    min-height: 16px;
+  }
+
+  .footer-investors-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 0.25rem;
+  }
+
+  .investor-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: rgba(8, 40, 70, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .investor-tags {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 12px;
+    color: #082846;
+  }
+
+  .inv-tag {
+    font-weight: 600;
+  }
+
+  .footer-social-circles {
+    display: flex;
+    gap: 8px;
+    margin-top: 0.25rem;
+  }
+
+  .soc-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #082846;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+
+  .soc-btn:hover {
+    background: #103860;
+    transform: scale(1.1);
+  }
+
+  /* Right Column */
+  .footer-plate-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .footer-canopy-box {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .btn-canopy-demo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #082846;
+    color: #ffffff;
+    font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 10px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: all 0.18s ease;
+    box-shadow: 0 4px 12px rgba(8, 40, 70, 0.18);
+  }
+
+  .btn-canopy-demo:hover {
+    background: #103860;
+    color: #38c8ff;
+    transform: translateY(-2px);
+  }
+
+  .footer-mini-nav {
+    display: flex;
+  }
+
+  .mini-links-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .f-link {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #082846;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .f-link:hover {
+    color: #0369a1;
+    text-decoration: underline;
+  }
+
+  .footer-colophon-text {
+    font-size: 10.5px;
+    line-height: 1.45;
+    color: rgba(8, 40, 70, 0.7);
+  }
+
+  @media (max-width: 800px) {
+    .footer-plate-content {
+      grid-template-columns: 1fr;
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>

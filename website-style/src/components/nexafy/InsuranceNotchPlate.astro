@@ -1,0 +1,419 @@
+---
+/**
+ * InsuranceNotchPlate Component
+ * Bürocratik Forensic Safe Renting & Insurance Architectural Plate.
+ * Features asymmetric perimeter notch cutout with concave transition fillets,
+ * interactive 100% All-Risk protection toggle, multi-country coverage badges,
+ * and pricing callout bubble.
+ * 
+ * Strict WCAG AAA Contrast on Nexa Dark Blue (#082846).
+ */
+interface Props {
+  isIsolated?: boolean;
+}
+
+const { isIsolated = false } = Astro.props;
+---
+
+<div class={`insurance-notch-plate-wrapper ${isIsolated ? 'is-isolated' : ''}`}>
+  <!-- Unified Silhouette SVG Background with Top-Right Architectural Notch & Concave Fillets -->
+  <svg 
+    class="insurance-notch-svg" 
+    viewBox="0 0 1440 770" 
+    preserveAspectRatio="none" 
+    aria-hidden="true"
+  >
+    <defs>
+      <clipPath id="insurance-notch-clip">
+        <path d="M 0 36 A 36 36 0 0 1 36 0 L 1092 0 A 36 36 0 0 1 1128 36 L 1128 44 A 36 36 0 0 0 1164 80 L 1404 80 A 36 36 0 0 1 1440 116 L 1440 734 A 36 36 0 0 1 1404 770 L 36 770 A 36 36 0 0 1 0 734 Z" />
+      </clipPath>
+      <radialGradient id="insurance-notch-glow" cx="40%" cy="40%" r="60%">
+        <stop offset="0%" stop-color="#0e3a63" stop-opacity="0.5" />
+        <stop offset="100%" stop-color="#082846" stop-opacity="0" />
+      </radialGradient>
+    </defs>
+    
+    <!-- Nexa Deep Blue Base Silhouette -->
+    <path 
+      class="insurance-notch-path" 
+      d="M 0 36 A 36 36 0 0 1 36 0 L 1092 0 A 36 36 0 0 1 1128 36 L 1128 44 A 36 36 0 0 0 1164 80 L 1404 80 A 36 36 0 0 1 1440 116 L 1440 734 A 36 36 0 0 1 1404 770 L 36 770 A 36 36 0 0 1 0 734 Z" 
+      fill="#082846"
+    />
+    <!-- Ambient Radial Glow -->
+    <rect x="0" y="0" width="1440" height="770" fill="url(#insurance-notch-glow)" clip-path="url(#insurance-notch-clip)" />
+  </svg>
+
+  <div class="insurance-notch-content">
+    <!-- Left Column: Editorial & Value Proposition -->
+    <div class="notch-editorial-col">
+      <div class="notch-badge-pill">
+        <i class="pi pi-shield" aria-hidden="true"></i>
+        <span>PÓLIZA DE SEGURO & CUSTODIA ESCROW</span>
+      </div>
+
+      <h3 class="notch-editorial-title">
+        Rethink just how safe <br />
+        renting can be <span class="highlight-cyan">with Nexa.</span>
+      </h3>
+
+      <p class="notch-editorial-desc">
+        Exposing valuable rental inventory to higher risk is a thing of the past. Our certified policy automatically protects all equipment against accidental damage, liquid spills, and total theft with pre-authorized escrow custody.
+      </p>
+
+      <!-- Multi-Country Geographic Coverage Pills -->
+      <div class="notch-country-pills" aria-label="Cobertura internacional">
+        <span class="country-pill">🇵🇹 Portugal</span>
+        <span class="country-pill">🇪🇸 España</span>
+        <span class="country-pill">🇮🇹 Italia</span>
+        <span class="country-pill">🇬🇧 Reino Unido</span>
+        <span class="country-pill">🇫🇷 Francia</span>
+      </div>
+    </div>
+
+    <!-- Right Column: Interactive Protection Widget & Pricing Callout -->
+    <div class="notch-action-col">
+      <!-- Interactive Protection Level Card -->
+      <div class="protection-toggle-card">
+        <div class="toggle-card-header">
+          <span class="protection-level-label">Nivel de Cobertura Activo</span>
+          <span class="protection-badge-active" id="plate-coverage-status">100% ALL-RISK</span>
+        </div>
+
+        <div class="interactive-switch-row">
+          <label class="switch-container" for="plate-policy-switch">
+            <input type="checkbox" id="plate-policy-switch" checked aria-label="Toggle All-Risk Protection" />
+            <span class="switch-slider"></span>
+          </label>
+          <span class="switch-label-text">Protección Integral de Flota</span>
+        </div>
+
+        <div class="protection-metrics-grid">
+          <div class="prot-metric-item">
+            <span class="prot-num text-mono">0.0%</span>
+            <span class="prot-lbl">Deducible Franquicia</span>
+          </div>
+          <div class="prot-metric-item">
+            <span class="prot-num text-mono">&lt; 2h</span>
+            <span class="prot-lbl">Resolución Reclamo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing Callout Bubble -->
+      <div class="notch-pricing-callout">
+        <div class="callout-icon-bubble" aria-hidden="true">
+          <i class="pi pi-info-circle"></i>
+        </div>
+        <div class="callout-text-col">
+          <p class="callout-headline">
+            Modelo de tarificación flexible basado en el valor comercial del activo.
+          </p>
+          <span class="callout-subtext">Protección automatizada sin costes fijos mensuales.</span>
+        </div>
+      </div>
+
+      <a href="#book-demo" class="btn-notch-demo">
+        <i class="pi pi-calendar"></i>
+        <span>Solicitar Demo de Cobertura</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Interactive toggle behavior for insurance plate
+  const policySwitch = document.getElementById('plate-policy-switch') as HTMLInputElement | null;
+  const statusBadge = document.getElementById('plate-coverage-status');
+
+  if (policySwitch && statusBadge) {
+    policySwitch.addEventListener('change', () => {
+      if (policySwitch.checked) {
+        statusBadge.textContent = '100% ALL-RISK';
+        statusBadge.style.background = '#38c8ff';
+        statusBadge.style.color = '#082846';
+      } else {
+        statusBadge.textContent = 'BÁSICO (ESTÁNDAR)';
+        statusBadge.style.background = '#e2e8f0';
+        statusBadge.style.color = '#334155';
+      }
+    });
+  }
+</script>
+
+<style>
+  .insurance-notch-plate-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(8, 40, 70, 0.25);
+    background: #082846;
+  }
+
+  .insurance-notch-plate-wrapper.is-isolated {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .insurance-notch-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .insurance-notch-content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 2.5rem;
+    align-items: center;
+    padding: 3rem 2.5rem;
+    box-sizing: border-box;
+  }
+
+  /* Left Column */
+  .notch-editorial-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .notch-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(56, 200, 255, 0.15);
+    border: 1px solid rgba(56, 200, 255, 0.4);
+    color: #38c8ff;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.04em;
+  }
+
+  .notch-editorial-title {
+    font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .highlight-cyan {
+    color: #38c8ff;
+  }
+
+  .notch-editorial-desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #cbd5e1;
+    max-width: 480px;
+    margin-bottom: 1.5rem;
+  }
+
+  .notch-country-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .country-pill {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #e2e8f0;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+
+  /* Right Column */
+  .notch-action-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .protection-toggle-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 1.25rem;
+    box-sizing: border-box;
+  }
+
+  .toggle-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.85rem;
+  }
+
+  .protection-level-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #94a3b8;
+  }
+
+  .protection-badge-active {
+    background: #38c8ff;
+    color: #082846;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .interactive-switch-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+
+  .switch-container {
+    position: relative;
+    display: inline-block;
+    width: 38px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  .switch-container input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .switch-slider {
+    position: absolute;
+    inset: 0;
+    background-color: #334155;
+    border-radius: 20px;
+    transition: 0.2s;
+  }
+
+  .switch-slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    transition: 0.2s;
+  }
+
+  input:checked + .switch-slider {
+    background-color: #38c8ff;
+  }
+
+  input:checked + .switch-slider:before {
+    transform: translateX(18px);
+    background-color: #082846;
+  }
+
+  .switch-label-text {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  .protection-metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 0.75rem;
+  }
+
+  .prot-metric-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .prot-num {
+    font-size: 15px;
+    font-weight: 800;
+    color: #38c8ff;
+  }
+
+  .prot-lbl {
+    font-size: 10px;
+    color: #94a3b8;
+  }
+
+  /* Pricing Callout Bubble */
+  .notch-pricing-callout {
+    display: flex;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    align-items: flex-start;
+  }
+
+  .callout-icon-bubble {
+    color: #38c8ff;
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .callout-headline {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.4;
+    margin-bottom: 2px;
+  }
+
+  .callout-subtext {
+    font-size: 10px;
+    color: #94a3b8;
+  }
+
+  .btn-notch-demo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #38c8ff;
+    color: #082846;
+    font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.18s ease;
+    box-shadow: 0 4px 12px rgba(56, 200, 255, 0.25);
+  }
+
+  .btn-notch-demo:hover {
+    background: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 800px) {
+    .insurance-notch-content {
+      grid-template-columns: 1fr;
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>

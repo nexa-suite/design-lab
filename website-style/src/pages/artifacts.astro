@@ -10,13 +10,22 @@ import YourCompanyHub from '../components/nexafy/YourCompanyHub.astro';
 import PhysicalStoreCard from '../components/nexafy/PhysicalStoreCard.astro';
 import CustomerInquiryCard from '../components/nexafy/CustomerInquiryCard.astro';
 import OnlineStoreCard from '../components/nexafy/OnlineStoreCard.astro';
+import ChannelBadges from '../components/nexafy/ChannelBadges.astro';
+import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
 import SaasCustomerProfileCard from '../components/nexafy/SaasCustomerProfileCard.astro';
 import SaasItemsTableCard from '../components/nexafy/SaasItemsTableCard.astro';
 import SaasFloatingDateCard from '../components/nexafy/SaasFloatingDateCard.astro';
-import PaymentCircuitMethods from '../components/nexafy/PaymentCircuitMethods.astro';
+import LiveTelemetryCard from '../components/nexafy/LiveTelemetryCard.astro';
 import PhoneCheckoutSimulator from '../components/nexafy/PhoneCheckoutSimulator.astro';
 import EscrowGuaranteeCard from '../components/nexafy/EscrowGuaranteeCard.astro';
-import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
+import RealtimeEscrowWidget from '../components/nexafy/RealtimeEscrowWidget.astro';
+import PaymentCircuitMethods from '../components/nexafy/PaymentCircuitMethods.astro';
+import QuickCheckoutModal from '../components/nexafy/QuickCheckoutModal.astro';
+import FloatingBookingChip from '../components/nexafy/FloatingBookingChip.astro';
+import InsuranceNotchPlate from '../components/nexafy/InsuranceNotchPlate.astro';
+import RentalRoiSimulator from '../components/nexafy/RentalRoiSimulator.astro';
+import SustainabilityMetricsCard from '../components/nexafy/SustainabilityMetricsCard.astro';
+import FooterSculptedPlate from '../components/nexafy/FooterSculptedPlate.astro';
 ---
 
 <!DOCTYPE html>
@@ -106,14 +115,44 @@ import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
     }
 
     .artifact-preview-stage {
+      --stage-card: #0a3359;
+      --stage-text: #ffffff;
+      --stage-subtext: #cbd5e1;
+      --stage-capsule-bg: rgba(255, 255, 255, 0.14);
+      --stage-capsule-text: #ffffff;
       background: #082846; /* Nexa Dark Blue Canvas */
-      padding: 2rem 1.5rem;
+      padding: 1.75rem 1.5rem;
       min-height: 240px;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .artifact-preview-stage.stage-light {
+      background: #f1f5f9;
+      --stage-card: #ffffff;
+      --stage-text: #082846;
+      --stage-capsule-bg: #082846;
+      --stage-capsule-text: #ffffff;
+    }
+
+    .artifact-preview-stage.stage-beige {
+      background: #FDFAE7;
+      --stage-card: #082846;
+      --stage-text: #ffffff;
+    }
+
+    .artifact-card.span-2 {
+      grid-column: span 2;
+    }
+
+    @media (max-width: 900px) {
+      .artifact-card.span-2 {
+        grid-column: span 1;
+      }
     }
 
     .artifact-info {
@@ -321,8 +360,8 @@ import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
       <!-- Your Company Hub -->
       <div class="artifact-card">
         <div class="artifact-preview-stage">
-          <div style="position: relative; width: 170px; height: 95px;">
-            <YourCompanyHub />
+          <div style="position: relative; width: 170px; height: 140px; display: flex; align-items: center; justify-content: center;">
+            <YourCompanyHub isIsolated={true} />
           </div>
         </div>
         <div class="artifact-info">
@@ -340,9 +379,7 @@ import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
       <!-- Physical Store Card -->
       <div class="artifact-card">
         <div class="artifact-preview-stage">
-          <div style="position: relative; width: 180px; height: 140px;">
-            <PhysicalStoreCard />
-          </div>
+          <PhysicalStoreCard isIsolated={true} />
         </div>
         <div class="artifact-info">
           <h3 class="artifact-name">PhysicalStoreCard</h3>
@@ -359,9 +396,7 @@ import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
       <!-- Customer Inquiry Card -->
       <div class="artifact-card">
         <div class="artifact-preview-stage">
-          <div style="position: relative; width: 200px; height: 140px;">
-            <CustomerInquiryCard />
-          </div>
+          <CustomerInquiryCard isIsolated={true} />
         </div>
         <div class="artifact-info">
           <h3 class="artifact-name">CustomerInquiryCard</h3>
@@ -378,9 +413,7 @@ import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
       <!-- Online Store Card -->
       <div class="artifact-card">
         <div class="artifact-preview-stage">
-          <div style="position: relative; width: 185px; height: 140px;">
-            <OnlineStoreCard />
-          </div>
+          <OnlineStoreCard isIsolated={true} />
         </div>
         <div class="artifact-info">
           <h3 class="artifact-name">OnlineStoreCard</h3>
@@ -394,12 +427,27 @@ import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
         </div>
       </div>
 
+      <!-- Channel Badges (4 Satellite Nodes) -->
+      <div class="artifact-card span-2">
+        <div class="artifact-preview-stage">
+          <ChannelBadges isIsolated={true} />
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">ChannelBadges</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Nodos Satélites</span>
+            <span class="tag-role">4 Canales</span>
+          </div>
+          <p class="artifact-details">
+            Insignias satélites que representan la Tienda Física POS, Cotización Directa (Inquiry), Tienda Online (acme.store) y Escudo de Custodia Escrow con telemetría en tiempo real.
+          </p>
+        </div>
+      </div>
+
       <!-- Conduit Badges & Satellites -->
       <div class="artifact-card">
         <div class="artifact-preview-stage">
-          <div style="position: relative; width: 220px; height: 140px;">
-            <ConduitBadges />
-          </div>
+          <ConduitBadges isIsolated={true} />
         </div>
         <div class="artifact-info">
           <h3 class="artifact-name">ConduitBadges</h3>
@@ -423,9 +471,7 @@ import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
       <!-- Customer Profile -->
       <div class="artifact-card">
         <div class="artifact-preview-stage">
-          <div style="position: relative; width: 220px; height: 160px;">
-            <SaasCustomerProfileCard />
-          </div>
+          <SaasCustomerProfileCard isIsolated={true} />
         </div>
         <div class="artifact-info">
           <h3 class="artifact-name">SaasCustomerProfileCard</h3>
@@ -440,11 +486,9 @@ import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
       </div>
 
       <!-- Items Table -->
-      <div class="artifact-card">
-        <div class="artifact-preview-stage">
-          <div style="position: relative; width: 320px; height: 180px;">
-            <SaasItemsTableCard />
-          </div>
+      <div class="artifact-card span-2">
+        <div class="artifact-preview-stage stage-light">
+          <SaasItemsTableCard isIsolated={true} />
         </div>
         <div class="artifact-info">
           <h3 class="artifact-name">SaasItemsTableCard</h3>
@@ -461,9 +505,7 @@ import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
       <!-- Floating Dates -->
       <div class="artifact-card">
         <div class="artifact-preview-stage">
-          <div style="position: relative; width: 200px; height: 120px;">
-            <SaasFloatingDateCard />
-          </div>
+          <SaasFloatingDateCard isIsolated={true} />
         </div>
         <div class="artifact-info">
           <h3 class="artifact-name">SaasFloatingDateCard</h3>
@@ -473,6 +515,23 @@ import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
           </div>
           <p class="artifact-details">
             Insignia flotante de calendario que sincroniza las fechas estimadas de entrega y devolución de activos alquilados.
+          </p>
+        </div>
+      </div>
+
+      <!-- Live Telemetry Card -->
+      <div class="artifact-card">
+        <div class="artifact-preview-stage">
+          <LiveTelemetryCard isIsolated={true} />
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">LiveTelemetryCard</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Telemetría Operativa</span>
+            <span class="tag-role">Bento Metric</span>
+          </div>
+          <p class="artifact-details">
+            Monitor de flota en tiempo real con 0.0% de conflictos de sobre-reserva, 100% de aseguramiento en tránsito y barras de utilización por categoría de equipo.
           </p>
         </div>
       </div>
@@ -486,10 +545,8 @@ import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
     <div class="artifacts-grid">
       <!-- Phone Checkout Simulator -->
       <div class="artifact-card">
-        <div class="artifact-preview-stage">
-          <div style="position: relative; width: 220px; height: 220px;">
-            <PhoneCheckoutSimulator />
-          </div>
+        <div class="artifact-preview-stage stage-light">
+          <PhoneCheckoutSimulator isIsolated={true} />
         </div>
         <div class="artifact-info">
           <h3 class="artifact-name">PhoneCheckoutSimulator</h3>
@@ -503,12 +560,44 @@ import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
         </div>
       </div>
 
-      <!-- Escrow Guarantee -->
+      <!-- Realtime Escrow Widget -->
+      <div class="artifact-card">
+        <div class="artifact-preview-stage stage-light">
+          <RealtimeEscrowWidget isIsolated={true} />
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">RealtimeEscrowWidget</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Custodia Escrow</span>
+            <span class="tag-role">Preautorización</span>
+          </div>
+          <p class="artifact-details">
+            Widget interactivo para simular retenciones en garantía preautorizadas (€50 - €1,500) con liberación post-checkin instantánea.
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Checkout Modal -->
+      <div class="artifact-card">
+        <div class="artifact-preview-stage stage-light">
+          <QuickCheckoutModal isIsolated={true} />
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">QuickCheckoutModal</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Modal de Checkout</span>
+            <span class="tag-role">Multi-pasarela</span>
+          </div>
+          <p class="artifact-details">
+            Modal interactivo de confirmación con desglose de período, depósito pre-autorizado, entrega y selección de métodos de pago.
+          </p>
+        </div>
+      </div>
+
+      <!-- Escrow Guarantee Card -->
       <div class="artifact-card">
         <div class="artifact-preview-stage">
-          <div style="position: relative; width: 220px; height: 150px;">
-            <EscrowGuaranteeCard />
-          </div>
+          <EscrowGuaranteeCard isIsolated={true} />
         </div>
         <div class="artifact-info">
           <h3 class="artifact-name">EscrowGuaranteeCard</h3>
@@ -525,9 +614,7 @@ import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
       <!-- Payment Circuit Methods -->
       <div class="artifact-card">
         <div class="artifact-preview-stage">
-          <div style="position: relative; width: 240px; height: 140px;">
-            <PaymentCircuitMethods />
-          </div>
+          <PaymentCircuitMethods isIsolated={true} />
         </div>
         <div class="artifact-info">
           <h3 class="artifact-name">PaymentCircuitMethods</h3>
@@ -537,6 +624,98 @@ import ConduitBadges from '../components/nexafy/ConduitBadges.astro';
           </div>
           <p class="artifact-details">
             Chips de procesamiento multicanal que representan tarjetas de crédito, transferencias directas y débitos programados.
+          </p>
+        </div>
+      </div>
+
+      <!-- Floating Booking Chip -->
+      <div class="artifact-card">
+        <div class="artifact-preview-stage">
+          <FloatingBookingChip isIsolated={true} />
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">FloatingBookingChip</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Nexa Link</span>
+            <span class="tag-role">Despachador 1-Click</span>
+          </div>
+          <p class="artifact-details">
+            Insignia flotante de enlace directo para compartir cotizaciones vinculadas a inventario real, parámetros de entrega y fianza bancaria.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Capítulo 4: Macro-Artefactos & Arquitectura de Póliza, ROI y Pie de Página -->
+    <h2 class="section-title">
+      <i class="pi pi-th-large"></i> Capítulo 04: Macro-Artefactos de Arquitectura, Póliza & Pie de Página
+    </h2>
+
+    <div class="artifacts-grid">
+      <!-- Insurance Notch Plate -->
+      <div class="artifact-card span-2">
+        <div class="artifact-preview-stage" style="padding: 1rem;">
+          <InsuranceNotchPlate isIsolated={true} />
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">InsuranceNotchPlate</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Geometría de Muesca</span>
+            <span class="tag-role">Bürocratik Concave</span>
+          </div>
+          <p class="artifact-details">
+            Placa arquitectónica completa con corte perimetral asimétrico y redondeos cóncavos, conmutador de cobertura All-Risk interactivo, insignias multi-país y cotizador de póliza.
+          </p>
+        </div>
+      </div>
+
+      <!-- Rental ROI Simulator -->
+      <div class="artifact-card">
+        <div class="artifact-preview-stage" style="padding: 1rem;">
+          <RentalRoiSimulator isIsolated={true} />
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">RentalRoiSimulator</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Simulador Financiero</span>
+            <span class="tag-role">Cálculo Reactivo</span>
+          </div>
+          <p class="artifact-details">
+            Simulador de rentabilidad y flujo de caja con controles deslizantes para tamaño de flota, tarifa diaria y tasa de ocupación con estimación de CO2 evitado.
+          </p>
+        </div>
+      </div>
+
+      <!-- Sustainability Metrics Suite -->
+      <div class="artifact-card">
+        <div class="artifact-preview-stage" style="padding: 1rem;">
+          <SustainabilityMetricsCard isIsolated={true} />
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">SustainabilityMetricsCard</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Impacto Ambiental</span>
+            <span class="tag-role">3 Tarjetas Métricas</span>
+          </div>
+          <p class="artifact-details">
+            Tríptico cuantitativo de métricas de sostenibilidad: 20k tons de CO2 ahorradas, 15kg evitados por día de alquiler y 55kg de delta de fabricación de equipo.
+          </p>
+        </div>
+      </div>
+
+      <!-- Footer Sculpted Plate -->
+      <div class="artifact-card span-2">
+        <div class="artifact-preview-stage stage-beige" style="padding: 1rem;">
+          <FooterSculptedPlate isIsolated={true} />
+        </div>
+        <div class="artifact-info">
+          <h3 class="artifact-name">FooterSculptedPlate</h3>
+          <div class="artifact-meta">
+            <span class="tag-role">Pie de Página Esculpido</span>
+            <span class="tag-role">Warm Beige #FDFAE7</span>
+          </div>
+          <p class="artifact-details">
+            Placa monolítica esculpida en cálido beige con muescas Bürocratik, logotipo modular de 4 bloques, formulario interactivo de newsletter y sellos de inversores (Techstars, Übermorgen, Maze).
           </p>
         </div>
       </div>

@@ -1,0 +1,237 @@
+---
+/**
+ * FloatingBookingChip Component
+ * The authentic "Flecto Link" / "Nexa Link" floating booking dispatcher.
+ * Enables merchants to dispatch pre-configured, insured rental quotes via 1-click URL.
+ * 
+ * Strict WCAG AAA Contrast on dark blue or standalone card.
+ */
+interface Props {
+  isIsolated?: boolean;
+}
+
+const { isIsolated = false } = Astro.props;
+---
+
+<div class={`floating-booking-chip ${isIsolated ? 'is-isolated' : ''}`} role="region" aria-label="Despachador de Nexa Link">
+  <div class="chip-header">
+    <div class="chip-url-pill">
+      <i class="pi pi-link"></i>
+      <span class="url-text text-mono" id="chip-url-text">nexa.link/b/camera-store-88219</span>
+    </div>
+    <button type="button" class="btn-copy-chip" id="btn-copy-booking-link" aria-label="Copiar link de reserva">
+      <i class="pi pi-copy" id="copy-icon"></i>
+      <span id="copy-status-text">Copiar</span>
+    </button>
+  </div>
+
+  <div class="chip-body">
+    <div class="chip-status-line">
+      <span class="pulse-indicator"></span>
+      <span class="status-msg">Enlace de Cotización Activo · 5 Días</span>
+    </div>
+
+    <!-- Parameter Badges Grid -->
+    <div class="chip-params-grid">
+      <div class="param-badge" title="Stripe, Apple Pay & MB WAY">
+        <i class="pi pi-credit-card"></i>
+        <span>Pasarela Online</span>
+      </div>
+      <div class="param-badge" title="Retiro presencial en tienda física">
+        <i class="pi pi-map-pin"></i>
+        <span>Mostrador POS</span>
+      </div>
+      <div class="param-badge" title="Servicio de entrega y recogida incluido">
+        <i class="pi pi-truck"></i>
+        <span>Entrega (+€20)</span>
+      </div>
+      <div class="param-badge highlight" title="Custodia bancaria retenida">
+        <i class="pi pi-shield"></i>
+        <span>Escrow €200</span>
+      </div>
+    </div>
+
+    <!-- Quote Summary Bar -->
+    <div class="chip-quote-summary">
+      <span class="quote-label">Cotización Cliente:</span>
+      <strong class="quote-amount text-mono">€690.00 EUR</strong>
+    </div>
+  </div>
+</div>
+
+<script>
+  const copyBtn = document.getElementById('btn-copy-booking-link');
+  const copyStatus = document.getElementById('copy-status-text');
+  const copyIcon = document.getElementById('copy-icon');
+
+  if (copyBtn && copyStatus && copyIcon) {
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard?.writeText('https://nexa.link/b/camera-store-88219').catch(() => {});
+      copyStatus.textContent = '¡Copiado!';
+      copyIcon.className = 'pi pi-check';
+      copyBtn.style.background = '#38c8ff';
+      copyBtn.style.color = '#082846';
+
+      setTimeout(() => {
+        copyStatus.textContent = 'Copiar';
+        copyIcon.className = 'pi pi-copy';
+        copyBtn.style.background = 'rgba(255, 255, 255, 0.1)';
+        copyBtn.style.color = '#ffffff';
+      }, 2000);
+    });
+  }
+</script>
+
+<style>
+  .floating-booking-chip {
+    background: #082846;
+    border: 1px solid rgba(56, 200, 255, 0.3);
+    border-radius: 16px;
+    padding: 1.15rem 1.25rem;
+    box-shadow: 0 8px 24px rgba(8, 40, 70, 0.2);
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    color: #ffffff;
+  }
+
+  .floating-booking-chip.is-isolated {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .chip-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 0.85rem;
+  }
+
+  .chip-url-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 6px 10px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .chip-url-pill i {
+    color: #38c8ff;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+
+  .url-text {
+    font-size: 11px;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .btn-copy-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .btn-copy-chip:hover {
+    background: #38c8ff;
+    color: #082846;
+  }
+
+  .chip-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .chip-status-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #cbd5e1;
+  }
+
+  .pulse-indicator {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #38c8ff;
+    box-shadow: 0 0 6px #38c8ff;
+  }
+
+  .status-msg {
+    font-size: 11px;
+    font-weight: 600;
+    color: #e2e8f0;
+  }
+
+  .chip-params-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .param-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 5px 8px;
+    font-size: 10.5px;
+    color: #cbd5e1;
+  }
+
+  .param-badge i {
+    color: #38c8ff;
+    font-size: 10px;
+  }
+
+  .param-badge.highlight {
+    background: rgba(56, 200, 255, 0.12);
+    border-color: rgba(56, 200, 255, 0.35);
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .chip-quote-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.04);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 0.65rem;
+    margin-top: 0.25rem;
+  }
+
+  .quote-label {
+    font-size: 11px;
+    color: #94a3b8;
+  }
+
+  .quote-amount {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: #38c8ff;
+  }
+</style>

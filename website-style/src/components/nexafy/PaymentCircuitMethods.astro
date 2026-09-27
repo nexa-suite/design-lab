@@ -1,11 +1,14 @@
 ---
-/**
- * PaymentCircuitMethods Component
- * Chapter 3 (Safe Renting & Payments): Digital payment providers circuit (MB WAY, PayPal, Mastercard, VISA).
- */
+interface Props {
+  isIsolated?: boolean;
+}
+
+const {
+  isIsolated = false
+} = Astro.props;
 ---
 
-<div class="ch3-left-circuit">
+<div class={`ch3-left-circuit ${isIsolated ? 'is-isolated' : ''}`}>
   <div class="ch3-stem-horizontal">
     <span class="ch3-stem-label">Multiple Payment Methods</span>
   </div>
@@ -35,34 +38,46 @@
 <style>
   .ch3-left-circuit {
     width: 280px;
-    background: var(--stage-card);
+    max-width: 100%;
+    background: var(--stage-card, #0a3359);
+    border: 1px solid rgba(56, 200, 255, 0.28);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
     border-radius: 18px;
-    padding: 1.25rem;
-    color: var(--stage-text);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    padding: 1.35rem 1.25rem;
+    color: #ffffff;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .ch3-left-circuit.is-isolated {
+    margin: 0 auto;
   }
 
   .ch3-stem-label {
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     font-weight: 800;
+    color: #ffffff !important;
+    display: block;
+    letter-spacing: -0.01em;
   }
 
   .ch3-toggle-capsule {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin: 0.75rem 0;
+    gap: 0.6rem;
+    margin: 0.85rem 0;
     font-size: 0.75rem;
     font-weight: 700;
+    color: #cbd5e1 !important;
   }
 
   .ch3-switch-pill {
-    width: 32px;
+    width: 34px;
     height: 18px;
-    background: var(--stage-capsule-bg);
+    background: #38c8ff;
     border-radius: 999px;
     position: relative;
-    transition: background-color 0.3s ease;
+    cursor: pointer;
+    flex-shrink: 0;
   }
 
   .ch3-switch-ball {
@@ -72,15 +87,14 @@
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: var(--stage-card);
-    transition: background-color 0.3s ease;
+    background: #082846;
   }
 
   .ch3-chips-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
-    margin-top: 0.75rem;
+    margin-top: 0.85rem;
   }
 
   .ch3-chip {
@@ -90,12 +104,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--stage-text);
+    color: #082846 !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   }
 
   .chip-mb-text {
     font-weight: 900;
     font-size: 14px;
-    color: var(--stage-text);
+    color: #082846 !important;
   }
 </style>

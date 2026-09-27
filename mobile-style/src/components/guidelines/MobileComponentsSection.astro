@@ -1,284 +1,677 @@
 ---
 /**
- * MobileComponentsSection — Canonical Mobile Component Catalog & Contracts
- * Shows live rendered specimens for TopAppBar, PrimaryButton, DispatchCard, BottomNav, and BottomSheet.
+ * MobileComponentsSection.astro
+ * Canonical Mobile Component Catalog, Interactive Navbar, Mobile Forms, Selection Options,
+ * Dispatch & Inventory Movement Cuadros, and Production Kotlin Compose Specifications.
  */
 ---
 
 <div class="components-container" data-platform-target="universal">
-  <!-- Section: Top App Bar -->
-  <section class="spec-card" id="sec-comp-appbar">
-    <div class="card-header-row">
-      <div class="card-badge-icon"><i class="pi pi-window-minimize"></i></div>
-      <div>
-        <span class="card-eyebrow">COMPONENTES MÓVILES · NAVEGACIÓN</span>
-        <h3 class="card-title">1. NexaTopAppBar (Material 3 Top App Bar)</h3>
+
+  <!-- ==========================================================================
+       1. NAVBAR INTERACTIVA SUPERIOR (TopAppBar M3)
+       ========================================================================== -->
+  <section class="cuadro-card" id="sec-comp-appbar">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">01</span>
+        <div>
+          <p class="cuadro-kicker">COMPONENTES MÓVILES · NAVEGACIÓN SUPERIOR</p>
+          <h3 class="cuadro-title">NexaTopAppBar (Navbar Interactiva Superior M3)</h3>
+          <p class="cuadro-subtitle">
+            Barra superior interactiva con altura estandarizada de <strong>56dp</strong> (Small) o expandible a <strong>112dp</strong> en scroll (Large/Medium). Incluye botones de acción con bounding box accesible de 48dp, badge de notificaciones de despacho y búsqueda reactiva.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-window-minimize"></i> 56dp M3 Spec</span>
+        <span class="cuadro-tag kotlin"><i class="pi pi-android"></i> TopAppBar Compose</span>
+        <span class="cuadro-tag success"><i class="pi pi-bell"></i> Badged Notification</span>
       </div>
     </div>
-    <p class="card-text">
-      Barra superior de navegación móvil con altura estandarizada de <strong>56dp</strong> (Small) o expandible en scroll. Incluye iconos táctiles con bounding box de 48dp y soporte de título centrado.
-    </p>
 
-    <!-- Live Specimen -->
+    <!-- Live Interactive Top App Bar -->
     <div class="component-demo-stage">
-      <div class="live-app-bar">
-        <button type="button" class="btn-app-icon" aria-label="Navegar atrás o abrir menú">
-          <i class="pi pi-arrow-left"></i>
-        </button>
-        <span class="app-bar-heading">Ruta de Despacho #9812</span>
-        <div class="app-bar-actions">
-          <button type="button" class="btn-app-icon" aria-label="Buscar en ruta">
-            <i class="pi pi-search"></i>
+      <div class="live-app-bar" id="interactive-topbar-demo">
+        <div class="topbar-bar-content">
+          <button type="button" class="btn-app-icon" id="topbar-btn-nav" aria-label="Menú de navegación o retroceso">
+            <i class="pi pi-arrow-left"></i>
           </button>
-          <button type="button" class="btn-app-icon" aria-label="Notificaciones">
-            <i class="pi pi-bell"></i>
+          <div class="app-bar-title-wrap">
+            <span class="app-bar-kicker">OPERACIONES EN RUTA</span>
+            <span class="app-bar-heading" id="topbar-heading-text">Ruta #9812 · Diego Morales</span>
+          </div>
+          <div class="app-bar-actions">
+            <button type="button" class="btn-app-icon" id="topbar-btn-search" aria-label="Buscar en ruta">
+              <i class="pi pi-search"></i>
+            </button>
+            <div class="badge-icon-wrapper">
+              <button type="button" class="btn-app-icon" id="topbar-btn-notif" aria-label="Notificaciones de ruta">
+                <i class="pi pi-bell"></i>
+              </button>
+              <span class="topbar-badge" id="topbar-badge-count">3</span>
+            </div>
+            <button type="button" class="btn-app-icon" id="topbar-btn-more" aria-label="Más opciones">
+              <i class="pi pi-ellipsis-v"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Integrated Search Bar (Toggled on click) -->
+        <div class="topbar-search-tray" id="topbar-search-tray" style="display: none;">
+          <i class="pi pi-search"></i>
+          <input type="text" placeholder="Filtrar por cliente, guía o SKU..." id="topbar-search-input" />
+          <button type="button" class="btn-close-tray" id="btn-close-search-tray" aria-label="Cerrar búsqueda">
+            <i class="pi pi-times"></i>
           </button>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Section: Botones & Estados 48dp / 56dp -->
-  <section class="spec-card" id="sec-comp-botones">
-    <div class="card-header-row">
-      <div class="card-badge-icon"><i class="pi pi-check-circle"></i></div>
-      <div>
-        <span class="card-eyebrow">COMPONENTES MÓVILES · ACCIÓN</span>
-        <h3 class="card-title">2. NexaPrimaryButton & Estados de Interacción</h3>
-      </div>
-    </div>
-    <p class="card-text">
-      Botones principales móviles de ancho completo con radio de 12dp y altura mínima accesible de 48dp (56dp en modo industrial para uso con guantes).
-    </p>
-
-    <!-- Live Buttons Row -->
-    <div class="buttons-states-grid">
-      <div class="btn-state-col">
-        <span class="state-label">ESTADO: REPOSO (48dp)</span>
-        <button type="button" class="nexa-mobile-btn primary">
-          <i class="pi pi-check-circle"></i>
-          <span>Confirmar Despacho</span>
-        </button>
-      </div>
-
-      <div class="btn-state-col">
-        <span class="state-label">ESTADO: INDUSTRIAL (56dp GUANTES)</span>
-        <button type="button" class="nexa-mobile-btn industrial">
-          <i class="pi pi-truck"></i>
-          <span>Entrega en Obra (56dp)</span>
-        </button>
-      </div>
-
-      <div class="btn-state-col">
-        <span class="state-label">ESTADO: CARGANDO / EN COLA</span>
-        <button type="button" class="nexa-mobile-btn loading" disabled>
-          <i class="pi pi-spin pi-spinner"></i>
-          <span>Sincronizando con API...</span>
-        </button>
-      </div>
-
-      <div class="btn-state-col">
-        <span class="state-label">ESTADO: SECUNDARIO / CANCELAR</span>
-        <button type="button" class="nexa-mobile-btn secondary">
-          <i class="pi pi-times"></i>
-          <span>Reportar Incidencia</span>
-        </button>
-      </div>
+    <!-- CUADRO ARQUITECTÓNICO: Variantes de Barra Superior -->
+    <div class="contract-table-wrapper">
+      <table class="contract-table">
+        <thead>
+          <tr>
+            <th>Variante M3</th>
+            <th>Altura en Reposo</th>
+            <th>Elevación Tonal</th>
+            <th>Comportamiento en Scroll</th>
+            <th>Uso Canónico en Nexa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>TopAppBar.Small</code></td>
+            <td>56dp</td>
+            <td>Level 0 (en reposo) / Level 2 (en scroll)</td>
+            <td>Fija o colapsable instantánea</td>
+            <td>Pantallas operativas densas (Picking FEFO, Checklist MT-042)</td>
+          </tr>
+          <tr>
+            <td><code>TopAppBar.CenterAligned</code></td>
+            <td>56dp</td>
+            <td>Level 0 / Level 2</td>
+            <td>Título centrado con logo Nexa</td>
+            <td>Pantalla de inicio de jornada y autenticación de chofer</td>
+          </tr>
+          <tr>
+            <td><code>TopAppBar.Medium / Large</code></td>
+            <td>88dp / 112dp</td>
+            <td>Level 0 / Level 2</td>
+            <td>Colapsa progresivamente a 56dp</td>
+            <td>Detalle de orden SO-2026-0018 con resumen de cliente y bultos</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
-  <!-- Section: Tarjeta de Despacho & Timeline -->
-  <section class="spec-card" id="sec-comp-cards">
-    <div class="card-header-row">
-      <div class="card-badge-icon"><i class="pi pi-id-card"></i></div>
-      <div>
-        <span class="card-eyebrow">COMPONENTES MÓVILES · DATOS</span>
-        <h3 class="card-title">3. NexaDispatchCard (Tarjeta de Ruta de Campo)</h3>
-      </div>
-    </div>
-    <p class="card-text">
-      Contenedor estructurado con elevación Nivel 1 (2dp), borde sutil de 1px y radio de 16dp. Organiza la cronología del despacho con conectores visuales y botón táctil principal.
-    </p>
-
-    <div class="component-demo-stage">
-      <div class="live-dispatch-card">
-        <div class="card-top-row">
-          <div class="order-badge">
-            <span class="order-num">SO-2026-0018</span>
-            <span class="order-client">ICISA Distribuciones</span>
-          </div>
-          <span class="status-chip en-turno">EN RUTA</span>
+  <!-- ==========================================================================
+       2. NAVBAR INTERACTIVA INFERIOR (BottomNavigation M3)
+       ========================================================================== -->
+  <section class="cuadro-card" id="sec-comp-bottomnav">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">02</span>
+        <div>
+          <p class="cuadro-kicker">COMPONENTES MÓVILES · NAVEGACIÓN BASE</p>
+          <h3 class="cuadro-title">NexaBottomNav (Barra de Navegación Inferior Interactiva M3)</h3>
+          <p class="cuadro-subtitle">
+            Barra inferior fija con altura estandarizada de <strong>64dp</strong> y áreas táctiles de 64×48dp por destino. Diseñada para conmutación fluida entre las 4 actividades clave de campo: <em>Rutas, Despacho, Picking y Checklist</em>.
+          </p>
         </div>
-
-        <div class="route-stepper">
-          <div class="stepper-item">
-            <div class="step-marker origin"></div>
-            <div class="step-text">
-              <span class="step-name">Almacén Frigorífico Central (Muelle 3)</span>
-              <span class="step-time">Salida: 13:45 · Diego Morales (WKN-892)</span>
-            </div>
-          </div>
-          <div class="stepper-connector"></div>
-          <div class="stepper-item">
-            <div class="step-marker destination"></div>
-            <div class="step-text">
-              <span class="step-name">ICISA Distribuciones (Av. Argentina 1240 · Callao)</span>
-              <span class="step-time">Entrega estimada: 14:20 · Sensor Calibrado 3.8°C</span>
-            </div>
-          </div>
-        </div>
-
-        <button type="button" class="nexa-mobile-btn primary">
-          <i class="pi pi-compass"></i>
-          <span>Navegar GPS (geo:0,0?q=-12.046374,-77.042793)</span>
-        </button>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-bars"></i> 64dp M3 Bar</span>
+        <span class="cuadro-tag success"><i class="pi pi-check"></i> 4 Destinos Activos</span>
       </div>
     </div>
-  </section>
 
-  <!-- Section: Bottom Navigation -->
-  <section class="spec-card" id="sec-comp-bottomnav">
-    <div class="card-header-row">
-      <div class="card-badge-icon"><i class="pi pi-bars"></i></div>
-      <div>
-        <span class="card-eyebrow">COMPONENTES MÓVILES · NAVEGACIÓN BASE</span>
-        <h3 class="card-title">4. NexaBottomNav (Navegación Inferior M3)</h3>
-      </div>
-    </div>
-    <p class="card-text">
-      Barra de navegación fija inferior con altura de <strong>64dp</strong> y áreas táctiles de 64×48dp por destino. Respeta las directrices ergonómicas de alcance del pulgar sin solapamiento con la barra de gestos del sistema.
-    </p>
-
+    <!-- Live Interactive Bottom Navigation Demo -->
     <div class="component-demo-stage">
-      <div class="live-bottom-nav">
-        <div class="nav-destination active">
-          <div class="destination-icon-wrap">
+      <div class="live-bottom-nav-interactive" id="interactive-bottomnav-demo">
+        <div class="bottom-nav-tab active" data-tab-id="rutas">
+          <div class="tab-indicator-pill">
             <i class="pi pi-map-marker"></i>
           </div>
-          <span class="destination-label">Rutas</span>
+          <span class="tab-label">Rutas</span>
+          <span class="tab-badge">2</span>
         </div>
-        <div class="nav-destination">
-          <div class="destination-icon-wrap">
+
+        <div class="bottom-nav-tab" data-tab-id="despacho">
+          <div class="tab-indicator-pill">
+            <i class="pi pi-send"></i>
+          </div>
+          <span class="tab-label">Despacho</span>
+        </div>
+
+        <div class="bottom-nav-tab" data-tab-id="picking">
+          <div class="tab-indicator-pill">
             <i class="pi pi-box"></i>
           </div>
-          <span class="destination-label">Cargas</span>
+          <span class="tab-label">Picking</span>
+          <span class="tab-badge warn">!</span>
         </div>
-        <div class="nav-destination">
-          <div class="destination-icon-wrap">
-            <i class="pi pi-shield"></i>
+
+        <div class="bottom-nav-tab" data-tab-id="checklist">
+          <div class="tab-indicator-pill">
+            <i class="pi pi-wrench"></i>
           </div>
-          <span class="destination-label">Seguridad</span>
+          <span class="tab-label">Checklist</span>
         </div>
-        <div class="nav-destination">
-          <div class="destination-icon-wrap">
-            <i class="pi pi-user"></i>
+      </div>
+    </div>
+    <div class="nav-tab-status-readout" id="nav-tab-status-readout">
+      <span>Pestaña Activa: <strong>RUTAS (Diego Morales · 2 paradas pendientes)</strong></span>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       3. FORMULARIOS MÓVILES (Mobile Forms & Inputs)
+       ========================================================================== -->
+  <section class="cuadro-card" id="sec-comp-formularios">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">03</span>
+        <div>
+          <p class="cuadro-kicker">COMPONENTES MÓVILES · FORMULARIOS & ENTRADA DE DATOS</p>
+          <h3 class="cuadro-title">Formularios Móviles Accesibles & OutlinedTextFields</h3>
+          <p class="cuadro-subtitle">
+            Entrada de datos optimizada para pantallas táctiles y terminales industriales con guantes. Campos con altura mínima de 56dp, etiquetas flotantes persistentes, teclado numérico forzado y mensajes de validación en tiempo real.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-pencil"></i> OutlinedTextField</span>
+        <span class="cuadro-tag success"><i class="pi pi-check-circle"></i> Input Validation</span>
+      </div>
+    </div>
+
+    <!-- Live Form Specimen: Registro de Despacho & Arribo -->
+    <div class="form-specimen-grid">
+      <div class="form-container-box">
+        <div class="form-box-header">
+          <span class="form-badge">FORMULARIO DE DESPACHO</span>
+          <h4>Registro de Arribo a Muelle (SO-2026-0018)</h4>
+        </div>
+
+        <form class="nexa-mobile-form" onsubmit="return false;">
+          <!-- Input 1: Código de Guía -->
+          <div class="form-field-group">
+            <label class="field-label" for="inp-guia">Número de Guía de Remisión *</label>
+            <div class="input-with-icon">
+              <i class="pi pi-file"></i>
+              <input type="text" id="inp-guia" class="nexa-input" value="SO-2026-0018" readonly />
+              <i class="pi pi-check-circle input-status-icon success"></i>
+            </div>
+            <span class="field-helper">Validado frente a base local SQLite</span>
           </div>
-          <span class="destination-label">Perfil</span>
+
+          <!-- Input 2: Selector de Muelle -->
+          <div class="form-field-group">
+            <label class="field-label" for="sel-muelle">Muelle de Descarga Asignado *</label>
+            <div class="input-with-icon">
+              <i class="pi pi-building"></i>
+              <select id="sel-muelle" class="nexa-select">
+                <option value="M3" selected>Muelle 3 · Frigorífico (-20°C)</option>
+                <option value="M1">Muelle 1 · Carga Seca</option>
+                <option value="M2">Muelle 2 · Tolva Pesados</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Input 3: Placa y Chofer -->
+          <div class="form-row-2">
+            <div class="form-field-group">
+              <label class="field-label" for="inp-placa">Placa Camión</label>
+              <input type="text" id="inp-placa" class="nexa-input" value="WKN-892" />
+            </div>
+            <div class="form-field-group">
+              <label class="field-label" for="inp-temp">Temp. BLE (°C)</label>
+              <input type="text" id="inp-temp" class="nexa-input temp-ok" value="3.8°C (OK)" readonly />
+            </div>
+          </div>
+
+          <!-- Input 4: Firma del Receptor -->
+          <div class="form-field-group">
+            <label class="field-label" for="inp-receptor">Nombre del Receptor en Obra *</label>
+            <input type="text" id="inp-receptor" class="nexa-input" placeholder="Ej. Ing. Manuel Valdés" value="Manuel Valdés C." />
+          </div>
+
+          <!-- Submit Buttons -->
+          <div class="form-actions-row">
+            <button type="button" class="nexa-mobile-btn secondary">Cancelar</button>
+            <button type="submit" class="nexa-mobile-btn industrial">
+              <i class="pi pi-check"></i>
+              <span>Confirmar Arribo (56dp)</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Live Form Specimen: OTP & PIN de Seguridad -->
+      <div class="form-container-box">
+        <div class="form-box-header">
+          <span class="form-badge">CONFIRMACIÓN POD</span>
+          <h4>Validación PIN / OTP sin Contacto</h4>
+        </div>
+        <p class="pin-desc">
+          El cliente receptor en obra proporciona el código OTP generado en su Buyer Mobile para autorizar la descarga física de los bultos:
+        </p>
+
+        <div class="otp-boxes-row">
+          <span class="otp-box active">4</span>
+          <span class="otp-box active">8</span>
+          <span class="otp-box active">2</span>
+          <span class="otp-box active">9</span>
+          <span class="otp-box">_</span>
+          <span class="otp-box">_</span>
+        </div>
+
+        <div class="numeric-keypad-preview">
+          <div class="keypad-grid">
+            <button type="button" class="key-btn">1</button>
+            <button type="button" class="key-btn">2</button>
+            <button type="button" class="key-btn">3</button>
+            <button type="button" class="key-btn">4</button>
+            <button type="button" class="key-btn">5</button>
+            <button type="button" class="key-btn">6</button>
+            <button type="button" class="key-btn">7</button>
+            <button type="button" class="key-btn">8</button>
+            <button type="button" class="key-btn">9</button>
+            <button type="button" class="key-btn key-action"><i class="pi pi-times"></i></button>
+            <button type="button" class="key-btn">0</button>
+            <button type="button" class="key-btn key-action"><i class="pi pi-arrow-left"></i></button>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Section: Modal Bottom Sheet -->
-  <section class="spec-card" id="sec-comp-bottomsheet">
-    <div class="card-header-row">
-      <div class="card-badge-icon"><i class="pi pi-sliders-h"></i></div>
-      <div>
-        <span class="card-eyebrow">COMPONENTES MÓVILES · CONTENEDOR MODAL</span>
-        <h3 class="card-title">5. NexaModalBottomSheet (Deslizable M3)</h3>
+  <!-- ==========================================================================
+       4. OPCIONES & CONTROLES DE SELECCIÓN (Radios, Checkboxes, Switches, Chips)
+       ========================================================================== -->
+  <section class="cuadro-card" id="sec-comp-opciones">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">04</span>
+        <div>
+          <p class="cuadro-kicker">COMPONENTES MÓVILES · OPCIONES & SELECCIÓN</p>
+          <h3 class="cuadro-title">Controles de Selección Táctil (Radios, Switches, Checkboxes, Chips)</h3>
+          <p class="cuadro-subtitle">
+            Todos los controles de selección implementan un bounding box táctil mínimo de 48×48dp para cumplir estrictamente con WCAG 2.2 AA.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-check-square"></i> 48dp Bounding Box</span>
+        <span class="cuadro-tag success"><i class="pi pi-sliders-h"></i> Segmented Controls</span>
       </div>
     </div>
-    <p class="card-text">
-      Superficie modal emergente con esquinas redondeadas de <strong>24dp</strong> y manija táctil central de 36×4dp. Se utiliza para confirmar recepciones, seleccionar motivos de discrepancia y filtros densos.
-    </p>
 
-    <div class="component-demo-stage">
-      <div class="live-bottom-sheet">
-        <div class="sheet-drag-handle"></div>
-        <div class="sheet-header">
-          <h4 class="sheet-title">Confirmar Recepción de Carga</h4>
-          <span class="sheet-subtitle">Verifique el número de guía antes de solicitar la firma del receptor.</span>
+    <div class="selection-controls-grid">
+      <!-- Radios: Estado de Carga -->
+      <div class="control-card">
+        <span class="control-kicker">RADIO BUTTONS M3</span>
+        <h4>Estado de Inspección de Carga</h4>
+        <div class="radio-options-list">
+          <label class="radio-option-item">
+            <input type="radio" name="radio-demo" checked />
+            <span class="custom-radio"></span>
+            <div class="option-label-text">
+              <strong>Carga Conforme</strong>
+              <small>Sin rotura de sellos, embalaje íntegro</small>
+            </div>
+          </label>
+
+          <label class="radio-option-item">
+            <input type="radio" name="radio-demo" />
+            <span class="custom-radio"></span>
+            <div class="option-label-text">
+              <strong>Observación Menor</strong>
+              <small>Humedad superficial en cartón exterior</small>
+            </div>
+          </label>
+
+          <label class="radio-option-item danger">
+            <input type="radio" name="radio-demo" />
+            <span class="custom-radio"></span>
+            <div class="option-label-text">
+              <strong>Rechazo Total / Parcial</strong>
+              <small>Cadena de frío rota (&gt;6.0°C) o bulto roto</small>
+            </div>
+          </label>
         </div>
+      </div>
 
-        <div class="sheet-form-group">
-          <label class="sheet-label">Nombre del Receptor en Obra</label>
-          <input type="text" class="sheet-input" value="Ing. Manuel Valdés" readonly />
+      <!-- Checkboxes & Switches -->
+      <div class="control-card">
+        <span class="control-kicker">SWITCHES & CHECKBOXES</span>
+        <h4>Ajustes de Telemetría & Sensores</h4>
+        <div class="switches-list">
+          <div class="switch-row">
+            <div class="switch-info">
+              <strong>Monitoreo BLE Activo</strong>
+              <small>Lectura continua cada 30 segundos (2°C – 6°C)</small>
+            </div>
+            <label class="nexa-switch">
+              <input type="checkbox" checked />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <div class="switch-row">
+            <div class="switch-info">
+              <strong>Geocerca GPS (200m)</strong>
+              <small>Auto-detección de llegada a obra</small>
+            </div>
+            <label class="nexa-switch">
+              <input type="checkbox" checked />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <div class="switch-row">
+            <div class="switch-info">
+              <strong>Forzar Modo Offline</strong>
+              <small>Almacenar en cola segura WorkManager</small>
+            </div>
+            <label class="nexa-switch">
+              <input type="checkbox" />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
         </div>
+      </div>
 
-        <div class="sheet-actions">
-          <button type="button" class="nexa-mobile-btn secondary">Cancelar</button>
-          <button type="button" class="nexa-mobile-btn primary">Abrir Panel de Firma</button>
+      <!-- Filter & Action Chips -->
+      <div class="control-card">
+        <span class="control-kicker">CHIPS & SEGMENTED BUTTONS</span>
+        <h4>Filtros de Almacén & Visualización</h4>
+        <div class="chips-demo-wrap">
+          <div class="segmented-control-demo">
+            <button type="button" class="segment-btn active">Lista</button>
+            <button type="button" class="segment-btn">Mapa GPS</button>
+            <button type="button" class="segment-btn">Lotes FEFO</button>
+          </div>
+
+          <div class="chips-row">
+            <span class="nexa-chip selected"><i class="pi pi-check"></i> Congelado (-20°C)</span>
+            <span class="nexa-chip"><i class="pi pi-clock"></i> Prioridad Alta</span>
+            <span class="nexa-chip"><i class="pi pi-filter"></i> Muelle 3</span>
+            <span class="nexa-chip"><i class="pi pi-tag"></i> GS1-128</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- ==========================================================================
+       5. CUADROS DE DESPACHO & MOVIMIENTO DE INVENTARIO
+       ========================================================================== -->
+  <section class="cuadro-card" id="sec-comp-despacho">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">05</span>
+        <div>
+          <p class="cuadro-kicker">OPERACIONES LOGÍSTICAS · CUADROS DE CAMPO</p>
+          <h3 class="cuadro-title">Cuadros Canónicos de Despacho & Movimiento de Inventario</h3>
+          <p class="cuadro-subtitle">
+            Modelos de datos visuales en campo que vinculan la orden de despacho <code>SO-2026-0018</code>, la lista de picking FEFO <code>DSP-204</code> y la inspección de maquinaria <code>MT-042</code>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub-Cuadro A: Tarjeta de Despacho SO-2026-0018 -->
+    <div class="cuadro-subcard">
+      <div class="subcard-header">
+        <div class="order-id-group">
+          <span class="subcard-kicker">ORDEN DE DESPACHO</span>
+          <h4 class="subcard-title">SO-2026-0018 · ICISA Distribuciones S.A.</h4>
+        </div>
+        <span class="status-chip-lg en-ruta"><i class="pi pi-truck"></i> EN RUTA (PARADA 1 DE 3)</span>
+      </div>
+
+      <div class="despacho-kv-grid">
+        <div class="despacho-kv-item">
+          <span class="kv-label">Destino</span>
+          <strong class="kv-val">Av. Argentina 1240, Callao</strong>
+        </div>
+        <div class="despacho-kv-item">
+          <span class="kv-label">Muelle Asignado</span>
+          <strong class="kv-val">Muelle 3 Frigorífico</strong>
+        </div>
+        <div class="despacho-kv-item">
+          <span class="kv-label">Sensor BLE Calibrado</span>
+          <strong class="kv-val temp-good"><i class="pi pi-check"></i> 3.8°C (Rango 2.0°C – 6.0°C)</strong>
+        </div>
+        <div class="despacho-kv-item">
+          <span class="kv-label">Geocerca GPS (200m)</span>
+          <strong class="kv-val"><i class="pi pi-map-marker"></i> Dentro del radio (84m)</strong>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="despacho-action-row">
+        <button type="button" class="nexa-mobile-btn secondary">
+          <i class="pi pi-phone"></i> Llamar al Contacto
+        </button>
+        <button type="button" class="nexa-mobile-btn industrial">
+          <i class="pi pi-qrcode"></i> Escanear Bultos & Firmar
+        </button>
+      </div>
+    </div>
+
+    <!-- Sub-Cuadro B: Picking FEFO DSP-204 -->
+    <div class="cuadro-subcard">
+      <div class="subcard-header">
+        <div class="order-id-group">
+          <span class="subcard-kicker">BODEGA FRIGORÍFICA · PICKING FEFO</span>
+          <h4 class="subcard-title">DSP-204 · Movimiento de Inventario</h4>
+        </div>
+        <span class="status-chip-lg picking"><i class="pi pi-box"></i> 2/3 ITEMS ESCANEADOS</span>
+      </div>
+
+      <div class="picking-table-wrapper">
+        <table class="contract-table">
+          <thead>
+            <tr>
+              <th>SKU / Producto</th>
+              <th>Ubicación Rack</th>
+              <th>Lote / Vencimiento</th>
+              <th>Requerido</th>
+              <th>Escaneado</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>SAL-LMO-01</strong><br><small>Salmón Salar Congelado 4-5kg</small></td>
+              <td><code>P-04 / N-02 / B-12</code></td>
+              <td><code>LOT-2026-09A</code><br><small>Vence: 12-Nov-2026</small></td>
+              <td>20 cajas</td>
+              <td><strong>20 / 20</strong></td>
+              <td><span class="badge-mini success">COMPLETO</span></td>
+            </tr>
+            <tr>
+              <td><strong>TRU-ARC-02</strong><br><small>Trucha Arcoíris Eviscerada</small></td>
+              <td><code>P-04 / N-03 / A-04</code></td>
+              <td><code>LOT-2026-10B</code><br><small>Vence: 05-Dic-2026</small></td>
+              <td>15 cajas</td>
+              <td><strong>15 / 15</strong></td>
+              <td><span class="badge-mini success">COMPLETO</span></td>
+            </tr>
+            <tr>
+              <td><strong>LAN-CON-04</strong><br><small>Langostino Entero Congelado 2kg</small></td>
+              <td><code>P-05 / N-01 / C-08</code></td>
+              <td><code>LOT-2026-11C</code><br><small>Vence: 20-Ene-2027</small></td>
+              <td>10 cajas</td>
+              <td><strong>0 / 10</strong></td>
+              <td><span class="badge-mini warn">PENDIENTE</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       6. CONTRATO DE CÓDIGO KOTLIN COMPOSE (:core:designsystem)
+       ========================================================================== -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">06</span>
+        <div>
+          <p class="cuadro-kicker">CÓDIGO DE PRODUCCIÓN · KOTLIN JETPACK COMPOSE</p>
+          <h3 class="cuadro-title">NexaTopAppBar & NexaBottomNav Composable</h3>
+          <p class="cuadro-subtitle">
+            Implementación nativa en Kotlin 2.4 lista para compilar en <code>apps/operations-android</code>.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag kotlin"><i class="pi pi-code"></i> NavigationBars.kt</span>
+      </div>
+    </div>
+
+    <div class="code-container-block">
+      <div class="code-header-bar">
+        <div class="code-header-title">
+          <i class="pi pi-file"></i>
+          <span>core/designsystem/src/main/kotlin/com/nexa/core/designsystem/component/NavigationBars.kt</span>
+        </div>
+        <span class="code-lang-pill">Kotlin 2.4</span>
+      </div>
+      <pre class="code-pre-box" is:raw><code><span class="comm">// Canonical Top & Bottom Navigation Bars for Nexa Suite Mobile</span>
+<span class="kw">package</span> com.nexa.core.designsystem.component
+
+<span class="kw">import</span> androidx.compose.foundation.layout.RowScope
+<span class="kw">import</span> androidx.compose.foundation.layout.height
+<span class="kw">import</span> androidx.compose.material3.BadgedBox
+<span class="kw">import</span> androidx.compose.material3.Badge
+<span class="kw">import</span> androidx.compose.material3.ExperimentalMaterial3Api
+<span class="kw">import</span> androidx.compose.material3.Icon
+<span class="kw">import</span> androidx.compose.material3.NavigationBar
+<span class="kw">import</span> androidx.compose.material3.NavigationBarItem
+<span class="kw">import</span> androidx.compose.material3.NavigationBarItemDefaults
+<span class="kw">import</span> androidx.compose.material3.Text
+<span class="kw">import</span> androidx.compose.material3.TopAppBar
+<span class="kw">import</span> androidx.compose.material3.TopAppBarDefaults
+<span class="kw">import</span> androidx.compose.runtime.Composable
+<span class="kw">import</span> androidx.compose.ui.Modifier
+<span class="kw">import</span> androidx.compose.ui.graphics.vector.ImageVector
+<span class="kw">import</span> androidx.compose.ui.unit.dp
+<span class="kw">import</span> com.nexa.core.designsystem.theme.NexaPrimary
+<span class="kw">import</span> com.nexa.core.designsystem.theme.NexaSurfaceContainerHigh
+<span class="kw">import</span> com.nexa.core.designsystem.theme.NexaTypography
+
+<span class="ann">@OptIn</span>(ExperimentalMaterial3Api::<span class="kw">class</span>)
+<span class="ann">@Composable</span>
+<span class="kw">fun</span> <span class="fn">NexaTopAppBar</span>(
+    title: <span class="type">String</span>,
+    modifier: <span class="type">Modifier</span> = Modifier,
+    navigationIcon: <span class="ann">@Composable</span> () -> <span class="type">Unit</span> = {},
+    actions: <span class="ann">@Composable</span> <span class="type">RowScope</span>.() -> <span class="type">Unit</span> = {}
+) {
+    <span class="fn">TopAppBar</span>(
+        title = { <span class="fn">Text</span>(text = title, style = NexaTypography.titleMedium) },
+        navigationIcon = navigationIcon,
+        actions = actions,
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = NexaSurfaceContainerHigh
+        ),
+        modifier = modifier.<span class="fn">height</span>(<span class="num">56.dp</span>)
+    )
+}
+
+<span class="ann">@Composable</span>
+<span class="kw">fun</span> <span class="fn">NexaBottomNavigationBar</span>(
+    selectedRoute: <span class="type">String</span>,
+    onNavigateToRoute: (<span class="type">String</span>) -> <span class="type">Unit</span>,
+    modifier: <span class="type">Modifier</span> = Modifier,
+    destinations: <span class="type">List</span>&lt;<span class="type">NexaNavDestination</span>&gt;
+) {
+    <span class="fn">NavigationBar</span>(
+        modifier = modifier.<span class="fn">height</span>(<span class="num">64.dp</span>), <span class="comm">// Altura canónica 64dp</span>
+        containerColor = NexaSurfaceContainerHigh
+    ) {
+        destinations.<span class="fn">forEach</span> { dest ->
+            <span class="kw">val</span> isSelected = selectedRoute == dest.route
+            <span class="fn">NavigationBarItem</span>(
+                selected = isSelected,
+                onClick = { onNavigateToRoute(dest.route) },
+                icon = {
+                    <span class="kw">if</span> (dest.badgeCount > <span class="num">0</span>) {
+                        <span class="fn">BadgedBox</span>(badge = { <span class="fn">Badge</span> { <span class="fn">Text</span>(dest.badgeCount.toString()) } }) {
+                            <span class="fn">Icon</span>(imageVector = dest.icon, contentDescription = dest.label)
+                        }
+                    } <span class="kw">else</span> {
+                        <span class="fn">Icon</span>(imageVector = dest.icon, contentDescription = dest.label)
+                    }
+                },
+                label = { <span class="fn">Text</span>(text = dest.label, style = NexaTypography.labelMedium) }
+            )
+        }
+    }
+}
+
+<span class="kw">data class</span> <span class="type">NexaNavDestination</span>(
+    <span class="kw">val</span> route: <span class="type">String</span>,
+    <span class="kw">val</span> label: <span class="type">String</span>,
+    <span class="kw">val</span> icon: <span class="type">ImageVector</span>,
+    <span class="kw">val</span> badgeCount: <span class="type">Int</span> = <span class="num">0</span>
+)</code></pre>
+    </div>
+  </section>
+
 </div>
+
+<script>
+  // Interactive TopBar Search Toggle
+  const btnSearch = document.getElementById('topbar-btn-search');
+  const searchTray = document.getElementById('topbar-search-tray');
+  const btnCloseTray = document.getElementById('btn-close-search-tray');
+  const searchInput = document.getElementById('topbar-search-input') as HTMLInputElement | null;
+
+  btnSearch?.addEventListener('click', () => {
+    if (searchTray) {
+      searchTray.style.display = 'flex';
+      searchInput?.focus();
+    }
+  });
+
+  btnCloseTray?.addEventListener('click', () => {
+    if (searchTray) searchTray.style.display = 'none';
+  });
+
+  // Interactive BottomNav Tab Switching Demo
+  const bottomTabs = document.querySelectorAll<HTMLElement>('.bottom-nav-tab');
+  const readout = document.getElementById('nav-tab-status-readout');
+
+  bottomTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      bottomTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const tabId = tab.getAttribute('data-tab-id')?.toUpperCase() || '';
+      const label = tab.querySelector('.tab-label')?.textContent || '';
+      if (readout) {
+        readout.innerHTML = `<span>Pestaña Activa: <strong>${tabId} (${label}) · Navegación reactiva M3</strong></span>`;
+      }
+    });
+  });
+</script>
 
 <style>
   .components-container {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 28px;
     width: 100%;
   }
 
-  .spec-card {
-    background: var(--nexa-surface-card, #ffffff);
-    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
-    border-radius: var(--nexa-radius-card, 16px);
-    padding: 24px;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    scroll-margin-top: 80px;
-  }
-
-  .card-header-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .card-badge-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background: var(--nexa-color-primary-50, #eff6ff);
-    color: var(--nexa-color-primary-600, #2a67d9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 17px;
-    flex-shrink: 0;
-  }
-
-  .card-eyebrow {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    color: var(--nexa-color-primary-700, #1d4ed8);
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 2px;
-  }
-
-  .card-title {
-    font-family: var(--nexa-font-family-display, sans-serif);
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--nexa-color-text-primary, #0f172a);
-    margin: 0;
-  }
-
-  .card-text {
-    font-size: 13.5px;
-    color: var(--nexa-color-text-secondary, #64748b);
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  /* Component Demo Stage */
   .component-demo-stage {
     background: var(--nexa-color-neutral-50, #f8fafc);
     border: 1px solid var(--nexa-color-border-default, #e2e8f0);
@@ -292,16 +685,20 @@
   /* Live Top App Bar */
   .live-app-bar {
     width: 100%;
-    max-width: 480px;
-    height: 56px;
+    max-width: 540px;
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+  }
+
+  .topbar-bar-content {
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 12px;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
   }
 
   .btn-app-icon {
@@ -317,13 +714,27 @@
     cursor: pointer;
     font-size: 15px;
 
-    &:hover {
-      background: #f1f5f9;
-    }
+    &:hover { background: #f1f5f9; }
+  }
+
+  .app-bar-title-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin: 0 8px;
+    flex: 1;
+  }
+
+  .app-bar-kicker {
+    font-size: 8.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    text-transform: uppercase;
   }
 
   .app-bar-heading {
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 700;
     color: var(--nexa-color-text-primary, #0f172a);
   }
@@ -334,32 +745,612 @@
     gap: 4px;
   }
 
-  /* Button States Grid */
-  .buttons-states-grid {
+  .badge-icon-wrapper {
+    position: relative;
+  }
+
+  .topbar-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: #b91c1c;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 800;
+    padding: 1px 4px;
+    border-radius: 999px;
+    line-height: 1;
+  }
+
+  .topbar-search-tray {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    background: #f1f5f9;
+    border-top: 1px solid #e2e8f0;
+
+    i { color: #64748b; font-size: 14px; }
+    input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 13px;
+      color: #0f172a;
+    }
+    .btn-close-tray {
+      background: transparent;
+      border: none;
+      color: #64748b;
+      cursor: pointer;
+      font-size: 14px;
+      &:hover { color: #0f172a; }
+    }
+  }
+
+  /* Interactive Bottom Nav */
+  .live-bottom-nav-interactive {
+    width: 100%;
+    max-width: 540px;
+    height: 64px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+  }
+
+  .bottom-nav-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 3px;
+    cursor: pointer;
+    position: relative;
+    color: #64748b;
+
+    .tab-indicator-pill {
+      width: 52px;
+      height: 28px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: all 0.15s ease;
+    }
+
+    .tab-label {
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .tab-badge {
+      position: absolute;
+      top: 6px;
+      right: calc(50% - 24px);
+      background: #2a67d9;
+      color: #ffffff;
+      font-size: 9px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 999px;
+      line-height: 1;
+
+      &.warn { background: #b45309; }
+    }
+
+    &.active {
+      color: #1d4ed8;
+
+      .tab-indicator-pill {
+        background: #dbeafe;
+        color: #1d4ed8;
+      }
+
+      .tab-label {
+        font-weight: 700;
+      }
+    }
+  }
+
+  .nav-tab-status-readout {
+    padding: 10px 16px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #1e40af;
+    text-align: center;
+  }
+
+  /* Form Specimen Grid */
+  .form-specimen-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 860px) {
+    .form-specimen-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .form-container-box {
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 12px;
+    padding: 20px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
     gap: 16px;
   }
 
-  .btn-state-col {
+  .form-box-header {
     display: flex;
     flex-direction: column;
+    gap: 3px;
+
+    .form-badge {
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--nexa-color-primary-700, #1d4ed8);
+      text-transform: uppercase;
+    }
+
+    h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0;
+    }
+  }
+
+  .nexa-mobile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .form-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .field-label {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #334155;
+  }
+
+  .input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    i:first-child {
+      position: absolute;
+      left: 12px;
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    .input-status-icon {
+      position: absolute;
+      right: 12px;
+      font-size: 14px;
+      &.success { color: #16a34a; }
+    }
+  }
+
+  .nexa-input, .nexa-select {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 36px 0 36px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 13px;
+    background: #f8fafc;
+    color: #0f172a;
+    outline: none;
+
+    &:focus {
+      border-color: #2a67d9;
+      background: #ffffff;
+    }
+
+    &.temp-ok {
+      color: #15803d;
+      font-weight: 700;
+    }
+  }
+
+  .field-helper {
+    font-size: 10.5px;
+    color: #64748b;
+  }
+
+  .form-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .form-actions-row {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  /* OTP Boxes */
+  .pin-desc {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .otp-boxes-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 8px 0;
+  }
+
+  .otp-box {
+    width: 44px;
+    height: 52px;
+    border: 2px solid #cbd5e1;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 800;
+    color: #0f172a;
+    background: #f8fafc;
+
+    &.active {
+      border-color: #2a67d9;
+      background: #ffffff;
+      color: #2a67d9;
+    }
+  }
+
+  .keypad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 8px;
   }
 
-  .state-label {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 9.5px;
-    font-weight: 800;
-    color: var(--nexa-color-neutral-500, #64748b);
+  .key-btn {
+    min-height: 48px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    cursor: pointer;
+
+    &:hover { background: #e2e8f0; }
+    &.key-action { color: #64748b; font-size: 14px; }
   }
 
-  /* Nexa Mobile Buttons */
+  /* Selection Controls Grid */
+  .selection-controls-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 900px) {
+    .selection-controls-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .control-card {
+    padding: 16px;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 12px;
+    background: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .control-kicker {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--nexa-color-primary-700, #1d4ed8);
+      text-transform: uppercase;
+    }
+
+    h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0;
+    }
+  }
+
+  .radio-options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .radio-option-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+
+    input[type="radio"] {
+      margin-top: 3px;
+      accent-color: #2a67d9;
+    }
+
+    .option-label-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+
+      strong { font-size: 12px; color: #0f172a; }
+      small { font-size: 10.5px; color: #64748b; }
+    }
+
+    &.danger {
+      border-color: #fecaca;
+      background: #fff5f5;
+      input[type="radio"] { accent-color: #b91c1c; }
+      strong { color: #b91c1c; }
+    }
+  }
+
+  .switches-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .switch-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+
+    .switch-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      strong { font-size: 12px; color: #0f172a; }
+      small { font-size: 10px; color: #64748b; }
+    }
+  }
+
+  .nexa-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+
+    input { opacity: 0; width: 0; height: 0; }
+    .switch-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #cbd5e1;
+      transition: .2s;
+      border-radius: 24px;
+
+      &:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: .2s;
+        border-radius: 50%;
+      }
+    }
+
+    input:checked + .switch-slider {
+      background-color: #2a67d9;
+    }
+
+    input:checked + .switch-slider:before {
+      transform: translateX(20px);
+    }
+  }
+
+  .segmented-control-demo {
+    display: flex;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 12px;
+
+    .segment-btn {
+      flex: 1;
+      min-height: 38px;
+      border: none;
+      background: #ffffff;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #475569;
+      cursor: pointer;
+
+      &.active {
+        background: #2a67d9;
+        color: #ffffff;
+      }
+    }
+  }
+
+  .chips-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .nexa-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 11.5px;
+    font-weight: 600;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+    cursor: pointer;
+
+    &.selected {
+      background: #dbeafe;
+      color: #1e40af;
+      border-color: #93c5fd;
+    }
+  }
+
+  /* Cuadros Subcards */
+  .cuadro-subcard {
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 14px;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 8px;
+  }
+
+  .subcard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .subcard-kicker {
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #2a67d9;
+    text-transform: uppercase;
+  }
+
+  .subcard-title {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 2px 0 0;
+  }
+
+  .status-chip-lg {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 800;
+
+    &.en-ruta {
+      background: #dcfce7;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+    }
+
+    &.picking {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+  }
+
+  .despacho-kv-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    padding: 12px 14px;
+    background: #f8fafc;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+  }
+
+  @media (max-width: 860px) {
+    .despacho-kv-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .despacho-kv-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    .kv-label {
+      font-size: 10.5px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .kv-val {
+      font-size: 12.5px;
+      color: #0f172a;
+
+      &.temp-good { color: #15803d; }
+    }
+  }
+
+  .despacho-action-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .badge-mini {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 800;
+
+    &.success { background: #dcfce7; color: #15803d; }
+    &.warn { background: #fef3c7; color: #92400e; }
+  }
+
   .nexa-mobile-btn {
-    width: 100%;
     min-height: 48px;
     border-radius: 12px;
-    font-family: var(--nexa-font-family-body, sans-serif);
+    font-family: inherit;
     font-size: 13px;
     font-weight: 700;
     display: inline-flex;
@@ -372,13 +1363,9 @@
     transition: all 0.15s ease;
 
     &.primary {
-      background: var(--nexa-color-primary-600, #2a67d9);
+      background: #2a67d9;
       color: #ffffff;
-      box-shadow: 0 1px 3px rgba(42, 103, 217, 0.25);
-
-      &:hover {
-        background: #1d4ed8;
-      }
+      &:hover { background: #1d4ed8; }
     }
 
     &.industrial {
@@ -387,252 +1374,14 @@
       color: #ffffff;
       border: 1px solid #1a4975;
       font-size: 13.5px;
-
-      &:hover {
-        background: #0d3860;
-      }
+      &:hover { background: #0d3860; }
     }
 
     &.secondary {
       background: #ffffff;
-      color: var(--nexa-color-neutral-700, #334155);
-      border: 1px solid var(--nexa-color-border-default, #cbd5e1);
-
-      &:hover {
-        background: #f8fafc;
-        border-color: #94a3b8;
-      }
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      &:hover { background: #f8fafc; }
     }
-
-    &.loading {
-      background: #93c5fd;
-      color: #1e3a8a;
-      cursor: not-allowed;
-    }
-  }
-
-  /* Live Dispatch Card */
-  .live-dispatch-card {
-    width: 100%;
-    max-width: 480px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 16px;
-    padding: 18px;
-    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .card-top-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-
-  .order-badge {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .order-num {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 13px;
-    font-weight: 800;
-    color: #2a67d9;
-  }
-
-  .order-client {
-    font-size: 12px;
-    color: #64748b;
-  }
-
-  .status-chip {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 10px;
-    font-weight: 800;
-    padding: 3px 8px;
-    border-radius: 6px;
-
-    &.en-turno {
-      background: #dcfce7;
-      color: #15803d;
-      border: 1px solid #bbf7d0;
-    }
-  }
-
-  .route-stepper {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding: 4px 0;
-  }
-
-  .stepper-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .step-marker {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-top: 3px;
-    flex-shrink: 0;
-
-    &.origin {
-      background: #2a67d9;
-      box-shadow: 0 0 0 3px rgba(42, 103, 217, 0.15);
-    }
-
-    &.destination {
-      background: #15803d;
-      box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.15);
-    }
-  }
-
-  .stepper-connector {
-    width: 2px;
-    height: 18px;
-    background: #cbd5e1;
-    margin-left: 5px;
-  }
-
-  .step-text {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-  }
-
-  .step-name {
-    font-size: 12.5px;
-    font-weight: 700;
-    color: #0f172a;
-  }
-
-  .step-time {
-    font-size: 11px;
-    color: #64748b;
-  }
-
-  /* Live Bottom Nav */
-  .live-bottom-nav {
-    width: 100%;
-    max-width: 480px;
-    height: 64px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    align-items: center;
-    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
-  }
-
-  .nav-destination {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    cursor: pointer;
-    color: #64748b;
-
-    &.active {
-      color: #2a67d9;
-
-      .destination-icon-wrap {
-        background: #e8f0fe;
-        color: #2a67d9;
-      }
-
-      .destination-label {
-        font-weight: 700;
-      }
-    }
-  }
-
-  .destination-icon-wrap {
-    width: 48px;
-    height: 28px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    transition: all 0.15s ease;
-  }
-
-  .destination-label {
-    font-size: 10.5px;
-    font-weight: 500;
-  }
-
-  /* Live Bottom Sheet */
-  .live-bottom-sheet {
-    width: 100%;
-    max-width: 480px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 24px;
-    padding: 16px 20px 20px;
-    box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.08);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .sheet-drag-handle {
-    width: 36px;
-    height: 4px;
-    background: #cbd5e1;
-    border-radius: 2px;
-    align-self: center;
-  }
-
-  .sheet-title {
-    font-family: var(--nexa-font-family-display, sans-serif);
-    font-size: 15px;
-    font-weight: 700;
-    color: #0f172a;
-    margin: 0;
-  }
-
-  .sheet-subtitle {
-    font-size: 12px;
-    color: #64748b;
-    line-height: 1.4;
-  }
-
-  .sheet-form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .sheet-label {
-    font-size: 11px;
-    font-weight: 700;
-    color: #475569;
-  }
-
-  .sheet-input {
-    height: 42px;
-    border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    padding: 0 12px;
-    font-size: 13px;
-    color: #0f172a;
-    background: #f8fafc;
-    outline: none;
-  }
-
-  .sheet-actions {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 10px;
-    margin-top: 4px;
   }
 </style>

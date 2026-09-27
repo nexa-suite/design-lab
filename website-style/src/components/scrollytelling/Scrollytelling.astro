@@ -1,6 +1,9 @@
 ---
 // Scrollytelling Component — Reconstructed to 100% forensic fidelity
-// Bases: webspo-flecto-2.png (Merchant Configurator) and webspo-flecto-3.png (Customer Flow)
+// Bases: Image 3 (media_1790488366954.png) & Awwwards SOTD Forensic Sequence
+// Features: Dual [Bookings]/[Inventory] switcher, 26px thick vascular conduits,
+// 4-step interactive smartphone checkout flow (Date Selection -> Face ID & Escrow -> Summary & Pay -> Payment Done with Confetti),
+// and smooth, glitch-free scroll choreography.
 ---
 
 <section class="scrolly-section" id="scrollytelling" aria-label="Flecto Link and Customer Scrollytelling Experience">
@@ -26,63 +29,22 @@
     <div class="scrolly-stage-area">
 
       <!-- ====================================================================
-           BACKDROP PLATES (Morphing between State 1 and State 2)
+           BACKDROP PLATE (Pastel Mint Container matching Image 3)
            ==================================================================== -->
-      <!-- State 1 Backdrop: Rounded vertical plate (webspo-flecto-2.png) -->
       <div class="stage-backdrop-state1" aria-hidden="true"></div>
-
-      <!-- State 2 Backdrop: Monumental sculpted cross silhouette (webspo-flecto-3.png) -->
-      <svg 
-        class="stage-backdrop-state2" 
-        viewBox="0 0 1600 900" 
-        preserveAspectRatio="none" 
-        aria-hidden="true"
-      >
-        <path 
-          d="M 526 125 
-             L 1069 125 
-             A 36 36 0 0 1 1105 161 
-             L 1105 224 
-             A 36 36 0 0 0 1141 260 
-             L 1479 260 
-             A 36 36 0 0 1 1515 296 
-             L 1515 684 
-             A 36 36 0 0 1 1479 720 
-             L 1191 720 
-             A 36 36 0 0 0 1155 756 
-             L 1155 864 
-             A 36 36 0 0 1 1119 900 
-             L 475 900 
-             A 36 36 0 0 1 439 864 
-             L 439 820 
-             A 36 36 0 0 0 403 784 
-             L 344 784 
-             A 36 36 0 0 1 308 748 
-             L 308 720 
-             A 36 36 0 0 0 272 684 
-             L 84 684 
-             A 36 36 0 0 1 48 648 
-             L 48 296 
-             A 36 36 0 0 1 84 260 
-             L 454 260 
-             A 36 36 0 0 0 490 224 
-             L 490 161 
-             A 36 36 0 0 1 526 125 Z" 
-          fill="#57f09e" 
-        />
-      </svg>
 
       <!-- ====================================================================
            SATELLITE TOGGLE CARDS (STATE 1: Merchant View)
+           Connected via THICK 26px PASTEL CONDUITS
            ==================================================================== -->
       <!-- 1. Top-Left Satellite: Online Payments -->
-      <div class="satellite-card card-top-left" id="satellite-online-payments">
+      <div class="satellite-card card-top-left bookings-satellite" id="satellite-online-payments">
         <div class="satellite-stem stem-left" aria-hidden="true"></div>
         <div class="satellite-inner">
           <div class="satellite-icon-box" aria-hidden="true">
-            <svg width="24" height="18" viewBox="0 0 28 20" fill="none" stroke="#004737" stroke-width="1.8">
+            <svg width="24" height="18" viewBox="0 0 28 20" fill="none" stroke="#004737" stroke-width="2">
               <rect x="2" y="3" width="24" height="15" rx="3"/>
-              <line x1="2" y1="7" x2="26" y2="7" stroke-width="1.5"/>
+              <line x1="2" y1="7" x2="26" y2="7" stroke-width="1.8"/>
               <text x="14" y="15" font-size="7" font-family="sans-serif" font-weight="800" fill="#004737" stroke="none" text-anchor="middle">€</text>
             </svg>
           </div>
@@ -95,11 +57,11 @@
       </div>
 
       <!-- 2. Bottom-Left Satellite: Pay in Store -->
-      <div class="satellite-card card-bottom-left" id="satellite-pay-store">
+      <div class="satellite-card card-bottom-left bookings-satellite" id="satellite-pay-store">
         <div class="satellite-stem stem-left" aria-hidden="true"></div>
         <div class="satellite-inner">
           <div class="satellite-icon-box" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#004737" stroke-width="1.8">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#004737" stroke-width="2">
               <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
               <polyline points="9 22 9 12 15 12 15 22"/>
             </svg>
@@ -117,7 +79,7 @@
         <div class="satellite-stem stem-right" aria-hidden="true"></div>
         <div class="satellite-inner">
           <div class="satellite-icon-box" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#004737" stroke-width="1.8">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#004737" stroke-width="2">
               <path d="M4 8V5a2 2 0 0 1 2-2h3M18 3h3a2 2 0 0 1 2 2v3M4 16v3a2 2 0 0 0 2 2h3M18 21h3a2 2 0 0 0 2-2v-3"/>
               <circle cx="12" cy="11" r="3"/>
               <path d="M8.5 17a4.5 4.5 0 0 1 7 0"/>
@@ -131,7 +93,7 @@
         </div>
       </div>
 
-      <!-- INVENTORY SATELLITE CARDS (Active when Inventory Tab is clicked, matching elem-62bb3a259519f446072569.mp4) -->
+      <!-- INVENTORY SATELLITE CARDS (Active when Inventory Tab is clicked) -->
       <!-- 1. Top-Left: Add Services -->
       <div class="satellite-card card-top-left inventory-satellite" id="satellite-add-services" style="display: none; opacity: 0;">
         <div class="satellite-stem stem-left" aria-hidden="true"></div>
@@ -228,23 +190,23 @@
         </h2>
       </div>
 
-      <!-- Right Wing: Vertical Dashed Timeline -->
+      <!-- Right Wing: Vertical Dashed Timeline (Clickable steps) -->
       <div class="customer-right-wing" aria-label="Customer Journey Progress">
         <div class="timeline-vertical-dashed" aria-hidden="true"></div>
         <ul class="timeline-steps-list">
-          <li class="timeline-item active" data-step="1">
+          <li class="timeline-item active" data-step="1" role="button" tabindex="0" aria-label="Go to step 1: Date selection & order">
             <span class="item-dot"></span>
-            <span class="item-text">Customer gets notification</span>
+            <span class="item-text">Date selection & order</span>
           </li>
-          <li class="timeline-item" data-step="2">
+          <li class="timeline-item" data-step="2" role="button" tabindex="0" aria-label="Go to step 2: Run face verification">
             <span class="item-dot"></span>
             <span class="item-text">Run face verification</span>
           </li>
-          <li class="timeline-item" data-step="3">
+          <li class="timeline-item" data-step="3" role="button" tabindex="0" aria-label="Go to step 3: Summary & pay">
             <span class="item-dot"></span>
-            <span class="item-text">Customer pays</span>
+            <span class="item-text">Summary & pay</span>
           </li>
-          <li class="timeline-item" data-step="4">
+          <li class="timeline-item" data-step="4" role="button" tabindex="0" aria-label="Go to step 4: Success">
             <span class="item-dot"></span>
             <span class="item-text">Success! 🍾</span>
           </li>
@@ -263,10 +225,10 @@
             <div class="chassis-speaker"></div>
           </div>
 
-          <!-- Phone Screen -->
+          <!-- Phone Screen Frame with Absolute Stacking Context -->
           <div class="phone-screen" role="region" aria-live="polite" aria-label="Customer Rental Mobile Flow">
             
-            <!-- Status Bar -->
+            <!-- Global Status Bar -->
             <div class="screen-status-bar" aria-hidden="true">
               <span class="status-time">9:41</span>
               <div class="status-indicators">
@@ -283,7 +245,7 @@
             </div>
 
             <!-- -------------------------------------------------------------
-                 PHONE SCREEN 1: Summary Transaction (webspo-flecto-2.png)
+                 PHONE SCREEN 1: Date Selection & Order Summary (Step 1)
                  ------------------------------------------------------------- -->
             <div class="phone-state-view active" id="phone-state-1" data-state="1">
               <div class="summary-top-nav">
@@ -292,13 +254,13 @@
                     <polyline points="15 18 9 12 15 6"/>
                   </svg>
                 </button>
-                <span class="summary-top-title">Summary Transaction</span>
+                <span class="summary-top-title">Select Dates & Order</span>
                 <button type="button" class="phone-circle-btn" aria-label="Help">?</button>
               </div>
 
-              <!-- Flecto Emblem Badge -->
+              <!-- Nexafy Emblem Badge -->
               <div class="flecto-emblem-badge" aria-hidden="true">
-                <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+                <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
                   <rect width="48" height="48" rx="14" fill="#57f09e"/>
                   <rect x="14" y="15" width="9" height="7" rx="3.5" fill="#004737"/>
                   <rect x="25" y="15" width="13" height="7" rx="3.5" fill="#004737"/>
@@ -308,108 +270,118 @@
               </div>
 
               <div class="summary-meta-block">
-                <h4 class="summary-booking-name">Flecto Booking</h4>
+                <h4 class="summary-booking-name">Nexafy Booking</h4>
                 <span class="summary-booking-date">On Mar 19, 2022</span>
               </div>
 
-              <!-- Monumental Price -->
-              <div class="summary-amount-display">€690.00</div>
+              <!-- Monumental Price (Dynamic) -->
+              <div class="summary-amount-display" id="step1-display-amount">€690.00</div>
 
-              <!-- Bottom Sheet Card: Pay in Store -->
-              <div class="summary-bottom-card" id="trigger-step-2" tabindex="0" role="button" aria-label="Open booking details">
+              <!-- Interactive Date Picker Simulator Chip -->
+              <div class="step1-date-selector">
+                <div class="date-chips-label">Rental Duration</div>
+                <div class="date-chips-row">
+                  <button type="button" class="duration-chip" data-days="3">3 Days</button>
+                  <button type="button" class="duration-chip active" data-days="5">5 Days</button>
+                  <button type="button" class="duration-chip" data-days="7">7 Days</button>
+                </div>
+                <div class="dates-range-text">2022/03/20 &rarr; <span id="step1-end-date">2022/03/24</span></div>
+              </div>
+
+              <!-- Bottom Sheet Card: Proceed to Face ID -->
+              <div class="summary-bottom-card" id="trigger-step-2" tabindex="0" role="button" aria-label="Proceed to Face ID">
                 <div class="bottom-card-header">
-                  <span class="bottom-card-title">Pay in Store</span>
+                  <span class="bottom-card-title">Verified Gear</span>
+                  <span class="bottom-card-tag">Escrow Ready</span>
                 </div>
                 
                 <div class="store-row">
                   <div class="store-schematic-thumb" aria-hidden="true">
-                    <img src="/assets/synthetic/store-schematic.svg" alt="Colorfoto Porto" />
+                    <img src="/assets/synthetic/camera-vector.svg" alt="GoPro HERO10" />
                   </div>
                   <div class="store-details">
-                    <strong class="store-name">Colorfoto Porto</strong>
-                    <p class="store-address">R. de Sá da Bandeira 526, 4000-430 Porto 22 016 3090</p>
+                    <strong class="store-name">GoPro HERO10 Black</strong>
+                    <p class="store-address">Colorfoto Porto · In stock</p>
                   </div>
                 </div>
 
-                <div class="bottom-card-button">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
+                <div class="bottom-card-button" id="btn-to-step-2">
+                  <span>Continue to Face ID</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="9 18 15 12 9 6"/>
                   </svg>
-                  <span>Pay Later</span>
                 </div>
               </div>
             </div>
 
             <!-- -------------------------------------------------------------
-                 PHONE SCREEN INVENTORY: Inventory Items List (Evidence elem-62bb3a259519f446072569)
+                 PHONE SCREEN INVENTORY: Inventory Items Table
                  ------------------------------------------------------------- -->
-            <div class="phone-state-view" id="phone-state-inventory" data-state="inventory" style="display: none; opacity: 0; background: #063124; color: #ffffff; flex-direction: column; justify-content: space-between; padding-top: 1.25rem;">
-              <!-- Top Nav -->
-              <div class="summary-top-nav" style="padding: 0 1.25rem; display: flex; align-items: center; justify-content: space-between;">
-                <button type="button" class="phone-circle-btn" aria-label="Back" style="background: rgba(255,255,255,0.1); border: none; color: #ffffff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+            <div class="phone-state-view" id="phone-state-inventory" data-state="inventory">
+              <div class="summary-top-nav">
+                <button type="button" class="phone-circle-btn" id="inv-back-btn" aria-label="Back to Bookings">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <polyline points="15 18 9 12 15 6"/>
                   </svg>
                 </button>
-                <span class="summary-top-title" style="font-size: 0.9375rem; font-weight: 600; color: #ffffff;">Your Booking</span>
-                <button type="button" class="phone-circle-btn" aria-label="Help" style="background: rgba(255,255,255,0.1); border: none; color: #ffffff; width: 28px; height: 28px; border-radius: 50%; font-size: 0.75rem; font-weight: 700; cursor: pointer;">?</button>
+                <span class="summary-top-title">Your Booking</span>
+                <button type="button" class="phone-circle-btn" aria-label="Help">?</button>
               </div>
 
               <!-- Date Range Display -->
-              <div style="text-align: center; margin: 1.5rem 0 1rem;">
-                <div style="display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--primitive-font-mono); font-size: 1rem; font-weight: 700; color: #57f09e;">
+              <div class="inv-date-range-wrap">
+                <div class="inv-date-chips">
                   <span>2022/03/20</span>
-                  <div style="width: 20px; height: 20px; border-radius: 50%; background: #57f09e; color: #063124; display: flex; align-items: center; justify-content: center;">
+                  <div class="inv-arrow-circle">
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                       <polyline points="9 18 15 12 9 6"/>
                     </svg>
                   </div>
                   <span>2022/03/24</span>
                 </div>
-                <div style="font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 0.25rem;">5-day rental</div>
+                <div class="inv-rental-sub">5-day rental</div>
               </div>
 
               <!-- Cream Bottom Sheet -->
-              <div style="background: #fcf9f2; color: #063124; border-radius: 28px 28px 0 0; padding: 1.25rem 1.25rem 1.5rem; margin-top: auto; box-shadow: 0 -4px 20px rgba(0,0,0,0.15);">
+              <div class="inv-cream-bottom-sheet">
                 <!-- Table Header -->
-                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 600; color: #5a7369; margin-bottom: 0.75rem;">
-                  <span style="font-weight: 700; color: #063124; font-size: 0.875rem;">Items</span>
-                  <div style="display: flex; gap: 1.5rem;">
+                <div class="inv-table-header">
+                  <span class="inv-th-items">Items</span>
+                  <div class="inv-th-right">
                     <span>Price</span>
                     <span>Deposit</span>
                   </div>
                 </div>
 
                 <!-- Main Rental Item -->
-                <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 0.75rem; border-bottom: 1px solid #e5eae6;">
-                  <div style="display: flex; align-items: center; gap: 0.6rem;">
-                    <div style="width: 32px; height: 32px; background: #000000; border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                <div class="inv-table-row">
+                  <div class="inv-item-info">
+                    <div class="inv-item-thumb">
                       <img src="/assets/synthetic/camera-vector.svg" width="24" height="24" alt="GoPro HERO10" />
                     </div>
                     <div>
-                      <strong style="display: block; font-size: 0.8125rem; font-weight: 700; color: #063124;">GoPro HERO10</strong>
-                      <span style="font-size: 0.6875rem; color: #5a7369;">x1</span>
+                      <strong class="inv-item-name">GoPro HERO10</strong>
+                      <span class="inv-item-qty">x1</span>
                     </div>
                   </div>
-                  <div style="display: flex; gap: 1.25rem; text-align: right;">
+                  <div class="inv-item-prices">
                     <div>
-                      <strong style="display: block; font-size: 0.75rem; font-weight: 700; color: #063124;">€100.00</strong>
-                      <span style="font-size: 0.625rem; color: #5a7369;">/day</span>
+                      <strong class="inv-item-rate">€100.00</strong>
+                      <span class="inv-item-unit">/day</span>
                     </div>
                     <div>
-                      <strong style="display: block; font-size: 0.75rem; font-weight: 700; color: #063124;">€200</strong>
-                      <span style="font-size: 0.625rem; color: #5a7369;">/booking</span>
+                      <strong class="inv-item-rate">€200</strong>
+                      <span class="inv-item-unit">/booking</span>
                     </div>
                   </div>
                 </div>
 
                 <!-- Additional Services (Dynamically toggled) -->
-                <div id="inv-additional-services-row" style="display: none; padding: 0.75rem 0; border-bottom: 1px solid #e5eae6;">
-                  <span style="display: block; font-size: 0.6875rem; font-weight: 700; color: #5a7369; margin-bottom: 0.4rem;">Additional Services</span>
-                  <div style="display: flex; align-items: center; justify-content: space-between;">
-                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                      <div style="width: 18px; height: 18px; border-radius: 50%; background: #4361ee; display: flex; align-items: center; justify-content: center;">
+                <div id="inv-additional-services-row" style="display: none;">
+                  <span class="inv-services-subhead">Additional Services</span>
+                  <div class="inv-service-line">
+                    <div class="inv-service-icon-wrap">
+                      <div class="inv-service-circle">
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
                           <rect x="1" y="3" width="15" height="13"/>
                           <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
@@ -417,41 +389,41 @@
                           <circle cx="18.5" cy="18.5" r="2.5"/>
                         </svg>
                       </div>
-                      <span style="font-size: 0.75rem; font-weight: 600; color: #063124;">Delivery (Pick-up & Return)</span>
+                      <span class="inv-service-title">Delivery (Pick-up & Return)</span>
                     </div>
-                    <strong style="font-size: 0.75rem; font-weight: 700; color: #063124;">€20.00</strong>
+                    <strong class="inv-service-fee">€20.00</strong>
                   </div>
                 </div>
 
                 <!-- Totals -->
-                <div style="padding-top: 0.75rem;">
-                  <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #5a7369; margin-bottom: 0.25rem;">
+                <div class="inv-totals-box">
+                  <div class="inv-total-line">
                     <span>Rental</span>
-                    <span id="inv-rental-subtotal" style="font-family: var(--primitive-font-mono);">€500.00</span>
+                    <span id="inv-rental-subtotal" class="text-mono">€500.00</span>
                   </div>
-                  <div style="display: flex; justify-content: space-between; font-size: 0.9375rem; font-weight: 700; color: #063124; margin-bottom: 1rem;">
+                  <div class="inv-total-line grand-total">
                     <span>Total</span>
-                    <span id="inv-total-amount" style="font-family: var(--primitive-font-mono);">€500.00</span>
+                    <span id="inv-total-amount" class="text-mono">€500.00</span>
                   </div>
 
-                  <button type="button" class="phone-submit-btn" style="width: 100%; background: #063124; color: #ffffff; border: none; border-radius: 100px; padding: 0.85rem; font-size: 0.875rem; font-weight: 700; cursor: pointer; transition: background 0.2s ease;">
-                    Proceed To Pay
+                  <button type="button" class="phone-submit-btn" id="inv-proceed-btn">
+                    Proceed To Face ID &rarr;
                   </button>
                 </div>
               </div>
             </div>
 
             <!-- -------------------------------------------------------------
-                 PHONE SCREEN 2: Biometric & ID Verification
+                 PHONE SCREEN 2: Biometric & Escrow Verification (Step 2)
                  ------------------------------------------------------------- -->
             <div class="phone-state-view" id="phone-state-2" data-state="2">
               <div class="state-subnav">
-                <button type="button" class="phone-back-btn" data-target="1" aria-label="Back to summary">
+                <button type="button" class="phone-back-btn" data-target="1" aria-label="Back to date selection">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="15 18 9 12 15 6"/>
                   </svg>
                 </button>
-                <span class="subnav-title">ID Verification</span>
+                <span class="subnav-title">ID & Escrow Verification</span>
                 <span class="secure-tag">Secure</span>
               </div>
 
@@ -462,7 +434,7 @@
                   <div class="corner-bracket bot-l"></div>
                   <div class="corner-bracket bot-r"></div>
                   <div class="scan-line"></div>
-                  <svg class="face-vector" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="rgba(87, 240, 158, 0.45)" stroke-width="1.5">
+                  <svg class="face-vector" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="rgba(87, 240, 158, 0.5)" stroke-width="1.6">
                     <circle cx="12" cy="8" r="5"/>
                     <path d="M20 21a8 8 0 1 0-16 0"/>
                   </svg>
@@ -473,9 +445,17 @@
                   <p>Quick 3D scan matching John Cooper's driver license.</p>
                 </div>
 
+                <!-- Escrow Guarantee Badge -->
+                <div class="escrow-screen-badge">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#57f09e" stroke-width="2.2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  </svg>
+                  <span>100% Escrow Guarantee Active (€200 hold)</span>
+                </div>
+
                 <button type="button" class="phone-submit-btn" id="confirm-face-scan">
                   <span>Confirm & Continue</span>
-                  <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2">
                     <polyline points="2 7 5.5 10.5 12 3"/>
                   </svg>
                 </button>
@@ -483,7 +463,7 @@
             </div>
 
             <!-- -------------------------------------------------------------
-                 PHONE SCREEN 3: Payment Breakdown & Checkout
+                 PHONE SCREEN 3: Payment Breakdown & Checkout (Step 3)
                  ------------------------------------------------------------- -->
             <div class="phone-state-view" id="phone-state-3" data-state="3">
               <div class="state-subnav">
@@ -492,7 +472,7 @@
                     <polyline points="15 18 9 12 15 6"/>
                   </svg>
                 </button>
-                <span class="subnav-title">Checkout</span>
+                <span class="subnav-title">Checkout Summary</span>
                 <span class="booking-hash text-mono">#FL-88219</span>
               </div>
 
@@ -502,7 +482,7 @@
                     <img src="/assets/synthetic/camera-vector.svg" alt="GoPro HERO10" />
                   </div>
                   <div class="item-info">
-                    <strong>2x GoPro HERO10</strong>
+                    <strong>GoPro HERO10 Black</strong>
                     <span>€100.00 / day × 5 days</span>
                   </div>
                   <span class="item-val">€500.00</span>
@@ -511,25 +491,37 @@
                 <div class="checkout-lines">
                   <div class="c-line">
                     <span>Security Deposit (escrow)</span>
-                    <span>€200.00</span>
+                    <span class="text-mono">€200.00</span>
                   </div>
                   <div class="c-line">
-                    <span>Insurance Coverage</span>
-                    <span>€20.00</span>
+                    <span>All-Risk Insurance</span>
+                    <span class="text-mono">€20.00</span>
                   </div>
                   <div class="c-line discount">
                     <span>Duration Discount</span>
-                    <span>-€30.00</span>
+                    <span class="text-mono">-€30.00</span>
                   </div>
                   <div class="c-line total">
                     <strong>Total Due</strong>
-                    <strong class="total-price">€690.00</strong>
+                    <strong class="total-price text-mono">€690.00</strong>
+                  </div>
+                </div>
+
+                <div class="checkout-pickup-card">
+                  <div class="store-row" style="margin-bottom: 0;">
+                    <div class="store-schematic-thumb" style="width: 28px; height: 28px;" aria-hidden="true">
+                      <img src="/assets/synthetic/store-schematic.svg" alt="Colorfoto Porto" style="width: 20px; height: 20px;" />
+                    </div>
+                    <div class="store-details">
+                      <strong class="store-name" style="font-size: 0.75rem;">Colorfoto Porto</strong>
+                      <p class="store-address" style="font-size: 0.625rem;">R. de Sá da Bandeira 526</p>
+                    </div>
                   </div>
                 </div>
 
                 <button type="button" class="phone-submit-btn primary" id="execute-payment-btn">
-                  <span>Pay €690.00</span>
-                  <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2">
+                  <span>Pay €690.00 & Escrow</span>
+                  <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2">
                     <path d="M2.5 7H11.5M11.5 7L7 2.5M11.5 7L7 11.5"/>
                   </svg>
                 </button>
@@ -537,23 +529,36 @@
             </div>
 
             <!-- -------------------------------------------------------------
-                 PHONE SCREEN 4: Payment Done (webspo-flecto-3.png)
+                 PHONE SCREEN 4: Payment Done with Confetti Celebration (Step 4)
                  ------------------------------------------------------------- -->
             <div class="phone-state-view" id="phone-state-4" data-state="4">
+              <div class="phone-confetti-container" aria-hidden="true"></div>
               <div class="done-content-wrap">
                 <!-- Crisp Mint Checkmark Badge -->
                 <div class="done-badge-box" aria-hidden="true">
-                  <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-                    <rect width="44" height="44" rx="12" fill="#57f09e"/>
-                    <polyline points="13 22 20 29 31 16" stroke="#004737" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <svg width="48" height="48" viewBox="0 0 44 44" fill="none">
+                    <rect width="44" height="44" rx="14" fill="#57f09e"/>
+                    <polyline points="13 22 20 29 31 16" stroke="#004737" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
 
-                <h3 class="done-screen-title">Payment <br />Done<span class="sr-only">! 🍾</span></h3>
+                <h3 class="done-screen-title">Payment <br />Done! 🍾</h3>
+
+                <div class="done-escrow-pill">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                  <span>100% Escrow Active · #FL-88219</span>
+                </div>
+
+                <p class="done-screen-subtext">
+                  Receipt sent to john.cooper@photography.com.<br/>
+                  Pick up ready at Colorfoto Porto.
+                </p>
 
                 <div class="done-bottom-action">
                   <button type="button" class="btn-done-pill" id="phone-restart-btn">
-                    <span>Done</span>
+                    <span>Done / Restart Flow ⟳</span>
                   </button>
                 </div>
               </div>
@@ -565,13 +570,13 @@
         <!-- Accessible Stepper Tabs (A11y & Playwright Test Controller) -->
         <div class="timeline-stepper" role="tablist" aria-label="Workflow Stages">
           <button type="button" role="tab" class="step-pill active" data-step="1" id="tab-step-1" aria-selected="true" aria-controls="phone-state-1">
-            <span class="step-num text-mono">01</span><span class="step-text">Config</span>
+            <span class="step-num text-mono">01</span><span class="step-text">Dates</span>
           </button>
           <button type="button" role="tab" class="step-pill" data-step="2" id="tab-step-2" aria-selected="false" aria-controls="phone-state-2">
             <span class="step-num text-mono">02</span><span class="step-text">Face ID</span>
           </button>
           <button type="button" role="tab" class="step-pill" data-step="3" id="tab-step-3" aria-selected="false" aria-controls="phone-state-3">
-            <span class="step-num text-mono">03</span><span class="step-text">Checkout</span>
+            <span class="step-num text-mono">03</span><span class="step-text">Summary</span>
           </button>
           <button type="button" role="tab" class="step-pill" data-step="4" id="tab-step-4" aria-selected="false" aria-controls="phone-state-4">
             <span class="step-num text-mono">04</span><span class="step-text">Done</span>
@@ -607,7 +612,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 4.75rem;
+    padding-top: 4.5rem;
     overflow: hidden;
     box-sizing: border-box;
     background-color: #ffffff;
@@ -623,7 +628,7 @@
     gap: 0.4rem;
     margin-bottom: 0.75rem;
     z-index: 30;
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    will-change: opacity, transform;
   }
 
   .tabs-buttons-row {
@@ -682,48 +687,37 @@
   }
 
   /* ==========================================================================
-     BACKDROP PLATES
+     BACKDROP PLATE (Pastel Mint Container matching Image 3)
      ========================================================================== */
-  /* State 1 Backdrop: Rounded vertical card (webspo-flecto-2.png) */
   .stage-backdrop-state1 {
     position: absolute;
     width: 440px;
-    height: 720px;
-    background-color: #d4ffe9;
+    height: 710px;
+    background-color: #bbf7d0;
     border-radius: 36px;
     z-index: 2;
-    transition: opacity 0.4s ease;
-  }
-
-  /* State 2 Backdrop: Monumental Sculpted Cross (webspo-flecto-3.png) */
-  .stage-backdrop-state2 {
-    position: absolute;
-    width: 1480px;
-    height: 760px;
-    z-index: 1;
-    opacity: 0;
-    pointer-events: none;
-    transform: scale(0.96);
-    transform-origin: center center;
-    transition: opacity 0.45s ease, transform 0.45s ease;
+    box-shadow: 0 16px 40px rgba(0, 71, 55, 0.07);
+    will-change: opacity, transform;
   }
 
   /* ==========================================================================
      SATELLITE CARDS (State 1: Merchant View)
+     Connected via THICK 26px PASTEL CONDUITS matching Image 3
      ========================================================================== */
   .satellite-card {
     position: absolute;
     width: 220px;
-    height: 195px;
-    background-color: #d4ffe9;
+    height: 185px;
+    background-color: #bbf7d0;
     border-radius: 24px;
-    padding: 1.5rem;
+    padding: 1.35rem;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     z-index: 15;
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    box-shadow: 0 8px 24px rgba(0, 71, 55, 0.05);
+    will-change: opacity, transform;
   }
 
   .satellite-inner {
@@ -747,7 +741,7 @@
 
   .satellite-desc {
     font-size: 0.8125rem;
-    color: #4a5c53;
+    color: #356553;
     margin: 0;
     line-height: 1.35;
   }
@@ -757,7 +751,7 @@
     position: relative;
     width: 44px;
     height: 24px;
-    background-color: #b5e4c8;
+    background-color: #e2ece6;
     border-radius: 9999px;
     cursor: pointer;
     transition: background-color 0.2s ease;
@@ -775,21 +769,22 @@
     height: 18px;
     border-radius: 50%;
     background-color: #ffffff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-    transition: transform 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .satellite-switch-pill.active .switch-ball {
     transform: translateX(18px);
   }
 
-  /* Organic Connector Stems */
+  /* Organic 26px Thick Vascular Conduits (Matching Image 3) */
   .satellite-stem {
     position: absolute;
-    height: 36px;
-    background-color: #d4ffe9;
+    height: 26px;
+    background-color: #bbf7d0;
     pointer-events: none;
     z-index: 1;
+    border-radius: 4px;
   }
 
   .card-top-left {
@@ -798,10 +793,12 @@
   }
 
   .card-top-left .stem-left {
-    right: -60px;
+    right: -62px;
     top: 50%;
     transform: translateY(-50%);
-    width: 60px;
+    width: 64px;
+    height: 26px;
+    background-color: #bbf7d0;
   }
 
   .card-bottom-left {
@@ -810,10 +807,12 @@
   }
 
   .card-bottom-left .stem-left {
-    right: -60px;
+    right: -62px;
     top: 50%;
     transform: translateY(-50%);
-    width: 60px;
+    width: 64px;
+    height: 26px;
+    background-color: #bbf7d0;
   }
 
   .card-right {
@@ -826,10 +825,12 @@
   }
 
   .card-right .stem-right {
-    left: -60px;
+    left: -62px;
     top: 50%;
     transform: translateY(-50%);
-    width: 60px;
+    width: 64px;
+    height: 26px;
+    background-color: #bbf7d0;
   }
 
   .card-bottom-right {
@@ -840,19 +841,21 @@
   }
 
   .card-bottom-right .stem-right {
-    left: -60px;
+    left: -62px;
     top: 50%;
     transform: translateY(-50%);
-    width: 60px;
+    width: 64px;
+    height: 26px;
+    background-color: #bbf7d0;
   }
 
   /* ==========================================================================
-     CUSTOMER JOURNEY ELEMENTS (State 2: webspo-flecto-3.png)
+     CUSTOMER JOURNEY ELEMENTS (State 2: Customer Flow)
      ========================================================================== */
   /* Top Avatar & Vertical Stem */
   .customer-avatar-stem-block {
     position: absolute;
-    bottom: -60px;
+    top: 15px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -861,18 +864,18 @@
     z-index: 25;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    will-change: opacity, transform;
   }
 
   .top-vertical-stem {
     width: 3px;
-    height: 36px;
+    height: 22px;
     background-color: #57f09e;
   }
 
   .customer-avatar-circle {
-    width: 76px;
-    height: 76px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
     overflow: hidden;
     background: #004737;
@@ -894,14 +897,14 @@
     padding: 0.25rem 0.875rem;
     border-radius: 9999px;
     margin-top: -10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   }
 
   /* Left Wing: Monumental Headline */
   .customer-left-wing {
     position: absolute;
     left: calc(50% - 220px - 340px);
-    top: 290px;
+    top: 260px;
     width: 320px;
     display: flex;
     flex-direction: column;
@@ -909,7 +912,7 @@
     z-index: 25;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    will-change: opacity, transform;
   }
 
   .customer-eyebrow-pill {
@@ -937,12 +940,16 @@
   .customer-right-wing {
     position: absolute;
     right: calc(50% - 220px - 320px);
-    top: 310px;
-    width: 280px;
+    top: 270px;
+    width: 290px;
     z-index: 25;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    will-change: opacity, transform;
+  }
+
+  .customer-right-wing.is-interactive {
+    pointer-events: auto;
   }
 
   .timeline-steps-list {
@@ -977,13 +984,21 @@
     font-size: 0.95rem;
     font-weight: 500;
     color: #004737;
-    opacity: 0.6;
-    transition: opacity 0.25s ease;
+    opacity: 0.55;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    user-select: none;
+    pointer-events: auto;
+  }
+
+  .timeline-item:hover {
+    opacity: 0.85;
   }
 
   .timeline-item.active {
     opacity: 1;
     font-weight: 700;
+    transform: translateX(4px);
   }
 
   .item-dot {
@@ -993,6 +1008,13 @@
     background-color: #004737;
     position: relative;
     z-index: 2;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .timeline-item.active .item-dot {
+    transform: scale(1.3);
+    background-color: #004737;
+    box-shadow: 0 0 0 3px rgba(0, 71, 55, 0.2);
   }
 
   /* ==========================================================================
@@ -1009,8 +1031,8 @@
 
   .phone-chassis {
     position: relative;
-    width: 264px;
-    height: 560px;
+    width: 268px;
+    height: 565px;
     background-color: #002e23;
     border-radius: 38px;
     padding: 10px;
@@ -1032,7 +1054,7 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    z-index: 10;
+    z-index: 35;
   }
 
   .chassis-camera {
@@ -1053,24 +1075,26 @@
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: #004737;
+    background-color: #002e23;
     border-radius: 30px;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
     box-sizing: border-box;
-    padding: 0.75rem 0.85rem;
   }
 
-  /* Status Bar */
+  /* Global Status Bar */
   .screen-status-bar {
+    position: absolute;
+    top: 8px;
+    left: 14px;
+    right: 14px;
+    z-index: 30;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 0.6875rem;
     font-weight: 600;
     color: #ffffff;
-    padding: 0.15rem 0.5rem 0.5rem 0.5rem;
+    pointer-events: none;
   }
 
   .status-indicators {
@@ -1095,38 +1119,52 @@
     border-radius: 1px;
   }
 
-  /* Views inside Phone Screen */
+  /* ==========================================================================
+     VIEWS INSIDE PHONE SCREEN (Absolute Stacking Context & GPU Transitions)
+     ========================================================================== */
   .phone-state-view {
-    display: none;
+    position: absolute;
+    inset: 0;
+    padding: 36px 12px 14px 12px;
+    display: flex;
     flex-direction: column;
-    flex: 1;
+    justify-content: space-between;
     width: 100%;
     height: 100%;
-    animation: fadeInView 0.25s ease forwards;
+    box-sizing: border-box;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    background-color: #002e23;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .phone-state-view::-webkit-scrollbar {
+    display: none;
   }
 
   .phone-state-view.active {
-    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    z-index: 10;
   }
 
-  @keyframes fadeInView {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ---------------- SCREEN 1: SUMMARY TRANSACTION ---------------- */
+  /* ---------------- PHONE COMMON CONTROLS ---------------- */
   .summary-top-nav {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.85rem;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
   }
 
   .phone-circle-btn {
-    width: 22px;
-    height: 22px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.1);
     border: none;
     color: #ffffff;
     display: flex;
@@ -1138,59 +1176,132 @@
   }
 
   .summary-top-title {
-    font-size: 0.78125rem;
-    font-weight: 500;
-    color: #d1fae5;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #ffffff;
   }
 
   .flecto-emblem-badge {
+    margin: 0.25rem auto;
     display: flex;
+    align-items: center;
     justify-content: center;
-    margin: 0.5rem 0 0.4rem 0;
   }
 
   .summary-meta-block {
     text-align: center;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.35rem;
   }
 
   .summary-booking-name {
-    font-size: 0.95rem;
+    font-size: 0.9375rem;
     font-weight: 700;
     color: #ffffff;
     margin: 0;
   }
 
   .summary-booking-date {
-    font-size: 0.71875rem;
+    font-size: 0.6875rem;
     color: #f7b928;
     font-weight: 600;
   }
 
   .summary-amount-display {
-    font-size: 2.15rem;
+    font-family: var(--primitive-font-mono, monospace);
+    font-size: 1.85rem;
     font-weight: 800;
     color: #ffffff;
     text-align: center;
-    letter-spacing: -0.03em;
-    margin-bottom: 1.25rem;
+    margin: 0.2rem 0;
+    letter-spacing: -0.02em;
   }
 
-  /* Bottom Card inside Screen 1 */
+  /* Step 1 Date Selector Simulator */
+  .step1-date-selector {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(87, 240, 158, 0.25);
+    border-radius: 12px;
+    padding: 0.5rem 0.65rem;
+    margin: 0.4rem 0;
+    text-align: center;
+  }
+
+  .date-chips-label {
+    font-size: 0.5625rem;
+    font-weight: 700;
+    color: #57f09e;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+
+  .date-chips-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.35rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .duration-chip {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    padding: 2px 8px;
+    font-size: 0.625rem;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .duration-chip.active {
+    background: #57f09e;
+    color: #004737;
+    border-color: #57f09e;
+    font-weight: 700;
+  }
+
+  .dates-range-text {
+    font-family: var(--primitive-font-mono, monospace);
+    font-size: 0.6875rem;
+    color: #cbd5e1;
+    font-weight: 600;
+  }
+
+  /* Step 1 Bottom Card */
   .summary-bottom-card {
-    background-color: #faf7ed;
+    background: #ffffff;
     border-radius: 20px;
     padding: 0.85rem;
+    color: #004737;
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
     cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    margin-top: auto;
+  }
+
+  .bottom-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .bottom-card-title {
-    font-size: 0.78125rem;
+    font-size: 0.75rem;
     font-weight: 700;
     color: #004737;
+  }
+
+  .bottom-card-tag {
+    font-size: 0.5625rem;
+    font-weight: 700;
+    background: #dcfce7;
+    color: #047857;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
   }
 
   .store-row {
@@ -1200,81 +1311,266 @@
   }
 
   .store-schematic-thumb {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 8px;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
-    background: #00362a;
-    flex-shrink: 0;
   }
 
   .store-schematic-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
   }
 
   .store-details {
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
   }
 
   .store-name {
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
     color: #004737;
   }
 
   .store-address {
-    font-size: 0.59375rem;
-    color: #5d6e64;
-    font-style: normal;
-    line-height: 1.2;
+    font-size: 0.625rem;
+    color: #64748b;
+    margin: 0;
   }
 
   .bottom-card-button {
     background-color: #57f09e;
     color: #004737;
+    border-radius: 10px;
+    padding: 0.55rem;
     font-size: 0.75rem;
     font-weight: 700;
-    padding: 0.55rem;
-    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.4rem;
+    cursor: pointer;
   }
 
-  /* ---------------- SCREEN 2: BIOMETRIC SCAN ---------------- */
-  .state-subnav {
+  /* ---------------- INVENTORY SCREEN ---------------- */
+  .inv-date-range-wrap {
+    text-align: center;
+    margin: 0.8rem 0;
+  }
+
+  .inv-date-chips {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--primitive-font-mono, monospace);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #57f09e;
+  }
+
+  .inv-arrow-circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #57f09e;
+    color: #002e23;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .inv-rental-sub {
+    font-size: 0.6875rem;
+    color: rgba(255, 255, 255, 0.65);
+    margin-top: 0.2rem;
+  }
+
+  .inv-cream-bottom-sheet {
+    background: #fcf9f2;
+    color: #063124;
+    border-radius: 24px 24px 0 0;
+    padding: 1rem 1rem 1.25rem;
+    margin-top: auto;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+  }
+
+  .inv-table-header {
     display: flex;
     justify-content: space-between;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: #5a7369;
+    margin-bottom: 0.6rem;
+  }
+
+  .inv-th-items {
+    font-weight: 700;
+    color: #063124;
+    font-size: 0.75rem;
+  }
+
+  .inv-th-right {
+    display: flex;
+    gap: 1.25rem;
+  }
+
+  .inv-table-row {
+    display: flex;
     align-items: center;
-    margin-bottom: 1rem;
+    justify-content: space-between;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid #e5eae6;
+  }
+
+  .inv-item-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .inv-item-thumb {
+    width: 28px;
+    height: 28px;
+    background: #000000;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .inv-item-name {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #063124;
+  }
+
+  .inv-item-qty {
+    font-size: 0.625rem;
+    color: #5a7369;
+  }
+
+  .inv-item-prices {
+    display: flex;
+    gap: 1rem;
+    text-align: right;
+  }
+
+  .inv-item-rate {
+    display: block;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: #063124;
+  }
+
+  .inv-item-unit {
+    font-size: 0.5625rem;
+    color: #5a7369;
+  }
+
+  .inv-services-subhead {
+    display: block;
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: #5a7369;
+    margin: 0.4rem 0 0.2rem;
+  }
+
+  .inv-service-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid #e5eae6;
+  }
+
+  .inv-service-icon-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .inv-service-circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #4361ee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .inv-service-title {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: #063124;
+  }
+
+  .inv-service-fee {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: #063124;
+  }
+
+  .inv-totals-box {
+    padding-top: 0.6rem;
+  }
+
+  .inv-total-line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.6875rem;
+    color: #5a7369;
+    margin-bottom: 0.2rem;
+  }
+
+  .inv-total-line.grand-total {
+    font-size: 0.875rem;
+    font-weight: 800;
+    color: #063124;
+    margin-bottom: 0.75rem;
+  }
+
+  /* ---------------- SCREEN 2: FACE ID & ESCROW ---------------- */
+  .state-subnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
   }
 
   .phone-back-btn {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.1);
     border: none;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #ffffff;
     cursor: pointer;
-    padding: 0.25rem;
-    display: flex;
   }
 
   .subnav-title {
-    font-size: 0.8125rem;
-    font-weight: 600;
+    font-size: 0.75rem;
+    font-weight: 700;
     color: #ffffff;
   }
 
   .secure-tag {
-    font-size: 0.625rem;
-    background: rgba(87, 240, 158, 0.2);
-    color: #57f09e;
-    padding: 0.15rem 0.45rem;
-    border-radius: 4px;
-    font-weight: 600;
+    font-size: 0.5625rem;
+    font-weight: 700;
+    background: #57f09e;
+    color: #004737;
+    padding: 2px 6px;
+    border-radius: 9999px;
   }
 
   .face-scan-wrapper {
@@ -1283,70 +1579,87 @@
     align-items: center;
     flex: 1;
     justify-content: space-between;
-    padding-bottom: 0.5rem;
   }
 
   .scan-laser-box {
     position: relative;
     width: 140px;
     height: 150px;
-    margin: 1.5rem auto 1rem auto;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0.5rem 0;
   }
 
   .corner-bracket {
     position: absolute;
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     border-color: #57f09e;
     border-style: solid;
+    border-width: 0;
   }
 
-  .corner-bracket.top-l { top: 0; left: 0; border-width: 2.5px 0 0 2.5px; border-radius: 4px 0 0 0; }
-  .corner-bracket.top-r { top: 0; right: 0; border-width: 2.5px 2.5px 0 0; border-radius: 0 4px 0 0; }
-  .corner-bracket.bot-l { bottom: 0; left: 0; border-width: 0 0 2.5px 2.5px; border-radius: 0 0 0 4px; }
-  .corner-bracket.bot-r { bottom: 0; right: 0; border-width: 0 2.5px 2.5px 0; border-radius: 0 0 4px 0; }
+  .corner-bracket.top-l { top: 0; left: 0; border-top-width: 2.5px; border-left-width: 2.5px; }
+  .corner-bracket.top-r { top: 0; right: 0; border-top-width: 2.5px; border-right-width: 2.5px; }
+  .corner-bracket.bot-l { bottom: 0; left: 0; border-bottom-width: 2.5px; border-left-width: 2.5px; }
+  .corner-bracket.bot-r { bottom: 0; right: 0; border-bottom-width: 2.5px; border-right-width: 2.5px; }
 
   .scan-line {
     position: absolute;
-    left: 6px;
-    right: 6px;
+    left: 4px;
+    right: 4px;
     height: 2px;
     background: #57f09e;
     box-shadow: 0 0 8px #57f09e;
-    animation: scanSweep 2s ease-in-out infinite;
+    animation: laserScan 2s infinite ease-in-out;
   }
 
-  @keyframes scanSweep {
-    0%, 100% { top: 10px; opacity: 0.8; }
-    50% { top: 135px; opacity: 1; }
+  @keyframes laserScan {
+    0%, 100% { top: 8px; }
+    50% { top: 138px; }
   }
 
   .scan-copy {
     text-align: center;
+    margin: 0.25rem 0;
   }
 
   .scan-copy h4 {
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
     color: #ffffff;
-    margin: 0 0 0.25rem 0;
+    margin: 0 0 0.2rem 0;
   }
 
   .scan-copy p {
-    font-size: 0.6875rem;
+    font-size: 0.625rem;
     color: #9ab4aa;
     margin: 0;
+  }
+
+  .escrow-screen-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(87, 240, 158, 0.12);
+    border: 1px solid rgba(87, 240, 158, 0.3);
+    border-radius: 8px;
+    padding: 0.45rem 0.65rem;
+    font-size: 0.625rem;
+    color: #57f09e;
+    font-weight: 600;
+    margin: 0.5rem 0;
+    text-align: left;
   }
 
   .phone-submit-btn {
     width: 100%;
     background-color: #57f09e;
     color: #004737;
-    font-size: 0.78125rem;
+    font-size: 0.8125rem;
     font-weight: 700;
-    padding: 0.65rem;
+    padding: 0.75rem;
     border: none;
     border-radius: 12px;
     display: flex;
@@ -1354,6 +1667,12 @@
     justify-content: center;
     gap: 0.4rem;
     cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .phone-submit-btn:hover {
+    background-color: #6effb0;
+    transform: translateY(-1px);
   }
 
   /* ---------------- SCREEN 3: CHECKOUT ---------------- */
@@ -1365,7 +1684,7 @@
   .checkout-scroll-body {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.6rem;
     flex: 1;
     justify-content: space-between;
   }
@@ -1390,8 +1709,8 @@
   }
 
   .item-schematic-icon img {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
   }
 
   .item-info {
@@ -1416,7 +1735,7 @@
   .checkout-lines {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.35rem;
     font-size: 0.6875rem;
     color: #d1fae5;
   }
@@ -1437,7 +1756,14 @@
     color: #ffffff;
   }
 
-  /* ---------------- SCREEN 4: PAYMENT DONE (webspo-flecto-3.png) ---------------- */
+  .checkout-pickup-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 0.5rem;
+    color: #004737;
+  }
+
+  /* ---------------- SCREEN 4: PAYMENT DONE ---------------- */
   .done-content-wrap {
     display: flex;
     flex-direction: column;
@@ -1445,23 +1771,61 @@
     justify-content: center;
     flex: 1;
     text-align: center;
-    padding: 1.5rem 0.5rem;
+    padding: 1rem 0.5rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .phone-confetti-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 40;
   }
 
   .done-badge-box {
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: badgePop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes badgePop {
+    0% { transform: scale(0.6); opacity: 0; }
+    70% { transform: scale(1.15); }
+    100% { transform: scale(1); opacity: 1; }
   }
 
   .done-screen-title {
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 800;
     line-height: 1.1;
     color: #ffffff;
     letter-spacing: -0.03em;
-    margin: 0 0 2rem 0;
+    margin: 0 0 1rem 0;
+  }
+
+  .done-escrow-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(87, 240, 158, 0.15);
+    border: 1px solid #57f09e;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: #57f09e;
+    margin-bottom: 0.75rem;
+  }
+
+  .done-screen-subtext {
+    font-size: 0.6875rem;
+    color: #cbd5e1;
+    line-height: 1.35;
+    margin: 0 0 1.5rem 0;
   }
 
   .done-bottom-action {
@@ -1479,9 +1843,15 @@
     border: none;
     border-radius: 12px;
     cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
   }
 
-  /* Accessible Stepper Tabs (A11y & Playwright Test Controller) */
+  .btn-done-pill:hover {
+    background-color: #6effb0;
+    transform: translateY(-1px);
+  }
+
+  /* Accessible Stepper Tabs */
   .timeline-stepper {
     position: absolute;
     bottom: -32px;
@@ -1522,10 +1892,6 @@
      RESPONSIVE BREAKPOINTS (0px horizontal overflow guaranteed)
      ========================================================================== */
   @media (max-width: 1200px) {
-    .stage-backdrop-state2 {
-      width: 960px;
-      max-width: calc(100vw - 40px);
-    }
     .card-top-left, .card-bottom-left {
       left: calc(50% - 220px - 200px);
     }
@@ -1560,7 +1926,7 @@
       flex-direction: column;
       gap: 2rem;
     }
-    .stage-backdrop-state1, .stage-backdrop-state2 {
+    .stage-backdrop-state1 {
       display: none;
     }
     .satellite-card {

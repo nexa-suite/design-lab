@@ -1,146 +1,300 @@
 ---
 /**
  * Cuadricula8dpSection.astro
- * Canonical 8dp Spatial Grid System for Android Jetpack Compose
+ * Canonical 8dp Spatial Grid System & Responsive Breakpoints for Android Jetpack Compose
+ * Covers Margins, Gutters, Columns (4, 8, 12), WindowSizeClass & Production Kotlin Contracts
  */
----
-
-<div class="cuadricula-8dp-container" data-platform-target="universal">
-  <section class="spec-card">
-    <div class="card-header-row">
-      <div class="card-badge-icon"><i class="pi pi-th-large"></i></div>
-      <div>
-        <span class="card-eyebrow">FUNDAMENTOS M3 · ESPACIADO ESPACIAL</span>
-        <h3 class="card-title">Cuadrícula Espacial de 8dp (con medios pasos de 4dp)</h3>
-      </div>
-    </div>
-    <p class="card-text">
-      Todo el espaciado vertical y horizontal en Nexa Mobile sigue múltiplos estrictos de <strong>8dp (8, 16, 24, 32, 40, 48, 56, 64dp)</strong>. Los medios pasos de <strong>4dp</strong> se permiten exclusivamente para alineación óptica de micro-iconos o relleno interior de badges.
-    </p>
-
-    <!-- Spacing Metrics Table -->
-    <div class="table-responsive-wrapper">
-      <table class="metrics-table">
-        <thead>
-          <tr>
-            <th>Token de Espaciado</th>
-            <th>Valor (dp)</th>
-            <th>Equivalente Compose</th>
-            <th>Uso Canónico en Pantallas Móviles</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>margin.screen</code></td>
-            <td><span class="code-pill">16dp</span></td>
-            <td><code>Modifier.padding(horizontal = 16.dp)</code></td>
-            <td>Márgenes laterales del Scaffold móvil</td>
-          </tr>
-          <tr>
-            <td><code>gutter.cards</code></td>
-            <td><span class="code-pill">12dp</span></td>
-            <td><code>Arrangement.spacedBy(12.dp)</code></td>
-            <td>Separación vertical en LazyColumn entre tarjetas</td>
-          </tr>
-          <tr>
-            <td><code>padding.card-inner</code></td>
-            <td><span class="code-pill">16dp</span></td>
-            <td><code>Modifier.padding(16.dp)</code></td>
-            <td>Relleno interior de tarjetas de despacho</td>
-          </tr>
-          <tr>
-            <td><code>spacing.touch-gap</code></td>
-            <td><span class="code-pill">8dp</span></td>
-            <td><code>Spacer(modifier = Modifier.width(8.dp))</code></td>
-            <td>Separación mínima entre botones adyacentes</td>
-          </tr>
-          <tr>
-            <td><code>padding.micro-badge</code></td>
-            <td><span class="code-pill">4dp</span></td>
-            <td><code>Modifier.padding(4.dp)</code></td>
-            <td>Excepción permitida para chips compactos y badges</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- Section 2: Visual Spacing Rhythm Board -->
-  <section class="spec-card">
-    <div class="card-header-row">
-      <div class="card-badge-icon rhythm-badge"><i class="pi pi-sliders-h"></i></div>
-      <div>
-        <span class="card-eyebrow">RITMO VISUAL EN VIVO</span>
-        <h3 class="card-title">Muestrario de Barras de Intervalo Espacial</h3>
-      </div>
-    </div>
-
-    <div class="spacing-rhythm-list">
-      <div class="rhythm-row">
-        <code>space-4dp</code>
-        <div class="rhythm-bar" style="width: 32px;">4dp</div>
-        <small>Micro-espaciado: separación entre icono y texto en chip</small>
-      </div>
-      <div class="rhythm-row">
-        <code>space-8dp</code>
-        <div class="rhythm-bar" style="width: 64px;">8dp</div>
-        <small>Espaciado base: separación entre elementos contiguos</small>
-      </div>
-      <div class="rhythm-row">
-        <code>space-12dp</code>
-        <div class="rhythm-bar" style="width: 96px;">12dp</div>
-        <small>Gutter: separación entre tarjetas en listas verticales</small>
-      </div>
-      <div class="rhythm-row">
-        <code>space-16dp</code>
-        <div class="rhythm-bar" style="width: 128px;">16dp</div>
-        <small>Margen de pantalla: padding estándar lateral del Scaffold</small>
-      </div>
-      <div class="rhythm-row">
-        <code>space-24dp</code>
-        <div class="rhythm-bar" style="width: 192px;">24dp</div>
-        <small>Separador de sección: distancia entre bloques temáticos</small>
-      </div>
-      <div class="rhythm-row">
-        <code>space-32dp</code>
-        <div class="rhythm-bar" style="width: 256px;">32dp</div>
-        <small>Espaciado mayor: distancia entre contenido y barra fija de acción</small>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 3: Kotlin Spacing Contract -->
-  <section class="spec-card">
-    <div class="card-header-row">
-      <div class="card-badge-icon code-badge"><i class="pi pi-code"></i></div>
-      <div>
-        <span class="card-eyebrow">IMPLEMENTACIÓN NATIVA · JETPACK COMPOSE</span>
-        <h3 class="card-title">Contrato de Espaciado Kotlin (:core:designsystem)</h3>
-      </div>
-    </div>
-
-    <div class="code-preview-block">
-      <pre is:raw><code>// core/designsystem/src/main/kotlin/com/nexa/core/designsystem/theme/Spacing.kt
+const spacingCode = `// Canonical 8dp Spatial System & Adaptive Window Size Helper
 package com.nexa.core.designsystem.theme
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 
 @Immutable
 data class NexaSpacing(
-    val extraSmall: Dp = 4.dp,
+    val micro: Dp = 4.dp,
     val small: Dp = 8.dp,
     val medium: Dp = 12.dp,
     val normal: Dp = 16.dp,
     val large: Dp = 24.dp,
     val extraLarge: Dp = 32.dp,
-    val touchMin: Dp = 48.dp,
+    val touchStandard: Dp = 48.dp,
     val touchIndustrial: Dp = 56.dp
 )
 
-val LocalNexaSpacing = staticCompositionLocalOf { NexaSpacing() }</code></pre>
+val LocalNexaSpacing = staticCompositionLocalOf { NexaSpacing() }
+
+@Immutable
+data class NexaAdaptiveLayoutConfig(
+    val columns: Int,
+    val horizontalMargin: Dp,
+    val cardGutter: Dp
+)
+
+fun resolveAdaptiveConfig(widthClass: WindowWidthSizeClass): NexaAdaptiveLayoutConfig =
+    when (widthClass) {
+        WindowWidthSizeClass.Compact -> NexaAdaptiveLayoutConfig(
+            columns = 4,
+            horizontalMargin = 16.dp,
+            cardGutter = 12.dp
+        )
+        WindowWidthSizeClass.Medium -> NexaAdaptiveLayoutConfig(
+            columns = 8,
+            horizontalMargin = 24.dp,
+            cardGutter = 16.dp
+        )
+        WindowWidthSizeClass.Expanded -> NexaAdaptiveLayoutConfig(
+            columns = 12,
+            horizontalMargin = 32.dp,
+            cardGutter = 24.dp
+        )
+        else -> NexaAdaptiveLayoutConfig(columns = 4, horizontalMargin = 16.dp, cardGutter = 12.dp)
+    }`;
+---
+
+<div class="cuadricula-8dp-container" data-platform-target="universal">
+  <!-- Section 1: Cuadrícula Espacial y Múltiplos de 8dp -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">01</span>
+        <div>
+          <p class="cuadro-kicker">FUNDAMENTOS M3 · RITMO ESPACIAL 8DP</p>
+          <h3 class="cuadro-title">Cuadrícula Espacial de 8dp con Subpasos Ópticos de 4dp</h3>
+          <p class="cuadro-subtitle">
+            Todo componente, padding, margen y gutter en <strong>Nexa Mobile</strong> se construye en múltiplos matemáticos de <strong>8dp (8, 16, 24, 32, 40, 48, 56, 64dp)</strong>. Los subpasos de <strong>4dp</strong> se reservan exclusivamente para micro-alineación de iconos dentro de chips o padding interior de badges compactos.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-th-large"></i> 8dp Base Unit</span>
+        <span class="cuadro-tag kotlin"><i class="pi pi-android"></i> Modifier.padding()</span>
+        <span class="cuadro-tag success"><i class="pi pi-check"></i> Pixel-Perfect Alignment</span>
+      </div>
+    </div>
+
+    <!-- CUADRO ARQUITECTÓNICO: Tokens de Espaciado Canónico -->
+    <div class="contract-table-wrapper">
+      <table class="contract-table">
+        <thead>
+          <tr>
+            <th>Token Nexa</th>
+            <th>Valor (dp)</th>
+            <th>Equivalente Compose</th>
+            <th>Caso de Uso Canónico en Nexa Mobile</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="mono-chip">space.micro</code></td>
+            <td>4dp</td>
+            <td><code>4.dp</code></td>
+            <td>Separación entre icono y texto en chips; padding interno de badges de estado</td>
+          </tr>
+          <tr>
+            <td><code class="mono-chip">space.small</code></td>
+            <td>8dp</td>
+            <td><code>8.dp</code></td>
+            <td>Separación mínima entre botones adyacentes; gap vertical en subgrupos</td>
+          </tr>
+          <tr>
+            <td><code class="mono-chip">space.medium</code></td>
+            <td>12dp</td>
+            <td><code>12.dp</code></td>
+            <td>Gutter vertical estándar entre tarjetas en <code>LazyColumn</code></td>
+          </tr>
+          <tr>
+            <td><code class="mono-chip">space.normal</code></td>
+            <td>16dp</td>
+            <td><code>16.dp</code></td>
+            <td>Márgenes laterales del <code>Scaffold</code>; padding interior de tarjetas de despacho</td>
+          </tr>
+          <tr>
+            <td><code class="mono-chip">space.large</code></td>
+            <td>24dp</td>
+            <td><code>24.dp</code></td>
+            <td>Separación entre bloques temáticos de pantalla (ej. entre cliente y lista de items)</td>
+          </tr>
+          <tr>
+            <td><code class="mono-chip">space.xlarge</code></td>
+            <td>32dp</td>
+            <td><code>32.dp</code></td>
+            <td>Espaciado previo a la barra fija inferior (BottomBar sticky)</td>
+          </tr>
+          <tr>
+            <td><code class="mono-chip">space.touch-std</code></td>
+            <td>48dp</td>
+            <td><code>48.dp</code></td>
+            <td>Altura mínima táctil accesible para botones estándar e iconos</td>
+          </tr>
+          <tr>
+            <td><code class="mono-chip">space.touch-ind</code></td>
+            <td>56dp</td>
+            <td><code>56.dp</code></td>
+            <td>Altura de botones industriales para choferes con guantes de seguridad</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Live Spacing Rhythm Spectrum -->
+    <div class="spacing-rhythm-list">
+      <div class="rhythm-row">
+        <code>4dp (micro)</code>
+        <div class="rhythm-bar" style="width: 32px;">4dp</div>
+        <small>Micro-espaciado: icono a texto en chip de telemetría</small>
+      </div>
+      <div class="rhythm-row">
+        <code>8dp (small)</code>
+        <div class="rhythm-bar" style="width: 64px;">8dp</div>
+        <small>Espaciado base: separación entre elementos contiguos</small>
+      </div>
+      <div class="rhythm-row">
+        <code>12dp (medium)</code>
+        <div class="rhythm-bar" style="width: 96px;">12dp</div>
+        <small>Gutter: separación entre tarjetas en LazyColumn</small>
+      </div>
+      <div class="rhythm-row">
+        <code>16dp (normal)</code>
+        <div class="rhythm-bar" style="width: 128px;">16dp</div>
+        <small>Margen de pantalla: padding estándar lateral del Scaffold</small>
+      </div>
+      <div class="rhythm-row">
+        <code>24dp (large)</code>
+        <div class="rhythm-bar" style="width: 192px;">24dp</div>
+        <small>Separador de sección: distancia entre bloques temáticos</small>
+      </div>
+      <div class="rhythm-row">
+        <code>32dp (xlarge)</code>
+        <div class="rhythm-bar" style="width: 256px;">32dp</div>
+        <small>Espaciado mayor: distancia entre contenido y barra fija de acción</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Adaptabilidad Responsiva (Compact, Medium, Expanded) -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">02</span>
+        <div>
+          <p class="cuadro-kicker">RESPONSIVE ADAPTABILITY · WINDOW SIZE CLASSES</p>
+          <h3 class="cuadro-title">Matriz de Columnas, Márgenes y Gutters Adaptativos</h3>
+          <p class="cuadro-subtitle">
+            La flota móvil opera en una amplia gama de factores de forma: smartphones compactos (Zebra TC26, Google Pixel), terminales plegables y tablets rugerizadas en montacargas de almacén (Zebra ET51). El sistema adopta las tres clases estándar de <code>WindowWidthSizeClass</code> de Jetpack Compose.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary">4 / 8 / 12 Columnas</span>
+        <span class="cuadro-tag kotlin">WindowWidthSizeClass</span>
+      </div>
+    </div>
+
+    <!-- CUADRO ARQUITECTÓNICO: WindowSizeClass -->
+    <div class="contract-table-wrapper">
+      <table class="contract-table">
+        <thead>
+          <tr>
+            <th>Clase de Ventana (M3)</th>
+            <th>Ancho de Pantalla</th>
+            <th>Columnas</th>
+            <th>Márgenes</th>
+            <th>Gutters</th>
+            <th>Dispositivos Típicos en Nexa</th>
+            <th>Comportamiento de Layout</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Compact</strong></td>
+            <td><code>&lt; 600dp</code></td>
+            <td><strong class="mono-chip">4 cols</strong></td>
+            <td>16dp</td>
+            <td>8dp – 12dp</td>
+            <td>Smartphones de choferes (6.1" – 6.7"), terminales de mano Zebra TC21/TC26</td>
+            <td>Columna única vertical fluida, botones fijos al pie (BottomBar), BottomSheet modal</td>
+          </tr>
+          <tr>
+            <td><strong>Medium</strong></td>
+            <td><code>600dp – 840dp</code></td>
+            <td><strong class="mono-chip">8 cols</strong></td>
+            <td>24dp</td>
+            <td>16dp</td>
+            <td>Dispositivos plegables abiertos (Foldables), tablets de supervisores de 8" en patio</td>
+            <td>Layout de dos columnas o panel dividido (lista de paradas a la izquierda, mapa a la derecha)</td>
+          </tr>
+          <tr>
+            <td><strong>Expanded</strong></td>
+            <td><code>&gt; 840dp</code></td>
+            <td><strong class="mono-chip">12 cols</strong></td>
+            <td>32dp</td>
+            <td>24dp</td>
+            <td>Tablets industriales de montacargas (10"+ Zebra ET51, Samsung Active Tab)</td>
+            <td>Navegación lateral fija (NavigationRail), vista TwoPane persistente de despacho y bodega</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Visual Breakpoint Cards -->
+    <div class="breakpoint-cards-grid">
+      <div class="breakpoint-card compact">
+        <div class="bp-icon"><i class="pi pi-mobile"></i></div>
+        <div class="bp-info">
+          <span class="bp-tag">COMPACT (&lt;600dp)</span>
+          <strong>Smartphones en Ruta</strong>
+          <p>4 Columnas · Márgenes 16dp · BottomNav fijo de 64dp al alcance del pulgar.</p>
+        </div>
+      </div>
+
+      <div class="breakpoint-card medium">
+        <div class="bp-icon"><i class="pi pi-table"></i></div>
+        <div class="bp-info">
+          <span class="bp-tag">MEDIUM (600-840dp)</span>
+          <strong>Supervisión en Patio</strong>
+          <p>8 Columnas · Márgenes 24dp · Panel dividido para monitoreo de flota en tiempo real.</p>
+        </div>
+      </div>
+
+      <div class="breakpoint-card expanded">
+        <div class="bp-icon"><i class="pi pi-desktop"></i></div>
+        <div class="bp-info">
+          <span class="bp-tag">EXPANDED (&gt;840dp)</span>
+          <strong>Montacargas & Bodega</strong>
+          <p>12 Columnas · Márgenes 32dp · NavigationRail lateral, interfaz de alta densidad para guantes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Contrato de Código Kotlin Spacing.kt & AdaptiveLayout.kt -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">03</span>
+        <div>
+          <p class="cuadro-kicker">CÓDIGO DE PRODUCCIÓN · KOTLIN JETPACK COMPOSE</p>
+          <h3 class="cuadro-title">Spacing.kt & AdaptiveLayout.kt (:core:designsystem)</h3>
+          <p class="cuadro-subtitle">
+            Contrato inmutable de espaciado mediante CompositionLocal y selector reactivo de layout por WindowSizeClass.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-container-block">
+      <div class="code-header-bar">
+        <div class="code-header-title">
+          <i class="pi pi-file"></i>
+          <span>core/designsystem/src/main/kotlin/com/nexa/core/designsystem/theme/Spacing.kt</span>
+        </div>
+        <span class="code-lang-pill">Kotlin 2.4</span>
+      </div>
+      <pre class="code-pre-box"><code>{spacingCode}</code></pre>
     </div>
   </section>
 </div>
@@ -149,118 +303,8 @@ val LocalNexaSpacing = staticCompositionLocalOf { NexaSpacing() }</code></pre>
   .cuadricula-8dp-container {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 28px;
     width: 100%;
-  }
-
-  .spec-card {
-    background: var(--nexa-surface-card, #ffffff);
-    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
-    border-radius: var(--nexa-radius-card, 16px);
-    padding: 24px;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .card-header-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .card-badge-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background: var(--nexa-color-primary-50, #eff6ff);
-    color: var(--nexa-color-primary-600, #2a67d9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 17px;
-    flex-shrink: 0;
-
-    &.rhythm-badge {
-      background: #faf5ff;
-      color: #9333ea;
-    }
-    &.code-badge {
-      background: #f1f5f9;
-      color: #0f172a;
-    }
-  }
-
-  .card-eyebrow {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    color: var(--nexa-color-primary-700, #1d4ed8);
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 2px;
-  }
-
-  .card-title {
-    font-family: var(--nexa-font-family-display, sans-serif);
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--nexa-color-text-primary, #0f172a);
-    margin: 0;
-  }
-
-  .card-text {
-    font-size: 13.5px;
-    color: var(--nexa-color-text-secondary, #64748b);
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  .table-responsive-wrapper {
-    width: 100%;
-    overflow-x: auto;
-    border: 1px solid var(--nexa-color-border-subtle, #e2e8f0);
-    border-radius: 12px;
-  }
-
-  .metrics-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12.5px;
-    text-align: left;
-
-    th {
-      background: var(--nexa-color-neutral-50, #f8fafc);
-      padding: 10px 14px;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--nexa-color-neutral-600, #475569);
-      border-bottom: 1px solid var(--nexa-color-border-structural, #e2e8f0);
-    }
-
-    td {
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
-      color: var(--nexa-color-text-secondary, #64748b);
-    }
-
-    tr:last-child td {
-      border-bottom: 0;
-    }
-  }
-
-  .code-pill {
-    display: inline-block;
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--nexa-color-primary-700, #1d4ed8);
-    background: var(--nexa-color-primary-50, #eff6ff);
-    padding: 2px 6px;
-    border-radius: 4px;
   }
 
   .spacing-rhythm-list {
@@ -272,15 +316,15 @@ val LocalNexaSpacing = staticCompositionLocalOf { NexaSpacing() }</code></pre>
 
   .rhythm-row {
     display: grid;
-    grid-template-columns: 100px minmax(100px, 280px) 1fr;
+    grid-template-columns: 120px minmax(100px, 280px) 1fr;
     gap: 16px;
     align-items: center;
 
     code {
       font-family: var(--nexa-font-family-mono, monospace);
-      font-size: 11.5px;
+      font-size: 11px;
       color: var(--nexa-color-primary-700, #1d4ed8);
-      font-weight: 600;
+      font-weight: 700;
     }
 
     small {
@@ -310,18 +354,64 @@ val LocalNexaSpacing = staticCompositionLocalOf { NexaSpacing() }</code></pre>
     justify-content: center;
   }
 
-  .code-preview-block {
-    background: #0f172a;
-    border-radius: 12px;
-    padding: 18px;
-    overflow-x: auto;
+  .breakpoint-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
 
-    pre { margin: 0; }
-    code {
-      font-family: var(--nexa-font-family-mono, monospace);
-      font-size: 12px;
-      color: #e2e8f0;
-      line-height: 1.6;
+  @media (max-width: 860px) {
+    .breakpoint-cards-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .breakpoint-card {
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    background: #f8fafc;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+
+    .bp-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: var(--nexa-color-primary-600, #2a67d9);
+      flex-shrink: 0;
+    }
+
+    .bp-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+
+      .bp-tag {
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        color: var(--nexa-color-primary-700, #1d4ed8);
+      }
+
+      strong {
+        font-size: 13.5px;
+        color: #0f172a;
+      }
+
+      p {
+        font-size: 11.5px;
+        color: #64748b;
+        margin: 0;
+        line-height: 1.4;
+      }
     }
   }
 </style>

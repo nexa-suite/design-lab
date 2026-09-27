@@ -8,17 +8,19 @@ interface Props {
   unitPrice?: string;
   depositPrice?: string;
   totalPrice?: string;
+  isIsolated?: boolean;
 }
 
 const {
   itemName = 'GoPro HERO10',
   unitPrice = '€100 /day',
   depositPrice = '€200 /booking',
-  totalPrice = '€700.00'
+  totalPrice = '€700.00',
+  isIsolated = false
 } = Astro.props;
 ---
 
-<div class="saas-card-frame">
+<div class={`saas-card-frame ${isIsolated ? 'is-isolated' : ''}`}>
   <div class="saas-modal-top-tags">
     <span class="saas-pill-tag ongoing">On Going</span>
     <span class="saas-pill-tag notpaid">• Not Paid</span>
@@ -102,6 +104,17 @@ const {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   }
 
+  .saas-card-frame.is-isolated {
+    position: relative;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
   .saas-modal-top-tags {
     display: flex;
     gap: 0.5rem;
@@ -117,28 +130,32 @@ const {
 
   .saas-pill-tag.ongoing {
     background: #e0f2fe;
-    color: #0369a1;
+    color: #075985;
+    font-weight: 800;
   }
 
   .saas-pill-tag.notpaid {
-    background: #fef2f2;
-    color: #dc2626;
+    background: #fee2e2;
+    color: #991b1b;
+    font-weight: 800;
   }
 
   .saas-table-header-row {
     display: flex;
     justify-content: space-between;
     font-size: 0.75rem;
-    border-bottom: 1px solid #e2e8f0;
-    padding-bottom: 0.35rem;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 0.4rem;
     margin-bottom: 0.5rem;
-    color: #64748b;
+    color: #334155;
   }
 
   .table-col-labels {
     display: flex;
     gap: 1.25rem;
     font-family: 'JetBrains Mono', monospace;
+    color: #334155;
+    font-weight: 600;
   }
 
   .saas-item-row {
@@ -146,14 +163,14 @@ const {
     justify-content: space-between;
     align-items: center;
     font-size: 0.8125rem;
-    padding: 0.35rem 0;
+    padding: 0.4rem 0;
   }
 
   .item-name-group {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-weight: 600;
+    font-weight: 700;
     color: #0f172a;
   }
 
@@ -162,24 +179,29 @@ const {
     gap: 1.25rem;
     font-size: 0.75rem;
     font-family: 'JetBrains Mono', monospace;
+    color: #1e293b;
+    font-weight: 600;
   }
 
   .item-total-bold {
     font-weight: 800;
-    color: var(--stage-text);
+    color: #0f172a;
   }
 
   .saas-services-table-section {
     margin-top: 0.85rem;
-    border-top: 1px solid #e2e8f0;
+    border-top: 1px solid #cbd5e1;
     padding-top: 0.65rem;
   }
 
   .section-title {
     font-size: 0.75rem;
-    color: var(--stage-text);
+    font-weight: 800;
+    color: #0f172a;
     display: block;
     margin-bottom: 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
   .saas-service-row {
@@ -187,7 +209,7 @@ const {
     justify-content: space-between;
     align-items: center;
     font-size: 0.75rem;
-    padding: 0.25rem 0;
+    padding: 0.35rem 0;
   }
 
   .service-name-group {
@@ -195,15 +217,29 @@ const {
     align-items: center;
     gap: 0.5rem;
     color: #0f172a;
+    font-weight: 700;
   }
 
   .service-name-group small {
     display: block;
-    color: #64748b;
+    color: #334155;
     font-size: 0.6875rem;
+    font-weight: 600;
   }
 
   .service-prices {
     font-family: 'JetBrains Mono', monospace;
+    color: #1e293b;
+    font-weight: 600;
+  }
+
+  .service-prices small {
+    color: #334155;
+    font-weight: 600;
+  }
+
+  .service-total {
+    color: #0f172a;
+    font-weight: 800;
   }
 </style>

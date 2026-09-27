@@ -172,18 +172,45 @@
         </div>
 
         <div class="view-toggles">
-          <!-- Plate Palette Preset Selector -->
-          <div class="plate-palette-toggle" role="group" aria-label="Plate Palette">
-            <button type="button" class="plate-pill active" data-plate="#082846" data-accent="#38c8ff" title="Nexa Deep Dark Blue (#082846)">
-              <span class="color-swatch" style="background: #082846; border: 1px solid #38c8ff;"></span> Nexa Blue
+          <!-- Human Ergonomic Tones Switcher -->
+          <div class="human-tones-toggle" role="group" aria-label="Human Ergonomic Tones">
+            <button type="button" class="tone-pill active" data-tone="nexa" data-plate="#082846" data-accent="#38c8ff" data-conduit="#bae6fd" data-oklch="oklch(28% 0.07 240)" title="Nexa Calibrated Dark Blue (#082846 & #38c8ff)">
+              <span class="color-swatch" style="background: #082846; border: 1.5px solid #38c8ff;"></span>
+              <span>Nexa Blue</span>
             </button>
-            <button type="button" class="plate-pill" data-plate="#00382b" data-accent="#57f09e" title="Obsidian Green (#00382b)">
-              <span class="color-swatch" style="background: #00382b; border: 1px solid #57f09e;"></span> Obsidian
+            <button type="button" class="tone-pill" data-tone="cashmere" data-plate="#283a48" data-accent="#7dd3fc" data-conduit="#bae6fd" data-oklch="oklch(33% 0.06 258)" title="Cashmere Arctic Mist (oklch(33% 0.06 258) / #283a48)">
+              <span class="color-swatch" style="background: #283a48; border: 1.5px solid #7dd3fc;"></span>
+              <span>Cashmere Mist</span>
             </button>
-            <button type="button" class="plate-pill" data-plate="#052018" data-accent="#57f09e" title="Deep Obsidian (#052018)">
-              <span class="color-swatch" style="background: #052018; border: 1px solid #57f09e;"></span> Deep Dark
+            <button type="button" class="tone-pill" data-tone="ceramic" data-plate="#1d3d63" data-accent="#38bdf8" data-conduit="#a5f3fc" data-oklch="oklch(35% 0.08 245)" title="Ceramic Azure Harmony (oklch(35% 0.08 245) / #1d3d63)">
+              <span class="color-swatch" style="background: #1d3d63; border: 1.5px solid #38bdf8;"></span>
+              <span>Ceramic Azure</span>
+            </button>
+            <button type="button" class="tone-pill" data-tone="oceanic" data-plate="#163b45" data-accent="#4ade80" data-conduit="#bbf7d0" data-oklch="oklch(32% 0.07 215)" title="Oceanic Sage Blue (oklch(32% 0.07 215) / #163b45)">
+              <span class="color-swatch" style="background: #163b45; border: 1.5px solid #4ade80;"></span>
+              <span>Oceanic Sage</span>
             </button>
           </div>
+
+          <!-- Conduit Pastel Tone Selector -->
+          <div class="conduit-palette-toggle" role="group" aria-label="Conduit Pastel Tone">
+            <span class="conduit-toggle-label">Conduit:</span>
+            <button type="button" class="conduit-pill active" data-pastel="#bae6fd" title="Celeste Pastel (#bae6fd)">
+              <span class="color-swatch" style="background: #bae6fd;"></span> Celeste
+            </button>
+            <button type="button" class="conduit-pill" data-pastel="#bbf7d0" title="Mint Pastel (#bbf7d0)">
+              <span class="color-swatch" style="background: #bbf7d0;"></span> Mint
+            </button>
+            <button type="button" class="conduit-pill" data-pastel="#a5f3fc" title="Soft Cyan (#a5f3fc)">
+              <span class="color-swatch" style="background: #a5f3fc;"></span> Cyan
+            </button>
+          </div>
+
+          <!-- Auto-Tour Button -->
+          <button type="button" class="nexafy-btn primary auto-tour-btn" id="btn-auto-tour" title="Play choreographed Cinematic Auto-Tour">
+            <span class="tour-icon" id="tour-btn-icon">▶</span>
+            <span id="auto-tour-btn-text">Auto-Tour</span>
+          </button>
 
           <label class="toggle-checkbox">
             <input type="checkbox" id="toggle-living-motion" checked>
@@ -195,7 +222,7 @@
           </label>
           <label class="toggle-checkbox">
             <input type="checkbox" id="toggle-circuit" checked>
-            <span>Vascular Circuit</span>
+            <span>28px Conduits</span>
           </label>
           <label class="toggle-checkbox">
             <input type="checkbox" id="toggle-debug-mode" checked>
@@ -217,8 +244,16 @@
         </div>
       </div>
 
-      <!-- SVG Drawing Surface with dotted grid canvas wrapper -->
+      <!-- SVG Drawing Surface with pure clean white background and ultra-subtle dot grid -->
       <div class="canvas-stage-wrapper" id="stage-wrapper">
+        <!-- Floating Cinematic Auto-Tour HUD Banner -->
+        <div class="tour-status-banner" id="tour-status-banner" style="display: none;">
+          <span class="tour-live-dot"></span>
+          <span class="tour-step-badge" id="tour-step-badge">TOUR 1/5</span>
+          <span class="tour-step-desc" id="tour-step-desc">DORMANT SCULPTED PLATE</span>
+          <button type="button" class="tour-stop-btn" id="tour-stop-btn" title="Stop Cinematic Tour">✕ Stop</button>
+        </div>
+
         <div class="canvas-frame" id="canvas-frame" style="width: 720px; height: 410px;">
           
           <!-- Reference Frame Image -->
@@ -240,34 +275,43 @@
                 <stop offset="0%" stop-color="#38c8ff" stop-opacity="0.12" />
                 <stop offset="100%" stop-color="#082846" stop-opacity="0" />
               </radialGradient>
+              <filter id="conduit-glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="6" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
               <filter id="node-glow" x="-20%" y="-20%" width="140%" height="140%">
                 <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#2a67d9" flood-opacity="0.25" />
               </filter>
               <filter id="card-shadow" x="-15%" y="-15%" width="130%" height="130%">
-                <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.12" />
+                <feDropShadow dx="0" dy="5" stdDeviation="10" flood-color="#000000" flood-opacity="0.15" />
               </filter>
               <filter id="pulse-glow" x="-40%" y="-40%" width="180%" height="180%">
-                <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#38c8ff" flood-opacity="0.95" />
+                <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#38c8ff" flood-opacity="0.95" />
               </filter>
             </defs>
             
             <!-- Layer 1: Sculpted Stage Contour with smooth 28px/36px fillets -->
-            <path id="sculpted-path" d="" fill="none" stroke="#38c8ff" stroke-width="1.5" stroke-linejoin="round" />
+            <path id="sculpted-path" d="" fill="none" stroke="rgba(56, 200, 255, 0.3)" stroke-width="1.5" stroke-linejoin="round" />
             <rect id="sculpted-glow" x="0" y="0" width="1440" height="820" fill="url(#lab-radial-glow)" pointer-events="none" />
 
-            <!-- Layer 2: Living Vascular Circuit Routes (SVG Edges) -->
+            <!-- Layer 2: Living Thick Pastel Vascular Circuit Routes (SVG Edges - 28px) -->
             <g id="circuit-edges-layer" style="display: block;">
               <!-- Injected dynamically via Scene Graph -->
             </g>
 
-            <!-- Layer 2.5: Animated Signal Pulses flowing along Edges -->
+            <!-- Layer 2.5: Animated Signal Pulses flowing along 28px conduits -->
             <g id="circuit-pulses-layer" style="display: block; pointer-events: none;">
               <!-- Injected dynamically via requestAnimationFrame -->
             </g>
 
-            <!-- Layer 3: Semantic Nodes & Mockups (Interactive Draggable) -->
+            <!-- Layer 3: Semantic Nodes & Mockups (Interactive Draggable, High-Contrast White Cards) -->
             <g id="circuit-nodes-layer" style="display: block;">
               <!-- Injected dynamically via Scene Graph with drag/hover handlers -->
+            </g>
+
+            <!-- Layer 3.5: Auto-Tour FX (Flying entry spin & Escrow confetti burst) -->
+            <g id="tour-fx-layer" style="display: block; pointer-events: none;">
+              <!-- Injected dynamically during Auto-Tour -->
             </g>
 
             <!-- Layer 4: Debug Clearance Halos, Bounds & Ports -->
@@ -664,7 +708,7 @@
     gap: 0.6rem;
   }
 
-  .plate-palette-toggle {
+  .human-tones-toggle {
     display: inline-flex;
     align-items: center;
     gap: 3px;
@@ -674,7 +718,7 @@
     border: 1px solid var(--nexafy-border);
   }
 
-  .plate-pill {
+  .tone-pill {
     background: transparent;
     border: 0;
     color: var(--nexafy-muted);
@@ -689,15 +733,158 @@
     transition: all 0.15s ease;
   }
 
-  .plate-pill:hover {
+  .tone-pill:hover {
     color: var(--nexafy-text);
   }
 
-  .plate-pill.active {
+  .tone-pill.active {
     background: #ffffff;
     color: var(--nexafy-accent);
     font-weight: 700;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  }
+
+  .conduit-palette-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: #f1f5f9;
+    padding: 2px 5px;
+    border-radius: 6px;
+    border: 1px solid var(--nexafy-border);
+  }
+
+  .conduit-toggle-label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--nexafy-muted);
+    margin-right: 2px;
+  }
+
+  .conduit-pill {
+    background: transparent;
+    border: 0;
+    color: var(--nexafy-muted);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s ease;
+  }
+
+  .conduit-pill:hover {
+    color: var(--nexafy-text);
+  }
+
+  .conduit-pill.active {
+    background: #ffffff;
+    color: var(--nexafy-accent-dark);
+    font-weight: 700;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  }
+
+  .auto-tour-btn {
+    background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+    color: #ffffff;
+    border: none;
+    padding: 0.28rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+    transition: all 0.2s ease;
+  }
+
+  .auto-tour-btn:hover {
+    background: linear-gradient(135deg, #0369a1 0%, #1d4ed8 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35);
+  }
+
+  .auto-tour-btn.running {
+    background: #dc2626 !important;
+    box-shadow: 0 2px 6px rgba(220, 38, 38, 0.35);
+  }
+
+  .tour-status-banner {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 40;
+    background: rgba(8, 40, 70, 0.94);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(56, 200, 255, 0.4);
+    border-radius: 999px;
+    padding: 6px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    color: #ffffff;
+    font-size: 0.75rem;
+    animation: fadeInDown 0.25s ease;
+  }
+
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translate(-50%, -10px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+  }
+
+  .tour-live-dot {
+    width: 8px;
+    height: 8px;
+    background: #38c8ff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #38c8ff;
+    animation: pulseDot 1.2s infinite ease-in-out;
+  }
+
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .tour-step-badge {
+    background: rgba(56, 200, 255, 0.2);
+    color: #38c8ff;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  .tour-step-desc {
+    font-weight: 600;
+    color: #f8fafc;
+    letter-spacing: 0.02em;
+  }
+
+  .tour-stop-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: #ffffff;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .tour-stop-btn:hover {
+    background: rgba(220, 38, 38, 0.85);
   }
 
   .color-swatch {
@@ -761,8 +948,8 @@
     justify-content: center;
     padding: 1.25rem;
     overflow: hidden;
-    background: #f6faff;
-    background-image: radial-gradient(#94a3b8 1.2px, transparent 1.2px);
+    background: #ffffff;
+    background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
     background-size: 24px 24px;
     position: relative;
     user-select: none;
@@ -770,13 +957,13 @@
 
   .canvas-frame {
     position: relative;
-    box-shadow: 0 20px 50px rgba(8, 40, 70, 0.18);
-    background: #082846;
-    border: 1px solid rgba(56, 200, 255, 0.15);
+    box-shadow: 0 25px 60px -15px rgba(8, 40, 70, 0.3), 0 10px 25px -5px rgba(8, 40, 70, 0.15);
+    background-color: #082846;
+    border: none !important;
     overflow: hidden;
     transform-origin: center center;
-    transition: background-color 0.25s ease, box-shadow 0.2s ease;
-    border-radius: 20px;
+    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+    border-radius: 28px;
   }
 
   .canvas-svg {
@@ -1026,6 +1213,71 @@
   let pulseProgress: Record<string, number> = {};
   let _livingEngineAnimId: number | null = null;
 
+  // Human Tones System (Ergonomic OKLCH & Calibrated Nexa Palette)
+  interface HumanToneConfig {
+    id: string;
+    name: string;
+    plateBg: string;
+    accent: string;
+    defaultPastel: string;
+    conduitGlow: string;
+    pulseColor: string;
+    oklchFormula: string;
+  }
+
+  const HUMAN_TONES: Record<string, HumanToneConfig> = {
+    nexa: {
+      id: 'nexa',
+      name: 'Nexa Calibrated Dark Blue',
+      plateBg: '#082846',
+      accent: '#38c8ff',
+      defaultPastel: '#bae6fd', // Celeste Pastel
+      conduitGlow: 'rgba(56, 200, 255, 0.25)',
+      pulseColor: '#38c8ff',
+      oklchFormula: 'oklch(28% 0.07 240)'
+    },
+    cashmere: {
+      id: 'cashmere',
+      name: 'Cashmere Arctic Mist',
+      plateBg: '#283a48', // oklch(33% 0.06 258)
+      accent: '#7dd3fc',
+      defaultPastel: '#bae6fd', // Celeste Pastel
+      conduitGlow: 'rgba(125, 211, 252, 0.25)',
+      pulseColor: '#bae6fd',
+      oklchFormula: 'oklch(33% 0.06 258)'
+    },
+    ceramic: {
+      id: 'ceramic',
+      name: 'Ceramic Azure Harmony',
+      plateBg: '#1d3d63', // oklch(35% 0.08 245)
+      accent: '#38bdf8',
+      defaultPastel: '#a5f3fc', // Soft Cyan
+      conduitGlow: 'rgba(165, 243, 252, 0.25)',
+      pulseColor: '#a5f3fc',
+      oklchFormula: 'oklch(35% 0.08 245)'
+    },
+    oceanic: {
+      id: 'oceanic',
+      name: 'Oceanic Sage Blue',
+      plateBg: '#163b45', // oklch(32% 0.07 215)
+      accent: '#4ade80',
+      defaultPastel: '#bbf7d0', // Mint Pastel
+      conduitGlow: 'rgba(187, 247, 208, 0.25)',
+      pulseColor: '#56f09f',
+      oklchFormula: 'oklch(32% 0.07 215)'
+    }
+  };
+
+  let currentTone: HumanToneConfig = HUMAN_TONES.nexa;
+  let currentConduitPastel: string = currentTone.defaultPastel;
+
+  // Auto-Tour Cinematic State
+  let isAutoTourRunning = false;
+  let tourTimeouts: any[] = [];
+  let tourAnimFrameId: number | null = null;
+  let isTourFlying = false;
+  let tourConfettiParticles: any[] = [];
+
   const EVENT_MARKERS = [
     { time: 0.00, label: '0.00s Stage' },
     { time: 0.87, label: '0.87s Company' },
@@ -1068,6 +1320,7 @@
     const edgesLayer = document.getElementById('circuit-edges-layer') as unknown as SVGGElement;
     const pulsesLayer = document.getElementById('circuit-pulses-layer') as unknown as SVGGElement;
     const nodesLayer = document.getElementById('circuit-nodes-layer') as unknown as SVGGElement;
+    const tourFxLayer = document.getElementById('tour-fx-layer') as unknown as SVGGElement;
     const debugLayer = document.getElementById('debug-overlay-layer') as unknown as SVGGElement;
 
     const toggleLivingMotion = document.getElementById('toggle-living-motion') as HTMLInputElement;
@@ -1079,17 +1332,352 @@
     const inputRefOpacity = document.getElementById('input-ref-opacity') as HTMLInputElement;
     const selectRefBlend = document.getElementById('select-ref-blend') as HTMLSelectElement;
 
-    // Palette preset switcher (Nexa Blue vs Obsidian vs Deep Dark)
-    document.querySelectorAll('.plate-pill').forEach(btn => {
+    const btnAutoTour = document.getElementById('btn-auto-tour') as HTMLButtonElement;
+    const autoTourBtnText = document.getElementById('auto-tour-btn-text') as HTMLSpanElement;
+    const tourBtnIcon = document.getElementById('tour-btn-icon') as HTMLSpanElement;
+    const tourStatusBanner = document.getElementById('tour-status-banner') as HTMLDivElement;
+    const tourStepBadge = document.getElementById('tour-step-badge') as HTMLSpanElement;
+    const tourStepDesc = document.getElementById('tour-step-desc') as HTMLSpanElement;
+    const tourStopBtn = document.getElementById('tour-stop-btn') as HTMLButtonElement;
+
+    // Human Tones System Switcher
+    function setHumanTone(toneKey: string) {
+      const tone = HUMAN_TONES[toneKey];
+      if (!tone) return;
+      currentTone = tone;
+      currentConduitPastel = tone.defaultPastel;
+
+      canvasFrame.style.backgroundColor = tone.plateBg;
+      pathElem.setAttribute('stroke', tone.accent);
+
+      document.querySelectorAll('.tone-pill').forEach(btn => {
+        btn.classList.toggle('active', (btn as HTMLElement).dataset.tone === toneKey);
+      });
+
+      document.querySelectorAll('.conduit-pill').forEach(btn => {
+        btn.classList.toggle('active', (btn as HTMLElement).dataset.pastel === currentConduitPastel);
+      });
+
+      renderCircuitLayers();
+    }
+
+    document.querySelectorAll('.tone-pill').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.plate-pill').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const plateColor = (btn as HTMLElement).dataset.plate || '#082846';
-        const accentColor = (btn as HTMLElement).dataset.accent || '#38c8ff';
-        canvasFrame.style.backgroundColor = plateColor;
-        pathElem.setAttribute('stroke', accentColor);
+        const toneKey = (btn as HTMLElement).dataset.tone || 'nexa';
+        setHumanTone(toneKey);
       });
     });
+
+    document.querySelectorAll('.conduit-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.conduit-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentConduitPastel = (btn as HTMLElement).dataset.pastel || '#bae6fd';
+        renderCircuitLayers();
+      });
+    });
+
+    function clearTourTimeouts() {
+      tourTimeouts.forEach(t => clearTimeout(t));
+      tourTimeouts = [];
+      if (tourAnimFrameId) {
+        cancelAnimationFrame(tourAnimFrameId);
+        tourAnimFrameId = null;
+      }
+      if (tourFxLayer) tourFxLayer.innerHTML = '';
+      tourConfettiParticles = [];
+      isTourFlying = false;
+    }
+
+    function showTourBanner(badge: string, desc: string) {
+      if (tourStatusBanner && tourStepBadge && tourStepDesc) {
+        tourStatusBanner.style.display = 'flex';
+        tourStepBadge.textContent = badge;
+        tourStepDesc.textContent = desc;
+      }
+    }
+
+    function startAutoTour() {
+      if (isAutoTourRunning) {
+        stopAutoTour();
+        return;
+      }
+
+      isAutoTourRunning = true;
+      btnAutoTour.classList.add('running');
+      autoTourBtnText.textContent = 'Stop Tour';
+      tourBtnIcon.textContent = '■';
+
+      runTourStep1_Dormant();
+    }
+
+    function stopAutoTour() {
+      isAutoTourRunning = false;
+      btnAutoTour.classList.remove('running');
+      autoTourBtnText.textContent = 'Auto-Tour';
+      tourBtnIcon.textContent = '▶';
+      if (tourStatusBanner) tourStatusBanner.style.display = 'none';
+      clearTourTimeouts();
+
+      currentConfig = JSON.parse(JSON.stringify(NEXAFY_PRESETS.CHANNELS));
+      scene = createSceneForPreset('CHANNELS', currentConfig.width, currentConfig.height);
+      syncUIFromConfig();
+      updateStagePath();
+      initSceneTree();
+      renderCircuitLayers();
+      runSceneValidation();
+    }
+
+    tourStopBtn?.addEventListener('click', stopAutoTour);
+    btnAutoTour?.addEventListener('click', startAutoTour);
+
+    // 1. DORMANT STAGE
+    function runTourStep1_Dormant() {
+      if (!isAutoTourRunning) return;
+      showTourBanner('STAGE 1/5', 'DORMANT STAGE · PURE ARCHITECTURAL FOUNDATION');
+      if (presetSelector) presetSelector.value = 'DORMANT';
+      currentConfig = JSON.parse(JSON.stringify(NEXAFY_PRESETS.DORMANT));
+      scene = createSceneForPreset('DORMANT', currentConfig.width, currentConfig.height);
+      syncUIFromConfig();
+      updateStagePath();
+      initSceneTree();
+      renderCircuitLayers();
+      runSceneValidation();
+
+      const tId = setTimeout(() => {
+        if (isAutoTourRunning) runTourStep2_FlyingEntry();
+      }, 2600);
+      tourTimeouts.push(tId);
+    }
+
+    // 2. FLYING ENTRY (-280° ROTATION & ELASTIC DOCKING)
+    function runTourStep2_FlyingEntry() {
+      if (!isAutoTourRunning) return;
+      showTourBanner('STAGE 2/5', 'FLYING ENTRY · -280° KINETIC ROTATIONAL DOCKING');
+      if (presetSelector) presetSelector.value = 'CHANNELS';
+      currentConfig = JSON.parse(JSON.stringify(NEXAFY_PRESETS.CHANNELS));
+      scene = createSceneForPreset('CHANNELS', currentConfig.width, currentConfig.height);
+
+      scene.nodes.forEach(n => {
+        n.visibility = (n.id === 'node-company' || n.id === 'node-hub') ? 'visible' : 'hidden';
+      });
+
+      syncUIFromConfig();
+      updateStagePath();
+      initSceneTree();
+      renderCircuitLayers();
+
+      isTourFlying = true;
+      const startTime = performance.now();
+      const duration = 1800;
+
+      function animFlying(now: number) {
+        if (!isAutoTourRunning) return;
+        const elapsed = now - startTime;
+        const p = Math.min(1, elapsed / duration);
+        const c1 = 1.70158;
+        const c3 = c1 + 1;
+        const ease = 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2);
+
+        const curRotation = -280 * (1 - ease);
+        const curScale = 0.15 + 0.85 * Math.max(0, ease);
+        const curOpacity = Math.min(1, p * 1.5);
+
+        const hubEl = document.getElementById('svg-node-hub');
+        const compEl = document.getElementById('svg-node-company');
+
+        const hubNode = scene.nodes.find(n => n.id === 'node-hub');
+        const compNode = scene.nodes.find(n => n.id === 'node-company');
+
+        if (hubEl && hubNode) {
+          const cx = hubNode.visualBounds.x + hubNode.visualBounds.width / 2;
+          const cy = hubNode.visualBounds.y + hubNode.visualBounds.height / 2;
+          hubEl.setAttribute('transform', `translate(${cx}, ${cy}) rotate(${curRotation}) scale(${curScale}) translate(${-cx}, ${-cy}) translate(${hubNode.visualBounds.x}, ${hubNode.visualBounds.y})`);
+          hubEl.setAttribute('opacity', `${curOpacity}`);
+        }
+
+        if (compEl && compNode) {
+          const cx = compNode.visualBounds.x + compNode.visualBounds.width / 2;
+          const cy = compNode.visualBounds.y + compNode.visualBounds.height / 2;
+          compEl.setAttribute('transform', `translate(${cx}, ${cy}) rotate(${curRotation * 0.7}) scale(${curScale}) translate(${-cx}, ${-cy}) translate(${compNode.visualBounds.x}, ${compNode.visualBounds.y})`);
+          compEl.setAttribute('opacity', `${curOpacity}`);
+        }
+
+        if (p < 1) {
+          tourAnimFrameId = requestAnimationFrame(animFlying);
+        } else {
+          isTourFlying = false;
+          if (hubEl && hubNode) {
+            hubEl.setAttribute('transform', `translate(${hubNode.visualBounds.x}, ${hubNode.visualBounds.y})`);
+            hubEl.setAttribute('opacity', '1');
+          }
+          if (compEl && compNode) {
+            compEl.setAttribute('transform', `translate(${compNode.visualBounds.x}, ${compNode.visualBounds.y})`);
+            compEl.setAttribute('opacity', '1');
+          }
+        }
+      }
+      tourAnimFrameId = requestAnimationFrame(animFlying);
+
+      const tId = setTimeout(() => {
+        if (isAutoTourRunning) runTourStep3_ChannelsArrival();
+      }, 2900);
+      tourTimeouts.push(tId);
+    }
+
+    // 3. CHANNELS ARRIVAL (28px PASTEL VASCULAR CIRCUIT)
+    function runTourStep3_ChannelsArrival() {
+      if (!isAutoTourRunning) return;
+      showTourBanner('STAGE 3/5', 'CHANNELS ARRIVAL · 28px PASTEL VASCULAR CIRCUIT');
+      isTourFlying = false;
+
+      scene.nodes.forEach(n => { n.visibility = 'visible'; });
+      renderCircuitLayers();
+      runSceneValidation();
+
+      scene.nodes.forEach((n, idx) => {
+        const el = document.getElementById(`svg-${n.id}`);
+        if (el) {
+          el.style.transition = 'transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)';
+          el.setAttribute('transform', `translate(${n.visualBounds.x}, ${n.visualBounds.y - 12}) scale(1.05)`);
+          setTimeout(() => {
+            if (el) {
+              el.setAttribute('transform', `translate(${n.visualBounds.x}, ${n.visualBounds.y}) scale(1)`);
+              setTimeout(() => { if (el) el.style.transition = ''; }, 450);
+            }
+          }, 120 + idx * 80);
+        }
+      });
+
+      const tId = setTimeout(() => {
+        if (isAutoTourRunning) runTourStep4_SaaSMorph();
+      }, 3400);
+      tourTimeouts.push(tId);
+    }
+
+    // 4. SAAS MORPH (CANVAS SHAPE INTERPOLATION & DASHBOARD COCKPIT)
+    function runTourStep4_SaaSMorph() {
+      if (!isAutoTourRunning) return;
+      showTourBanner('STAGE 4/5', 'SAAS MORPH · WORKBENCH & ACTIVE LEDGER COCKPIT');
+      if (presetSelector) presetSelector.value = 'SAAS';
+
+      const cfgA = NEXAFY_PRESETS.CHANNELS;
+      const cfgB = NEXAFY_PRESETS.SAAS;
+      const cmdsA = generateContainerCommands(cfgA);
+      const cmdsB = generateContainerCommands(cfgB);
+
+      const startTime = performance.now();
+      const morphDuration = 1800;
+
+      function animMorph(now: number) {
+        if (!isAutoTourRunning) return;
+        const elapsed = now - startTime;
+        const p = Math.min(1, elapsed / morphDuration);
+        const ease = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+
+        const morphed = interpolateCommands(cmdsA, cmdsB, ease);
+        const d = commandsToSvgPath(morphed);
+        pathElem.setAttribute('d', d);
+
+        if (p < 1) {
+          tourAnimFrameId = requestAnimationFrame(animMorph);
+        } else {
+          currentConfig = JSON.parse(JSON.stringify(NEXAFY_PRESETS.SAAS));
+          scene = createSceneForPreset('SAAS', currentConfig.width, currentConfig.height);
+          syncUIFromConfig();
+          updateStagePath();
+          initSceneTree();
+          renderCircuitLayers();
+          runSceneValidation();
+        }
+      }
+      tourAnimFrameId = requestAnimationFrame(animMorph);
+
+      const tId = setTimeout(() => {
+        if (isAutoTourRunning) runTourStep5_EscrowConfetti();
+      }, 3800);
+      tourTimeouts.push(tId);
+    }
+
+    // 5. ESCROW CONFETTI FINALE
+    function runTourStep5_EscrowConfetti() {
+      if (!isAutoTourRunning) return;
+      showTourBanner('STAGE 5/5', 'ESCROW GUARANTEE & CONFETTI FINALE · 100% CUSTODY VERIFIED!');
+      if (presetSelector) presetSelector.value = 'PAYMENT';
+
+      currentConfig = JSON.parse(JSON.stringify(NEXAFY_PRESETS.PAYMENT));
+      scene = createSceneForPreset('PAYMENT', currentConfig.width, currentConfig.height);
+      syncUIFromConfig();
+      updateStagePath();
+      initSceneTree();
+      renderCircuitLayers();
+      runSceneValidation();
+
+      if (tourFxLayer) {
+        tourFxLayer.innerHTML = '';
+        tourConfettiParticles = [];
+        const colors = ['#38c8ff', '#56f09f', '#bae6fd', '#fef08a', '#f472b6', '#ffffff'];
+        const centerX = currentConfig.width / 2;
+        const centerY = currentConfig.height * 0.42;
+
+        for (let i = 0; i < 50; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = 4 + Math.random() * 9;
+          const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          rect.setAttribute('width', `${6 + Math.random() * 8}`);
+          rect.setAttribute('height', `${8 + Math.random() * 10}`);
+          rect.setAttribute('rx', '2');
+          rect.setAttribute('fill', colors[Math.floor(Math.random() * colors.length)]);
+
+          tourFxLayer.appendChild(rect);
+
+          tourConfettiParticles.push({
+            el: rect,
+            x: centerX,
+            y: centerY,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 3,
+            rot: Math.random() * 360,
+            vRot: (Math.random() - 0.5) * 15,
+            opacity: 1
+          });
+        }
+
+        const confettiStart = performance.now();
+        function animConfetti(now: number) {
+          if (!isAutoTourRunning) return;
+          const elapsed = now - confettiStart;
+          const p = Math.min(1, elapsed / 3200);
+
+          tourConfettiParticles.forEach(pt => {
+            pt.x += pt.vx;
+            pt.y += pt.vy;
+            pt.vy += 0.22;
+            pt.vx *= 0.985;
+            pt.rot += pt.vRot;
+            pt.opacity = Math.max(0, 1 - p * 1.1);
+
+            pt.el.setAttribute('transform', `translate(${pt.x}, ${pt.y}) rotate(${pt.rot})`);
+            pt.el.setAttribute('opacity', `${pt.opacity}`);
+          });
+
+          if (p < 1) {
+            tourAnimFrameId = requestAnimationFrame(animConfetti);
+          } else {
+            if (tourFxLayer) tourFxLayer.innerHTML = '';
+            tourConfettiParticles = [];
+          }
+        }
+        tourAnimFrameId = requestAnimationFrame(animConfetti);
+      }
+
+      const tId = setTimeout(() => {
+        if (isAutoTourRunning) {
+          runTourStep1_Dormant();
+        }
+      }, 4200);
+      tourTimeouts.push(tId);
+    }
 
     const btnZoomIn = document.getElementById('btn-zoom-in') as HTMLButtonElement;
     const btnZoomOut = document.getElementById('btn-zoom-out') as HTMLButtonElement;
@@ -1419,24 +2007,41 @@
 
         const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
         g.setAttribute('class', 'circuit-edge-group');
+        g.setAttribute('data-edge-id', edge.id);
 
-        const pathGlow = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        pathGlow.setAttribute('d', edge.svgPathData);
-        pathGlow.setAttribute('fill', 'none');
-        pathGlow.setAttribute('stroke', '#56f09f');
-        pathGlow.setAttribute('stroke-width', '5');
-        pathGlow.setAttribute('stroke-opacity', '0.25');
+        // 1. Semi-transparent glowing underlay (38px halo)
+        const pathUnderlay = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        pathUnderlay.setAttribute('d', edge.svgPathData);
+        pathUnderlay.setAttribute('fill', 'none');
+        pathUnderlay.setAttribute('stroke', currentTone.conduitGlow);
+        pathUnderlay.setAttribute('stroke-width', '38');
+        pathUnderlay.setAttribute('stroke-linecap', 'round');
+        pathUnderlay.setAttribute('stroke-linejoin', 'round');
+        pathUnderlay.setAttribute('opacity', '0.6');
+        pathUnderlay.setAttribute('filter', 'url(#conduit-glow)');
 
+        // 2. Thick Pastel Vascular Conduit Body (28px with 20px fillet corners)
         const pathMain = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         pathMain.id = `edge-path-${edge.id}`;
         pathMain.setAttribute('d', edge.svgPathData);
         pathMain.setAttribute('fill', 'none');
-        pathMain.setAttribute('stroke', '#cbd5e1');
-        pathMain.setAttribute('stroke-width', '2');
-        pathMain.setAttribute('stroke-dasharray', 'none');
+        pathMain.setAttribute('stroke', currentConduitPastel);
+        pathMain.setAttribute('stroke-width', '28');
+        pathMain.setAttribute('stroke-linecap', 'round');
+        pathMain.setAttribute('stroke-linejoin', 'round');
 
-        g.appendChild(pathGlow);
+        // 3. Central luminescent core lumen track (3px smooth guide)
+        const pathCore = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        pathCore.setAttribute('d', edge.svgPathData);
+        pathCore.setAttribute('fill', 'none');
+        pathCore.setAttribute('stroke', 'rgba(255, 255, 255, 0.45)');
+        pathCore.setAttribute('stroke-width', '3');
+        pathCore.setAttribute('stroke-linecap', 'round');
+        pathCore.setAttribute('stroke-linejoin', 'round');
+
+        g.appendChild(pathUnderlay);
         g.appendChild(pathMain);
+        g.appendChild(pathCore);
         edgesLayer.appendChild(g);
       });
 
@@ -1459,47 +2064,92 @@
           selectNode(node.id);
         });
 
+        // 1. Crisp White Card Surface with 1px border and refined drop shadow
         const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
         rect.setAttribute('class', 'node-card-bg');
         rect.setAttribute('width', `${node.visualBounds.width}`);
         rect.setAttribute('height', `${node.visualBounds.height}`);
-        rect.setAttribute('rx', '12');
-        rect.setAttribute('ry', '12');
+        rect.setAttribute('rx', '14');
+        rect.setAttribute('ry', '14');
         rect.setAttribute('fill', '#ffffff');
-        rect.setAttribute('stroke', '#e2e8f0');
-        rect.setAttribute('stroke-width', '1.5');
+        rect.setAttribute('stroke', node.id === selectedNodeId ? 'var(--nexafy-accent)' : '#e2e8f0');
+        rect.setAttribute('stroke-width', node.id === selectedNodeId ? '2' : '1');
         rect.setAttribute('filter', 'url(#card-shadow)');
         g.appendChild(rect);
 
+        // 2. Active status indicator dot in top-right
+        const statusDot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        statusDot.setAttribute('cx', `${node.visualBounds.width - 16}`);
+        statusDot.setAttribute('cy', '16');
+        statusDot.setAttribute('r', '4');
+        statusDot.setAttribute('fill', '#10b981');
+        g.appendChild(statusDot);
+
+        // 3. Bold Node Title (WCAG AAA dark slate on white - no black on dark blue!)
         const textName = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         textName.setAttribute('class', 'node-title-text');
         textName.setAttribute('x', '16');
-        textName.setAttribute('y', '32');
+        textName.setAttribute('y', '27');
         textName.setAttribute('fill', '#0f172a');
         textName.setAttribute('font-family', 'Plus Jakarta Sans, sans-serif');
-        textName.setAttribute('font-size', '13');
+        textName.setAttribute('font-size', '12.5');
         textName.setAttribute('font-weight', '700');
-        textName.textContent = node.name;
+        textName.textContent = node.name.length > 24 ? node.name.slice(0, 22) + '...' : node.name;
         g.appendChild(textName);
+
+        // 4. Monospace Role Badge container & label
+        const rolePill = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        const roleTextContent = node.semanticRole.toUpperCase();
+        const rolePillW = Math.max(68, roleTextContent.length * 6.5 + 14);
+        rolePill.setAttribute('x', '16');
+        rolePill.setAttribute('y', '36');
+        rolePill.setAttribute('width', `${rolePillW}`);
+        rolePill.setAttribute('height', '18');
+        rolePill.setAttribute('rx', '4');
+        rolePill.setAttribute('fill', '#f1f5f9');
+        rolePill.setAttribute('stroke', '#cbd5e1');
+        rolePill.setAttribute('stroke-width', '0.75');
+        g.appendChild(rolePill);
 
         const textRole = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         textRole.setAttribute('class', 'node-role-text');
-        textRole.setAttribute('x', '16');
-        textRole.setAttribute('y', '52');
-        textRole.setAttribute('fill', '#64748b');
-        textRole.setAttribute('font-family', 'Inter, sans-serif');
-        textRole.setAttribute('font-size', '11');
-        textRole.textContent = `role: ${node.semanticRole}`;
+        textRole.setAttribute('x', '22');
+        textRole.setAttribute('y', '49');
+        textRole.setAttribute('fill', '#0369a1');
+        textRole.setAttribute('font-family', 'JetBrains Mono, monospace');
+        textRole.setAttribute('font-size', '9.5');
+        textRole.setAttribute('font-weight', '700');
+        textRole.textContent = roleTextContent;
         g.appendChild(textRole);
 
+        // 5. Telemetry / Metrics sub-row if card has sufficient height (>= 75px)
+        if (node.visualBounds.height >= 75) {
+          const telemetryText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          telemetryText.setAttribute('x', '16');
+          telemetryText.setAttribute('y', `${Math.min(74, node.visualBounds.height - 12)}`);
+          telemetryText.setAttribute('fill', '#64748b');
+          telemetryText.setAttribute('font-family', 'Inter, sans-serif');
+          telemetryText.setAttribute('font-size', '10');
+          telemetryText.setAttribute('font-weight', '500');
+
+          let subInfo = '0ms latency · sync active';
+          if (node.semanticRole === 'origin') subInfo = 'Port 443 · Root Authority';
+          else if (node.semanticRole === 'hub') subInfo = 'Living Orthogonal Router';
+          else if (node.id.includes('shield') || node.id.includes('escrow')) subInfo = '100% Custody · Zero Risk';
+
+          telemetryText.textContent = subInfo;
+          g.appendChild(telemetryText);
+        }
+
+        // 6. Ports on Card Perimeter with white border ring
         node.ports.forEach(port => {
           const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
           const px = port.computedAbsolutePosition ? port.computedAbsolutePosition.x - node.visualBounds.x : port.offsetRatio.x * node.visualBounds.width;
           const py = port.computedAbsolutePosition ? port.computedAbsolutePosition.y - node.visualBounds.y : port.offsetRatio.y * node.visualBounds.height;
           circle.setAttribute('cx', `${px}`);
           circle.setAttribute('cy', `${py}`);
-          circle.setAttribute('r', '5');
-          circle.setAttribute('fill', port.role === 'source' ? '#2a67d9' : '#56f09f');
+          circle.setAttribute('r', '6');
+          circle.setAttribute('fill', port.role === 'source' ? '#0284c7' : '#10b981');
           circle.setAttribute('stroke', '#ffffff');
           circle.setAttribute('stroke-width', '2');
           g.appendChild(circle);
@@ -1536,17 +2186,19 @@
     function startLivingEngine() {
       let t = 0;
       function loop() {
-        t += 0.04;
-        if (isLivingMotionEnabled && !isDraggingNode) {
+        t += 0.035;
+        // Floating breathing motion for nodes (y = +/- 3px sinusoidal wave)
+        if (isLivingMotionEnabled && !isDraggingNode && !isTourFlying) {
           scene.nodes.forEach((node, idx) => {
             const el = document.getElementById(`svg-${node.id}`);
             if (el && node.visibility !== 'hidden') {
-              const deltaY = Math.sin(t + idx * 0.8) * 1.8;
+              const deltaY = Math.sin(t * 1.5 + idx * 0.9) * 3.0;
               el.setAttribute('transform', `translate(${node.visualBounds.x}, ${node.visualBounds.y + deltaY})`);
             }
           });
         }
 
+        // Animated signal pulse particles (r=6, glowing white/cyan flowing through 28px conduits)
         if (isPulsesEnabled) {
           pulsesLayer.innerHTML = '';
           scene.edges.forEach((edge, idx) => {
@@ -1554,21 +2206,43 @@
             const tNode = scene.nodes.find(n => n.id === edge.targetNodeId);
             if (!sNode || !tNode || sNode.visibility === 'hidden' || tNode.visibility === 'hidden') return;
 
-            pulseProgress[edge.id] = (pulseProgress[edge.id] || (idx * 0.25)) + 0.008;
-            if (pulseProgress[edge.id] > 1) pulseProgress[edge.id] = 0;
-
             const path = document.getElementById(`edge-path-${edge.id}`) as unknown as SVGPathElement;
             if (path && path.getTotalLength) {
               const len = path.getTotalLength();
-              const pt = path.getPointAtLength(len * pulseProgress[edge.id]);
+              if (len <= 0) return;
 
-              const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-              circle.setAttribute('cx', `${pt.x}`);
-              circle.setAttribute('cy', `${pt.y}`);
-              circle.setAttribute('r', '4');
-              circle.setAttribute('fill', '#56f09f');
-              circle.setAttribute('filter', 'url(#pulse-glow)');
-              pulsesLayer.appendChild(circle);
+              // Run two staggered pulse particles per conduit
+              const offsets = [0, 0.5];
+              offsets.forEach(offset => {
+                let p = ((pulseProgress[edge.id] || (idx * 0.25)) + offset) % 1;
+                const pt = path.getPointAtLength(len * p);
+
+                const pulseGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+
+                // Outer glowing halo
+                const glow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                glow.setAttribute('cx', `${pt.x}`);
+                glow.setAttribute('cy', `${pt.y}`);
+                glow.setAttribute('r', '9');
+                glow.setAttribute('fill', currentTone.pulseColor);
+                glow.setAttribute('opacity', '0.5');
+                glow.setAttribute('filter', 'url(#pulse-glow)');
+
+                // Inner crisp white core (r=6)
+                const core = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                core.setAttribute('cx', `${pt.x}`);
+                core.setAttribute('cy', `${pt.y}`);
+                core.setAttribute('r', '6');
+                core.setAttribute('fill', '#ffffff');
+                core.setAttribute('stroke', currentTone.accent);
+                core.setAttribute('stroke-width', '1.5');
+
+                pulseGroup.appendChild(glow);
+                pulseGroup.appendChild(core);
+                pulsesLayer.appendChild(pulseGroup);
+              });
+
+              pulseProgress[edge.id] = ((pulseProgress[edge.id] || 0) + 0.007) % 1;
             }
           });
         }
@@ -1818,6 +2492,7 @@
     startLivingEngine();
 
     window.addEventListener('beforeunload', () => {
+      clearTourTimeouts();
       if (_livingEngineAnimId) cancelAnimationFrame(_livingEngineAnimId);
       if (timelineAnimId) cancelAnimationFrame(timelineAnimId);
       if (morphAnimId) cancelAnimationFrame(morphAnimId);

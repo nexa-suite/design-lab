@@ -36,8 +36,12 @@ import MachineryInspectionStory from '../components/stories/MachineryInspectionS
 import MobileHardwareSection from '../components/guidelines/MobileHardwareSection.astro';
 import MobileResilienceSection from '../components/guidelines/MobileResilienceSection.astro';
 
-// Native Simulator
+// Native Simulator & Live Interactive Features
 import DeviceFrame from '../components/simulator/DeviceFrame.astro';
+import InteractiveMobileNavbar from '../components/simulator/InteractiveMobileNavbar.astro';
+import InteractiveWholesaleCatalog from '../components/simulator/InteractiveWholesaleCatalog.astro';
+import InteractiveMobileForms from '../components/simulator/InteractiveMobileForms.astro';
+import InteractiveDispatchMovement from '../components/simulator/InteractiveDispatchMovement.astro';
 ---
 
 <!DOCTYPE html>
@@ -509,6 +513,23 @@ import DeviceFrame from '../components/simulator/DeviceFrame.astro';
         <!-- 7. INSPECCIÓN ARQUITECTÓNICA DE PANTALLAS CANÓNICAS -->
         <div class="mobile-screen-view" id="screen-simulador-hardware">
           <DeviceFrame />
+        </div>
+
+        <!-- 8. MÓDULOS INTERACTIVOS EN VIVO (LIVE SIMULATOR SPECIMENS) -->
+        <div class="mobile-screen-view" id="screen-live-dispatch">
+          <InteractiveDispatchMovement />
+        </div>
+
+        <div class="mobile-screen-view" id="screen-live-catalog">
+          <InteractiveWholesaleCatalog />
+        </div>
+
+        <div class="mobile-screen-view" id="screen-live-forms">
+          <InteractiveMobileForms />
+        </div>
+
+        <div class="mobile-screen-view" id="screen-live-navbar">
+          <InteractiveMobileNavbar />
         </div>
 
       </div>

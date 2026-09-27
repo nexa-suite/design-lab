@@ -7,16 +7,18 @@ interface Props {
   domain?: string;
   item?: string;
   price?: string;
+  isIsolated?: boolean;
 }
 
 const {
   domain = 'acme.store',
   item = 'Gopro',
-  price = '100€/Day'
+  price = '100€/Day',
+  isIsolated = false
 } = Astro.props;
 ---
 
-<article class="channel-card card-online" aria-label="Online Store Channel">
+<article class={`channel-card card-online ${isIsolated ? 'is-isolated' : ''}`} aria-label="Online Store Channel">
   <div class="online-card-topbar">
     <svg class="browser-lock-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
       <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
@@ -61,14 +63,22 @@ const {
 <style>
   .channel-card {
     position: absolute;
-    background-color: var(--stage-card);
+    background-color: var(--stage-card, #38c8ff);
     border-radius: 16px;
     box-shadow: none !important;
     border: none !important;
     z-index: 7;
     cursor: default;
-    color: var(--stage-text);
+    color: var(--stage-text, #082846);
     transition: transform 0.25s ease, background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .channel-card.is-isolated {
+    position: relative;
+    left: auto !important;
+    top: auto !important;
+    margin: 0 auto;
+    max-width: 100%;
   }
 
   .channel-card:hover {

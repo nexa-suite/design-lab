@@ -2,128 +2,176 @@
 /**
  * ZonasAlcanceSection.astro
  * Canonical Thumb Zone Reachability & One-Handed Ergonomics for Android
+ * Covers Biomechanical Reach Zones, Sticky Bottom Bars & Kotlin Scaffold Pattern
  */
-const scaffoldSnippet = `// Estructura canónica respetando Zonas de Pulgar:
-@Composable
-fun OperationScreen(
-    onConfirmAction: () -> Unit,
-    content: @Composable (PaddingValues) -> Unit
-) {
-    Scaffold(
-        topBar = {
-            // Zona Difícil: Solo título pasivo y navegación atrás
-            NexaTopAppBar(title = "Orden SO-2026-0018 · ICISA")
-        },
-        bottomBar = {
-            // Zona Natural Cómoda: Botón principal de acción fija
-            Surface(
-                tonalElevation = 3.dp,
-                shadowElevation = 8.dp,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Box(modifier = Modifier.padding(16.dp)) {
-                    Button(
-                        onClick = onConfirmAction,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(56.dp) // Altura industrial guantes
-                    ) {
-                        Text("REGISTRAR ENTREGA EN SITIO")
-                    }
-                }
-            }
-        }
-    ) { innerPadding ->
-        // Zona Alcanzable: Lista scrolleable
-        content(innerPadding)
-    }
-}`;
 ---
 
 <div class="zonas-alcance-container" data-platform-target="universal">
-  <section class="spec-card">
-    <div class="card-header-row">
-      <div class="card-badge-icon"><i class="pi pi-compass"></i></div>
-      <div>
-        <span class="card-eyebrow">ERGONOMÍA · ALCANCE BIOMECÁNICO</span>
-        <h3 class="card-title">Zonas de Alcance del Pulgar (Thumb Zones)</h3>
+  <!-- Section 1: Zonas Biomecánicas del Pulgar -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">01</span>
+        <div>
+          <p class="cuadro-kicker">ERGONOMÍA BIOMECÁNICA · OPERACIÓN CON UNA MANO</p>
+          <h3 class="cuadro-title">Zonas de Alcance del Pulgar (Thumb Reachability Zones)</h3>
+          <p class="cuadro-subtitle">
+            En terminales Android con pantallas de 6.1" a 6.7" (360dp a 412dp de ancho lógico), la ergonomía de una mano impone colocar las acciones primarias en la <strong>zona natural inferior (base 35%)</strong> para mitigar la fatiga tenar y evitar caídas accidentales de terminales en obra.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-compass"></i> Biomecánica 1 Mano</span>
+        <span class="cuadro-tag success"><i class="pi pi-check"></i> Sticky Bottom Action</span>
+        <span class="cuadro-tag warning"><i class="pi pi-exclamation-triangle"></i> Safe Destruction Zone</span>
       </div>
     </div>
-    <p class="card-text">
-      En pantallas de 6.1" a 6.7" (360dp a 412dp de ancho lógico en smartphones y terminales Android), la ergonomía de una mano impone colocar las acciones primarias en la zona natural inferior para evitar fatiga en muñeca y caídas de terminales.
-    </p>
 
     <!-- Biomechanics Diagram -->
     <div class="thumb-zone-diagram">
       <div class="zone-row zone-hard">
-        <div class="zone-badge red">ZONA DIFÍCIL (Top 25%)</div>
+        <div class="zone-badge red">ZONA DIFÍCIL / STRETCH (Top 25%)</div>
         <div class="zone-content">
-          <strong>Top App Bar, Título de Pantalla, Icono de Perfil</strong>
-          <p>Ubicación solo para información pasiva o acciones poco frecuentes. Requiere dos manos.</p>
+          <strong>NexaTopAppBar, Título Pasivo, Avatar de Perfil</strong>
+          <p>Ubicación restringida a información pasiva o lecturas no interactivas. Requiere uso de dos manos o cambio de agarre.</p>
         </div>
       </div>
 
       <div class="zone-row zone-medium">
-        <div class="zone-badge amber">ZONA ALCANZABLE (Centro 40%)</div>
+        <div class="zone-badge amber">ZONA ALCANZABLE / NEUTRAL (Centro 40%)</div>
         <div class="zone-content">
-          <strong>Tarjetas de Lista, Formularios, Datos Informativos de la Parada</strong>
-          <p>Lectura rápida, desplazamiento y selección mediante scroll con el pulgar.</p>
+          <strong>Tarjetas de Parada SO-2026-0018, Items de Picking, Formularios de Inspección</strong>
+          <p>Lectura continua, desplazamiento vertical fluido con el pulgar (fling) y selección táctil sin esfuerzo excesivo.</p>
         </div>
       </div>
 
       <div class="zone-row zone-natural">
         <div class="zone-badge green">ZONA NATURAL / CÓMODA (Base 35%)</div>
         <div class="zone-content">
-          <strong>Botones de Acción Primaria (CTA), Botoneras Fijas, Navegación Inferior</strong>
-          <p>Objetivo primordial: el botón de acción principal ("Confirmar Entrega", "Escanear Guía") siempre anclado abajo.</p>
+          <strong>Botones de Acción Primaria (CTA 56dp), BottomBar Fija, NexaBottomNav (64dp)</strong>
+          <p>Objetivo primordial: el botón de acción principal ("Confirmar Entrega", "Escanear Lote") siempre anclado abajo.</p>
         </div>
       </div>
     </div>
+
+    <!-- CUADRO ARQUITECTÓNICO: Colocación Biomecánica de Componentes -->
+    <div class="contract-table-wrapper">
+      <table class="contract-table">
+        <thead>
+          <tr>
+            <th>Zona de Alcance</th>
+            <th>Porcentaje de Pantalla</th>
+            <th>Nivel de Fatiga Muscular</th>
+            <th>Componentes Permitidos</th>
+            <th>Componentes Prohibidos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong class="zone-label red">Zona Difícil (Top)</strong></td>
+            <td>0% – 25% superior</td>
+            <td>Alta (Extensión del pulgar)</td>
+            <td>Título pasivo de pantalla, botón atrás de navegación, icono de búsqueda secundario</td>
+            <td>Botones de confirmación de despacho, campos de texto obligatorios</td>
+          </tr>
+          <tr>
+            <td><strong class="zone-label amber">Zona Alcanzable (Centro)</strong></td>
+            <td>25% – 65% medio</td>
+            <td>Media (Desplazamiento natural)</td>
+            <td>LazyColumn de paradas, inputs de formulario, selectores de muelle, checkboxes</td>
+            <td>Acciones críticas irreversibles sin confirmación posterior</td>
+          </tr>
+          <tr>
+            <td><strong class="zone-label green">Zona Natural (Base)</strong></td>
+            <td>65% – 100% inferior</td>
+            <td>Mínima (Rango neutro biomecánico)</td>
+            <td>NexaIndustrialButton (56dp), FloatingActionButton (FAB), NexaBottomNav fija</td>
+            <td>Listas densas sin scroll que queden solapadas por la barra de navegación</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
-  <!-- Section 2: Biomechanical Placement Rules -->
-  <section class="spec-card">
-    <div class="card-header-row">
-      <div class="card-badge-icon rule-badge"><i class="pi pi-check-circle"></i></div>
-      <div>
-        <span class="card-eyebrow">REGLAS ARQUITECTÓNICAS DE COLOCACIÓN</span>
-        <h3 class="card-title">Directrices de Diseño Ergonómico en Campo</h3>
+  <!-- Section 2: Contrato de Código Kotlin Scaffold Ergonómico -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">02</span>
+        <div>
+          <p class="cuadro-kicker">CÓDIGO DE PRODUCCIÓN · KOTLIN JETPACK COMPOSE</p>
+          <h3 class="cuadro-title">Scaffold Ergonómico con Sticky Bottom Action</h3>
+          <p class="cuadro-subtitle">
+            Plantilla canónica de pantalla para choferes y operarios, anclando el botón de acción crítica en la zona cómoda inferior sin solapamiento con la barra de gestos del sistema Android.
+          </p>
+        </div>
       </div>
     </div>
 
-    <div class="rules-grid">
-      <div class="rule-card">
-        <i class="pi pi-arrow-down-left"></i>
-        <strong>Botón Flotante / Sticky Bottom Bar</strong>
-        <p>Todo flujo operativo (entrega, escaneo, checklist) debe terminar con una barra inferior fija con padding seguro contra la barra de gestos del sistema Android.</p>
+    <div class="code-container-block">
+      <div class="code-header-bar">
+        <div class="code-header-title">
+          <i class="pi pi-file"></i>
+          <span>core/designsystem/src/main/kotlin/com/nexa/core/designsystem/component/Scaffold.kt</span>
+        </div>
+        <span class="code-lang-pill">Kotlin 2.4</span>
       </div>
+      <pre class="code-pre-box" is:raw><code><span class="comm">// Canonical Ergonomic Screen Layout Template in Jetpack Compose</span>
+<span class="kw">package</span> com.nexa.core.designsystem.component
 
-      <div class="rule-card">
-        <i class="pi pi-angle-double-down"></i>
-        <strong>Sheets Desplegables de Abajo hacia Arriba</strong>
-        <p>Para firma digital (POD), reportes o filtros, se emplean Bottom Sheets en lugar de diálogos flotantes centrados.</p>
-      </div>
+<span class="kw">import</span> androidx.compose.foundation.layout.Box
+<span class="kw">import</span> androidx.compose.foundation.layout.PaddingValues
+<span class="kw">import</span> androidx.compose.foundation.layout.WindowInsets
+<span class="kw">import</span> androidx.compose.foundation.layout.asPaddingValues
+<span class="kw">import</span> androidx.compose.foundation.layout.fillMaxSize
+<span class="kw">import</span> androidx.compose.foundation.layout.fillMaxWidth
+<span class="kw">import</span> androidx.compose.foundation.layout.navigationBars
+<span class="kw">import</span> androidx.compose.foundation.layout.padding
+<span class="kw">import</span> androidx.compose.material3.Scaffold
+<span class="kw">import</span> androidx.compose.material3.Surface
+<span class="kw">import</span> androidx.compose.runtime.Composable
+<span class="kw">import</span> androidx.compose.ui.Modifier
+<span class="kw">import</span> androidx.compose.ui.unit.dp
 
-      <div class="rule-card">
-        <i class="pi pi-shield"></i>
-        <strong>Confirmación de Destrucción Fuera de Zona Accidental</strong>
-        <p>Acciones destructivas (cancelar orden, rechazar entrega completa) requieren diálogo con confirmación en dos pasos.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 3: Scaffold Jetpack Compose Template -->
-  <section class="spec-card">
-    <div class="card-header-row">
-      <div class="card-badge-icon code-badge"><i class="pi pi-code"></i></div>
-      <div>
-        <span class="card-eyebrow">PATRÓN DE SCAFFOLD · JETPACK COMPOSE</span>
-        <h3 class="card-title">Estructura Ergonómica con Scaffold y BottomBar</h3>
-      </div>
-    </div>
-
-    <div class="code-preview-block">
-      <pre><code>{scaffoldSnippet}</code></pre>
+<span class="ann">@Composable</span>
+<span class="kw">fun</span> <span class="fn">NexaOperationScreenScaffold</span>(
+    title: <span class="type">String</span>,
+    onPrimaryAction: () -> <span class="type">Unit</span>,
+    primaryActionLabel: <span class="type">String</span>,
+    modifier: <span class="type">Modifier</span> = Modifier,
+    content: <span class="ann">@Composable</span> (<span class="type">PaddingValues</span>) -> <span class="type">Unit</span>
+) {
+    <span class="fn">Scaffold</span>(
+        modifier = modifier.fillMaxSize(),
+        topBar = {
+            <span class="comm">// Zona Difícil: Información pasiva y navegación de retorno</span>
+            <span class="fn">NexaTopAppBar</span>(title = title)
+        },
+        bottomBar = {
+            <span class="comm">// Zona Natural Cómoda: Botón industrial anclado con safe padding</span>
+            <span class="fn">Surface</span>(
+                tonalElevation = <span class="num">3.dp</span>,
+                shadowElevation = <span class="num">8.dp</span>,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                <span class="fn">Box</span>(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(<span class="num">16.dp</span>)
+                        .padding(WindowInsets.navigationBars.asPaddingValues()) <span class="comm">// Insets seguros</span>
+                ) {
+                    <span class="fn">NexaIndustrialButton</span>(
+                        text = primaryActionLabel,
+                        onClick = onPrimaryAction
+                    )
+                }
+            }
+        }
+    ) { innerPadding ->
+        <span class="comm">// Zona Alcanzable: Lista scrolleable que no colisiona con barras</span>
+        content(innerPadding)
+    }
+}</code></pre>
     </div>
   </section>
 </div>
@@ -132,79 +180,14 @@ fun OperationScreen(
   .zonas-alcance-container {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 28px;
     width: 100%;
-  }
-
-  .spec-card {
-    background: var(--nexa-surface-card, #ffffff);
-    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
-    border-radius: var(--nexa-radius-card, 16px);
-    padding: 24px;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .card-header-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .card-badge-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background: var(--nexa-color-primary-50, #eff6ff);
-    color: var(--nexa-color-primary-600, #2a67d9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 17px;
-    flex-shrink: 0;
-
-    &.rule-badge {
-      background: #ecfdf5;
-      color: #059669;
-    }
-    &.code-badge {
-      background: #f1f5f9;
-      color: #0f172a;
-    }
-  }
-
-  .card-eyebrow {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    color: var(--nexa-color-primary-700, #1d4ed8);
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 2px;
-  }
-
-  .card-title {
-    font-family: var(--nexa-font-family-display, sans-serif);
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--nexa-color-text-primary, #0f172a);
-    margin: 0;
-  }
-
-  .card-text {
-    font-size: 13.5px;
-    color: var(--nexa-color-text-secondary, #64748b);
-    line-height: 1.6;
-    margin: 0;
   }
 
   .thumb-zone-diagram {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 8px;
+    gap: 12px;
   }
 
   .zone-row {
@@ -259,6 +242,14 @@ fun OperationScreen(
     }
   }
 
+  .zone-label {
+    font-size: 11px;
+    font-weight: 700;
+    &.red { color: #b91c1c; }
+    &.amber { color: #b45309; }
+    &.green { color: #15803d; }
+  }
+
   .zone-content {
     display: flex;
     flex-direction: column;
@@ -272,59 +263,6 @@ fun OperationScreen(
       font-size: 12px;
       color: #64748b;
       margin: 0;
-    }
-  }
-
-  .rules-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 8px;
-  }
-
-  @media (max-width: 900px) {
-    .rules-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .rule-card {
-    padding: 16px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-
-    i {
-      font-size: 18px;
-      color: var(--nexa-color-primary-600, #2a67d9);
-    }
-    strong {
-      font-size: 13.5px;
-      color: #0f172a;
-    }
-    p {
-      font-size: 12px;
-      color: #64748b;
-      margin: 0;
-      line-height: 1.5;
-    }
-  }
-
-  .code-preview-block {
-    background: #0f172a;
-    border-radius: 12px;
-    padding: 18px;
-    overflow-x: auto;
-
-    pre { margin: 0; }
-    code {
-      font-family: var(--nexa-font-family-mono, monospace);
-      font-size: 12px;
-      color: #e2e8f0;
-      line-height: 1.6;
     }
   }
 </style>

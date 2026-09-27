@@ -570,91 +570,182 @@ function initHeroAnimation() {
 }
 
 /* --------------------------------------------------------------------------
-   4. INTERACTIVE PHONE MOCKUP (4-STATE WORKFLOW)
+   4. INTERACTIVE PHONE MOCKUP & SCROLLYTELLING STATE CONTROLLER
    -------------------------------------------------------------------------- */
-function initPhoneMockup() {
-  const tabs = document.querySelectorAll<HTMLButtonElement>('.timeline-stepper .step-pill');
+let currentPhoneState: number | 'inventory' = 1;
+let activeCategoryTab: 'bookings' | 'inventory' = 'bookings';
+let isScrollytellingInState2 = false;
+let isConfettiFiring = false;
+
+function setPhoneState(targetState: number | 'inventory', triggerConfetti = true) {
+  currentPhoneState = targetState;
   const views = document.querySelectorAll<HTMLElement>('.phone-screen .phone-state-view');
+  const stepperTabs = document.querySelectorAll<HTMLButtonElement>('.timeline-stepper .step-pill');
+  const timelineItems = document.querySelectorAll<HTMLElement>('.timeline-steps-list .timeline-item');
+
+  // Update Views
+  views.forEach(v => {
+    const vState = v.getAttribute('data-state');
+    const isActive = String(vState) === String(targetState);
+    v.classList.toggle('active', isActive);
+    if (isActive) {
+      v.removeAttribute('aria-hidden');
+    } else {
+      v.setAttribute('aria-hidden', 'true');
+    }
+  });
+
+  // If numeric step (1, 2, 3, 4), update right wing timeline and stepper pills
+  if (typeof targetState === 'number') {
+    stepperTabs.forEach(t => {
+      const tStep = parseInt(t.getAttribute('data-step') || '1', 10);
+      const isSel = tStep === targetState;
+      t.classList.toggle('active', isSel);
+      t.setAttribute('aria-selected', String(isSel));
+    });
+
+    timelineItems.forEach(item => {
+      const itemStep = parseInt(item.getAttribute('data-step') || '1', 10);
+      const isItemActive = itemStep === targetState;
+      item.classList.toggle('active', isItemActive);
+    });
+
+    if (targetState === 4 && triggerConfetti) {
+      triggerPaymentConfetti();
+    }
+  }
+}
+
+function updateDuration(days: number) {
+  const chipButtons = document.querySelectorAll<HTMLButtonElement>('.duration-chip');
+  chipButtons.forEach(btn => {
+    const bDays = parseInt(btn.getAttribute('data-days') || '5', 10);
+    btn.classList.toggle('active', bDays === days);
+  });
+
+  // End date calculation
+  const endDateEl = document.getElementById('step1-end-date');
+  if (endDateEl) {
+    if (days === 3) endDateEl.textContent = '2022/03/22';
+    else if (days === 5) endDateEl.textContent = '2022/03/24';
+    else if (days === 7) endDateEl.textContent = '2022/03/26';
+  }
+
+  // Price calculations:
+  // Base daily rate: €100.00
+  // Deposit: €200.00
+  // Insurance: €20.00
+  // Duration discount: €30.00
+  const rentalBase = days * 100;
+  const total = rentalBase + 200 + 20 - 30; // 3d: €490.00, 5d: €690.00, 7d: €890.00
+  const totalFormatted = `€${total.toFixed(2)}`;
+
+  // Step 1 display amount
+  const step1Amt = document.getElementById('step1-display-amount');
+  if (step1Amt) step1Amt.textContent = totalFormatted;
+
+  // Step 3 (Summary) updates
+  const itemValEl = document.querySelector<HTMLElement>('#phone-state-3 .item-val');
+  if (itemValEl) itemValEl.textContent = `€${rentalBase.toFixed(2)}`;
+
+  const itemSubInfo = document.querySelector<HTMLElement>('#phone-state-3 .item-info span');
+  if (itemSubInfo) itemSubInfo.textContent = `€100.00 / day × ${days} days`;
+
+  const totalDueEl = document.querySelector<HTMLElement>('#phone-state-3 .total-price');
+  if (totalDueEl) totalDueEl.textContent = totalFormatted;
+
+  const payBtnSpan = document.querySelector<HTMLElement>('#execute-payment-btn span');
+  if (payBtnSpan) payBtnSpan.textContent = `Pay ${totalFormatted} & Escrow`;
+}
+
+function initPhoneMockup() {
   const notifCard = document.getElementById('trigger-step-2');
+  const btnToStep2 = document.getElementById('btn-to-step-2');
   const faceScanBtn = document.getElementById('confirm-face-scan');
   const payBtn = document.getElementById('execute-payment-btn');
   const restartBtn = document.getElementById('phone-restart-btn');
   const backBtns = document.querySelectorAll<HTMLButtonElement>('.phone-back-btn');
-  const payOptions = document.querySelectorAll<HTMLLabelElement>('.pay-option');
+  const invProceedBtn = document.getElementById('inv-proceed-btn');
+  const invBackBtn = document.getElementById('inv-back-btn');
+  const durationChips = document.querySelectorAll<HTMLButtonElement>('.duration-chip');
+  const timelineItems = document.querySelectorAll<HTMLElement>('.timeline-steps-list .timeline-item');
+  const stepperTabs = document.querySelectorAll<HTMLButtonElement>('.timeline-stepper .step-pill');
 
-  const goToState = (stateNum: number) => {
-    // Update Views
-    views.forEach(v => {
-      const vState = parseInt(v.getAttribute('data-state') || '1', 10);
-      if (vState === stateNum) {
-        v.classList.add('active');
-        v.removeAttribute('aria-hidden');
-      } else {
-        v.classList.remove('active');
-        v.setAttribute('aria-hidden', 'true');
-      }
-    });
-
-    // Update Tabs
-    tabs.forEach(t => {
-      const tStep = parseInt(t.getAttribute('data-step') || '1', 10);
-      const isSelected = tStep === stateNum;
-      t.classList.toggle('active', isSelected);
-      t.setAttribute('aria-selected', String(isSelected));
-    });
-
-    if (stateNum === 4) {
-      triggerPaymentConfetti();
-    }
-  };
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const step = parseInt(tab.getAttribute('data-step') || '1', 10);
-      goToState(step);
+  // Duration chips click
+  durationChips.forEach(chip => {
+    chip.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const days = parseInt(chip.getAttribute('data-days') || '5', 10);
+      updateDuration(days);
     });
   });
 
-  // Notification click triggers Step 2
-  notifCard?.addEventListener('click', () => goToState(2));
+  // Step 1 -> Step 2
+  notifCard?.addEventListener('click', () => setPhoneState(2));
   notifCard?.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      goToState(2);
+      setPhoneState(2);
     }
   });
+  btnToStep2?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setPhoneState(2);
+  });
 
-  // Face scan confirm triggers Step 3
-  faceScanBtn?.addEventListener('click', () => goToState(3));
+  // Step 2 -> Step 3 (Face Scan Confirm)
+  faceScanBtn?.addEventListener('click', () => setPhoneState(3));
 
-  // Payment button triggers Step 4
-  payBtn?.addEventListener('click', () => goToState(4));
+  // Step 3 -> Step 4 (Payment Button)
+  payBtn?.addEventListener('click', () => setPhoneState(4));
 
-  // Restart flow
-  restartBtn?.addEventListener('click', () => goToState(1));
+  // Step 4 -> Step 1 (Restart Flow)
+  restartBtn?.addEventListener('click', () => setPhoneState(1));
 
   // Back buttons
   backBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const target = parseInt(btn.getAttribute('data-target') || '1', 10);
-      goToState(target);
+      setPhoneState(target);
     });
   });
 
-  // Payment radio options styling
-  payOptions.forEach(opt => {
-    opt.addEventListener('click', () => {
-      payOptions.forEach(o => o.classList.remove('active'));
-      opt.classList.add('active');
-      const radio = opt.querySelector('input');
-      if (radio) radio.checked = true;
+  // Inventory navigation
+  invProceedBtn?.addEventListener('click', () => setPhoneState(2));
+  invBackBtn?.addEventListener('click', () => {
+    const tabBookings = document.getElementById('tab-bookings');
+    tabBookings?.click();
+  });
+
+  // Right-wing timeline step click
+  timelineItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const step = parseInt(item.getAttribute('data-step') || '1', 10);
+      setPhoneState(step);
+    });
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const step = parseInt(item.getAttribute('data-step') || '1', 10);
+        setPhoneState(step);
+      }
+    });
+  });
+
+  // Stepper tabs click
+  stepperTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const step = parseInt(tab.getAttribute('data-step') || '1', 10);
+      setPhoneState(step);
     });
   });
 }
 
 function triggerPaymentConfetti() {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) return;
+  if (prefersReduced || isConfettiFiring) return;
+  isConfettiFiring = true;
+  setTimeout(() => { isConfettiFiring = false; }, 1400);
 
   const phoneScreen = document.querySelector<HTMLElement>('.phone-screen');
   if (!phoneScreen) return;
@@ -670,20 +761,20 @@ function triggerPaymentConfetti() {
   gsap.killTweensOf(container.children);
   container.innerHTML = '';
 
-  const colors = ['#57f09e', '#3dd598', '#f7b928', '#ffffff', '#004737', '#b5e4c8'];
-  const count = 38;
+  const colors = ['#57f09e', '#38c8ff', '#f7b928', '#ffffff', '#004737', '#6effb0'];
+  const count = 42;
 
   for (let i = 0; i < count; i++) {
     const p = document.createElement('div');
     const color = colors[i % colors.length];
-    const isRound = Math.random() > 0.5;
+    const isRound = Math.random() > 0.45;
     const size = Math.random() * 6 + 5;
     p.style.cssText = `
       position: absolute;
       left: 50%;
       top: 45%;
       width: ${size}px;
-      height: ${isRound ? size : size * 1.6}px;
+      height: ${isRound ? size : size * 1.7}px;
       background-color: ${color};
       border-radius: ${isRound ? '50%' : '2px'};
       pointer-events: none;
@@ -691,20 +782,20 @@ function triggerPaymentConfetti() {
     container.appendChild(p);
 
     const angle = Math.random() * Math.PI * 2;
-    const distance = Math.random() * 115 + 25;
+    const distance = Math.random() * 120 + 30;
     const x = Math.cos(angle) * distance;
-    const y = Math.sin(angle) * distance - 20;
+    const y = Math.sin(angle) * distance - 25;
     const rot = (Math.random() - 0.5) * 720;
 
     gsap.fromTo(p, 
-      { x: 0, y: 0, rotation: 0, scale: 0.5, opacity: 1 },
+      { x: 0, y: 0, rotation: 0, scale: 0.4, opacity: 1 },
       { 
         x, 
-        y: y + 90, 
+        y: y + 95, 
         rotation: rot, 
         scale: 1, 
         opacity: 0, 
-        duration: Math.random() * 0.8 + 0.75, 
+        duration: Math.random() * 0.75 + 0.75, 
         ease: 'power2.out',
         onComplete: () => p.remove()
       }
@@ -918,7 +1009,8 @@ function initScrollChoreography() {
 function initSatelliteSwitches() {
   const switches = document.querySelectorAll<HTMLElement>('.satellite-switch-pill');
   switches.forEach(sw => {
-    sw.addEventListener('click', () => {
+    sw.addEventListener('click', (e) => {
+      e.stopPropagation();
       const isChecked = sw.classList.toggle('active');
       sw.setAttribute('aria-checked', String(isChecked));
     });
@@ -929,72 +1021,40 @@ function initSatelliteSwitches() {
   const tabInventory = document.getElementById('tab-inventory');
   const trackBar = document.querySelector<HTMLElement>('.track-active-bar');
 
-  const bookingsSatellites = document.querySelectorAll<HTMLElement>('#satellite-online-payments, #satellite-pay-store, #satellite-id-verify');
+  const bookingsSatellites = document.querySelectorAll<HTMLElement>('.bookings-satellite');
   const inventorySatellites = document.querySelectorAll<HTMLElement>('.inventory-satellite');
-  const phoneScreen1 = document.getElementById('phone-state-1');
-  const phoneScreenInv = document.getElementById('phone-state-inventory');
 
-  tabBookings?.addEventListener('click', () => {
-    tabBookings.classList.add('active');
-    tabBookings.setAttribute('aria-selected', 'true');
-    tabInventory?.classList.remove('active');
-    tabInventory?.setAttribute('aria-selected', 'false');
-    if (trackBar) trackBar.style.transform = 'translateX(0)';
+  function switchTab(tab: 'bookings' | 'inventory') {
+    activeCategoryTab = tab;
+    const isBookings = tab === 'bookings';
 
-    // Crossfade satellites
-    inventorySatellites.forEach(el => {
-      gsap.to(el, { opacity: 0, scale: 0.95, duration: 0.25, onComplete: () => { el.style.display = 'none'; } });
-    });
-    bookingsSatellites.forEach(el => {
-      el.style.display = 'flex';
-      gsap.fromTo(el, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.3, delay: 0.08 });
-    });
+    tabBookings?.classList.toggle('active', isBookings);
+    tabBookings?.setAttribute('aria-selected', String(isBookings));
+    tabInventory?.classList.toggle('active', !isBookings);
+    tabInventory?.setAttribute('aria-selected', String(!isBookings));
 
-    // Crossfade phone view
-    if (phoneScreenInv) {
-      gsap.to(phoneScreenInv, { opacity: 0, duration: 0.2, onComplete: () => {
-        phoneScreenInv.style.display = 'none';
-        phoneScreenInv.classList.remove('active');
-      }});
+    if (trackBar) {
+      trackBar.style.transform = isBookings ? 'translateX(0)' : 'translateX(100%)';
     }
-    if (phoneScreen1) {
-      phoneScreen1.style.display = 'flex';
-      phoneScreen1.classList.add('active');
-      gsap.fromTo(phoneScreen1, { opacity: 0 }, { opacity: 1, duration: 0.25, delay: 0.08 });
-    }
-  });
 
-  tabInventory?.addEventListener('click', () => {
-    tabInventory.classList.add('active');
-    tabInventory.setAttribute('aria-selected', 'true');
-    tabBookings?.classList.remove('active');
-    tabBookings?.setAttribute('aria-selected', 'false');
-    if (trackBar) trackBar.style.transform = 'translateX(100%)';
-
-    // Crossfade satellites
+    // Toggle satellite cards visibility without breaking GSAP's transform
     bookingsSatellites.forEach(el => {
-      gsap.to(el, { opacity: 0, scale: 0.95, duration: 0.25, onComplete: () => { el.style.display = 'none'; } });
+      el.style.display = isBookings ? 'flex' : 'none';
+      el.style.opacity = isBookings ? '1' : '0';
     });
     inventorySatellites.forEach(el => {
-      el.style.display = 'flex';
-      gsap.fromTo(el, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.3, delay: 0.08 });
+      el.style.display = isBookings ? 'none' : 'flex';
+      el.style.opacity = isBookings ? '0' : '1';
     });
 
-    // Crossfade phone view
-    if (phoneScreen1) {
-      gsap.to(phoneScreen1, { opacity: 0, duration: 0.2, onComplete: () => {
-        phoneScreen1.style.display = 'none';
-        phoneScreen1.classList.remove('active');
-      }});
-    }
-    if (phoneScreenInv) {
-      phoneScreenInv.style.display = 'flex';
-      phoneScreenInv.classList.add('active');
-      gsap.fromTo(phoneScreenInv, { opacity: 0 }, { opacity: 1, duration: 0.25, delay: 0.08 });
-    }
-  });
+    // Update phone state
+    setPhoneState(isBookings ? 1 : 'inventory', false);
+  }
 
-  // Inventory Interactive Switches (e.g. Add Services -> €20 Delivery)
+  tabBookings?.addEventListener('click', () => switchTab('bookings'));
+  tabInventory?.addEventListener('click', () => switchTab('inventory'));
+
+  // Inventory Interactive Switches (Add Services -> €20 Delivery fee)
   const addServicesCard = document.getElementById('satellite-add-services');
   const servicesRow = document.getElementById('inv-additional-services-row');
   const totalAmountEl = document.getElementById('inv-total-amount');
@@ -1014,11 +1074,13 @@ function initSatelliteSwitches() {
     }
   });
 
-  // Allow clicking on other switches
-  const otherSwitches = document.querySelectorAll<HTMLElement>('#satellite-add-deposits, #satellite-add-items, #satellite-discounts');
-  otherSwitches.forEach(card => {
+  // Clicking anywhere on satellite cards to toggle switch
+  const otherSatellites = document.querySelectorAll<HTMLElement>(
+    '#satellite-online-payments, #satellite-pay-store, #satellite-id-verify, #satellite-add-deposits, #satellite-add-items, #satellite-discounts'
+  );
+  otherSatellites.forEach(card => {
     card.addEventListener('click', () => {
-      const pill = card.querySelector('.satellite-switch-pill');
+      const pill = card.querySelector<HTMLElement>('.satellite-switch-pill');
       if (pill) {
         const isNowActive = !pill.classList.contains('active');
         pill.classList.toggle('active', isNowActive);
@@ -1035,70 +1097,105 @@ function initScrollytellingTimeline() {
   const section = document.getElementById('scrollytelling');
   if (!section) return;
 
-  const state1Plate = section.querySelector('.stage-backdrop-state1');
-  const state2Plate = section.querySelector('.stage-backdrop-state2');
-  const navTabs = section.querySelector('.scrolly-nav-tabs');
-  const cardTopLeft = section.querySelector('#satellite-online-payments');
-  const cardBottomLeft = section.querySelector('#satellite-pay-store');
-  const cardRight = section.querySelector('#satellite-id-verify');
-  const avatarBlock = section.querySelector('.customer-avatar-stem-block');
-  const leftWing = section.querySelector('.customer-left-wing');
-  const rightWing = section.querySelector('.customer-right-wing');
-  const timelineItems = section.querySelectorAll<HTMLElement>('.timeline-steps-list .timeline-item');
-  const phoneScreen1 = section.querySelector<HTMLElement>('#phone-state-1');
-  const phoneScreen4 = section.querySelector<HTMLElement>('#phone-state-4');
+  const navTabs = section.querySelector<HTMLElement>('.scrolly-nav-tabs');
+  const leftCards = section.querySelectorAll<HTMLElement>('.card-top-left, .card-bottom-left');
+  const rightCards = section.querySelectorAll<HTMLElement>('.card-right, .card-bottom-right');
+  const avatarBlock = section.querySelector<HTMLElement>('.customer-avatar-stem-block');
+  const leftWing = section.querySelector<HTMLElement>('.customer-left-wing');
+  const rightWing = section.querySelector<HTMLElement>('.customer-right-wing');
 
+  // Initial setup for State 1: ensure customer wings start hidden & avatar is properly centered with xPercent
+  if (avatarBlock) {
+    gsap.set(avatarBlock, { opacity: 0, y: -20, xPercent: -50 });
+  }
+  if (leftWing) {
+    gsap.set(leftWing, { opacity: 0, x: -30 });
+  }
+  if (rightWing) {
+    gsap.set(rightWing, { opacity: 0, x: 30 });
+  }
+
+  // Create GSAP ScrollTrigger timeline with scrub
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: '#scrollytelling',
       start: 'top top',
       end: 'bottom bottom',
-      scrub: 0.8,
-    }
+      scrub: 0.6,
+      onUpdate: (self) => {
+        const p = self.progress;
+
+        // Mode switch: State 1 (< 0.22) vs State 2 (>= 0.22)
+        if (p < 0.22) {
+          if (isScrollytellingInState2) {
+            isScrollytellingInState2 = false;
+            rightWing?.classList.remove('is-interactive');
+            if (rightWing) rightWing.style.pointerEvents = 'none';
+            if (navTabs) navTabs.style.pointerEvents = 'auto';
+            leftCards.forEach(c => (c.style.pointerEvents = 'auto'));
+            rightCards.forEach(c => (c.style.pointerEvents = 'auto'));
+            // Restore tab state (1 or inventory)
+            setPhoneState(activeCategoryTab === 'bookings' ? 1 : 'inventory', false);
+          }
+        } else {
+          if (!isScrollytellingInState2) {
+            isScrollytellingInState2 = true;
+            rightWing?.classList.add('is-interactive');
+            if (rightWing) rightWing.style.pointerEvents = 'auto';
+            if (navTabs) navTabs.style.pointerEvents = 'none';
+            leftCards.forEach(c => (c.style.pointerEvents = 'none'));
+            rightCards.forEach(c => (c.style.pointerEvents = 'none'));
+          }
+
+          // Step progression in State 2:
+          // 0.22 - 0.44 -> Step 1 (Date selection & order)
+          // 0.44 - 0.64 -> Step 2 (Run face verification)
+          // 0.64 - 0.82 -> Step 3 (Summary & pay)
+          // 0.82 - 1.00 -> Step 4 (Success! 🍾)
+          let targetStep = 1;
+          if (p >= 0.82) {
+            targetStep = 4;
+          } else if (p >= 0.64) {
+            targetStep = 3;
+          } else if (p >= 0.44) {
+            targetStep = 2;
+          } else {
+            targetStep = 1;
+          }
+
+          if (currentPhoneState !== targetStep) {
+            setPhoneState(targetStep, targetStep === 4);
+          }
+        }
+      },
+    },
   });
 
-  // Phase 1 -> Transition to Phase 2 (0.10 -> 0.30)
-  tl.to(navTabs, { opacity: 0, y: -20, duration: 0.18 }, 0.10)
-    .to([cardTopLeft, cardBottomLeft], { opacity: 0, x: -40, duration: 0.22 }, 0.12)
-    .to(cardRight, { opacity: 0, x: 40, duration: 0.22 }, 0.12)
-    .to(state1Plate, { opacity: 0, scale: 0.94, duration: 0.24 }, 0.16)
-    .to(state2Plate, { opacity: 1, scale: 1, duration: 0.28 }, 0.20)
-    .to(avatarBlock, { opacity: 1, y: 0, duration: 0.28 }, 0.24)
-    .to(leftWing, { opacity: 1, x: 0, duration: 0.30 }, 0.28)
-    .to(rightWing, { opacity: 1, x: 0, duration: 0.30 }, 0.28);
+  // Crossfade animations (progress 0.08 to 0.24)
+  // 1. Fade out nav tabs and glide upward
+  if (navTabs) {
+    tl.to(navTabs, { opacity: 0, y: -20, duration: 0.12 }, 0.08);
+  }
+  // 2. Glide satellite cards outward and fade out
+  if (leftCards.length) {
+    tl.to(leftCards, { opacity: 0, x: -40, duration: 0.14 }, 0.10);
+  }
+  if (rightCards.length) {
+    tl.to(rightCards, { opacity: 0, x: 40, duration: 0.14 }, 0.10);
+  }
+  // 3. Fade in John Cooper avatar (preserving xPercent: -50), left wing, right wing
+  if (avatarBlock) {
+    tl.to(avatarBlock, { opacity: 1, y: 0, xPercent: -50, duration: 0.14 }, 0.16);
+  }
+  if (leftWing) {
+    tl.to(leftWing, { opacity: 1, x: 0, duration: 0.14 }, 0.18);
+  }
+  if (rightWing) {
+    tl.to(rightWing, { opacity: 1, x: 0, duration: 0.14 }, 0.18);
+  }
 
-  // Crossfade phone screen from 1 to 4 smoothly (0.32 -> 0.38)
-  tl.to(phoneScreen1, { 
-    opacity: 0, 
-    duration: 0.12, 
-    onComplete: () => {
-      phoneScreen1?.classList.remove('active');
-      phoneScreen4?.classList.add('active');
-    }, 
-    onReverseComplete: () => {
-      phoneScreen4?.classList.remove('active');
-      phoneScreen1?.classList.add('active');
-    } 
-  }, 0.32)
-  .fromTo(phoneScreen4, { opacity: 0 }, { opacity: 1, duration: 0.12 }, 0.35);
-
-  // Animate timeline milestones along scroll:
-  // Milestone 0 (Reserve): 0.40
-  // Milestone 1 (Face ID): 0.48
-  // Milestone 2 (Checkout): 0.56
-  // Milestone 3 (Done / Success!): 0.65 -> COMPLETION IS FULLY REACHED AT 0.65!
-  const stepProgress = [0.40, 0.48, 0.56, 0.65];
-  timelineItems.forEach((_item, index) => {
-    tl.call(() => {
-      timelineItems.forEach((it, i) => it.classList.toggle('active', i === index));
-    }, [], stepProgress[index]);
-  });
-
-  // FINAL MANDATORY HOLD (0.65 -> 1.00):
-  // The last milestone ("Success! 🍾") is active, the phone state is stable,
-  // and the page maintains this completed state for a full 35% of the scroll track
-  // before the pin is released and the next section enters.
-  tl.to({}, { duration: 0.35 }, 0.65);
+  // Hold completion state through the remainder of the pin
+  tl.to({}, { duration: 0.65 }, 0.35);
 }
 
 /* --------------------------------------------------------------------------

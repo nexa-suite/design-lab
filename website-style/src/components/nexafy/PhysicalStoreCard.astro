@@ -7,16 +7,18 @@ interface Props {
   price?: string;
   item?: string;
   channelName?: string;
+  isIsolated?: boolean;
 }
 
 const {
   price = '100€/Day',
   item = 'Gopro',
-  channelName = 'Physical Store'
+  channelName = 'Physical Store',
+  isIsolated = false
 } = Astro.props;
 ---
 
-<article class="channel-card card-store" aria-label="Physical Store Channel">
+<article class={`channel-card card-store ${isIsolated ? 'is-isolated' : ''}`} aria-label="Physical Store Channel">
   <div class="card-thumb-wrap">
     <img 
       src="/assets/synthetic/store-schematic.svg" 
@@ -38,14 +40,22 @@ const {
 <style>
   .channel-card {
     position: absolute;
-    background-color: var(--stage-card);
+    background-color: var(--stage-card, #38c8ff);
     border-radius: 16px;
     box-shadow: none !important;
     border: none !important;
     z-index: 7;
     cursor: default;
-    color: var(--stage-text);
+    color: var(--stage-text, #082846);
     transition: transform 0.25s ease, background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .channel-card.is-isolated {
+    position: relative;
+    left: auto !important;
+    top: auto !important;
+    margin: 0 auto;
+    max-width: 100%;
   }
 
   .channel-card:hover {

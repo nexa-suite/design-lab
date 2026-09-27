@@ -1,0 +1,1190 @@
+---
+/**
+ * InteractiveMobileForms.astro
+ * Canonical Touch-Validated Mobile Forms Specification (Material 3)
+ * Includes:
+ *  - Form 1: Registro de Entrega POD (Proof of Delivery) con motivo, acta de discrepancia y pad interactivo de firma digital HTML5
+ *  - Form 2: Inspección Pre-operacional de Montacargas con switches táctiles 56dp (OK, ALERTA, CRÍTICO) y bloqueo de ignición automático reactivo
+ *  - Exact production Kotlin 2.4 & Jetpack Compose Material 3 code cuadro
+ */
+---
+
+<div class="interactive-forms-container">
+
+  <!-- Interactive Forms Stage Card -->
+  <div class="forms-stage-card">
+    
+    <!-- Top Form Tabs Switcher -->
+    <div class="forms-tab-selector" role="tablist">
+      <button type="button" class="form-nav-btn active" id="tab-btn-pod" data-target="form-pod">
+        <i class="pi pi-check-circle"></i> 1. Registro de Entrega POD
+      </button>
+      <button type="button" class="form-nav-btn" id="tab-btn-forklift" data-target="form-forklift">
+        <i class="pi pi-wrench"></i> 2. Inspección de Montacargas
+      </button>
+    </div>
+
+    <!-- =====================================================================
+         FORM 1: REGISTRO DE ENTREGA POD (PROOF OF DELIVERY)
+         ===================================================================== -->
+    <div class="form-view-panel active" id="panel-form-pod">
+      <div class="form-panel-header">
+        <div class="panel-title-wrap">
+          <span class="panel-eyebrow">RECEPCIÓN DE MERCADERÍA EN SITIO</span>
+          <h2 class="panel-title">Acta de Conformidad & Entrega POD</h2>
+        </div>
+        <span class="order-id-badge">DSP-204 · La Cava Fría</span>
+      </div>
+
+      <form class="touch-form-body" id="form-pod-el" onsubmit="return false;">
+        
+        <!-- Motivo de Entrega Selector (56dp height touch target) -->
+        <div class="touch-field-group">
+          <label class="touch-label" for="pod-reason-select">
+            ESTADO DE CONFORMIDAD DE RECEPCIÓN:
+          </label>
+          <div class="custom-select-wrap">
+            <select id="pod-reason-select" class="touch-input-56 select-field">
+              <option value="conforme" selected>✓ Entrega Conforme 100% (Sin Discrepancias)</option>
+              <option value="temperatura">⚠ Rechazo Parcial por Temperatura Fuera de Rango</option>
+              <option value="cantidad">⚠ Discrepancia en Conteo de Cajas / Faltante</option>
+              <option value="embalaje">⚠ Embalaje Dañado / Pérdida de Cadena de Frío</option>
+            </select>
+            <i class="pi pi-chevron-down select-caret"></i>
+          </div>
+        </div>
+
+        <!-- Conditional Discrepancy Protocol Card (Dynamic Visibility) -->
+        <div class="discrepancy-card" id="discrepancy-panel" style="display: none;">
+          <div class="discrepancy-header">
+            <i class="pi pi-exclamation-triangle text-warning"></i>
+            <strong>Acta de Discrepancia y Cadena de Frío Requerida</strong>
+          </div>
+          <div class="discrepancy-fields-grid">
+            <div class="discrepancy-input-item">
+              <label for="discrepancy-temp">TEMPERATURA REGISTRADA (°C):</label>
+              <input type="text" id="discrepancy-temp" class="discrepancy-input" value="7.8°C" />
+            </div>
+            <div class="discrepancy-input-item">
+              <label for="discrepancy-rejected-boxes">CAJAS RECHAZADAS:</label>
+              <input type="number" id="discrepancy-rejected-boxes" class="discrepancy-input" value="4" min="1" max="50" />
+            </div>
+          </div>
+          <label class="evidence-checkbox-label">
+            <input type="checkbox" id="check-evidence-attached" checked />
+            <span>Evidencia fotográfica adjuntada mediante escaneo óptico CameraX</span>
+          </label>
+        </div>
+
+        <!-- Touch Input: Receptor Name (56dp height) -->
+        <div class="touch-field-group">
+          <label class="touch-label" for="pod-receiver-name">NOMBRE Y APELLIDO DEL RECEPTOR:</label>
+          <input 
+            type="text" 
+            id="pod-receiver-name" 
+            class="touch-input-56" 
+            placeholder="Ej: Ing. Carlos Paredes Alarcón" 
+            value="Carlos Paredes Alarcón" 
+            required 
+          />
+        </div>
+
+        <!-- Touch Input: Document DNI/CE (56dp height) -->
+        <div class="touch-field-group">
+          <label class="touch-label" for="pod-receiver-dni">DOCUMENTO DE IDENTIDAD (DNI / CE):</label>
+          <input 
+            type="text" 
+            id="pod-receiver-dni" 
+            class="touch-input-56 font-mono" 
+            placeholder="Ej: 45892019" 
+            value="45892019" 
+            required 
+          />
+        </div>
+
+        <!-- Digital Signature Interactive Pad (HTML5 Canvas with Touch / Mouse drawing) -->
+        <div class="signature-section-wrap">
+          <div class="signature-header-row">
+            <label class="touch-label">PAD DE FIRMA DIGITAL EN PANTALLA:</label>
+            <div class="signature-actions">
+              <button type="button" class="btn-sig-action" id="btn-clear-signature">
+                <i class="pi pi-trash"></i> Limpiar
+              </button>
+              <button type="button" class="btn-sig-action verify" id="btn-verify-signature">
+                <i class="pi pi-shield"></i> Verificar & Sellar
+              </button>
+            </div>
+          </div>
+
+          <!-- The HTML5 Interactive Canvas Pad -->
+          <div class="signature-canvas-container">
+            <canvas id="signature-canvas" width="360" height="150" class="sig-canvas"></canvas>
+            <div class="signature-placeholder" id="sig-placeholder">
+              <i class="pi pi-pencil"></i>
+              <span>Firme aquí con el dedo o stylus táctil</span>
+            </div>
+          </div>
+
+          <div class="signature-status-bar" id="sig-status-bar">
+            <span class="sig-status-dot" id="sig-status-dot"></span>
+            <span class="sig-status-text" id="sig-status-text">Pendiente de firma del receptor</span>
+            <span class="sig-hash-token" id="sig-hash-token"></span>
+          </div>
+        </div>
+
+        <!-- Submit POD Action Button (56dp height) -->
+        <button type="button" class="btn-submit-pod" id="btn-submit-pod">
+          <i class="pi pi-check-circle"></i>
+          <span>Emitir Acta POD Digital (56dp)</span>
+        </button>
+
+      </form>
+    </div>
+
+    <!-- =====================================================================
+         FORM 2: INSPECCIÓN PRE-OPERACIONAL DE MONTACARGAS
+         ===================================================================== -->
+    <div class="form-view-panel" id="panel-form-forklift">
+      <div class="form-panel-header">
+        <div class="panel-title-wrap">
+          <span class="panel-eyebrow">CHECKLIST PRE-OPERACIONAL ISO 3691</span>
+          <h2 class="panel-title">Inspección de Montacargas Linde H30 #04</h2>
+        </div>
+        <span class="order-id-badge warning">Turno: Mañana (07:00 – 15:00)</span>
+      </div>
+
+      <!-- Critical Ignition Interlock Alert Banner (Appears dynamically on CRITICO) -->
+      <div class="interlock-alarm-banner" id="interlock-alarm" style="display: none;">
+        <div class="alarm-icon-pulse">
+          <i class="pi pi-ban"></i>
+        </div>
+        <div class="alarm-text-block">
+          <strong>¡BLOQUEO DE IGNICIÓN ACTIVADO!</strong>
+          <p>Falla crítica detectada en sistema de frenos o circuito hidráulico. Telemetría CAN-bus inmovilizada por protocolo de seguridad ISO 3691. Notificando automáticamente al Jefe de Patio.</p>
+        </div>
+      </div>
+
+      <!-- Normal Ready Banner -->
+      <div class="normal-status-banner" id="normal-status-banner">
+        <i class="pi pi-check-circle text-success"></i>
+        <span>Todos los subsistemas se encuentran dentro de los parámetros de operación seguros.</span>
+      </div>
+
+      <div class="inspection-items-list">
+        
+        <!-- Item 1: Frenos & Emergencia (Critical) -->
+        <div class="inspection-item-card" data-subsystem="brakes">
+          <div class="item-meta">
+            <div class="item-title-row">
+              <i class="pi pi-exclamation-circle text-primary"></i>
+              <strong>1. Sistema de Frenos & Freno de Emergencia</strong>
+            </div>
+            <span class="item-desc">Pedal de freno de servicio, zapata hidráulica y parada de emergencia de corte rápido.</span>
+          </div>
+
+          <div class="segmented-switches-56" role="radiogroup" aria-label="Estado frenos">
+            <button type="button" class="switch-btn-56 active" data-state="ok" data-subsystem="brakes">
+              <i class="pi pi-check"></i> OK
+            </button>
+            <button type="button" class="switch-btn-56 alert" data-state="alert" data-subsystem="brakes">
+              <i class="pi pi-info-circle"></i> ALERTA
+            </button>
+            <button type="button" class="switch-btn-56 critic" data-state="critic" data-subsystem="brakes">
+              <i class="pi pi-ban"></i> CRÍTICO
+            </button>
+          </div>
+        </div>
+
+        <!-- Item 2: Circuito Hidráulico & Mástil (Critical) -->
+        <div class="inspection-item-card" data-subsystem="hydraulic">
+          <div class="item-meta">
+            <div class="item-title-row">
+              <i class="pi pi-cog text-primary"></i>
+              <strong>2. Circuito Hidráulico & Elevación de Mástil</strong>
+            </div>
+            <span class="item-desc">Mangueras de alta presión, vástago, fuga de aceite ATF y cadenas de carga.</span>
+          </div>
+
+          <div class="segmented-switches-56" role="radiogroup" aria-label="Estado hidráulico">
+            <button type="button" class="switch-btn-56 active" data-state="ok" data-subsystem="hydraulic">
+              <i class="pi pi-check"></i> OK
+            </button>
+            <button type="button" class="switch-btn-56 alert" data-state="alert" data-subsystem="hydraulic">
+              <i class="pi pi-info-circle"></i> ALERTA
+            </button>
+            <button type="button" class="switch-btn-56 critic" data-state="critic" data-subsystem="hydraulic">
+              <i class="pi pi-ban"></i> CRÍTICO
+            </button>
+          </div>
+        </div>
+
+        <!-- Item 3: Luces de Trabajo & Baliza -->
+        <div class="inspection-item-card" data-subsystem="lights">
+          <div class="item-meta">
+            <div class="item-title-row">
+              <i class="pi pi-sun text-primary"></i>
+              <strong>3. Luces de Trabajo, Alarma de Retroceso & Baliza</strong>
+            </div>
+            <span class="item-desc">Faros LED frontales, estroboscópico azul perimetral de seguridad y bocina.</span>
+          </div>
+
+          <div class="segmented-switches-56" role="radiogroup" aria-label="Estado luces">
+            <button type="button" class="switch-btn-56 active" data-state="ok" data-subsystem="lights">
+              <i class="pi pi-check"></i> OK
+            </button>
+            <button type="button" class="switch-btn-56 alert" data-state="alert" data-subsystem="lights">
+              <i class="pi pi-info-circle"></i> ALERTA
+            </button>
+            <button type="button" class="switch-btn-56 critic" data-state="critic" data-subsystem="lights">
+              <i class="pi pi-ban"></i> CRÍTICO
+            </button>
+          </div>
+        </div>
+
+        <!-- Item 4: Batería / Gas GLP -->
+        <div class="inspection-item-card" data-subsystem="energy">
+          <div class="item-meta">
+            <div class="item-title-row">
+              <i class="pi pi-bolt text-primary"></i>
+              <strong>4. Nivel de Carga Batería / Balón GLP</strong>
+            </div>
+            <span class="item-desc">Sensor de celda Li-Ion al 88%, sin sulfatación de bornes ni fuga de gas.</span>
+          </div>
+
+          <div class="segmented-switches-56" role="radiogroup" aria-label="Estado energía">
+            <button type="button" class="switch-btn-56 active" data-state="ok" data-subsystem="energy">
+              <i class="pi pi-check"></i> OK
+            </button>
+            <button type="button" class="switch-btn-56 alert" data-state="alert" data-subsystem="energy">
+              <i class="pi pi-info-circle"></i> ALERTA
+            </button>
+            <button type="button" class="switch-btn-56 critic" data-state="critic" data-subsystem="energy">
+              <i class="pi pi-ban"></i> CRÍTICO
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Button for Forklift Inspection -->
+      <button type="button" class="btn-submit-forklift" id="btn-submit-inspection">
+        <i class="pi pi-lock-open" id="forklift-btn-icon"></i>
+        <span id="forklift-btn-label">Aprobar Turno Operacional (Liberar Ignición)</span>
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- Documentation Cuadro: Production-Ready Kotlin 2.4 & Jetpack Compose Material 3 Code -->
+  <section class="cuadro-card">
+    <header class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">FRM</span>
+        <div>
+          <p class="cuadro-kicker">JETPACK COMPOSE MATERIAL 3 · FORMULARIOS TÁCTILES & BLOQUEO DE IGNICIÓN</p>
+          <h3 class="cuadro-title">Especificación de Firma Táctil Canvas & SegmentedButton con Enclavamiento</h3>
+          <p class="cuadro-subtitle">
+            Implementación nativa en Kotlin 2.4 con captura vectorial de firma digital, validación reactiva de reglas críticas y emisión de actas POD con persistencia Room.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-android"></i> Android 14 M3</span>
+        <span class="cuadro-tag kotlin"><i class="pi pi-code"></i> Kotlin 2.4</span>
+        <span class="cuadro-tag success"><i class="pi pi-shield"></i> ISO 3691 Safety</span>
+      </div>
+    </header>
+
+    <!-- Kotlin 2.4 Production Snippet -->
+    <div class="code-box-wrapper">
+      <div class="code-box-header">
+        <div class="file-name">
+          <i class="pi pi-file"></i>
+          <span>MachineryInspectionAndPodForms.kt — Jetpack Compose Material 3</span>
+        </div>
+        <span class="code-badge">Production Kotlin 2.4</span>
+      </div>
+      <pre class="code-content" is:raw><code><span class="kw">package</span> com.nexa.operations.presentation.forms
+
+<span class="kw">import</span> androidx.compose.animation.AnimatedVisibility
+<span class="kw">import</span> androidx.compose.foundation.Canvas
+<span class="kw">import</span> androidx.compose.foundation.gestures.detectDragGestures
+<span class="kw">import</span> androidx.compose.foundation.layout.*
+<span class="kw">import</span> androidx.compose.foundation.shape.RoundedCornerShape
+<span class="kw">import</span> androidx.compose.material.icons.Icons
+<span class="kw">import</span> androidx.compose.material.icons.filled.*
+<span class="kw">import</span> androidx.compose.material3.*
+<span class="kw">import</span> androidx.compose.runtime.*
+<span class="kw">import</span> androidx.compose.ui.Modifier
+<span class="kw">import</span> androidx.compose.ui.geometry.Offset
+<span class="kw">import</span> androidx.compose.ui.graphics.Color
+<span class="kw">import</span> androidx.compose.ui.graphics.Path
+<span class="kw">import</span> androidx.compose.ui.graphics.drawscope.Stroke
+<span class="kw">import</span> androidx.compose.ui.input.pointer.pointerInput
+<span class="kw">import</span> androidx.compose.ui.unit.dp
+
+<span class="kw">enum class</span> <span class="type">InspectionState</span> { OK, ALERT, CRITICAL }
+
+<span class="cmt">/**
+ * Componente nativo de Pad de Firma Digital en Compose.
+ */</span>
+<span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">NexaDigitalSignaturePad</span>(
+    onSignatureCaptured: (<span class="type">List</span>&lt;<span class="type">Offset</span>&gt;) -&gt; <span class="type">Unit</span>,
+    modifier: <span class="type">Modifier</span> = <span class="type">Modifier</span>
+) {
+    <span class="kw">val</span> points = remember { mutableStateListOf&lt;<span class="type">Offset</span>&gt;() }
+
+    <span class="fn">Surface</span>(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(<span class="num">160.dp</span>),
+        shape = RoundedCornerShape(<span class="num">12.dp</span>),
+        border = CardDefaults.outlinedCardBorder(),
+        color = Color(<span class="num">0xFFF8FAFC</span>)
+    ) {
+        <span class="fn">Canvas</span>(
+            modifier = Modifier
+                .fillMaxSize()
+                .pointerInput(Unit) {
+                    <span class="fn">detectDragGestures</span>(
+                        onDragStart = { offset -&gt; points.add(offset) },
+                        onDrag = { change, _ -&gt;
+                            points.add(change.position)
+                            onSignatureCaptured(points.toList())
+                        }
+                    )
+                }
+        ) {
+            <span class="kw">if</span> (points.size &gt; <span class="num">1</span>) {
+                <span class="kw">val</span> path = Path().apply {
+                    moveTo(points.first().x, points.first().y)
+                    points.drop(<span class="num">1</span>).forEach { lineTo(it.x, it.y) }
+                }
+                drawPath(path = path, color = Color(<span class="num">0xFF082846</span>), style = Stroke(width = <span class="num">4f</span>))
+            }
+        }
+    }
+}
+
+<span class="cmt">/**
+ * Formulario de Inspección de Montacargas con Enclavamiento de Seguridad ISO 3691.
+ */</span>
+<span class="kw">@OptIn</span>(ExperimentalMaterial3Api::<span class="kw">class</span>)
+<span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">MachineryInspectionScreen</span>(
+    onApproveShift: () -&gt; <span class="type">Unit</span>,
+    modifier: <span class="type">Modifier</span> = <span class="type">Modifier</span>
+) {
+    <span class="kw">var</span> brakesState <span class="kw">by</span> remember { mutableStateOf(InspectionState.OK) }
+    <span class="kw">var</span> hydraulicState <span class="kw">by</span> remember { mutableStateOf(InspectionState.OK) }
+    
+    <span class="cmt">// Regla de negocio canónica: Falla crítica en frenos o hidráulico activa bloqueo inmediato</span>
+    <span class="kw">val</span> isIgnitionLocked = brakesState == InspectionState.CRITICAL || hydraulicState == InspectionState.CRITICAL
+
+    <span class="fn">Column</span>(modifier = modifier.fillMaxWidth().padding(<span class="num">16.dp</span>)) {
+        <span class="fn">AnimatedVisibility</span>(visible = isIgnitionLocked) {
+            <span class="fn">Card</span>(
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
+                modifier = Modifier.fillMaxWidth().padding(bottom = <span class="num">16.dp</span>)
+            ) {
+                <span class="fn">Row</span>(modifier = Modifier.padding(<span class="num">16.dp</span>)) {
+                    <span class="fn">Icon</span>(Icons.Default.Dangerous, contentDescription = <span class="kw">null</span>, tint = MaterialTheme.colorScheme.error)
+                    <span class="fn">Spacer</span>(modifier = Modifier.width(<span class="num">12.dp</span>))
+                    <span class="fn">Text</span>(
+                        text = <span class="str">"¡BLOQUEO DE IGNICIÓN ACTIVADO! Telemetría inmovilizada por falla crítica."</span>,
+                        color = MaterialTheme.colorScheme.onErrorContainer,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
+            }
+        }
+
+        <span class="cmt">// Botón de 56dp ergonómico</span>
+        <span class="fn">Button</span>(
+            onClick = onApproveShift,
+            enabled = !isIgnitionLocked,
+            modifier = Modifier.fillMaxWidth().heightIn(min = <span class="num">56.dp</span>),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = <span class="kw">if</span> (isIgnitionLocked) Color.Gray <span class="kw">else</span> MaterialTheme.colorScheme.primary
+            )
+        ) {
+            <span class="fn">Text</span>(
+                text = <span class="kw">if</span> (isIgnitionLocked) <span class="str">"Bloqueado por Seguridad Operacional"</span> <span class="kw">else</span> <span class="str">"Aprobar Turno Operacional"</span>
+            )
+        }
+    }
+}</code></pre>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Tab switching between POD and Forklift forms
+    const tabPod = document.getElementById('tab-btn-pod');
+    const tabForklift = document.getElementById('tab-btn-forklift');
+    const panelPod = document.getElementById('panel-form-pod');
+    const panelForklift = document.getElementById('panel-form-forklift');
+
+    tabPod?.addEventListener('click', () => {
+      tabPod.classList.add('active');
+      tabForklift?.classList.remove('active');
+      panelPod?.classList.add('active');
+      panelForklift?.classList.remove('active');
+    });
+
+    tabForklift?.addEventListener('click', () => {
+      tabForklift.classList.add('active');
+      tabPod?.classList.remove('active');
+      panelForklift?.classList.add('active');
+      panelPod?.classList.remove('active');
+    });
+
+    // Reason Select & Discrepancy Protocol conditional display
+    const selectReason = document.getElementById('pod-reason-select') as HTMLSelectElement | null;
+    const discrepancyPanel = document.getElementById('discrepancy-panel');
+
+    selectReason?.addEventListener('change', () => {
+      const val = selectReason.value;
+      if (discrepancyPanel) {
+        discrepancyPanel.style.display = val === 'conforme' ? 'none' : 'block';
+      }
+    });
+
+    // Interactive Digital Signature HTML5 Canvas Pad
+    const canvas = document.getElementById('signature-canvas') as HTMLCanvasElement | null;
+    const placeholder = document.getElementById('sig-placeholder');
+    const btnClearSig = document.getElementById('btn-clear-signature');
+    const btnVerifySig = document.getElementById('btn-verify-signature');
+    const sigStatusDot = document.getElementById('sig-status-dot');
+    const sigStatusText = document.getElementById('sig-status-text');
+    const sigHashToken = document.getElementById('sig-hash-token');
+
+    let isDrawing = false;
+    let hasSignature = false;
+    let ctx: CanvasRenderingContext2D | null = null;
+
+    if (canvas) {
+      ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.strokeStyle = '#082846';
+        ctx.lineWidth = 2.8;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+      }
+
+      function getPos(e: MouseEvent | TouchEvent) {
+        if (!canvas) return { x: 0, y: 0 };
+        const rect = canvas.getBoundingClientRect();
+        if ('touches' in e && e.touches.length > 0) {
+          return {
+            x: e.touches[0].clientX - rect.left,
+            y: e.touches[0].clientY - rect.top
+          };
+        } else if ('clientX' in e) {
+          return {
+            x: (e as MouseEvent).clientX - rect.left,
+            y: (e as MouseEvent).clientY - rect.top
+          };
+        }
+        return { x: 0, y: 0 };
+      }
+
+      function startDraw(e: MouseEvent | TouchEvent) {
+        e.preventDefault();
+        isDrawing = true;
+        hasSignature = true;
+        if (placeholder) placeholder.style.display = 'none';
+        const pos = getPos(e);
+        ctx?.beginPath();
+        ctx?.moveTo(pos.x, pos.y);
+      }
+
+      function draw(e: MouseEvent | TouchEvent) {
+        if (!isDrawing) return;
+        e.preventDefault();
+        const pos = getPos(e);
+        ctx?.lineTo(pos.x, pos.y);
+        ctx?.stroke();
+      }
+
+      function stopDraw() {
+        if (isDrawing) {
+          isDrawing = false;
+          if (sigStatusDot) sigStatusDot.className = 'sig-status-dot drawing';
+          if (sigStatusText) sigStatusText.textContent = 'Firma capturada (sin sellar)';
+        }
+      }
+
+      canvas.addEventListener('mousedown', startDraw);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDraw);
+      canvas.addEventListener('mouseleave', stopDraw);
+
+      canvas.addEventListener('touchstart', startDraw, { passive: false });
+      canvas.addEventListener('touchmove', draw, { passive: false });
+      canvas.addEventListener('touchend', stopDraw);
+    }
+
+    btnClearSig?.addEventListener('click', () => {
+      if (canvas && ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        hasSignature = false;
+        if (placeholder) placeholder.style.display = 'flex';
+        if (sigStatusDot) sigStatusDot.className = 'sig-status-dot';
+        if (sigStatusText) sigStatusText.textContent = 'Pendiente de firma del receptor';
+        if (sigHashToken) sigHashToken.textContent = '';
+      }
+    });
+
+    btnVerifySig?.addEventListener('click', () => {
+      if (!hasSignature) {
+        alert('Por favor firme en el pad antes de verificar.');
+        return;
+      }
+      if (sigStatusDot) sigStatusDot.className = 'sig-status-dot verified';
+      if (sigStatusText) sigStatusText.textContent = '✓ Firma verificada y sellada con SHA-256';
+      if (sigHashToken) {
+        const mockHash = 'SHA256: ' + Math.random().toString(36).substring(2, 10).toUpperCase() + '...' + Date.now().toString(16).toUpperCase();
+        sigHashToken.textContent = mockHash;
+      }
+    });
+
+    // Submit POD Button
+    const btnSubmitPod = document.getElementById('btn-submit-pod');
+    btnSubmitPod?.addEventListener('click', () => {
+      if (!hasSignature) {
+        alert('Se requiere la firma del receptor para emitir el acta POD digital.');
+        return;
+      }
+      alert('¡Acta POD Digital emitida con éxito!\nOrden: DSP-204 (La Cava Fría)\nTransacción registrada en cola SQLite Room y firmada criptográficamente.');
+    });
+
+    // Forklift Machinery Inspection & Ignition Interlock
+    const inspectionButtons = document.querySelectorAll('.switch-btn-56');
+    const alarmBanner = document.getElementById('interlock-alarm');
+    const normalBanner = document.getElementById('normal-status-banner');
+    const btnSubmitForklift = document.getElementById('btn-submit-inspection') as HTMLButtonElement | null;
+    const btnIcon = document.getElementById('forklift-btn-icon');
+    const btnLabel = document.getElementById('forklift-btn-label');
+
+    const subsystemStates: Record<string, string> = {
+      brakes: 'ok',
+      hydraulic: 'ok',
+      lights: 'ok',
+      energy: 'ok'
+    };
+
+    function evaluateIgnitionSafety() {
+      // Critical failure in brakes or hydraulic activates interlock
+      const hasCriticalSafetyFailure = subsystemStates.brakes === 'critic' || subsystemStates.hydraulic === 'critic';
+
+      if (hasCriticalSafetyFailure) {
+        if (alarmBanner) alarmBanner.style.display = 'flex';
+        if (normalBanner) normalBanner.style.display = 'none';
+        if (btnSubmitForklift) {
+          btnSubmitForklift.disabled = true;
+          btnSubmitForklift.classList.add('locked');
+        }
+        if (btnIcon) btnIcon.className = 'pi pi-ban';
+        if (btnLabel) btnLabel.textContent = '⛔ Bloqueado por Seguridad Operacional (Falla Crítica)';
+      } else {
+        if (alarmBanner) alarmBanner.style.display = 'none';
+        if (normalBanner) normalBanner.style.display = 'flex';
+        if (btnSubmitForklift) {
+          btnSubmitForklift.disabled = false;
+          btnSubmitForklift.classList.remove('locked');
+        }
+        if (btnIcon) btnIcon.className = 'pi pi-lock-open';
+        if (btnLabel) btnLabel.textContent = 'Aprobar Turno Operacional (Liberar Ignición)';
+      }
+    }
+
+    inspectionButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const subsystem = btn.getAttribute('data-subsystem');
+        const state = btn.getAttribute('data-state');
+        if (!subsystem || !state) return;
+
+        // Toggle active button within the parent group
+        const parent = btn.closest('.segmented-switches-56');
+        parent?.querySelectorAll('.switch-btn-56').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        subsystemStates[subsystem] = state;
+        evaluateIgnitionSafety();
+      });
+    });
+
+    btnSubmitForklift?.addEventListener('click', () => {
+      alert('¡Inspección Pre-operacional Aprobada!\nMontacargas Linde H30 #04 liberado en telemetría CAN-bus para el turno.');
+    });
+  });
+</script>
+
+<style>
+  .interactive-forms-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .forms-stage-card {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: var(--nexa-radius-card, 16px);
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Form Tabs Selector */
+  .forms-tab-selector {
+    display: flex;
+    background: #f1f5f9;
+    border-bottom: 1px solid var(--nexa-color-border-default, #cbd5e1);
+    padding: 6px;
+    gap: 6px;
+  }
+
+  .form-nav-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 44px;
+    border-radius: 10px;
+    border: none;
+    background: transparent;
+    color: var(--nexa-color-text-secondary, #475569);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .form-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  .form-nav-btn.active {
+    background: #ffffff;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  }
+
+  /* Form View Panels */
+  .form-view-panel {
+    display: none;
+    padding: 20px;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .form-view-panel.active {
+    display: flex;
+  }
+
+  .form-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    flex-wrap: wrap;
+  }
+
+  .panel-title-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .panel-eyebrow {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    text-transform: uppercase;
+  }
+
+  .panel-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 2px 0 0;
+  }
+
+  .order-id-badge {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .order-id-badge.warning {
+    background: #fffbeb;
+    color: #b45309;
+    border-color: #fde68a;
+  }
+
+  /* Form Elements (56dp touch targets) */
+  .touch-form-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .touch-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .touch-label {
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--nexa-color-text-secondary, #475569);
+    text-transform: uppercase;
+  }
+
+  .touch-input-56 {
+    width: 100%;
+    height: 56px;
+    min-height: 56px;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: 1.5px solid var(--nexa-color-border-default, #cbd5e1);
+    background: var(--nexa-color-neutral-50, #f8fafc);
+    color: var(--nexa-color-text-primary, #0f172a);
+    font-size: 14px;
+    font-weight: 600;
+    outline: none;
+    transition: all 0.15s ease;
+  }
+
+  .touch-input-56:focus {
+    background: #ffffff;
+    border-color: var(--nexa-color-primary-600, #2a67d9);
+    box-shadow: 0 0 0 3px rgba(42, 103, 217, 0.15);
+  }
+
+  .font-mono {
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .custom-select-wrap {
+    position: relative;
+    width: 100%;
+  }
+
+  .select-field {
+    appearance: none;
+    cursor: pointer;
+    padding-right: 40px;
+  }
+
+  .select-caret {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    pointer-events: none;
+  }
+
+  /* Discrepancy Card */
+  .discrepancy-card {
+    background: #fffbeb;
+    border: 1.5px solid #fde68a;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .discrepancy-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #92400e;
+  }
+
+  .discrepancy-fields-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  @media (max-width: 600px) {
+    .discrepancy-fields-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .discrepancy-input-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .discrepancy-input-item label {
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #78350f;
+  }
+
+  .discrepancy-input {
+    height: 44px;
+    padding: 0 12px;
+    border-radius: 8px;
+    border: 1px solid #fcd34d;
+    background: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .evidence-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #78350f;
+    cursor: pointer;
+  }
+
+  /* Signature Pad */
+  .signature-section-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .signature-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .signature-actions {
+    display: flex;
+    gap: 6px;
+  }
+
+  .btn-sig-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    height: 32px;
+    padding: 0 10px;
+    border-radius: 6px;
+    border: 1px solid var(--nexa-color-border-default, #cbd5e1);
+    background: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    color: #475569;
+    cursor: pointer;
+  }
+
+  .btn-sig-action.verify {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border-color: #bfdbfe;
+  }
+
+  .signature-canvas-container {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    background: #ffffff;
+    border: 1.5px dashed var(--nexa-color-border-default, #cbd5e1);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .sig-canvas {
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+    touch-action: none;
+  }
+
+  .signature-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: #94a3b8;
+    font-size: 12px;
+    pointer-events: none;
+  }
+
+  .signature-status-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #64748b;
+  }
+
+  .sig-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #cbd5e1;
+  }
+
+  .sig-status-dot.drawing { background: #f59e0b; }
+  .sig-status-dot.verified { background: #22c55e; }
+
+  .sig-hash-token {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    color: #1d4ed8;
+    margin-left: auto;
+  }
+
+  .btn-submit-pod {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 56px;
+    min-height: 56px;
+    border-radius: 14px;
+    border: none;
+    background: var(--nexa-color-primary-600, #2a67d9);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.15s ease;
+  }
+
+  .btn-submit-pod:hover {
+    background: var(--nexa-color-primary-700, #1d4ed8);
+  }
+
+  /* Forklift Checklist & Ignition Interlock Styles */
+  .interlock-alarm-banner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #fef2f2;
+    border: 2px solid #ef4444;
+    border-radius: 14px;
+    padding: 16px;
+    color: #991b1b;
+    animation: pulseAlarm 1.2s infinite alternate ease-in-out;
+  }
+
+  @keyframes pulseAlarm {
+    from { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+    to { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+  }
+
+  .alarm-icon-pulse {
+    font-size: 28px;
+    color: #dc2626;
+  }
+
+  .alarm-text-block strong {
+    font-size: 14px;
+    display: block;
+  }
+
+  .alarm-text-block p {
+    font-size: 12px;
+    margin: 4px 0 0;
+    line-height: 1.4;
+  }
+
+  .normal-status-banner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #166534;
+  }
+
+  .inspection-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .inspection-item-card {
+    background: #f8fafc;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .item-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
+    color: var(--nexa-color-text-primary, #0f172a);
+  }
+
+  .item-desc {
+    font-size: 11.5px;
+    color: var(--nexa-color-text-secondary, #64748b);
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* 56dp Touch Target Segmented Buttons */
+  .segmented-switches-56 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .switch-btn-56 {
+    height: 56px;
+    min-height: 56px;
+    border-radius: 10px;
+    border: 1.5px solid var(--nexa-color-border-default, #cbd5e1);
+    background: #ffffff;
+    color: var(--nexa-color-text-secondary, #475569);
+    font-size: 12.5px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .switch-btn-56.active {
+    background: #16a34a;
+    color: #ffffff;
+    border-color: transparent;
+  }
+
+  .switch-btn-56.alert.active {
+    background: #f59e0b;
+    color: #ffffff;
+    border-color: transparent;
+  }
+
+  .switch-btn-56.critic.active {
+    background: #dc2626;
+    color: #ffffff;
+    border-color: transparent;
+  }
+
+  .btn-submit-forklift {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 56px;
+    min-height: 56px;
+    border-radius: 14px;
+    border: none;
+    background: #16a34a;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-submit-forklift.locked {
+    background: #dc2626;
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+
+  /* Code box wrapper */
+  .code-box-wrapper {
+    background: #0f172a;
+    border-radius: 12px;
+    border: 1px solid #1e293b;
+    overflow: hidden;
+  }
+
+  .code-box-header {
+    background: #090d16;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1e293b;
+    color: #94a3b8;
+    font-size: 12px;
+  }
+
+  .file-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    color: #e2e8f0;
+  }
+
+  .code-badge {
+    background: #2563eb;
+    color: #ffffff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .code-content {
+    margin: 0;
+    padding: 16px;
+    overflow-x: auto;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 12px;
+    line-height: 1.6;
+    color: #f8fafc;
+  }
+
+  .kw { color: #f472b6; font-weight: 600; }
+  .type { color: #60a5fa; }
+  .fn { color: #38bdf8; }
+  .str { color: #4ade80; }
+  .num { color: #fb923c; }
+  .cmt { color: #64748b; font-style: italic; }
+</style>

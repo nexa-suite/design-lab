@@ -7,16 +7,18 @@ interface Props {
   author?: string;
   timestamp?: string;
   message?: string;
+  isIsolated?: boolean;
 }
 
 const {
   author = 'John Cooper',
   timestamp = '3h',
-  message = 'I want to rent 2xGoPro for 4 days, for an event.'
+  message = 'I want to rent 2xGoPro for 4 days, for an event.',
+  isIsolated = false
 } = Astro.props;
 ---
 
-<article class="channel-card card-email" aria-label="Direct Customer Inquiry">
+<article class={`channel-card card-email ${isIsolated ? 'is-isolated' : ''}`} aria-label="Direct Customer Inquiry">
   <div class="email-card-header">
     <div class="email-avatar-wrap">
       <img 
@@ -34,21 +36,29 @@ const {
     </div>
   </div>
   <p class="email-body-text">
-    Hi! <span class="wave-hand-icon" aria-hidden="true">👆</span> {message}
+    Hi! <span class="wave-hand-icon" aria-hidden="true">👋</span> {message}
   </p>
 </article>
 
 <style>
   .channel-card {
     position: absolute;
-    background-color: var(--stage-card);
+    background-color: var(--stage-card, #38c8ff);
     border-radius: 16px;
     box-shadow: none !important;
     border: none !important;
     z-index: 7;
     cursor: default;
-    color: var(--stage-text);
+    color: var(--stage-text, #082846);
     transition: transform 0.25s ease, background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .channel-card.is-isolated {
+    position: relative;
+    left: auto !important;
+    top: auto !important;
+    margin: 0 auto;
+    max-width: 100%;
   }
 
   .channel-card:hover {

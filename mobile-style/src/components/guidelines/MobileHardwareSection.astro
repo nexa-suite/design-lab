@@ -1,29 +1,44 @@
 ---
 /**
- * MobileHardwareSection — CameraX & ML Kit Hardware Scanning with Mandatory Manual Fallback
- * Directly adheres to ADR-0018 and field ruggedization constraints.
+ * MobileHardwareSection.astro
+ * Canonical Hardware & Field Sensor Integration for Android
+ * Covers CameraX GS1-128 Burst Scanning, GPS Geofencing (200m), BLE Temperature Telemetry (2.0°C – 6.0°C),
+ * Mandatory Manual Fallback & Production Kotlin 2.4 Integration Contracts.
  */
 ---
 
 <div class="hardware-container" id="sec-hardware-camerax" data-platform-target="kotlin">
-  <section class="spec-card">
-    <div class="card-header-row">
-      <div class="card-badge-icon hardware-badge"><i class="pi pi-qrcode"></i></div>
-      <div>
-        <span class="card-eyebrow">HARDWARE MÓVIL · CAMERAX & ML KIT</span>
-        <h3 class="card-title">Escaneo Óptico en Campo con Fallback Manual Obligatorio</h3>
+
+  <!-- ==========================================================================
+       1. ESCANEO ÓPTICO CAMERAX & ML KIT (CON FALLBACK OBLIGATORIO)
+       ========================================================================== -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">01</span>
+        <div>
+          <p class="cuadro-kicker">HARDWARE MÓVIL · CAMERAX 1.4 & ML KIT VISION</p>
+          <h3 class="cuadro-title">Escaneo Láser Óptico de Códigos GS1-128 & Fallback Numérico</h3>
+          <p class="cuadro-subtitle">
+            Integración de hardware para captura burst de códigos de barras (GS1-128, DataMatrix, QR) en guías de remisión y bultos de almacén. Implementa <strong>CameraX ImageAnalysis.Analyzer</strong> con delegación a <strong>Google ML Kit Barcode Scanning</strong> y soporte nativo para terminales Zebra DataWedge vía <code>Android Intents</code>.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-qrcode"></i> CameraX 60 FPS</span>
+        <span class="cuadro-tag success"><i class="pi pi-barcode"></i> GS1-128 / QR</span>
+        <span class="cuadro-tag warning"><i class="pi pi-shield"></i> Fallback 48dp Mandatario</span>
       </div>
     </div>
-    <p class="card-text">
-      En operaciones logísticas y de almacén (Operations Android), los conductores y operarios deben validar guías de despacho y códigos de activos en contenedores. El sistema implementa <strong>CameraX + ML Kit Barcode Scanning</strong> junto con integración a escáneres láser industriales (Zebra DataWedge via Android Intents).
-    </p>
 
-    <!-- Fallback Requirement Box -->
+    <!-- Fallback Requirement Banner -->
     <div class="field-rule-banner">
       <div class="rule-icon"><i class="pi pi-exclamation-circle"></i></div>
       <div class="rule-text">
-        <strong>Mandato Arquitectónico (ADR-0018): Fallback Manual Obligatorio</strong>
-        <p>Bajo ninguna circunstancia la imposibilidad de escanear (código físico con manchas de grasa, roto, o falta de luz en tolva) puede detener la operativa de despacho. La pantalla de escáner debe ofrecer <em>siempre</em> un campo de texto numérico de 48dp con teclado numérico ampliado para validación manual de la guía.</p>
+        <strong>Mandato de Arquitectura de Campo (ADR-0018): Fallback Numérico Obligatorio</strong>
+        <p>
+          En condiciones de obra (polvo, manchas de grasa en etiquetas térmicas, código roto o falta de iluminación en tolva), el escaneo óptico puede fallar. <strong>Bajo ninguna circunstancia se detiene el despacho</strong>: la pantalla de escáner debe ofrecer <em>permanentemente</em> un teclado numérico táctil de 48dp y validación manual directa sin cambiar de pantalla.
+        </p>
       </div>
     </div>
 
@@ -31,26 +46,31 @@
     <div class="scanner-specimen-layout">
       <div class="scanner-mock-view">
         <div class="cam-lens-header">
-          <span><i class="pi pi-camera"></i> CameraX 1.4 PreviewView</span>
-          <span class="fps-tag">60 FPS · QR/Code128</span>
+          <span><i class="pi pi-camera"></i> CameraX PreviewView</span>
+          <span class="fps-tag">60 FPS · Autofocus Activo</span>
         </div>
         <div class="cam-lens-body">
           <div class="reticle-box">
             <div class="reticle-laser"></div>
-            <span class="reticle-text">Alinee guía física aquí</span>
+            <span class="reticle-text">Alinee guía física GS1-128 aquí</span>
           </div>
+        </div>
+        <div class="scanner-status-strip">
+          <span><i class="pi pi-bolt"></i> Flash: Auto</span>
+          <span><i class="pi pi-volume-up"></i> Beep: On</span>
+          <span><i class="pi pi-mobile"></i> Haptic: Heavy</span>
         </div>
       </div>
 
       <div class="scanner-fallback-panel">
-        <span class="panel-kicker">INTERFAZ DE CONTINGENCIA</span>
+        <span class="panel-kicker">INTERFAZ DE CONTINGENCIA EN CAMPO</span>
         <h4 class="panel-title">Entrada Manual Inmediata</h4>
         <p class="panel-desc">Disponible en todo momento sin salir del flujo de escaneo:</p>
 
         <div class="manual-input-box">
-          <label>Código de Guía de Despacho (10 dígitos)</label>
+          <label for="inp-fallback-code">Código de Guía o SKU (10 dígitos)</label>
           <div class="input-action-row">
-            <input type="text" value="SO-2026-0018-01" readonly />
+            <input type="text" id="inp-fallback-code" value="SO-2026-0018-01" readonly />
             <button type="button" class="btn-validate">
               <i class="pi pi-check"></i> Validar
             </button>
@@ -58,80 +78,182 @@
         </div>
 
         <div class="hardware-specs-list">
-          <div class="spec-pill-item">
-            <i class="pi pi-bolt"></i> Linterna Flash Integrada
-          </div>
-          <div class="spec-pill-item">
-            <i class="pi pi-tablet"></i> Soporte Zebra DataWedge
-          </div>
-          <div class="spec-pill-item">
-            <i class="pi pi-volume-up"></i> Pitido y Haptic Feedback
-          </div>
+          <div class="spec-pill-item"><i class="pi pi-bolt"></i> Linterna LED Forzada</div>
+          <div class="spec-pill-item"><i class="pi pi-tablet"></i> Zebra DataWedge Broadcast</div>
+          <div class="spec-pill-item"><i class="pi pi-check-circle"></i> Deduplicación 500ms</div>
         </div>
       </div>
     </div>
+
+    <!-- Production Kotlin CameraX Code Block -->
+    <div class="code-container-block">
+      <div class="code-header-bar">
+        <div class="code-header-title">
+          <i class="pi pi-file"></i>
+          <span>core/hardware/src/main/kotlin/com/nexa/core/hardware/scanner/BarcodeAnalyzer.kt</span>
+        </div>
+        <span class="code-lang-pill">Kotlin 2.4</span>
+      </div>
+      <pre class="code-pre-box" is:raw><code><span class="comm">// CameraX ImageAnalysis.Analyzer with ML Kit Vision for GS1-128 burst scanning</span>
+<span class="kw">package</span> com.nexa.core.hardware.scanner
+
+<span class="kw">import</span> androidx.camera.core.ExperimentalGetImage
+<span class="kw">import</span> androidx.camera.core.ImageAnalysis
+<span class="kw">import</span> androidx.camera.core.ImageProxy
+<span class="kw">import</span> com.google.mlkit.vision.barcode.BarcodeScanning
+<span class="kw">import</span> com.google.mlkit.vision.barcode.common.Barcode
+<span class="kw">import</span> com.google.mlkit.vision.common.InputImage
+
+<span class="kw">class</span> <span class="type">NexaBarcodeAnalyzer</span>(
+    <span class="kw">private val</span> onBarcodeDetected: (<span class="type">String</span>) -> <span class="type">Unit</span>
+) : <span class="type">ImageAnalysis.Analyzer</span> {
+
+    <span class="kw">private val</span> scanner = <span class="fn">BarcodeScanning</span>.getClient()
+    <span class="kw">private var</span> lastScannedTime = <span class="num">0L</span>
+
+    <span class="ann">@androidx.annotation.OptIn</span>(ExperimentalGetImage::<span class="kw">class</span>)
+    <span class="kw">override fun</span> <span class="fn">analyze</span>(imageProxy: <span class="type">ImageProxy</span>) {
+        <span class="kw">val</span> mediaImage = imageProxy.image
+        <span class="kw">if</span> (mediaImage != <span class="kw">null</span>) {
+            <span class="kw">val</span> image = <span class="fn">InputImage</span>.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+            scanner.<span class="fn">process</span>(image)
+                .addOnSuccessListener { barcodes ->
+                    <span class="kw">for</span> (barcode <span class="kw">in</span> barcodes) {
+                        <span class="kw">val</span> rawValue = barcode.rawValue
+                        <span class="kw">val</span> now = System.currentTimeMillis()
+                        <span class="comm">// Anti-rebote de 500ms para escaneo burst confiable</span>
+                        <span class="kw">if</span> (rawValue != <span class="kw">null</span> && (now - lastScannedTime > <span class="num">500L</span>)) {
+                            lastScannedTime = now
+                            onBarcodeDetected(rawValue)
+                        }
+                    }
+                }
+                .addOnCompleteListener { imageProxy.<span class="fn">close</span>() }
+        } <span class="kw">else</span> {
+            imageProxy.<span class="fn">close</span>()
+        }
+    }
+}</code></pre>
+    </div>
   </section>
+
+  <!-- ==========================================================================
+       2. GEOCERCAS GPS (200m) & TELEMETRÍA BLE CADENA DE FRÍO (2°C – 6°C)
+       ========================================================================== -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">02</span>
+        <div>
+          <p class="cuadro-kicker">SENSORES DE CAMPO · GPS FUSED & BLUETOOTH LOW ENERGY</p>
+          <h3 class="cuadro-title">Geocercas GPS (Radio 200m) & Telemetría BLE de Cadena de Frío</h3>
+          <p class="cuadro-subtitle">
+            Detección automática de arribo a muelles de descarga sin intervención del chofer y monitoreo térmico continuo en cámaras de transporte (rango reglamentario de <strong>2.0°C a 6.0°C</strong>).
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-map-marker"></i> Geocerca 200m GPS</span>
+        <span class="cuadro-tag success"><i class="pi pi-wifi"></i> BLE GATT 2°C – 6°C</span>
+      </div>
+    </div>
+
+    <!-- CUADRO ARQUITECTÓNICO: Especificación de Sensores de Campo -->
+    <div class="contract-table-wrapper">
+      <table class="contract-table">
+        <thead>
+          <tr>
+            <th>Subsistema de Hardware</th>
+            <th>API Android / SDK</th>
+            <th>Rango / Tolerancia</th>
+            <th>Frecuencia de Muestreo</th>
+            <th>Acción Automática del Sistema</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Geocerca de Arribo a Muelle</strong></td>
+            <td><code>FusedLocationProviderClient</code> / <code>GeofencingClient</code></td>
+            <td>Radio de <strong>200 metros</strong> en torno a coordenadas de obra</td>
+            <td>Notificación en segundo plano al ingresar (GEOFENCE_TRANSITION_ENTER)</td>
+            <td>Transición de estado de ruta a <code>ARRIVED_GEOFENCE</code>, desbloqueo de botón de firma</td>
+          </tr>
+          <tr>
+            <td><strong>Telemetría BLE de Cadena de Frío</strong></td>
+            <td><code>BluetoothGattCallback</code> / <code>BluetoothLeScanner</code></td>
+            <td>Rango seguro calibrado: <strong>2.0°C a 6.0°C</strong> (&plusmn;0.2°C)</td>
+            <td>Lectura asíncrona cada 30 segundos en ruta</td>
+            <td>Si T &gt; 6.0°C por más de 10 min, emite alerta crítica sonora y marca lote para inspección</td>
+          </tr>
+          <tr>
+            <td><strong>Láser Rugerizado Zebra</strong></td>
+            <td>Zebra DataWedge Service (Broadcast Intents)</td>
+            <td>Lectura 1D/2D hasta 3 metros de distancia</td>
+            <td>Instantánea por gatillo físico de terminal</td>
+            <td>Inyección directa de evento <code>BarcodeScannedEvent</code> en ViewModel</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Production Kotlin Geofence Code Block -->
+    <div class="code-container-block">
+      <div class="code-header-bar">
+        <div class="code-header-title">
+          <i class="pi pi-file"></i>
+          <span>core/hardware/src/main/kotlin/com/nexa/core/hardware/location/GeofenceManager.kt</span>
+        </div>
+        <span class="code-lang-pill">Kotlin 2.4</span>
+      </div>
+      <pre class="code-pre-box" is:raw><code><span class="comm">// GPS Geofencing (200m radius) with FusedLocationProviderClient</span>
+<span class="kw">package</span> com.nexa.core.hardware.location
+
+<span class="kw">import</span> android.annotation.SuppressLint
+<span class="kw">import</span> android.app.PendingIntent
+<span class="kw">import</span> android.content.Context
+<span class="kw">import</span> com.google.android.gms.location.Geofence
+<span class="kw">import</span> com.google.android.gms.location.GeofencingClient
+<span class="kw">import</span> com.google.android.gms.location.GeofencingRequest
+<span class="kw">import</span> com.google.android.gms.location.LocationServices
+
+<span class="kw">class</span> <span class="type">NexaGeofenceManager</span>(<span class="kw">private val</span> context: <span class="type">Context</span>) {
+
+    <span class="kw">private val</span> geofencingClient: <span class="type">GeofencingClient</span> =
+        <span class="fn">LocationServices</span>.getGeofencingClient(context)
+
+    <span class="ann">@SuppressLint</span>(<span class="str">"MissingPermission"</span>)
+    <span class="kw">fun</span> <span class="fn">registerDockGeofence</span>(
+        orderId: <span class="type">String</span>,
+        latitude: <span class="type">Double</span>,
+        longitude: <span class="type">Double</span>,
+        pendingIntent: <span class="type">PendingIntent</span>
+    ) {
+        <span class="kw">val</span> geofence = <span class="fn">Geofence.Builder</span>()
+            .setRequestId(orderId)
+            .setCircularRegion(latitude, longitude, <span class="num">200f</span>) <span class="comm">// Radio canónico 200m</span>
+            .setExpirationDuration(Geofence.NEVER_EXPIRE)
+            .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER or Geofence.GEOFENCE_TRANSITION_EXIT)
+            .build()
+
+        <span class="kw">val</span> request = <span class="fn">GeofencingRequest.Builder</span>()
+            .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
+            .addGeofence(geofence)
+            .build()
+
+        geofencingClient.<span class="fn">addGeofences</span>(request, pendingIntent)
+    }
+}</code></pre>
+    </div>
+  </section>
+
 </div>
 
 <style>
   .hardware-container {
-    width: 100%;
-  }
-
-  .spec-card {
-    background: var(--nexa-surface-card, #ffffff);
-    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
-    border-radius: var(--nexa-radius-card, 16px);
-    padding: 24px;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    scroll-margin-top: 80px;
-  }
-
-  .card-header-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .card-badge-icon.hardware-badge {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background: #f3e8ff;
-    color: #7f52ff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 17px;
-    flex-shrink: 0;
-  }
-
-  .card-eyebrow {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    color: #7f52ff;
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 2px;
-  }
-
-  .card-title {
-    font-family: var(--nexa-font-family-display, sans-serif);
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--nexa-color-text-primary, #0f172a);
-    margin: 0;
-  }
-
-  .card-text {
-    font-size: 13.5px;
-    color: var(--nexa-color-text-secondary, #64748b);
-    line-height: 1.6;
-    margin: 0;
+    gap: 28px;
+    width: 100%;
   }
 
   .field-rule-banner {
@@ -143,38 +265,29 @@
     border: 1px solid #fde68a;
     border-radius: 12px;
     color: #92400e;
-  }
 
-  .rule-icon {
-    font-size: 18px;
-    color: #d97706;
-    margin-top: 2px;
-    flex-shrink: 0;
-  }
-
-  .rule-text {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-
-    strong {
-      font-size: 13px;
-      color: #78350f;
+    .rule-icon {
+      font-size: 18px;
+      color: #d97706;
+      margin-top: 2px;
+      flex-shrink: 0;
     }
 
-    p {
-      font-size: 12px;
-      line-height: 1.5;
-      margin: 0;
-      color: #92400e;
+    .rule-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+
+      strong { font-size: 13px; color: #78350f; }
+      p { font-size: 12px; line-height: 1.5; margin: 0; color: #92400e; }
     }
   }
 
   .scanner-specimen-layout {
     display: grid;
-    grid-template-columns: 240px 1fr;
+    grid-template-columns: 260px 1fr;
     gap: 16px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
     border-radius: 12px;
     overflow: hidden;
     background: #f8fafc;
@@ -191,7 +304,7 @@
     color: #ffffff;
     display: flex;
     flex-direction: column;
-    padding: 12px;
+    padding: 14px;
     gap: 10px;
   }
 
@@ -204,9 +317,7 @@
     font-family: var(--nexa-font-family-mono, monospace);
   }
 
-  .fps-tag {
-    color: #22c55e;
-  }
+  .fps-tag { color: #22c55e; }
 
   .cam-lens-body {
     flex: 1;
@@ -253,35 +364,45 @@
     border-radius: 4px;
     position: absolute;
     bottom: -20px;
+    white-space: nowrap;
+  }
+
+  .scanner-status-strip {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #94a3b8;
+    padding-top: 6px;
+    border-top: 1px solid #1e293b;
   }
 
   .scanner-fallback-panel {
-    padding: 18px 20px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 8px;
     background: #ffffff;
-  }
 
-  .panel-kicker {
-    font-size: 9.5px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    color: #d97706;
-  }
+    .panel-kicker {
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #d97706;
+    }
 
-  .panel-title {
-    font-family: var(--nexa-font-family-display, sans-serif);
-    font-size: 15px;
-    font-weight: 700;
-    color: #0f172a;
-    margin: 0;
-  }
+    .panel-title {
+      font-family: var(--nexa-font-family-display, sans-serif);
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0;
+    }
 
-  .panel-desc {
-    font-size: 12.5px;
-    color: #64748b;
-    margin: 0;
+    .panel-desc {
+      font-size: 12.5px;
+      color: #64748b;
+      margin: 0;
+    }
   }
 
   .manual-input-box {
@@ -291,7 +412,7 @@
     margin-top: 6px;
 
     label {
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 700;
       color: #475569;
     }
@@ -330,9 +451,7 @@
     align-items: center;
     gap: 6px;
 
-    &:hover {
-      background: #1d4ed8;
-    }
+    &:hover { background: #1d4ed8; }
   }
 
   .hardware-specs-list {
@@ -353,9 +472,6 @@
     align-items: center;
     gap: 4px;
 
-    i {
-      font-size: 11px;
-      color: #2a67d9;
-    }
+    i { font-size: 11px; color: #2a67d9; }
   }
 </style>

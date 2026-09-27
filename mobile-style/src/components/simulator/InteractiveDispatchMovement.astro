@@ -1,0 +1,1386 @@
+---
+/**
+ * InteractiveDispatchMovement.astro
+ * Canonical Mobile Dispatch Board & Live Custody Movement Specification
+ * Includes:
+ *  - 4 Kanban columns: Órdenes (4), Preparación (3), En Distribución (5), Entregado (18)
+ *  - Live interactive card movement across columns with real-time counters & toast updates
+ *  - Dynamic Cryptographic HMAC-SHA256 QR Generator for Carrier Handoff
+ *  - Production-ready Kotlin 2.4 & Jetpack Compose Material 3 code cuadro
+ */
+---
+
+<div class="interactive-dispatch-container">
+
+  <!-- Interactive Dispatch Board Stage -->
+  <div class="dispatch-board-stage">
+    
+    <!-- Top Board Control Bar -->
+    <header class="dispatch-stage-header">
+      <div class="header-left-meta">
+        <span class="board-eyebrow">MONITOREO DE PATIO & MUELLE 3 FRIGORÍFICO</span>
+        <h2 class="board-title">Tablero de Despacho & Flujo de Movimiento</h2>
+      </div>
+
+      <div class="header-actions">
+        <button type="button" class="btn-board-ctrl" id="btn-reset-board" title="Restaurar estado inicial">
+          <i class="pi pi-refresh"></i> Resetear
+        </button>
+        <button type="button" class="btn-board-ctrl primary" id="btn-quick-qr" title="Abrir generador QR rápido">
+          <i class="pi pi-qrcode"></i> Token QR Rápido
+        </button>
+      </div>
+    </header>
+
+    <!-- Column Switcher for Small Screens (360dp / 390dp) -->
+    <div class="mobile-column-tabs-bar" role="tablist">
+      <button type="button" class="col-tab-btn active" data-col="col-orders">
+        <span>Órdenes</span> <b class="badge-count" id="tab-count-orders">4</b>
+      </button>
+      <button type="button" class="col-tab-btn" data-col="col-prep">
+        <span>Preparación</span> <b class="badge-count" id="tab-count-prep">3</b>
+      </button>
+      <button type="button" class="col-tab-btn" data-col="col-distrib">
+        <span>Distribución</span> <b class="badge-count" id="tab-count-distrib">5</b>
+      </button>
+      <button type="button" class="col-tab-btn" data-col="col-delivered">
+        <span>Entregado</span> <b class="badge-count" id="tab-count-delivered">18</b>
+      </button>
+    </div>
+
+    <!-- 4 Kanban Columns Stage (Scrollable horizontal or tab-switched on mobile) -->
+    <div class="dispatch-kanban-canvas" id="kanban-canvas">
+      
+      <!-- COLUMN 1: ÓRDENES -->
+      <div class="kanban-column active" id="col-orders" data-status="orders">
+        <div class="kanban-column-header">
+          <div class="col-title-wrap">
+            <span class="col-indicator orders"></span>
+            <h3 class="col-name">Órdenes</h3>
+          </div>
+          <span class="col-counter" id="badge-orders">4</span>
+        </div>
+
+        <div class="cards-column-dropzone" id="zone-orders">
+          
+          <!-- Card DSP-204 -->
+          <article class="dispatch-order-card" id="card-dsp-204" data-id="DSP-204" data-client="La Cava Fría" data-carrier="Diego Morales (WKN-892)" data-cargo="24x Salmón Salar" data-temp="-18.4°C" data-status="orders">
+            <div class="card-top-row">
+              <span class="order-id-chip">DSP-204</span>
+              <span class="cold-tag cold"><i class="pi pi-snowflake"></i> -18.4°C</span>
+            </div>
+            <h4 class="card-client-name">La Cava Fría</h4>
+            <p class="card-cargo-info">24x Salmón Salar 4-5kg IQF · Muelle 3</p>
+            <div class="card-carrier-row">
+              <i class="pi pi-truck"></i>
+              <span>Por Asignar (Sugerido Flota C-250)</span>
+            </div>
+            <div class="card-action-bar">
+              <button type="button" class="btn-card-move" data-card="card-dsp-204" data-next="prep">
+                <span>Avanzar a Prep</span> <i class="pi pi-arrow-right"></i>
+              </button>
+              <button type="button" class="btn-card-qr" data-card="card-dsp-204" title="Generar token QR">
+                <i class="pi pi-qrcode"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- Card DSP-207 -->
+          <article class="dispatch-order-card" id="card-dsp-207" data-id="DSP-207" data-client="Pescadería del Mar" data-carrier="Pendiente" data-cargo="15x Merluza Austral" data-temp="-18.0°C" data-status="orders">
+            <div class="card-top-row">
+              <span class="order-id-chip">DSP-207</span>
+              <span class="cold-tag cold"><i class="pi pi-snowflake"></i> -18.0°C</span>
+            </div>
+            <h4 class="card-client-name">Pescadería del Mar</h4>
+            <p class="card-cargo-info">15x Merluza Austral Filete 10kg · Rampa 2</p>
+            <div class="card-carrier-row">
+              <i class="pi pi-truck"></i>
+              <span>Sin conductor asignado</span>
+            </div>
+            <div class="card-action-bar">
+              <button type="button" class="btn-card-move" data-card="card-dsp-207" data-next="prep">
+                <span>Avanzar a Prep</span> <i class="pi pi-arrow-right"></i>
+              </button>
+              <button type="button" class="btn-card-qr" data-card="card-dsp-207">
+                <i class="pi pi-qrcode"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- Card DSP-210 -->
+          <article class="dispatch-order-card" id="card-dsp-210" data-id="DSP-210" data-client="Supermercados Andinos" data-carrier="Pendiente" data-cargo="40x Trucha Titicaca" data-temp="3.2°C" data-status="orders">
+            <div class="card-top-row">
+              <span class="order-id-chip">DSP-210</span>
+              <span class="cold-tag fresh"><i class="pi pi-sun"></i> 3.2°C</span>
+            </div>
+            <h4 class="card-client-name">Supermercados Andinos</h4>
+            <p class="card-cargo-info">40x Trucha Arcoíris Evicerada</p>
+            <div class="card-carrier-row">
+              <i class="pi pi-truck"></i>
+              <span>Por Asignar</span>
+            </div>
+            <div class="card-action-bar">
+              <button type="button" class="btn-card-move" data-card="card-dsp-210" data-next="prep">
+                <span>Avanzar a Prep</span> <i class="pi pi-arrow-right"></i>
+              </button>
+              <button type="button" class="btn-card-qr" data-card="card-dsp-210">
+                <i class="pi pi-qrcode"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- Card DSP-212 -->
+          <article class="dispatch-order-card" id="card-dsp-212" data-id="DSP-212" data-client="Gourmet Express" data-carrier="Pendiente" data-cargo="10x Langostino 20/30" data-temp="-18.1°C" data-status="orders">
+            <div class="card-top-row">
+              <span class="order-id-chip">DSP-212</span>
+              <span class="cold-tag cold"><i class="pi pi-snowflake"></i> -18.1°C</span>
+            </div>
+            <h4 class="card-client-name">Gourmet Express</h4>
+            <p class="card-cargo-info">10x Langostino Entero 12kg</p>
+            <div class="card-carrier-row">
+              <i class="pi pi-truck"></i>
+              <span>Por Asignar</span>
+            </div>
+            <div class="card-action-bar">
+              <button type="button" class="btn-card-move" data-card="card-dsp-212" data-next="prep">
+                <span>Avanzar a Prep</span> <i class="pi pi-arrow-right"></i>
+              </button>
+              <button type="button" class="btn-card-qr" data-card="card-dsp-212">
+                <i class="pi pi-qrcode"></i>
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- COLUMN 2: PREPARACIÓN -->
+      <div class="kanban-column" id="col-prep" data-status="prep">
+        <div class="kanban-column-header">
+          <div class="col-title-wrap">
+            <span class="col-indicator prep"></span>
+            <h3 class="col-name">Preparación</h3>
+          </div>
+          <span class="col-counter" id="badge-prep">3</span>
+        </div>
+
+        <div class="cards-column-dropzone" id="zone-prep">
+          
+          <!-- Card DSP-198 -->
+          <article class="dispatch-order-card" id="card-dsp-198" data-id="DSP-198" data-client="Andino Food Service" data-carrier="Diego Morales (WKN-892)" data-cargo="18x Merluza + 10x Trucha" data-temp="-17.9°C" data-status="prep">
+            <div class="card-top-row">
+              <span class="order-id-chip">DSP-198</span>
+              <span class="cold-tag cold"><i class="pi pi-snowflake"></i> -17.9°C</span>
+            </div>
+            <h4 class="card-client-name">Andino Food Service</h4>
+            <p class="card-cargo-info">18x Merluza + 10x Trucha · En Estiba Muelle 3</p>
+            <div class="card-carrier-row">
+              <i class="pi pi-user-check text-primary"></i>
+              <span>Diego Morales · WKN-892</span>
+            </div>
+            <div class="card-action-bar">
+              <button type="button" class="btn-card-move" data-card="card-dsp-198" data-next="distrib">
+                <span>Despachar a Ruta</span> <i class="pi pi-arrow-right"></i>
+              </button>
+              <button type="button" class="btn-card-qr active" data-card="card-dsp-198" title="Generar token QR">
+                <i class="pi pi-qrcode"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- Card DSP-201 -->
+          <article class="dispatch-order-card" id="card-dsp-201" data-id="DSP-201" data-client="Cevichera La Mar" data-carrier="Flota Local #12" data-cargo="12x Langostino" data-temp="-18.2°C" data-status="prep">
+            <div class="card-top-row">
+              <span class="order-id-chip">DSP-201</span>
+              <span class="cold-tag cold"><i class="pi pi-snowflake"></i> -18.2°C</span>
+            </div>
+            <h4 class="card-client-name">Cevichera La Mar</h4>
+            <p class="card-cargo-info">12x Langostino Entero Congelado</p>
+            <div class="card-carrier-row">
+              <i class="pi pi-truck"></i>
+              <span>Flota Local #12</span>
+            </div>
+            <div class="card-action-bar">
+              <button type="button" class="btn-card-move" data-card="card-dsp-201" data-next="distrib">
+                <span>Despachar</span> <i class="pi pi-arrow-right"></i>
+              </button>
+              <button type="button" class="btn-card-qr" data-card="card-dsp-201">
+                <i class="pi pi-qrcode"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- Card DSP-202 -->
+          <article class="dispatch-order-card" id="card-dsp-202" data-id="DSP-202" data-client="Hotel Costa Azul" data-carrier="Flota C-180" data-cargo="8x Salmón Salar" data-temp="-18.5°C" data-status="prep">
+            <div class="card-top-row">
+              <span class="order-id-chip">DSP-202</span>
+              <span class="cold-tag cold"><i class="pi pi-snowflake"></i> -18.5°C</span>
+            </div>
+            <h4 class="card-client-name">Hotel Costa Azul</h4>
+            <p class="card-cargo-info">8x Salmón Salar 4-5kg IQF</p>
+            <div class="card-carrier-row">
+              <i class="pi pi-truck"></i>
+              <span>Flota C-180</span>
+            </div>
+            <div class="card-action-bar">
+              <button type="button" class="btn-card-move" data-card="card-dsp-202" data-next="distrib">
+                <span>Despachar</span> <i class="pi pi-arrow-right"></i>
+              </button>
+              <button type="button" class="btn-card-qr" data-card="card-dsp-202">
+                <i class="pi pi-qrcode"></i>
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- COLUMN 3: EN DISTRIBUCIÓN -->
+      <div class="kanban-column" id="col-distrib" data-status="distrib">
+        <div class="kanban-column-header">
+          <div class="col-title-wrap">
+            <span class="col-indicator distrib"></span>
+            <h3 class="col-name">En Distribución</h3>
+          </div>
+          <span class="col-counter" id="badge-distrib">5</span>
+        </div>
+
+        <div class="cards-column-dropzone" id="zone-distrib">
+          
+          <!-- Card DSP-195 -->
+          <article class="dispatch-order-card" id="card-dsp-195" data-id="DSP-195" data-client="Distribuidora Central" data-carrier="Diego Morales (WKN-892)" data-cargo="30x Salmón Salar" data-temp="-18.1°C" data-status="distrib">
+            <div class="card-top-row">
+              <span class="order-id-chip">DSP-195</span>
+              <span class="cold-tag cold"><i class="pi pi-snowflake"></i> -18.1°C</span>
+            </div>
+            <h4 class="card-client-name">Distribuidora Central</h4>
+            <p class="card-cargo-info">30x Salmón Salar · GPS: Av. Argentina km 3.5</p>
+            <div class="card-carrier-row">
+              <i class="pi pi-compass text-primary"></i>
+              <span>En tránsito · ETA 15:10</span>
+            </div>
+            <div class="card-action-bar">
+              <button type="button" class="btn-card-move" data-card="card-dsp-195" data-next="delivered">
+                <span>Confirmar Entrega</span> <i class="pi pi-check"></i>
+              </button>
+              <button type="button" class="btn-card-qr" data-card="card-dsp-195">
+                <i class="pi pi-qrcode"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- Card DSP-196 -->
+          <article class="dispatch-order-card" id="card-dsp-196" data-id="DSP-196" data-client="Mar & Fuego Restaurante" data-carrier="Flota C-210" data-cargo="8x Salmón + 4x Langostino" data-temp="-18.0°C" data-status="distrib">
+            <div class="card-top-row">
+              <span class="order-id-chip">DSP-196</span>
+              <span class="cold-tag cold"><i class="pi pi-snowflake"></i> -18.0°C</span>
+            </div>
+            <h4 class="card-client-name">Mar & Fuego Restaurante</h4>
+            <p class="card-cargo-info">8x Salmón + 4x Langostino · Miraflores</p>
+            <div class="card-carrier-row">
+              <i class="pi pi-compass"></i>
+              <span>ETA 15:25</span>
+            </div>
+            <div class="card-action-bar">
+              <button type="button" class="btn-card-move" data-card="card-dsp-196" data-next="delivered">
+                <span>Confirmar</span> <i class="pi pi-check"></i>
+              </button>
+              <button type="button" class="btn-card-qr" data-card="card-dsp-196">
+                <i class="pi pi-qrcode"></i>
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- COLUMN 4: ENTREGADO -->
+      <div class="kanban-column" id="col-delivered" data-status="delivered">
+        <div class="kanban-column-header">
+          <div class="col-title-wrap">
+            <span class="col-indicator delivered"></span>
+            <h3 class="col-name">Entregado (POD OK)</h3>
+          </div>
+          <span class="col-counter" id="badge-delivered">18</span>
+        </div>
+
+        <div class="cards-column-dropzone" id="zone-delivered">
+          
+          <!-- Card DSP-189 -->
+          <article class="dispatch-order-card delivered" id="card-dsp-189" data-id="DSP-189" data-client="Corporación El Sol" data-carrier="Diego Morales" data-cargo="45x Cajas Variadas" data-temp="-18.3°C" data-status="delivered">
+            <div class="card-top-row">
+              <span class="order-id-chip delivered">DSP-189</span>
+              <span class="cold-tag success"><i class="pi pi-check-circle"></i> POD Firmado</span>
+            </div>
+            <h4 class="card-client-name">Corporación El Sol</h4>
+            <p class="card-cargo-info">Entregado a las 13:40 · Hash POD verificado</p>
+            <div class="card-carrier-row">
+              <i class="pi pi-shield text-success"></i>
+              <span>Custodia legal completada 100%</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Live Movement Notification Bar -->
+    <div class="dispatch-toast" id="dispatch-live-toast" style="display: none;">
+      <i class="pi pi-arrow-right-arrow-left text-primary"></i>
+      <span id="dispatch-toast-text">Orden DSP-204 movida a Preparación</span>
+    </div>
+
+  </div>
+
+  <!-- Dynamic Cryptographic QR Generator Modal / Dialog -->
+  <div class="qr-modal-backdrop" id="qr-modal-backdrop" style="display: none;">
+    <div class="qr-dialog-card">
+      <div class="qr-dialog-header">
+        <div class="qr-title-block">
+          <span class="qr-eyebrow">TRASPASO DE CUSTODIA LEGAL · CRYPTO TOKEN</span>
+          <h3 class="qr-dialog-title" id="qr-dialog-order-title">Token QR: DSP-204</h3>
+        </div>
+        <button type="button" class="btn-close-modal" id="btn-close-qr-modal" aria-label="Cerrar modal">
+          <i class="pi pi-times"></i>
+        </button>
+      </div>
+
+      <div class="qr-dialog-body">
+        <!-- Visual QR Matrix Simulation with Scanner Aiming Brackets -->
+        <div class="qr-matrix-frame">
+          <div class="qr-aim-bracket top-left"></div>
+          <div class="qr-aim-bracket top-right"></div>
+          <div class="qr-aim-bracket bottom-left"></div>
+          <div class="qr-aim-bracket bottom-right"></div>
+          
+          <div class="qr-visual-block" id="qr-visual-block">
+            <!-- Simulated High-Density QR SVG -->
+            <svg viewBox="0 0 100 100" class="qr-svg" aria-label="Código QR Dinámico HMAC-SHA256">
+              <rect width="100" height="100" fill="#ffffff" />
+              <!-- Top Left Marker -->
+              <rect x="6" y="6" width="28" height="28" fill="#082846" rx="4" />
+              <rect x="12" y="12" width="16" height="16" fill="#ffffff" />
+              <rect x="16" y="16" width="8" height="8" fill="#082846" />
+              <!-- Top Right Marker -->
+              <rect x="66" y="6" width="28" height="28" fill="#082846" rx="4" />
+              <rect x="72" y="12" width="16" height="16" fill="#ffffff" />
+              <rect x="76" y="16" width="8" height="8" fill="#082846" />
+              <!-- Bottom Left Marker -->
+              <rect x="6" y="66" width="28" height="28" fill="#082846" rx="4" />
+              <rect x="12" y="72" width="16" height="16" fill="#ffffff" />
+              <rect x="16" y="76" width="8" height="8" fill="#082846" />
+              <!-- Random Data Pixels -->
+              <rect x="38" y="10" width="6" height="6" fill="#082846" />
+              <rect x="48" y="14" width="8" height="6" fill="#082846" />
+              <rect x="40" y="24" width="6" height="10" fill="#082846" />
+              <rect x="52" y="26" width="8" height="6" fill="#082846" />
+              <rect x="10" y="40" width="6" height="6" fill="#082846" />
+              <rect x="22" y="44" width="10" height="6" fill="#082846" />
+              <rect x="38" y="40" width="8" height="8" fill="#2a67d9" />
+              <rect x="50" y="42" width="6" height="6" fill="#082846" />
+              <rect x="62" y="38" width="10" height="8" fill="#082846" />
+              <rect x="78" y="40" width="8" height="6" fill="#082846" />
+              <rect x="38" y="56" width="6" height="12" fill="#082846" />
+              <rect x="48" y="60" width="10" height="8" fill="#082846" />
+              <rect x="64" y="54" width="8" height="10" fill="#082846" />
+              <rect x="76" y="62" width="10" height="6" fill="#082846" />
+              <rect x="40" y="78" width="8" height="12" fill="#082846" />
+              <rect x="54" y="80" width="10" height="8" fill="#082846" />
+              <rect x="68" y="76" width="8" height="8" fill="#082846" />
+              <rect x="80" y="82" width="10" height="10" fill="#082846" />
+            </svg>
+          </div>
+
+          <div class="qr-countdown-badge">
+            <i class="pi pi-clock"></i>
+            <span>Válido: <b id="qr-timer-val">14:59</b> min</span>
+          </div>
+        </div>
+
+        <!-- Token Payload Details -->
+        <div class="qr-token-details">
+          <div class="token-kv">
+            <span class="token-key">CONDUCTOR ASIGNADO:</span>
+            <strong class="token-val" id="qr-carrier-val">Diego Morales · Flota C-250 (WKN-892)</strong>
+          </div>
+          <div class="token-kv">
+            <span class="token-key">RAMPA DE SALIDA:</span>
+            <strong class="token-val">Muelle 3 Staging Frigorífico</strong>
+          </div>
+          <div class="token-kv">
+            <span class="token-key">HASH CRIPTOGRÁFICO HMAC-SHA256:</span>
+            <code class="token-hash" id="qr-hash-val">HMAC-SHA256: 7F9A2B4C8E01D345F6789ABCDEF01234</code>
+          </div>
+        </div>
+
+        <button type="button" class="btn-copy-token" id="btn-copy-token">
+          <i class="pi pi-copy"></i>
+          <span>Copiar Token Criptográfico</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Documentation Cuadro: Production-Ready Kotlin 2.4 & Jetpack Compose Material 3 Code -->
+  <section class="cuadro-card">
+    <header class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">DSP</span>
+        <div>
+          <p class="cuadro-kicker">JETPACK COMPOSE MATERIAL 3 · TABLERO KANBAN & HMAC-SHA256</p>
+          <h3 class="cuadro-title">Especificación de Transiciones de Estado y Traspaso Criptográfico</h3>
+          <p class="cuadro-subtitle">
+            Implementación nativa en Kotlin 2.4 con <code>HorizontalPager</code> o columnas de muelle, cálculo criptográfico con <code>javax.crypto.Mac</code> y mutaciones offline seguras con Room.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-android"></i> Android 14 M3</span>
+        <span class="cuadro-tag kotlin"><i class="pi pi-code"></i> Kotlin 2.4</span>
+        <span class="cuadro-tag success"><i class="pi pi-key"></i> HMAC-SHA256</span>
+      </div>
+    </header>
+
+    <!-- Kotlin 2.4 Production Snippet -->
+    <div class="code-box-wrapper">
+      <div class="code-box-header">
+        <div class="file-name">
+          <i class="pi pi-file"></i>
+          <span>DispatchBoardAndCryptoToken.kt — Jetpack Compose Material 3</span>
+        </div>
+        <span class="code-badge">Production Kotlin 2.4</span>
+      </div>
+      <pre class="code-content" is:raw><code><span class="kw">package</span> com.nexa.operations.presentation.dispatch
+
+<span class="kw">import</span> androidx.compose.foundation.layout.*
+<span class="kw">import</span> androidx.compose.foundation.lazy.LazyColumn
+<span class="kw">import</span> androidx.compose.foundation.lazy.items
+<span class="kw">import</span> androidx.compose.foundation.shape.RoundedCornerShape
+<span class="kw">import</span> androidx.compose.material.icons.Icons
+<span class="kw">import</span> androidx.compose.material.icons.filled.*
+<span class="kw">import</span> androidx.compose.material3.*
+<span class="kw">import</span> androidx.compose.runtime.*
+<span class="kw">import</span> androidx.compose.ui.Alignment
+<span class="kw">import</span> androidx.compose.ui.Modifier
+<span class="kw">import</span> androidx.compose.ui.graphics.Color
+<span class="kw">import</span> androidx.compose.ui.unit.dp
+<span class="kw">import</span> javax.crypto.Mac
+<span class="kw">import</span> javax.crypto.spec.SecretKeySpec
+<span class="kw">import</span> java.security.MessageDigest
+
+<span class="kw">enum class</span> <span class="type">DispatchColumn</span> {
+    ORDERS, PREPARATION, IN_DISTRIBUTION, DELIVERED
+}
+
+<span class="kw">data class</span> <span class="type">DispatchItem</span>(
+    <span class="kw">val</span> id: <span class="type">String</span>,
+    <span class="kw">val</span> clientName: <span class="type">String</span>,
+    <span class="kw">val</span> cargoSummary: <span class="type">String</span>,
+    <span class="kw">val</span> tempCelsius: <span class="type">Double</span>,
+    <span class="kw">val</span> carrierPlaca: <span class="type">String</span>?,
+    <span class="kw">val</span> status: <span class="type">DispatchColumn</span>
+)
+
+<span class="cmt">/**
+ * Generador criptográfico HMAC-SHA256 para traspaso de custodia en rampa.
+ */</span>
+<span class="kw">object</span> <span class="type">DispatchCryptoSigner</span> {
+    <span class="kw">fun</span> <span class="fn">generateHandoffToken</span>(
+        dispatchId: <span class="type">String</span>,
+        carrierPlaca: <span class="type">String</span>,
+        timestampEpoch: <span class="type">Long</span>,
+        secretKey: <span class="type">ByteArray</span>
+    ): <span class="type">String</span> {
+        <span class="kw">val</span> payload = <span class="str">"$dispatchId:$carrierPlaca:$timestampEpoch"</span>
+        <span class="kw">val</span> mac = Mac.getInstance(<span class="str">"HmacSHA256"</span>)
+        <span class="kw">val</span> keySpec = SecretKeySpec(secretKey, <span class="str">"HmacSHA256"</span>)
+        mac.init(keySpec)
+        <span class="kw">val</span> hashBytes = mac.doFinal(payload.toByteArray(Charsets.UTF_8))
+        <span class="kw">return</span> hashBytes.joinToString(<span class="str">""</span>) { <span class="str">"%02x"</span>.format(it) }.take(<span class="num">32</span>).uppercase()
+    }
+}
+
+<span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">DispatchOrderCard</span>(
+    order: <span class="type">DispatchItem</span>,
+    onAdvanceStatus: (<span class="type">DispatchItem</span>) -&gt; <span class="type">Unit</span>,
+    onGenerateQr: (<span class="type">DispatchItem</span>) -&gt; <span class="type">Unit</span>,
+    modifier: <span class="type">Modifier</span> = <span class="type">Modifier</span>
+) {
+    <span class="fn">Card</span>(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(vertical = <span class="num">6.dp</span>),
+        shape = RoundedCornerShape(<span class="num">14.dp</span>),
+        elevation = CardDefaults.cardElevation(defaultElevation = <span class="num">2.dp</span>),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+    ) {
+        <span class="fn">Column</span>(modifier = Modifier.padding(<span class="num">14.dp</span>)) {
+            <span class="fn">Row</span>(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                <span class="fn">Text</span>(text = order.id, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+                <span class="fn">SuggestionChip</span>(
+                    onClick = {},
+                    label = { <span class="fn">Text</span>(<span class="str">"${order.tempCelsius}°C"</span>, style = MaterialTheme.typography.labelSmall) }
+                )
+            }
+
+            <span class="fn">Text</span>(text = order.clientName, style = MaterialTheme.typography.titleMedium)
+            <span class="fn">Text</span>(text = order.cargoSummary, style = MaterialTheme.typography.bodySmall, color = Color.Gray)
+
+            <span class="fn">Spacer</span>(modifier = Modifier.height(<span class="num">12.dp</span>))
+
+            <span class="fn">Row</span>(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                <span class="fn">Button</span>(
+                    onClick = { onAdvanceStatus(order) },
+                    modifier = Modifier.weight(<span class="num">1f</span>).heightIn(min = <span class="num">48.dp</span>),
+                    shape = RoundedCornerShape(<span class="num">10.dp</span>)
+                ) {
+                    <span class="fn">Text</span>(<span class="str">"Avanzar Estado"</span>)
+                    <span class="fn">Icon</span>(Icons.Default.ArrowForward, contentDescription = <span class="kw">null</span>)
+                }
+
+                <span class="fn">Spacer</span>(modifier = Modifier.width(<span class="num">8.dp</span>))
+
+                <span class="fn">FilledTonalIconButton</span>(
+                    onClick = { onGenerateQr(order) },
+                    modifier = Modifier.size(<span class="num">48.dp</span>)
+                ) {
+                    <span class="fn">Icon</span>(Icons.Default.QrCode, contentDescription = <span class="str">"QR Token"</span>)
+                }
+            }
+        }
+    }
+}</code></pre>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Kanban Interactive Movement Logic
+    const counts = {
+      orders: 4,
+      prep: 3,
+      distrib: 5,
+      delivered: 18
+    };
+
+    const toastBar = document.getElementById('dispatch-live-toast');
+    const toastText = document.getElementById('dispatch-toast-text');
+
+    function updateCounters() {
+      // Update badges
+      const bOrders = document.getElementById('badge-orders');
+      const bPrep = document.getElementById('badge-prep');
+      const bDistrib = document.getElementById('badge-distrib');
+      const bDelivered = document.getElementById('badge-delivered');
+
+      if (bOrders) bOrders.textContent = String(counts.orders);
+      if (bPrep) bPrep.textContent = String(counts.prep);
+      if (bDistrib) bDistrib.textContent = String(counts.distrib);
+      if (bDelivered) bDelivered.textContent = String(counts.delivered);
+
+      // Update mobile tabs
+      const tOrders = document.getElementById('tab-count-orders');
+      const tPrep = document.getElementById('tab-count-prep');
+      const tDistrib = document.getElementById('tab-count-distrib');
+      const tDelivered = document.getElementById('tab-count-delivered');
+
+      if (tOrders) tOrders.textContent = String(counts.orders);
+      if (tPrep) tPrep.textContent = String(counts.prep);
+      if (tDistrib) tDistrib.textContent = String(counts.distrib);
+      if (tDelivered) tDelivered.textContent = String(counts.delivered);
+    }
+
+    function showDispatchToast(msg: string) {
+      if (!toastBar || !toastText) return;
+      toastText.textContent = msg;
+      toastBar.style.display = 'flex';
+      setTimeout(() => {
+        toastBar.style.display = 'none';
+      }, 3500);
+    }
+
+    // Move Button Listeners
+    function attachMoveListeners() {
+      document.querySelectorAll('.btn-card-move').forEach(btn => {
+        btn.replaceWith(btn.cloneNode(true));
+      });
+
+      document.querySelectorAll('.btn-card-move').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const cardId = btn.getAttribute('data-card');
+          const nextCol = btn.getAttribute('data-next');
+          if (!cardId || !nextCol) return;
+
+          const card = document.getElementById(cardId);
+          if (!card) return;
+
+          const targetZone = document.getElementById(`zone-${nextCol}`);
+          const orderCode = card.getAttribute('data-id') || 'Orden';
+          const client = card.getAttribute('data-client') || '';
+
+          if (targetZone) {
+            // Update card status attribute
+            card.setAttribute('data-status', nextCol);
+            
+            // Adjust card button for the new stage
+            if (nextCol === 'prep') {
+              btn.setAttribute('data-next', 'distrib');
+              btn.innerHTML = '<span>Despachar a Ruta</span> <i class="pi pi-arrow-right"></i>';
+              counts.orders = Math.max(0, counts.orders - 1);
+              counts.prep += 1;
+              showDispatchToast(`${orderCode} (${client}) avanzada a Preparación (Staging Muelle 3)`);
+            } else if (nextCol === 'distrib') {
+              btn.setAttribute('data-next', 'delivered');
+              btn.innerHTML = '<span>Confirmar Entrega</span> <i class="pi pi-check"></i>';
+              counts.prep = Math.max(0, counts.prep - 1);
+              counts.distrib += 1;
+              showDispatchToast(`${orderCode} en tránsito hacia destino final`);
+            } else if (nextCol === 'delivered') {
+              card.classList.add('delivered');
+              btn.parentElement?.remove(); // remove action buttons in delivered
+              counts.distrib = Math.max(0, counts.distrib - 1);
+              counts.delivered += 1;
+              showDispatchToast(`${orderCode} entregada satisfactoriamente con POD verificado`);
+            }
+
+            // Animate card movement
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(6px)';
+            targetZone.prepend(card);
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, 50);
+
+            updateCounters();
+          }
+        });
+      });
+    }
+
+    attachMoveListeners();
+
+    // Reset Board
+    const btnReset = document.getElementById('btn-reset-board');
+    btnReset?.addEventListener('click', () => {
+      location.reload();
+    });
+
+    // Mobile Column Switcher (for small viewports)
+    const colTabs = document.querySelectorAll('.col-tab-btn');
+    const kanbanColumns = document.querySelectorAll('.kanban-column');
+
+    colTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        colTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const targetColId = tab.getAttribute('data-col');
+        kanbanColumns.forEach(col => {
+          if (col.id === targetColId) {
+            col.classList.add('active');
+          } else {
+            col.classList.remove('active');
+          }
+        });
+      });
+    });
+
+    // Dynamic QR Generator Modal
+    const qrBackdrop = document.getElementById('qr-modal-backdrop');
+    const btnCloseQr = document.getElementById('btn-close-qr-modal');
+    const qrTitle = document.getElementById('qr-dialog-order-title');
+    const qrCarrier = document.getElementById('qr-carrier-val');
+    const qrHash = document.getElementById('qr-hash-val');
+    const btnCopyToken = document.getElementById('btn-copy-token');
+    const btnQuickQr = document.getElementById('btn-quick-qr');
+
+    function openQrModal(orderId: string, carrier: string) {
+      if (qrTitle) qrTitle.textContent = `Token QR Criptográfico: ${orderId}`;
+      if (qrCarrier) qrCarrier.textContent = carrier || 'Diego Morales · Flota C-250 (WKN-892)';
+      
+      // Generate realistic dynamic HMAC-SHA256 mock digest
+      const randomSalt = Math.random().toString(36).substring(2, 8).toUpperCase();
+      const timestamp = Date.now().toString(16).toUpperCase();
+      const mockHash = `HMAC-SHA256: ${randomSalt}9E8D1A3F${timestamp}4BC72`;
+      if (qrHash) qrHash.textContent = mockHash;
+
+      if (qrBackdrop) qrBackdrop.style.display = 'flex';
+    }
+
+    document.querySelectorAll('.btn-card-qr').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const cardId = btn.getAttribute('data-card');
+        const card = cardId ? document.getElementById(cardId) : null;
+        const orderId = card?.getAttribute('data-id') || 'DSP-204';
+        const carrier = card?.getAttribute('data-carrier') || 'Diego Morales (WKN-892)';
+        openQrModal(orderId, carrier);
+      });
+    });
+
+    btnQuickQr?.addEventListener('click', () => {
+      openQrModal('DSP-204', 'Diego Morales · Flota C-250 (WKN-892)');
+    });
+
+    btnCloseQr?.addEventListener('click', () => {
+      if (qrBackdrop) qrBackdrop.style.display = 'none';
+    });
+
+    qrBackdrop?.addEventListener('click', (e) => {
+      if (e.target === qrBackdrop) {
+        qrBackdrop.style.display = 'none';
+      }
+    });
+
+    btnCopyToken?.addEventListener('click', () => {
+      const hash = qrHash?.textContent || '';
+      navigator.clipboard?.writeText(hash);
+      alert(`Token copiado al portapapeles:\n${hash}`);
+    });
+  });
+</script>
+
+<style>
+  .interactive-dispatch-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .dispatch-board-stage {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: var(--nexa-radius-card, 16px);
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .dispatch-stage-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    background: #f8fafc;
+    border-bottom: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .header-left-meta {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .board-eyebrow {
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    text-transform: uppercase;
+  }
+
+  .board-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 2px 0 0;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn-board-ctrl {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 38px;
+    padding: 0 12px;
+    border-radius: 8px;
+    border: 1px solid var(--nexa-color-border-default, #cbd5e1);
+    background: #ffffff;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-board-ctrl:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+  }
+
+  .btn-board-ctrl.primary {
+    background: var(--nexa-color-primary-600, #2a67d9);
+    color: #ffffff;
+    border-color: transparent;
+  }
+
+  /* Mobile Tabs for Kanban Column Switching */
+  .mobile-column-tabs-bar {
+    display: flex;
+    background: #f1f5f9;
+    padding: 6px 8px;
+    gap: 6px;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--nexa-color-border-default, #cbd5e1);
+  }
+
+  .col-tab-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 36px;
+    padding: 0 8px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    color: #64748b;
+    font-size: 11.5px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+
+  .col-tab-btn.active {
+    background: #ffffff;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  }
+
+  .badge-count {
+    background: #e2e8f0;
+    color: #334155;
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 10px;
+  }
+
+  .col-tab-btn.active .badge-count {
+    background: var(--nexa-color-primary-100, #dbeafe);
+    color: var(--nexa-color-primary-800, #1e40af);
+  }
+
+  /* Kanban Columns Layout */
+  .dispatch-kanban-canvas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    padding: 16px;
+    background: #f8fafc;
+    overflow-x: auto;
+    min-height: 480px;
+  }
+
+  @media (max-width: 900px) {
+    .dispatch-kanban-canvas {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .kanban-column {
+      display: none;
+      width: 100%;
+    }
+
+    .kanban-column.active {
+      display: flex;
+    }
+  }
+
+  .kanban-column {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .kanban-column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: #f1f5f9;
+    border-bottom: 1px solid var(--nexa-color-border-default, #e2e8f0);
+  }
+
+  .col-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .col-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .col-indicator.orders { background: #3b82f6; }
+  .col-indicator.prep { background: #f59e0b; }
+  .col-indicator.distrib { background: #8b5cf6; }
+  .col-indicator.delivered { background: #22c55e; }
+
+  .col-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+  }
+
+  .col-counter {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 1px 7px;
+    border-radius: 10px;
+    color: #334155;
+  }
+
+  .cards-column-dropzone {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  /* Order Cards */
+  .dispatch-order-card {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-default, #cbd5e1);
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    transition: all 0.2s ease;
+  }
+
+  .dispatch-order-card:hover {
+    border-color: var(--nexa-color-primary-500, #3b82f6);
+    box-shadow: 0 3px 8px rgba(15, 23, 42, 0.08);
+  }
+
+  .dispatch-order-card.delivered {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+  }
+
+  .card-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .order-id-chip {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 800;
+    color: #1d4ed8;
+  }
+
+  .order-id-chip.delivered {
+    color: #15803d;
+  }
+
+  .cold-tag {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .cold-tag.cold {
+    background: #e0f2fe;
+    color: #0284c7;
+  }
+
+  .cold-tag.fresh {
+    background: #fef3c7;
+    color: #b45309;
+  }
+
+  .cold-tag.success {
+    background: #dcfce7;
+    color: #15803d;
+  }
+
+  .card-client-name {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .card-cargo-info {
+    font-size: 11.5px;
+    color: #475569;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .card-carrier-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 4px;
+  }
+
+  .card-action-bar {
+    display: flex;
+    gap: 6px;
+    margin-top: 6px;
+    padding-top: 8px;
+    border-top: 1px solid #f1f5f9;
+  }
+
+  .btn-card-move {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 40px;
+    min-height: 40px;
+    border-radius: 8px;
+    border: none;
+    background: var(--nexa-color-primary-50, #eff6ff);
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-card-move:hover {
+    background: var(--nexa-color-primary-600, #2a67d9);
+    color: #ffffff;
+  }
+
+  .btn-card-qr {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--nexa-color-border-default, #cbd5e1);
+    background: #ffffff;
+    color: #475569;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-card-qr:hover, .btn-card-qr.active {
+    background: #0f172a;
+    color: #ffffff;
+    border-color: transparent;
+  }
+
+  /* Dispatch Toast */
+  .dispatch-toast {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0f172a;
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    z-index: 50;
+    white-space: nowrap;
+    animation: toastPop 0.2s ease-out;
+  }
+
+  /* QR Modal Dialog */
+  .qr-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    padding: 16px;
+  }
+
+  .qr-dialog-card {
+    background: #ffffff;
+    border-radius: 20px;
+    max-width: 400px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    animation: modalScale 0.2s ease-out;
+  }
+
+  @keyframes modalScale {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .qr-dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 16px 20px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .qr-eyebrow {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+  }
+
+  .qr-dialog-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 2px 0 0;
+  }
+
+  .btn-close-modal {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: #e2e8f0;
+    color: #475569;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .qr-dialog-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .qr-matrix-frame {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  }
+
+  .qr-aim-bracket {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: #2a67d9;
+    border-style: solid;
+  }
+
+  .qr-aim-bracket.top-left {
+    top: 6px; left: 6px;
+    border-width: 3px 0 0 3px;
+    border-top-left-radius: 6px;
+  }
+
+  .qr-aim-bracket.top-right {
+    top: 6px; right: 6px;
+    border-width: 3px 3px 0 0;
+    border-top-right-radius: 6px;
+  }
+
+  .qr-aim-bracket.bottom-left {
+    bottom: 6px; left: 6px;
+    border-width: 0 0 3px 3px;
+    border-bottom-left-radius: 6px;
+  }
+
+  .qr-aim-bracket.bottom-right {
+    bottom: 6px; right: 6px;
+    border-width: 0 3px 3px 0;
+    border-bottom-right-radius: 6px;
+  }
+
+  .qr-svg {
+    width: 150px;
+    height: 150px;
+  }
+
+  .qr-countdown-badge {
+    margin-top: 8px;
+    font-size: 11px;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .qr-token-details {
+    width: 100%;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 11.5px;
+  }
+
+  .token-kv {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .token-key {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #64748b;
+  }
+
+  .token-val {
+    color: #0f172a;
+    font-size: 12px;
+  }
+
+  .token-hash {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    color: #1d4ed8;
+    word-break: break-all;
+    background: #eff6ff;
+    padding: 4px;
+    border-radius: 4px;
+    margin-top: 2px;
+  }
+
+  .btn-copy-token {
+    width: 100%;
+    height: 48px;
+    border-radius: 12px;
+    border: none;
+    background: var(--nexa-color-primary-600, #2a67d9);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .btn-copy-token:hover {
+    background: var(--nexa-color-primary-700, #1d4ed8);
+  }
+
+  /* Code box wrapper */
+  .code-box-wrapper {
+    background: #0f172a;
+    border-radius: 12px;
+    border: 1px solid #1e293b;
+    overflow: hidden;
+  }
+
+  .code-box-header {
+    background: #090d16;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1e293b;
+    color: #94a3b8;
+    font-size: 12px;
+  }
+
+  .file-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    color: #e2e8f0;
+  }
+
+  .code-badge {
+    background: #2563eb;
+    color: #ffffff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .code-content {
+    margin: 0;
+    padding: 16px;
+    overflow-x: auto;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 12px;
+    line-height: 1.6;
+    color: #f8fafc;
+  }
+
+  .kw { color: #f472b6; font-weight: 600; }
+  .type { color: #60a5fa; }
+  .fn { color: #38bdf8; }
+  .str { color: #4ade80; }
+  .num { color: #fb923c; }
+  .cmt { color: #64748b; font-style: italic; }
+</style>

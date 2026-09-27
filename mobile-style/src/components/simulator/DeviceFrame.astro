@@ -9,6 +9,10 @@ import OperationsScreenSpec from './OperationsScreenSpec.astro';
 import BuyerScreenSpec from './BuyerScreenSpec.astro';
 import BottomSheetSpec from './BottomSheetSpec.astro';
 import ScannerScreenSpec from './ScannerScreenSpec.astro';
+import InteractiveMobileNavbar from './InteractiveMobileNavbar.astro';
+import InteractiveWholesaleCatalog from './InteractiveWholesaleCatalog.astro';
+import InteractiveMobileForms from './InteractiveMobileForms.astro';
+import InteractiveDispatchMovement from './InteractiveDispatchMovement.astro';
 ---
 
 <div class="screen-spec-container">
@@ -18,10 +22,10 @@ import ScannerScreenSpec from './ScannerScreenSpec.astro';
     <div class="section-heading">
       <span class="section-index">07</span>
       <div>
-        <p class="section-kicker">CANONICAL SCREENS & COMPONENT ARCHITECTURE</p>
-        <h2>Inspección de Pantallas Canónicas y Ergonomía de Densidad</h2>
+        <p class="section-kicker">CANONICAL SCREENS & LIVE INTERACTIVE SIMULATOR</p>
+        <h2>Simulador Móvil Interactivo en Vivo y Ergonomía de Densidad</h2>
         <p class="section-intro">
-          Validación de componentes nativos en <strong>Android Jetpack Compose</strong> y Flutter sobre densidades de pantalla reales (360dp compacto, 390dp estándar, 412dp industrial Zebra). Permite verificar composiciones de pantalla completa, áreas de toque de 48dp/56dp y legibilidad de tokens M3 sin marcos decorativos ni falsos chasis de hardware.
+          Validación de componentes nativos en <strong>Android Jetpack Compose</strong> y Flutter sobre densidades de pantalla reales (360dp compacto, 390dp estándar, 412dp industrial Zebra). Permite probar en tiempo real las 4 pantallas canónicas y los 4 nuevos módulos vivos interactivos: <strong>Navbar Dinámica M3</strong>, <strong>Catálogo Mayorista con Tier Pricing</strong>, <strong>Formularios POD con Firma Digital</strong> y <strong>Tablero de Despacho con Token HMAC-SHA256</strong>.
         </p>
       </div>
     </div>
@@ -31,7 +35,7 @@ import ScannerScreenSpec from './ScannerScreenSpec.astro';
       <span class="cuadro-tag primary"><i class="pi pi-android" aria-hidden="true"></i> Android 14 (API 34)</span>
       <span class="cuadro-tag"><i class="pi pi-mobile" aria-hidden="true"></i> Densidades 360dp / 390dp / 412dp</span>
       <span class="cuadro-tag success"><i class="pi pi-hand" aria-hidden="true"></i> Touch Target 48dp / 56dp Guantes</span>
-      <span class="cuadro-tag kotlin"><i class="pi pi-check" aria-hidden="true"></i> Sin Chasis Falso</span>
+      <span class="cuadro-tag kotlin"><i class="pi pi-bolt" aria-hidden="true"></i> 4 Módulos Interactivos en Vivo</span>
     </div>
   </header>
 
@@ -53,9 +57,27 @@ import ScannerScreenSpec from './ScannerScreenSpec.astro';
     </div>
 
     <div class="control-cluster">
-      <span class="control-label">PANTALLA CANÓNICA:</span>
+      <span class="control-label">MÓDULOS INTERACTIVOS EN VIVO:</span>
       <div class="button-toggle-group">
-        <button type="button" class="btn-ctrl screen-btn active" data-screen="operations">
+        <button type="button" class="btn-ctrl screen-btn live-feature active" data-screen="dispatch-live">
+          <i class="pi pi-send"></i> Despacho Kanban (Live)
+        </button>
+        <button type="button" class="btn-ctrl screen-btn live-feature" data-screen="catalog-live">
+          <i class="pi pi-shopping-bag"></i> Catálogo B2B (Live)
+        </button>
+        <button type="button" class="btn-ctrl screen-btn live-feature" data-screen="forms-live">
+          <i class="pi pi-pencil"></i> Formularios & POD (Live)
+        </button>
+        <button type="button" class="btn-ctrl screen-btn live-feature" data-screen="navbar-live">
+          <i class="pi pi-bars"></i> Navbar & Sucursales (Live)
+        </button>
+      </div>
+    </div>
+
+    <div class="control-cluster">
+      <span class="control-label">PANTALLAS CANÓNICAS:</span>
+      <div class="button-toggle-group">
+        <button type="button" class="btn-ctrl screen-btn" data-screen="operations">
           <i class="pi pi-truck"></i> Operaciones
         </button>
         <button type="button" class="btn-ctrl screen-btn" data-screen="scanner">
@@ -84,12 +106,29 @@ import ScannerScreenSpec from './ScannerScreenSpec.astro';
         <div class="vp-tags">
           <span class="vp-badge">48dp OK</span>
           <span class="vp-badge">56dp GLOVES</span>
+          <span class="vp-badge live">LIVE MOCK</span>
         </div>
       </div>
 
       <!-- Scrollable Screen Content Container -->
       <div class="screen-viewport-host" style="height: 720px;">
-        <div class="screen-view active" id="view-operations">
+        
+        <!-- Live Interactive Specimens -->
+        <div class="screen-view active" id="view-dispatch-live">
+          <InteractiveDispatchMovement />
+        </div>
+        <div class="screen-view" id="view-catalog-live">
+          <InteractiveWholesaleCatalog />
+        </div>
+        <div class="screen-view" id="view-forms-live">
+          <InteractiveMobileForms />
+        </div>
+        <div class="screen-view" id="view-navbar-live">
+          <InteractiveMobileNavbar />
+        </div>
+
+        <!-- Canonical Static Specimens -->
+        <div class="screen-view" id="view-operations">
           <OperationsScreenSpec />
         </div>
         <div class="screen-view" id="view-scanner">
@@ -105,7 +144,7 @@ import ScannerScreenSpec from './ScannerScreenSpec.astro';
 
       <!-- Viewport Footer Metric -->
       <div class="viewport-footer-bar">
-        <span>Controles accesibles M3 · WCAG 2.2 AA · 1:1 Software Rendering</span>
+        <span>Controles interactivos M3 · WCAG 2.2 AA · 1:1 Kotlin Jetpack Compose Mock</span>
       </div>
 
     </div>
@@ -199,6 +238,71 @@ import ScannerScreenSpec from './ScannerScreenSpec.astro';
             Cada pantalla encapsula su scroll vertical mediante <code>LazyColumn(modifier = Modifier.fillMaxSize())</code> con <code>contentPadding = PaddingValues(bottom = 80.dp)</code> para garantizar que el último elemento sea visible sobre barras flotantes.
           </p>
         </div>
+      </div>
+    </section>
+
+    <!-- Cuadro 3: Live Interactive Modules & Kotlin 2.4 Contracts -->
+    <section class="cuadro-card">
+      <header class="cuadro-header">
+        <div class="cuadro-header-left">
+          <span class="cuadro-num-badge">C3</span>
+          <div>
+            <p class="cuadro-kicker">MÓDULOS INTERACTIVOS EN VIVO & CONTRATOS KOTLIN 2.4</p>
+            <h3 class="cuadro-title">Matriz de Características Funcionales y Estado Reactivo UDF</h3>
+            <p class="cuadro-subtitle">
+              Los 4 especímenes interactivos simulan la experiencia real en terminales Android con persistencia Room, cola offline y firmas criptográficas.
+            </p>
+          </div>
+        </div>
+        <div class="cuadro-tags">
+          <span class="cuadro-tag primary"><i class="pi pi-bolt"></i> Live Interactive</span>
+          <span class="cuadro-tag kotlin"><i class="pi pi-code"></i> Compose M3</span>
+          <span class="cuadro-tag success"><i class="pi pi-shield"></i> StateFlow & Room</span>
+        </div>
+      </header>
+
+      <div class="contract-table-wrapper">
+        <table class="contract-table">
+          <thead>
+            <tr>
+              <th>Módulo Interactivo</th>
+              <th>Componente Compose</th>
+              <th>Controles Táctiles (48dp/56dp)</th>
+              <th>Reglas de Negocio & Criptografía</th>
+              <th>Garantía Offline</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Navbar Dinámica</strong></td>
+              <td><span class="mono-type">NexaInteractiveTopAppBar</span></td>
+              <td>Dropdown de sucursal, campana de alertas, avatar del operador (Carlos Mendoza).</td>
+              <td>Título contextual por módulo, selector de sucursales frías (Lima Norte, Callao, Chiclayo).</td>
+              <td><span class="mono-chip">WorkManager Queue (2)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Catálogo Mayorista</strong></td>
+              <td><span class="mono-type">WholesaleCatalogScreen</span></td>
+              <td>FilterChips horizontales, steppers (+/-) de 48dp y botón 56dp "Añadir a Despacho".</td>
+              <td>Tier Pricing reactivo: Salmón $100 vs $85 (>20 cajas), Merluza $72 vs $62, Trucha $55 vs $48, Langostino $120 vs $99.</td>
+              <td><span class="mono-chip">Room Cache IQF</span></td>
+            </tr>
+            <tr>
+              <td><strong>Formularios POD & Inspección</strong></td>
+              <td><span class="mono-type">PODDeliveryForm & InspectionScreen</span></td>
+              <td>Inputs de 56dp, pad Canvas de firma digital táctil, switches de 3 estados (OK/ALERTA/CRÍTICO).</td>
+              <td>Enclavamiento ISO 3691: falla crítica en frenos/hidráulico activa bloqueo automático de ignición. Firma sellada con SHA-256.</td>
+              <td><span class="mono-chip">Transacción SQLite</span></td>
+            </tr>
+            <tr>
+              <td><strong>Tablero Despacho</strong></td>
+              <td><span class="mono-type">DispatchKanbanBoard</span></td>
+              <td>Tarjetas de despacho móviles con botón "Avanzar Etapa" y generador QR dinámico.</td>
+              <td>4 columnas (Órdenes, Preparación, Distribución, Entregado). Token HMAC-SHA256 dinámico con TTL 15 min para Diego Morales (WKN-892).</td>
+              <td><span class="mono-chip">Sync Event Broker</span></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
@@ -332,6 +436,22 @@ import ScannerScreenSpec from './ScannerScreenSpec.astro';
     color: #ffffff;
     border-color: transparent;
     font-weight: 700;
+  }
+
+  .btn-ctrl.live-feature {
+    border-color: #bfdbfe;
+    background: #eff6ff;
+    color: #1d4ed8;
+  }
+
+  .btn-ctrl.live-feature:hover {
+    background: #dbeafe;
+  }
+
+  .btn-ctrl.live-feature.active {
+    background: #1d4ed8;
+    color: #ffffff;
+    border-color: transparent;
   }
 
   /* Architectural Stage Wrapper */

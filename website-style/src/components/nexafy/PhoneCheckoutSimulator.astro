@@ -6,15 +6,17 @@
 interface Props {
   productName?: string;
   price?: string;
+  isIsolated?: boolean;
 }
 
 const {
   productName = 'GoPro HERO10 Black',
-  price = '€100 / day'
+  price = '€100 / day',
+  isIsolated = false
 } = Astro.props;
 ---
 
-<div class="ch3-phone-wrapper">
+<div class={`ch3-phone-wrapper ${isIsolated ? 'is-isolated' : ''}`}>
   <div class="ch3-phone-shell">
     <div class="phone-dynamic-island"></div>
     
@@ -73,12 +75,19 @@ const {
     height: 380px;
     background: #ffffff;
     border-radius: 28px;
-    border: 4px solid var(--stage-card);
+    border: 4px solid var(--stage-card, #38c8ff);
     overflow: hidden;
     position: relative;
     padding: 0.75rem;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     transition: border-color 0.3s ease;
+  }
+
+  .ch3-phone-wrapper.is-isolated {
+    margin: 0 auto;
+    max-width: 100%;
+    transform: scale(0.9);
+    transform-origin: center center;
   }
 
   .phone-dynamic-island {
