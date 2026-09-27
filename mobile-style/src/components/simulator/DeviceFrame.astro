@@ -20,6 +20,7 @@ import InteractiveMobileNavbar from './InteractiveMobileNavbar.astro';
 import InteractiveWholesaleCatalog from './InteractiveWholesaleCatalog.astro';
 import InteractiveMobileForms from './InteractiveMobileForms.astro';
 import InteractiveDispatchMovement from './InteractiveDispatchMovement.astro';
+import LoginScreenSpec from './LoginScreenSpec.astro';
 ---
 
 <div class="screen-spec-container" id="simulador-interactivo">
@@ -140,6 +141,9 @@ import InteractiveDispatchMovement from './InteractiveDispatchMovement.astro';
         <button type="button" class="btn-ctrl screen-btn" data-screen="buyer" data-title="Portal de Comprador B2B">
           <i class="pi pi-shopping-cart"></i> Comprador B2B
         </button>
+        <button type="button" class="btn-ctrl screen-btn" data-screen="login" data-title="Acceso a Espacio de Trabajo · Login">
+          <i class="pi pi-lock"></i> Login & Workspace
+        </button>
         <button type="button" class="btn-ctrl screen-btn" data-screen="sheet" data-title="Detalle de Entrega M3">
           <i class="pi pi-sliders-h"></i> Bottom Sheet M3
         </button>
@@ -184,6 +188,11 @@ import InteractiveDispatchMovement from './InteractiveDispatchMovement.astro';
       <!-- Scrollable Screen Content Host Container -->
       <div class="screen-viewport-host" id="screen-viewport-host" style="height: 660px; padding: 16px;">
         
+        <!-- Screen 0: Workspace Login & Access Specimen -->
+        <div class="screen-view" id="view-login">
+          <LoginScreenSpec />
+        </div>
+
         <!-- Screen 1 (DEFAULT): Canonical Operaciones (Clean without duplicated header/footer) -->
         <div class="screen-view active" id="view-operations">
           <OperationsScreenSpec />
@@ -399,7 +408,14 @@ import InteractiveDispatchMovement from './InteractiveDispatchMovement.astro';
           activeView.classList.add('active');
         }
 
-        // Sync bottom nav destinations
+        // Sync bottom nav destinations & visibility
+        const frameBottomNav = document.getElementById('frame-bottom-nav');
+        if (targetScreen === 'login') {
+          if (frameBottomNav) frameBottomNav.style.display = 'none';
+        } else {
+          if (frameBottomNav) frameBottomNav.style.display = 'flex';
+        }
+
         navDests.forEach(dest => dest.classList.remove('active'));
         if (targetScreen === 'operations') {
           document.querySelector('[data-dest="rutas"]')?.classList.add('active');

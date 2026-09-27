@@ -158,44 +158,260 @@ import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
         letter-spacing: 0.04em;
       }
 
-      /* Scene Quick Jump Tabs */
-      .scenes-nav-track {
-        display: flex;
-        gap: 8px;
-        overflow-x: auto;
-        padding-bottom: 8px;
+      /* Scene Quick Jump & Multi-Dimensional Taxonomy Controller */
+      .forensic-taxonomy-controller {
+        background: #ffffff;
+        border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+        border-radius: 20px;
+        padding: 1.5rem;
         margin-bottom: 2.5rem;
-        border-bottom: 1px solid #e2e8f0;
+        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
       }
 
-      .scene-nav-btn {
-        background: #ffffff;
+      .taxonomy-main-modes {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        border-bottom: 1px solid #f1f5f9;
+        padding-bottom: 1rem;
+      }
+
+      .tax-mode-btn {
+        background: #f8fafc;
         border: 1px solid #cbd5e1;
         color: #334155;
-        padding: 8px 14px;
+        padding: 8px 16px;
         border-radius: 10px;
-        font-size: 12px;
-        font-weight: 600;
-        white-space: nowrap;
+        font-size: 13px;
+        font-weight: 700;
         cursor: pointer;
         display: inline-flex;
         align-items: center;
+        gap: 8px;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .tax-mode-btn:hover {
+        background: #f1f5f9;
+        border-color: #2a67d9;
+        color: #2a67d9;
+      }
+
+      .tax-mode-btn.active {
+        background: #082846;
+        color: #ffffff;
+        border-color: #082846;
+        box-shadow: 0 3px 10px rgba(8, 40, 70, 0.25);
+      }
+
+      .taxonomy-filters-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      @media (max-width: 900px) {
+        .taxonomy-filters-row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .filter-group-box {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .filter-group-label {
+        font-size: 11px;
+        font-weight: 700;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        display: flex;
+        align-items: center;
         gap: 6px;
+      }
+
+      .filter-chips-cluster {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .filter-chip {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        color: #475569;
+        padding: 5px 12px;
+        border-radius: 8px;
+        font-size: 11.5px;
+        font-weight: 600;
+        cursor: pointer;
         transition: all 0.15s ease;
+      }
+
+      .filter-chip:hover {
+        background: #f8fafc;
+        border-color: #94a3b8;
+        color: #0f172a;
+      }
+
+      .filter-chip.active {
+        background: #2a67d9;
+        border-color: #2a67d9;
+        color: #ffffff;
+        font-weight: 700;
+      }
+
+      .taxonomy-quick-nav-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+        padding-top: 1rem;
+        border-top: 1px solid #f1f5f9;
+      }
+
+      .quick-scene-pills {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .quick-scene-pill {
+        background: #f1f5f9;
+        border: 1px solid transparent;
+        color: #334155;
+        padding: 5px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        font-family: var(--nexa-font-family-mono, monospace);
+        cursor: pointer;
         text-decoration: none;
+        transition: all 0.15s ease;
+      }
 
-        &:hover {
-          background: #f8fafc;
-          border-color: #2a67d9;
-          color: #2a67d9;
-        }
+      .quick-scene-pill:hover {
+        background: #e2e8f0;
+        color: #2a67d9;
+      }
 
-        &.active {
-          background: #082846;
-          color: #ffffff;
-          border-color: #082846;
-          box-shadow: 0 2px 8px rgba(8, 40, 70, 0.25);
-        }
+      .quick-scene-pill.highlight {
+        background: #082846;
+        color: #38c8ff;
+      }
+
+      .taxonomy-search-box {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        position: relative;
+        min-width: 260px;
+      }
+
+      .taxonomy-search-input {
+        width: 100%;
+        background: #f8fafc;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        padding: 7px 12px 7px 32px;
+        font-size: 12px;
+        color: #0f172a;
+        outline: none;
+        transition: border-color 0.15s ease;
+      }
+
+      .taxonomy-search-input:focus {
+        border-color: #2a67d9;
+        background: #ffffff;
+      }
+
+      .taxonomy-search-icon {
+        position: absolute;
+        left: 10px;
+        font-size: 12px;
+        color: #94a3b8;
+        pointer-events: none;
+      }
+
+      .taxonomy-status-badge {
+        font-family: var(--nexa-font-family-mono, monospace);
+        font-size: 11px;
+        font-weight: 700;
+        color: #0369a1;
+        background: #e0f2fe;
+        padding: 4px 10px;
+        border-radius: 6px;
+      }
+
+      /* Scene Card Taxonomy Badges */
+      .scene-taxonomy-badges {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-top: 8px;
+      }
+
+      .tax-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .tax-tag-screen {
+        background: #082846;
+        color: #38c8ff;
+        font-family: var(--nexa-font-family-mono, monospace);
+      }
+
+      .tax-tag-site {
+        background: #eff6ff;
+        color: #1d4ed8;
+        border: 1px solid #bfdbfe;
+      }
+
+      .tax-tag-func {
+        background: #f0fdf4;
+        color: #15803d;
+        border: 1px solid #bbf7d0;
+      }
+
+      .tax-tag-frames {
+        background: #fefce8;
+        color: #a16207;
+        border: 1px solid #fef08a;
+        font-family: var(--nexa-font-family-mono, monospace);
+      }
+
+      /* Transitions & Spotlight states */
+      .scene-card {
+        transition: opacity 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .scene-card.filtered-out {
+        display: none !important;
+      }
+
+      .scene-card.spotlight {
+        outline: 3px solid #2a67d9;
+        box-shadow: 0 12px 32px rgba(42, 103, 217, 0.25);
+      }
+
+      /* Forensic Deep Dive Highlight */
+      body.mode-forensics .forensic-table-wrapper {
+        border: 2px solid #2a67d9 !important;
+        box-shadow: 0 0 0 3px rgba(42, 103, 217, 0.15);
       }
 
       /* Scene Stations Cards */
@@ -584,17 +800,89 @@ import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
             </div>
           </div>
 
-          <!-- Quick Jump Scene Buttons -->
-          <nav class="scenes-nav-track" aria-label="Jump to scene">
-            <a href="#scene-01" class="scene-nav-btn active">01 Hero Dormant</a>
-            <a href="#scene-02" class="scene-nav-btn">02 Channels Morph</a>
-            <a href="#scene-03" class="scene-nav-btn">03 SaaS Ledger</a>
-            <a href="#scene-04" class="scene-nav-btn">04 Scrolly Merchant</a>
-            <a href="#scene-05" class="scene-nav-btn">05 Phone Simulator</a>
-            <a href="#scene-06" class="scene-nav-btn">06 Insurance Plate</a>
-            <a href="#scene-07" class="scene-nav-btn">07 Beige Bento</a>
-            <a href="#scene-08" class="scene-nav-btn">08 Sculpted Footer</a>
-          </nav>
+          <!-- Multi-Dimensional Taxonomy Controller (Por Pantalla, Por Sitio, Por Funcionalidad, y Fotograma por Fotograma) -->
+          <section class="forensic-taxonomy-controller" aria-label="Controlador de taxonomía forense">
+            <!-- Dimension 1: Main Perspective Modes -->
+            <div class="taxonomy-main-modes" role="tablist" aria-label="Perspectivas de análisis">
+              <button type="button" class="tax-mode-btn active" data-mode="all" role="tab" aria-selected="true">
+                <i class="pi pi-th-large" aria-hidden="true"></i> Todas las Escenas (1-8)
+              </button>
+              <button type="button" class="tax-mode-btn" data-mode="screen" role="tab" aria-selected="false">
+                <i class="pi pi-desktop" aria-hidden="true"></i> Por Pantalla
+              </button>
+              <button type="button" class="tax-mode-btn" data-mode="site" role="tab" aria-selected="false">
+                <i class="pi pi-globe" aria-hidden="true"></i> Por Sitio / Dominio
+              </button>
+              <button type="button" class="tax-mode-btn" data-mode="func" role="tab" aria-selected="false">
+                <i class="pi pi-cog" aria-hidden="true"></i> Por Funcionalidad
+              </button>
+              <button type="button" class="tax-mode-btn" data-mode="forensics" role="tab" aria-selected="false">
+                <i class="pi pi-microchip" aria-hidden="true"></i> Fotograma por Fotograma (60fps)
+              </button>
+              <button type="button" class="tax-mode-btn" data-mode="interactive" role="tab" aria-selected="false">
+                <i class="pi pi-play" aria-hidden="true"></i> Modo Interactivo
+              </button>
+            </div>
+
+            <!-- Dimension 2: Sub-filters (Site & Functionality) -->
+            <div class="taxonomy-filters-row">
+              <div class="filter-group-box">
+                <span class="filter-group-label">
+                  <i class="pi pi-sitemap" aria-hidden="true"></i> Filtrar por Sitio / Dominio:
+                </span>
+                <div class="filter-chips-cluster" id="filter-site-chips">
+                  <button type="button" class="filter-chip active" data-site="all">Todos</button>
+                  <button type="button" class="filter-chip" data-site="landing">Landing & Brand</button>
+                  <button type="button" class="filter-chip" data-site="merchant">Merchant Studio</button>
+                  <button type="button" class="filter-chip" data-site="saas">SaaS Ledger</button>
+                  <button type="button" class="filter-chip" data-site="mobile">Mobile Flow</button>
+                  <button type="button" class="filter-chip" data-site="assurance">Assurance Plate</button>
+                </div>
+              </div>
+
+              <div class="filter-group-box">
+                <span class="filter-group-label">
+                  <i class="pi pi-sliders-h" aria-hidden="true"></i> Filtrar por Funcionalidad:
+                </span>
+                <div class="filter-chips-cluster" id="filter-func-chips">
+                  <button type="button" class="filter-chip active" data-func="all">Todas</button>
+                  <button type="button" class="filter-chip" data-func="geometry">Geometría SVG & Conduits</button>
+                  <button type="button" class="filter-chip" data-func="motion">Física 60fps & Bézier</button>
+                  <button type="button" class="filter-chip" data-func="data">Data Architecture & Ledger</button>
+                  <button type="button" class="filter-chip" data-func="device">Simulador Mobile & Touch</button>
+                  <button type="button" class="filter-chip" data-func="grid">Bento & Modular Grid</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dimension 3: Quick Navigation by Screen + Search Input + Status -->
+            <div class="taxonomy-quick-nav-bar">
+              <div class="quick-scene-pills" id="quick-scene-pills">
+                <a href="#scene-01" class="quick-scene-pill highlight" data-scene="01">01 Hero</a>
+                <a href="#scene-02" class="quick-scene-pill" data-scene="02">02 Channels</a>
+                <a href="#scene-03" class="quick-scene-pill" data-scene="03">03 SaaS</a>
+                <a href="#scene-04" class="quick-scene-pill" data-scene="04">04 Merchant</a>
+                <a href="#scene-05" class="quick-scene-pill" data-scene="05">05 Mobile</a>
+                <a href="#scene-06" class="quick-scene-pill" data-scene="06">06 Insurance</a>
+                <a href="#scene-07" class="quick-scene-pill" data-scene="07">07 Bento</a>
+                <a href="#scene-08" class="quick-scene-pill" data-scene="08">08 Footer</a>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                <div class="taxonomy-search-box">
+                  <i class="pi pi-search taxonomy-search-icon" aria-hidden="true"></i>
+                  <input 
+                    type="search" 
+                    id="tax-search-input" 
+                    class="taxonomy-search-input" 
+                    placeholder="Buscar fotograma, easing, token..." 
+                    aria-label="Buscar en investigación forense"
+                  />
+                </div>
+                <span class="taxonomy-status-badge" id="tax-count-badge">8 / 8 Escenas</span>
+              </div>
+            </div>
+          </section>
         </header>
 
         <!-- The 8 Forensic Scenes Stack -->
@@ -603,11 +891,25 @@ import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
           <!-- =========================================================================
                SCENE 01: HERO DORMANT & LIVING VASCULATURE (t=0s - 4s)
                ========================================================================= -->
-          <article class="scene-card" id="scene-01">
+          <article 
+            class="scene-card" 
+            id="scene-01"
+            data-scene="01"
+            data-site="landing"
+            data-func="geometry motion"
+            data-frames="0-240"
+            data-search="hero dormant living vasculature canopy mint celeste 142x142 800,665 1.766s cubic-bezier power2.inout opencv 28px conduits"
+          >
             <div class="scene-card-header">
               <div class="scene-title-group">
                 <span class="scene-kicker">01 / FORENSIC TRAJECTORY (t = 0.000s &rarr; 4.000s)</span>
                 <h2 class="scene-title">Scene 01: Hero Dormant & Living Vasculature</h2>
+                <div class="scene-taxonomy-badges">
+                  <span class="tax-tag tax-tag-screen"><i class="pi pi-desktop"></i> Pantalla 01 / 08</span>
+                  <span class="tax-tag tax-tag-site"><i class="pi pi-globe"></i> Sitio: Landing & Brand</span>
+                  <span class="tax-tag tax-tag-func"><i class="pi pi-cog"></i> Func: Geometría SVG & 60fps Motion</span>
+                  <span class="tax-tag tax-tag-frames"><i class="pi pi-clock"></i> Fotogramas: f=0&rarr;240 (0.000s - 4.000s)</span>
+                </div>
               </div>
               <span class="scene-provenance-badge">
                 <i class="pi pi-video" aria-hidden="true"></i> elem-62bb3911cfdd5765825581.mp4 (f: 0-240)
@@ -707,11 +1009,25 @@ import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
           <!-- =========================================================================
                SCENE 02: CHANNELS MORPH & MULTI-TENANT ROUTING (t=4s - 10s)
                ========================================================================= -->
-          <article class="scene-card" id="scene-02">
+          <article 
+            class="scene-card" 
+            id="scene-02"
+            data-scene="02"
+            data-site="landing"
+            data-func="geometry motion"
+            data-frames="240-620"
+            data-search="channels morph multi-tenant routing booking store wave circular arc node 28px conduits 4-brick flecto symbol"
+          >
             <div class="scene-card-header">
               <div class="scene-title-group">
                 <span class="scene-kicker">02 / FORENSIC SEQUENCE (t = 4.000s &rarr; 10.333s)</span>
                 <h2 class="scene-title">Scene 02: Channels Morph & Multi-Tenant Routing</h2>
+                <div class="scene-taxonomy-badges">
+                  <span class="tax-tag tax-tag-screen"><i class="pi pi-desktop"></i> Pantalla 02 / 08</span>
+                  <span class="tax-tag tax-tag-site"><i class="pi pi-globe"></i> Sitio: Landing & Omnichannel</span>
+                  <span class="tax-tag tax-tag-func"><i class="pi pi-cog"></i> Func: Conduits & Terminal Nodes</span>
+                  <span class="tax-tag tax-tag-frames"><i class="pi pi-clock"></i> Fotogramas: f=240&rarr;620 (4.000s - 10.333s)</span>
+                </div>
               </div>
               <span class="scene-provenance-badge">
                 <i class="pi pi-video" aria-hidden="true"></i> elem-62bb3911cfdd5765825581.mp4 (f: 240-620)
@@ -822,11 +1138,25 @@ import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
           <!-- =========================================================================
                SCENE 03: SAAS LEDGER & LIVE ASSET DISPATCH (t=10s - 18s)
                ========================================================================= -->
-          <article class="scene-card" id="scene-03">
+          <article 
+            class="scene-card" 
+            id="scene-03"
+            data-scene="03"
+            data-site="saas"
+            data-func="data"
+            data-frames="600-933"
+            data-search="saas ledger live asset dispatch financial enterprise management modal 540x380 payment confetti celebration"
+          >
             <div class="scene-card-header">
               <div class="scene-title-group">
                 <span class="scene-kicker">03 / FORENSIC EXPANSION (t = 10.000s &rarr; 18.000s)</span>
                 <h2 class="scene-title">Scene 03: SaaS Ledger & Live Asset Dispatch</h2>
+                <div class="scene-taxonomy-badges">
+                  <span class="tax-tag tax-tag-screen"><i class="pi pi-desktop"></i> Pantalla 03 / 08</span>
+                  <span class="tax-tag tax-tag-site"><i class="pi pi-globe"></i> Sitio: SaaS Ledger</span>
+                  <span class="tax-tag tax-tag-func"><i class="pi pi-cog"></i> Func: Data Architecture & Settlement</span>
+                  <span class="tax-tag tax-tag-frames"><i class="pi pi-clock"></i> Fotogramas: f=600&rarr;933 (10.000s - 18.000s)</span>
+                </div>
               </div>
               <span class="scene-provenance-badge">
                 <i class="pi pi-video" aria-hidden="true"></i> elem-62d69ee3303ff845112099.mp4 & elem-62d6a0344e4f8517286422.mp4
@@ -919,11 +1249,25 @@ import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
           <!-- =========================================================================
                SCENE 04: SCROLLYTELLING MERCHANT CONFIGURATOR (t=18s - 25s)
                ========================================================================= -->
-          <article class="scene-card" id="scene-04">
+          <article 
+            class="scene-card" 
+            id="scene-04"
+            data-scene="04"
+            data-site="merchant"
+            data-func="data motion"
+            data-frames="0-420"
+            data-search="scrollytelling merchant configurator bookings inventory smartphone recalculation delivery toggle reactive"
+          >
             <div class="scene-card-header">
               <div class="scene-title-group">
                 <span class="scene-kicker">04 / SCROLLYTELLING ARCHITECTURE (t = 18.000s &rarr; 25.000s)</span>
                 <h2 class="scene-title">Scene 04: Scrollytelling Merchant Configurator</h2>
+                <div class="scene-taxonomy-badges">
+                  <span class="tax-tag tax-tag-screen"><i class="pi pi-desktop"></i> Pantalla 04 / 08</span>
+                  <span class="tax-tag tax-tag-site"><i class="pi pi-globe"></i> Sitio: Merchant Studio</span>
+                  <span class="tax-tag tax-tag-func"><i class="pi pi-cog"></i> Func: Reactive Ledger & Scrolly</span>
+                  <span class="tax-tag tax-tag-frames"><i class="pi pi-clock"></i> Fotogramas: f=0&rarr;420 (18.000s - 25.000s)</span>
+                </div>
               </div>
               <span class="scene-provenance-badge">
                 <i class="pi pi-video" aria-hidden="true"></i> elem-62bb3a259519f446072569.mp4 (f: 0-420)
@@ -1016,11 +1360,25 @@ import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
           <!-- =========================================================================
                SCENE 05: CUSTOMER 4-STEP CHECKOUT PHONE SIMULATOR (t=25s - 33s)
                ========================================================================= -->
-          <article class="scene-card" id="scene-05">
+          <article 
+            class="scene-card" 
+            id="scene-05"
+            data-scene="05"
+            data-site="mobile"
+            data-func="device"
+            data-frames="720-840"
+            data-search="customer 4-step checkout phone simulator dates escrow biometric face id apple pay qr code wai-aria"
+          >
             <div class="scene-card-header">
               <div class="scene-title-group">
                 <span class="scene-kicker">05 / USER JOURNEY TIMELINE (t = 25.000s &rarr; 33.000s)</span>
                 <h2 class="scene-title">Scene 05: Customer 4-Step Checkout Phone Simulator</h2>
+                <div class="scene-taxonomy-badges">
+                  <span class="tax-tag tax-tag-screen"><i class="pi pi-desktop"></i> Pantalla 05 / 08</span>
+                  <span class="tax-tag tax-tag-site"><i class="pi pi-globe"></i> Sitio: Mobile Flow</span>
+                  <span class="tax-tag tax-tag-func"><i class="pi pi-cog"></i> Func: Simulador Mobile & Touch</span>
+                  <span class="tax-tag tax-tag-frames"><i class="pi pi-clock"></i> Fotogramas: f=720&rarr;840 (25.000s - 33.000s)</span>
+                </div>
               </div>
               <span class="scene-provenance-badge">
                 <i class="pi pi-video" aria-hidden="true"></i> elem-62bb3a25 & flecto-awwwards-original.mp4
@@ -1126,11 +1484,25 @@ import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
           <!-- =========================================================================
                SCENE 06: BÜROCRATIK ASYMMETRIC INSURANCE PLATE (t=33s - 40s)
                ========================================================================= -->
-          <article class="scene-card" id="scene-06">
+          <article 
+            class="scene-card" 
+            id="scene-06"
+            data-scene="06"
+            data-site="assurance"
+            data-func="grid geometry"
+            data-frames="840-900"
+            data-search="bürocratik asymmetric insurance plate 100% all-risk guarantee crown drop concave fillets 50000 zero deductible"
+          >
             <div class="scene-card-header">
               <div class="scene-title-group">
                 <span class="scene-kicker">06 / ARCHITECTURAL GEOMETRY (t = 33.000s &rarr; 40.000s)</span>
                 <h2 class="scene-title">Scene 06: Bürocratik Asymmetric Insurance Plate</h2>
+                <div class="scene-taxonomy-badges">
+                  <span class="tax-tag tax-tag-screen"><i class="pi pi-desktop"></i> Pantalla 06 / 08</span>
+                  <span class="tax-tag tax-tag-site"><i class="pi pi-globe"></i> Sitio: Assurance Plate</span>
+                  <span class="tax-tag tax-tag-func"><i class="pi pi-cog"></i> Func: Asymmetric Plate & All-Risk Shield</span>
+                  <span class="tax-tag tax-tag-frames"><i class="pi pi-clock"></i> Fotogramas: f=840&rarr;900 (33.000s - 40.000s)</span>
+                </div>
               </div>
               <span class="scene-provenance-badge">
                 <i class="pi pi-video" aria-hidden="true"></i> flecto-awwwards-original.mp4 (t: 33s-40s)
@@ -1221,11 +1593,25 @@ import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
           <!-- =========================================================================
                SCENE 07: ACCESS CHANNELS 8-TILE WARM BEIGE BENTO GRID (t=40s - 48s)
                ========================================================================= -->
-          <article class="scene-card" id="scene-07">
+          <article 
+            class="scene-card" 
+            id="scene-07"
+            data-scene="07"
+            data-site="landing"
+            data-func="grid data"
+            data-frames="900-960"
+            data-search="access channels 8-tile warm beige bento grid #fdfae7 market store analytics wave escrow booking rapid setup boost seo modular"
+          >
             <div class="scene-card-header">
               <div class="scene-title-group">
                 <span class="scene-kicker">07 / BENTO ARCHITECTURE (t = 40.000s &rarr; 48.000s)</span>
                 <h2 class="scene-title">Scene 07: Access Channels 8-Tile Warm Beige Bento Grid (#FDFAE7)</h2>
+                <div class="scene-taxonomy-badges">
+                  <span class="tax-tag tax-tag-screen"><i class="pi pi-desktop"></i> Pantalla 07 / 08</span>
+                  <span class="tax-tag tax-tag-site"><i class="pi pi-globe"></i> Sitio: Landing Ecosystem</span>
+                  <span class="tax-tag tax-tag-func"><i class="pi pi-cog"></i> Func: 8-Tile Bento Architecture</span>
+                  <span class="tax-tag tax-tag-frames"><i class="pi pi-clock"></i> Fotogramas: f=900&rarr;960 (40.000s - 48.000s)</span>
+                </div>
               </div>
               <span class="scene-provenance-badge">
                 <i class="pi pi-image" aria-hidden="true"></i> frame_0054_home_lower.png &rarr; frame_0058_home_lower.png
@@ -1340,11 +1726,25 @@ import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
           <!-- =========================================================================
                SCENE 08: SCULPTED MONOLITHIC BEIGE FOOTER (t=48s - 55s)
                ========================================================================= -->
-          <article class="scene-card" id="scene-08">
+          <article 
+            class="scene-card" 
+            id="scene-08"
+            data-scene="08"
+            data-site="landing"
+            data-func="geometry"
+            data-frames="960-984"
+            data-search="sculpted monolithic beige footer cta parametric bottom well negative-radius inset newsletter credentials closure"
+          >
             <div class="scene-card-header">
               <div class="scene-title-group">
                 <span class="scene-kicker">08 / ARCHITECTURAL CLOSURE (t = 48.000s &rarr; 55.000s)</span>
                 <h2 class="scene-title">Scene 08: Sculpted Monolithic Beige Footer</h2>
+                <div class="scene-taxonomy-badges">
+                  <span class="tax-tag tax-tag-screen"><i class="pi pi-desktop"></i> Pantalla 08 / 08</span>
+                  <span class="tax-tag tax-tag-site"><i class="pi pi-globe"></i> Sitio: Landing Closure</span>
+                  <span class="tax-tag tax-tag-func"><i class="pi pi-cog"></i> Func: Sculpted Geometry & Inset</span>
+                  <span class="tax-tag tax-tag-frames"><i class="pi pi-clock"></i> Fotogramas: f=960&rarr;984 (48.000s - 55.000s)</span>
+                </div>
               </div>
               <span class="scene-provenance-badge">
                 <i class="pi pi-image" aria-hidden="true"></i> unsection-footer.jpg (2880x1184 reference)
@@ -1644,6 +2044,134 @@ import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
         if (btnToggleIns) {
           btnToggleIns.textContent = insActive ? 'Switch to Standard' : 'Enable 100% Shield';
         }
+      });
+
+      // Multi-Dimensional Taxonomy Controller Engine
+      const taxModeBtns = document.querySelectorAll<HTMLButtonElement>('.tax-mode-btn');
+      const siteFilterBtns = document.querySelectorAll<HTMLButtonElement>('#filter-site-chips .filter-chip');
+      const funcFilterBtns = document.querySelectorAll<HTMLButtonElement>('#filter-func-chips .filter-chip');
+      const searchInput = document.getElementById('tax-search-input') as HTMLInputElement | null;
+      const countBadge = document.getElementById('tax-count-badge');
+      const allSceneCards = document.querySelectorAll<HTMLElement>('.scene-card');
+      const quickScenePills = document.querySelectorAll<HTMLAnchorElement>('.quick-scene-pill');
+
+      let currentMode = 'all';
+      let currentSite = 'all';
+      let currentFunc = 'all';
+      let currentQuery = '';
+
+      function applyTaxonomyFilters() {
+        let visibleCount = 0;
+        const normalizedQuery = currentQuery.trim().toLowerCase();
+
+        allSceneCards.forEach(card => {
+          const site = card.getAttribute('data-site') || '';
+          const func = card.getAttribute('data-func') || '';
+          const searchText = (card.getAttribute('data-search') || '') + ' ' + (card.innerText || '').toLowerCase();
+
+          if (currentMode === 'forensics') {
+            document.body.classList.add('mode-forensics');
+          } else {
+            document.body.classList.remove('mode-forensics');
+          }
+
+          const matchSite = (currentSite === 'all') || site.includes(currentSite);
+          const matchFunc = (currentFunc === 'all') || func.includes(currentFunc);
+          const matchSearch = (!normalizedQuery) || searchText.includes(normalizedQuery);
+
+          if (matchSite && matchFunc && matchSearch) {
+            card.classList.remove('filtered-out');
+            visibleCount++;
+          } else {
+            card.classList.add('filtered-out');
+          }
+        });
+
+        if (countBadge) {
+          countBadge.textContent = `${visibleCount} / ${allSceneCards.length} Escenas`;
+        }
+      }
+
+      // Mode switching
+      taxModeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          taxModeBtns.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+          currentMode = btn.getAttribute('data-mode') || 'all';
+
+          if (currentMode === 'all') {
+            currentSite = 'all';
+            currentFunc = 'all';
+            siteFilterBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-site') === 'all'));
+            funcFilterBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-func') === 'all'));
+          } else if (currentMode === 'screen') {
+            // Focus on screen progression
+            currentSite = 'all';
+            currentFunc = 'all';
+          }
+          applyTaxonomyFilters();
+        });
+      });
+
+      // Site filter chips
+      siteFilterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          siteFilterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentSite = btn.getAttribute('data-site') || 'all';
+          applyTaxonomyFilters();
+        });
+      });
+
+      // Func filter chips
+      funcFilterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          funcFilterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentFunc = btn.getAttribute('data-func') || 'all';
+          applyTaxonomyFilters();
+        });
+      });
+
+      // Search input
+      searchInput?.addEventListener('input', (e) => {
+        currentQuery = (e.target as HTMLInputElement).value;
+        applyTaxonomyFilters();
+      });
+
+      // Quick scene navigation with smooth scroll & spotlight
+      quickScenePills.forEach(pill => {
+        pill.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = pill.getAttribute('href')?.replace('#', '');
+          if (!targetId) return;
+
+          const targetCard = document.getElementById(targetId);
+          if (targetCard && targetCard.classList.contains('filtered-out')) {
+            currentSite = 'all';
+            currentFunc = 'all';
+            currentQuery = '';
+            if (searchInput) searchInput.value = '';
+            siteFilterBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-site') === 'all'));
+            funcFilterBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-func') === 'all'));
+            applyTaxonomyFilters();
+          }
+
+          quickScenePills.forEach(p => p.classList.remove('highlight'));
+          pill.classList.add('highlight');
+
+          if (targetCard) {
+            targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            targetCard.classList.add('spotlight');
+            setTimeout(() => {
+              targetCard.classList.remove('spotlight');
+            }, 1800);
+          }
+        });
       });
     </script>
   </body>

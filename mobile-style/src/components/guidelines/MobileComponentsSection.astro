@@ -118,52 +118,64 @@
           <p class="cuadro-kicker">COMPONENTES MÓVILES · NAVEGACIÓN BASE</p>
           <h3 class="cuadro-title">NexaBottomNav (Barra de Navegación Inferior Interactiva M3)</h3>
           <p class="cuadro-subtitle">
-            Barra inferior fija con altura estandarizada de <strong>64dp</strong> y áreas táctiles de 64×48dp por destino. Diseñada para conmutación fluida entre las 4 actividades clave de campo: <em>Rutas, Despacho, Picking y Checklist</em>.
+            Barra inferior fija con altura estandarizada de <strong>64dp</strong> y áreas táctiles de 64×48dp. Diseñada con destinos especializados para cada rol operacional de Blueprint (<em>Conductor, Almacén, Despacho, Inspector y Comprador B2B</em>), evitando saturar al usuario con opciones irrelevantes a su contexto.
           </p>
         </div>
       </div>
       <div class="cuadro-tags">
         <span class="cuadro-tag primary"><i class="pi pi-bars"></i> 64dp M3 Bar</span>
-        <span class="cuadro-tag success"><i class="pi pi-check"></i> 4 Destinos Activos</span>
+        <span class="cuadro-tag success" id="tag-active-role-destinations"><i class="pi pi-check"></i> 5 Roles Blueprint</span>
       </div>
     </div>
 
-    <!-- Live Interactive Bottom Navigation Demo -->
+    <!-- Role Selector Cluster for Blueprint User Stories -->
+    <div class="role-nav-selector-stage">
+      <span class="role-nav-selector-title"><i class="pi pi-users"></i> SELECCIONA EL ROL OPERACIONAL (BLUEPRINT USER STORIES):</span>
+      <div class="role-pills-selector" id="role-bottomnav-selector">
+        <button type="button" class="btn-role-nav-pill active" data-role="conductor">
+          <i class="pi pi-map-marker"></i> Conductor (En Ruta)
+        </button>
+        <button type="button" class="btn-role-nav-pill" data-role="almacen">
+          <i class="pi pi-box"></i> Operario Almacén (Picking)
+        </button>
+        <button type="button" class="btn-role-nav-pill" data-role="despacho">
+          <i class="pi pi-truck"></i> Supervisor Despacho (Muelle)
+        </button>
+        <button type="button" class="btn-role-nav-pill" data-role="inspector">
+          <i class="pi pi-check-square"></i> Inspector Maquinaria (ISO)
+        </button>
+        <button type="button" class="btn-role-nav-pill" data-role="comprador">
+          <i class="pi pi-shopping-bag"></i> Comprador B2B
+        </button>
+      </div>
+    </div>
+
+    <!-- Live Interactive Bottom Navigation Demo (Dynamic by Role) -->
     <div class="component-demo-stage">
       <div class="live-bottom-nav-interactive" id="interactive-bottomnav-demo">
+        <!-- Rendered dynamically by script below, default is Conductor -->
         <div class="bottom-nav-tab active" data-tab-id="rutas">
-          <div class="tab-indicator-pill">
-            <i class="pi pi-map-marker"></i>
-          </div>
+          <div class="tab-indicator-pill"><i class="pi pi-map-marker"></i></div>
           <span class="tab-label">Rutas</span>
           <span class="tab-badge">2</span>
         </div>
-
-        <div class="bottom-nav-tab" data-tab-id="despacho">
-          <div class="tab-indicator-pill">
-            <i class="pi pi-send"></i>
-          </div>
-          <span class="tab-label">Despacho</span>
+        <div class="bottom-nav-tab" data-tab-id="entregas">
+          <div class="tab-indicator-pill"><i class="pi pi-file-edit"></i></div>
+          <span class="tab-label">Entregas POD</span>
+          <span class="tab-badge">5</span>
         </div>
-
-        <div class="bottom-nav-tab" data-tab-id="picking">
-          <div class="tab-indicator-pill">
-            <i class="pi pi-box"></i>
-          </div>
-          <span class="tab-label">Picking</span>
-          <span class="tab-badge warn">!</span>
+        <div class="bottom-nav-tab" data-tab-id="incidencias">
+          <div class="tab-indicator-pill"><i class="pi pi-exclamation-triangle"></i></div>
+          <span class="tab-label">Incidencias</span>
         </div>
-
-        <div class="bottom-nav-tab" data-tab-id="checklist">
-          <div class="tab-indicator-pill">
-            <i class="pi pi-wrench"></i>
-          </div>
-          <span class="tab-label">Checklist</span>
+        <div class="bottom-nav-tab" data-tab-id="jornada">
+          <div class="tab-indicator-pill"><i class="pi pi-user"></i></div>
+          <span class="tab-label">Mi Jornada</span>
         </div>
       </div>
     </div>
     <div class="nav-tab-status-readout" id="nav-tab-status-readout">
-      <span>Pestaña Activa: <strong>RUTAS (Diego Morales · 2 paradas pendientes)</strong></span>
+      <span>Rol Activo: <strong>CONDUCTOR (Diego Morales · Rutas GPS, captura de POD y eventos de entrega)</strong></span>
     </div>
   </section>
 
@@ -1384,4 +1396,172 @@
       &:hover { background: #f8fafc; }
     }
   }
+
+  /* Role Nav Selector Stage */
+  .role-nav-selector-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 12px 0 16px;
+    padding: 12px 14px;
+    background: #f8fafc;
+    border: 1px solid var(--nexa-color-border-subtle, #e2e8f0);
+    border-radius: 10px;
+  }
+
+  .role-nav-selector-title {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .role-pills-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .btn-role-nav-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-role-nav-pill:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+  }
+
+  .btn-role-nav-pill.active {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #ffffff;
+    box-shadow: 0 1px 3px rgba(37, 99, 235, 0.25);
+  }
 </style>
+
+<script>
+  // Role-Aware Bottom Navigation State (Derived from Blueprint User Stories)
+  const roleNavData: Record<string, {
+    destinations: Array<{ id: string; label: string; icon: string; badge?: string | number; isWarn?: boolean }>;
+    summary: string;
+  }> = {
+    conductor: {
+      destinations: [
+        { id: 'rutas', label: 'Rutas', icon: 'pi-map-marker', badge: 2 },
+        { id: 'entregas', label: 'Entregas POD', icon: 'pi-file-edit', badge: 5 },
+        { id: 'incidencias', label: 'Incidencias', icon: 'pi-exclamation-triangle' },
+        { id: 'jornada', label: 'Mi Jornada', icon: 'pi-user' },
+      ],
+      summary: 'CONDUCTOR (Diego Morales · Rutas GPS, captura de POD y eventos de entrega)',
+    },
+    almacen: {
+      destinations: [
+        { id: 'picking', label: 'Picking FEFO', icon: 'pi-box', badge: 8 },
+        { id: 'escaner', label: 'Escáner Lotes', icon: 'pi-qrcode' },
+        { id: 'ubicaciones', label: 'Ubicaciones', icon: 'pi-sitemap' },
+        { id: 'mermas', label: 'Mermas Frío', icon: 'pi-times-circle', badge: '!', isWarn: true },
+      ],
+      summary: 'OPERARIO ALMACÉN (Alejandro Vargas · Cumplimiento FEFO, escaneo GS1 y racks frigoríficos)',
+    },
+    despacho: {
+      destinations: [
+        { id: 'muelle', label: 'Bahías 1-8', icon: 'pi-truck', badge: 4 },
+        { id: 'kanban', label: 'Kanban Patio', icon: 'pi-th-large' },
+        { id: 'manifiestos', label: 'Manifiestos', icon: 'pi-file' },
+        { id: 'flota', label: 'Flota Activa', icon: 'pi-sliders-h' },
+      ],
+      summary: 'SUPERVISOR DESPACHO (Asignación de rampas, balance de carga de camiones y sellos)',
+    },
+    inspector: {
+      destinations: [
+        { id: 'checklist', label: 'Checklist ISO', icon: 'pi-check-square', badge: 1 },
+        { id: 'equipos', label: 'Equipos', icon: 'pi-wrench' },
+        { id: 'fallas', label: 'Reporte Fallas', icon: 'pi-shield' },
+        { id: 'historial', label: 'Historial', icon: 'pi-history' },
+      ],
+      summary: 'INSPECTOR MAQUINARIA (Inspección pre-uso ISO 3691 de montacargas y transpaletas)',
+    },
+    comprador: {
+      destinations: [
+        { id: 'catalogo', label: 'Catálogo B2B', icon: 'pi-shopping-bag' },
+        { id: 'pedidos', label: 'Mis Pedidos', icon: 'pi-list', badge: 3 },
+        { id: 'tracking', label: 'Tracking Frío', icon: 'pi-compass' },
+        { id: 'facturacion', label: 'Facturas', icon: 'pi-credit-card' },
+      ],
+      summary: 'COMPRADOR B2B (Carlos Mendoza · Abastecimiento perecible y telemetría de frío)',
+    },
+  };
+
+  const roleButtons = document.querySelectorAll<HTMLButtonElement>('.btn-role-nav-pill');
+  const bottomNavContainer = document.getElementById('interactive-bottomnav-demo');
+  const readout = document.getElementById('nav-tab-status-readout');
+
+  function renderBottomNavForRole(roleKey: string) {
+    const roleConfig = roleNavData[roleKey];
+    if (!roleConfig || !bottomNavContainer) return;
+
+    let html = '';
+    roleConfig.destinations.forEach((dest, idx) => {
+      const activeClass = idx === 0 ? 'active' : '';
+      const badgeHtml = dest.badge 
+        ? `<span class="tab-badge ${dest.isWarn ? 'warn' : ''}">${dest.badge}</span>` 
+        : '';
+      html += `
+        <div class="bottom-nav-tab ${activeClass}" data-tab-id="${dest.id}">
+          <div class="tab-indicator-pill"><i class="pi ${dest.icon}"></i></div>
+          <span class="tab-label">${dest.label}</span>
+          ${badgeHtml}
+        </div>
+      `;
+    });
+
+    bottomNavContainer.innerHTML = html;
+    if (readout) {
+      readout.innerHTML = `<span>Rol Activo: <strong>${roleConfig.summary}</strong></span>`;
+    }
+
+    const tabs = bottomNavContainer.querySelectorAll('.bottom-nav-tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const tabLabel = tab.querySelector('.tab-label')?.textContent || '';
+        if (readout) {
+          readout.innerHTML = `<span>Pestaña Activa: <strong>${tabLabel.toUpperCase()} (${roleConfig.summary})</strong></span>`;
+        }
+      });
+    });
+  }
+
+  roleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      roleButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const role = btn.getAttribute('data-role') || 'conductor';
+      renderBottomNavForRole(role);
+    });
+  });
+
+  const initialTabs = bottomNavContainer?.querySelectorAll('.bottom-nav-tab');
+  initialTabs?.forEach(tab => {
+    tab.addEventListener('click', () => {
+      initialTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+</script>

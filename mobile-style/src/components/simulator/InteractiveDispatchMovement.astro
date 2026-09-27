@@ -844,10 +844,17 @@
     padding: 8px;
     gap: 6px;
     overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     border-bottom: 1px solid var(--nexa-color-border-default, #e2e8f0);
     position: sticky;
     top: 0;
     z-index: 10;
+  }
+  .mobile-column-tabs-bar::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
   }
 
   .col-tab-btn {

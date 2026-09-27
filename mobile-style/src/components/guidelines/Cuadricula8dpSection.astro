@@ -238,10 +238,12 @@ fun resolveAdaptiveConfig(widthClass: WindowWidthSizeClass): NexaAdaptiveLayoutC
         <div class="device-mockup tablet-mockup">
           <div class="mockup-with-rail">
             <div class="mock-nav-rail">
-              <i class="pi pi-th-large active"></i>
-              <i class="pi pi-box"></i>
-              <i class="pi pi-truck"></i>
-              <i class="pi pi-cog"></i>
+              <div class="mock-rail-nx-badge" title="Nexa Identity (NX)">
+                <img src="/assets/nexa-mobile-inverted.svg" alt="NX" class="mock-rail-nx-logo" />
+              </div>
+              <i class="pi pi-box active" title="Inventario & Picking"></i>
+              <i class="pi pi-truck" title="Flota & Rutas"></i>
+              <i class="pi pi-cog" title="Configuración"></i>
             </div>
             <div class="mock-rail-body">
               <div class="mockup-top-bar">
@@ -780,20 +782,55 @@ fun resolveAdaptiveConfig(widthClass: WindowWidthSizeClass): NexaAdaptiveLayoutC
   }
 
   .mock-nav-rail {
-    width: 36px;
-    background: #082846;
+    width: 44px;
+    background: #ffffff;
+    border-right: 1px solid var(--nexa-color-border-subtle, #e2e8f0);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
-    padding: 14px 0;
-    color: #94a3b8;
+    gap: 12px;
+    padding: 10px 0;
+    color: #64748b;
     font-size: 13px;
     z-index: 3;
+    box-shadow: 1px 0 3px rgba(0, 0, 0, 0.02);
+
+    i {
+      padding: 6px;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+
+    i:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
 
     i.active {
-      color: #38c8ff;
+      color: #2563eb;
+      background: #eff6ff;
     }
+  }
+
+  .mock-rail-nx-badge {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    margin-bottom: 2px;
+  }
+
+  .mock-rail-nx-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .mock-rail-body {
