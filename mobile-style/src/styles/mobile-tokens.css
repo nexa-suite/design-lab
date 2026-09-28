@@ -15,7 +15,7 @@
   --nexa-surface-tint: #f1f5f9;
   --nexa-surface-nav-active: #edf4fe;
   --nexa-surface-info: #eef6ff;
-  --nexa-surface-success: #f0fdf4;
+  --nexa-surface-success: #eff6ff;
   --nexa-surface-warning: #fffbeb;
   --nexa-surface-danger: #fef2f2;
 
@@ -501,7 +501,7 @@
 .code-pre-box .kw { color: #f472b6; font-weight: bold; }
 .code-pre-box .type { color: #38bdf8; font-weight: 600; }
 .code-pre-box .fn { color: #a78bfa; }
-.code-pre-box .str { color: #4ade80; }
+.code-pre-box .str { color: #7dd3fc; }
 .code-pre-box .num { color: #fbbf24; }
 .code-pre-box .ann { color: #f59e0b; }
 .code-pre-box .comm { color: #64748b; font-style: italic; }

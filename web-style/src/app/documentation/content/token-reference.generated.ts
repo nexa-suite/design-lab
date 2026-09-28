@@ -31,9 +31,9 @@ export const NEXA_TOKEN_VALUES: Readonly<Record<string, string>> = {
   "--nexa-primitive-slate-900": "#0f172a",
   "--nexa-primitive-white": "#ffffff",
   "--nexa-primitive-canvas": "#f6faff",
-  "--nexa-primitive-green-50": "#f0fdf4",
-  "--nexa-primitive-green-200": "#bbf7d0",
-  "--nexa-primitive-green-700": "#15803d",
+  "--nexa-primitive-green-50": "#eff6ff",
+  "--nexa-primitive-green-200": "#bae6fd",
+  "--nexa-primitive-green-700": "#0284c7",
   "--nexa-primitive-amber-50": "#fffbeb",
   "--nexa-primitive-amber-200": "#fcd34d",
   "--nexa-primitive-amber-600": "#d97706",
@@ -122,18 +122,18 @@ export const NEXA_TOKEN_VALUES: Readonly<Record<string, string>> = {
   "--nexa-color-info-emphasized-background": "oklch(48% 0.19 262.9)",
   "--nexa-color-info-emphasized-border": "oklch(48% 0.19 262.9)",
   "--nexa-color-info-emphasized-text": "#ffffff",
-  "--nexa-color-success-50": "#f0fdf4",
-  "--nexa-color-success-200": "#bbf7d0",
-  "--nexa-color-success-border": "#bbf7d0",
-  "--nexa-color-success-700": "#15803d",
-  "--nexa-color-success-standard-background": "#f0fdf4",
-  "--nexa-color-success-standard-text": "#15803d",
-  "--nexa-color-success-emphasized-background": "#15803d",
-  "--nexa-color-success-emphasized-border": "#15803d",
+  "--nexa-color-success-50": "#eff6ff",
+  "--nexa-color-success-200": "#bae6fd",
+  "--nexa-color-success-border": "#bae6fd",
+  "--nexa-color-success-700": "#0284c7",
+  "--nexa-color-success-standard-background": "#eff6ff",
+  "--nexa-color-success-standard-text": "#0284c7",
+  "--nexa-color-success-emphasized-background": "#0284c7",
+  "--nexa-color-success-emphasized-border": "#0284c7",
   "--nexa-color-success-emphasized-text": "#ffffff",
-  "--nexa-color-role-sales-surface": "#f0fdf4",
-  "--nexa-color-role-sales-border": "#bbf7d0",
-  "--nexa-color-role-sales-text": "#15803d",
+  "--nexa-color-role-sales-surface": "#eff6ff",
+  "--nexa-color-role-sales-border": "#bae6fd",
+  "--nexa-color-role-sales-text": "#0284c7",
   "--nexa-color-warning-50": "#fffbeb",
   "--nexa-color-warning-600": "#d97706",
   "--nexa-color-warning-text": "#92400e",
@@ -186,7 +186,7 @@ export const NEXA_TOKEN_VALUES: Readonly<Record<string, string>> = {
   "--nexa-surface-overlay": "rgb(15 23 42 / 48%)",
   "--nexa-surface-nav-active": "oklch(96.9% 0.014 264.5)",
   "--nexa-surface-info": "oklch(96.9% 0.014 264.5)",
-  "--nexa-surface-success": "#f0fdf4",
+  "--nexa-surface-success": "#eff6ff",
   "--nexa-surface-warning": "#fffbeb",
   "--nexa-surface-danger": "#fef2f2",
   "--nexa-surface-table-header": "#f8fafc",
@@ -293,9 +293,9 @@ export const NEXA_TOKEN_VALUES: Readonly<Record<string, string>> = {
   "--nexa-viz-series-2": "#0284c7",
   "--nexa-viz-series-3": "#4f46e5",
   "--nexa-viz-series-4": "#f97316",
-  "--nexa-viz-series-5": "#15803d",
+  "--nexa-viz-series-5": "#0284c7",
   "--nexa-viz-series-6": "#d97706",
-  "--nexa-viz-status-success": "#15803d",
+  "--nexa-viz-status-success": "#0284c7",
   "--nexa-viz-status-warning": "#d97706",
   "--nexa-viz-status-danger": "#dc2626",
   "--nexa-viz-status-info": "oklch(48% 0.19 262.9)",
@@ -487,24 +487,24 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "name": "--nexa-primitive-green-50",
     "layer": "primitive",
     "type": "color",
-    "sourceValue": "#f0fdf4",
-    "value": "#f0fdf4",
+    "sourceValue": "#eff6ff",
+    "value": "#eff6ff",
     "description": "Nexa primitive token nexa-primitive-green-50."
   },
   {
     "name": "--nexa-primitive-green-200",
     "layer": "primitive",
     "type": "color",
-    "sourceValue": "#bbf7d0",
-    "value": "#bbf7d0",
+    "sourceValue": "#bae6fd",
+    "value": "#bae6fd",
     "description": "Nexa primitive token nexa-primitive-green-200."
   },
   {
     "name": "--nexa-primitive-green-700",
     "layer": "primitive",
     "type": "color",
-    "sourceValue": "#15803d",
-    "value": "#15803d",
+    "sourceValue": "#0284c7",
+    "value": "#0284c7",
     "description": "Nexa primitive token nexa-primitive-green-700."
   },
   {
@@ -1216,7 +1216,7 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "layer": "semantic",
     "type": "color",
     "sourceValue": "var(--nexa-primitive-green-50)",
-    "value": "#f0fdf4",
+    "value": "#eff6ff",
     "description": "Nexa semantic token nexa-color-success-50."
   },
   {
@@ -1224,7 +1224,7 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "layer": "semantic",
     "type": "color",
     "sourceValue": "var(--nexa-primitive-green-200)",
-    "value": "#bbf7d0",
+    "value": "#bae6fd",
     "description": "Nexa semantic token nexa-color-success-200."
   },
   {
@@ -1232,7 +1232,7 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "layer": "semantic",
     "type": "color",
     "sourceValue": "var(--nexa-primitive-green-200)",
-    "value": "#bbf7d0",
+    "value": "#bae6fd",
     "description": "Nexa semantic token nexa-color-success-border."
   },
   {
@@ -1240,7 +1240,7 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "layer": "semantic",
     "type": "color",
     "sourceValue": "var(--nexa-primitive-green-700)",
-    "value": "#15803d",
+    "value": "#0284c7",
     "description": "Nexa semantic token nexa-color-success-700."
   },
   {
@@ -1248,7 +1248,7 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "layer": "semantic",
     "type": "color",
     "sourceValue": "var(--nexa-surface-success)",
-    "value": "#f0fdf4",
+    "value": "#eff6ff",
     "description": "Standard success status background."
   },
   {
@@ -1256,7 +1256,7 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "layer": "semantic",
     "type": "color",
     "sourceValue": "var(--nexa-color-success-700)",
-    "value": "#15803d",
+    "value": "#0284c7",
     "description": "Standard success status text."
   },
   {
@@ -1264,7 +1264,7 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "layer": "semantic",
     "type": "color",
     "sourceValue": "var(--nexa-color-success-700)",
-    "value": "#15803d",
+    "value": "#0284c7",
     "description": "Strong success status background."
   },
   {
@@ -1272,7 +1272,7 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "layer": "semantic",
     "type": "color",
     "sourceValue": "var(--nexa-color-success-700)",
-    "value": "#15803d",
+    "value": "#0284c7",
     "description": "Strong success status boundary."
   },
   {
@@ -1288,7 +1288,7 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "layer": "semantic",
     "type": "color",
     "sourceValue": "var(--nexa-primitive-green-50)",
-    "value": "#f0fdf4",
+    "value": "#eff6ff",
     "description": "Nexa semantic token nexa-color-role-sales-surface."
   },
   {
@@ -1296,7 +1296,7 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "layer": "semantic",
     "type": "color",
     "sourceValue": "var(--nexa-primitive-green-200)",
-    "value": "#bbf7d0",
+    "value": "#bae6fd",
     "description": "Nexa semantic token nexa-color-role-sales-border."
   },
   {
@@ -1304,7 +1304,7 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "layer": "semantic",
     "type": "color",
     "sourceValue": "var(--nexa-primitive-green-700)",
-    "value": "#15803d",
+    "value": "#0284c7",
     "description": "Nexa semantic token nexa-color-role-sales-text."
   },
   {
@@ -1728,7 +1728,7 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "layer": "semantic",
     "type": "color",
     "sourceValue": "var(--nexa-primitive-green-50)",
-    "value": "#f0fdf4",
+    "value": "#eff6ff",
     "description": "Nexa semantic token nexa-surface-success."
   },
   {
@@ -2584,7 +2584,7 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "layer": "data-visualization",
     "type": "color",
     "sourceValue": "{nexa-color-success-700}",
-    "value": "#15803d",
+    "value": "#0284c7",
     "description": "Green categorical series."
   },
   {
@@ -2600,7 +2600,7 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "layer": "data-visualization",
     "type": "color",
     "sourceValue": "{nexa-color-success-700}",
-    "value": "#15803d",
+    "value": "#0284c7",
     "description": "Semantic success status for analytics states; never a categorical series alias."
   },
   {
