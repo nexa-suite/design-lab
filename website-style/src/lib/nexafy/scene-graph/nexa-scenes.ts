@@ -357,7 +357,7 @@ export function createNexaEnterpriseScene(w: number, h: number): SceneGraph {
     targetPortId: 'port-escrow-in',
     strokeWidth: 8,
     filletRadius: 20,
-    colorToken: '#10b981',
+    colorToken: '#38bdf8',
     waypoints: rEsc.waypoints,
     svgPathData: rEsc.svgPathData,
     animationOrder: 5,

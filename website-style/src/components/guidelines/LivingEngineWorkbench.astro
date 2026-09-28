@@ -104,13 +104,13 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
           type="button" 
           class="tone-pill" 
           data-tone="oceanic" 
-          data-plate="#004737" 
-          data-accent="#4ade80" 
-          data-conduit="#57f09e" 
-          title="Oceanic Sage / Flecto (#004737 & #57f09e)"
+          data-plate="#0c2038" 
+          data-accent="#38bdf8" 
+          data-conduit="#93c5fd" 
+          title="Deep Cold Chain (#0c2038 & #38bdf8)"
         >
-          <span class="color-swatch" style="background: #004737; border: 1.5px solid #57f09e;"></span>
-          <span>Oceanic Sage</span>
+          <span class="color-swatch" style="background: #0c2038; border: 1.5px solid #38bdf8;"></span>
+          <span>Deep Navy</span>
         </button>
       </div>
 
@@ -123,8 +123,8 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
         <button type="button" class="conduit-pill" data-pastel="#a5f3fc" title="Soft Cyan (#a5f3fc)">
           <span class="color-swatch" style="background: #a5f3fc;"></span> Cyan
         </button>
-        <button type="button" class="conduit-pill" data-pastel="#57f09e" title="Mint Clásico (#57f09e)">
-          <span class="color-swatch" style="background: #57f09e;"></span> Mint
+        <button type="button" class="conduit-pill" data-pastel="#93c5fd" title="Ice Blue (#93c5fd)">
+          <span class="color-swatch" style="background: #93c5fd;"></span> Ice Blue
         </button>
       </div>
     </div>
@@ -157,9 +157,14 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
       >
         <defs>
           <radialGradient id="workbench-radial-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#0e3d6b" stop-opacity="0.45" />
+            <stop offset="0%" stop-color="#0e3d6b" stop-opacity="0.5" />
             <stop offset="100%" stop-color="#082846" stop-opacity="0" />
           </radialGradient>
+          <pattern id="workbench-blueprint-grid" width="36" height="36" patternUnits="userSpaceOnUse">
+            <path d="M 36 0 L 0 0 0 36" fill="none" stroke="rgba(56, 189, 248, 0.22)" stroke-width="1" />
+            <circle cx="0" cy="0" r="1.5" fill="rgba(56, 189, 248, 0.35)" />
+            <circle cx="36" cy="36" r="1.5" fill="rgba(56, 189, 248, 0.35)" />
+          </pattern>
         </defs>
         <!-- The continuous sculpted contour path matching Bürocratik SOTD geometry -->
         <path 
@@ -169,6 +174,8 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
         />
         <!-- Ambient Radial Backlight Glow within the frame -->
         <rect x="0" y="0" width="1440" height="820" fill="url(#workbench-radial-glow)" />
+        <!-- Architectural Blueprint Grid Pattern ("fondo con cuadraditos") -->
+        <rect x="0" y="0" width="1440" height="820" fill="url(#workbench-blueprint-grid)" opacity="0.65" />
       </svg>
 
       <!-- 2.2 TOP LAYER (Notches & Monumental Headline Canopy) -->
@@ -176,12 +183,7 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
         <!-- Top-Left White Notch: Nexa Brand & Primary Links -->
         <div class="hero-top-left">
           <a href="#" class="nexa-brand" aria-label="Nexafy Homepage">
-            <span class="nexa-logo-bricks" aria-hidden="true">
-              <span class="brick brick-sm"></span>
-              <span class="brick brick-lg"></span>
-              <span class="brick brick-lg"></span>
-              <span class="brick brick-sm"></span>
-            </span>
+            <img src="/assets/nexa-nx-blue.svg" alt="Nexa" width="28" height="28" style="display: block;" />
             <span class="nexa-logo-word">Nexafy</span>
           </a>
 
@@ -206,15 +208,8 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
           </div>
         </div>
 
-        <!-- Top-Right White Notch: Language, CTA & Login -->
+        <!-- Top-Right White Notch: CTA & Login -->
         <div class="hero-top-right">
-          <div class="hero-lang-pill" aria-label="Language selector">
-            <button type="button" class="lang-toggle-btn active" aria-label="Selected language English">EN</button>
-            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <polyline points="2 4 6 8 10 4"></polyline>
-            </svg>
-          </div>
-
           <a href="#book-demo" class="hero-book-btn">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -323,144 +318,124 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
         <div class="modular-block node-origin-hub" id="origin-hub" role="region" aria-label="Origen: Your Company">
           <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
           <div class="hub-label">
-            <span class="hub-word">YOUR</span>
-            <span class="hub-word">COMPANY</span>
+            <span class="hub-word">CALLAO</span>
+            <span class="hub-word">MUELLE 04</span>
           </div>
-          <span class="block-tag-sub">ORIGIN ROOT</span>
+          <span class="block-tag-sub">ORIGIN HUB · B2B</span>
         </div>
 
         <!-- BLOCK 2: Nexa Modular Hub Core -->
         <div class="modular-block node-hub-core" id="hub-core" role="region" aria-label="Nexa Hub Core">
           <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
           <div class="core-icon-wrap">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38c8ff" stroke-width="2">
-              <circle cx="12" cy="12" r="3"></circle>
-              <path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path>
-              <path d="M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
-            </svg>
+            <img src="/assets/nexa-nx-white.svg" alt="NX" width="24" height="24" style="display: block;" />
           </div>
           <strong class="core-title">NEXA HUB</strong>
-          <span class="core-sub">Core Bus</span>
+          <span class="core-sub">Core Dispatch</span>
           <span class="core-dot-indicator"></span>
         </div>
 
         <!-- BLOCK 3: Interlocking Logic Block A (Dispatch Router) -->
-        <div class="modular-block node-logic-puzzle node-logic-a" id="logic-a" role="region" aria-label="Bloque Lógico A: Despacho">
+        <div class="modular-block node-logic-puzzle node-logic-a" id="logic-a" role="region" aria-label="Bloque Lógico A: Despacho FEFO">
           <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
           <div class="puzzle-header">
             <span class="puzzle-badge">01</span>
-            <strong class="puzzle-title">BLOCK A</strong>
+            <strong class="puzzle-title">ROUTER</strong>
           </div>
-          <span class="puzzle-role">Route Dispatch</span>
+          <span class="puzzle-role">DSP-204 FEFO</span>
           <div class="puzzle-indicator-bar"><span class="bar-fill"></span></div>
         </div>
 
-        <!-- BLOCK 4: Interlocking Logic Block B (Escrow Verifier) -->
-        <div class="modular-block node-logic-puzzle node-logic-b" id="logic-b" role="region" aria-label="Bloque Lógico B: Verificación Escrow">
+        <!-- BLOCK 4: Interlocking Logic Block B (IoT Cold Chain) -->
+        <div class="modular-block node-logic-puzzle node-logic-b" id="logic-b" role="region" aria-label="Bloque Lógico B: Telemetría Sensirion">
           <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
           <div class="puzzle-header">
             <span class="puzzle-badge">02</span>
-            <strong class="puzzle-title">BLOCK B</strong>
+            <strong class="puzzle-title">SENSIRION</strong>
           </div>
-          <span class="puzzle-role">Escrow Verify</span>
+          <span class="puzzle-role">-18.2°C IoT</span>
           <div class="puzzle-indicator-bar"><span class="bar-fill"></span></div>
         </div>
 
-        <!-- BLOCK 5: Interlocking Logic Block C (Supply Mesh) -->
-        <div class="modular-block node-logic-puzzle node-logic-c" id="logic-c" role="region" aria-label="Bloque Lógico C: Malla de Suministro">
+        <!-- BLOCK 5: Interlocking Logic Block C (Escrow Smart) -->
+        <div class="modular-block node-logic-puzzle node-logic-c" id="logic-c" role="region" aria-label="Bloque Lógico C: Custodia Escrow">
           <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
           <div class="puzzle-header">
             <span class="puzzle-badge">03</span>
-            <strong class="puzzle-title">BLOCK C</strong>
+            <strong class="puzzle-title">ESCROW</strong>
           </div>
-          <span class="puzzle-role">Cold Chain</span>
+          <span class="puzzle-role">$3,450 B2B</span>
           <div class="puzzle-indicator-bar"><span class="bar-fill"></span></div>
         </div>
 
-        <!-- BLOCK 6: Physical Store POS Card -->
-        <article class="modular-block channel-card card-store" id="store-card" aria-label="Canal: Physical Store POS">
+        <!-- BLOCK 6: Despacho en Bahía Card -->
+        <article class="modular-block channel-card card-store" id="store-card" aria-label="Canal: Despacho en Bahía">
           <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
           <div class="card-thumb-wrap">
-            <img 
-              src="/assets/synthetic/store-schematic.svg" 
-              alt="Physical Store Showroom POS" 
-              class="card-thumb-img" 
-              loading="eager"
-              width="80"
-              height="80"
-            />
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
           </div>
           <div class="card-details-col">
-            <p class="card-sub-label">Gopro available</p>
-            <p class="card-sub-label">for renting at</p>
-            <p class="card-sub-label"><strong class="channel-bold">Physical Store</strong></p>
-            <span class="card-price-value text-mono">100€/Day</span>
+            <p class="card-sub-label">Despacho en Bahía</p>
+            <p class="card-sub-label"><strong class="channel-bold">Muelle Callao R04</strong></p>
+            <span class="card-price-value text-mono">500 kg · IQF</span>
           </div>
         </article>
 
-        <!-- BLOCK 7: Customer Inquiry Card (John Cooper) -->
-        <article class="modular-block channel-card card-email" id="inquiry-card" aria-label="Canal: Consulta Directa">
+        <!-- BLOCK 7: Monitoreo Reefer GPS Card -->
+        <article class="modular-block channel-card card-email" id="inquiry-card" aria-label="Canal: Monitoreo Reefer">
           <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
           <div class="email-card-header">
-            <div class="email-avatar-wrap">
-              <img 
-                src="/assets/synthetic/avatar-customer.svg" 
-                alt="John Cooper Avatar" 
-                class="email-avatar-img" 
-                loading="eager"
-                width="32"
-                height="32"
-              />
+            <div class="email-avatar-wrap" style="background: rgba(56, 189, 248, 0.15); display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
             </div>
             <div class="email-meta-info">
-              <strong class="email-author-name">John Cooper</strong>
-              <span class="email-timestamp text-mono">3h</span>
+              <strong class="email-author-name">Reefer Van B-402</strong>
+              <span class="email-timestamp text-mono">-18.2°C</span>
             </div>
           </div>
           <p class="email-body-text">
-            Hi! <span class="wave-hand-icon" aria-hidden="true">👋</span> I want to order 2xGoPro for 4 days, for an event.
+            ⚡ En Ruta: Muelle Callao &rarr; ICISA Lima Norte. Conforme HACCP.
           </p>
         </article>
 
-        <!-- BLOCK 8: Online Store Card (acme.store) -->
-        <article class="modular-block channel-card card-online" id="online-card" aria-label="Canal: Catálogo Online">
+        <!-- BLOCK 8: Catálogo B2B Mayorista -->
+        <article class="modular-block channel-card card-online" id="online-card" aria-label="Canal: Catálogo Mayorista">
           <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
           <div class="online-card-topbar">
             <svg class="browser-lock-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
               <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
               <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
             </svg>
-            <span class="browser-domain-text text-mono">acme.store</span>
+            <span class="browser-domain-text text-mono">nexa.wholesale/b2b</span>
           </div>
 
           <div class="online-card-body">
-            <div class="card-thumb-wrap gopro-wrap">
-              <img 
-                src="/assets/synthetic/camera-vector.svg" 
-                alt="Action Camera" 
-                class="card-thumb-img" 
-                loading="eager"
-                width="50"
-                height="42"
-              />
+            <div class="card-thumb-wrap wholesale-thumb-wrap">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                <line x1="7" y1="7" x2="7.01" y2="7"></line>
+              </svg>
             </div>
             <div class="card-details-col">
               <p class="card-sub-label">
-                Online Catalog <br />
-                for renting <strong class="channel-bold">Online</strong>
+                Catálogo Mayorista <br />
+                <strong class="channel-bold">Salmón del Pacífico IQF</strong>
               </p>
             </div>
           </div>
 
           <div class="online-action-capsule">
-            <span class="capsule-price text-mono">100€/Day</span>
+            <span class="capsule-price text-mono">$24.50/kg</span>
             <span class="capsule-divider" aria-hidden="true">|</span>
             <span class="capsule-rent-btn">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <path d="M16 10a4 4 0 0 1-8 0"></path>
-              </svg>
               <span>DESPACHAR</span>
             </span>
           </div>
@@ -476,11 +451,11 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
               </svg>
             </div>
             <div class="escrow-title-wrap">
-              <strong class="escrow-title">100% Custody</strong>
-              <span class="escrow-sub">Zero Risk Escrow</span>
+              <strong class="escrow-title">Custodia Escrow</strong>
+              <span class="escrow-sub">Smart Contract B2B</span>
             </div>
           </div>
-          <p class="escrow-desc">Pre-autorización instantánea y liberación automática sin reclamos en frío.</p>
+          <p class="escrow-desc">Garantía $3,450.00 pre-autorizada. Liquidación automática tras telemetría conforme.</p>
           <div class="escrow-footer-status">
             <span class="status-live-dot"></span>
             <span class="text-mono">AUTORIZADO · RED ACTIVA</span>
@@ -826,9 +801,9 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    background: rgba(16, 185, 129, 0.12);
-    border: 1px solid rgba(16, 185, 129, 0.35);
-    color: #059669;
+    background: rgba(37, 99, 235, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    color: #2563eb;
     font-size: 11px;
     font-weight: 700;
     padding: 3px 9px;
@@ -1491,7 +1466,7 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     gap: 0.75rem;
   }
 
-  .gopro-wrap {
+  .wholesale-thumb-wrap {
     width: 50px;
     height: 44px;
   }
@@ -1783,9 +1758,9 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    background: rgba(16, 185, 129, 0.12);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    color: #059669;
+    background: rgba(37, 99, 235, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: #2563eb;
     font-size: 11px;
     font-weight: 700;
     padding: 2px 8px;
@@ -1985,7 +1960,7 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
   const NODES: Record<string, BlockNode> = {
     'origin-hub': {
       id: 'origin-hub',
-      name: 'YOUR COMPANY',
+      name: 'CALLAO MUELLE 04',
       x: 20, y: 210, width: 154, height: 140,
       ports: {
         right: { x: 154, y: 70, dir: 'right' }
@@ -2004,7 +1979,7 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     },
     'logic-a': {
       id: 'logic-a',
-      name: 'BLOCK A (Dispatch)',
+      name: 'ROUTER (DSP-204)',
       x: 410, y: 140, width: 100, height: 95,
       ports: {
         left:   { x: 0,   y: 48, dir: 'left' },
@@ -2014,7 +1989,7 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     },
     'logic-b': {
       id: 'logic-b',
-      name: 'BLOCK B (Escrow)',
+      name: 'SENSIRION (-18.2°C)',
       x: 410, y: 280, width: 100, height: 95,
       ports: {
         left:   { x: 0,   y: 48, dir: 'left' },
@@ -2024,7 +1999,7 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     },
     'logic-c': {
       id: 'logic-c',
-      name: 'BLOCK C (Mesh)',
+      name: 'ESCROW ($3,450)',
       x: 545, y: 210, width: 105, height: 95,
       ports: {
         left:   { x: 0,   y: 48, dir: 'left' },
@@ -2035,7 +2010,7 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     },
     'store-card': {
       id: 'store-card',
-      name: 'Physical Store POS',
+      name: 'Despacho en Bahía',
       x: 150, y: 430, width: 260, height: 115,
       ports: {
         top:  { x: 130, y: 0,  dir: 'top' },
@@ -2044,7 +2019,7 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     },
     'inquiry-card': {
       id: 'inquiry-card',
-      name: 'Customer Inquiry',
+      name: 'Monitoreo Reefer',
       x: 470, y: 430, width: 275, height: 110,
       ports: {
         top: { x: 137, y: 0, dir: 'top' }
@@ -2052,7 +2027,7 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     },
     'online-card': {
       id: 'online-card',
-      name: 'Online Store',
+      name: 'Catálogo Mayorista',
       x: 740, y: 130, width: 260, height: 190,
       ports: {
         left:   { x: 0,   y: 95,  dir: 'left' },
@@ -2061,7 +2036,7 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     },
     'escrow-card': {
       id: 'escrow-card',
-      name: 'Escrow Terminal',
+      name: 'Custodia Escrow B2B',
       x: 810, y: 390, width: 250, height: 145,
       ports: {
         left: { x: 0,   y: 72, dir: 'left' },
@@ -2519,7 +2494,7 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     nexa:     { plate: '#082846', accent: '#38c8ff', conduit: '#bae6fd' },
     ceramic:  { plate: '#1d3d63', accent: '#38bdf8', conduit: '#a5f3fc' },
     cashmere: { plate: '#283a48', accent: '#7dd3fc', conduit: '#bae6fd' },
-    oceanic:  { plate: '#004737', accent: '#4ade80', conduit: '#57f09e' }
+    oceanic:  { plate: '#0c2038', accent: '#38bdf8', conduit: '#93c5fd' }
   };
 
   function applyTone(toneKey: string) {

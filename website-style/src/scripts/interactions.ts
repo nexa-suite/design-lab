@@ -7,6 +7,8 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FLECTO_TIMELINE } from '../lib/flecto-motion';
+import { generateContainerCommands, commandsToSvgPath, interpolateCommands } from '../lib/nexafy/geometry';
+import { NEXAFY_PRESETS } from '../lib/nexafy/presets';
 
 // Register GSAP plugins safely in browser environment
 if (typeof window !== 'undefined') {
@@ -133,12 +135,48 @@ function initHeroAnimation() {
 
   if (!canvas || !hub) return;
 
+  const silhouettePath = document.querySelector<SVGPathElement>('.hero-silhouette-path');
+  const clipPathEl = document.querySelector<SVGPathElement>('#hero-silhouette-clip path');
+
+  const cmdsDormant = generateContainerCommands(NEXAFY_PRESETS.DORMANT);
+  const cmdsChannels = generateContainerCommands(NEXAFY_PRESETS.CHANNELS);
+  const cmdsSaas = generateContainerCommands(NEXAFY_PRESETS.SAAS);
+  const cmdsPayment = generateContainerCommands(NEXAFY_PRESETS.PAYMENT);
+
+  let currentCmds = cmdsDormant;
+
+  const morphToPreset = (targetCmds: typeof cmdsChannels, duration = 1.1, ease = 'power2.inOut') => {
+    if (!silhouettePath) return;
+    const startCmds = currentCmds;
+    const morphObj = { t: 0 };
+    gsap.to(morphObj, {
+      t: 1,
+      duration,
+      ease,
+      onUpdate: () => {
+        const interpolated = interpolateCommands(startCmds, targetCmds, morphObj.t);
+        const d = commandsToSvgPath(interpolated);
+        silhouettePath.setAttribute('d', d);
+        if (clipPathEl) clipPathEl.setAttribute('d', d);
+      },
+      onComplete: () => {
+        currentCmds = targetCmds;
+      }
+    });
+  };
+
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isDesktop = window.innerWidth > 900;
   let ch3ConfettiId: number | null = null;
 
   const setSettledHero = () => {
     gsap.set(canvas, { scale: 1, opacity: 1 });
+    if (silhouettePath) {
+      const d = commandsToSvgPath(cmdsChannels);
+      silhouettePath.setAttribute('d', d);
+      if (clipPathEl) clipPathEl.setAttribute('d', d);
+      currentCmds = cmdsChannels;
+    }
     gsap.set(hub, { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1 });
     if (crown) gsap.set(crown, { y: 0, opacity: 1 });
     if (guarantee) gsap.set(guarantee, { opacity: 1 });
@@ -149,10 +187,14 @@ function initHeroAnimation() {
     });
     const markEl = document.querySelector<SVGPathElement>('.line-flecto-mark');
     if (markEl) gsap.set(markEl, { opacity: 1, scale: 1 });
+    const centerHubEl = document.getElementById('circuit-center-hub');
+    if (centerHubEl) gsap.set(centerHubEl, { opacity: 1, scale: 1 });
+    const destNodeEl = document.querySelector('.circuit-dest-node');
+    if (destNodeEl) gsap.set(destNodeEl, { opacity: 1, scale: 1 });
     if (pipeAccent) gsap.set(pipeAccent, { opacity: 1 });
     badges.forEach(b => gsap.set(b, { scale: 1, opacity: 1 }));
     cards.forEach(c => gsap.set(c, { scale: 1, opacity: 1 }));
-    if (tickerMsg) tickerMsg.textContent = 'Customers can email you directly or book in Physical Stores';
+    if (tickerMsg) tickerMsg.textContent = 'Con Nexafy gestionas despachos de cadena de frío y operaciones B2B en tiempo real';
   };
 
   const isSettledMode = canvas.getAttribute('data-settled') === 'true';
@@ -209,19 +251,37 @@ function initHeroAnimation() {
     store: '<svg class="guarantee-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>',
     globe: '<svg class="guarantee-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>',
     lock: '<svg class="guarantee-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>',
+    eye: '<svg class="guarantee-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>',
   };
 
-  // 3. Master Forensic Sequence Timeline (Synchronized with elem-62bb3911cfdd5765825581.mp4 and elem-62d69ee3303ff845112099.mp4)
+  // 3. Master Forensic Sequence Timeline (Synchronized with video extraction)
   const masterTl = gsap.timeline({ delay: 0.05 });
   const ch1 = FLECTO_TIMELINE.CHAPTER_01;
 
-  // Phase 1 (0.0s - 0.25s): Stage opens in dominant green stillness
+  // Phase 1 (0.0s - 0.25s): Stage opens in dominant stillness
   masterTl.to(canvas, {
     scale: 1,
     opacity: 1,
     duration: ch1.STAGE_FADE_IN.duration,
     ease: 'power2.out',
   }, ch1.STAGE_FADE_IN.start);
+
+  // Phase 1b (0.2s - 1.6s): Living canvas morphs smoothly from full rounded rectangular block into sculpted cross canopy
+  const morphObj = { t: 0 };
+  masterTl.to(morphObj, {
+    t: 1,
+    duration: 1.4,
+    ease: 'power3.inOut',
+    onUpdate: () => {
+      const interpolated = interpolateCommands(cmdsDormant, cmdsChannels, morphObj.t);
+      const d = commandsToSvgPath(interpolated);
+      if (silhouettePath) silhouettePath.setAttribute('d', d);
+      if (clipPathEl) clipPathEl.setAttribute('d', d);
+    },
+    onComplete: () => {
+      currentCmds = cmdsChannels;
+    }
+  }, 0.2);
 
   // Phase 2 (0.267s - 0.867s): YOUR COMPANY flies into center with -52.78° rotation and decelerates
   masterTl.to(hub, {
@@ -272,8 +332,16 @@ function initHeroAnimation() {
     }, ch1.TRUNK_DRAW.start);
   }
 
-  // Phase 7 (4.50s - 6.00s): Modular logo mark reveals
-  if (mark) {
+  // Phase 7 (4.50s - 6.00s): Nexa Core Bus reveals
+  const centerHub = document.getElementById('circuit-center-hub');
+  if (centerHub) {
+    masterTl.to(centerHub, {
+      opacity: 1,
+      scale: 1,
+      duration: ch1.MODULAR_MARK_ASSEMBLE.duration,
+      ease: 'power2.out',
+    }, ch1.MODULAR_MARK_ASSEMBLE.start);
+  } else if (mark) {
     masterTl.to(mark, {
       opacity: 1,
       scale: 1,
@@ -282,65 +350,53 @@ function initHeroAnimation() {
     }, ch1.MODULAR_MARK_ASSEMBLE.start);
   }
 
-  // Phase 8: Channel arrival sequence matching forensic timing:
+  // Phase 8: Operational Cold-Chain Station Arrival Sequence:
   const lineStore = document.querySelector<SVGPathElement>('.line-store');
-  const badgeStore = document.querySelector<HTMLElement>('.badge-store');
   const cardStore = document.querySelector<HTMLElement>('.card-store');
   const lineEmail = document.querySelector<SVGPathElement>('.line-email');
-  const badgeEmail = document.querySelector<HTMLElement>('.badge-email');
   const cardEmail = document.querySelector<HTMLElement>('.card-email');
   const lineOnline = document.querySelector<SVGPathElement>('.line-online');
-  const badgeOnline = document.querySelector<HTMLElement>('.badge-online');
   const cardOnline = document.querySelector<HTMLElement>('.card-online');
   const lineShield = document.querySelector<SVGPathElement>('.line-shield');
-  const badgeShield = document.querySelector<HTMLElement>('.badge-shield');
+  const destNode = document.querySelector<HTMLElement>('.circuit-dest-node');
 
-  // 1. Customer Inquiry Arrives (~6.10s)
-  if (lineEmail) {
-    masterTl.to(lineEmail, { opacity: 1, strokeDashoffset: 0, duration: ch1.CARDS.INQUIRY.duration, ease: 'power1.out' }, ch1.CARDS.INQUIRY.lineStart);
-  }
-  if (badgeEmail) {
-    masterTl.to(badgeEmail, { scale: 1, opacity: 1, duration: 0.25, ease: 'power2.out' }, ch1.CARDS.INQUIRY.cardStart);
-  }
-  if (cardEmail) {
-    masterTl.to(cardEmail, { scale: 1, opacity: 1, duration: 0.4, ease: 'power2.out' }, ch1.CARDS.INQUIRY.cardStart);
-  }
-  masterTl.add(() => setTicker('Customers can email you directly or book in Physical Stores', icons.email), ch1.CARDS.INQUIRY.cardStart);
-
-  // 2. Physical Store POS Arrives (~7.67s)
+  // 1. Station 01: Despacho en Bahía Arrives (~6.10s)
   if (lineStore) {
-    masterTl.to(lineStore, { opacity: 1, strokeDashoffset: 0, duration: ch1.CARDS.PHYSICAL_STORE.duration, ease: 'power1.out' }, ch1.CARDS.PHYSICAL_STORE.lineStart);
-  }
-  if (badgeStore) {
-    masterTl.to(badgeStore, { scale: 1, opacity: 1, duration: 0.25, ease: 'power2.out' }, ch1.CARDS.PHYSICAL_STORE.cardStart);
+    masterTl.to(lineStore, { opacity: 1, strokeDashoffset: 0, duration: ch1.CARDS.INQUIRY.duration, ease: 'power1.out' }, ch1.CARDS.INQUIRY.lineStart);
   }
   if (cardStore) {
-    masterTl.to(cardStore, { scale: 1, opacity: 1, duration: 0.4, ease: 'power2.out' }, ch1.CARDS.PHYSICAL_STORE.cardStart);
+    masterTl.to(cardStore, { scale: 1, opacity: 1, duration: 0.4, ease: 'power2.out' }, ch1.CARDS.INQUIRY.cardStart);
   }
+  masterTl.add(() => setTicker('Estación 01: Muelle Callao · Rampa 04 despachando lote FEFO L-8841', icons.email), ch1.CARDS.INQUIRY.cardStart);
 
-  // 3. Online Store Channel Arrives (~10.02s) — CORRECTED from premature 7.4s!
+  // 2. Station 02: Telemetría Sensirion IoT Arrives (~7.67s)
+  if (lineEmail) {
+    masterTl.to(lineEmail, { opacity: 1, strokeDashoffset: 0, duration: ch1.CARDS.PHYSICAL_STORE.duration, ease: 'power1.out' }, ch1.CARDS.PHYSICAL_STORE.lineStart);
+  }
+  if (cardEmail) {
+    masterTl.to(cardEmail, { scale: 1, opacity: 1, duration: 0.4, ease: 'power2.out' }, ch1.CARDS.PHYSICAL_STORE.cardStart);
+  }
+  masterTl.add(() => setTicker('Estación 02: Telemetría Sensirion IoT monitorea frío continuo a -18.2°C', icons.eye), ch1.CARDS.PHYSICAL_STORE.cardStart);
+
+  // 3. Station 03: Custodia Escrow 100% Arrives (~10.02s)
   if (lineOnline) {
     masterTl.to(lineOnline, { opacity: 1, strokeDashoffset: 0, duration: ch1.CARDS.ONLINE_STORE.duration, ease: 'power1.out' }, ch1.CARDS.ONLINE_STORE.lineStart);
-  }
-  if (badgeOnline) {
-    masterTl.to(badgeOnline, { scale: 1, opacity: 1, duration: 0.25, ease: 'power2.out' }, ch1.CARDS.ONLINE_STORE.cardStart);
   }
   if (cardOnline) {
     masterTl.to(cardOnline, { scale: 1, opacity: 1, duration: 0.4, ease: 'power2.out' }, ch1.CARDS.ONLINE_STORE.cardStart);
   }
+  masterTl.add(() => setTicker('Estación 03: Custodia Escrow 100% activa para liquidación Smart Contract', icons.lock), ch1.CARDS.ONLINE_STORE.cardStart);
 
-  // 4. Escrow Security Shield Arrives (~10.75s)
+  // 4. Destination Supermercados & Exit Conduits Arrive (~10.75s)
   if (lineShield) {
     masterTl.to(lineShield, { opacity: 1, strokeDashoffset: 0, duration: ch1.CARDS.ESCROW_SHIELD.duration, ease: 'power1.out' }, ch1.CARDS.ESCROW_SHIELD.lineStart);
   }
-  if (badgeShield) {
-    masterTl.to(badgeShield, { scale: 1, opacity: 1, duration: 0.25, ease: 'power2.out' }, ch1.CARDS.ESCROW_SHIELD.badgeStart);
+  if (destNode) {
+    masterTl.to(destNode, { scale: 1, opacity: 1, duration: 0.35, ease: 'power2.out' }, ch1.CARDS.ESCROW_SHIELD.badgeStart);
   }
-  masterTl.add(() => setTicker('Every booking is safe and every transaction is insured.', icons.lock), ch1.CARDS.ESCROW_SHIELD.badgeStart);
+  masterTl.add(() => setTicker('Despacho completado hacia Supermercados & Retail B2B sin excepciones', icons.lock), ch1.CARDS.ESCROW_SHIELD.badgeStart);
 
   // Phase 9: Chapter 01 Breathing Room (10.333s - 14.167s)
-  // The system remains fully settled, allowing the user to read the complete network.
-  // At 14.50s, auto-trigger organic Chapter 02 transition if user has not interacted.
   masterTl.add(() => {
     // Check if user is still on chapter 1
     const activeStep = document.querySelector('.tracker-step.active');
@@ -368,9 +424,10 @@ function initHeroAnimation() {
     }
 
     if (chapter === 1) {
+      morphToPreset(cmdsChannels, 0.95);
       // Restore Chapter 1 Titles
-      if (titleHeading) titleHeading.innerHTML = 'Unlock your rental <br /> business';
-      if (titleSub) titleSub.textContent = 'The easiest way to access new customers and a greener future';
+      if (titleHeading) titleHeading.innerHTML = 'Unlock your B2B supply <br /> network';
+      if (titleSub) titleSub.textContent = 'The easiest way to access wholesale cold-chain and direct deliveries';
 
       if (guarantee) gsap.to(guarantee, { opacity: 1, duration: 0.3 });
       if (chapter2View) {
@@ -398,9 +455,10 @@ function initHeroAnimation() {
         gsap.to(chapter1View, { opacity: 1, scale: 1, duration: 0.35, delay: 0.1 });
       }
     } else if (chapter === 2) {
+      morphToPreset(cmdsSaas, 0.95);
       // Morph to Chapter 2 (SaaS Platform)
-      if (titleHeading) titleHeading.innerHTML = 'A platform that brings <br /> it all together';
-      if (titleSub) titleSub.textContent = 'Designed to improve the renting experience';
+      if (titleHeading) titleHeading.innerHTML = 'Una plataforma que conecta <br /> toda tu logística';
+      if (titleSub) titleSub.textContent = 'Monitoreo en tiempo real, inventario de muelle y telemetría de frío';
       if (guarantee) gsap.to(guarantee, { opacity: 0, duration: 0.25 });
 
       if (chapter1View) {
@@ -431,9 +489,10 @@ function initHeroAnimation() {
         );
       }
     } else if (chapter === 3) {
-      // Morph to Chapter 3 (Flecto Link & Safe Renting)
-      if (titleHeading) titleHeading.innerHTML = 'Making rental as easy <br /> as it can be';
-      if (titleSub) titleSub.textContent = 'With multiple payment options and safeguards';
+      morphToPreset(cmdsPayment, 0.95);
+      // Morph to Chapter 3 (Nexa Link & Escrow)
+      if (titleHeading) titleHeading.innerHTML = 'Despachos B2B con custodia <br /> Escrow inteligente';
+      if (titleSub) titleSub.textContent = 'Precintos digitales y liquidación protegida con múltiples métodos';
       if (guarantee) gsap.to(guarantee, { opacity: 0, duration: 0.25 });
 
       if (chapter1View) {
@@ -492,7 +551,7 @@ function initHeroAnimation() {
     const width = confettiCanvas.width = 400;
     const height = confettiCanvas.height = 300;
 
-    const colors = ['#57f09e', '#ffffff', '#e63946', '#3a86ff', '#f77f00'];
+    const colors = ['#2563eb', '#38bdf8', '#60a5fa', '#93c5fd', '#ffffff'];
     const particles: Array<{
       x: number;
       y: number;
@@ -651,19 +710,33 @@ function updateDuration(days: number) {
   // End date calculation
   const endDateEl = document.getElementById('step1-end-date');
   if (endDateEl) {
-    if (days === 3) endDateEl.textContent = '2022/03/22';
-    else if (days === 5) endDateEl.textContent = '2022/03/24';
-    else if (days === 7) endDateEl.textContent = '2022/03/26';
+    if (days === 3) endDateEl.textContent = '2026/04/13';
+    else if (days === 5) endDateEl.textContent = '2026/04/15';
+    else if (days === 7) endDateEl.textContent = '2026/04/17';
   }
 
   // Price calculations:
-  // Base daily rate: €100.00
-  // Deposit: €200.00
-  // Insurance: €20.00
-  // Duration discount: €30.00
-  const rentalBase = days * 100;
-  const total = rentalBase + 200 + 20 - 30; // 3d: €490.00, 5d: €690.00, 7d: €890.00
-  const totalFormatted = `€${total.toFixed(2)}`;
+  // 3d (250 kg): $2,450.00 USD
+  // 5d (500 kg): $3,450.00 USD
+  // 7d (1,000 kg): $4,450.00 USD
+  let total = 3450;
+  let base = 2800;
+  let kg = 500;
+  if (days === 3) {
+    total = 2450;
+    base = 1800;
+    kg = 250;
+  } else if (days === 5) {
+    total = 3450;
+    base = 2800;
+    kg = 500;
+  } else if (days === 7) {
+    total = 4450;
+    base = 3800;
+    kg = 1000;
+  }
+  const totalFormatted = `$${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  const baseFormatted = `$${base.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
   // Step 1 display amount
   const step1Amt = document.getElementById('step1-display-amount');
@@ -671,16 +744,16 @@ function updateDuration(days: number) {
 
   // Step 3 (Summary) updates
   const itemValEl = document.querySelector<HTMLElement>('#phone-state-3 .item-val');
-  if (itemValEl) itemValEl.textContent = `€${rentalBase.toFixed(2)}`;
+  if (itemValEl) itemValEl.textContent = baseFormatted;
 
   const itemSubInfo = document.querySelector<HTMLElement>('#phone-state-3 .item-info span');
-  if (itemSubInfo) itemSubInfo.textContent = `€100.00 / day × ${days} days`;
+  if (itemSubInfo) itemSubInfo.textContent = `Lote L-8841 · ${kg} kg a -18.2°C`;
 
   const totalDueEl = document.querySelector<HTMLElement>('#phone-state-3 .total-price');
   if (totalDueEl) totalDueEl.textContent = totalFormatted;
 
   const payBtnSpan = document.querySelector<HTMLElement>('#execute-payment-btn span');
-  if (payBtnSpan) payBtnSpan.textContent = `Pay ${totalFormatted} & Escrow`;
+  if (payBtnSpan) payBtnSpan.textContent = `Liberar Custodia ${totalFormatted} USD & Escrow`;
 }
 
 function initPhoneMockup() {
@@ -786,7 +859,7 @@ function triggerPaymentConfetti() {
   gsap.killTweensOf(container.children);
   container.innerHTML = '';
 
-  const colors = ['#57f09e', '#38c8ff', '#f7b928', '#ffffff', '#004737', '#6effb0'];
+  const colors = ['#2563eb', '#38bdf8', '#60a5fa', '#ffffff', '#1d4ed8', '#93c5fd'];
   const count = 42;
 
   for (let i = 0; i < count; i++) {
@@ -1095,7 +1168,7 @@ function initSatelliteSwitches() {
       servicesRow.style.display = isNowActive ? 'block' : 'none';
     }
     if (totalAmountEl) {
-      totalAmountEl.textContent = isNowActive ? '€520.00' : '€500.00';
+      totalAmountEl.textContent = isNowActive ? '$3,450.00' : '$3,300.00';
     }
   });
 

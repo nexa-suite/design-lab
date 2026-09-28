@@ -52,7 +52,7 @@ export interface SceneEdge {
   targetPortId: string;
   strokeWidth: number;         // Historical standard: 28px
   filletRadius: number;        // Bend smoothing radius: 12px to 20px
-  colorToken: string;          // e.g. '#57f09e'
+  colorToken: string;          // e.g. '#38bdf8'
   waypoints: Vector2D[];
   svgPathData: string;
   animationOrder: number;      // Sequential sequence step (1 to 5)

@@ -30,18 +30,9 @@
         
         <!-- Left Column: Monumental Logo, Newsletter, Backed By, Socials -->
         <div class="footer-left-col">
-          <!-- Modular Flecto 4-Square Logo Mark in deep green #004737 -->
-          <div class="footer-brand-mark" aria-label="Flecto">
-            <svg width="52" height="42" viewBox="0 0 52 42" fill="none" aria-hidden="true">
-              <!-- Top-left brick (wider) -->
-              <rect x="0" y="0" width="22" height="12" rx="3" fill="#004737"/>
-              <!-- Top-right brick (square) -->
-              <rect x="28" y="0" width="12" height="12" rx="3" fill="#004737"/>
-              <!-- Bottom-left brick (square) -->
-              <rect x="0" y="18" width="12" height="12" rx="3" fill="#004737"/>
-              <!-- Bottom-right brick (wider) -->
-              <rect x="18" y="18" width="22" height="12" rx="3" fill="#004737"/>
-            </svg>
+          <!-- Modular Nexa Transparent Logo Mark -->
+          <div class="footer-brand-mark" aria-label="Nexa">
+            <img src="/assets/nexa-nx-blue.svg" alt="Nexa" width="48" height="40" style="display: block;" />
           </div>
 
           <h2 id="footer-newsletter-heading" class="footer-newsletter-title">
@@ -63,7 +54,7 @@
                 aria-label="Email address for newsletter"
               />
               <button type="submit" class="footer-arrow-submit" aria-label="Submit newsletter subscription">
-                <svg width="24" height="16" viewBox="0 0 24 16" fill="none" stroke="#004737" stroke-width="2.2">
+                <svg width="24" height="16" viewBox="0 0 24 16" fill="none" stroke="#082846" stroke-width="2.2">
                   <path d="M1 8h21M15 1l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
@@ -82,7 +73,7 @@
 
               <!-- ÜBERMORGEN -->
               <span class="backed-brand text-ubermorgen" role="listitem">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="#004737" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#082846" aria-hidden="true">
                   <circle cx="12" cy="7" r="3.2"/>
                   <path d="M5.5 18c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5"/>
                   <circle cx="6.5" cy="11.5" r="2.2"/>
@@ -186,7 +177,7 @@
       const input = document.getElementById('footer-email-input') as HTMLInputElement | null;
       if (input && input.value) {
         feedback.textContent = 'Thank you for subscribing! ✨';
-        feedback.style.color = '#004737';
+        feedback.style.color = '#082846';
         input.value = '';
         setTimeout(() => {
           feedback.textContent = '';
@@ -232,7 +223,7 @@
     height: 100%;
     z-index: 1;
     pointer-events: none;
-    filter: drop-shadow(0 16px 36px rgba(0, 71, 55, 0.04));
+    filter: drop-shadow(0 16px 36px rgba(8, 40, 70, 0.06));
   }
 
   .footer-content-grid {
@@ -259,7 +250,7 @@
     font-size: clamp(2rem, 3.8vw, 3rem);
     font-weight: 700;
     line-height: 1.14;
-    color: #004737;
+    color: #082846;
     letter-spacing: -0.02em;
     margin: 0;
   }
@@ -276,13 +267,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 2px solid rgba(0, 71, 55, 0.35);
+    border-bottom: 2px solid rgba(8, 40, 70, 0.25);
     padding-bottom: 0.85rem;
     transition: border-color 0.2s ease;
   }
 
   .footer-input-row:focus-within {
-    border-bottom-color: #004737;
+    border-bottom-color: #2563eb;
   }
 
   #footer-email-input {
@@ -291,13 +282,13 @@
     outline: none;
     font-size: 1.5rem;
     font-weight: 500;
-    color: #004737;
+    color: #082846;
     width: 100%;
     letter-spacing: -0.01em;
   }
 
   #footer-email-input::placeholder {
-    color: rgba(0, 71, 55, 0.45);
+    color: rgba(8, 40, 70, 0.45);
   }
 
   .footer-arrow-submit {
@@ -330,7 +321,7 @@
   .backed-label {
     font-size: 0.75rem;
     font-weight: 600;
-    color: #6a8277;
+    color: #64748b;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -347,13 +338,13 @@
     align-items: center;
     gap: 0.45rem;
     font-size: 1.15rem;
-    color: #004737;
+    color: #082846;
     font-weight: 800;
     letter-spacing: -0.02em;
   }
 
   .brand-underscore {
-    color: #3dd598;
+    color: #2563eb;
   }
 
   .text-ubermorgen {
@@ -374,7 +365,7 @@
     margin-top: -2px;
   }
 
-  /* Social Icons (Dark Green Circular Buttons) */
+  /* Social Icons (Deep Navy Circular Buttons) */
   .footer-socials-row {
     display: flex;
     align-items: center;
@@ -386,7 +377,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #004737;
+    background-color: #082846;
     color: #ffffff;
     display: flex;
     align-items: center;
@@ -397,7 +388,7 @@
 
   .social-circle-btn:hover {
     transform: scale(1.1);
-    background-color: #0f3c2d;
+    background-color: #0e3d6b;
   }
 
   .social-glyph {
@@ -423,7 +414,7 @@
   }
 
   .book-demo-pill-btn {
-    background-color: #004737;
+    background-color: #082846;
     color: #ffffff;
     font-size: 0.9375rem;
     font-weight: 600;
@@ -437,7 +428,7 @@
   }
 
   .book-demo-pill-btn:hover {
-    background-color: #0f3c2d;
+    background-color: #0e3d6b;
     transform: scale(1.03);
   }
 
@@ -462,7 +453,7 @@
   .sitemap-anchor {
     font-size: 1.15rem;
     font-weight: 500;
-    color: #004737;
+    color: #082846;
     text-decoration: none;
     transition: color 0.2s ease;
     display: inline-flex;
@@ -472,7 +463,7 @@
   }
 
   .sitemap-anchor:hover {
-    color: #3dd598;
+    color: #2563eb;
   }
 
   /* Legal Links */
@@ -486,16 +477,16 @@
 
   .legal-anchor {
     font-size: 0.8125rem;
-    color: #6a8277;
+    color: #64748b;
     text-decoration: none;
     transition: color 0.2s ease;
   }
 
   .legal-anchor:hover {
-    color: #004737;
+    color: #082846;
   }
 
-  /* Bottom Right Notch: Made by Büro sitting on the white ground */
+  /* Bottom Right Notch: Nexa Engineering sitting on the white ground */
   .footer-buro-notch {
     position: absolute;
     bottom: 1.5rem;
@@ -510,7 +501,7 @@
     font-family: var(--primitive-font-display);
     font-size: 1.0625rem;
     font-weight: 700;
-    color: #004737;
+    color: #082846;
     letter-spacing: -0.01em;
   }
 
