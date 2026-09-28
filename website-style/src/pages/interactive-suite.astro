@@ -42,7 +42,12 @@ import Sustainability from '../components/sections/Sustainability.astro';
     }
 
     body {
-      background: var(--nexa-surface-page, #f6faff);
+      background-color: #f8fafc;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.06) 0%, transparent 60%),
+        linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
+      background-size: 100% 100%, 36px 36px, 36px 36px;
       color: var(--nexa-color-text-primary, #0f172a);
       font-family: var(--nexa-font-family-body, 'Inter', sans-serif);
       font-size: 14px;
@@ -58,7 +63,7 @@ import Sustainability from '../components/sections/Sustainability.astro';
       margin: 0 auto;
     }
 
-    /* Suite Header Banner */
+    /* Suite Header Banner with subtle blueprint grid */
     .suite-hero-banner {
       background: #082846;
       color: #ffffff;
@@ -66,6 +71,18 @@ import Sustainability from '../components/sections/Sustainability.astro';
       border-bottom: 1px solid #1a4971;
       position: relative;
       overflow: hidden;
+    }
+
+    .suite-hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.15;
+      background-image: 
+        linear-gradient(rgba(56, 189, 248, 0.25) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.25) 1px, transparent 1px);
+      background-size: 24px 24px;
     }
 
     .banner-inner {

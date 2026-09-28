@@ -236,7 +236,11 @@ import LoginScreenSpec from './LoginScreenSpec.astro';
 
       <!-- Persistent M3 Bottom Navigation Bar (Synchronized with active screens) -->
       <nav class="frame-m3-bottom-nav" id="frame-bottom-nav" aria-label="Navegación principal de la aplicación">
-        <button type="button" class="nav-destination active" data-dest="rutas" aria-label="Rutas">
+        <button type="button" class="nav-destination active" data-dest="inicio" aria-label="Inicio">
+          <i class="pi pi-home"></i>
+          <span>Inicio</span>
+        </button>
+        <button type="button" class="nav-destination" data-dest="rutas" aria-label="Rutas">
           <i class="pi pi-map-marker"></i>
           <span>Rutas</span>
         </button>
@@ -418,7 +422,7 @@ import LoginScreenSpec from './LoginScreenSpec.astro';
 
         navDests.forEach(dest => dest.classList.remove('active'));
         if (targetScreen === 'operations') {
-          document.querySelector('[data-dest="rutas"]')?.classList.add('active');
+          document.querySelector('[data-dest="inicio"]')?.classList.add('active');
         } else if (targetScreen === 'dispatch-live') {
           document.querySelector('[data-dest="despacho"]')?.classList.add('active');
         } else if (targetScreen === 'catalog-live') {
@@ -436,7 +440,9 @@ import LoginScreenSpec from './LoginScreenSpec.astro';
         dest.classList.add('active');
 
         const destId = dest.getAttribute('data-dest');
-        if (destId === 'rutas') {
+        if (destId === 'inicio') {
+          document.querySelector('[data-screen="operations"]')?.dispatchEvent(new Event('click'));
+        } else if (destId === 'rutas') {
           document.querySelector('[data-screen="operations"]')?.dispatchEvent(new Event('click'));
         } else if (destId === 'despacho') {
           document.querySelector('[data-screen="dispatch-live"]')?.dispatchEvent(new Event('click'));

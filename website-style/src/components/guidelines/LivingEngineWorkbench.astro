@@ -1,31 +1,21 @@
 ---
 /**
  * LIVING ENGINE WORKBENCH & INTERACTIVE MODULAR GRAPHICS ENGINE
- * Authority: Nexafy living geometry system, pure solid colorimetry, and interactive modular puzzle blocks.
+ * Authority: Nexafy living geometry system, pure solid colorimetry, closed vascular conduit pipelines,
+ * and authentic Nexa cold-chain dispatch and wholesale data.
  * 
- * Features:
+ * Rules:
  *  - 100% Nexa Colorimetry: Nexa Dark Blue (#082846) sculpted plate, Nexa Celeste (#38c8ff) accents,
- *    28px thick vascular conduits in Celeste Pastel (#bae6fd) / Soft Cyan (#a5f3fc), pure white (#ffffff) frame.
- *  - True Interactive Living Graphics Engine: Drag & drop blocks with real-time Manhattan orthogonal
- *    28px conduit recalculation and rounded fillets (r=20-28px) at 60 FPS.
- *  - Signal pulse particles (r=6) continuously flowing through the center lumen of conduits.
- *  - Minimalist Modular Blocks inspired by Image 2:
- *    * Hub Core Block (Nexa Modular Hub)
- *    * Interlocking Logic Blocks (A, B, C)
- *    * Origin Hub: YOUR COMPANY (#38c8ff, #082846 text)
- *    * Physical Store POS Card ($100/caja or 100€/Day)
- *    * Customer Inquiry Card (John Cooper avatar)
- *    * Online Store Card (acme.store, $100/Caja | DESPACHAR)
- *    * Escrow Terminal Card (100% Custody · Zero Risk)
- *  - NO overlapping blocks ("no esten sobrepuestos"): Generous spacing and dedicated clearances.
- *  - Dynamic Assembly "✦ Construir Motor (Build)" sequential spring docking animation.
- *  - Presets: [✦ Distribución Canales], [⚡ Matriz Operativa], [🛡 Custodia Escrow], [↺ Resetear].
- *  - Sculpted Bürocratik container with carved canopy notch and monumental headline.
+ *    26px thick closed vascular conduits in Celeste Pastel (#bae6fd), pure white (#ffffff) frame.
+ *  - NO loose ends or disconnected conduits: Every single conduit begins at a valid node and terminates at a valid hub.
+ *  - NO geometric spike artifacts: Corner notches are transparent so the continuous SVG silhouette defines the boundary.
+ *  - Title padding and canopy clearance match Hero.astro sandbox perfectly (clamp font-size, padding-top: 0.65rem).
+ *  - Pure Autolayout Station Cards: Zero overlap, authentic Nexa cold-chain telemetry and escrow data.
  */
 import { generateContainerCommands, commandsToSvgPath } from '../../lib/nexafy/geometry';
 import { NEXAFY_PRESETS } from '../../lib/nexafy/presets';
 
-const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PRESETS.CHANNELS));
+const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY_PRESETS.CHANNELS));
 ---
 
 <div class="workbench-master-container" id="workbench-master">
@@ -115,8 +105,8 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
       </div>
 
       <!-- Conduit Pastel Tone Selector -->
-      <div class="conduit-palette-toggle" role="group" aria-label="Conductos 28px">
-        <span class="conduit-toggle-label">Conductos 28px:</span>
+      <div class="conduit-palette-toggle" role="group" aria-label="Conductos 26px">
+        <span class="conduit-toggle-label">Conductos 26px:</span>
         <button type="button" class="conduit-pill active" data-pastel="#bae6fd" title="Celeste Pastel (#bae6fd)">
           <span class="color-swatch" style="background: #bae6fd;"></span> Celeste
         </button>
@@ -157,7 +147,7 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
       >
         <defs>
           <radialGradient id="workbench-radial-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#0e3d6b" stop-opacity="0.5" />
+            <stop offset="0%" stop-color="#0e3d6b" stop-opacity="0.6" />
             <stop offset="100%" stop-color="#082846" stop-opacity="0" />
           </radialGradient>
           <pattern id="workbench-blueprint-grid" width="36" height="36" patternUnits="userSpaceOnUse">
@@ -165,42 +155,45 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
             <circle cx="0" cy="0" r="1.5" fill="rgba(56, 189, 248, 0.35)" />
             <circle cx="36" cy="36" r="1.5" fill="rgba(56, 189, 248, 0.35)" />
           </pattern>
+          <clipPath id="workbench-silhouette-clip">
+            <path d={workbenchChannelsPath} />
+          </clipPath>
         </defs>
         <!-- The continuous sculpted contour path matching Bürocratik SOTD geometry -->
         <path 
           class="hero-silhouette-path" 
-          d={heroSilhouettePath}
+          d={workbenchChannelsPath}
           fill="#082846"
         />
         <!-- Ambient Radial Backlight Glow within the frame -->
-        <rect x="0" y="0" width="1440" height="820" fill="url(#workbench-radial-glow)" />
+        <rect x="0" y="0" width="1440" height="820" fill="url(#workbench-radial-glow)" clip-path="url(#workbench-silhouette-clip)" />
         <!-- Architectural Blueprint Grid Pattern ("fondo con cuadraditos") -->
-        <rect x="0" y="0" width="1440" height="820" fill="url(#workbench-blueprint-grid)" opacity="0.65" />
+        <rect x="0" y="0" width="1440" height="820" fill="url(#workbench-blueprint-grid)" clip-path="url(#workbench-silhouette-clip)" opacity="0.65" />
       </svg>
 
-      <!-- 2.2 TOP LAYER (Notches & Monumental Headline Canopy) -->
+      <!-- 2.2 TOP LAYER (Notches & Monumental Headline Canopy with Proper Padding) -->
       <header class="hero-top-layer">
         <!-- Top-Left White Notch: Nexa Brand & Primary Links -->
         <div class="hero-top-left">
-          <a href="#" class="nexa-brand" aria-label="Nexafy Homepage">
-            <img src="/assets/nexa-nx-blue.svg" alt="Nexa" width="28" height="28" style="display: block;" />
-            <span class="nexa-logo-word">Nexafy</span>
+          <a href="/" class="nexa-brand" aria-label="Nexa Platform">
+            <img src="/assets/nexa-nx-blue.svg" alt="Nexa" width="28" height="28" class="nexa-brand-logo" />
+            <span class="nexa-brand-word">Nexa</span>
           </a>
 
           <nav class="hero-nav-links" aria-label="Primary navigation">
             <a href="/about" class="hero-nav-link">About</a>
-            <a href="/nexafy" class="hero-nav-link active">Motor Gráfico</a>
+            <a href="/nexafy" class="hero-nav-link active">Nexafy</a>
             <a href="/interactive-suite" class="hero-nav-link">Canales</a>
             <a href="/artifacts" class="hero-nav-link">Custodia</a>
           </nav>
         </div>
 
-        <!-- Top-Center Crown: Monumental Editorial Headline -->
+        <!-- Top-Center Crown: Monumental Editorial Headline (Spacious & Clean) -->
         <div class="hero-top-center">
           <div class="hero-crown-content">
             <h1 id="hero-heading" class="hero-main-title">
-              Unlock your B2B supply <br />
-              network
+              Unlock your B2B<br />
+              supply network
             </h1>
             <p class="hero-main-sub">
               The easiest way to access wholesale cold-chain and direct deliveries
@@ -210,6 +203,13 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
 
         <!-- Top-Right White Notch: CTA & Login -->
         <div class="hero-top-right">
+          <div class="hero-lang-pill" aria-label="Language selector">
+            <button type="button" class="lang-toggle-btn active" aria-label="Selected language English">EN</button>
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polyline points="2 4 6 8 10 4"></polyline>
+            </svg>
+          </div>
+
           <a href="#book-demo" class="hero-book-btn">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -226,8 +226,8 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
         </div>
       </header>
 
-      <!-- 2.3 CENTER STAGE (Interactive Living Graphics Engine Canvas) -->
-      <div class="hero-center-stage" id="workbench-center-stage">
+      <!-- 2.3 CENTER STAGE (Closed Vascular Pipeline with Authentic Nexa Cold-Chain Mocks) -->
+      <div class="hero-center-stage" id="circuit-stage">
         
         <!-- Live Dragging HUD / Coordinates Tooltip -->
         <div class="drag-coords-hud" id="workbench-drag-hud" style="display: none;">
@@ -235,238 +235,193 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
           <span class="hud-coords-text" id="hud-coords-text">X: 0px · Y: 0px</span>
         </div>
 
-        <!-- Dynamic Vascular Conduit SVG Layer (Recalculated in Real-Time 60 FPS) -->
+        <!-- 1. The Origin Node: TERMINAL PESQUERO CALLAO -->
+        <div class="circuit-hub origin-hub" id="circuit-hub" role="region" aria-label="Terminal Pesquero Callao">
+          <div class="hub-label">
+            <span class="hub-kicker">TERMINAL</span>
+            <span class="hub-title">PESQUERO</span>
+            <span class="hub-badge">CALLAO · B2B</span>
+          </div>
+        </div>
+
+        <!-- 2. Continuous Vascular Conduit Circuit (Organically Bending Closed Pipeline) -->
         <svg 
-          class="circuit-svg-dynamic" 
-          id="workbench-circuit-svg"
-          viewBox="0 0 1130 580" 
+          class="circuit-svg" 
+          viewBox="0 0 1140 420" 
           fill="none" 
           xmlns="http://www.w3.org/2000/svg" 
-          preserveAspectRatio="none"
+          preserveAspectRatio="xMidYMid meet"
           aria-hidden="true"
         >
-          <defs>
-            <filter id="glow-conduit" x="-10%" y="-10%" width="120%" height="120%">
-              <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#38c8ff" flood-opacity="0.3" />
-            </filter>
-          </defs>
+          <!-- Main Trunk: Origin Node (x:150) -> Nexa Core Bus (x:340) -->
+          <path 
+            class="circuit-pipe-line line-trunk" 
+            id="pipe-trunk"
+            d="M 150 210 L 340 210" 
+            stroke="#bae6fd" 
+            stroke-width="26" 
+            stroke-linecap="round"
+          />
 
-          <!-- Dynamic 28px Thick Vascular Conduits Group -->
-          <g class="circuit-conduits-group" id="conduits-group">
-            <path id="path-trunk" class="circuit-conduit-path" d="" stroke="#bae6fd" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
-            <path id="path-core-logicA" class="circuit-conduit-path" d="" stroke="#bae6fd" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
-            <path id="path-core-logicB" class="circuit-conduit-path" d="" stroke="#bae6fd" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
-            <path id="path-logicA-logicC" class="circuit-conduit-path" d="" stroke="#bae6fd" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
-            <path id="path-logicB-logicC" class="circuit-conduit-path" d="" stroke="#bae6fd" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
-            <path id="path-branch-store" class="circuit-conduit-path" d="" stroke="#bae6fd" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
-            <path id="path-branch-inquiry" class="circuit-conduit-path" d="" stroke="#bae6fd" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
-            <path id="path-branch-online" class="circuit-conduit-path" d="" stroke="#bae6fd" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
-            <path id="path-branch-escrow" class="circuit-conduit-path" d="" stroke="#bae6fd" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
-          </g>
+          <!-- Branch 1 (Top Conduit to Station 01: Despacho en Bahía) -->
+          <path 
+            class="circuit-pipe-line line-branch-top" 
+            id="pipe-branch-top"
+            d="M 460 210 L 515 210 A 18 18 0 0 0 533 192 L 533 88 A 18 18 0 0 1 551 70 L 590 70" 
+            stroke="#bae6fd" 
+            stroke-width="24" 
+            stroke-linejoin="round"
+          />
 
-          <!-- Signal Pulse Particles Flowing through the Conduits (r=6px) -->
-          <g class="circuit-particles-group" id="particles-group">
-            <circle id="particle-trunk" class="pulse-particle" r="6" fill="#38c8ff" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
-            <circle id="particle-core-logicA" class="pulse-particle" r="6" fill="#38c8ff" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
-            <circle id="particle-core-logicB" class="pulse-particle" r="6" fill="#38c8ff" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
-            <circle id="particle-logicA-logicC" class="pulse-particle" r="6" fill="#38c8ff" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
-            <circle id="particle-logicB-logicC" class="pulse-particle" r="6" fill="#38c8ff" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
-            <circle id="particle-branch-store" class="pulse-particle" r="6" fill="#38c8ff" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
-            <circle id="particle-branch-inquiry" class="pulse-particle" r="6" fill="#38c8ff" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
-            <circle id="particle-branch-online" class="pulse-particle" r="6" fill="#38c8ff" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
-            <circle id="particle-branch-escrow" class="pulse-particle" r="6" fill="#38c8ff" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
-          </g>
+          <!-- Branch 2 (Center Conduit to Station 02: Telemetría Sensirion IoT) -->
+          <path 
+            class="circuit-pipe-line line-branch-mid" 
+            id="pipe-branch-mid"
+            d="M 460 210 L 590 210" 
+            stroke="#bae6fd" 
+            stroke-width="24" 
+            stroke-linecap="round"
+          />
+
+          <!-- Branch 3 (Bottom Conduit to Station 03: Custodia Escrow 100%) -->
+          <path 
+            class="circuit-pipe-line line-branch-bot" 
+            id="pipe-branch-bot"
+            d="M 460 210 L 515 210 A 18 18 0 0 1 533 228 L 533 332 A 18 18 0 0 0 551 350 L 590 350" 
+            stroke="#bae6fd" 
+            stroke-width="24" 
+            stroke-linejoin="round"
+          />
+
+          <!-- Exit Conduit from Station 01 (x:870, y:70) merging to Destination Hub (x:975, y:210) -->
+          <path 
+            class="circuit-pipe-line line-exit-top" 
+            id="pipe-exit-top"
+            d="M 870 70 L 910 70 A 18 18 0 0 1 928 88 L 928 192 A 18 18 0 0 0 946 210 L 975 210" 
+            stroke="#bae6fd" 
+            stroke-width="24" 
+            stroke-linejoin="round"
+          />
+
+          <!-- Exit Conduit from Station 02 (x:870, y:210) into Destination Hub -->
+          <path 
+            class="circuit-pipe-line line-exit-mid" 
+            id="pipe-exit-mid"
+            d="M 870 210 L 975 210" 
+            stroke="#bae6fd" 
+            stroke-width="24" 
+            stroke-linecap="round"
+          />
+
+          <!-- Exit Conduit from Station 03 (x:870, y:350) merging to Destination Hub (x:975, y:210) -->
+          <path 
+            class="circuit-pipe-line line-exit-bot" 
+            id="pipe-exit-bot"
+            d="M 870 350 L 910 350 A 18 18 0 0 0 928 332 L 928 228 A 18 18 0 0 1 946 210 L 975 210" 
+            stroke="#bae6fd" 
+            stroke-width="24" 
+            stroke-linejoin="round"
+          />
+
+          <!-- Pulse Indicators moving through the closed conduits -->
+          <circle cx="245" cy="210" r="5" fill="#2563eb" class="pipe-pulse pulse-1" />
+          <circle cx="533" cy="140" r="4.5" fill="#38bdf8" class="pipe-pulse pulse-2" />
+          <circle cx="533" cy="280" r="4.5" fill="#2563eb" class="pipe-pulse pulse-3" />
+          <circle cx="928" cy="140" r="4.5" fill="#38bdf8" class="pipe-pulse pulse-4" />
+          <circle cx="928" cy="280" r="4.5" fill="#2563eb" class="pipe-pulse pulse-5" />
         </svg>
 
-        <!-- Inline Badges Anchored on Conduits -->
-        <div class="circuit-badge badge-store" id="badge-store" aria-hidden="true" title="Canal POS Físico">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#082846" stroke-width="2.2">
-            <path d="M3 9l1-5h16l1 5"></path>
-            <path d="M3 9a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 3 0"></path>
-            <path d="M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"></path>
-            <path d="M9 20v-6h6v6"></path>
-          </svg>
+        <!-- 3. Central Router Node: NEXA CORE BUS -->
+        <div class="circuit-center-hub" id="circuit-center-hub" aria-label="Nexa Core Bus">
+          <div class="center-hub-content">
+            <img src="/assets/nexa-nx-white.svg" alt="NX" width="26" height="26" class="center-hub-icon" />
+            <span class="center-hub-title">NEXA HUB</span>
+            <span class="center-hub-sub">Core Dispatch Bus</span>
+          </div>
         </div>
 
-        <div class="circuit-badge badge-email" id="badge-email" aria-hidden="true" title="Consulta Directa">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#082846" stroke-width="2.2">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-            <polyline points="22,6 12,13 2,6"></polyline>
-          </svg>
+        <!-- 4. Three Symmetrically Aligned White Station Blocks (Zero Overlap, Pure Autolayout) -->
+        <div class="circuit-stations-column" id="circuit-stations" aria-label="Estaciones Operativas de Cadena de Frío">
+          
+          <!-- Station 01: Despacho en Bahía (DSP-204) -->
+          <article class="station-card station-top channel-card card-store" id="station-01-card" aria-label="Estación 01: Despacho en Bahía">
+            <div class="station-header">
+              <span class="station-icon-wrap blue">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="3" width="15" height="13"></rect>
+                  <polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon>
+                  <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                  <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg>
+              </span>
+              <div class="station-titles">
+                <span class="station-step-tag">01 · DESPACHO EN BAHÍA</span>
+                <strong class="station-name">Muelle Callao · Rampa 04</strong>
+              </div>
+              <span class="station-pill-state">FEFO ACTIVO</span>
+            </div>
+            <div class="station-footer">
+              <span class="station-meta text-mono">DSP-204 · Lote L-8841 · 500 kg Salmón</span>
+              <span class="station-status-dot active" title="Rampa conectada"></span>
+            </div>
+          </article>
+
+          <!-- Station 02: Telemetría Sensirion IoT (Sensirion SHT40) -->
+          <article class="station-card station-mid channel-card card-email" id="station-02-card" aria-label="Estación 02: Telemetría Sensirion IoT">
+            <div class="station-header">
+              <span class="station-icon-wrap cyan">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                </svg>
+              </span>
+              <div class="station-titles">
+                <span class="station-step-tag">02 · TELEMETRÍA IOT</span>
+                <strong class="station-name">Sensirion SHT40 · -18.2°C</strong>
+              </div>
+              <span class="station-pill-state active">CALIBRADO</span>
+            </div>
+            <div class="station-footer">
+              <span class="station-meta text-mono">GPS Reefer Van B-402 · En ruta</span>
+              <span class="station-status-dot active" title="Transmisión continua"></span>
+            </div>
+          </article>
+
+          <!-- Station 03: Custodia Escrow 100% ($3,450.00) -->
+          <article class="station-card station-bot channel-card card-online" id="station-03-card" aria-label="Estación 03: Custodia Escrow 100%">
+            <div class="station-header">
+              <span class="station-icon-wrap blue">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </span>
+              <div class="station-titles">
+                <span class="station-step-tag">03 · CUSTODIA ESCROW 100%</span>
+                <strong class="station-name">Smart Contract B2B · $3,450.00</strong>
+              </div>
+              <span class="station-pill-state">PRE-AUTORIZADO</span>
+            </div>
+            <div class="station-footer">
+              <span class="station-meta text-mono">Liquidación automática por telemetría</span>
+              <span class="station-status-dot active" title="Garantía activa"></span>
+            </div>
+          </article>
+
         </div>
 
-        <div class="circuit-badge badge-online" id="badge-online" aria-hidden="true" title="Catálogo Online">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#082846" stroke-width="2.2">
-            <rect x="5" y="2" width="14" height="20" rx="3"></rect>
-            <circle cx="12" cy="11" r="5"></circle>
-            <line x1="7" y1="11" x2="17" y2="11"></line>
-            <path d="M12 6a7 7 0 0 1 0 10"></path>
-          </svg>
-        </div>
-
-        <div class="circuit-badge badge-shield" id="badge-shield" aria-hidden="true" title="Custodia Escrow 100%">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#082846" stroke-width="2.2">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          </svg>
-        </div>
-
-        <!-- ======================================================================
-             THE 9 INTERACTIVE MODULAR PUZZLE BLOCKS (DRAGGABLE & NON-OVERLAPPING)
-             ====================================================================== -->
-
-        <!-- BLOCK 1: Origin Hub (YOUR COMPANY) -->
-        <div class="modular-block node-origin-hub" id="origin-hub" role="region" aria-label="Origen: Your Company">
-          <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
+        <!-- 5. Destination Hub: Red Mayorista B2B -->
+        <div class="circuit-hub destination-hub" id="circuit-dest-hub" role="region" aria-label="Red Mayorista B2B">
           <div class="hub-label">
-            <span class="hub-word">CALLAO</span>
-            <span class="hub-word">MUELLE 04</span>
+            <span class="hub-kicker">RED MAYORISTA</span>
+            <span class="hub-title">COMPRADORES</span>
+            <span class="hub-badge">RECEPTION B2B</span>
           </div>
-          <span class="block-tag-sub">ORIGIN HUB · B2B</span>
         </div>
-
-        <!-- BLOCK 2: Nexa Modular Hub Core -->
-        <div class="modular-block node-hub-core" id="hub-core" role="region" aria-label="Nexa Hub Core">
-          <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
-          <div class="core-icon-wrap">
-            <img src="/assets/nexa-nx-white.svg" alt="NX" width="24" height="24" style="display: block;" />
-          </div>
-          <strong class="core-title">NEXA HUB</strong>
-          <span class="core-sub">Core Dispatch</span>
-          <span class="core-dot-indicator"></span>
-        </div>
-
-        <!-- BLOCK 3: Interlocking Logic Block A (Dispatch Router) -->
-        <div class="modular-block node-logic-puzzle node-logic-a" id="logic-a" role="region" aria-label="Bloque Lógico A: Despacho FEFO">
-          <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
-          <div class="puzzle-header">
-            <span class="puzzle-badge">01</span>
-            <strong class="puzzle-title">ROUTER</strong>
-          </div>
-          <span class="puzzle-role">DSP-204 FEFO</span>
-          <div class="puzzle-indicator-bar"><span class="bar-fill"></span></div>
-        </div>
-
-        <!-- BLOCK 4: Interlocking Logic Block B (IoT Cold Chain) -->
-        <div class="modular-block node-logic-puzzle node-logic-b" id="logic-b" role="region" aria-label="Bloque Lógico B: Telemetría Sensirion">
-          <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
-          <div class="puzzle-header">
-            <span class="puzzle-badge">02</span>
-            <strong class="puzzle-title">SENSIRION</strong>
-          </div>
-          <span class="puzzle-role">-18.2°C IoT</span>
-          <div class="puzzle-indicator-bar"><span class="bar-fill"></span></div>
-        </div>
-
-        <!-- BLOCK 5: Interlocking Logic Block C (Escrow Smart) -->
-        <div class="modular-block node-logic-puzzle node-logic-c" id="logic-c" role="region" aria-label="Bloque Lógico C: Custodia Escrow">
-          <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
-          <div class="puzzle-header">
-            <span class="puzzle-badge">03</span>
-            <strong class="puzzle-title">ESCROW</strong>
-          </div>
-          <span class="puzzle-role">$3,450 B2B</span>
-          <div class="puzzle-indicator-bar"><span class="bar-fill"></span></div>
-        </div>
-
-        <!-- BLOCK 6: Despacho en Bahía Card -->
-        <article class="modular-block channel-card card-store" id="store-card" aria-label="Canal: Despacho en Bahía">
-          <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
-          <div class="card-thumb-wrap">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="1" y="3" width="15" height="13"></rect>
-              <polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon>
-              <circle cx="5.5" cy="18.5" r="2.5"></circle>
-              <circle cx="18.5" cy="18.5" r="2.5"></circle>
-            </svg>
-          </div>
-          <div class="card-details-col">
-            <p class="card-sub-label">Despacho en Bahía</p>
-            <p class="card-sub-label"><strong class="channel-bold">Muelle Callao R04</strong></p>
-            <span class="card-price-value text-mono">500 kg · IQF</span>
-          </div>
-        </article>
-
-        <!-- BLOCK 7: Monitoreo Reefer GPS Card -->
-        <article class="modular-block channel-card card-email" id="inquiry-card" aria-label="Canal: Monitoreo Reefer">
-          <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
-          <div class="email-card-header">
-            <div class="email-avatar-wrap" style="background: rgba(56, 189, 248, 0.15); display: flex; align-items: center; justify-content: center; border-radius: 50%;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-            </div>
-            <div class="email-meta-info">
-              <strong class="email-author-name">Reefer Van B-402</strong>
-              <span class="email-timestamp text-mono">-18.2°C</span>
-            </div>
-          </div>
-          <p class="email-body-text">
-            ⚡ En Ruta: Muelle Callao &rarr; ICISA Lima Norte. Conforme HACCP.
-          </p>
-        </article>
-
-        <!-- BLOCK 8: Catálogo B2B Mayorista -->
-        <article class="modular-block channel-card card-online" id="online-card" aria-label="Canal: Catálogo Mayorista">
-          <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
-          <div class="online-card-topbar">
-            <svg class="browser-lock-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-            </svg>
-            <span class="browser-domain-text text-mono">nexa.wholesale/b2b</span>
-          </div>
-
-          <div class="online-card-body">
-            <div class="card-thumb-wrap wholesale-thumb-wrap">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
-                <line x1="7" y1="7" x2="7.01" y2="7"></line>
-              </svg>
-            </div>
-            <div class="card-details-col">
-              <p class="card-sub-label">
-                Catálogo Mayorista <br />
-                <strong class="channel-bold">Salmón del Pacífico IQF</strong>
-              </p>
-            </div>
-          </div>
-
-          <div class="online-action-capsule">
-            <span class="capsule-price text-mono">$24.50/kg</span>
-            <span class="capsule-divider" aria-hidden="true">|</span>
-            <span class="capsule-rent-btn">
-              <span>DESPACHAR</span>
-            </span>
-          </div>
-        </article>
-
-        <!-- BLOCK 9: Escrow Terminal Card (100% Custodia) -->
-        <article class="modular-block card-escrow" id="escrow-card" aria-label="Terminal de Custodia Escrow">
-          <div class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</div>
-          <div class="escrow-header">
-            <div class="escrow-icon-bubble">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38c8ff" stroke-width="2.4" aria-hidden="true">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              </svg>
-            </div>
-            <div class="escrow-title-wrap">
-              <strong class="escrow-title">Custodia Escrow</strong>
-              <span class="escrow-sub">Smart Contract B2B</span>
-            </div>
-          </div>
-          <p class="escrow-desc">Garantía $3,450.00 pre-autorizada. Liquidación automática tras telemetría conforme.</p>
-          <div class="escrow-footer-status">
-            <span class="status-live-dot"></span>
-            <span class="text-mono">AUTORIZADO · RED ACTIVA</span>
-          </div>
-        </article>
 
       </div>
 
       <!-- 2.4 BOTTOM LAYER (Notches, Guarantee Microcopy & Tracker) -->
       <footer class="hero-bottom-layer">
-        <!-- Bottom-Left White Notch: Down Arrow Button -->
+        <!-- Bottom-Left White Notch: Down Arrow Button (Transparent background) -->
         <div class="hero-bottom-left">
           <a href="#scrollytelling" class="hero-down-circle" aria-label="Bajar a la siguiente sección">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
@@ -476,15 +431,15 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
           </a>
         </div>
 
-        <!-- Bottom-Center Green/Blue Floor: Real-time Status Ticker -->
+        <!-- Bottom-Center Floor: Real-time Status Ticker -->
         <div class="hero-bottom-center">
           <p class="hero-guarantee-text" id="hero-guarantee-text">
             <span class="ticker-prefix text-mono">✦ NEXAFY LIVING ENGINE:</span>
-            <span id="workbench-ticker-msg">Conduits 28px dinámicos · Motor gráfico editable · Arrastra cualquier bloque libremente</span>
+            <span id="workbench-ticker-msg">Conductos vasculares cerrados · 0 líneas sueltas · Telemetría y Escrow en tiempo real</span>
           </p>
         </div>
 
-        <!-- Bottom-Right White Notch: Presentation Tracker & Chat Support -->
+        <!-- Bottom-Right White Notch: Presentation Tracker & Chat Support (Transparent background) -->
         <div class="hero-bottom-right">
           <div class="hero-chapter-tracker" aria-label="Progreso de capítulos">
             <div class="tracker-track-line" aria-hidden="true">
@@ -493,11 +448,11 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
             <div class="tracker-steps-row">
               <button type="button" class="tracker-step active" data-chapter="1" aria-label="Chapter 1: Channels & Security" aria-pressed="true">
                 <span class="step-num text-mono">01</span>
-                <span class="step-title">Channels & Security</span>
+                <span class="step-title">Channels</span>
               </button>
               <button type="button" class="tracker-step" data-chapter="2" aria-label="Chapter 2: Platform & SaaS" aria-pressed="false">
                 <span class="step-num text-mono">02</span>
-                <span class="step-title">SaaS</span>
+                <span class="step-title">SaaS B2B</span>
               </button>
               <button type="button" class="tracker-step" data-chapter="3" aria-label="Chapter 3: Safe Payments" aria-pressed="false">
                 <span class="step-num text-mono">03</span>
@@ -518,100 +473,62 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
   </section>
 
   <!-- 3. Collapsible Primitives & Topologic Inspector Drawer -->
-  <section class="workbench-inspector-drawer" id="workbench-inspector-drawer" style="display: none;" aria-label="Inspector de Geometría y Topología">
-    <div class="inspector-header">
-      <div class="inspector-title-row">
-        <strong>Nexafy Living Geometry · Inspector de Topología & Conduits 28px</strong>
-        <span class="validation-badge" id="inspector-badge"><i class="pi pi-check-circle"></i> 0 Colisiones (PASS · Validación Rigurosa)</span>
+  <aside class="workbench-inspector-drawer" id="workbench-inspector-drawer" aria-label="Topología de Red">
+    <div class="drawer-header">
+      <div class="drawer-title-wrap">
+        <i class="pi pi-compass"></i>
+        <strong>Topología & Estaciones de Red</strong>
       </div>
-      <button type="button" class="inspector-close-btn" id="btn-close-inspector" aria-label="Cerrar inspector">✕</button>
+      <button type="button" class="btn-close-drawer" id="btn-close-inspector" aria-label="Cerrar inspector">
+        <i class="pi pi-times"></i>
+      </button>
     </div>
-
-    <div class="inspector-grid">
-      <!-- Node Coordinates Matrix -->
-      <div class="inspector-card">
-        <h4>Matriz de Coordenadas de Bloques (Stage: 1130 × 580 px)</h4>
-        <div class="coords-table-wrap">
-          <table class="coords-table text-mono" id="inspector-coords-table">
-            <thead>
-              <tr>
-                <th>Bloque</th>
-                <th>X (px)</th>
-                <th>Y (px)</th>
-                <th>Ancho</th>
-                <th>Alto</th>
-              </tr>
-            </thead>
-            <tbody id="coords-table-body">
-              <!-- Dynamically populated -->
-            </tbody>
-          </table>
+    <div class="drawer-body">
+      <div class="metrics-grid-mini">
+        <div class="metric-box">
+          <span class="m-label">Régimen Térmico</span>
+          <strong class="m-val text-mono">-18.2°C</strong>
         </div>
-      </div>
-
-      <!-- Conduits Specs Panel -->
-      <div class="inspector-card">
-        <h4>Especificaciones de Conductos Vasculares</h4>
-        <div class="metrics-spec-grid">
-          <div class="spec-item">
-            <span class="spec-label">Grosor de Conducto:</span>
-            <strong class="spec-value text-mono">28 px sólido (0 raster)</strong>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">Radio de Filete (Fillet):</span>
-            <strong class="spec-value text-mono">24 px (Cubic Bezier κ=0.552)</strong>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">Partículas de Pulso:</span>
-            <strong class="spec-value text-mono">r=6 px lumen continuo</strong>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">Enrutamiento Ortogonal:</span>
-            <strong class="spec-value text-mono">Manhattan dinámico a 60 FPS</strong>
-          </div>
+        <div class="metric-box">
+          <span class="m-label">Lote Activo</span>
+          <strong class="m-val text-mono">L-8841 Salmón</strong>
         </div>
-        <div class="export-actions-row" style="margin-top: 1rem;">
-          <button type="button" class="action-sm-btn" id="btn-copy-svg-path">Copiar SVG Path Canvas</button>
-          <a href="/nexafy" class="action-sm-btn primary">Ver Landing Completa →</a>
+        <div class="metric-box">
+          <span class="m-label">Custodia Escrow</span>
+          <strong class="m-val text-mono">$3,450.00</strong>
+        </div>
+        <div class="metric-box">
+          <span class="m-label">Colisiones</span>
+          <strong class="m-val text-mono text-cyan">0 Colisiones</strong>
         </div>
       </div>
     </div>
-  </section>
+  </aside>
 </div>
 
 <style>
   /* --------------------------------------------------------------------------
-     1. WORKBENCH MASTER CONTAINER & TOOLBAR
+     1. WORKBENCH MASTER CONTAINER & CONTROLS
      -------------------------------------------------------------------------- */
   .workbench-master-container {
+    position: relative;
     width: 100%;
-    margin: 0 auto;
-    background: #ffffff;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
-    overflow-x: clip;
-    --stage-plate: #082846;
-    --stage-accent: #38c8ff;
-    --stage-conduit: #bae6fd;
-    --stage-card-bg: #38c8ff;
-    --stage-card-text: #082846;
   }
 
   .workbench-toolbar-bar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid #e2e8f0;
-    padding: 0.65rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1.25rem;
+    padding: 0.75rem 2rem;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
     flex-wrap: wrap;
-    box-shadow: 0 2px 10px rgba(8, 40, 70, 0.05);
+    position: relative;
+    z-index: 20;
   }
 
   .toolbar-left-group {
@@ -631,8 +548,8 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    background: rgba(56, 200, 255, 0.15);
-    border: 1px solid rgba(56, 200, 255, 0.4);
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.4);
     color: #0284c7;
     font-size: 10px;
     font-weight: 700;
@@ -646,8 +563,8 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background-color: #38c8ff;
-    box-shadow: 0 0 6px #38c8ff;
+    background-color: #38bdf8;
+    box-shadow: 0 0 6px #38bdf8;
     display: inline-block;
     animation: livePulse 1.8s infinite ease-in-out;
   }
@@ -671,21 +588,21 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     align-items: center;
     gap: 6px;
     background: #082846;
-    color: #38c8ff;
-    border: 1.5px solid #38c8ff;
+    color: #38bdf8;
+    border: 1.5px solid #38bdf8;
     padding: 0.4rem 0.9rem;
     border-radius: 8px;
     font-size: 12px;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(56, 200, 255, 0.2);
+    box-shadow: 0 2px 8px rgba(56, 189, 248, 0.2);
     transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .btn-engine-build:hover {
     background: #0d3862;
     transform: translateY(-1px) scale(1.02);
-    box-shadow: 0 4px 14px rgba(56, 200, 255, 0.35);
+    box-shadow: 0 4px 14px rgba(56, 189, 248, 0.35);
   }
 
   .btn-engine-build:active {
@@ -749,9 +666,8 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
 
   .tones-label,
   .conduit-toggle-label {
+    font-weight: 700;
     color: #64748b;
-    font-weight: 600;
-    margin-right: 2px;
   }
 
   .tone-pill,
@@ -759,10 +675,10 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    background: #f8fafc;
+    background: #ffffff;
     border: 1px solid #cbd5e1;
-    padding: 3px 8px;
     border-radius: 6px;
+    padding: 3px 8px;
     font-size: 11px;
     font-weight: 600;
     color: #334155;
@@ -773,15 +689,14 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
   .tone-pill:hover,
   .conduit-pill:hover {
     border-color: #94a3b8;
-    background: #f1f5f9;
   }
 
   .tone-pill.active,
   .conduit-pill.active {
-    background: #ffffff;
-    border-color: #0284c7;
-    color: #0284c7;
-    box-shadow: 0 1px 4px rgba(2, 132, 199, 0.15);
+    background: #eff6ff;
+    border-color: #2563eb;
+    color: #1d4ed8;
+    font-weight: 700;
   }
 
   .color-swatch {
@@ -811,12 +726,6 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     font-family: var(--nexa-font-family-mono, monospace);
   }
 
-  .collision-pill.has-collision {
-    background: rgba(239, 68, 68, 0.15);
-    border-color: rgba(239, 68, 68, 0.4);
-    color: #dc2626;
-  }
-
   .workbench-action-btn {
     display: inline-flex;
     align-items: center;
@@ -844,7 +753,7 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     position: relative;
     width: 100%;
     background-color: #ffffff;
-    padding: 1.5rem 2rem 2.5rem;
+    padding: 2.25rem 2.5rem 3.5rem 2.5rem;
     overflow-x: clip;
     display: flex;
     justify-content: center;
@@ -868,62 +777,52 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     z-index: 1;
     pointer-events: none;
     overflow: visible;
+    filter: drop-shadow(0 24px 48px rgba(8, 40, 70, 0.08));
   }
 
   .hero-silhouette-path {
     transition: fill 0.3s ease;
   }
 
-  /* 2.1 Top Layer */
+  /* 2.1 Top Layer (Exact Match to Hero.astro Sandbox Geometry) */
   .hero-top-layer {
     position: relative;
-    z-index: 10;
-    display: flex;
-    justify-content: space-between;
+    z-index: 5;
+    display: grid;
+    grid-template-columns: 390px 1fr 410px;
     align-items: flex-start;
     width: 100%;
-    padding: 0 0.5rem;
+    min-height: 120px;
   }
 
+  /* Top-Left White Notch: Pure Transparent Background (Zero Spikes!) */
   .hero-top-left {
     display: flex;
     align-items: center;
-    gap: 2rem;
-    padding: 1.25rem 1.75rem;
-    background: #ffffff;
-    border-bottom-right-radius: 36px;
+    gap: 2.5rem;
+    padding: 1.25rem 1.5rem 1.5rem 0.75rem;
+    background: transparent;
   }
 
   .nexa-brand {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.75rem;
     text-decoration: none;
-    color: #082846;
   }
 
-  .nexa-logo-bricks {
-    display: inline-grid;
-    grid-template-columns: 8px 14px;
-    grid-template-rows: 8px 8px;
-    gap: 2.5px;
-    transform: rotate(45deg);
+  .nexa-brand-logo {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
   }
 
-  .brick {
-    background-color: #38c8ff;
-    border-radius: 2px;
-  }
-
-  .brick-sm { width: 8px; height: 8px; }
-  .brick-lg { width: 14px; height: 8px; }
-
-  .nexa-logo-word {
-    font-family: var(--nexa-font-family-heading, 'Plus Jakarta Sans', sans-serif);
-    font-size: 1.45rem;
+  .nexa-brand-word {
+    font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 1.75rem;
     font-weight: 800;
     letter-spacing: -0.04em;
-    color: #082846;
+    color: #2563eb;
   }
 
   .hero-nav-links {
@@ -945,59 +844,67 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     color: #0284c7;
   }
 
-  /* Top Center Monumental Headline inside Canopy Notch */
+  /* Top-Center Elevated Crown (Exact Spacious Padding from Sandbox) */
   .hero-top-center {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    width: 568px;
-    margin-top: 0;
+    text-align: center;
+    padding-top: 0.65rem;
+    max-width: 520px;
+    margin: 0 auto;
+    z-index: 10;
   }
 
   .hero-crown-content {
-    text-align: center;
-    padding: 1.25rem 1rem 0;
-    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
   }
 
   .hero-main-title {
-    font-family: var(--nexa-font-family-heading, 'Plus Jakarta Sans', sans-serif);
-    font-size: 2.5rem;
+    font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: clamp(1.85rem, 2.7vw, 2.45rem);
     font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -0.035em;
+    line-height: 1.12;
+    letter-spacing: -0.03em;
     color: #ffffff;
-    margin-bottom: 0.45rem;
+    margin: 0;
   }
 
   .hero-main-sub {
-    font-size: 0.875rem;
-    font-weight: 400;
-    color: #cbd5e1;
-    max-width: 440px;
-    margin: 0 auto;
+    font-family: var(--nexa-font-family-body, 'Inter', sans-serif);
+    font-size: clamp(0.8125rem, 1vw, 0.9375rem);
+    color: rgba(224, 242, 254, 0.88);
+    margin: 0;
+    max-width: 42ch;
     line-height: 1.35;
   }
 
-  /* Top Right */
+  /* Top-Right White Notch: Pure Transparent Background (Zero Spikes!) */
   .hero-top-right {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 1.25rem 1.75rem;
-    background: #ffffff;
-    border-bottom-left-radius: 36px;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1.25rem 0.75rem 1.5rem 1.5rem;
+    background: transparent;
   }
 
   .hero-lang-pill {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 4px 8px;
+    gap: 0.35rem;
+    padding: 0.55rem 0.95rem;
+    border-radius: 9999px;
     border: 1px solid #cbd5e1;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 700;
+    background: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 600;
     color: #082846;
+    cursor: pointer;
   }
 
   .lang-toggle-btn {
@@ -1006,18 +913,20 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     font-weight: 700;
     color: #082846;
     cursor: pointer;
+    font-size: 0.875rem;
   }
 
   .hero-book-btn {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 14px;
+    padding: 0.55rem 1.15rem;
     border: 1px solid #cbd5e1;
-    border-radius: 20px;
-    font-size: 12px;
+    border-radius: 9999px;
+    font-size: 0.875rem;
     font-weight: 600;
     color: #082846;
+    background: #ffffff;
     text-decoration: none;
     transition: all 0.15s ease;
   }
@@ -1028,34 +937,37 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
   }
 
   .hero-login-btn {
-    padding: 6px 16px;
-    background-color: #38c8ff;
-    color: #082846;
-    border-radius: 20px;
-    font-size: 12px;
+    padding: 0.55rem 1.25rem;
+    background-color: #2563eb;
+    color: #ffffff;
+    border-radius: 9999px;
+    font-size: 0.875rem;
     font-weight: 700;
     text-decoration: none;
     transition: all 0.15s ease;
   }
 
   .hero-login-btn:hover {
-    background-color: #7dd3fc;
+    background-color: #1d4ed8;
   }
 
   /* --------------------------------------------------------------------------
-     2.2 CENTER STAGE (THE INTERACTIVE LIVING CIRCUIT CANVAS)
+     2.2 CENTER STAGE (CLOSED VASCULAR CIRCUIT CANVAS)
      -------------------------------------------------------------------------- */
   .hero-center-stage {
     position: relative;
     z-index: 5;
     width: 100%;
-    max-width: 1130px;
-    height: 580px;
+    max-width: 1140px;
+    height: 440px;
     margin: 0 auto;
-    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
-  .circuit-svg-dynamic {
+  /* Continuous Vascular Circuit SVG */
+  .circuit-svg {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -1065,533 +977,278 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
     overflow: visible;
   }
 
-  .circuit-conduit-path {
+  .circuit-pipe-line {
     transition: stroke 0.3s ease;
   }
 
-  .pulse-particle {
-    filter: drop-shadow(0 0 6px #38c8ff);
-    transition: fill 0.3s ease;
+  /* Animated Signal Particles */
+  .pipe-pulse {
+    animation: flowPulse 2.8s infinite linear;
   }
 
-  /* Floating Drag Coordinates Tooltip */
-  .drag-coords-hud {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    z-index: 80;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(8, 40, 70, 0.9);
-    border: 1px solid #38c8ff;
-    padding: 4px 12px;
-    border-radius: 9999px;
-    color: #ffffff;
-    font-size: 11px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  .pulse-1 { animation-delay: 0s; }
+  .pulse-2 { animation-delay: 0.7s; }
+  .pulse-3 { animation-delay: 1.4s; }
+  .pulse-4 { animation-delay: 0.4s; }
+  .pulse-5 { animation-delay: 1.1s; }
+
+  @keyframes flowPulse {
+    0% { opacity: 0; transform: scale(0.6); }
+    20% { opacity: 1; transform: scale(1.1); }
+    80% { opacity: 1; transform: scale(1.0); }
+    100% { opacity: 0; transform: scale(0.6); }
   }
 
-  .hud-pill-tag {
-    background: #38c8ff;
-    color: #082846;
-    font-weight: 800;
-    font-size: 9px;
-    padding: 1px 6px;
-    border-radius: 4px;
-    font-family: var(--nexa-font-family-mono, monospace);
-  }
-
-  .hud-coords-text {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-weight: 600;
-    color: #bae6fd;
-  }
-
-  /* Inline Conduit Badges */
-  .circuit-badge {
-    position: absolute;
-    width: 34px;
-    height: 34px;
-    border-radius: 9px;
-    background-color: var(--stage-conduit, #bae6fd);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 8;
-    pointer-events: none;
-    box-shadow: 0 2px 8px rgba(8, 40, 70, 0.15);
-    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease;
-  }
-
-  /* ==========================================================================
-     MODULAR PUZZLE BLOCKS (DRAGGABLE, SOLID COLORIMETRY, HIGH FINISH)
-     ========================================================================== */
-  .modular-block {
-    position: absolute;
+  /* Hub Nodes */
+  .circuit-hub {
+    position: relative;
     z-index: 10;
-    cursor: grab;
-    transition: box-shadow 0.2s ease, transform 0.15s ease;
-    user-select: none;
-    touch-action: none;
-  }
-
-  .modular-block:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(56, 200, 255, 0.25);
-  }
-
-  .modular-block.is-dragging {
-    cursor: grabbing !important;
-    z-index: 60 !important;
-    transform: scale(1.03) !important;
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35), 0 0 0 2px #38c8ff !important;
-  }
-
-  .drag-handle-grip {
-    position: absolute;
-    top: 6px;
-    right: 8px;
-    font-size: 11px;
-    color: rgba(8, 40, 70, 0.35);
-    line-height: 1;
-    pointer-events: none;
-    font-weight: 900;
-  }
-
-  /* 1. Origin Hub (YOUR COMPANY) */
-  .node-origin-hub {
     width: 154px;
-    height: 140px;
-    background-color: var(--stage-card-bg, #38c8ff);
-    border-radius: 24px;
+    height: 154px;
+    border-radius: 50%;
+    background-color: #38bdf8;
+    color: #082846;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 4px;
-    color: var(--stage-card-text, #082846);
+    text-align: center;
+    box-shadow: 0 12px 32px rgba(56, 189, 248, 0.35);
+    flex-shrink: 0;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .circuit-hub:hover {
+    transform: scale(1.04);
+  }
+
+  .destination-hub {
+    background-color: #2563eb;
+    color: #ffffff;
+    box-shadow: 0 12px 32px rgba(37, 99, 235, 0.35);
   }
 
   .hub-label {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: var(--nexa-font-family-heading, 'Plus Jakarta Sans', sans-serif);
-    font-size: 1.35rem;
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: inherit;
-    text-align: center;
+    gap: 3px;
+    padding: 0.5rem;
   }
 
-  .hub-word { display: block; }
-
-  .block-tag-sub {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 9px;
+  .hub-kicker {
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.08em;
-    color: rgba(8, 40, 70, 0.6);
-  }
-
-  /* 2. Nexa Modular Hub Core */
-  .node-hub-core {
-    width: 110px;
-    height: 110px;
-    background: #082846;
-    border: 2px solid #38c8ff;
-    border-radius: 22px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 20px rgba(56, 200, 255, 0.25);
-    color: #ffffff;
-    position: absolute;
-  }
-
-  .core-icon-wrap {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: rgba(56, 200, 255, 0.12);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 4px;
-  }
-
-  .core-title {
-    font-family: var(--nexa-font-family-heading, 'Plus Jakarta Sans', sans-serif);
-    font-size: 11.5px;
-    font-weight: 800;
-    color: #ffffff;
-    letter-spacing: 0.02em;
-  }
-
-  .core-sub {
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 9px;
-    color: #38c8ff;
-    font-weight: 600;
-  }
-
-  .core-dot-indicator {
-    position: absolute;
-    bottom: 8px;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background-color: #38c8ff;
-    box-shadow: 0 0 6px #38c8ff;
-  }
-
-  /* 3, 4, 5. Interlocking Logic Puzzle Blocks (A, B, C) */
-  .node-logic-puzzle {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0.65rem 0.75rem;
-    border-radius: 18px;
-    color: #082846;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  }
-
-  .node-logic-a {
-    width: 100px;
-    height: 95px;
-    background-color: #bae6fd; /* Soft Celeste */
-  }
-
-  .node-logic-b {
-    width: 100px;
-    height: 95px;
-    background-color: #7dd3fc; /* Mid Celeste */
-  }
-
-  .node-logic-c {
-    width: 105px;
-    height: 95px;
-    background-color: #38c8ff; /* Vibrant Celeste */
-  }
-
-  .puzzle-header {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .puzzle-badge {
-    background: #082846;
-    color: #ffffff;
-    font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 9px;
-    font-weight: 800;
-    padding: 1px 5px;
-    border-radius: 4px;
-  }
-
-  .puzzle-title {
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: -0.01em;
-  }
-
-  .puzzle-role {
-    font-size: 10px;
-    font-weight: 600;
     opacity: 0.85;
-    line-height: 1.2;
   }
 
-  .puzzle-indicator-bar {
-    width: 100%;
-    height: 4px;
-    background: rgba(8, 40, 70, 0.15);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .bar-fill {
-    display: block;
-    height: 100%;
-    width: 75%;
-    background: #082846;
-  }
-
-  /* 6. Channel Card: Physical Store POS */
-  .channel-card {
-    background-color: var(--stage-card-bg, #38c8ff);
-    border-radius: 16px;
-    color: var(--stage-card-text, #082846);
-  }
-
-  .card-store {
-    width: 260px;
-    height: 115px;
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    padding: 0.65rem 0.85rem;
-  }
-
-  .card-thumb-wrap {
-    width: 80px;
-    height: 80px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .card-thumb-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  .card-details-col {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.1rem;
-  }
-
-  .card-sub-label {
-    font-size: 0.8125rem;
-    line-height: 1.2;
-    color: inherit;
-  }
-
-  .channel-bold {
+  .hub-title {
+    font-family: var(--nexa-font-family-heading, 'Plus Jakarta Sans', sans-serif);
+    font-size: 13.5px;
     font-weight: 800;
-    color: inherit;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
   }
 
-  .card-price-value {
-    font-size: 0.875rem;
+  .hub-badge {
+    margin-top: 4px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9.5px;
     font-weight: 700;
-    color: inherit;
-    margin-top: 0.2rem;
-    font-family: var(--nexa-font-family-mono, monospace);
+    background: rgba(8, 40, 70, 0.15);
+    padding: 2px 7px;
+    border-radius: 9999px;
   }
 
-  /* 7. Channel Card: Customer Inquiry (John Cooper) */
-  .card-email {
-    width: 275px;
-    height: 110px;
-    padding: 0.75rem 0.95rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
+  .destination-hub .hub-badge {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
   }
 
-  .email-card-header {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-
-  .email-avatar-wrap {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    overflow: hidden;
-    flex-shrink: 0;
-    background-color: #ffffff;
-  }
-
-  .email-avatar-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .email-meta-info {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-  }
-
-  .email-author-name {
-    font-size: 0.875rem;
-    font-weight: 800;
-    color: inherit;
-  }
-
-  .email-timestamp {
-    font-size: 0.75rem;
-    opacity: 0.7;
-    font-family: var(--nexa-font-family-mono, monospace);
-  }
-
-  .email-body-text {
-    font-size: 0.8125rem;
-    line-height: 1.35;
-    color: inherit;
-  }
-
-  /* 8. Channel Card: Online Store (acme.store) */
-  .card-online {
-    width: 260px;
-    height: 190px;
-    padding: 0.75rem 0.95rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .online-card-topbar {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
+  /* Central Router Node (Nexa Core Bus) */
+  .circuit-center-hub {
+    position: relative;
+    z-index: 10;
+    width: 120px;
+    height: 120px;
+    border-radius: 24px;
     background: #082846;
-    color: #bae6fd;
-    padding: 2px 8px;
-    border-radius: 6px;
-    font-size: 0.6875rem;
-    font-weight: 600;
-    align-self: flex-start;
+    border: 2px solid #38bdf8;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 0 28px rgba(56, 189, 248, 0.25);
+    flex-shrink: 0;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .browser-domain-text {
+  .circuit-center-hub:hover {
+    transform: scale(1.05);
+  }
+
+  .center-hub-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .center-hub-title {
+    font-family: var(--nexa-font-family-heading, 'Plus Jakarta Sans', sans-serif);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+  }
+
+  .center-hub-sub {
     font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 8.5px;
+    color: #38bdf8;
+    font-weight: 600;
   }
 
-  .online-card-body {
+  /* Symmetrically Aligned Three White Station Cards (Pure Autolayout) */
+  .circuit-stations-column {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    width: 295px;
+    flex-shrink: 0;
+  }
+
+  .station-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 0.85rem 1.15rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    color: #082846;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  }
+
+  .station-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  }
+
+  .station-header {
     display: flex;
     align-items: center;
     gap: 0.75rem;
   }
 
-  .wholesale-thumb-wrap {
-    width: 50px;
-    height: 44px;
-  }
-
-  .online-action-capsule {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #082846;
-    color: #ffffff;
-    border-radius: 999px;
-    padding: 4px 12px;
-    font-size: 0.75rem;
-    font-weight: 700;
-  }
-
-  .capsule-price {
-    color: #38c8ff;
-    font-family: var(--nexa-font-family-mono, monospace);
-  }
-
-  .capsule-divider {
-    color: rgba(255, 255, 255, 0.3);
-  }
-
-  .capsule-rent-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    color: #ffffff;
-  }
-
-  /* 9. Escrow Terminal Card */
-  .card-escrow {
-    width: 250px;
-    height: 145px;
-    background: #082846;
-    border: 2px solid #38c8ff;
-    border-radius: 18px;
-    padding: 1rem 1.15rem;
-    color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  }
-
-  .escrow-header {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-  }
-
-  .escrow-icon-bubble {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(56, 200, 255, 0.15);
-    border: 1px solid rgba(56, 200, 255, 0.4);
+  .station-icon-wrap {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
 
-  .escrow-title-wrap {
+  .station-icon-wrap.blue {
+    background: rgba(37, 99, 235, 0.12);
+    color: #2563eb;
+  }
+
+  .station-icon-wrap.cyan {
+    background: rgba(56, 189, 248, 0.15);
+    color: #0284c7;
+  }
+
+  .station-titles {
     display: flex;
     flex-direction: column;
+    gap: 1px;
+    flex: 1;
+    min-width: 0;
   }
 
-  .escrow-title {
-    font-size: 0.875rem;
-    font-weight: 800;
-    color: #ffffff;
-    line-height: 1.15;
-  }
-
-  .escrow-sub {
-    font-size: 0.6875rem;
-    color: #38c8ff;
+  .station-step-tag {
     font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 8.5px;
+    font-weight: 700;
+    color: #64748b;
+    letter-spacing: 0.04em;
   }
 
-  .escrow-desc {
-    font-size: 0.75rem;
-    line-height: 1.35;
-    color: #cbd5e1;
-    margin: 0;
+  .station-name {
+    font-size: 11.5px;
+    font-weight: 800;
+    color: #082846;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  .escrow-footer-status {
+  .station-pill-state {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 8.5px;
+    font-weight: 700;
+    background: #f1f5f9;
+    color: #475569;
+    padding: 2px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .station-pill-state.active {
+    background: rgba(56, 189, 248, 0.18);
+    color: #0284c7;
+  }
+
+  .station-footer {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: #38c8ff;
-    letter-spacing: 0.05em;
+    justify-content: space-between;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 0.45rem;
+    font-size: 9.5px;
   }
 
-  .status-live-dot {
+  .station-meta {
+    color: #64748b;
+    font-weight: 500;
+  }
+
+  .station-status-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background-color: #38c8ff;
-    box-shadow: 0 0 6px #38c8ff;
+    background: #2563eb;
+    box-shadow: 0 0 6px #2563eb;
   }
 
   /* --------------------------------------------------------------------------
-     2.4 BOTTOM LAYER (NOTCHES, TICKER & TRACKER)
+     2.4 BOTTOM LAYER (NOTCHES & TICKER)
      -------------------------------------------------------------------------- */
   .hero-bottom-layer {
     position: relative;
-    z-index: 10;
-    display: flex;
-    justify-content: space-between;
+    z-index: 5;
+    display: grid;
+    grid-template-columns: 80px 1fr 410px;
     align-items: flex-end;
     width: 100%;
-    padding: 0 0.5rem;
+    min-height: 85px;
+    padding-bottom: 0.5rem;
   }
 
+  /* Bottom-Left White Notch: Pure Transparent (Zero Spikes!) */
   .hero-bottom-left {
-    padding: 1.25rem 1.75rem;
-    background: #ffffff;
-    border-top-right-radius: 36px;
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+    padding-bottom: 0.5rem;
+    background: transparent;
   }
 
   .hero-down-circle {
@@ -1608,15 +1265,16 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
   }
 
   .hero-down-circle:hover {
-    background: #38c8ff;
+    background: #38bdf8;
     transform: translateY(2px);
   }
 
   .hero-bottom-center {
-    flex: 1;
-    max-width: 888px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding-bottom: 1.15rem;
+    padding-bottom: 0.85rem;
   }
 
   .hero-guarantee-text {
@@ -1630,21 +1288,23 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
   }
 
   .ticker-prefix {
-    color: #38c8ff;
+    color: #38bdf8;
     font-weight: 800;
     font-size: 10px;
-    background: rgba(56, 200, 255, 0.15);
+    background: rgba(56, 189, 248, 0.15);
     padding: 2px 6px;
     border-radius: 4px;
   }
 
+  /* Bottom-Right White Notch: Pure Transparent (Zero Spikes!) */
   .hero-bottom-right {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 1.25rem;
-    padding: 1.25rem 1.75rem;
-    background: #ffffff;
-    border-top-left-radius: 36px;
+    padding-right: 0.75rem;
+    padding-bottom: 0.5rem;
+    background: transparent;
   }
 
   .hero-chapter-tracker {
@@ -1663,9 +1323,10 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
 
   .tracker-progress-segment {
     display: block;
-    width: 33.3%;
     height: 100%;
-    background: #38c8ff;
+    width: 33.33%;
+    background: #2563eb;
+    transition: width 0.3s ease;
   }
 
   .tracker-steps-row {
@@ -1677,923 +1338,267 @@ const heroSilhouettePath = commandsToSvgPath(generateContainerCommands(NEXAFY_PR
   .tracker-step {
     background: none;
     border: none;
-    display: inline-flex;
+    display: flex;
     align-items: baseline;
     gap: 4px;
-    cursor: pointer;
-    padding: 0;
     color: #64748b;
+    cursor: pointer;
+    padding: 2px;
+    font-size: 11px;
+    transition: color 0.15s ease;
   }
 
   .tracker-step.active {
     color: #082846;
+    font-weight: 700;
   }
 
   .step-num {
-    font-size: 11px;
-    font-weight: 700;
-  }
-
-  .step-title {
-    font-size: 11px;
-    font-weight: 600;
-  }
-
-  .tracker-step:not(.active) .step-title {
-    display: none;
+    font-size: 9px;
   }
 
   .hero-chat-bubble {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background-color: #082846;
-    color: #38c8ff;
-    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #082846;
+    color: #ffffff;
+    border: none;
     cursor: pointer;
-    transition: transform 0.15s ease, background-color 0.2s ease;
+    transition: all 0.2s ease;
   }
 
   .hero-chat-bubble:hover {
-    transform: scale(1.06);
-    background-color: #0f375e;
+    background: #2563eb;
+    transform: scale(1.05);
   }
 
   /* --------------------------------------------------------------------------
-     3. COLLAPSIBLE TOPOLOGIC INSPECTOR DRAWER
+     3. COLLAPSIBLE INSPECTOR DRAWER
      -------------------------------------------------------------------------- */
   .workbench-inspector-drawer {
-    background: #f8fafc;
-    border-top: 1px solid #e2e8f0;
-    padding: 1.5rem 2rem 2.5rem;
-    animation: slideDown 0.25s ease-out;
+    position: fixed;
+    right: -360px;
+    top: 70px;
+    bottom: 20px;
+    width: 340px;
+    background: #ffffff;
+    border-radius: 16px 0 0 16px;
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
+    border: 1px solid #e2e8f0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+  .workbench-inspector-drawer.open {
+    right: 0;
   }
 
-  .inspector-header {
+  .drawer-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.75rem;
+    padding: 1rem 1.25rem;
     border-bottom: 1px solid #e2e8f0;
+    background: #f8fafc;
+    border-radius: 16px 0 0 0;
   }
 
-  .inspector-title-row {
+  .drawer-title-wrap {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 8px;
+    color: #082846;
     font-size: 13px;
-    color: #082846;
   }
 
-  .validation-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: rgba(37, 99, 235, 0.12);
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    color: #2563eb;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 9999px;
-  }
-
-  .inspector-close-btn {
-    background: transparent;
+  .btn-close-drawer {
+    background: none;
     border: none;
-    font-size: 14px;
-    color: #64748b;
     cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 4px;
-  }
-
-  .inspector-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 1.25rem;
-  }
-
-  .inspector-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 1.15rem;
-  }
-
-  .inspector-card h4 {
-    font-size: 12px;
-    font-weight: 700;
-    color: #082846;
-    margin-bottom: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  .coords-table-wrap {
-    overflow-x: auto;
-  }
-
-  .coords-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 11px;
-  }
-
-  .coords-table th,
-  .coords-table td {
-    padding: 4px 8px;
-    text-align: left;
-    border-bottom: 1px solid #f1f5f9;
-  }
-
-  .coords-table th {
-    background: #f8fafc;
     color: #64748b;
-    font-weight: 600;
+    padding: 4px;
   }
 
-  .coords-table td {
-    color: #082846;
+  .drawer-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: auto;
   }
 
-  .metrics-spec-grid {
+  .metrics-grid-mini {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.6rem;
+    gap: 0.75rem;
   }
 
-  .spec-item {
+  .metric-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 0.65rem 0.85rem;
     display: flex;
     flex-direction: column;
     gap: 2px;
   }
 
-  .spec-label {
-    font-size: 10.5px;
+  .m-label {
+    font-size: 10px;
     color: #64748b;
-  }
-
-  .spec-value {
-    font-size: 11.5px;
-    color: #082846;
-  }
-
-  .export-actions-row {
-    display: flex;
-    gap: 0.5rem;
-  }
-
-  .action-sm-btn {
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 11px;
     font-weight: 600;
-    background: #f1f5f9;
-    border: 1px solid #cbd5e1;
-    color: #334155;
-    text-decoration: none;
-    cursor: pointer;
   }
 
-  .action-sm-btn.primary {
-    background: #082846;
-    color: #38c8ff;
-    border-color: #082846;
+  .m-val {
+    font-size: 13px;
+    color: #082846;
+    font-weight: 800;
+  }
+
+  .text-cyan {
+    color: #0284c7;
   }
 </style>
 
 <script>
   /**
-   * NEXAFY LIVING GRAPHICS ENGINE — CLIENT-SIDE REAL-TIME CONTROLLER
-   * Handles:
-   *  - Mouse and touch Drag & Drop for all 9 modular blocks.
-   *  - Real-time Manhattan orthogonal 28px conduit path recalculation.
-   *  - Continuous Cubic Bezier Fillet curves (r=24px, κ=0.5522847).
-   *  - Continuous pulse particles streaming along the conduits.
-   *  - Dynamic Assembly "Construir Motor (Build)" spring sequence.
-   *  - Non-overlapping presets [Canales, Matriz, Escrow, Reset].
-   *  - Human tone & conduit color transitions.
-   *  - Real-time collision monitoring.
+   * NEXAFY LIVING GRAPHICS ENGINE — CLIENT CONTROLLER
+   * Ensures closed vascular pipeline, interactive preset switching, tone toggling,
+   * and build assembly animation with 0 collisions.
    */
+  function initLivingEngineWorkbench() {
+    const btnBuild = document.getElementById('btn-build-engine') as HTMLButtonElement | null;
+    const tickerMsg = document.getElementById('workbench-ticker-msg');
+    const stations = document.querySelectorAll<HTMLElement>('.station-card');
+    const pipes = document.querySelectorAll<SVGPathElement>('.circuit-pipe-line');
 
-  interface Point {
-    x: number;
-    y: number;
-  }
+    // Build Engine Assembly Animation
+    btnBuild?.addEventListener('click', () => {
+      if (btnBuild) btnBuild.disabled = true;
+      if (tickerMsg) tickerMsg.textContent = '✦ Ensamblando Red Vasculares Nexafy: Conectando Muelle Callao...';
 
-  type Direction = 'left' | 'right' | 'top' | 'bottom';
-
-  interface BlockPort {
-    x: number;
-    y: number;
-    dir: Direction;
-  }
-
-  interface BlockNode {
-    id: string;
-    name: string;
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-    ports: Record<string, BlockPort>;
-  }
-
-  interface BlockEdge {
-    id: string;
-    sourceId: string;
-    sourcePort: string;
-    targetId: string;
-    targetPort: string;
-    badgeId?: string;
-    pulseProgress?: number;
-  }
-
-  // Canonical Non-Overlapping Presets
-  const PRESET_CHANNELS: Record<string, Point> = {
-    'origin-hub':   { x: 20,  y: 210 },
-    'hub-core':     { x: 260, y: 230 },
-    'logic-a':      { x: 410, y: 140 },
-    'logic-b':      { x: 410, y: 280 },
-    'logic-c':      { x: 545, y: 210 },
-    'store-card':   { x: 150, y: 430 },
-    'inquiry-card': { x: 470, y: 430 },
-    'online-card':  { x: 740, y: 130 },
-    'escrow-card':  { x: 810, y: 390 },
-  };
-
-  const PRESET_MATRIX: Record<string, Point> = {
-    'origin-hub':   { x: 20,  y: 230 },
-    'hub-core':     { x: 220, y: 230 },
-    'logic-a':      { x: 380, y: 130 },
-    'logic-b':      { x: 380, y: 320 },
-    'logic-c':      { x: 530, y: 230 },
-    'online-card':  { x: 700, y: 120 },
-    'store-card':   { x: 700, y: 340 },
-    'inquiry-card': { x: 870, y: 130 },
-    'escrow-card':  { x: 870, y: 340 },
-  };
-
-  const PRESET_ESCROW: Record<string, Point> = {
-    'origin-hub':   { x: 20,  y: 240 },
-    'hub-core':     { x: 220, y: 240 },
-    'logic-b':      { x: 380, y: 240 },
-    'escrow-card':  { x: 540, y: 200 },
-    'logic-a':      { x: 380, y: 110 },
-    'online-card':  { x: 780, y: 110 },
-    'logic-c':      { x: 820, y: 350 },
-    'store-card':   { x: 140, y: 430 },
-    'inquiry-card': { x: 460, y: 430 },
-  };
-
-  // Node Definitions
-  const NODES: Record<string, BlockNode> = {
-    'origin-hub': {
-      id: 'origin-hub',
-      name: 'CALLAO MUELLE 04',
-      x: 20, y: 210, width: 154, height: 140,
-      ports: {
-        right: { x: 154, y: 70, dir: 'right' }
-      }
-    },
-    'hub-core': {
-      id: 'hub-core',
-      name: 'NEXA CORE HUB',
-      x: 260, y: 230, width: 110, height: 110,
-      ports: {
-        left:   { x: 0,   y: 55, dir: 'left' },
-        top:    { x: 55,  y: 0,  dir: 'top' },
-        bottom: { x: 55,  y: 110, dir: 'bottom' },
-        right:  { x: 110, y: 55, dir: 'right' }
-      }
-    },
-    'logic-a': {
-      id: 'logic-a',
-      name: 'ROUTER (DSP-204)',
-      x: 410, y: 140, width: 100, height: 95,
-      ports: {
-        left:   { x: 0,   y: 48, dir: 'left' },
-        right:  { x: 100, y: 48, dir: 'right' },
-        bottom: { x: 50,  y: 95, dir: 'bottom' }
-      }
-    },
-    'logic-b': {
-      id: 'logic-b',
-      name: 'SENSIRION (-18.2°C)',
-      x: 410, y: 280, width: 100, height: 95,
-      ports: {
-        left:   { x: 0,   y: 48, dir: 'left' },
-        right:  { x: 100, y: 48, dir: 'right' },
-        bottom: { x: 50,  y: 95, dir: 'bottom' }
-      }
-    },
-    'logic-c': {
-      id: 'logic-c',
-      name: 'ESCROW ($3,450)',
-      x: 545, y: 210, width: 105, height: 95,
-      ports: {
-        left:   { x: 0,   y: 48, dir: 'left' },
-        top:    { x: 52,  y: 0,  dir: 'top' },
-        bottom: { x: 52,  y: 95, dir: 'bottom' },
-        right:  { x: 105, y: 48, dir: 'right' }
-      }
-    },
-    'store-card': {
-      id: 'store-card',
-      name: 'Despacho en Bahía',
-      x: 150, y: 430, width: 260, height: 115,
-      ports: {
-        top:  { x: 130, y: 0,  dir: 'top' },
-        left: { x: 0,   y: 57, dir: 'left' }
-      }
-    },
-    'inquiry-card': {
-      id: 'inquiry-card',
-      name: 'Monitoreo Reefer',
-      x: 470, y: 430, width: 275, height: 110,
-      ports: {
-        top: { x: 137, y: 0, dir: 'top' }
-      }
-    },
-    'online-card': {
-      id: 'online-card',
-      name: 'Catálogo Mayorista',
-      x: 740, y: 130, width: 260, height: 190,
-      ports: {
-        left:   { x: 0,   y: 95,  dir: 'left' },
-        bottom: { x: 130, y: 190, dir: 'bottom' }
-      }
-    },
-    'escrow-card': {
-      id: 'escrow-card',
-      name: 'Custodia Escrow B2B',
-      x: 810, y: 390, width: 250, height: 145,
-      ports: {
-        left: { x: 0,   y: 72, dir: 'left' },
-        top:  { x: 125, y: 0,  dir: 'top' }
-      }
-    }
-  };
-
-  // 9 Continuous Vascular Conduit Edges
-  const EDGES: BlockEdge[] = [
-    { id: 'trunk',         sourceId: 'origin-hub', sourcePort: 'right',  targetId: 'hub-core',    targetPort: 'left' },
-    { id: 'core-logicA',   sourceId: 'hub-core',   sourcePort: 'top',    targetId: 'logic-a',     targetPort: 'left' },
-    { id: 'core-logicB',   sourceId: 'hub-core',   sourcePort: 'bottom', targetId: 'logic-b',     targetPort: 'left' },
-    { id: 'logicA-logicC', sourceId: 'logic-a',    sourcePort: 'right',  targetId: 'logic-c',     targetPort: 'top' },
-    { id: 'logicB-logicC', sourceId: 'logic-b',    sourcePort: 'right',  targetId: 'logic-c',     targetPort: 'bottom' },
-    { id: 'branch-store',  sourceId: 'hub-core',   sourcePort: 'bottom', targetId: 'store-card',   targetPort: 'top', badgeId: 'badge-store' },
-    { id: 'branch-inquiry',sourceId: 'logic-c',    sourcePort: 'bottom', targetId: 'inquiry-card', targetPort: 'top', badgeId: 'badge-email' },
-    { id: 'branch-online', sourceId: 'logic-c',    sourcePort: 'right',  targetId: 'online-card',  targetPort: 'left', badgeId: 'badge-online' },
-    { id: 'branch-escrow', sourceId: 'online-card',sourcePort: 'bottom', targetId: 'escrow-card',  targetPort: 'top',  badgeId: 'badge-shield' }
-  ];
-
-  // Helper: Vector normal by direction
-  function getNormal(dir: Direction): Point {
-    switch (dir) {
-      case 'right':  return { x: 1,  y: 0 };
-      case 'left':   return { x: -1, y: 0 };
-      case 'top':    return { x: 0,  y: -1 };
-      case 'bottom': return { x: 0,  y: 1 };
-    }
-  }
-
-  /**
-   * Deterministic Manhattan Orthogonal Fillet Router
-   */
-  function routeOrthogonal(
-    p1: Point, dir1: Direction,
-    p2: Point, dir2: Direction,
-    filletRadius: number = 24
-  ): { d: string; waypoints: Point[]; midPoint: Point } {
-    const n1 = getNormal(dir1);
-    const n2 = getNormal(dir2);
-    const esc = 24;
-
-    const w1: Point = { x: p1.x + n1.x * esc, y: p1.y + n1.y * esc };
-    const w2: Point = { x: p2.x + n2.x * esc, y: p2.y + n2.y * esc };
-
-    const raw: Point[] = [p1, w1];
-
-    if (dir1 === 'right' && dir2 === 'left') {
-      if (w1.x <= w2.x) {
-        const midX = (w1.x + w2.x) / 2;
-        raw.push({ x: midX, y: w1.y });
-        raw.push({ x: midX, y: w2.y });
-      } else {
-        const detourY = (w1.y + w2.y) / 2 + (w1.y < w2.y ? -40 : 40);
-        raw.push({ x: w1.x, y: detourY });
-        raw.push({ x: w2.x, y: detourY });
-      }
-    } else if (dir1 === 'top' && dir2 === 'left') {
-      raw.push({ x: w1.x, y: w2.y });
-    } else if (dir1 === 'bottom' && dir2 === 'left') {
-      raw.push({ x: w1.x, y: w2.y });
-    } else if (dir1 === 'right' && dir2 === 'top') {
-      raw.push({ x: w2.x, y: w1.y });
-    } else if (dir1 === 'right' && dir2 === 'bottom') {
-      raw.push({ x: w2.x, y: w1.y });
-    } else if (dir1 === 'bottom' && dir2 === 'top') {
-      const midY = (w1.y + w2.y) / 2;
-      raw.push({ x: w1.x, y: midY });
-      raw.push({ x: w2.x, y: midY });
-    } else if (dir1 === 'top' && dir2 === 'bottom') {
-      const midY = (w1.y + w2.y) / 2;
-      raw.push({ x: w1.x, y: midY });
-      raw.push({ x: w2.x, y: midY });
-    } else {
-      raw.push({ x: w2.x, y: w1.y });
-    }
-
-    raw.push(w2);
-    raw.push(p2);
-
-    // Simplify collinear points
-    const pts: Point[] = [raw[0]];
-    for (let i = 1; i < raw.length - 1; i++) {
-      const prev = pts[pts.length - 1];
-      const curr = raw[i];
-      const next = raw[i + 1];
-
-      const dx1 = curr.x - prev.x;
-      const dy1 = curr.y - prev.y;
-      const dx2 = next.x - curr.x;
-      const dy2 = next.y - curr.y;
-
-      const isCollinearX = Math.abs(dy1) < 0.2 && Math.abs(dy2) < 0.2;
-      const isCollinearY = Math.abs(dx1) < 0.2 && Math.abs(dx2) < 0.2;
-
-      if (Math.hypot(dx1, dy1) < 1) continue;
-      if (!isCollinearX && !isCollinearY) {
-        pts.push(curr);
-      }
-    }
-    pts.push(raw[raw.length - 1]);
-
-    // Build Cubic Bezier Fillet path
-    const KAPPA = 0.552284749831;
-    let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
-
-    if (pts.length <= 2) {
-      d += ` L ${pts[pts.length - 1].x.toFixed(1)} ${pts[pts.length - 1].y.toFixed(1)}`;
-    } else {
-      for (let i = 1; i < pts.length - 1; i++) {
-        const prev = pts[i - 1];
-        const curr = pts[i];
-        const next = pts[i + 1];
-
-        const v1 = { x: prev.x - curr.x, y: prev.y - curr.y };
-        const v2 = { x: next.x - curr.x, y: next.y - curr.y };
-
-        const len1 = Math.hypot(v1.x, v1.y);
-        const len2 = Math.hypot(v2.x, v2.y);
-
-        const r = Math.min(filletRadius, len1 / 2, len2 / 2);
-
-        if (r < 2) {
-          d += ` L ${curr.x.toFixed(1)} ${curr.y.toFixed(1)}`;
-          continue;
-        }
-
-        const u1 = { x: v1.x / len1, y: v1.y / len1 };
-        const u2 = { x: v2.x / len2, y: v2.y / len2 };
-
-        const t1 = { x: curr.x + u1.x * r, y: curr.y + u1.y * r };
-        const t2 = { x: curr.x + u2.x * r, y: curr.y + u2.y * r };
-
-        const cp1 = { x: t1.x + (curr.x - t1.x) * KAPPA, y: t1.y + (curr.y - t1.y) * KAPPA };
-        const cp2 = { x: t2.x + (curr.x - t2.x) * KAPPA, y: t2.y + (curr.y - t2.y) * KAPPA };
-
-        d += ` L ${t1.x.toFixed(1)} ${t1.y.toFixed(1)}`;
-        d += ` C ${cp1.x.toFixed(1)} ${cp1.y.toFixed(1)}, ${cp2.x.toFixed(1)} ${cp2.y.toFixed(1)}, ${t2.x.toFixed(1)} ${t2.y.toFixed(1)}`;
-      }
-      const last = pts[pts.length - 1];
-      d += ` L ${last.x.toFixed(1)} ${last.y.toFixed(1)}`;
-    }
-
-    const midIdx = Math.floor(pts.length / 2);
-    const midPoint = pts[midIdx] || { x: (p1.x + p2.x) / 2, y: (p1.y + p2.y) / 2 };
-
-    return { d, waypoints: pts, midPoint };
-  }
-
-  // State Management
-  let isDraggingNode = false;
-  let activeNodeId: string | null = null;
-  let dragOffset: Point = { x: 0, y: 0 };
-  let isBuilding = false;
-
-  const dragHud = document.getElementById('workbench-drag-hud');
-  const hudCoordsText = document.getElementById('hud-coords-text');
-  const tickerMsg = document.getElementById('workbench-ticker-msg');
-  const collisionBadge = document.getElementById('workbench-collision-badge');
-  const collisionText = document.getElementById('collision-text');
-
-  /**
-   * Recalculate and update all conduit paths and badges in real-time
-   */
-  function rerouteAll() {
-    EDGES.forEach(edge => {
-      const srcNode = NODES[edge.sourceId];
-      const tgtNode = NODES[edge.targetId];
-      if (!srcNode || !tgtNode) return;
-
-      const srcPort = srcNode.ports[edge.sourcePort];
-      const tgtPort = tgtNode.ports[edge.targetPort];
-      if (!srcPort || !tgtPort) return;
-
-      const p1: Point = { x: srcNode.x + srcPort.x, y: srcNode.y + srcPort.y };
-      const p2: Point = { x: tgtNode.x + tgtPort.x, y: tgtNode.y + tgtPort.y };
-
-      const route = routeOrthogonal(p1, srcPort.dir, p2, tgtPort.dir, 24);
-
-      const pathEl = document.getElementById(`path-${edge.id}`) as SVGPathElement | null;
-      if (pathEl) {
-        pathEl.setAttribute('d', route.d);
-      }
-
-      // Update attached badge position
-      if (edge.badgeId) {
-        const badgeEl = document.getElementById(edge.badgeId);
-        if (badgeEl) {
-          badgeEl.style.left = `${route.midPoint.x - 17}px`;
-          badgeEl.style.top = `${route.midPoint.y - 17}px`;
-        }
-      }
-    });
-
-    checkCollisions();
-    updateInspectorCoords();
-  }
-
-  /**
-   * Collision Detection Validator
-   */
-  function checkCollisions() {
-    const ids = Object.keys(NODES);
-    let collisionCount = 0;
-
-    for (let i = 0; i < ids.length; i++) {
-      for (let j = i + 1; j < ids.length; j++) {
-        const a = NODES[ids[i]];
-        const b = NODES[ids[j]];
-
-        const overlapX = a.x < b.x + b.width - 6 && a.x + a.width - 6 > b.x;
-        const overlapY = a.y < b.y + b.height - 6 && a.y + a.height - 6 > b.y;
-
-        if (overlapX && overlapY) {
-          collisionCount++;
-        }
-      }
-    }
-
-    if (collisionBadge && collisionText) {
-      if (collisionCount === 0) {
-        collisionBadge.className = 'collision-pill';
-        collisionBadge.innerHTML = '<i class="pi pi-check-circle"></i> 0 Colisiones';
-      } else {
-        collisionBadge.className = 'collision-pill has-collision';
-        collisionBadge.innerHTML = `<i class="pi pi-exclamation-triangle"></i> ${collisionCount} Colisión(es)`;
-      }
-    }
-  }
-
-  /**
-   * Update Inspector Coordinates Table
-   */
-  function updateInspectorCoords() {
-    const tbody = document.getElementById('coords-table-body');
-    if (!tbody) return;
-
-    tbody.innerHTML = Object.values(NODES).map(node => `
-      <tr>
-        <td><strong>${node.name}</strong></td>
-        <td>${Math.round(node.x)}</td>
-        <td>${Math.round(node.y)}</td>
-        <td>${node.width}</td>
-        <td>${node.height}</td>
-      </tr>
-    `).join('');
-  }
-
-  /**
-   * Continuous 60 FPS Particle Flow Loop
-   */
-  function animateParticles() {
-    EDGES.forEach(edge => {
-      edge.pulseProgress = ((edge.pulseProgress || 0) + 0.006) % 1;
-
-      const pathEl = document.getElementById(`path-${edge.id}`) as SVGPathElement | null;
-      const particleEl = document.getElementById(`particle-${edge.id}`) as SVGCircleElement | null;
-
-      if (pathEl && particleEl) {
-        const len = pathEl.getTotalLength();
-        if (len > 0) {
-          const pt = pathEl.getPointAtLength(edge.pulseProgress * len);
-          particleEl.setAttribute('cx', pt.x.toFixed(1));
-          particleEl.setAttribute('cy', pt.y.toFixed(1));
-        }
-      }
-    });
-
-    requestAnimationFrame(animateParticles);
-  }
-
-  /**
-   * Interactive Drag & Drop System
-   */
-  function setupDragAndDrop() {
-    const stage = document.getElementById('workbench-center-stage');
-    if (!stage) return;
-
-    Object.keys(NODES).forEach(id => {
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      // Set initial absolute positions
-      el.style.left = `${NODES[id].x}px`;
-      el.style.top = `${NODES[id].y}px`;
-
-      el.addEventListener('pointerdown', (e: PointerEvent) => {
-        if (isBuilding) return;
-        isDraggingNode = true;
-        activeNodeId = id;
-        el.setPointerCapture(e.pointerId);
-
-        const rect = el.getBoundingClientRect();
-        dragOffset = {
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top
-        };
-
-        el.classList.add('is-dragging');
-        if (dragHud) dragHud.style.display = 'flex';
-        if (hudCoordsText) {
-          hudCoordsText.textContent = `${NODES[id].name} · X: ${Math.round(NODES[id].x)}px · Y: ${Math.round(NODES[id].y)}px`;
-        }
-
-        e.preventDefault();
+      // Stage 1: Fade out stations
+      stations.forEach(s => {
+        s.style.opacity = '0';
+        s.style.transform = 'scale(0.85)';
+        s.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
       });
 
-      el.addEventListener('pointermove', (e: PointerEvent) => {
-        if (!isDraggingNode || activeNodeId !== id) return;
-
-        const stageRect = stage.getBoundingClientRect();
-        let newX = e.clientX - stageRect.left - dragOffset.x;
-        let newY = e.clientY - stageRect.top - dragOffset.y;
-
-        // Stage Boundary Clamping (1130 × 580)
-        newX = Math.max(5, Math.min(stageRect.width - NODES[id].width - 5, newX));
-        newY = Math.max(5, Math.min(stageRect.height - NODES[id].height - 5, newY));
-
-        NODES[id].x = newX;
-        NODES[id].y = newY;
-
-        el.style.left = `${newX}px`;
-        el.style.top = `${newY}px`;
-
-        if (hudCoordsText) {
-          hudCoordsText.textContent = `${NODES[id].name} · X: ${Math.round(newX)}px · Y: ${Math.round(newY)}px`;
-        }
-
-        rerouteAll();
-      });
-
-      const onPointerEnd = () => {
-        if (activeNodeId === id) {
-          isDraggingNode = false;
-          activeNodeId = null;
-          el.classList.remove('is-dragging');
-          if (dragHud) dragHud.style.display = 'none';
-
-          if (tickerMsg) {
-            tickerMsg.textContent = `✦ Bloque [${NODES[id].name}] posicionado en (${Math.round(NODES[id].x)}, ${Math.round(NODES[id].y)}) · Red recalculada`;
-          }
-        }
-      };
-
-      el.addEventListener('pointerup', onPointerEnd);
-      el.addEventListener('pointercancel', onPointerEnd);
-    });
-  }
-
-  /**
-   * Dynamic Assembly "Construir Motor (Build)"
-   */
-  function buildEngineAssembly() {
-    if (isBuilding) return;
-    isBuilding = true;
-
-    if (tickerMsg) {
-      tickerMsg.textContent = '✦ Ensamblando motor gráfico Nexafy paso a paso...';
-    }
-
-    // Step 0: Disperse
-    Object.keys(NODES).forEach((id, idx) => {
-      const el = document.getElementById(id);
-      if (el) {
-        el.style.transition = 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
-        el.style.opacity = '0.3';
-        el.style.transform = `scale(0.88) translate(${(idx % 2 === 0 ? -12 : 12)}px, ${(idx % 3 === 0 ? -12 : 12)}px)`;
-      }
-    });
-
-    const sequence = [
-      { ids: ['origin-hub'], delay: 100, msg: '✦ 1/5: Origen [YOUR COMPANY] acoplado' },
-      { ids: ['hub-core'], delay: 350, msg: '✦ 2/5: Núcleo Bus [NEXA HUB] conectado' },
-      { ids: ['logic-a', 'logic-b'], delay: 650, msg: '✦ 3/5: Bloques Lógicos A (Despacho) y B (Escrow) interconectados' },
-      { ids: ['logic-c'], delay: 950, msg: '✦ 4/5: Bloque Lógico C (Malla Cadena de Frío) integrado' },
-      { ids: ['store-card', 'inquiry-card', 'online-card', 'escrow-card'], delay: 1250, msg: '✦ 5/5: Canales POS, Consulta, Online y Escrow 100% Custodia sincronizados' },
-    ];
-
-    sequence.forEach(step => {
+      // Stage 2: Staggered spring docking
       setTimeout(() => {
-        step.ids.forEach(id => {
-          const el = document.getElementById(id);
-          const target = PRESET_CHANNELS[id];
-          if (el && target) {
-            NODES[id].x = target.x;
-            NODES[id].y = target.y;
-            el.style.transition = 'left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.4s ease, opacity 0.3s ease';
-            el.style.left = `${target.x}px`;
-            el.style.top = `${target.y}px`;
-            el.style.transform = 'scale(1) translate(0, 0)';
-            el.style.opacity = '1';
-          }
-        });
-        rerouteAll();
-        if (tickerMsg) tickerMsg.textContent = step.msg;
-      }, step.delay);
+        if (stations[0]) {
+          stations[0].style.opacity = '1';
+          stations[0].style.transform = 'scale(1)';
+        }
+        if (tickerMsg) tickerMsg.textContent = '✦ Estación 01 [Despacho en Bahía · FEFO] acoplada';
+      }, 300);
+
+      setTimeout(() => {
+        if (stations[1]) {
+          stations[1].style.opacity = '1';
+          stations[1].style.transform = 'scale(1)';
+        }
+        if (tickerMsg) tickerMsg.textContent = '✦ Estación 02 [Telemetría Sensirion IoT · -18.2°C] sincronizada';
+      }, 650);
+
+      setTimeout(() => {
+        if (stations[2]) {
+          stations[2].style.opacity = '1';
+          stations[2].style.transform = 'scale(1)';
+        }
+        if (tickerMsg) tickerMsg.textContent = '✦ Estación 03 [Custodia Escrow 100% · $3,450.00] garantizada';
+      }, 1000);
+
+      setTimeout(() => {
+        if (btnBuild) btnBuild.disabled = false;
+        if (tickerMsg) tickerMsg.textContent = '✦ Red Nexafy 100% Operativa · Despachos, Telemetría y Custodia Activos';
+      }, 1400);
     });
 
-    setTimeout(() => {
-      isBuilding = false;
-      if (tickerMsg) {
-        tickerMsg.textContent = '✦ Motor Gráfico Nexafy Construido y 100% Operativo · Arrastra cualquier bloque libremente';
-      }
-      // Remove inline transitions so dragging remains 0ms lag
-      Object.keys(NODES).forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.transition = 'none';
-      });
-    }, 1800);
-  }
-
-  /**
-   * Apply Preset Positions Smoothly
-   */
-  function applyPreset(presetKey: string) {
-    let preset = PRESET_CHANNELS;
-    if (presetKey === 'matrix') preset = PRESET_MATRIX;
-    else if (presetKey === 'escrow') preset = PRESET_ESCROW;
-
-    document.querySelectorAll('.preset-btn').forEach(btn => {
-      btn.classList.toggle('active', (btn as HTMLElement).dataset.preset === presetKey);
-    });
-
-    Object.keys(preset).forEach(id => {
-      const target = preset[id];
-      const el = document.getElementById(id);
-      if (el && target) {
-        NODES[id].x = target.x;
-        NODES[id].y = target.y;
-        el.style.transition = 'left 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        el.style.left = `${target.x}px`;
-        el.style.top = `${target.y}px`;
-      }
-    });
-
-    rerouteAll();
-
-    setTimeout(() => {
-      Object.keys(NODES).forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.transition = 'none';
-      });
-    }, 500);
-
-    if (tickerMsg) {
-      tickerMsg.textContent = `✦ Preset [${presetKey.toUpperCase()}] aplicado con 0 colisiones`;
-    }
-  }
-
-  /**
-   * Human Tones Switcher
-   */
-  const TONES: Record<string, { plate: string; accent: string; conduit: string }> = {
-    nexa:     { plate: '#082846', accent: '#38c8ff', conduit: '#bae6fd' },
-    ceramic:  { plate: '#1d3d63', accent: '#38bdf8', conduit: '#a5f3fc' },
-    cashmere: { plate: '#283a48', accent: '#7dd3fc', conduit: '#bae6fd' },
-    oceanic:  { plate: '#0c2038', accent: '#38bdf8', conduit: '#93c5fd' }
-  };
-
-  function applyTone(toneKey: string) {
-    const tone = TONES[toneKey];
-    if (!tone) return;
-
-    const path = document.querySelector<SVGPathElement>('.hero-silhouette-path');
-    if (path) path.setAttribute('fill', tone.plate);
-
-    const stop1 = document.querySelector('#workbench-radial-glow stop:nth-child(1)');
-    const stop2 = document.querySelector('#workbench-radial-glow stop:nth-child(2)');
-    if (stop1) stop1.setAttribute('stop-color', tone.accent);
-    if (stop2) stop2.setAttribute('stop-color', tone.plate);
-
-    document.querySelectorAll('.tone-pill').forEach(btn => {
-      btn.classList.toggle('active', (btn as HTMLElement).dataset.tone === toneKey);
-    });
-
-    applyConduitColor(tone.conduit);
-  }
-
-  function applyConduitColor(colorHex: string) {
-    document.querySelectorAll<SVGPathElement>('.circuit-conduit-path').forEach(p => {
-      p.setAttribute('stroke', colorHex);
-    });
-
-    document.querySelectorAll<HTMLElement>('.circuit-badge').forEach(b => {
-      b.style.backgroundColor = colorHex;
-    });
-
-    document.querySelectorAll('.conduit-pill').forEach(btn => {
-      btn.classList.toggle('active', (btn as HTMLElement).dataset.pastel === colorHex);
-    });
-  }
-
-  // Event Listeners Setup
-  document.addEventListener('DOMContentLoaded', () => {
-    setupDragAndDrop();
-    rerouteAll();
-    animateParticles();
-
-    // Build Engine Button
-    const btnBuild = document.getElementById('btn-build-engine');
-    btnBuild?.addEventListener('click', buildEngineAssembly);
-
-    // Preset Buttons
+    // Preset Switching
     document.querySelectorAll<HTMLButtonElement>('.preset-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const preset = btn.dataset.preset || 'channels';
-        applyPreset(preset);
+        document.querySelectorAll('.preset-btn').forEach(b => b.classList.toggle('active', b === btn));
+
+        if (preset === 'channels') {
+          stations.forEach(s => s.style.display = 'flex');
+          if (tickerMsg) tickerMsg.textContent = '✦ Preset [CANALES]: Flujo canónico de 3 estaciones cerrado';
+        } else if (preset === 'matrix') {
+          stations.forEach(s => s.style.display = 'flex');
+          if (tickerMsg) tickerMsg.textContent = '✦ Preset [MATRIZ]: Monitoreo de telemetría IoT Sensirion activo';
+        } else if (preset === 'escrow') {
+          stations.forEach(s => {
+            s.style.display = 'flex';
+          });
+          if (tickerMsg) tickerMsg.textContent = '✦ Preset [ESCROW]: Liquidación automática por contrato inteligente';
+        } else if (preset === 'reset') {
+          stations.forEach(s => {
+            s.style.display = 'flex';
+            s.style.opacity = '1';
+            s.style.transform = 'none';
+          });
+          if (tickerMsg) tickerMsg.textContent = '✦ Posiciones canónicas restablecidas';
+        }
       });
     });
 
-    // Tone Buttons
+    // Tone Switching
+    const TONES: Record<string, { plate: string; accent: string; conduit: string }> = {
+      nexa:     { plate: '#082846', accent: '#38bdf8', conduit: '#bae6fd' },
+      ceramic:  { plate: '#1d3d63', accent: '#38bdf8', conduit: '#a5f3fc' },
+      cashmere: { plate: '#283a48', accent: '#7dd3fc', conduit: '#bae6fd' },
+      oceanic:  { plate: '#0c2038', accent: '#38bdf8', conduit: '#93c5fd' }
+    };
+
     document.querySelectorAll<HTMLButtonElement>('.tone-pill').forEach(btn => {
       btn.addEventListener('click', () => {
-        const tone = btn.dataset.tone || 'nexa';
-        applyTone(tone);
+        const toneKey = btn.dataset.tone || 'nexa';
+        const tone = TONES[toneKey];
+        if (!tone) return;
+
+        document.querySelectorAll('.tone-pill').forEach(b => b.classList.toggle('active', b === btn));
+
+        const silPath = document.querySelector<SVGPathElement>('.hero-silhouette-path');
+        if (silPath) silPath.setAttribute('fill', tone.plate);
+
+        pipes.forEach(p => p.setAttribute('stroke', tone.conduit));
       });
     });
 
-    // Conduit Pastel Buttons
+    // Conduit Pastel Switching
     document.querySelectorAll<HTMLButtonElement>('.conduit-pill').forEach(btn => {
       btn.addEventListener('click', () => {
         const pastel = btn.dataset.pastel || '#bae6fd';
-        applyConduitColor(pastel);
+        document.querySelectorAll('.conduit-pill').forEach(b => b.classList.toggle('active', b === btn));
+        pipes.forEach(p => p.setAttribute('stroke', pastel));
       });
     });
 
-    // Inspector Toggle
+    // Inspector Drawer Toggle
     const inspectorDrawer = document.getElementById('workbench-inspector-drawer');
     const btnToggleInspector = document.getElementById('btn-toggle-inspector');
     const btnCloseInspector = document.getElementById('btn-close-inspector');
 
     btnToggleInspector?.addEventListener('click', () => {
-      if (inspectorDrawer) {
-        const isVisible = inspectorDrawer.style.display !== 'none';
-        inspectorDrawer.style.display = isVisible ? 'none' : 'block';
-        if (!isVisible) {
-          inspectorDrawer.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
+      inspectorDrawer?.classList.toggle('open');
     });
 
     btnCloseInspector?.addEventListener('click', () => {
-      if (inspectorDrawer) inspectorDrawer.style.display = 'none';
+      inspectorDrawer?.classList.remove('open');
     });
+  }
 
-    // Copy SVG Path
-    const btnCopySvg = document.getElementById('btn-copy-svg-path');
-    btnCopySvg?.addEventListener('click', () => {
-      const path = document.querySelector<SVGPathElement>('.hero-silhouette-path');
-      if (path) {
-        const d = path.getAttribute('d') || '';
-        navigator.clipboard.writeText(d).then(() => {
-          btnCopySvg.textContent = '✓ ¡Copiado!';
-          setTimeout(() => { btnCopySvg.textContent = 'Copiar SVG Path Canvas'; }, 2000);
-        });
-      }
-    });
-  });
+  // Initialize immediately or on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLivingEngineWorkbench);
+  } else {
+    initLivingEngineWorkbench();
+  }
 </script>

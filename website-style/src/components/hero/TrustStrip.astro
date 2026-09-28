@@ -43,16 +43,16 @@
 
 <style>
   .trust-strip {
-    background-color: var(--primitive-color-forest-900);
-    border-top: 1px solid rgba(87, 240, 158, 0.12);
-    border-bottom: 1px solid rgba(87, 240, 158, 0.12);
+    background-color: #061e38;
+    border-top: 1px solid rgba(56, 189, 248, 0.2);
+    border-bottom: 1px solid rgba(56, 189, 248, 0.2);
     padding: 1.75rem 0;
   }
 
   .trust-container {
-    max-width: var(--layout-max-width);
+    max-width: var(--layout-max-width, 1360px);
     margin: 0 auto;
-    padding: 0 var(--layout-gutter);
+    padding: 0 var(--layout-gutter, 2rem);
     display: flex;
     justify-content: center;
   }
@@ -69,12 +69,12 @@
   .badge-item {
     display: inline-flex;
     align-items: center;
-    color: rgba(255, 255, 255, 0.55);
-    transition: color var(--primitive-duration-fast) ease, transform var(--primitive-duration-fast) ease;
+    color: rgba(255, 255, 255, 0.65);
+    transition: color 0.2s ease, transform 0.2s ease;
   }
 
   .badge-item:hover {
-    color: var(--primitive-color-mint-500);
+    color: #38bdf8;
     transform: translateY(-1px);
   }
 
