@@ -1,82 +1,73 @@
 ---
-// Sustainability Section: Forensic Bürocratik Awwwards SOTD Reconstruction
-// Aerial Drone Agricultural Landscape, Sculpted Contour Frame, Floating Editorial Information Cards
+// Sustainability Section: Nexa Cold-Chain SOTD Architectural Grid Canvas
+// Pure Solid Colorimetry, Blueprint Grid Mesh, Zero Plant Photos, Zero Green.
 ---
 
 <section class="sustainability-section" id="sustainability" aria-labelledby="sustain-heading">
   <div class="sustain-stage-wrap">
     
-    <!-- Outer Contour Frame with Aerial Agricultural Earth Photography Background -->
-    <div class="sustain-aerial-canvas" id="sustain-canvas">
+    <!-- Outer Contour Frame with Blueprint Grid Mesh ("fondo con cuadraditos") -->
+    <div class="sustain-blueprint-canvas" id="sustain-canvas">
       
-      <!-- Ambient Image Background Overlay -->
-      <div class="sustain-bg-layer" aria-hidden="true">
-        <img 
-          src="/assets/sustainability-aerial-independent.webp" 
-          alt="Aerial view of green agricultural terraced landscape" 
-          class="sustain-aerial-img" 
-          loading="lazy" 
-          width="1600" 
-          height="1200"
-        />
-        <div class="sustain-photo-scrim"></div>
-      </div>
+      <!-- Ambient Blueprint Grid Overlay Layer -->
+      <div class="sustain-grid-layer" aria-hidden="true"></div>
 
-      <!-- Content Stage Grid hosting the Floating Dark Forest Cards -->
+      <!-- Content Stage Grid hosting the Floating Solid Navy Cards -->
       <div class="sustain-content-grid">
         
-        <!-- CARD 1: Left Intro Hook ("We exist to") -->
+        <!-- CARD 1: Left Intro Hook ("Misión & Propósito") -->
         <div class="sustain-card intro-card">
-          <span class="intro-eyebrow text-eyebrow">Mission & Purpose</span>
+          <span class="intro-eyebrow text-eyebrow">Misión & Eficiencia</span>
           <h2 id="sustain-heading" class="intro-headline">
-            We <br />
-            exist to
+            Cadena <br />
+            de Frío <br />
+            Limpia
           </h2>
         </div>
 
         <!-- CARD 2: Center Monumental Editorial Statement -->
         <div class="sustain-card main-statement-card">
           <h3 class="main-statement-title">
-            Reimagine ownership <br />
-            for a sustainable <br />
-            future.
+            Optimizar la cadena <br />
+            de frío para un futuro <br />
+            sin desperdicio.
           </h3>
           <p class="main-statement-body">
-            Renting means your products are used more often throughout their life cycle with a more conscious purpose. You need less products, save resources and cut down on CO2. Access a greener future here.
+            La trazabilidad en tiempo real y la custodia inteligente eliminan el desperdicio de alimentos perecibles en tránsito. Monitoreo IoT ininterrumpido a -18.2°C, rutas satelitales optimizadas y liquidación transparente sin fricción de intermediarios.
           </p>
         </div>
 
-        <!-- CARD 3: Metric Top-Right (20k tons) -->
+        <!-- CARD 3: Metric Top-Right (0.0% Rotura de Frío) -->
         <div class="sustain-card metric-card metric-top-right">
           <div class="metric-val-wrap">
-            <span class="metric-val-number text-mono" data-target="20">20k</span>
+            <span class="metric-val-number text-mono">0.0%</span>
           </div>
           <p class="metric-val-desc">
-            tons of CO2 savings by 2024 and 200,000 tons by 2028
+            Desvíos térmicos tolerados: control estricto de temperatura de muelle a entrega final
           </p>
-          <div class="metric-card-pill text-mono">Goal 2028</div>
+          <div class="metric-card-pill text-mono">Norma HACCP</div>
         </div>
 
-        <!-- CARD 4: Metric Bottom-Left (15kg) -->
+        <!-- CARD 4: Metric Bottom-Left (-18.2°C) -->
         <div class="sustain-card metric-card metric-bottom-left">
           <div class="metric-val-wrap">
-            <span class="metric-val-number text-mono" data-target="15">15kg</span>
+            <span class="metric-val-number text-mono">-18.2°C</span>
           </div>
           <p class="metric-val-desc">
-            of CO2 saved per one rental a day
+            Régimen continuo garantizado por sensores de telemetría Sensirion IoT
           </p>
-          <div class="metric-card-pill text-mono">Impact Metric #01</div>
+          <div class="metric-card-pill text-mono">Telemetría Activa</div>
         </div>
 
-        <!-- CARD 5: Metric Bottom-Right (55kg) -->
+        <!-- CARD 5: Metric Bottom-Right (100% Trazabilidad) -->
         <div class="sustain-card metric-card metric-bottom-right">
           <div class="metric-val-wrap">
-            <span class="metric-val-number text-mono" data-target="55">55kg</span>
+            <span class="metric-val-number text-mono">100%</span>
           </div>
           <p class="metric-val-desc">
-            of CO2 emissions from the manufacturing of a typical rental product
+            Lotes certificados con protocolo GS1-128 y custodia escrow pre-autorizada
           </p>
-          <div class="metric-card-pill text-mono">Manufacturing Delta</div>
+          <div class="metric-card-pill text-mono">Custodia Smart</div>
         </div>
 
       </div>
@@ -88,7 +79,7 @@
 
 <style>
   /* --------------------------------------------------------------------------
-     1. SUSTAINABILITY SECTION & MONUMENTAL STAGE
+     1. SUSTAINABILITY SECTION & BLUEPRINT GRID STAGE (0 PLANTS, 0 GREEN)
      -------------------------------------------------------------------------- */
   .sustainability-section {
     position: relative;
@@ -106,80 +97,68 @@
     position: relative;
   }
 
-  /* Aerial Drone Earth Canvas */
-  .sustain-aerial-canvas {
+  /* Architectural Blueprint Grid Canvas ("fondo de cuadros") */
+  .sustain-blueprint-canvas {
     position: relative;
     width: 100%;
-    min-height: 840px;
+    min-height: 820px;
     border-radius: 36px;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 24px 60px rgba(0, 71, 55, 0.12);
+    background-color: #082846;
+    box-shadow: 0 24px 60px rgba(8, 40, 70, 0.18);
   }
 
-  .sustain-bg-layer {
+  /* Blueprint Grid Pattern Layer */
+  .sustain-grid-layer {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
+    pointer-events: none;
     z-index: 1;
-  }
-
-  .sustain-aerial-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    filter: saturate(1.15) brightness(0.92);
-    transform: scale(1.03);
-    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .sustain-aerial-canvas:hover .sustain-aerial-img {
-    transform: scale(1.0);
-  }
-
-  .sustain-photo-scrim {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(0, 45, 34, 0.3) 0%, rgba(0, 71, 55, 0.6) 100%);
+    background-image: 
+      radial-gradient(circle at 50% 50%, rgba(14, 61, 107, 0.75) 0%, #082846 100%),
+      linear-gradient(rgba(56, 189, 248, 0.18) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56, 189, 248, 0.18) 1px, transparent 1px);
+    background-size: 100% 100%, 36px 36px, 36px 36px;
   }
 
   /* --------------------------------------------------------------------------
-     2. FLOATING ARCHITECTURAL FOREST GREEN CARDS
+     2. FLOATING ARCHITECTURAL SOLID NAVY CARDS (PURE SOLID COLORIMETRY)
      -------------------------------------------------------------------------- */
   .sustain-content-grid {
     position: relative;
     z-index: 3;
     width: 100%;
     max-width: 1360px;
-    min-height: 740px;
-    margin: 2rem;
+    min-height: 720px;
+    margin: 2.5rem;
     display: grid;
-    grid-template-columns: 240px 1fr 280px;
+    grid-template-columns: 260px 1fr 300px;
     grid-template-rows: auto 1fr auto;
     gap: 1.5rem;
     align-items: start;
   }
 
   .sustain-card {
-    background-color: var(--primitive-color-forest-900);
+    background-color: #061e38;
     border-radius: 24px;
     color: #ffffff;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-    border: 1px solid rgba(86, 240, 159, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.22);
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
   }
 
   .sustain-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
-    border-color: rgba(86, 240, 159, 0.25);
+    border-color: rgba(56, 189, 248, 0.4);
   }
 
-  /* CARD 1: Intro Card ("We exist to") */
+  /* CARD 1: Intro Card */
   .intro-card {
     grid-column: 1;
     grid-row: 1;
@@ -192,16 +171,19 @@
   }
 
   .intro-eyebrow {
-    color: var(--primitive-color-mint-500);
+    color: #38bdf8;
     font-size: 0.75rem;
+    font-weight: 700;
     letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: var(--nexa-font-family-mono, monospace);
   }
 
   .intro-headline {
-    font-family: var(--primitive-font-display);
-    font-size: clamp(2rem, 2.75vw, 3rem);
-    font-weight: 700;
-    line-height: 1.05;
+    font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: clamp(2rem, 2.75vw, 2.85rem);
+    font-weight: 800;
+    line-height: 1.08;
     letter-spacing: -0.03em;
     color: #ffffff;
     margin: 0;
@@ -219,9 +201,9 @@
   }
 
   .main-statement-title {
-    font-family: var(--primitive-font-display);
-    font-size: clamp(2.25rem, 4vw, 4.25rem);
-    font-weight: 700;
+    font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: clamp(2.25rem, 3.8vw, 3.85rem);
+    font-weight: 800;
     line-height: 1.05;
     letter-spacing: -0.035em;
     color: #ffffff;
@@ -229,15 +211,15 @@
   }
 
   .main-statement-body {
-    font-family: var(--primitive-font-sans);
-    font-size: clamp(1rem, 1.25vw, 1.25rem);
+    font-family: var(--nexa-font-family-body, 'Inter', sans-serif);
+    font-size: clamp(0.95rem, 1.2vw, 1.15rem);
     line-height: 1.6;
-    color: rgba(255, 251, 236, 0.85);
+    color: #cbd5e1;
     margin: 0;
     max-width: 48ch;
   }
 
-  /* CARD 3, 4, 5: Quantitative Metric Cards */
+  /* CARDS 3, 4, 5: Quantitative Metric Cards */
   .metric-card {
     display: flex;
     flex-direction: column;
@@ -249,27 +231,20 @@
   .metric-top-right {
     grid-column: 3;
     grid-row: 1;
-    width: 260px;
     align-self: start;
     margin-top: 1rem;
-    margin-left: auto;
   }
 
   .metric-bottom-left {
     grid-column: 1;
-    grid-row: 3;
-    width: 250px;
+    grid-row: 2;
     align-self: end;
-    margin-bottom: 1rem;
   }
 
   .metric-bottom-right {
     grid-column: 3;
-    grid-row: 3;
-    width: 270px;
+    grid-row: 2;
     align-self: end;
-    margin-bottom: 1rem;
-    margin-left: auto;
   }
 
   .metric-val-wrap {
@@ -279,61 +254,62 @@
   }
 
   .metric-val-number {
-    font-family: var(--primitive-font-display);
-    font-size: clamp(2.75rem, 3.8vw, 4.5rem);
+    font-family: var(--nexa-font-family-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: clamp(2.5rem, 3.5vw, 3.5rem);
     font-weight: 800;
+    color: #38bdf8;
     line-height: 1;
-    letter-spacing: -0.04em;
-    color: var(--primitive-color-mint-500);
+    letter-spacing: -0.03em;
   }
 
   .metric-val-desc {
-    font-family: var(--primitive-font-sans);
-    font-size: 0.9375rem;
-    line-height: 1.45;
-    color: rgba(255, 251, 236, 0.85);
+    font-family: var(--nexa-font-family-body, 'Inter', sans-serif);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #94a3b8;
     margin: 0;
   }
 
   .metric-card-pill {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(37, 99, 235, 0.2);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: #bae6fd;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
     align-self: flex-start;
-    font-size: 0.6875rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    padding: 0.3rem 0.65rem;
-    background: rgba(86, 240, 159, 0.12);
-    color: var(--primitive-color-mint-400);
-    border-radius: 100px;
   }
 
-  /* --------------------------------------------------------------------------
-     3. RESPONSIVE ADAPTATIONS
-     -------------------------------------------------------------------------- */
   @media (max-width: 1200px) {
     .sustain-content-grid {
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto auto;
+      grid-template-rows: auto;
+      gap: 1.25rem;
+      margin: 1.5rem;
     }
+
     .intro-card {
-      grid-column: 1;
-      grid-row: 1;
+      grid-column: 1 / -1;
+      grid-row: auto;
+      margin-top: 0;
     }
-    .metric-top-right {
-      grid-column: 2;
-      grid-row: 1;
-    }
+
     .main-statement-card {
       grid-column: 1 / -1;
-      grid-row: 2;
+      grid-row: auto;
+      padding: 2.25rem 2rem;
     }
-    .metric-bottom-left {
-      grid-column: 1;
-      grid-row: 3;
-    }
+
+    .metric-top-right,
+    .metric-bottom-left,
     .metric-bottom-right {
-      grid-column: 2;
-      grid-row: 3;
+      grid-column: auto;
+      grid-row: auto;
+      margin-top: 0;
     }
   }
 
@@ -341,23 +317,18 @@
     .sustainability-section {
       padding: 2rem 1rem;
     }
-    .sustain-aerial-canvas {
-      min-height: auto;
-      border-radius: 24px;
-    }
+
     .sustain-content-grid {
-      display: flex;
-      flex-direction: column;
-      margin: 1.5rem 1rem;
-      gap: 1.25rem;
+      grid-template-columns: 1fr;
+      margin: 1rem;
     }
-    .intro-card, .main-statement-card, .metric-card {
-      width: 100%;
-      margin: 0;
-      padding: 1.75rem 1.5rem;
+
+    .main-statement-card {
+      padding: 1.5rem;
     }
-    .main-statement-title {
-      font-size: 2.25rem;
+
+    .metric-card {
+      padding: 1.5rem;
     }
   }
 </style>

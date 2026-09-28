@@ -13,17 +13,17 @@
     <div class="blueprint-grid-mesh" aria-hidden="true"></div>
 
     <div class="brand-plane-content">
-      <!-- Top Brand Row: Transparent NX White Logo & Home Return Pill -->
+      <!-- Top Brand Row: Home Return Pill (Left) & Transparent NX White Logo (Right) -->
       <div class="brand-header-row">
-        <div class="nx-logo-mark" title="Nexa Suite">
-          <img src="/assets/nexa-nx-white.svg" alt="NX" class="nx-logo-img" />
-        </div>
-
-        <!-- Central / Top Return to Home Action -->
+        <!-- Central / Top Return to Home Action on the Left -->
         <a href="/" class="login-home-pill" title="Volver al Portal Central Nexa">
           <i class="pi pi-home" aria-hidden="true"></i>
           <span>Inicio</span>
         </a>
+
+        <div class="nx-logo-mark" title="Nexa Suite">
+          <img src="/assets/nexa-nx-white.svg" alt="NX" class="nx-logo-img" />
+        </div>
       </div>
 
       <div class="brand-hero-text">
@@ -141,12 +141,12 @@
     margin: 0 auto;
   }
 
-  /* Blueprint Grid Brand Plane with Fluid Gradient Transition */
+  /* Blueprint Grid Brand Plane with Solid Colorimetry (0 Gradients) */
   .login-brand-plane {
     position: relative;
-    background: linear-gradient(180deg, #061e38 0%, #0d3868 38%, #1d4ed8 72%, #2563eb 90%, #3b82f6 100%);
+    background: #082846;
     color: #ffffff;
-    padding: 24px 22px 34px;
+    padding: 24px 22px 32px;
     overflow: hidden;
   }
 
@@ -155,10 +155,10 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.24;
+    opacity: 0.18;
     background-image: 
-      linear-gradient(rgba(255, 255, 255, 0.22) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.22) 1px, transparent 1px);
+      linear-gradient(rgba(56, 189, 248, 0.25) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56, 189, 248, 0.25) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 
@@ -182,7 +182,7 @@
     height: 40px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-end;
     background: transparent;
   }
 
@@ -192,17 +192,17 @@
     object-fit: contain;
   }
 
-  /* Central / Top Home Navigation Pill */
+  /* Central / Top Home Navigation Pill (Now on the Left) */
   .login-home-pill {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     padding: 6px 14px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.32);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     color: #ffffff;
     font-size: 12px;
     font-weight: 700;
@@ -211,7 +211,7 @@
   }
 
   .login-home-pill:hover {
-    background: rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.22);
     transform: translateY(-1px);
   }
 
@@ -236,19 +236,19 @@
 
   .brand-subtitle {
     font-size: 13px;
-    color: #dbeafe;
+    color: #bae6fd;
     line-height: 1.4;
     font-weight: 500;
   }
 
-  /* Form Content Area Overlapping Gradient */
+  /* Form Content Area Overlapping Solid Header */
   .login-form-plane {
     position: relative;
     z-index: 3;
-    margin-top: -16px;
+    margin-top: -12px;
     background: #ffffff;
     border-radius: 24px 24px 0 0;
-    padding: 22px 22px 26px;
+    padding: 24px 22px 28px;
     display: flex;
     flex-direction: column;
     gap: 18px;

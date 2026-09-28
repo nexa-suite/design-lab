@@ -160,6 +160,10 @@
 
         <!-- 1. Rol Conductor -->
         <nav class="live-bottom-nav-interactive role-bottom-nav active-role-nav" id="role-nav-conductor" data-role="conductor" aria-label="Navegación Conductor">
+          <button type="button" class="bottom-nav-tab active" data-tab-name="Inicio" data-desc="Panel central operativo: resumen de jornada, alertas críticas y métricas de ruta">
+            <div class="tab-indicator-pill"><i class="pi pi-home"></i></div>
+            <span class="tab-label">Inicio</span>
+          </button>
           <button type="button" class="bottom-nav-tab" data-tab-name="Rutas" data-desc="Visualización de ruta satelital optimizada y tiempos de arribo a muelles">
             <div class="tab-indicator-pill"><i class="pi pi-map-marker"></i></div>
             <span class="tab-label">Rutas</span>
@@ -169,10 +173,6 @@
             <div class="tab-indicator-pill"><i class="pi pi-file-edit"></i></div>
             <span class="tab-label">Entregas</span>
             <span class="tab-badge">5</span>
-          </button>
-          <button type="button" class="bottom-nav-tab active central-home-tab" data-tab-name="Inicio" data-desc="Panel central operativo: resumen de jornada, alertas críticas y métricas de ruta">
-            <div class="tab-indicator-pill central-pill"><i class="pi pi-home"></i></div>
-            <span class="tab-label">Inicio</span>
           </button>
           <button type="button" class="bottom-nav-tab" data-tab-name="Incidencias" data-desc="Reporte de desvíos térmicos, demoras de tráfico o rechazo en rampa">
             <div class="tab-indicator-pill"><i class="pi pi-exclamation-triangle"></i></div>
@@ -186,6 +186,10 @@
 
         <!-- 2. Rol Operario Almacén -->
         <nav class="live-bottom-nav-interactive role-bottom-nav" id="role-nav-almacen" data-role="almacen" aria-label="Navegación Almacén" style="display: none;">
+          <button type="button" class="bottom-nav-tab active" data-tab-name="Inicio" data-desc="Panel central de almacén: resumen de pallets recibidos, cámaras activas y tareas FEFO">
+            <div class="tab-indicator-pill"><i class="pi pi-home"></i></div>
+            <span class="tab-label">Inicio</span>
+          </button>
           <button type="button" class="bottom-nav-tab" data-tab-name="Picking FEFO" data-desc="Rutas de recolección en racks frigoríficos ordenadas por fecha de vencimiento">
             <div class="tab-indicator-pill"><i class="pi pi-box"></i></div>
             <span class="tab-label">Picking</span>
@@ -194,10 +198,6 @@
           <button type="button" class="bottom-nav-tab" data-tab-name="Escáner Lotes" data-desc="Lector de código de barras y QR GS1-128 integrado por hardware">
             <div class="tab-indicator-pill"><i class="pi pi-qrcode"></i></div>
             <span class="tab-label">Escanear</span>
-          </button>
-          <button type="button" class="bottom-nav-tab active central-home-tab" data-tab-name="Inicio" data-desc="Panel central de almacén: resumen de pallets recibidos, cámaras activas y tareas FEFO">
-            <div class="tab-indicator-pill central-pill"><i class="pi pi-home"></i></div>
-            <span class="tab-label">Inicio</span>
           </button>
           <button type="button" class="bottom-nav-tab" data-tab-name="Ubicaciones" data-desc="Mapa de pasillos, niveles y slots de congelado en cámara (-18°C)">
             <div class="tab-indicator-pill"><i class="pi pi-sitemap"></i></div>
@@ -212,6 +212,10 @@
 
         <!-- 3. Rol Supervisor Despacho -->
         <nav class="live-bottom-nav-interactive role-bottom-nav" id="role-nav-despacho" data-role="despacho" aria-label="Navegación Despacho" style="display: none;">
+          <button type="button" class="bottom-nav-tab active" data-tab-name="Inicio" data-desc="Centro de control de patio: balance general de muelles, sellos colocados y tiempos de ciclo">
+            <div class="tab-indicator-pill"><i class="pi pi-home"></i></div>
+            <span class="tab-label">Inicio</span>
+          </button>
           <button type="button" class="bottom-nav-tab" data-tab-name="Bahías 1-8" data-desc="Asignación y estado en vivo de rampas de carga de camiones frigoríficos">
             <div class="tab-indicator-pill"><i class="pi pi-truck"></i></div>
             <span class="tab-label">Bahías</span>
@@ -220,10 +224,6 @@
           <button type="button" class="bottom-nav-tab" data-tab-name="Kanban Patio" data-desc="Tablero de flujo: camiones en espera, cargando, pesaje y despachados">
             <div class="tab-indicator-pill"><i class="pi pi-th-large"></i></div>
             <span class="tab-label">Kanban</span>
-          </button>
-          <button type="button" class="bottom-nav-tab active central-home-tab" data-tab-name="Inicio" data-desc="Centro de control de patio: balance general de muelles, sellos colocados y tiempos de ciclo">
-            <div class="tab-indicator-pill central-pill"><i class="pi pi-home"></i></div>
-            <span class="tab-label">Inicio</span>
           </button>
           <button type="button" class="bottom-nav-tab" data-tab-name="Manifiestos" data-desc="Guías electrónicas de remisión y control de precintos de seguridad">
             <div class="tab-indicator-pill"><i class="pi pi-file"></i></div>
@@ -237,6 +237,10 @@
 
         <!-- 4. Rol Inspector Maquinaria -->
         <nav class="live-bottom-nav-interactive role-bottom-nav" id="role-nav-inspector" data-role="inspector" aria-label="Navegación Inspector" style="display: none;">
+          <button type="button" class="bottom-nav-tab active" data-tab-name="Inicio" data-desc="Panel de certificación y seguridad: flota operativa, equipos en cuarentena e inspecciones del día">
+            <div class="tab-indicator-pill"><i class="pi pi-home"></i></div>
+            <span class="tab-label">Inicio</span>
+          </button>
           <button type="button" class="bottom-nav-tab" data-tab-name="Checklist ISO" data-desc="Inspección pre-operacional obligatoria ISO 3691 de montacargas">
             <div class="tab-indicator-pill"><i class="pi pi-check-square"></i></div>
             <span class="tab-label">Checklist</span>
@@ -245,10 +249,6 @@
           <button type="button" class="bottom-nav-tab" data-tab-name="Equipos" data-desc="Inventario de apiladores eléctricos, transpaletas y baterías de litio">
             <div class="tab-indicator-pill"><i class="pi pi-wrench"></i></div>
             <span class="tab-label">Equipos</span>
-          </button>
-          <button type="button" class="bottom-nav-tab active central-home-tab" data-tab-name="Inicio" data-desc="Panel de certificación y seguridad: flota operativa, equipos en cuarentena e inspecciones del día">
-            <div class="tab-indicator-pill central-pill"><i class="pi pi-home"></i></div>
-            <span class="tab-label">Inicio</span>
           </button>
           <button type="button" class="bottom-nav-tab" data-tab-name="Reporte Fallas" data-desc="Bloqueo preventivo de equipo e informe de fallas hidráulicas o de frenos">
             <div class="tab-indicator-pill"><i class="pi pi-shield"></i></div>
@@ -262,6 +262,10 @@
 
         <!-- 5. Rol Comprador B2B -->
         <nav class="live-bottom-nav-interactive role-bottom-nav" id="role-nav-comprador" data-role="comprador" aria-label="Navegación Comprador" style="display: none;">
+          <button type="button" class="bottom-nav-tab active" data-tab-name="Inicio" data-desc="Portal mayorista B2B: compras frecuentes, estado de despacho y línea de crédito">
+            <div class="tab-indicator-pill"><i class="pi pi-home"></i></div>
+            <span class="tab-label">Inicio</span>
+          </button>
           <button type="button" class="bottom-nav-tab" data-tab-name="Catálogo B2B" data-desc="Precios por volumen escalonado de mariscos y pescados congelados">
             <div class="tab-indicator-pill"><i class="pi pi-shopping-bag"></i></div>
             <span class="tab-label">Catálogo</span>
@@ -270,10 +274,6 @@
             <div class="tab-indicator-pill"><i class="pi pi-list"></i></div>
             <span class="tab-label">Pedidos</span>
             <span class="tab-badge">3</span>
-          </button>
-          <button type="button" class="bottom-nav-tab active central-home-tab" data-tab-name="Inicio" data-desc="Portal mayorista B2B: compras frecuentes, estado de despacho y línea de crédito">
-            <div class="tab-indicator-pill central-pill"><i class="pi pi-home"></i></div>
-            <span class="tab-label">Inicio</span>
           </button>
           <button type="button" class="bottom-nav-tab" data-tab-name="Tracking Frío" data-desc="Temperatura de contenedor en vivo durante el transporte (-18.2°C)">
             <div class="tab-indicator-pill"><i class="pi pi-compass"></i></div>
