@@ -17,16 +17,16 @@
           <path d="M 0 36 A 36 36 0 0 1 36 0 L 1092 0 A 36 36 0 0 1 1128 36 L 1128 44 A 36 36 0 0 0 1164 80 L 1404 80 A 36 36 0 0 1 1440 116 L 1440 734 A 36 36 0 0 1 1404 770 L 36 770 A 36 36 0 0 1 0 734 Z" />
         </clipPath>
         <radialGradient id="insurance-canvas-glow" cx="40%" cy="40%" r="60%">
-          <stop offset="0%" stop-color="#005844" stop-opacity="0.4" />
-          <stop offset="100%" stop-color="#004737" stop-opacity="0" />
+          <stop offset="0%" stop-color="#0e3d6b" stop-opacity="0.4" />
+          <stop offset="100%" stop-color="#082846" stop-opacity="0" />
         </radialGradient>
       </defs>
       
-      <!-- Forest Green Base Silhouette -->
+      <!-- Nexa Deep Blue Base Silhouette -->
       <path 
         class="insurance-silhouette-path" 
         d="M 0 36 A 36 36 0 0 1 36 0 L 1092 0 A 36 36 0 0 1 1128 36 L 1128 44 A 36 36 0 0 0 1164 80 L 1404 80 A 36 36 0 0 1 1440 116 L 1440 734 A 36 36 0 0 1 1404 770 L 36 770 A 36 36 0 0 1 0 734 Z" 
-        fill="#004737"
+        fill="#082846"
       />
       <!-- Ambient Radial Backlight Glow within the frame -->
       <rect x="0" y="0" width="1440" height="770" fill="url(#insurance-canvas-glow)" clip-path="url(#insurance-clip)" />
@@ -42,7 +42,7 @@
         <h2 id="insurance-heading" class="insurance-title">
           Rethink just how safe<br />
           renting can be <span class="text-mint">with</span><br />
-          <span class="text-mint">Flecto.</span>
+          <span class="text-mint">Nexa.</span>
         </h2>
 
         <p class="insurance-description">
@@ -56,7 +56,7 @@
         <div class="protection-toggle-plate" id="insurance-protection-toggle-card">
           <div class="protection-plate-header">
             <div class="protection-shield-badge">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#57f09e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                 <polyline points="9 12 11 14 15 10"/>
               </svg>
@@ -120,8 +120,8 @@
           <div class="pricing-icon-bubble" aria-hidden="true">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
               <path d="M 6 2 H 18 A 4 4 0 0 1 22 6 V 16 A 4 4 0 0 1 18 20 H 9 L 2 23 V 6 A 4 4 0 0 1 6 2 Z" fill="#ffffff"/>
-              <circle cx="12" cy="7.5" r="1.3" fill="#004737"/>
-              <rect x="10.8" y="10.5" width="2.4" height="5.5" rx="1.2" fill="#004737"/>
+              <circle cx="12" cy="7.5" r="1.3" fill="#082846"/>
+              <rect x="10.8" y="10.5" width="2.4" height="5.5" rx="1.2" fill="#082846"/>
             </svg>
           </div>
           <div class="pricing-text-col">
@@ -269,9 +269,9 @@
   }
 
   .insurance-cta-btn:hover {
-    background-color: #6effb0;
+    background-color: #60a5fa;
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(86, 240, 159, 0.3);
+    box-shadow: 0 12px 24px rgba(56, 189, 248, 0.35);
   }
 
   .insurance-cta-btn:focus-visible {
@@ -435,7 +435,7 @@
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.06em;
-    color: var(--primitive-color-mint-500, #57f09e);
+    color: var(--primitive-color-mint-500, #38bdf8);
     transition: color 0.25s ease;
   }
 
@@ -453,14 +453,14 @@
     font-family: var(--primitive-font-mono, monospace);
     font-size: 0.6875rem;
     font-weight: 700;
-    color: var(--primitive-color-mint-500, #57f09e);
+    color: var(--primitive-color-mint-500, #38bdf8);
     transition: color 0.25s ease;
   }
 
   .switch-track {
     width: 44px;
     height: 24px;
-    background: var(--primitive-color-mint-500, #57f09e);
+    background: var(--primitive-color-mint-500, #38bdf8);
     border-radius: 9999px;
     padding: 2px;
     display: flex;
@@ -471,7 +471,7 @@
   .switch-knob {
     width: 20px;
     height: 20px;
-    background: #004737;
+    background: #082846;
     border-radius: 50%;
     transform: translateX(20px);
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease;
@@ -524,7 +524,7 @@
     font-family: var(--primitive-font-mono, monospace);
     font-size: 1.125rem;
     font-weight: 700;
-    color: var(--primitive-color-mint-500, #57f09e);
+    color: var(--primitive-color-mint-500, #38bdf8);
     transition: color 0.25s ease;
   }
 
@@ -563,7 +563,7 @@
 
       if (statusTag) {
         statusTag.textContent = isProtected ? '100% ALL-RISK SHIELD' : 'STANDARD FLEET TIER';
-        statusTag.style.color = isProtected ? 'var(--primitive-color-mint-500, #57f09e)' : '#fcd34d';
+        statusTag.style.color = isProtected ? 'var(--primitive-color-mint-500, #38bdf8)' : '#fcd34d';
       }
 
       if (headlineText) {
@@ -580,7 +580,7 @@
 
       if (metricCoverage) {
         metricCoverage.textContent = isProtected ? '100%' : '80%';
-        metricCoverage.style.color = isProtected ? 'var(--primitive-color-mint-500, #57f09e)' : '#fcd34d';
+        metricCoverage.style.color = isProtected ? 'var(--primitive-color-mint-500, #38bdf8)' : '#fcd34d';
       }
 
       if (metricDeductible) {

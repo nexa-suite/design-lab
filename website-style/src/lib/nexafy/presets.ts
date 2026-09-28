@@ -119,8 +119,8 @@ export const NEXAFY_PRESETS: Record<string, NexafyShapeConfig> = {
       filletRadius: 36
     },
     colors: {
-      background: '#052018',
-      mintAccent: '#57f09e',
+      background: '#05192d',
+      mintAccent: '#38bdf8',
       surface: '#ffffff'
     }
   },
@@ -149,8 +149,8 @@ export const NEXAFY_PRESETS: Record<string, NexafyShapeConfig> = {
       filletRadius: 32
     },
     colors: {
-      background: '#033a2e',
-      mintAccent: '#57f09e',
+      background: '#082846',
+      mintAccent: '#38bdf8',
       surface: '#ffffff'
     }
   },
@@ -178,8 +178,8 @@ export const NEXAFY_PRESETS: Record<string, NexafyShapeConfig> = {
       filletRadius: 36
     },
     colors: {
-      background: '#004737',
-      mintAccent: '#57f09e',
+      background: '#082846',
+      mintAccent: '#38bdf8',
       surface: '#ffffff'
     }
   },
@@ -207,8 +207,8 @@ export const NEXAFY_PRESETS: Record<string, NexafyShapeConfig> = {
     },
     colors: {
       background: '#FDFAE7',
-      mintAccent: '#3dd598',
-      surface: '#004737'
+      mintAccent: '#2563eb',
+      surface: '#082846'
     }
   },
 
@@ -236,8 +236,8 @@ export const NEXAFY_PRESETS: Record<string, NexafyShapeConfig> = {
     },
     colors: {
       background: '#FDFAE7',
-      mintAccent: '#3dd598',
-      surface: '#004737'
+      mintAccent: '#2563eb',
+      surface: '#082846'
     }
   }
 };

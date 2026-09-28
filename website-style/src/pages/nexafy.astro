@@ -56,12 +56,17 @@ import Footer from '../components/footer/Footer.astro';
 
       html {
         scroll-behavior: smooth;
-        background-color: #082846;
+        background-color: #f8fafc;
       }
 
       body {
-        background-color: #082846;
-        color: #ffffff;
+        background-color: #f8fafc;
+        background-image: 
+          radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.06) 0%, transparent 60%),
+          linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
+        background-size: 100% 100%, 36px 36px, 36px 36px;
+        color: #0f172a;
         font-family: var(--nexa-font-family-body, 'Inter', sans-serif);
         overflow-x: clip;
         position: relative;
@@ -259,10 +264,10 @@ import Footer from '../components/footer/Footer.astro';
       <!-- Scene 07: Dual Owner / Business Mode Switcher -->
       <OwnerSwitcher />
 
-      <!-- Scene 08: Latest News Editorial White Strip (Go Green, Smartphone, Balloon) -->
+      <!-- Scene 08: Latest News Editorial White Strip (Nexa Cold, Smartphone, Balloon) -->
       <NewsSection />
 
-      <!-- Scene 09: Rental Community Obsidian Green (#052018) Cascade Testimonials -->
+      <!-- Scene 09: Rental Community Obsidian Deep Navy (#05192d) Cascade Testimonials -->
       <Testimonials />
     </main>
 

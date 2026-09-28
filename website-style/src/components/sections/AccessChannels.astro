@@ -46,17 +46,17 @@
         <div class="market-tile-header">
           <div class="market-brand-badge">
             <img src="/assets/nexa-nx-white.svg" alt="NX" width="34" height="34" class="market-nexa-logo" />
-            <span class="market-title-text">Nexa Marketplace</span>
+            <span class="market-title-text">Nexa Marketplace & Despachos</span>
           </div>
           <p class="market-lead-desc">
-            Publica y comercializa lotes perecibles en un ecosistema mayorista interconectado en vivo con muelles, transportistas de frío y compradores corporativos.
+            Gestiona la asignación de muelle y despacha lotes perecibles en un tablero interconectado en vivo con transportistas de frío, trazabilidad FEFO y custodia escrow.
           </p>
           <div class="market-cta-wrap">
-            <a href="#book-demo" class="bento-pill-btn">Explorar Catálogo B2B</a>
+            <a href="#book-demo" class="bento-pill-btn">Explorar Tablero de Despachos</a>
           </div>
         </div>
 
-        <!-- Nexa Marketplace Catalog UI Preview -->
+        <!-- Nexa Real Dispatch Board UI Preview (Authentic Pattern from Nexa Web Style) -->
         <div class="market-ui-preview" aria-hidden="true">
           <!-- Browser Mockup Top Bar -->
           <div class="market-top-searchbar">
@@ -72,161 +72,138 @@
                   <circle cx="11" cy="11" r="8"/>
                   <line x1="21" y1="21" x2="16.65" y2="16.65"/>
                 </svg>
-                <span>pescados y mariscos congelados</span>
+                <span>DSP-204 · Terminal Pesquero Callao</span>
               </div>
             </div>
             
             <div class="market-browser-tags">
-              <span class="browser-tag">Puerto Callao</span>
-              <span class="browser-tag">Lotes FEFO</span>
-              <span class="browser-tag tag-muted">CADENA DE FRÍO</span>
-              <span class="browser-tag tag-muted">GS1 CERTIFICADO</span>
+              <span class="browser-tag tag-active">Tablero Despachos</span>
+              <span class="browser-tag tag-cyan">4 En Tránsito</span>
+              <span class="browser-tag tag-muted">Sensirion -18.2°C</span>
+              <span class="browser-tag tag-muted">Escrow 100%</span>
               <span class="browser-avatar-circle"></span>
             </div>
           </div>
 
-          <!-- Split Catalog View: Items Grid (Left) + Ports Map (Right) -->
-          <div class="market-catalog-split">
-            <!-- Left: Catalog Items Grid (2 Columns x 4 Rows) -->
-            <div class="catalog-items-subgrid">
-              
-              <div class="cat-item-card">
-                <div class="cat-img-box">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
-                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-                  </svg>
+          <!-- Nexa Dispatch Board Kanban Columns -->
+          <div class="dispatch-board-preview-grid">
+            <!-- Column 1: Orders -->
+            <div class="dispatch-col">
+              <div class="dispatch-col-header">
+                <span class="col-title">Órdenes</span>
+                <span class="col-count">1</span>
+              </div>
+              <div class="dispatch-card-item card-selected">
+                <div class="card-top-row">
+                  <span class="card-id-badge">DSP-204</span>
+                  <span class="status-chip chip-info">Listo revisión</span>
                 </div>
-                <div class="cat-item-info">
-                  <span class="cat-name">Salmón Salar Congelado</span>
-                  <strong class="cat-price">$14.50<small>/kg</small></strong>
-                  <span class="cat-loc">Muelle Callao · -18°C</span>
+                <strong class="card-buyer">La Cava Fría SAC</strong>
+                <span class="card-dest">Callao ➔ Lima Norte</span>
+                <div class="card-meta-row">
+                  <span class="meta-item">Lote FEFO L-8841</span>
+                  <span class="meta-item text-cyan">500 kg</span>
+                </div>
+                <div class="card-action-hint">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                  <span>Revisar documentos</span>
                 </div>
               </div>
-
-              <div class="cat-item-card">
-                <div class="cat-img-box">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
-                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-                  </svg>
-                </div>
-                <div class="cat-item-info">
-                  <span class="cat-name">Trucha Andina Eviscerada</span>
-                  <strong class="cat-price">$9.20<small>/kg</small></strong>
-                  <span class="cat-loc">Puno · Frío Controlado</span>
-                </div>
-              </div>
-
-              <div class="cat-item-card">
-                <div class="cat-img-box">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
-                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-                  </svg>
-                </div>
-                <div class="cat-item-info">
-                  <span class="cat-name">Filete Merluza Congelada</span>
-                  <strong class="cat-price">$6.80<small>/kg</small></strong>
-                  <span class="cat-loc">Paita · Planta 02</span>
-                </div>
-              </div>
-
-              <div class="cat-item-card">
-                <div class="cat-img-box">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
-                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-                  </svg>
-                </div>
-                <div class="cat-item-info">
-                  <span class="cat-name">Langostino IQF Cola</span>
-                  <strong class="cat-price">$18.00<small>/kg</small></strong>
-                  <span class="cat-loc">Tumbes · Frío -20°C</span>
-                </div>
-              </div>
-
-              <div class="cat-item-card">
-                <div class="cat-img-box">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
-                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-                  </svg>
-                </div>
-                <div class="cat-item-info">
-                  <span class="cat-name">Atún Aleta Amarilla Lomo</span>
-                  <strong class="cat-price">$22.00<small>/kg</small></strong>
-                  <span class="cat-loc">Chimbote · Certificado</span>
-                </div>
-              </div>
-
-              <div class="cat-item-card">
-                <div class="cat-img-box">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
-                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-                  </svg>
-                </div>
-                <div class="cat-item-info">
-                  <span class="cat-name">Pulpo Entero Congelado</span>
-                  <strong class="cat-price">$12.50<small>/kg</small></strong>
-                  <span class="cat-loc">Ilo · Bahía Sur</span>
-                </div>
-              </div>
-
-              <div class="cat-item-card">
-                <div class="cat-img-box">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
-                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-                  </svg>
-                </div>
-                <div class="cat-item-info">
-                  <span class="cat-name">Conchas de Abanico Tallo</span>
-                  <strong class="cat-price">$24.00<small>/kg</small></strong>
-                  <span class="cat-loc">Sechura · Lote Premium</span>
-                </div>
-              </div>
-
-              <div class="cat-item-card">
-                <div class="cat-img-box">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
-                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-                  </svg>
-                </div>
-                <div class="cat-item-info">
-                  <span class="cat-name">Calamar Gigante Trozado</span>
-                  <strong class="cat-price">$4.80<small>/kg</small></strong>
-                  <span class="cat-loc">Paita · Exportación</span>
-                </div>
-              </div>
-
             </div>
 
-            <!-- Right: Stylized Cold Ports Map with Real-time Hub Pins -->
-            <div class="catalog-map-panel">
-              <svg viewBox="0 0 200 200" class="europe-map-svg">
-                <!-- Coastal route line -->
-                <path d="M 50 20 Q 70 70 85 110 T 115 160 T 150 190" fill="none" stroke="rgba(56, 189, 248, 0.35)" stroke-width="2" stroke-dasharray="4 3"/>
-                
-                <!-- Regional Hub Labels -->
-                <text x="35" y="45" font-size="8" font-family="sans-serif" fill="#38bdf8" font-weight="700">Paita (-18°)</text>
-                <text x="50" y="95" font-size="8" font-family="sans-serif" fill="#38bdf8" font-weight="700">Chimbote (-20°)</text>
-                <text x="95" y="130" font-size="9" font-family="sans-serif" fill="#ffffff" font-weight="800">Callao (Hub)</text>
-                <text x="125" y="175" font-size="8" font-family="sans-serif" fill="#38bdf8" font-weight="700">Ilo (-18°)</text>
-                
-                <!-- Price Pins -->
-                <g class="map-pin" transform="translate(90, 115)">
-                  <rect x="-18" y="-12" width="36" height="15" rx="6" fill="#2563eb"/>
-                  <text x="0" y="-2" font-size="8" font-family="monospace" fill="#ffffff" font-weight="700" text-anchor="middle">$14.50</text>
-                  <circle cx="0" cy="5" r="2.5" fill="#38bdf8"/>
-                </g>
+            <!-- Column 2: Preparation -->
+            <div class="dispatch-col">
+              <div class="dispatch-col-header">
+                <span class="col-title">En Preparación</span>
+                <span class="col-count">1</span>
+              </div>
+              <div class="dispatch-card-item">
+                <div class="card-top-row">
+                  <span class="card-id-badge">DSP-198</span>
+                  <span class="status-chip chip-warning">Checklist</span>
+                </div>
+                <strong class="card-buyer">Andino Food Service</strong>
+                <span class="card-dest">Muelle Rampa 02</span>
+                <div class="card-meta-row">
+                  <span class="meta-item">Pallet P-102</span>
+                  <span class="meta-item text-cyan">-19.0°C</span>
+                </div>
+                <div class="card-action-hint">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                  <span>Validar precintos</span>
+                </div>
+              </div>
+            </div>
 
-                <g class="map-pin" transform="translate(60, 35)">
-                  <rect x="-16" y="-12" width="32" height="15" rx="6" fill="#1e3a8a"/>
-                  <text x="0" y="-2" font-size="8" font-family="monospace" fill="#38bdf8" font-weight="700" text-anchor="middle">$6.80</text>
-                  <circle cx="0" cy="5" r="2.5" fill="#38bdf8"/>
-                </g>
+            <!-- Column 3: Distribution -->
+            <div class="dispatch-col">
+              <div class="dispatch-col-header">
+                <span class="col-title">En Distribución</span>
+                <span class="col-count">1</span>
+              </div>
+              <div class="dispatch-card-item card-active-glow">
+                <div class="card-top-row">
+                  <span class="card-id-badge">DSP-191</span>
+                  <span class="status-chip chip-active">GPS Tránsito</span>
+                </div>
+                <strong class="card-buyer">Frío Norte SAC</strong>
+                <span class="card-dest">Lima ➔ Chiclayo 1N</span>
+                <div class="card-meta-row">
+                  <span class="meta-item">Sensirion IoT OK</span>
+                  <span class="meta-item text-cyan">-18.4°C</span>
+                </div>
+                <div class="card-action-hint">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                  <span>Telemetría en vivo</span>
+                </div>
+              </div>
+            </div>
 
-                <g class="map-pin" transform="translate(130, 160)">
-                  <rect x="-16" y="-12" width="32" height="15" rx="6" fill="#1e3a8a"/>
-                  <text x="0" y="-2" font-size="8" font-family="monospace" fill="#38bdf8" font-weight="700" text-anchor="middle">$12.50</text>
-                  <circle cx="0" cy="5" r="2.5" fill="#38bdf8"/>
-                </g>
-              </svg>
+            <!-- Column 4: Delivered -->
+            <div class="dispatch-col">
+              <div class="dispatch-col-header">
+                <span class="col-title">Entregado</span>
+                <span class="col-count">1</span>
+              </div>
+              <div class="dispatch-card-item">
+                <div class="card-top-row">
+                  <span class="card-id-badge">DSP-183</span>
+                  <span class="status-chip chip-success-blue">Conforme</span>
+                </div>
+                <strong class="card-buyer">Mercado Central B2B</strong>
+                <span class="card-dest">Lima Sur · Rampa 01</span>
+                <div class="card-meta-row">
+                  <span class="meta-item">Escrow liberado</span>
+                  <span class="meta-item text-cyan">GS1-128</span>
+                </div>
+                <div class="card-action-hint">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                  <span>Ver acta digital</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accessible Movement Proof Strip -->
+          <div class="dispatch-proof-strip">
+            <div class="proof-step">
+              <span class="proof-label">Origen</span>
+              <span class="proof-val">Terminal Callao · Muelle 04</span>
+            </div>
+            <div class="proof-divider">➔</div>
+            <div class="proof-step">
+              <span class="proof-label">Destino</span>
+              <span class="proof-val">Lima Norte · Rampa Fría</span>
+            </div>
+            <div class="proof-divider">➔</div>
+            <div class="proof-step">
+              <span class="proof-label">Telemetría Sensirion</span>
+              <span class="proof-val text-cyan">-18.2°C Continuo</span>
+            </div>
+            <div class="proof-divider">➔</div>
+            <div class="proof-step">
+              <span class="proof-label">Smart Escrow</span>
+              <span class="proof-val text-blue">$3,450.00 Pre-autorizado</span>
             </div>
           </div>
         </div>
@@ -609,82 +586,208 @@
     background: #2563eb;
   }
 
-  .market-catalog-split {
+  /* Dispatch Board Preview (Real Pattern from Nexa Web Style) */
+  .dispatch-board-preview-grid {
     display: grid;
-    grid-template-columns: 1.6fr 1fr;
-    gap: 1rem;
-  }
-
-  .catalog-items-subgrid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     gap: 0.65rem;
   }
 
-  .cat-item-card {
-    background: #0f2742;
-    border: 1px solid rgba(56, 189, 248, 0.14);
-    border-radius: 10px;
-    padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
+  @media (max-width: 900px) {
+    .dispatch-board-preview-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
-  .cat-img-box {
-    height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .dispatch-col {
     background: #081d33;
-    border-radius: 6px;
-  }
-
-  .cat-item-info {
+    border: 1px solid rgba(56, 189, 248, 0.12);
+    border-radius: 12px;
+    padding: 0.65rem;
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
   }
 
-  .cat-name {
+  .dispatch-col-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 0.6875rem;
-    font-weight: 600;
-    color: #e2e8f0;
+    font-weight: 700;
+    color: #94a3b8;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+  }
+
+  .col-count {
+    background: rgba(37, 99, 235, 0.25);
+    color: #38bdf8;
+    padding: 0.1rem 0.4rem;
+    border-radius: 999px;
+    font-size: 0.625rem;
+  }
+
+  .dispatch-card-item {
+    background: #0f2742;
+    border: 1px solid rgba(56, 189, 248, 0.18);
+    border-radius: 9px;
+    padding: 0.65rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .dispatch-card-item.card-selected {
+    border-color: #38bdf8;
+    background: rgba(15, 39, 66, 0.95);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.18);
+  }
+
+  .dispatch-card-item.card-active-glow {
+    border-color: #2563eb;
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.25);
+  }
+
+  .card-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-id-badge {
+    font-family: var(--primitive-font-mono, monospace);
+    font-size: 0.625rem;
+    font-weight: 800;
+    color: #38bdf8;
+    letter-spacing: 0.05em;
+  }
+
+  .status-chip {
+    font-size: 0.5625rem;
+    font-weight: 700;
+    padding: 0.15rem 0.45rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .chip-info {
+    background: rgba(37, 99, 235, 0.2);
+    color: #93c5fd;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+  }
+
+  .chip-warning {
+    background: rgba(245, 158, 11, 0.18);
+    color: #fcd34d;
+    border: 1px solid rgba(245, 158, 11, 0.35);
+  }
+
+  .chip-active {
+    background: rgba(56, 189, 248, 0.2);
+    color: #38bdf8;
+    border: 1px solid #38bdf8;
+  }
+
+  .chip-success-blue {
+    background: rgba(37, 99, 235, 0.25);
+    color: #bae6fd;
+    border: 1px solid rgba(186, 230, 253, 0.4);
+  }
+
+  .card-buyer {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #ffffff;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .cat-price {
-    font-size: 0.8125rem;
-    font-weight: 700;
-    color: #38bdf8;
-  }
-
-  .cat-price small {
+  .card-dest {
     font-size: 0.625rem;
-    font-weight: 400;
     color: #94a3b8;
   }
 
-  .cat-loc {
+  .card-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 0.5875rem;
     color: #64748b;
+    padding-top: 0.2rem;
+    border-top: 1px dashed rgba(56, 189, 248, 0.12);
   }
 
-  .catalog-map-panel {
-    background: #081d33;
-    border: 1px solid rgba(56, 189, 248, 0.12);
-    border-radius: 14px;
+  .card-action-hint {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
+    gap: 0.25rem;
+    font-size: 0.5875rem;
+    font-weight: 600;
+    color: #38bdf8;
+    margin-top: 0.15rem;
   }
 
-  .europe-map-svg {
-    width: 100%;
-    height: 100%;
-    max-height: 160px;
+  /* Movement Proof Strip */
+  .dispatch-proof-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #061629;
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    border-radius: 10px;
+    padding: 0.5rem 0.85rem;
+    font-size: 0.625rem;
+  }
+
+  .proof-step {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .proof-label {
+    font-size: 0.53125rem;
+    text-transform: uppercase;
+    color: #64748b;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+
+  .proof-val {
+    font-weight: 600;
+    color: #e2e8f0;
+  }
+
+  .proof-divider {
+    color: rgba(56, 189, 248, 0.4);
+    font-weight: 800;
+    font-size: 0.75rem;
+  }
+
+  .text-cyan {
+    color: #38bdf8;
+  }
+
+  .text-blue {
+    color: #60a5fa;
+  }
+
+  .tag-cyan {
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.1);
+    padding: 0.15rem 0.45rem;
+    border-radius: 999px;
+  }
+
+  .tag-active {
+    color: #ffffff;
+    background: #2563eb;
+    padding: 0.15rem 0.45rem;
+    border-radius: 999px;
   }
 
   /* --------------------------------------------------------------------------

@@ -187,6 +187,10 @@ function initHeroAnimation() {
     });
     const markEl = document.querySelector<SVGPathElement>('.line-flecto-mark');
     if (markEl) gsap.set(markEl, { opacity: 1, scale: 1 });
+    const centerHubEl = document.getElementById('circuit-center-hub');
+    if (centerHubEl) gsap.set(centerHubEl, { opacity: 1, scale: 1 });
+    const destNodeEl = document.querySelector('.circuit-dest-node');
+    if (destNodeEl) gsap.set(destNodeEl, { opacity: 1, scale: 1 });
     if (pipeAccent) gsap.set(pipeAccent, { opacity: 1 });
     badges.forEach(b => gsap.set(b, { scale: 1, opacity: 1 }));
     cards.forEach(c => gsap.set(c, { scale: 1, opacity: 1 }));
@@ -247,6 +251,7 @@ function initHeroAnimation() {
     store: '<svg class="guarantee-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>',
     globe: '<svg class="guarantee-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>',
     lock: '<svg class="guarantee-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>',
+    eye: '<svg class="guarantee-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>',
   };
 
   // 3. Master Forensic Sequence Timeline (Synchronized with video extraction)
@@ -327,8 +332,16 @@ function initHeroAnimation() {
     }, ch1.TRUNK_DRAW.start);
   }
 
-  // Phase 7 (4.50s - 6.00s): Modular logo mark reveals
-  if (mark) {
+  // Phase 7 (4.50s - 6.00s): Nexa Core Bus reveals
+  const centerHub = document.getElementById('circuit-center-hub');
+  if (centerHub) {
+    masterTl.to(centerHub, {
+      opacity: 1,
+      scale: 1,
+      duration: ch1.MODULAR_MARK_ASSEMBLE.duration,
+      ease: 'power2.out',
+    }, ch1.MODULAR_MARK_ASSEMBLE.start);
+  } else if (mark) {
     masterTl.to(mark, {
       opacity: 1,
       scale: 1,
@@ -337,65 +350,53 @@ function initHeroAnimation() {
     }, ch1.MODULAR_MARK_ASSEMBLE.start);
   }
 
-  // Phase 8: Channel arrival sequence matching forensic timing:
+  // Phase 8: Operational Cold-Chain Station Arrival Sequence:
   const lineStore = document.querySelector<SVGPathElement>('.line-store');
-  const badgeStore = document.querySelector<HTMLElement>('.badge-store');
   const cardStore = document.querySelector<HTMLElement>('.card-store');
   const lineEmail = document.querySelector<SVGPathElement>('.line-email');
-  const badgeEmail = document.querySelector<HTMLElement>('.badge-email');
   const cardEmail = document.querySelector<HTMLElement>('.card-email');
   const lineOnline = document.querySelector<SVGPathElement>('.line-online');
-  const badgeOnline = document.querySelector<HTMLElement>('.badge-online');
   const cardOnline = document.querySelector<HTMLElement>('.card-online');
   const lineShield = document.querySelector<SVGPathElement>('.line-shield');
-  const badgeShield = document.querySelector<HTMLElement>('.badge-shield');
+  const destNode = document.querySelector<HTMLElement>('.circuit-dest-node');
 
-  // 1. Customer Inquiry Arrives (~6.10s)
-  if (lineEmail) {
-    masterTl.to(lineEmail, { opacity: 1, strokeDashoffset: 0, duration: ch1.CARDS.INQUIRY.duration, ease: 'power1.out' }, ch1.CARDS.INQUIRY.lineStart);
-  }
-  if (badgeEmail) {
-    masterTl.to(badgeEmail, { scale: 1, opacity: 1, duration: 0.25, ease: 'power2.out' }, ch1.CARDS.INQUIRY.cardStart);
-  }
-  if (cardEmail) {
-    masterTl.to(cardEmail, { scale: 1, opacity: 1, duration: 0.4, ease: 'power2.out' }, ch1.CARDS.INQUIRY.cardStart);
-  }
-  masterTl.add(() => setTicker('Customers can email you directly or book in Physical Stores', icons.email), ch1.CARDS.INQUIRY.cardStart);
-
-  // 2. Physical Store POS Arrives (~7.67s)
+  // 1. Station 01: Despacho en Bahía Arrives (~6.10s)
   if (lineStore) {
-    masterTl.to(lineStore, { opacity: 1, strokeDashoffset: 0, duration: ch1.CARDS.PHYSICAL_STORE.duration, ease: 'power1.out' }, ch1.CARDS.PHYSICAL_STORE.lineStart);
-  }
-  if (badgeStore) {
-    masterTl.to(badgeStore, { scale: 1, opacity: 1, duration: 0.25, ease: 'power2.out' }, ch1.CARDS.PHYSICAL_STORE.cardStart);
+    masterTl.to(lineStore, { opacity: 1, strokeDashoffset: 0, duration: ch1.CARDS.INQUIRY.duration, ease: 'power1.out' }, ch1.CARDS.INQUIRY.lineStart);
   }
   if (cardStore) {
-    masterTl.to(cardStore, { scale: 1, opacity: 1, duration: 0.4, ease: 'power2.out' }, ch1.CARDS.PHYSICAL_STORE.cardStart);
+    masterTl.to(cardStore, { scale: 1, opacity: 1, duration: 0.4, ease: 'power2.out' }, ch1.CARDS.INQUIRY.cardStart);
   }
+  masterTl.add(() => setTicker('Estación 01: Muelle Callao · Rampa 04 despachando lote FEFO L-8841', icons.email), ch1.CARDS.INQUIRY.cardStart);
 
-  // 3. Online Store Channel Arrives (~10.02s) — CORRECTED from premature 7.4s!
+  // 2. Station 02: Telemetría Sensirion IoT Arrives (~7.67s)
+  if (lineEmail) {
+    masterTl.to(lineEmail, { opacity: 1, strokeDashoffset: 0, duration: ch1.CARDS.PHYSICAL_STORE.duration, ease: 'power1.out' }, ch1.CARDS.PHYSICAL_STORE.lineStart);
+  }
+  if (cardEmail) {
+    masterTl.to(cardEmail, { scale: 1, opacity: 1, duration: 0.4, ease: 'power2.out' }, ch1.CARDS.PHYSICAL_STORE.cardStart);
+  }
+  masterTl.add(() => setTicker('Estación 02: Telemetría Sensirion IoT monitorea frío continuo a -18.2°C', icons.eye), ch1.CARDS.PHYSICAL_STORE.cardStart);
+
+  // 3. Station 03: Custodia Escrow 100% Arrives (~10.02s)
   if (lineOnline) {
     masterTl.to(lineOnline, { opacity: 1, strokeDashoffset: 0, duration: ch1.CARDS.ONLINE_STORE.duration, ease: 'power1.out' }, ch1.CARDS.ONLINE_STORE.lineStart);
-  }
-  if (badgeOnline) {
-    masterTl.to(badgeOnline, { scale: 1, opacity: 1, duration: 0.25, ease: 'power2.out' }, ch1.CARDS.ONLINE_STORE.cardStart);
   }
   if (cardOnline) {
     masterTl.to(cardOnline, { scale: 1, opacity: 1, duration: 0.4, ease: 'power2.out' }, ch1.CARDS.ONLINE_STORE.cardStart);
   }
+  masterTl.add(() => setTicker('Estación 03: Custodia Escrow 100% activa para liquidación Smart Contract', icons.lock), ch1.CARDS.ONLINE_STORE.cardStart);
 
-  // 4. Escrow Security Shield Arrives (~10.75s)
+  // 4. Destination Supermercados & Exit Conduits Arrive (~10.75s)
   if (lineShield) {
     masterTl.to(lineShield, { opacity: 1, strokeDashoffset: 0, duration: ch1.CARDS.ESCROW_SHIELD.duration, ease: 'power1.out' }, ch1.CARDS.ESCROW_SHIELD.lineStart);
   }
-  if (badgeShield) {
-    masterTl.to(badgeShield, { scale: 1, opacity: 1, duration: 0.25, ease: 'power2.out' }, ch1.CARDS.ESCROW_SHIELD.badgeStart);
+  if (destNode) {
+    masterTl.to(destNode, { scale: 1, opacity: 1, duration: 0.35, ease: 'power2.out' }, ch1.CARDS.ESCROW_SHIELD.badgeStart);
   }
-  masterTl.add(() => setTicker('Every booking is safe and every transaction is insured.', icons.lock), ch1.CARDS.ESCROW_SHIELD.badgeStart);
+  masterTl.add(() => setTicker('Despacho completado hacia Supermercados & Retail B2B sin excepciones', icons.lock), ch1.CARDS.ESCROW_SHIELD.badgeStart);
 
   // Phase 9: Chapter 01 Breathing Room (10.333s - 14.167s)
-  // The system remains fully settled, allowing the user to read the complete network.
-  // At 14.50s, auto-trigger organic Chapter 02 transition if user has not interacted.
   masterTl.add(() => {
     // Check if user is still on chapter 1
     const activeStep = document.querySelector('.tracker-step.active');
@@ -550,7 +551,7 @@ function initHeroAnimation() {
     const width = confettiCanvas.width = 400;
     const height = confettiCanvas.height = 300;
 
-    const colors = ['#57f09e', '#ffffff', '#e63946', '#3a86ff', '#f77f00'];
+    const colors = ['#2563eb', '#38bdf8', '#60a5fa', '#93c5fd', '#ffffff'];
     const particles: Array<{
       x: number;
       y: number;
@@ -858,7 +859,7 @@ function triggerPaymentConfetti() {
   gsap.killTweensOf(container.children);
   container.innerHTML = '';
 
-  const colors = ['#57f09e', '#38c8ff', '#f7b928', '#ffffff', '#004737', '#6effb0'];
+  const colors = ['#2563eb', '#38bdf8', '#60a5fa', '#ffffff', '#1d4ed8', '#93c5fd'];
   const count = 42;
 
   for (let i = 0; i < count; i++) {
