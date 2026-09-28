@@ -37,10 +37,10 @@
   --nexa-primitive-white: #ffffff;
   --nexa-primitive-canvas: #f6faff;
 
-  /* Semantic Hues */
-  --nexa-primitive-green-50: #f0fdf4;
-  --nexa-primitive-green-200: #bbf7d0;
-  --nexa-primitive-green-700: #15803d;
+  /* Semantic Hues (Strictly zero green in Nexa brand; mapped to cyan) */
+  --nexa-primitive-green-50: #e0f2fe;
+  --nexa-primitive-green-200: #bae6fd;
+  --nexa-primitive-green-700: #0284c7;
 
   --nexa-primitive-amber-50: #fffbeb;
   --nexa-primitive-amber-200: #fcd34d;

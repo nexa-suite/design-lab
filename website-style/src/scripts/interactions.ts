@@ -116,27 +116,29 @@ function initMobileDrawer() {
    -------------------------------------------------------------------------- */
 function initHeroAnimation() {
   const canvas = document.getElementById('hero-sculpted-canvas');
-  const hub = document.getElementById('circuit-hub');
-  const crown = document.querySelector<HTMLElement>('.hero-crown-content');
-  const titleHeading = document.getElementById('hero-heading');
-  const titleSub = document.querySelector<HTMLElement>('.hero-main-sub');
-  const chapter1View = document.getElementById('hero-chapter-1-view');
-  const chapter2View = document.getElementById('hero-chapter-2-view');
-  const chapter3View = document.getElementById('hero-chapter-3-view');
-  const pipeLines = document.querySelectorAll<SVGPathElement>('.circuit-pipe-line');
-  const pipeAccent = document.querySelector<SVGPathElement>('.circuit-pipe-accent');
-  const mark = document.querySelector<SVGPathElement>('.line-flecto-mark');
-  const badges = document.querySelectorAll<HTMLElement>('.circuit-badge');
-  const cards = document.querySelectorAll<HTMLElement>('.channel-card');
-  const trackerSteps = document.querySelectorAll<HTMLButtonElement>('.tracker-step');
-  const progressSeg = document.querySelector<HTMLElement>('.tracker-progress-segment');
-  const tickerMsg = document.getElementById('hero-ticker-msg');
-  const guarantee = document.getElementById('hero-guarantee-text');
+  if (!canvas) return;
 
-  if (!canvas || !hub) return;
+  const hub = canvas.querySelector<HTMLElement>('#circuit-hub');
+  if (!hub) return;
 
-  const silhouettePath = document.querySelector<SVGPathElement>('.hero-silhouette-path');
-  const clipPathEl = document.querySelector<SVGPathElement>('#hero-silhouette-clip path');
+  const crown = canvas.querySelector<HTMLElement>('.hero-crown-content');
+  const titleHeading = canvas.querySelector<HTMLElement>('#hero-heading');
+  const titleSub = canvas.querySelector<HTMLElement>('.hero-main-sub');
+  const chapter1View = canvas.querySelector<HTMLElement>('#hero-chapter-1-view');
+  const chapter2View = canvas.querySelector<HTMLElement>('#hero-chapter-2-view');
+  const chapter3View = canvas.querySelector<HTMLElement>('#hero-chapter-3-view');
+  const pipeLines = canvas.querySelectorAll<SVGPathElement>('.circuit-pipe-line');
+  const pipeAccent = canvas.querySelector<SVGPathElement>('.circuit-pipe-accent');
+  const mark = canvas.querySelector<SVGPathElement>('.line-flecto-mark');
+  const badges = canvas.querySelectorAll<HTMLElement>('.circuit-badge');
+  const cards = canvas.querySelectorAll<HTMLElement>('.channel-card');
+  const trackerSteps = canvas.querySelectorAll<HTMLButtonElement>('.tracker-step');
+  const progressSeg = canvas.querySelector<HTMLElement>('.tracker-progress-segment');
+  const tickerMsg = canvas.querySelector<HTMLElement>('#hero-ticker-msg');
+  const guarantee = canvas.querySelector<HTMLElement>('#hero-guarantee-text');
+
+  const silhouettePath = canvas.querySelector<SVGPathElement>('.hero-silhouette-path');
+  const clipPathEl = canvas.querySelector<SVGPathElement>('#hero-silhouette-clip path');
 
   const cmdsDormant = generateContainerCommands(NEXAFY_PRESETS.DORMANT);
   const cmdsChannels = generateContainerCommands(NEXAFY_PRESETS.CHANNELS);
@@ -351,14 +353,14 @@ function initHeroAnimation() {
   }
 
   // Phase 8: Operational Cold-Chain Station Arrival Sequence:
-  const lineStore = document.querySelector<SVGPathElement>('.line-store');
-  const cardStore = document.querySelector<HTMLElement>('.card-store');
-  const lineEmail = document.querySelector<SVGPathElement>('.line-email');
-  const cardEmail = document.querySelector<HTMLElement>('.card-email');
-  const lineOnline = document.querySelector<SVGPathElement>('.line-online');
-  const cardOnline = document.querySelector<HTMLElement>('.card-online');
-  const lineShield = document.querySelector<SVGPathElement>('.line-shield');
-  const destNode = document.querySelector<HTMLElement>('.circuit-dest-node');
+  const lineStore = canvas.querySelector<SVGPathElement>('.line-store');
+  const cardStore = canvas.querySelector<HTMLElement>('.card-store');
+  const lineEmail = canvas.querySelector<SVGPathElement>('.line-email');
+  const cardEmail = canvas.querySelector<HTMLElement>('.card-email');
+  const lineOnline = canvas.querySelector<SVGPathElement>('.line-online');
+  const cardOnline = canvas.querySelector<HTMLElement>('.card-online');
+  const lineShield = canvas.querySelector<SVGPathElement>('.line-shield');
+  const destNode = canvas.querySelector<HTMLElement>('.circuit-dest-node');
 
   // 1. Station 01: Despacho en Bahía Arrives (~6.10s)
   if (lineStore) {
@@ -396,14 +398,9 @@ function initHeroAnimation() {
   }
   masterTl.add(() => setTicker('Despacho completado hacia Supermercados & Retail B2B sin excepciones', icons.lock), ch1.CARDS.ESCROW_SHIELD.badgeStart);
 
-  // Phase 9: Chapter 01 Breathing Room (10.333s - 14.167s)
+  // Phase 9: Stable Chapter 01 Operational Network Hold (User manually switches chapters)
   masterTl.add(() => {
-    // Check if user is still on chapter 1
-    const activeStep = document.querySelector('.tracker-step.active');
-    const currCh = activeStep ? parseInt(activeStep.getAttribute('data-chapter') || '1', 10) : 1;
-    if (currCh === 1) {
-      goToChapter(2);
-    }
+    setTicker('Red Nexafy 100% Operativa · Conexiones logísticas activas y estables', icons.lock);
   }, FLECTO_TIMELINE.CHAPTER_02.MORPH_START);
 
   // 4. Interactive Chapter State Machine (01 Channels -> 02 SaaS Platform -> 03 Safe Renting)

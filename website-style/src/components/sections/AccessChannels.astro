@@ -68,7 +68,7 @@
                 </svg>
               </span>
               <div class="search-input-pill">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5">
                   <circle cx="11" cy="11" r="8"/>
                   <line x1="21" y1="21" x2="16.65" y2="16.65"/>
                 </svg>
@@ -522,13 +522,13 @@
 
   /* Market Catalog Web Window Preview */
   .market-ui-preview {
-    background: #081d33;
+    background: #ffffff;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     padding: 1.15rem 1.35rem 1.35rem;
-    border: 1px solid rgba(56, 189, 248, 0.15);
+    border: 1px solid #e2e8f0;
     border-bottom: none;
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -539,7 +539,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgba(56, 189, 248, 0.12);
+    border-bottom: 1px solid #e2e8f0;
     padding-bottom: 0.75rem;
   }
 
@@ -553,13 +553,13 @@
     display: flex;
     align-items: center;
     gap: 0.45rem;
-    background: #0d2847;
-    border: 1px solid rgba(56, 189, 248, 0.2);
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
     padding: 0.35rem 0.85rem;
     border-radius: 999px;
     font-size: 0.8125rem;
     font-weight: 600;
-    color: #38bdf8;
+    color: #0f172a;
   }
 
   .market-browser-tags {
@@ -571,7 +571,7 @@
   .browser-tag {
     font-size: 0.75rem;
     font-weight: 600;
-    color: #94a3b8;
+    color: #475569;
   }
 
   .tag-muted {
@@ -600,8 +600,8 @@
   }
 
   .dispatch-col {
-    background: #081d33;
-    border: 1px solid rgba(56, 189, 248, 0.12);
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
     border-radius: 12px;
     padding: 0.65rem;
     display: flex;
@@ -615,39 +615,41 @@
     align-items: center;
     font-size: 0.6875rem;
     font-weight: 700;
-    color: #94a3b8;
+    color: #0f172a;
     padding-bottom: 0.35rem;
-    border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+    border-bottom: 1px solid #e2e8f0;
   }
 
   .col-count {
-    background: rgba(37, 99, 235, 0.25);
-    color: #38bdf8;
+    background: #eff6ff;
+    color: #1d4ed8;
     padding: 0.1rem 0.4rem;
     border-radius: 999px;
     font-size: 0.625rem;
+    font-weight: 700;
   }
 
   .dispatch-card-item {
-    background: #0f2742;
-    border: 1px solid rgba(56, 189, 248, 0.18);
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
     border-radius: 9px;
     padding: 0.65rem;
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
     transition: border-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
   }
 
   .dispatch-card-item.card-selected {
-    border-color: #38bdf8;
-    background: rgba(15, 39, 66, 0.95);
-    box-shadow: 0 0 12px rgba(56, 189, 248, 0.18);
+    border-color: #2563eb;
+    background: #ffffff;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12);
   }
 
   .dispatch-card-item.card-active-glow {
     border-color: #2563eb;
-    box-shadow: 0 0 10px rgba(37, 99, 235, 0.25);
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12);
   }
 
   .card-top-row {
@@ -660,7 +662,7 @@
     font-family: var(--primitive-font-mono, monospace);
     font-size: 0.625rem;
     font-weight: 800;
-    color: #38bdf8;
+    color: #1d4ed8;
     letter-spacing: 0.05em;
   }
 
@@ -674,33 +676,33 @@
   }
 
   .chip-info {
-    background: rgba(37, 99, 235, 0.2);
-    color: #93c5fd;
-    border: 1px solid rgba(56, 189, 248, 0.3);
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
   }
 
   .chip-warning {
-    background: rgba(245, 158, 11, 0.18);
-    color: #fcd34d;
-    border: 1px solid rgba(245, 158, 11, 0.35);
+    background: #fffbeb;
+    color: #b45309;
+    border: 1px solid #fde68a;
   }
 
   .chip-active {
-    background: rgba(56, 189, 248, 0.2);
-    color: #38bdf8;
-    border: 1px solid #38bdf8;
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #2563eb;
   }
 
   .chip-success-blue {
-    background: rgba(37, 99, 235, 0.25);
-    color: #bae6fd;
-    border: 1px solid rgba(186, 230, 253, 0.4);
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
   }
 
   .card-buyer {
     font-size: 0.75rem;
     font-weight: 700;
-    color: #ffffff;
+    color: #0f172a;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -708,7 +710,7 @@
 
   .card-dest {
     font-size: 0.625rem;
-    color: #94a3b8;
+    color: #64748b;
   }
 
   .card-meta-row {
@@ -718,7 +720,7 @@
     font-size: 0.5875rem;
     color: #64748b;
     padding-top: 0.2rem;
-    border-top: 1px dashed rgba(56, 189, 248, 0.12);
+    border-top: 1px dashed #e2e8f0;
   }
 
   .card-action-hint {
@@ -727,7 +729,7 @@
     gap: 0.25rem;
     font-size: 0.5875rem;
     font-weight: 600;
-    color: #38bdf8;
+    color: #2563eb;
     margin-top: 0.15rem;
   }
 
@@ -736,8 +738,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #061629;
-    border: 1px solid rgba(56, 189, 248, 0.15);
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
     border-radius: 10px;
     padding: 0.5rem 0.85rem;
     font-size: 0.625rem;
@@ -759,17 +761,17 @@
 
   .proof-val {
     font-weight: 600;
-    color: #e2e8f0;
+    color: #0f172a;
   }
 
   .proof-divider {
-    color: rgba(56, 189, 248, 0.4);
+    color: #2563eb;
     font-weight: 800;
     font-size: 0.75rem;
   }
 
   .text-cyan {
-    color: #38bdf8;
+    color: #1d4ed8;
   }
 
   .text-blue {
@@ -804,13 +806,14 @@
   }
 
   .store-preview-visual {
-    background: #081d33;
-    border: 1px solid rgba(56, 189, 248, 0.14);
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
     border-radius: 20px;
     padding: 1.5rem;
     position: relative;
     min-height: 190px;
     overflow: hidden;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
   }
 
   .store-screens-wrapper {
@@ -820,11 +823,11 @@
   }
 
   .mock-screen {
-    background: #0f2742;
-    border: 1px solid rgba(56, 189, 248, 0.16);
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
     border-radius: 12px;
     padding: 0.75rem;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -836,20 +839,20 @@
     align-items: center;
     font-size: 0.6875rem;
     font-weight: 700;
-    color: #ffffff;
+    color: #0f172a;
   }
 
   .mock-screen-nav {
     display: flex;
     gap: 0.5rem;
     font-size: 0.5875rem;
-    color: #94a3b8;
+    color: #64748b;
   }
 
   .mock-hero-banner {
     height: 50px;
-    background: #081d33;
-    border: 1px solid rgba(56, 189, 248, 0.1);
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
     border-radius: 6px;
     overflow: hidden;
     display: flex;
@@ -865,7 +868,8 @@
 
   .mock-thumb-box {
     height: 28px;
-    background: #081d33;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
     border-radius: 4px;
   }
 
@@ -876,13 +880,13 @@
     align-items: center;
     font-size: 0.6875rem;
     font-weight: 700;
-    color: #ffffff;
+    color: #0f172a;
   }
 
   .checkout-badge {
-    background: rgba(37, 99, 235, 0.3);
-    color: #38bdf8;
-    border: 1px solid rgba(56, 189, 248, 0.3);
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
     font-size: 0.5875rem;
     font-weight: 800;
     padding: 0.15rem 0.4rem;
@@ -893,8 +897,8 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: #081d33;
-    border: 1px solid rgba(56, 189, 248, 0.1);
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
     padding: 0.5rem;
     border-radius: 8px;
   }
@@ -902,7 +906,7 @@
   .checkout-item-thumb {
     width: 32px;
     height: 32px;
-    background: #0d2847;
+    background: #eff6ff;
     border-radius: 6px;
     display: flex;
     align-items: center;
@@ -916,12 +920,12 @@
 
   .checkout-item-title {
     font-size: 0.6875rem;
-    color: #e2e8f0;
+    color: #0f172a;
   }
 
   .checkout-item-price {
     font-size: 0.625rem;
-    color: #38bdf8;
+    color: #1d4ed8;
     font-weight: 700;
   }
 

@@ -92,10 +92,10 @@
   --nexa-color-border-interactive: #cbd5e1;
   --nexa-focus-ring: 0 0 0 3px rgba(42, 103, 217, 0.18);
 
-  /* Status Semantics */
-  --nexa-color-success-50: #f0fdf4;
-  --nexa-color-success-200: #bbf7d0;
-  --nexa-color-success-700: #15803d;
+  /* Status Semantics (Cyan/Blue, strictly zero green) */
+  --nexa-color-success-50: #e0f2fe;
+  --nexa-color-success-200: #bae6fd;
+  --nexa-color-success-700: #0284c7;
   --nexa-color-warning-50: #fffbeb;
   --nexa-color-warning-200: #fde68a;
   --nexa-color-warning-600: #d97706;
@@ -267,9 +267,9 @@
 }
 
 .cuadro-tag.success {
-  background: var(--nexa-color-success-50, #f0fdf4);
-  color: var(--nexa-color-success-700, #15803d);
-  border-color: var(--nexa-color-success-200, #bbf7d0);
+  background: var(--nexa-color-success-50, #e0f2fe);
+  color: var(--nexa-color-success-700, #0284c7);
+  border-color: var(--nexa-color-success-200, #bae6fd);
 }
 
 .cuadro-tag.warning {

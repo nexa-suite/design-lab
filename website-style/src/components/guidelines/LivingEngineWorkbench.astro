@@ -136,7 +136,7 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
 
   <!-- 2. Sculpted Bürocratik Canvas Stage Frame -->
   <section class="workbench-hero-stage" id="workbench-hero-stage" aria-label="Escenario Motor Gráfico Nexafy">
-    <div class="hero-sculpted-canvas" id="hero-sculpted-canvas">
+    <div class="hero-sculpted-canvas" id="workbench-sculpted-canvas">
 
       <!-- 2.1 Unified Architectural SVG Silhouette Background -->
       <svg 
@@ -171,10 +171,13 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
         <rect x="0" y="0" width="1440" height="820" fill="url(#workbench-blueprint-grid)" clip-path="url(#workbench-silhouette-clip)" opacity="0.65" />
       </svg>
 
-      <!-- 2.2 TOP LAYER (Notches & Monumental Headline Canopy with Proper Padding) -->
+      <!-- 2.2 TOP LAYER (Notches & Monumental Headline Canopy with Generous Padding) -->
       <header class="hero-top-layer">
-        <!-- Top-Left White Notch: Nexa Brand & Primary Links -->
+        <!-- Top-Left White Notch: Home Return + Nexa Brand & Primary Links -->
         <div class="hero-top-left">
+          <a href="/" class="hero-home-btn" title="Volver al Inicio" aria-label="Inicio">
+            <i class="pi pi-home" aria-hidden="true"></i>
+          </a>
           <a href="/" class="nexa-brand" aria-label="Nexa Platform">
             <img src="/assets/nexa-nx-blue.svg" alt="Nexa" width="28" height="28" class="nexa-brand-logo" />
             <span class="nexa-brand-word">Nexa</span>
@@ -201,15 +204,8 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
           </div>
         </div>
 
-        <!-- Top-Right White Notch: CTA & Login -->
+        <!-- Top-Right White Notch: CTA & Login (0 Language Dropdown) -->
         <div class="hero-top-right">
-          <div class="hero-lang-pill" aria-label="Language selector">
-            <button type="button" class="lang-toggle-btn active" aria-label="Selected language English">EN</button>
-            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <polyline points="2 4 6 8 10 4"></polyline>
-            </svg>
-          </div>
-
           <a href="#book-demo" class="hero-book-btn">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -242,34 +238,38 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
             <span class="hub-title">PESQUERO</span>
             <span class="hub-badge">CALLAO · B2B</span>
           </div>
+          <span class="drag-handle-grip hub-grip" title="Arrastrar origen">⋮⋮</span>
         </div>
 
         <!-- 2. Continuous Vascular Conduit Circuit (Organically Bending Closed Pipeline) -->
         <svg 
           class="circuit-svg" 
-          viewBox="0 0 1140 420" 
+          id="workbench-circuit-svg"
+          viewBox="0 0 1140 480" 
           fill="none" 
           xmlns="http://www.w3.org/2000/svg" 
-          preserveAspectRatio="xMidYMid meet"
+          preserveAspectRatio="none"
           aria-hidden="true"
         >
           <!-- Main Trunk: Origin Node (x:150) -> Nexa Core Bus (x:340) -->
           <path 
             class="circuit-pipe-line line-trunk" 
             id="pipe-trunk"
-            d="M 150 210 L 340 210" 
+            d="" 
             stroke="#bae6fd" 
             stroke-width="26" 
             stroke-linecap="round"
+            stroke-linejoin="round"
           />
 
           <!-- Branch 1 (Top Conduit to Station 01: Despacho en Bahía) -->
           <path 
             class="circuit-pipe-line line-branch-top" 
             id="pipe-branch-top"
-            d="M 460 210 L 515 210 A 18 18 0 0 0 533 192 L 533 88 A 18 18 0 0 1 551 70 L 590 70" 
+            d="" 
             stroke="#bae6fd" 
             stroke-width="24" 
+            stroke-linecap="round"
             stroke-linejoin="round"
           />
 
@@ -277,58 +277,65 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
           <path 
             class="circuit-pipe-line line-branch-mid" 
             id="pipe-branch-mid"
-            d="M 460 210 L 590 210" 
+            d="" 
             stroke="#bae6fd" 
             stroke-width="24" 
             stroke-linecap="round"
+            stroke-linejoin="round"
           />
 
           <!-- Branch 3 (Bottom Conduit to Station 03: Custodia Escrow 100%) -->
           <path 
             class="circuit-pipe-line line-branch-bot" 
             id="pipe-branch-bot"
-            d="M 460 210 L 515 210 A 18 18 0 0 1 533 228 L 533 332 A 18 18 0 0 0 551 350 L 590 350" 
-            stroke="#bae6fd" 
-            stroke-width="24" 
-            stroke-linejoin="round"
-          />
-
-          <!-- Exit Conduit from Station 01 (x:870, y:70) merging to Destination Hub (x:975, y:210) -->
-          <path 
-            class="circuit-pipe-line line-exit-top" 
-            id="pipe-exit-top"
-            d="M 870 70 L 910 70 A 18 18 0 0 1 928 88 L 928 192 A 18 18 0 0 0 946 210 L 975 210" 
-            stroke="#bae6fd" 
-            stroke-width="24" 
-            stroke-linejoin="round"
-          />
-
-          <!-- Exit Conduit from Station 02 (x:870, y:210) into Destination Hub -->
-          <path 
-            class="circuit-pipe-line line-exit-mid" 
-            id="pipe-exit-mid"
-            d="M 870 210 L 975 210" 
+            d="" 
             stroke="#bae6fd" 
             stroke-width="24" 
             stroke-linecap="round"
-          />
-
-          <!-- Exit Conduit from Station 03 (x:870, y:350) merging to Destination Hub (x:975, y:210) -->
-          <path 
-            class="circuit-pipe-line line-exit-bot" 
-            id="pipe-exit-bot"
-            d="M 870 350 L 910 350 A 18 18 0 0 0 928 332 L 928 228 A 18 18 0 0 1 946 210 L 975 210" 
-            stroke="#bae6fd" 
-            stroke-width="24" 
             stroke-linejoin="round"
           />
 
-          <!-- Pulse Indicators moving through the closed conduits -->
-          <circle cx="245" cy="210" r="5" fill="#2563eb" class="pipe-pulse pulse-1" />
-          <circle cx="533" cy="140" r="4.5" fill="#38bdf8" class="pipe-pulse pulse-2" />
-          <circle cx="533" cy="280" r="4.5" fill="#2563eb" class="pipe-pulse pulse-3" />
-          <circle cx="928" cy="140" r="4.5" fill="#38bdf8" class="pipe-pulse pulse-4" />
-          <circle cx="928" cy="280" r="4.5" fill="#2563eb" class="pipe-pulse pulse-5" />
+          <!-- Exit Conduit from Station 01 merging to Destination Hub -->
+          <path 
+            class="circuit-pipe-line line-exit-top" 
+            id="pipe-exit-top"
+            d="" 
+            stroke="#bae6fd" 
+            stroke-width="24" 
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+
+          <!-- Exit Conduit from Station 02 into Destination Hub -->
+          <path 
+            class="circuit-pipe-line line-exit-mid" 
+            id="pipe-exit-mid"
+            d="" 
+            stroke="#bae6fd" 
+            stroke-width="24" 
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+
+          <!-- Exit Conduit from Station 03 merging to Destination Hub -->
+          <path 
+            class="circuit-pipe-line line-exit-bot" 
+            id="pipe-exit-bot"
+            d="" 
+            stroke="#bae6fd" 
+            stroke-width="24" 
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+
+          <!-- Signal Pulse Particles Flowing through the Conduits -->
+          <circle id="pulse-trunk" class="pulse-particle" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
+          <circle id="pulse-branch-top" class="pulse-particle" r="5" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5" cx="-50" cy="-50" />
+          <circle id="pulse-branch-mid" class="pulse-particle" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" cx="-50" cy="-50" />
+          <circle id="pulse-branch-bot" class="pulse-particle" r="5" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5" cx="-50" cy="-50" />
+          <circle id="pulse-exit-top" class="pulse-particle" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" cx="-50" cy="-50" />
+          <circle id="pulse-exit-mid" class="pulse-particle" r="5" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5" cx="-50" cy="-50" />
+          <circle id="pulse-exit-bot" class="pulse-particle" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" cx="-50" cy="-50" />
         </svg>
 
         <!-- 3. Central Router Node: NEXA CORE BUS -->
@@ -338,75 +345,75 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
             <span class="center-hub-title">NEXA HUB</span>
             <span class="center-hub-sub">Core Dispatch Bus</span>
           </div>
+          <span class="drag-handle-grip hub-grip" title="Arrastrar núcleo">⋮⋮</span>
         </div>
 
-        <!-- 4. Three Symmetrically Aligned White Station Blocks (Zero Overlap, Pure Autolayout) -->
-        <div class="circuit-stations-column" id="circuit-stations" aria-label="Estaciones Operativas de Cadena de Frío">
-          
-          <!-- Station 01: Despacho en Bahía (DSP-204) -->
-          <article class="station-card station-top channel-card card-store" id="station-01-card" aria-label="Estación 01: Despacho en Bahía">
-            <div class="station-header">
-              <span class="station-icon-wrap blue">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="1" y="3" width="15" height="13"></rect>
-                  <polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon>
-                  <circle cx="5.5" cy="18.5" r="2.5"></circle>
-                  <circle cx="18.5" cy="18.5" r="2.5"></circle>
-                </svg>
-              </span>
-              <div class="station-titles">
-                <span class="station-step-tag">01 · DESPACHO EN BAHÍA</span>
-                <strong class="station-name">Muelle Callao · Rampa 04</strong>
-              </div>
-              <span class="station-pill-state">FEFO ACTIVO</span>
+        <!-- 4. Three Symmetrically Aligned White Station Blocks (Draggable & Non-Overlapping) -->
+        <!-- Station 01: Despacho en Bahía (DSP-204) -->
+        <article class="station-card station-top workbench-card card-01-fefo" id="station-01-card" aria-label="Estación 01: Despacho en Bahía">
+          <div class="station-header">
+            <span class="station-icon-wrap blue">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+            </span>
+            <div class="station-titles">
+              <span class="station-step-tag">01 · DESPACHO EN BAHÍA</span>
+              <strong class="station-name">Muelle Callao · Rampa 04</strong>
             </div>
-            <div class="station-footer">
-              <span class="station-meta text-mono">DSP-204 · Lote L-8841 · 500 kg Salmón</span>
-              <span class="station-status-dot active" title="Rampa conectada"></span>
-            </div>
-          </article>
+            <span class="station-pill-state">FEFO ACTIVO</span>
+            <span class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</span>
+          </div>
+          <div class="station-footer">
+            <span class="station-meta text-mono">DSP-204 · Lote L-8841 · 500 kg Salmón</span>
+            <span class="station-status-dot active" title="Rampa conectada"></span>
+          </div>
+        </article>
 
-          <!-- Station 02: Telemetría Sensirion IoT (Sensirion SHT40) -->
-          <article class="station-card station-mid channel-card card-email" id="station-02-card" aria-label="Estación 02: Telemetría Sensirion IoT">
-            <div class="station-header">
-              <span class="station-icon-wrap cyan">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
-                </svg>
-              </span>
-              <div class="station-titles">
-                <span class="station-step-tag">02 · TELEMETRÍA IOT</span>
-                <strong class="station-name">Sensirion SHT40 · -18.2°C</strong>
-              </div>
-              <span class="station-pill-state active">CALIBRADO</span>
+        <!-- Station 02: Telemetría Sensirion IoT (Sensirion SHT40) -->
+        <article class="station-card station-mid workbench-card card-02-iot" id="station-02-card" aria-label="Estación 02: Telemetría Sensirion IoT">
+          <div class="station-header">
+            <span class="station-icon-wrap cyan">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+              </svg>
+            </span>
+            <div class="station-titles">
+              <span class="station-step-tag">02 · TELEMETRÍA IOT</span>
+              <strong class="station-name">Sensirion SHT40 · -18.2°C</strong>
             </div>
-            <div class="station-footer">
-              <span class="station-meta text-mono">GPS Reefer Van B-402 · En ruta</span>
-              <span class="station-status-dot active" title="Transmisión continua"></span>
-            </div>
-          </article>
+            <span class="station-pill-state active">CALIBRADO</span>
+            <span class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</span>
+          </div>
+          <div class="station-footer">
+            <span class="station-meta text-mono">GPS Reefer Van B-402 · En ruta</span>
+            <span class="station-status-dot active" title="Transmisión continua"></span>
+          </div>
+        </article>
 
-          <!-- Station 03: Custodia Escrow 100% ($3,450.00) -->
-          <article class="station-card station-bot channel-card card-online" id="station-03-card" aria-label="Estación 03: Custodia Escrow 100%">
-            <div class="station-header">
-              <span class="station-icon-wrap blue">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                </svg>
-              </span>
-              <div class="station-titles">
-                <span class="station-step-tag">03 · CUSTODIA ESCROW 100%</span>
-                <strong class="station-name">Smart Contract B2B · $3,450.00</strong>
-              </div>
-              <span class="station-pill-state">PRE-AUTORIZADO</span>
+        <!-- Station 03: Custodia Escrow 100% ($3,450.00) -->
+        <article class="station-card station-bot workbench-card card-03-escrow" id="station-03-card" aria-label="Estación 03: Custodia Escrow 100%">
+          <div class="station-header">
+            <span class="station-icon-wrap blue">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </span>
+            <div class="station-titles">
+              <span class="station-step-tag">03 · CUSTODIA ESCROW 100%</span>
+              <strong class="station-name">Smart Contract B2B · $3,450.00</strong>
             </div>
-            <div class="station-footer">
-              <span class="station-meta text-mono">Liquidación automática por telemetría</span>
-              <span class="station-status-dot active" title="Garantía activa"></span>
-            </div>
-          </article>
-
-        </div>
+            <span class="station-pill-state">PRE-AUTORIZADO</span>
+            <span class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</span>
+          </div>
+          <div class="station-footer">
+            <span class="station-meta text-mono">Liquidación automática por telemetría</span>
+            <span class="station-status-dot active" title="Garantía activa"></span>
+          </div>
+        </article>
 
         <!-- 5. Destination Hub: Red Mayorista B2B -->
         <div class="circuit-hub destination-hub" id="circuit-dest-hub" role="region" aria-label="Red Mayorista B2B">
@@ -415,6 +422,7 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
             <span class="hub-title">COMPRADORES</span>
             <span class="hub-badge">RECEPTION B2B</span>
           </div>
+          <span class="drag-handle-grip hub-grip" title="Arrastrar destino">⋮⋮</span>
         </div>
 
       </div>
@@ -789,19 +797,45 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
     position: relative;
     z-index: 5;
     display: grid;
-    grid-template-columns: 390px 1fr 410px;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.5rem;
     align-items: flex-start;
     width: 100%;
-    min-height: 120px;
+    min-height: 135px;
   }
 
   /* Top-Left White Notch: Pure Transparent Background (Zero Spikes!) */
   .hero-top-left {
     display: flex;
     align-items: center;
-    gap: 2.5rem;
+    gap: 1.25rem;
     padding: 1.25rem 1.5rem 1.5rem 0.75rem;
     background: transparent;
+    flex-shrink: 0;
+  }
+
+  .hero-home-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1.5px solid #cbd5e1;
+    color: #082846;
+    font-size: 15px;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(8, 40, 70, 0.08);
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .hero-home-btn:hover {
+    background: #f0f9ff;
+    border-color: #38bdf8;
+    color: #0284c7;
+    transform: scale(1.05);
   }
 
   .nexa-brand {
@@ -851,8 +885,10 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding-top: 0.65rem;
-    max-width: 520px;
+    padding-top: 0.95rem;
+    flex: 1;
+    min-width: 340px;
+    max-width: 680px;
     margin: 0 auto;
     z-index: 10;
   }
@@ -959,11 +995,9 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
     z-index: 5;
     width: 100%;
     max-width: 1140px;
-    height: 440px;
+    height: 480px;
     margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    overflow: visible;
   }
 
   /* Continuous Vascular Circuit SVG */
@@ -982,29 +1016,17 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
   }
 
   /* Animated Signal Particles */
-  .pipe-pulse {
-    animation: flowPulse 2.8s infinite linear;
-  }
-
-  .pulse-1 { animation-delay: 0s; }
-  .pulse-2 { animation-delay: 0.7s; }
-  .pulse-3 { animation-delay: 1.4s; }
-  .pulse-4 { animation-delay: 0.4s; }
-  .pulse-5 { animation-delay: 1.1s; }
-
-  @keyframes flowPulse {
-    0% { opacity: 0; transform: scale(0.6); }
-    20% { opacity: 1; transform: scale(1.1); }
-    80% { opacity: 1; transform: scale(1.0); }
-    100% { opacity: 0; transform: scale(0.6); }
+  .pulse-particle {
+    filter: drop-shadow(0 0 5px #38bdf8);
+    pointer-events: none;
   }
 
   /* Hub Nodes */
   .circuit-hub {
-    position: relative;
+    position: absolute;
     z-index: 10;
-    width: 154px;
-    height: 154px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     background-color: #38bdf8;
     color: #082846;
@@ -1013,18 +1035,41 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
     justify-content: center;
     text-align: center;
     box-shadow: 0 12px 32px rgba(56, 189, 248, 0.35);
-    flex-shrink: 0;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    transition: box-shadow 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .circuit-hub:hover {
-    transform: scale(1.04);
+    transform: scale(1.03);
+    box-shadow: 0 16px 36px rgba(56, 189, 248, 0.45);
+  }
+
+  .circuit-hub.is-dragging {
+    cursor: grabbing;
+    z-index: 50;
+    transform: scale(1.06);
+    box-shadow: 0 20px 44px rgba(56, 189, 248, 0.6);
   }
 
   .destination-hub {
     background-color: #2563eb;
     color: #ffffff;
+    width: 154px;
+    height: 154px;
     box-shadow: 0 12px 32px rgba(37, 99, 235, 0.35);
+  }
+
+  .destination-hub:hover {
+    box-shadow: 0 16px 36px rgba(37, 99, 235, 0.45);
+  }
+
+  .destination-hub.is-dragging {
+    cursor: grabbing;
+    z-index: 50;
+    transform: scale(1.06);
+    box-shadow: 0 20px 44px rgba(37, 99, 235, 0.6);
   }
 
   .hub-label {
@@ -1067,7 +1112,7 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
 
   /* Central Router Node (Nexa Core Bus) */
   .circuit-center-hub {
-    position: relative;
+    position: absolute;
     z-index: 10;
     width: 120px;
     height: 120px;
@@ -1080,12 +1125,21 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
     justify-content: center;
     text-align: center;
     box-shadow: 0 0 28px rgba(56, 189, 248, 0.25);
-    flex-shrink: 0;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    transition: box-shadow 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .circuit-center-hub:hover {
-    transform: scale(1.05);
+    transform: scale(1.04);
+  }
+
+  .circuit-center-hub.is-dragging {
+    cursor: grabbing;
+    z-index: 50;
+    transform: scale(1.07);
+    box-shadow: 0 0 36px rgba(56, 189, 248, 0.5);
   }
 
   .center-hub-content {
@@ -1110,19 +1164,13 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
     font-weight: 600;
   }
 
-  /* Symmetrically Aligned Three White Station Cards (Pure Autolayout) */
-  .circuit-stations-column {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    gap: 1.15rem;
-    width: 295px;
-    flex-shrink: 0;
-  }
-
+  /* Symmetrically Aligned Three White Station Cards (Pure Autolayout & Draggable) */
   .station-card {
+    position: absolute;
+    z-index: 10;
+    width: 295px;
     background: #ffffff;
+    opacity: 1 !important;
     border-radius: 16px;
     padding: 0.85rem 1.15rem;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.1);
@@ -1130,12 +1178,78 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
     flex-direction: column;
     gap: 0.6rem;
     color: #082846;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
   }
 
   .station-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25);
+  }
+
+  .station-card.is-dragging {
+    cursor: grabbing;
+    z-index: 50;
+    transform: scale(1.04);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .drag-handle-grip {
+    cursor: grab;
+    color: #94a3b8;
+    font-size: 14px;
+    line-height: 1;
+    user-select: none;
+    padding: 2px 4px;
+    transition: color 0.15s ease;
+  }
+
+  .drag-handle-grip:hover {
+    color: #38bdf8;
+  }
+
+  .hub-grip {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+  }
+
+  .drag-coords-hud {
+    position: absolute;
+    top: 14px;
+    left: 20px;
+    z-index: 60;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    background: rgba(8, 40, 70, 0.94);
+    border: 1px solid #38bdf8;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 999px;
+    padding: 6px 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+  }
+
+  .hud-pill-tag {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #ffffff;
+    background: #0284c7;
+    padding: 2px 7px;
+    border-radius: 6px;
+  }
+
+  .hud-coords-text {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #bae6fd;
   }
 
   .station-header {
@@ -1468,107 +1582,497 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
 
 <script>
   /**
-   * NEXAFY LIVING GRAPHICS ENGINE — CLIENT CONTROLLER
-   * Ensures closed vascular pipeline, interactive preset switching, tone toggling,
-   * and build assembly animation with 0 collisions.
+   * NEXAFY LIVING GRAPHICS ENGINE — 60FPS CLIENT CONTROLLER
+   * Full drag-and-drop support across all 6 nodes, real-time vascular conduit
+   * recalculation with smooth S-curves/fillets, particle pulse animation,
+   * live HUD coordinates, and dynamic assembly animation.
    */
-  function initLivingEngineWorkbench() {
-    const btnBuild = document.getElementById('btn-build-engine') as HTMLButtonElement | null;
+
+  interface NodeState {
+    id: string;
+    name: string;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  }
+
+  interface EdgeDef {
+    id: string;
+    pathId: string;
+    pulseId: string;
+    sourceId: string;
+    targetId: string;
+    getSourcePoint: () => { x: number; y: number };
+    getTargetPoint: () => { x: number; y: number };
+    pulseProgress: number;
+    pulseSpeed: number;
+  }
+
+  // Canonical Initial Positions (Symmetric & Zero Collision)
+  const INITIAL_POSITIONS: Record<string, { x: number; y: number }> = {
+    'circuit-hub':        { x: 25, y: 175 },
+    'circuit-center-hub': { x: 230, y: 180 },
+    'station-01-card':    { x: 450, y: 55 },
+    'station-02-card':    { x: 450, y: 197 },
+    'station-03-card':    { x: 450, y: 339 },
+    'circuit-dest-hub':   { x: 860, y: 170 }
+  };
+
+  const PRESET_MATRIX: Record<string, { x: number; y: number }> = {
+    'circuit-hub':        { x: 20, y: 175 },
+    'circuit-center-hub': { x: 205, y: 180 },
+    'station-01-card':    { x: 420, y: 40 },
+    'station-02-card':    { x: 420, y: 197 },
+    'station-03-card':    { x: 420, y: 354 },
+    'circuit-dest-hub':   { x: 875, y: 170 }
+  };
+
+  const PRESET_ESCROW: Record<string, { x: number; y: number }> = {
+    'circuit-hub':        { x: 30, y: 175 },
+    'circuit-center-hub': { x: 220, y: 180 },
+    'station-01-card':    { x: 430, y: 50 },
+    'station-02-card':    { x: 430, y: 180 },
+    'station-03-card':    { x: 460, y: 310 },
+    'circuit-dest-hub':   { x: 860, y: 220 }
+  };
+
+  const NODES: Record<string, NodeState> = {
+    'circuit-hub':        { id: 'circuit-hub', name: 'Terminal Pesquero', x: 25, y: 175, width: 140, height: 140 },
+    'circuit-center-hub': { id: 'circuit-center-hub', name: 'Nexa Hub Core', x: 230, y: 180, width: 120, height: 120 },
+    'station-01-card':    { id: 'station-01-card', name: '01 Despacho FEFO', x: 450, y: 55, width: 295, height: 86 },
+    'station-02-card':    { id: 'station-02-card', name: '02 Telemetría IoT', x: 450, y: 197, width: 295, height: 86 },
+    'station-03-card':    { id: 'station-03-card', name: '03 Escrow 100%', x: 450, y: 339, width: 295, height: 86 },
+    'circuit-dest-hub':   { id: 'circuit-dest-hub', name: 'Red Mayorista', x: 860, y: 170, width: 154, height: 154 }
+  };
+
+  const EDGES: EdgeDef[] = [
+    {
+      id: 'trunk',
+      pathId: 'pipe-trunk',
+      pulseId: 'pulse-trunk',
+      sourceId: 'circuit-hub',
+      targetId: 'circuit-center-hub',
+      getSourcePoint: () => ({ x: NODES['circuit-hub'].x + NODES['circuit-hub'].width, y: NODES['circuit-hub'].y + NODES['circuit-hub'].height / 2 }),
+      getTargetPoint: () => ({ x: NODES['circuit-center-hub'].x, y: NODES['circuit-center-hub'].y + NODES['circuit-center-hub'].height / 2 }),
+      pulseProgress: 0.1,
+      pulseSpeed: 0.005
+    },
+    {
+      id: 'branch-top',
+      pathId: 'pipe-branch-top',
+      pulseId: 'pulse-branch-top',
+      sourceId: 'circuit-center-hub',
+      targetId: 'station-01-card',
+      getSourcePoint: () => ({ x: NODES['circuit-center-hub'].x + NODES['circuit-center-hub'].width, y: NODES['circuit-center-hub'].y + 30 }),
+      getTargetPoint: () => ({ x: NODES['station-01-card'].x, y: NODES['station-01-card'].y + NODES['station-01-card'].height / 2 }),
+      pulseProgress: 0.3,
+      pulseSpeed: 0.004
+    },
+    {
+      id: 'branch-mid',
+      pathId: 'pipe-branch-mid',
+      pulseId: 'pulse-branch-mid',
+      sourceId: 'circuit-center-hub',
+      targetId: 'station-02-card',
+      getSourcePoint: () => ({ x: NODES['circuit-center-hub'].x + NODES['circuit-center-hub'].width, y: NODES['circuit-center-hub'].y + 60 }),
+      getTargetPoint: () => ({ x: NODES['station-02-card'].x, y: NODES['station-02-card'].y + NODES['station-02-card'].height / 2 }),
+      pulseProgress: 0.5,
+      pulseSpeed: 0.005
+    },
+    {
+      id: 'branch-bot',
+      pathId: 'pipe-branch-bot',
+      pulseId: 'pulse-branch-bot',
+      sourceId: 'circuit-center-hub',
+      targetId: 'station-03-card',
+      getSourcePoint: () => ({ x: NODES['circuit-center-hub'].x + NODES['circuit-center-hub'].width, y: NODES['circuit-center-hub'].y + 90 }),
+      getTargetPoint: () => ({ x: NODES['station-03-card'].x, y: NODES['station-03-card'].y + NODES['station-03-card'].height / 2 }),
+      pulseProgress: 0.2,
+      pulseSpeed: 0.004
+    },
+    {
+      id: 'exit-top',
+      pathId: 'pipe-exit-top',
+      pulseId: 'pulse-exit-top',
+      sourceId: 'station-01-card',
+      targetId: 'circuit-dest-hub',
+      getSourcePoint: () => ({ x: NODES['station-01-card'].x + NODES['station-01-card'].width, y: NODES['station-01-card'].y + NODES['station-01-card'].height / 2 }),
+      getTargetPoint: () => ({ x: NODES['circuit-dest-hub'].x, y: NODES['circuit-dest-hub'].y + 38 }),
+      pulseProgress: 0.6,
+      pulseSpeed: 0.004
+    },
+    {
+      id: 'exit-mid',
+      pathId: 'pipe-exit-mid',
+      pulseId: 'pulse-exit-mid',
+      sourceId: 'station-02-card',
+      targetId: 'circuit-dest-hub',
+      getSourcePoint: () => ({ x: NODES['station-02-card'].x + NODES['station-02-card'].width, y: NODES['station-02-card'].y + NODES['station-02-card'].height / 2 }),
+      getTargetPoint: () => ({ x: NODES['circuit-dest-hub'].x, y: NODES['circuit-dest-hub'].y + 77 }),
+      pulseProgress: 0.4,
+      pulseSpeed: 0.005
+    },
+    {
+      id: 'exit-bot',
+      pathId: 'pipe-exit-bot',
+      pulseId: 'pulse-exit-bot',
+      sourceId: 'station-03-card',
+      targetId: 'circuit-dest-hub',
+      getSourcePoint: () => ({ x: NODES['station-03-card'].x + NODES['station-03-card'].width, y: NODES['station-03-card'].y + NODES['station-03-card'].height / 2 }),
+      getTargetPoint: () => ({ x: NODES['circuit-dest-hub'].x, y: NODES['circuit-dest-hub'].y + 116 }),
+      pulseProgress: 0.7,
+      pulseSpeed: 0.004
+    }
+  ];
+
+  let isBuilding = false;
+
+  /**
+   * Smooth S-curve / Filleted Orthogonal Conduit Router
+   */
+  function routeConduit(p1: { x: number; y: number }, p2: { x: number; y: number }, radius: number = 20): string {
+    const dx = p2.x - p1.x;
+    const dy = p2.y - p1.y;
+
+    // Straight horizontal line if y-difference is negligible
+    if (Math.abs(dy) < 2) {
+      return `M ${p1.x.toFixed(1)} ${p1.y.toFixed(1)} L ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+    }
+
+    // Forward smooth routing with rounded fillets
+    if (dx >= 24) {
+      const midX = p1.x + dx / 2;
+      const r = Math.min(radius, Math.abs(dx) / 2 - 2, Math.abs(dy) / 2 - 2);
+      const signY = dy > 0 ? 1 : -1;
+
+      return `M ${p1.x.toFixed(1)} ${p1.y.toFixed(1)} ` +
+             `L ${(midX - r).toFixed(1)} ${p1.y.toFixed(1)} ` +
+             `Q ${midX.toFixed(1)} ${p1.y.toFixed(1)}, ${midX.toFixed(1)} ${(p1.y + signY * r).toFixed(1)} ` +
+             `L ${midX.toFixed(1)} ${(p2.y - signY * r).toFixed(1)} ` +
+             `Q ${midX.toFixed(1)} ${p2.y.toFixed(1)}, ${(midX + r).toFixed(1)} ${p2.y.toFixed(1)} ` +
+             `L ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+    }
+
+    // Graceful loop if target is dragged behind source
+    const safeOffsetY = dy >= 0 ? 60 : -60;
+    return `M ${p1.x.toFixed(1)} ${p1.y.toFixed(1)} ` +
+           `C ${(p1.x + 35).toFixed(1)} ${p1.y.toFixed(1)}, ${(p1.x + 35).toFixed(1)} ${(p1.y + safeOffsetY).toFixed(1)}, ${(p1.x + p2.x) / 2} ${(p1.y + safeOffsetY).toFixed(1)} ` +
+           `C ${(p2.x - 35).toFixed(1)} ${(p1.y + safeOffsetY).toFixed(1)}, ${(p2.x - 35).toFixed(1)} ${p2.y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+  }
+
+  /**
+   * Recalculate all 7 vascular conduits dynamically in real time
+   */
+  function rerouteAll() {
+    EDGES.forEach(edge => {
+      const p1 = edge.getSourcePoint();
+      const p2 = edge.getTargetPoint();
+      const pathD = routeConduit(p1, p2, 20);
+      const pathEl = document.getElementById(edge.pathId) as SVGPathElement | null;
+      if (pathEl) {
+        pathEl.setAttribute('d', pathD);
+        pathEl.style.strokeDasharray = 'none';
+        pathEl.style.strokeDashoffset = '0';
+        pathEl.style.opacity = '1';
+      }
+    });
+
+    checkCollisions();
+  }
+
+  /**
+   * Collision detection check between blocks
+   */
+  function checkCollisions() {
+    const ids = Object.keys(NODES);
+    let collisionCount = 0;
+
+    for (let i = 0; i < ids.length; i++) {
+      for (let j = i + 1; j < ids.length; j++) {
+        const a = NODES[ids[i]];
+        const b = NODES[ids[j]];
+
+        const overlapX = a.x < b.x + b.width - 6 && a.x + a.width - 6 > b.x;
+        const overlapY = a.y < b.y + b.height - 6 && a.y + a.height - 6 > b.y;
+
+        if (overlapX && overlapY) {
+          collisionCount++;
+        }
+      }
+    }
+
+    const collisionPill = document.querySelector('.collision-pill');
+    if (collisionPill) {
+      if (collisionCount === 0) {
+        collisionPill.innerHTML = '<i class="pi pi-check-circle" style="color: #0284c7;"></i> 0 Colisiones';
+        collisionPill.classList.remove('has-collision');
+      } else {
+        collisionPill.innerHTML = `<i class="pi pi-exclamation-triangle" style="color: #ef4444;"></i> ${collisionCount} Solapamiento${collisionCount > 1 ? 's' : ''}`;
+        collisionPill.classList.add('has-collision');
+      }
+    }
+  }
+
+  /**
+   * Interactive Drag & Drop System
+   */
+  function setupDragAndDrop() {
+    const stage = document.getElementById('circuit-stage');
+    if (!stage) return;
+
+    const dragHud = document.getElementById('workbench-drag-hud');
+    const hudCoordsText = document.getElementById('hud-coords-text');
     const tickerMsg = document.getElementById('workbench-ticker-msg');
-    const stations = document.querySelectorAll<HTMLElement>('.station-card');
-    const pipes = document.querySelectorAll<SVGPathElement>('.circuit-pipe-line');
 
-    // Build Engine Assembly Animation
-    btnBuild?.addEventListener('click', () => {
-      if (btnBuild) btnBuild.disabled = true;
-      if (tickerMsg) tickerMsg.textContent = '✦ Ensamblando Red Vasculares Nexafy: Conectando Muelle Callao...';
+    Object.keys(NODES).forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
 
-      // Stage 1: Fade out stations
-      stations.forEach(s => {
-        s.style.opacity = '0';
-        s.style.transform = 'scale(0.85)';
-        s.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      // Initialize position and guarantee active visibility
+      el.style.left = `${NODES[id].x}px`;
+      el.style.top = `${NODES[id].y}px`;
+      el.style.opacity = '1';
+      el.style.transform = 'scale(1) translate(0, 0)';
+      el.style.display = 'flex';
+      el.style.visibility = 'visible';
+
+      let isDragging = false;
+      let dragOffset = { x: 0, y: 0 };
+
+      el.addEventListener('pointerdown', (e: PointerEvent) => {
+        if (isBuilding) return;
+        isDragging = true;
+        el.setPointerCapture(e.pointerId);
+
+        const rect = el.getBoundingClientRect();
+        dragOffset = {
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top
+        };
+
+        el.classList.add('is-dragging');
+        if (dragHud) dragHud.style.display = 'flex';
+        if (hudCoordsText) {
+          hudCoordsText.textContent = `${NODES[id].name} · X: ${Math.round(NODES[id].x)}px · Y: ${Math.round(NODES[id].y)}px`;
+        }
+        e.preventDefault();
       });
 
-      // Stage 2: Staggered spring docking
-      setTimeout(() => {
-        if (stations[0]) {
-          stations[0].style.opacity = '1';
-          stations[0].style.transform = 'scale(1)';
-        }
-        if (tickerMsg) tickerMsg.textContent = '✦ Estación 01 [Despacho en Bahía · FEFO] acoplada';
-      }, 300);
+      el.addEventListener('pointermove', (e: PointerEvent) => {
+        if (!isDragging) return;
 
-      setTimeout(() => {
-        if (stations[1]) {
-          stations[1].style.opacity = '1';
-          stations[1].style.transform = 'scale(1)';
-        }
-        if (tickerMsg) tickerMsg.textContent = '✦ Estación 02 [Telemetría Sensirion IoT · -18.2°C] sincronizada';
-      }, 650);
+        const stageRect = stage.getBoundingClientRect();
+        let newX = e.clientX - stageRect.left - dragOffset.x;
+        let newY = e.clientY - stageRect.top - dragOffset.y;
 
-      setTimeout(() => {
-        if (stations[2]) {
-          stations[2].style.opacity = '1';
-          stations[2].style.transform = 'scale(1)';
-        }
-        if (tickerMsg) tickerMsg.textContent = '✦ Estación 03 [Custodia Escrow 100% · $3,450.00] garantizada';
-      }, 1000);
+        // Stage boundary clamping (Never leave canvas or cut tubes)
+        newX = Math.max(10, Math.min(stageRect.width - NODES[id].width - 10, newX));
+        newY = Math.max(10, Math.min(stageRect.height - NODES[id].height - 10, newY));
 
-      setTimeout(() => {
-        if (btnBuild) btnBuild.disabled = false;
-        if (tickerMsg) tickerMsg.textContent = '✦ Red Nexafy 100% Operativa · Despachos, Telemetría y Custodia Activos';
-      }, 1400);
+        NODES[id].x = newX;
+        NODES[id].y = newY;
+
+        el.style.left = `${newX}px`;
+        el.style.top = `${newY}px`;
+
+        if (hudCoordsText) {
+          hudCoordsText.textContent = `${NODES[id].name} · X: ${Math.round(newX)}px · Y: ${Math.round(newY)}px`;
+        }
+
+        rerouteAll();
+      });
+
+      const onPointerEnd = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        el.classList.remove('is-dragging');
+        if (dragHud) dragHud.style.display = 'none';
+
+        if (tickerMsg) {
+          tickerMsg.textContent = `✦ Bloque [${NODES[id].name}] posicionado en (${Math.round(NODES[id].x)}, ${Math.round(NODES[id].y)}) · Conduits recalculados`;
+        }
+      };
+
+      el.addEventListener('pointerup', onPointerEnd);
+      el.addEventListener('pointercancel', onPointerEnd);
     });
+  }
+
+  /**
+   * Animate Signal Pulses Flowing through Conduits (60 FPS)
+   */
+  function animateParticles() {
+    EDGES.forEach(edge => {
+      edge.pulseProgress += edge.pulseSpeed;
+      if (edge.pulseProgress > 1) edge.pulseProgress = 0;
+
+      const pathEl = document.getElementById(edge.pathId) as SVGPathElement | null;
+      const particleEl = document.getElementById(edge.pulseId) as SVGCircleElement | null;
+
+      if (pathEl && particleEl) {
+        const len = pathEl.getTotalLength();
+        if (len > 0) {
+          const pt = pathEl.getPointAtLength(edge.pulseProgress * len);
+          particleEl.setAttribute('cx', pt.x.toFixed(1));
+          particleEl.setAttribute('cy', pt.y.toFixed(1));
+        }
+      }
+    });
+
+    requestAnimationFrame(animateParticles);
+  }
+
+  /**
+   * Dynamic Assembly "Construir Motor (Build)"
+   */
+  function buildEngineAssembly() {
+    if (isBuilding) return;
+    isBuilding = true;
+
+    const btnBuild = document.getElementById('btn-build-engine') as HTMLButtonElement | null;
+    const tickerMsg = document.getElementById('workbench-ticker-msg');
+    if (btnBuild) btnBuild.disabled = true;
+
+    if (tickerMsg) {
+      tickerMsg.textContent = '✦ Ensamblando motor gráfico Nexafy: Conectando muelle y estaciones...';
+    }
+
+    // Step 0: Disperse
+    Object.keys(NODES).forEach((id, idx) => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.style.transition = 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
+        el.style.opacity = '0.35';
+        el.style.transform = `scale(0.9) translate(${(idx % 2 === 0 ? -16 : 16)}px, ${(idx % 3 === 0 ? -12 : 12)}px)`;
+      }
+    });
+
+    const sequence = [
+      { ids: ['circuit-hub'], delay: 100, msg: '✦ 1/5: Origen [Terminal Pesquero Callao · B2B] acoplado' },
+      { ids: ['circuit-center-hub'], delay: 400, msg: '✦ 2/5: Núcleo Bus [NEXA HUB Core] conectado' },
+      { ids: ['station-01-card'], delay: 750, msg: '✦ 3/5: Estación 01 [Despacho en Bahía · FEFO] acoplada' },
+      { ids: ['station-02-card'], delay: 1100, msg: '✦ 4/5: Estación 02 [Telemetría Sensirion IoT · -18.2°C] sincronizada' },
+      { ids: ['station-03-card', 'circuit-dest-hub'], delay: 1450, msg: '✦ 5/5: Estación 03 [Custodia Escrow 100%] y Red Mayorista enlazadas' },
+    ];
+
+    sequence.forEach(step => {
+      setTimeout(() => {
+        step.ids.forEach(id => {
+          const el = document.getElementById(id);
+          const target = INITIAL_POSITIONS[id];
+          if (el && target) {
+            NODES[id].x = target.x;
+            NODES[id].y = target.y;
+            el.style.transition = 'left 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.4s ease, opacity 0.3s ease';
+            el.style.left = `${target.x}px`;
+            el.style.top = `${target.y}px`;
+            el.style.transform = 'scale(1) translate(0, 0)';
+            el.style.opacity = '1';
+          }
+        });
+        rerouteAll();
+        if (tickerMsg) tickerMsg.textContent = step.msg;
+      }, step.delay);
+    });
+
+    setTimeout(() => {
+      isBuilding = false;
+      if (btnBuild) btnBuild.disabled = false;
+      if (tickerMsg) {
+        tickerMsg.textContent = '✦ Motor Gráfico Nexafy Construido y 100% Operativo · Arrastra cualquier bloque libremente';
+      }
+      Object.keys(NODES).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.transition = 'none';
+      });
+    }, 1900);
+  }
+
+  /**
+   * Apply Preset Positions Smoothly
+   */
+  function applyPreset(presetKey: string) {
+    let preset = INITIAL_POSITIONS;
+    if (presetKey === 'matrix') preset = PRESET_MATRIX;
+    else if (presetKey === 'escrow') preset = PRESET_ESCROW;
+
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.classList.toggle('active', (btn as HTMLElement).dataset.preset === presetKey);
+    });
+
+    Object.keys(preset).forEach(id => {
+      const target = preset[id];
+      const el = document.getElementById(id);
+      if (el && target) {
+        NODES[id].x = target.x;
+        NODES[id].y = target.y;
+        el.style.transition = 'left 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        el.style.left = `${target.x}px`;
+        el.style.top = `${target.y}px`;
+      }
+    });
+
+    rerouteAll();
+
+    setTimeout(() => {
+      Object.keys(NODES).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.transition = 'none';
+      });
+    }, 500);
+
+    const tickerMsg = document.getElementById('workbench-ticker-msg');
+    if (tickerMsg) {
+      tickerMsg.textContent = `✦ Preset [${presetKey.toUpperCase()}] aplicado con 0 colisiones`;
+    }
+  }
+
+  // Tones Management
+  const TONES: Record<string, { plate: string; accent: string; conduit: string }> = {
+    nexa:     { plate: '#082846', accent: '#38bdf8', conduit: '#bae6fd' },
+    ceramic:  { plate: '#1d3d63', accent: '#38bdf8', conduit: '#a5f3fc' },
+    cashmere: { plate: '#283a48', accent: '#7dd3fc', conduit: '#bae6fd' },
+    oceanic:  { plate: '#0c2038', accent: '#38bdf8', conduit: '#93c5fd' }
+  };
+
+  function applyTone(toneKey: string) {
+    const tone = TONES[toneKey];
+    if (!tone) return;
+
+    document.querySelectorAll('.tone-pill').forEach(btn => {
+      btn.classList.toggle('active', (btn as HTMLElement).dataset.tone === toneKey);
+    });
+
+    const silPath = document.querySelector<SVGPathElement>('.hero-silhouette-path');
+    if (silPath) silPath.setAttribute('fill', tone.plate);
+
+    const pipes = document.querySelectorAll<SVGPathElement>('.circuit-pipe-line');
+    pipes.forEach(p => p.setAttribute('stroke', tone.conduit));
+  }
+
+  function initLivingEngineWorkbench() {
+    setupDragAndDrop();
+    rerouteAll();
+    animateParticles();
+
+    // Build Engine Assembly
+    const btnBuild = document.getElementById('btn-build-engine');
+    btnBuild?.addEventListener('click', buildEngineAssembly);
 
     // Preset Switching
     document.querySelectorAll<HTMLButtonElement>('.preset-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const preset = btn.dataset.preset || 'channels';
-        document.querySelectorAll('.preset-btn').forEach(b => b.classList.toggle('active', b === btn));
-
-        if (preset === 'channels') {
-          stations.forEach(s => s.style.display = 'flex');
-          if (tickerMsg) tickerMsg.textContent = '✦ Preset [CANALES]: Flujo canónico de 3 estaciones cerrado';
-        } else if (preset === 'matrix') {
-          stations.forEach(s => s.style.display = 'flex');
-          if (tickerMsg) tickerMsg.textContent = '✦ Preset [MATRIZ]: Monitoreo de telemetría IoT Sensirion activo';
-        } else if (preset === 'escrow') {
-          stations.forEach(s => {
-            s.style.display = 'flex';
-          });
-          if (tickerMsg) tickerMsg.textContent = '✦ Preset [ESCROW]: Liquidación automática por contrato inteligente';
-        } else if (preset === 'reset') {
-          stations.forEach(s => {
-            s.style.display = 'flex';
-            s.style.opacity = '1';
-            s.style.transform = 'none';
-          });
-          if (tickerMsg) tickerMsg.textContent = '✦ Posiciones canónicas restablecidas';
-        }
+        applyPreset(preset);
       });
     });
 
     // Tone Switching
-    const TONES: Record<string, { plate: string; accent: string; conduit: string }> = {
-      nexa:     { plate: '#082846', accent: '#38bdf8', conduit: '#bae6fd' },
-      ceramic:  { plate: '#1d3d63', accent: '#38bdf8', conduit: '#a5f3fc' },
-      cashmere: { plate: '#283a48', accent: '#7dd3fc', conduit: '#bae6fd' },
-      oceanic:  { plate: '#0c2038', accent: '#38bdf8', conduit: '#93c5fd' }
-    };
-
     document.querySelectorAll<HTMLButtonElement>('.tone-pill').forEach(btn => {
       btn.addEventListener('click', () => {
         const toneKey = btn.dataset.tone || 'nexa';
-        const tone = TONES[toneKey];
-        if (!tone) return;
-
-        document.querySelectorAll('.tone-pill').forEach(b => b.classList.toggle('active', b === btn));
-
-        const silPath = document.querySelector<SVGPathElement>('.hero-silhouette-path');
-        if (silPath) silPath.setAttribute('fill', tone.plate);
-
-        pipes.forEach(p => p.setAttribute('stroke', tone.conduit));
+        applyTone(toneKey);
       });
     });
 
@@ -1577,7 +2081,7 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
       btn.addEventListener('click', () => {
         const pastel = btn.dataset.pastel || '#bae6fd';
         document.querySelectorAll('.conduit-pill').forEach(b => b.classList.toggle('active', b === btn));
-        pipes.forEach(p => p.setAttribute('stroke', pastel));
+        document.querySelectorAll<SVGPathElement>('.circuit-pipe-line').forEach(p => p.setAttribute('stroke', pastel));
       });
     });
 
@@ -1595,7 +2099,6 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
     });
   }
 
-  // Initialize immediately or on DOM ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initLivingEngineWorkbench);
   } else {

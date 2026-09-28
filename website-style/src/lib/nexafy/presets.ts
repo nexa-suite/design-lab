@@ -45,9 +45,9 @@ export const NEXAFY_PRESETS: Record<string, NexafyShapeConfig> = {
     baseRadius: 36,
     crown: {
       enabled: true,
-      x: 426,
-      width: 568,
-      height: 105,
+      x: 390,
+      width: 660,
+      height: 120,
       radius: 36,
       filletRadius: 36
     },
@@ -72,22 +72,22 @@ export const NEXAFY_PRESETS: Record<string, NexafyShapeConfig> = {
     description: 'Shared-stage morph state supporting the white enterprise software workbench and active channels.',
     width: 1440,
     height: 820,
-    baseRadius: 32,
+    baseRadius: 36,
     crown: {
       enabled: true,
-      x: 360,
-      width: 720,
-      height: 90,
-      radius: 32,
-      filletRadius: 32
+      x: 380,
+      width: 680,
+      height: 120,
+      radius: 36,
+      filletRadius: 36
     },
     shelf: {
       enabled: true,
-      x: 240,
-      width: 960,
-      height: 60,
-      radius: 28,
-      filletRadius: 28
+      x: 200,
+      width: 1040,
+      height: 85,
+      radius: 36,
+      filletRadius: 36
     },
     colors: {
       background: '#082846',
@@ -100,16 +100,16 @@ export const NEXAFY_PRESETS: Record<string, NexafyShapeConfig> = {
     id: 'PAYMENT',
     name: 'Safe Renting / Payment Flow',
     description: 'Framing for iOS lockscreen, floating payment chips, and confetti celebration.',
-    width: 1200,
-    height: 720,
+    width: 1440,
+    height: 820,
     baseRadius: 36,
     crown: {
       enabled: true,
-      x: 300,
-      width: 600,
-      height: 80,
-      radius: 32,
-      filletRadius: 32
+      x: 380,
+      width: 680,
+      height: 120,
+      radius: 36,
+      filletRadius: 36
     },
     shelf: {
       enabled: false,

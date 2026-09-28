@@ -90,7 +90,7 @@ export const NEUTRAL_SCALE: readonly NeutralToken[] = [
 ];
 
 export const COLOR_FAMILIES: readonly ColorFamily[] = [
-  { name: 'Success green', surface: '#f0fdf4', border: '#bbf7d0', foreground: '#15803d', icon: 'pi-check-circle', example: 'Completed order' },
+  { name: 'Active cyan', surface: '#e0f2fe', border: '#bae6fd', foreground: '#0369a1', icon: 'pi-check-circle', example: 'Completed order' },
   { name: 'Attention amber', surface: '#fffbeb', border: '#fcd34d', foreground: '#92400e', icon: 'pi-clock', example: 'Awaiting review' },
   { name: 'Danger red', surface: '#fef2f2', border: '#fecaca', foreground: '#991b1b', icon: 'pi-ban', example: 'Blocked request' },
   { name: 'Operational orange', surface: '#fff7ed', border: '#fed7aa', foreground: '#9a3412', icon: 'pi-flag', example: 'High priority' },
@@ -150,7 +150,7 @@ export const CONTRAST_CONTRACTS: readonly ContrastContract[] = [
   { id: 'text-secondary-card', label: 'Secondary text on card', foregroundToken: '--nexa-color-text-secondary', foreground: '#64748b', backgroundToken: '--nexa-surface-card', background: '#ffffff', gate: 'normal', ratio: 4.8, pass: true },
   { id: 'action-label-primary', label: 'Action label on primary blue', foregroundToken: '--nexa-color-text-inverse', foreground: '#ffffff', backgroundToken: '--nexa-color-primary-600', background: 'oklch(54.6% 0.215 262.9)', gate: 'normal', ratio: 5.6, pass: true },
   { id: 'link-on-card', label: 'Link on card', foregroundToken: '--nexa-color-primary-700', foreground: 'oklch(48% 0.19 262.9)', backgroundToken: '--nexa-surface-card', background: '#ffffff', gate: 'normal', ratio: 7.2, pass: true },
-  { id: 'success-card', label: 'Success text on success surface', foregroundToken: '--nexa-color-success-700', foreground: '#15803d', backgroundToken: '--nexa-surface-success', background: '#f0fdf4', gate: 'normal', ratio: 5.4, pass: true },
+  { id: 'success-card', label: 'Success text on success surface', foregroundToken: '--nexa-color-success-700', foreground: '#0369a1', backgroundToken: '--nexa-surface-success', background: '#e0f2fe', gate: 'normal', ratio: 5.4, pass: true },
   { id: 'warning-card', label: 'Warning text on warning surface', foregroundToken: '--nexa-color-warning-text', foreground: '#92400e', backgroundToken: '--nexa-surface-warning', background: '#fffbeb', gate: 'normal', ratio: 5.8, pass: true },
   { id: 'danger-card', label: 'Danger text on danger surface', foregroundToken: '--nexa-color-danger-text', foreground: '#991b1b', backgroundToken: '--nexa-surface-danger', background: '#fef2f2', gate: 'normal', ratio: 6.2, pass: true },
 ];

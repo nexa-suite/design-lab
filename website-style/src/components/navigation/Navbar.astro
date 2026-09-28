@@ -4,12 +4,17 @@
 
 <header class="site-header" id="site-header">
   <div class="nav-container">
-    <a href="/" class="brand-logo" aria-label="Nexa Platform">
-      <span class="logo-mark" aria-hidden="true">
-        <img src="/assets/nexa-nx-blue.svg" alt="NX" width="28" height="28" />
-      </span>
-      <span class="logo-text">Nexa</span>
-    </a>
+    <div class="nav-brand-group">
+      <a href="/" class="nav-home-icon-link" aria-label="Volver a Inicio" title="Inicio">
+        <i class="pi pi-home" aria-hidden="true"></i>
+      </a>
+      <a href="/" class="brand-logo" aria-label="Nexa Platform">
+        <span class="logo-mark" aria-hidden="true">
+          <img src="/assets/nexa-nx-blue.svg" alt="NX" width="28" height="28" />
+        </span>
+        <span class="logo-text">Nexa</span>
+      </a>
+    </div>
 
     <!-- Desktop Navigation -->
     <nav class="desktop-nav" aria-label="Main Navigation">
@@ -24,12 +29,6 @@
 
     <!-- Desktop Actions -->
     <div class="nav-actions">
-      <div class="lang-selector" aria-label="Language selection">
-        <button type="button" class="lang-btn active" aria-label="Switch language to Spanish" aria-pressed="true">ES</button>
-        <span class="lang-divider" aria-hidden="true">/</span>
-        <button type="button" class="lang-btn" aria-label="Switch language to English" aria-pressed="false">EN</button>
-      </div>
-
       <a href="#login" class="login-link">Login</a>
       <a href="#book-demo" class="cta-pill-button">
         <span>Agendar Demo</span>
@@ -128,6 +127,35 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  /* Brand Group with Left Home Icon */
+  .nav-brand-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .nav-home-icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    color: #334155;
+    font-size: 15px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .nav-home-icon-link:hover {
+    background: #2563eb;
+    border-color: #1d4ed8;
+    color: #ffffff;
+    transform: translateY(-1px);
   }
 
   /* Brand Logo */

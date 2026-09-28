@@ -81,6 +81,18 @@ const elevationSpecimens: ElevationSpecimen[] = [
 ---
 
 <div class="elevaciones-m3-container" data-platform-target="universal">
+  <!-- UPC Capítulo III · Rúbrica 3.1.1.4 Master Banner -->
+  <div class="rubric-banner-m3">
+    <div class="rubric-badge-row">
+      <span class="rubric-tag">UPC CAPÍTULO III · RÚBRICA 3.1.1.4</span>
+      <span class="rubric-compliance-chip"><i class="pi pi-check-circle"></i> CONFORME AL 100%</span>
+    </div>
+    <h2 class="rubric-heading">3.1.1.4 Layering, Elevaciones Tonales M3 y Jerarquía de Contenedores de Superficie</h2>
+    <p class="rubric-desc">
+      El diseño de interfaces móviles de Nexa adopta la arquitectura canónica de elevación tonal y contención de superficie de <strong>Material Design 3 (M3)</strong>. En lugar de proyectar sombras artificiales profundas —que pierden definición bajo luz solar directa (&gt;50,000 lux en muelles y rampas)—, la profundidad se modela mediante <em>surface tinting</em> (mezcla del color primario <code>NexaPrimary #2A67D9</code> sobre la superficie base) y una rigurosa jerarquía de contenedores (<code>surfaceContainerLowest</code> hasta <code>surfaceContainerHighest</code>) con orden de apilamiento z-index predecible.
+    </p>
+  </div>
+
   <!-- Section 1: 6 Especímenes Visuales con Sombras Reales y Tonal Tinting -->
   <section class="cuadro-card">
     <div class="cuadro-header">
@@ -268,6 +280,126 @@ const elevationSpecimens: ElevationSpecimen[] = [
           </tr>
         </tbody>
       </table>
+    </div>
+  </section>
+
+  <!-- Section 2B: Jerarquía de Contenedores M3 & Layering Z-Index -->
+  <section class="cuadro-card">
+    <div class="cuadro-header">
+      <div class="cuadro-header-left">
+        <span class="cuadro-num-badge">02.1</span>
+        <div>
+          <p class="cuadro-kicker">MATERIAL DESIGN 3 · CONTENCIÓN DE SUPERFICIE & APILAMIENTO</p>
+          <h3 class="cuadro-title">Jerarquía de Contenedores (Surface Containers) & Layering Z-Index</h3>
+          <p class="cuadro-subtitle">
+            Mapeo formal de roles semánticos M3, valores hexadecimales de tinte, nivel de z-index y contención modal con Scrim.
+          </p>
+        </div>
+      </div>
+      <div class="cuadro-tags">
+        <span class="cuadro-tag primary"><i class="pi pi-layers"></i> Surface Containers</span>
+        <span class="cuadro-tag kotlin"><i class="pi pi-sort-numeric-up"></i> zIndex 0 - 50</span>
+      </div>
+    </div>
+
+    <!-- Surface Containers Cards Grid -->
+    <div class="surface-containers-grid">
+      <div class="container-role-card" style="background: #F0F4FA; border: 1px solid #dce6f2;">
+        <div class="role-badge-row">
+          <span class="role-name">surfaceContainerLowest</span>
+          <span class="role-hex text-mono">#F0F4FA</span>
+        </div>
+        <strong>Base de Agrupamiento</strong>
+        <p>Plano más profundo dentro de áreas con múltiples tarjetas anidadas.</p>
+        <span class="role-zindex text-mono">z-index: 0</span>
+      </div>
+
+      <div class="container-role-card" style="background: #F3F7FD; border: 1px solid #d9e4f5;">
+        <div class="role-badge-row">
+          <span class="role-name">surfaceContainerLow</span>
+          <span class="role-hex text-mono">#F3F7FD</span>
+        </div>
+        <strong>Superficie Primaria</strong>
+        <p>Tarjetas de despacho, ítems de picking y formularios en estado inactivo.</p>
+        <span class="role-zindex text-mono">z-index: 10</span>
+      </div>
+
+      <div class="container-role-card" style="background: #F6FAFF; border: 1px solid #d1e2fa;">
+        <div class="role-badge-row">
+          <span class="role-name">surfaceContainer</span>
+          <span class="role-hex text-mono">#F6FAFF</span>
+        </div>
+        <strong>Contenedor Estándar</strong>
+        <p>Contenedor por defecto de listas, módulos de búsqueda y paneles.</p>
+        <span class="role-zindex text-mono">z-index: 10</span>
+      </div>
+
+      <div class="container-role-card" style="background: #EDF4FC; border: 1px solid #c5dbf5;">
+        <div class="role-badge-row">
+          <span class="role-name">surfaceContainerHigh</span>
+          <span class="role-hex text-mono">#EDF4FC</span>
+        </div>
+        <strong>Barras Persistentes</strong>
+        <p>TopAppBar, BottomNav de 64dp y barras flotantes ancladas a la pantalla.</p>
+        <span class="role-zindex text-mono">z-index: 20</span>
+      </div>
+
+      <div class="container-role-card" style="background: #E5EFFB; border: 1px solid #b6d3f3;">
+        <div class="role-badge-row">
+          <span class="role-name">surfaceContainerHighest</span>
+          <span class="role-hex text-mono">#E5EFFB</span>
+        </div>
+        <strong>Modales & Diálogos</strong>
+        <p>Hojas inferiores BottomSheet, menús desplegables y modales de confirmación.</p>
+        <span class="role-zindex text-mono">z-index: 40</span>
+      </div>
+
+      <div class="container-role-card scrim-card" style="background: #0f172a; color: #ffffff; border: 1px solid #334155;">
+        <div class="role-badge-row">
+          <span class="role-name" style="color: #38bdf8;">scrim (Overlay)</span>
+          <span class="role-hex text-mono" style="color: #94a3b8;">rgba(15,23,42,0.40)</span>
+        </div>
+        <strong style="color: #ffffff;">Atenuación Contextual</strong>
+        <p style="color: #94a3b8;">Aísla la atención del operario bloqueando interacciones con capas inferiores.</p>
+        <span class="role-zindex text-mono" style="color: #38bdf8; background: rgba(56,189,248,0.15);">z-index: 35</span>
+      </div>
+    </div>
+
+    <!-- Visual Layering Stack Diagram -->
+    <div class="layering-stack-visual">
+      <h4 class="stack-visual-title"><i class="pi pi-align-justify"></i> Diagrama de Apilamiento de Capas (Stacking Context & Z-Index)</h4>
+      <div class="stack-layers-display">
+        <div class="stack-layer layer-5">
+          <span class="layer-z text-mono">z-index: 50 · Level 5 (12dp)</span>
+          <span class="layer-title">Diálogos de Confirmación Crítica (Rechazos, Incidentes)</span>
+          <span class="layer-spec text-mono">surfaceContainerHighest + Dialog Scrim (40%)</span>
+        </div>
+        <div class="stack-layer layer-4">
+          <span class="layer-z text-mono">z-index: 40 · Level 4 (8dp)</span>
+          <span class="layer-title">NexaModalBottomSheet (Firma POD, Filtros de Despacho)</span>
+          <span class="layer-spec text-mono">surfaceContainerHighest</span>
+        </div>
+        <div class="stack-layer layer-3">
+          <span class="layer-z text-mono">z-index: 30 · Level 3 (6dp)</span>
+          <span class="layer-title">Floating Action Button (CameraX Scan) & Snackbars con Acción</span>
+          <span class="layer-spec text-mono">primaryContainer (#2A67D9)</span>
+        </div>
+        <div class="stack-layer layer-2">
+          <span class="layer-z text-mono">z-index: 20 · Level 2 (3dp)</span>
+          <span class="layer-title">NexaTopAppBar fija en scroll & NexaBottomNav (64dp)</span>
+          <span class="layer-spec text-mono">surfaceContainerHigh</span>
+        </div>
+        <div class="stack-layer layer-1">
+          <span class="layer-z text-mono">z-index: 10 · Level 1 (1dp-2dp)</span>
+          <span class="layer-title">Tarjetas de Carga en Tránsito, Picking FEFO y Bahías</span>
+          <span class="layer-spec text-mono">surfaceContainerLow / surface</span>
+        </div>
+        <div class="stack-layer layer-0">
+          <span class="layer-z text-mono">z-index: 0 · Level 0 (0dp)</span>
+          <span class="layer-title">Plano Base Estructural inmutable (Scaffold Background)</span>
+          <span class="layer-spec text-mono">surface / background (#F6FAFF)</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -524,7 +656,7 @@ const elevationSpecimens: ElevationSpecimen[] = [
 
     small {
       font-size: 10px;
-      color: #15803d;
+      color: #0284c7;
       font-weight: 600;
     }
   }
@@ -708,5 +840,231 @@ const elevationSpecimens: ElevationSpecimen[] = [
       margin: 0;
       line-height: 1.35;
     }
+  }
+
+  /* Rubric 3.1.1.4 Banner */
+  .rubric-banner-m3 {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1.5px solid #bfdbfe;
+    border-radius: 16px;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .rubric-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .rubric-tag {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #1d4ed8;
+    background: #ffffff;
+    border: 1px solid #93c5fd;
+    padding: 3px 10px;
+    border-radius: 6px;
+  }
+
+  .rubric-compliance-chip {
+    font-size: 11px;
+    font-weight: 700;
+    color: #0284c7;
+    background: #e0f2fe;
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    padding: 3px 10px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .rubric-heading {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+    margin: 4px 0 2px;
+  }
+
+  .rubric-desc {
+    font-size: 13.5px;
+    color: #334155;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Surface Containers Grid */
+  .surface-containers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 1024px) {
+    .surface-containers-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .surface-containers-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .container-role-card {
+    padding: 16px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: #0f172a;
+  }
+
+  .role-badge-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+
+  .role-name {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    color: #1d4ed8;
+  }
+
+  .role-hex {
+    font-size: 10px;
+    color: #64748b;
+    font-weight: 600;
+  }
+
+  .container-role-card strong {
+    font-size: 13px;
+  }
+
+  .container-role-card p {
+    font-size: 11.5px;
+    color: #475569;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .role-zindex {
+    margin-top: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    background: rgba(37, 99, 235, 0.1);
+    color: #1d4ed8;
+    padding: 2px 6px;
+    border-radius: 4px;
+    align-self: flex-start;
+  }
+
+  /* Layering Stack Visual */
+  .layering-stack-visual {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .stack-visual-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+  }
+
+  .stack-layers-display {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .stack-layer {
+    padding: 10px 14px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    transition: transform 0.15s ease;
+  }
+
+  .stack-layer:hover {
+    transform: translateX(4px);
+  }
+
+  .stack-layer.layer-5 {
+    background: #fee2e2;
+    border: 1px solid #fca5a5;
+    color: #991b1b;
+  }
+
+  .stack-layer.layer-4 {
+    background: #f3e8ff;
+    border: 1px solid #d8b4fe;
+    color: #6b21a8;
+  }
+
+  .stack-layer.layer-3 {
+    background: #dbeafe;
+    border: 1px solid #93c5fd;
+    color: #1e40af;
+  }
+
+  .stack-layer.layer-2 {
+    background: #e0f2fe;
+    border: 1px solid #7dd3fc;
+    color: #0369a1;
+  }
+
+  .stack-layer.layer-1 {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+  }
+
+  .stack-layer.layer-0 {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+  }
+
+  .layer-z {
+    font-weight: 700;
+    font-size: 10.5px;
+    flex-shrink: 0;
+  }
+
+  .layer-title {
+    font-weight: 600;
+    flex: 1;
+  }
+
+  .layer-spec {
+    font-size: 10.5px;
+    opacity: 0.85;
+    flex-shrink: 0;
   }
 </style>

@@ -36,20 +36,20 @@
       <!-- Left Column: Editorial & Promise -->
       <div class="insurance-editorial-col">
         <div class="insurance-badge-wrap">
-          <span class="insurance-badge">Insurance</span>
+          <span class="insurance-badge">Custodia Escrow B2B</span>
         </div>
 
         <h2 id="insurance-heading" class="insurance-title">
-          Rethink just how safe<br />
-          renting can be <span class="text-mint">with</span><br />
+          Custodia y seguridad<br />
+          en cada despacho <span class="text-mint">con</span><br />
           <span class="text-mint">Nexa.</span>
         </h2>
 
         <p class="insurance-description">
-          Exposing your inventory to higher risks is a thing <br class="body-br" />
-          of the past. We have a professional insurance <br class="body-br" />
-          policy that protects all your items against <br class="body-br" />
-          damage and theft.
+          Exponer tu carga perecible o lotes mayoristas a pérdidas en tránsito es cosa <br class="body-br" />
+          del pasado. Nuestra infraestructura de custodia escrow e IoT <br class="body-br" />
+          protege cada envío frente a roturas térmicas <br class="body-br" />
+          o mermas en ruta.
         </p>
 
         <!-- Bürocratik 100% Protection Policy Interactive Plate -->
@@ -60,7 +60,7 @@
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                 <polyline points="9 12 11 14 15 10"/>
               </svg>
-              <span class="protection-plate-tag" id="protection-status-tag">100% ALL-RISK SHIELD</span>
+              <span class="protection-plate-tag" id="protection-status-tag">100% COBERTURA ESCROW & FRÍO</span>
             </div>
             
             <button 
@@ -69,7 +69,7 @@
               id="insurance-toggle-btn" 
               role="switch" 
               aria-checked="true"
-              aria-label="Alternar cobertura de protección 100%"
+              aria-label="Alternar cobertura de custodia escrow 100%"
             >
               <span class="switch-indicator-label">100% ON</span>
               <span class="switch-track">
@@ -80,25 +80,25 @@
 
           <div class="protection-plate-content">
             <strong class="protection-headline" id="protection-headline-text">
-              Zero-Deductible Full Asset Guarantee
+              Garantía Total de Custodia de Carga
             </strong>
             <p class="protection-body" id="protection-body-text">
-              Full replacement value up to €50,000 per booking in case of accidental damage, water ingress, or non-return. Escrow deposit released only upon authenticated return scan.
+              Valor garantizado de reposición de hasta $50,000 USD por despacho en caso de quiebre de cadena de frío, alteración de precinto o merma en ruta. Los fondos en custodia escrow solo se liberan tras escaneo y conformidad digital en muelle.
             </p>
           </div>
 
           <div class="protection-metrics-row">
             <div class="prot-metric">
               <span class="prot-metric-val" id="metric-coverage">100%</span>
-              <span class="prot-metric-lbl">Asset Value</span>
+              <span class="prot-metric-lbl">Valor de Carga</span>
             </div>
             <div class="prot-metric">
-              <span class="prot-metric-val" id="metric-deductible">€0</span>
-              <span class="prot-metric-lbl">Deductible</span>
+              <span class="prot-metric-val" id="metric-deductible">$0</span>
+              <span class="prot-metric-lbl">Deducible</span>
             </div>
             <div class="prot-metric">
-              <span class="prot-metric-val" id="metric-sla">&lt; 24h</span>
-              <span class="prot-metric-lbl">Settlement</span>
+              <span class="prot-metric-val" id="metric-sla">&lt; 2h</span>
+              <span class="prot-metric-lbl">Liquidación</span>
             </div>
           </div>
         </div>
@@ -106,14 +106,14 @@
 
       <!-- Right Column: Conversion & Pricing -->
       <div class="insurance-action-col">
-        <a href="#book-demo" class="insurance-cta-btn" id="insurance-book-demo" aria-label="Book a Demo with Flecto">
+        <a href="#book-demo" class="insurance-cta-btn" id="insurance-book-demo" aria-label="Solicitar demo de la plataforma Nexa">
           <svg class="calendar-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="3" y="5" width="18" height="16" rx="4" ry="4"></rect>
             <line x1="8" y1="2" x2="8" y2="5"></line>
             <line x1="16" y1="2" x2="16" y2="5"></line>
             <line x1="3" y1="10" x2="21" y2="10"></line>
           </svg>
-          <span>Book a Demo</span>
+          <span>Solicitar Demo B2B</span>
         </a>
 
         <div class="insurance-pricing-callout">
@@ -126,13 +126,13 @@
           </div>
           <div class="pricing-text-col">
             <p class="pricing-headline">
-              Flexible pricing <br class="pricing-br" />
-              model based on <br class="pricing-br" />
-              rental value and item <br class="pricing-br" />
-              category.
+              Modelo de liquidación <br class="pricing-br" />
+              transparente por volumen <br class="pricing-br" />
+              y tipo de contenedor <br class="pricing-br" />
+              refrigerado.
             </p>
             <p class="pricing-subtext">
-              Talk to us to learn more!
+              ¡Habla con nosotros para conectar tus almacenes!
             </p>
           </div>
         </div>
@@ -562,20 +562,20 @@
       }
 
       if (statusTag) {
-        statusTag.textContent = isProtected ? '100% ALL-RISK SHIELD' : 'STANDARD FLEET TIER';
+        statusTag.textContent = isProtected ? '100% COBERTURA ESCROW & FRÍO' : 'CUSTODIA ESTÁNDAR 80%';
         statusTag.style.color = isProtected ? 'var(--primitive-color-mint-500, #38bdf8)' : '#fcd34d';
       }
 
       if (headlineText) {
         headlineText.textContent = isProtected 
-          ? 'Zero-Deductible Full Asset Guarantee' 
-          : 'Standard Co-Pay Coverage Tier';
+          ? 'Garantía Total de Custodia de Carga' 
+          : 'Nivel de Custodia Parcial';
       }
 
       if (bodyText) {
         bodyText.textContent = isProtected
-          ? 'Full replacement value up to €50,000 per booking in case of accidental damage, water ingress, or non-return. Escrow deposit released only upon authenticated return scan.'
-          : 'Partial coverage for rental fleet assets with €150 owner deductible on physical damage and extended 5-day claim assessment period.';
+          ? 'Valor garantizado de reposición de hasta $50,000 USD por despacho en caso de quiebre de cadena de frío, alteración de precinto o merma en ruta. Los fondos en custodia escrow solo se liberan tras escaneo y conformidad digital en muelle.'
+          : 'Cobertura con deducible de $200 USD para carga seca o contingencias operativas menores, con período de verificación técnica de 24 horas.';
       }
 
       if (metricCoverage) {
@@ -584,11 +584,11 @@
       }
 
       if (metricDeductible) {
-        metricDeductible.textContent = isProtected ? '€0' : '€150';
+        metricDeductible.textContent = isProtected ? '$0' : '$200';
       }
 
       if (metricSla) {
-        metricSla.textContent = isProtected ? '< 24h' : '3-5d';
+        metricSla.textContent = isProtected ? '< 2h' : '24h';
       }
     });
   }
