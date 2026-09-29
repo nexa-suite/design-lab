@@ -15,11 +15,12 @@ import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
 import DeviceFrame from '../components/simulator/DeviceFrame.astro';
 import LoginScreenSpec from '../components/simulator/LoginScreenSpec.astro';
 
-// 2. Visual Design Foundations M3
+// 2. Visual Design Foundations M3 (UPC Capítulo III · Rúbrica 3.1.1)
+import PrincipiosDisenoSection from '../components/guidelines/PrincipiosDisenoSection.astro';
 import TokensColorSection from '../components/guidelines/TokensColorSection.astro';
 import TipografiaSpSection from '../components/guidelines/TipografiaSpSection.astro';
-import Cuadricula8dpSection from '../components/guidelines/Cuadricula8dpSection.astro';
 import ElevacionesM3Section from '../components/guidelines/ElevacionesM3Section.astro';
+import Cuadricula8dpSection from '../components/guidelines/Cuadricula8dpSection.astro';
 import Ergonomia48dpSection from '../components/guidelines/Ergonomia48dpSection.astro';
 import ZonasAlcanceSection from '../components/guidelines/ZonasAlcanceSection.astro';
 
@@ -226,9 +227,28 @@ import GaleriaVisualAndroid from '../components/simulator/GaleriaVisualAndroid.a
             <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
           </div>
         </div>
-        <div style="max-width: 440px; margin: 0 auto;">
+        <div style="max-width: 1040px; width: 100%; margin: 0 auto;">
           <LoginScreenSpec />
         </div>
+      </section>
+
+      <!-- =====================================================================
+           PANTALLA 2.0: PRINCIPIOS DE DISEÑO MÓVIL
+           ===================================================================== -->
+      <section class="lab-screen-view" id="screen-foundations-principles" data-title="Principios de Diseño Móvil">
+        <div class="screen-header-bar">
+          <div>
+            <span class="screen-badge-tag">PRINCIPIOS & ERGONOMÍA DE CAMPO</span>
+            <h2 class="screen-main-title">Principios de Diseño Móvil para Logística y Cadena de Frío</h2>
+            <p class="screen-main-desc">
+              Directrices de glanceability (&lt;1s), interacción ergonómica con una sola mano, arquitectura offline-first, legibilidad extrema a &gt;50,000 Lux y retroalimentación háptica/acústica.
+            </p>
+          </div>
+          <div class="screen-actions">
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
+          </div>
+        </div>
+        <PrincipiosDisenoSection />
       </section>
 
       <!-- =====================================================================
@@ -237,7 +257,7 @@ import GaleriaVisualAndroid from '../components/simulator/GaleriaVisualAndroid.a
       <section class="lab-screen-view" id="screen-foundations-color" data-title="Paleta M3 & Contraste WCAG">
         <div class="screen-header-bar">
           <div>
-            <span class="screen-badge-tag">FUNDAMENTOS VISUALES M3 · 01</span>
+            <span class="screen-badge-tag">PALETA TONAL M3 & WCAG 2.2</span>
             <h2 class="screen-main-title">Paleta Tonal Material 3 & Contraste Accesible</h2>
             <p class="screen-main-desc">
               Tokens tonales certificados bajo WCAG 2.2 AAA para Android Jetpack Compose con paleta de alto contraste para logística de campo.
@@ -256,7 +276,7 @@ import GaleriaVisualAndroid from '../components/simulator/GaleriaVisualAndroid.a
       <section class="lab-screen-view" id="screen-foundations-typography" data-title="Tipografía Escalar en sp">
         <div class="screen-header-bar">
           <div>
-            <span class="screen-badge-tag">FUNDAMENTOS VISUALES M3 · 02</span>
+            <span class="screen-badge-tag">ESCALA EN SP DINÁMICO</span>
             <h2 class="screen-main-title">Escala Tipográfica Dinámica en sp (Scale-Independent Pixels)</h2>
             <p class="screen-main-desc">
               Especificaciones de texto en <code>sp</code> con soporte nativo para escalado de accesibilidad del sistema operativo Android (85% a 200%).
@@ -275,7 +295,7 @@ import GaleriaVisualAndroid from '../components/simulator/GaleriaVisualAndroid.a
       <section class="lab-screen-view" id="screen-foundations-grid" data-title="Cuadrícula Espacial 8dp">
         <div class="screen-header-bar">
           <div>
-            <span class="screen-badge-tag">FUNDAMENTOS VISUALES M3 · 03</span>
+            <span class="screen-badge-tag">CUADRÍCULA ESPACIAL 8DP</span>
             <h2 class="screen-main-title">Cuadrícula Espacial 8dp & Densidad Multiplataforma</h2>
             <p class="screen-main-desc">
               Ritmo vertical y horizontal de 8dp (y half-step de 4dp) alineado con los píxeles independientes de densidad (dp) de Android.
@@ -294,10 +314,10 @@ import GaleriaVisualAndroid from '../components/simulator/GaleriaVisualAndroid.a
       <section class="lab-screen-view" id="screen-foundations-elevation" data-title="Elevación & Surface Tint">
         <div class="screen-header-bar">
           <div>
-            <span class="screen-badge-tag">FUNDAMENTOS VISUALES M3 · 04</span>
-            <h2 class="screen-main-title">Elevación Tonal Material 3 & Surface Tint (Nivel 0 al 5)</h2>
+            <span class="screen-badge-tag">LAYERING & ELEVACIONES M3</span>
+            <h2 class="screen-main-title">Layering, Elevaciones Tonales M3 y Jerarquía de Contenedores</h2>
             <p class="screen-main-desc">
-              Capas de elevación sin sombras artificiales pesadas; profundidad jerárquica lograda mediante tinte de superficie tonal M3.
+              Capas de elevación sin sombras artificiales pesadas; profundidad jerárquica lograda mediante tinte de superficie tonal M3, contenedores (Lowest a Highest) y z-index estricto.
             </p>
           </div>
           <div class="screen-actions">
@@ -313,7 +333,7 @@ import GaleriaVisualAndroid from '../components/simulator/GaleriaVisualAndroid.a
       <section class="lab-screen-view" id="screen-foundations-ergonomics" data-title="Ergonomía 48dp vs 56dp">
         <div class="screen-header-bar">
           <div>
-            <span class="screen-badge-tag">FUNDAMENTOS VISUALES M3 · 05</span>
+            <span class="screen-badge-tag">DIANAS TÁCTILES 48DP / 56DP</span>
             <h2 class="screen-main-title">Calibrador Táctil 48dp Estándar vs 56dp con Guantes</h2>
             <p class="screen-main-desc">
               Diana mínima táctil de 48dp para conductores en movimiento y 56dp para operarios de almacén con guantes de cámara de frío.
@@ -332,7 +352,7 @@ import GaleriaVisualAndroid from '../components/simulator/GaleriaVisualAndroid.a
       <section class="lab-screen-view" id="screen-foundations-reach" data-title="Zonas de Alcance del Pulgar">
         <div class="screen-header-bar">
           <div>
-            <span class="screen-badge-tag">FUNDAMENTOS VISUALES M3 · 06</span>
+            <span class="screen-badge-tag">ZONAS DE ALCANCE ERGONÓMICO</span>
             <h2 class="screen-main-title">Zonas Biomecánicas de Alcance del Pulgar en Pantalla Móvil</h2>
             <p class="screen-main-desc">
               Mapeo ergonómico de zonas: Cómoda (inferior), Estiramiento (centro) y Difícil (superior) para ubicar acciones primarias.

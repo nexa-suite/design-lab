@@ -59,10 +59,10 @@ const { currentSection = 'overview' } = Astro.props;
 
     <!-- Navigation Groups with Accordions (Modular Discrete Screens) -->
     <nav class="lab-nav" aria-label="Secciones de la documentación móvil">
-      <!-- 1. Simulador & Calibrador Android (Pantalla principal) -->
+      <!-- Simulador & Calibrador Android (Pantalla principal) -->
       <section class="lab-nav-group">
         <button class="nav-section-button" type="button" data-nav-group="simulator">
-          <span class="nav-section">1. SIMULADOR ANDROID</span>
+          <span class="nav-section">SIMULADOR ANDROID</span>
           <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
         </button>
         <div class="lab-nav-items">
@@ -77,44 +77,48 @@ const { currentSection = 'overview' } = Astro.props;
         </div>
       </section>
 
-      <!-- 2. Fundamentos de Diseño Visual M3 -->
+      <!-- Fundamentos de Diseño Visual M3 -->
       <section class="lab-nav-group">
         <button class="nav-section-button" type="button" data-nav-group="foundations">
-          <span class="nav-section">2. FUNDAMENTOS VISUALES M3</span>
+          <span class="nav-section">GUÍAS DE DISEÑO & VISUALES M3</span>
           <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
         </button>
         <div class="lab-nav-items">
+          <a class="lab-nav-item" href="#screen-foundations-principles" data-screen="screen-foundations-principles">
+            <i class="pi pi-compass" aria-hidden="true"></i>
+            <span>Principios Móviles</span>
+          </a>
           <a class="lab-nav-item" href="#screen-foundations-color" data-screen="screen-foundations-color">
             <i class="pi pi-palette" aria-hidden="true"></i>
-            <span>Paleta M3 & Swatches WCAG</span>
+            <span>Paleta M3 & WCAG</span>
           </a>
           <a class="lab-nav-item" href="#screen-foundations-typography" data-screen="screen-foundations-typography">
             <i class="pi pi-align-left" aria-hidden="true"></i>
-            <span>Tipografía Escalar en sp</span>
-          </a>
-          <a class="lab-nav-item" href="#screen-foundations-grid" data-screen="screen-foundations-grid">
-            <i class="pi pi-th-large" aria-hidden="true"></i>
-            <span>Cuadrícula Espacial 8dp</span>
+            <span>Tipografía en sp</span>
           </a>
           <a class="lab-nav-item" href="#screen-foundations-elevation" data-screen="screen-foundations-elevation">
             <i class="pi pi-clone" aria-hidden="true"></i>
-            <span>Elevación & Surface Tint (0-5)</span>
+            <span>Layering & Superficies M3</span>
+          </a>
+          <a class="lab-nav-item" href="#screen-foundations-grid" data-screen="screen-foundations-grid">
+            <i class="pi pi-th-large" aria-hidden="true"></i>
+            <span>Cuadrícula 8dp</span>
           </a>
           <a class="lab-nav-item" href="#screen-foundations-ergonomics" data-screen="screen-foundations-ergonomics">
             <i class="pi pi-hand" aria-hidden="true"></i>
-            <span>Calibrador 48dp vs 56dp (Guantes)</span>
+            <span>Diana Táctil 48dp vs 56dp</span>
           </a>
           <a class="lab-nav-item" href="#screen-foundations-reach" data-screen="screen-foundations-reach">
             <i class="pi pi-chart-pie" aria-hidden="true"></i>
-            <span>Zonas de Alcance del Pulgar</span>
+            <span>Zonas de Alcance Ergonómico</span>
           </a>
         </div>
       </section>
 
-      <!-- 3. Componentes & Módulos en Vivo -->
+      <!-- Componentes & Módulos en Vivo -->
       <section class="lab-nav-group">
         <button class="nav-section-button" type="button" data-nav-group="components">
-          <span class="nav-section">3. COMPONENTES & MÓDULOS</span>
+          <span class="nav-section">COMPONENTES & MÓDULOS</span>
           <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
         </button>
         <div class="lab-nav-items">
@@ -129,10 +133,10 @@ const { currentSection = 'overview' } = Astro.props;
         </div>
       </section>
 
-      <!-- 4. Especificaciones Técnicas & Código Kotlin -->
+      <!-- Especificaciones Técnicas & Código Kotlin -->
       <section class="lab-nav-group">
         <button class="nav-section-button" type="button" data-nav-group="technical">
-          <span class="nav-section">4. CÓDIGO & ARQUITECTURA</span>
+          <span class="nav-section">CÓDIGO & ARQUITECTURA</span>
           <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
         </button>
         <div class="lab-nav-items">
@@ -533,9 +537,9 @@ const { currentSection = 'overview' } = Astro.props;
     height: 8px;
     margin-top: 3px;
     border-radius: 50%;
-    background: #16a34a;
+    background: #0284c7;
     flex-shrink: 0;
-    box-shadow: 0 0 6px rgba(22, 163, 74, 0.4);
+    box-shadow: 0 0 6px rgba(2, 132, 199, 0.4);
   }
 
   /* Right Main Content */

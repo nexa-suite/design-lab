@@ -321,9 +321,14 @@ import LoginScreenSpec from './LoginScreenSpec.astro';
 
       // Update host height & padding
       if (host) {
-        const hostH = Math.max(480, h - 140);
-        host.style.height = `${hostH}px`;
-        host.style.padding = `${p}px`;
+        if (currentActiveScreen === 'login') {
+          host.style.height = `${h - 28}px`;
+          host.style.padding = '0px';
+        } else {
+          const hostH = Math.max(480, h - 140);
+          host.style.height = `${hostH}px`;
+          host.style.padding = `${p}px`;
+        }
       }
 
       // Update UI numbers & sliders
@@ -390,48 +395,62 @@ import LoginScreenSpec from './LoginScreenSpec.astro';
       });
     });
 
-    // Switch Screen Specimen
-    screenButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        screenButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+        let currentActiveScreen = 'operations';
 
-        const targetScreen = btn.getAttribute('data-screen');
-        const titleText = btn.getAttribute('data-title') || 'Operaciones Nexa';
+        // Switch Screen Specimen
+        screenButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            screenButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
 
-        if (topTitle) {
-          topTitle.textContent = titleText;
-        }
+            const targetScreen = btn.getAttribute('data-screen') || 'operations';
+            currentActiveScreen = targetScreen;
+            const titleText = btn.getAttribute('data-title') || 'Operaciones Nexa';
 
-        screenViews.forEach(view => {
-          view.classList.remove('active');
+            if (topTitle) {
+              topTitle.textContent = titleText;
+            }
+
+            screenViews.forEach(view => {
+              view.classList.remove('active');
+            });
+
+            const activeView = document.getElementById(`view-${targetScreen}`);
+            if (activeView) {
+              activeView.classList.add('active');
+            }
+
+            // Sync top bar, bottom nav & viewport host for true full screen
+            const frameBottomNav = document.getElementById('frame-bottom-nav');
+            const frameTopBar = document.getElementById('frame-top-bar');
+            if (targetScreen === 'login') {
+              if (frameBottomNav) frameBottomNav.style.display = 'none';
+              if (frameTopBar) frameTopBar.style.display = 'none';
+              if (host) {
+                host.style.padding = '0px';
+                host.style.height = `${currentHeight - 28}px`;
+              }
+            } else {
+              if (frameBottomNav) frameBottomNav.style.display = 'flex';
+              if (frameTopBar) frameTopBar.style.display = 'flex';
+              if (host) {
+                host.style.padding = `${currentPadding}px`;
+                host.style.height = `${Math.max(480, currentHeight - 140)}px`;
+              }
+            }
+
+            navDests.forEach(dest => dest.classList.remove('active'));
+            if (targetScreen === 'operations') {
+              document.querySelector('[data-dest="inicio"]')?.classList.add('active');
+            } else if (targetScreen === 'dispatch-live') {
+              document.querySelector('[data-dest="despacho"]')?.classList.add('active');
+            } else if (targetScreen === 'catalog-live') {
+              document.querySelector('[data-dest="picking"]')?.classList.add('active');
+            } else if (targetScreen === 'forms-live') {
+              document.querySelector('[data-dest="checklist"]')?.classList.add('active');
+            }
+          });
         });
-
-        const activeView = document.getElementById(`view-${targetScreen}`);
-        if (activeView) {
-          activeView.classList.add('active');
-        }
-
-        // Sync bottom nav destinations & visibility
-        const frameBottomNav = document.getElementById('frame-bottom-nav');
-        if (targetScreen === 'login') {
-          if (frameBottomNav) frameBottomNav.style.display = 'none';
-        } else {
-          if (frameBottomNav) frameBottomNav.style.display = 'flex';
-        }
-
-        navDests.forEach(dest => dest.classList.remove('active'));
-        if (targetScreen === 'operations') {
-          document.querySelector('[data-dest="inicio"]')?.classList.add('active');
-        } else if (targetScreen === 'dispatch-live') {
-          document.querySelector('[data-dest="despacho"]')?.classList.add('active');
-        } else if (targetScreen === 'catalog-live') {
-          document.querySelector('[data-dest="picking"]')?.classList.add('active');
-        } else if (targetScreen === 'forms-live') {
-          document.querySelector('[data-dest="checklist"]')?.classList.add('active');
-        }
-      });
-    });
 
     // Interactive Bottom Nav Destination Switching
     navDests.forEach(dest => {
@@ -544,9 +563,9 @@ import LoginScreenSpec from './LoginScreenSpec.astro';
   }
 
   .cuadro-tag.success {
-    background: #ecfdf5;
-    border-color: #a7f3d0;
-    color: #047857;
+    background: #e0f2fe;
+    border-color: #bae6fd;
+    color: #0284c7;
   }
 
   .cuadro-tag.kotlin {

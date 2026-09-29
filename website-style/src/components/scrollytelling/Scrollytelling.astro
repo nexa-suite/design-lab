@@ -440,7 +440,7 @@
                   <div class="corner-bracket bot-l"></div>
                   <div class="corner-bracket bot-r"></div>
                   <div class="scan-line"></div>
-                  <svg class="face-vector" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="rgba(56, 189, 248, 0.7)" stroke-width="1.6">
+                  <svg class="face-vector" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.6">
                     <rect x="3" y="3" width="7" height="7"/>
                     <rect x="14" y="3" width="7" height="7"/>
                     <rect x="3" y="14" width="7" height="7"/>
@@ -455,7 +455,7 @@
 
                 <!-- Escrow Guarantee Badge -->
                 <div class="escrow-screen-badge">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2.2">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                   </svg>
                   <span>Custodia Escrow Activa ($3,450.00 USD retenidos)</span>
@@ -1094,13 +1094,13 @@
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: #08213b;
+    background-color: #ffffff;
     border-radius: 30px;
     overflow: hidden;
     box-sizing: border-box;
   }
 
-  /* Global Status Bar */
+  /* Global Status Bar (Clean Dark Icons on White Screen) */
   .screen-status-bar {
     position: absolute;
     top: 8px;
@@ -1112,7 +1112,7 @@
     align-items: center;
     font-size: 0.6875rem;
     font-weight: 600;
-    color: #ffffff;
+    color: #0f172a;
     pointer-events: none;
   }
 
@@ -1139,7 +1139,7 @@
   }
 
   /* ==========================================================================
-     VIEWS INSIDE PHONE SCREEN (Absolute Stacking Context & GPU Transitions)
+     VIEWS INSIDE PHONE SCREEN (Authentic 100% White Background matching mobile-style)
      ========================================================================== */
   .phone-state-view {
     position: absolute;
@@ -1155,7 +1155,8 @@
     pointer-events: none;
     transform: translateY(8px);
     transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    background-color: #08213b;
+    background-color: #ffffff;
+    color: #0f172a;
     overflow-y: auto;
     scrollbar-width: none;
   }
@@ -1183,9 +1184,9 @@
     width: 26px;
     height: 26px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: #ffffff;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    color: #0f172a;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1196,8 +1197,8 @@
 
   .summary-top-title {
     font-size: 0.8125rem;
-    font-weight: 600;
-    color: #ffffff;
+    font-weight: 700;
+    color: #082846;
   }
 
   .flecto-emblem-badge {
@@ -1215,13 +1216,13 @@
   .summary-booking-name {
     font-size: 0.9375rem;
     font-weight: 700;
-    color: #ffffff;
+    color: #082846;
     margin: 0;
   }
 
   .summary-booking-date {
     font-size: 0.6875rem;
-    color: #f7b928;
+    color: #d97706;
     font-weight: 600;
   }
 
@@ -1229,7 +1230,7 @@
     font-family: var(--primitive-font-mono, monospace);
     font-size: 1.85rem;
     font-weight: 800;
-    color: #ffffff;
+    color: #082846;
     text-align: center;
     margin: 0.2rem 0;
     letter-spacing: -0.02em;
@@ -1273,8 +1274,8 @@
   }
 
   .step1-date-selector {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(56, 189, 248, 0.3);
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
     border-radius: 12px;
     padding: 0.5rem 0.65rem;
     margin: 0.4rem 0;
@@ -1284,7 +1285,7 @@
   .date-chips-label {
     font-size: 0.5625rem;
     font-weight: 700;
-    color: #38bdf8;
+    color: #1d4ed8;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 0.3rem;
@@ -1298,13 +1299,13 @@
   }
 
   .duration-chip {
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
     border-radius: 999px;
     padding: 2px 8px;
     font-size: 0.625rem;
     font-weight: 600;
-    color: #ffffff;
+    color: #0f172a;
     cursor: pointer;
     transition: all 0.2s ease;
   }
@@ -1312,14 +1313,14 @@
   .duration-chip.active {
     background: #2563eb;
     color: #ffffff;
-    border-color: #38bdf8;
+    border-color: #1d4ed8;
     font-weight: 700;
   }
 
   .dates-range-text {
     font-family: var(--primitive-font-mono, monospace);
     font-size: 0.6875rem;
-    color: #cbd5e1;
+    color: #475569;
     font-weight: 600;
   }
 
@@ -1432,15 +1433,15 @@
     font-family: var(--primitive-font-mono, monospace);
     font-size: 0.875rem;
     font-weight: 700;
-    color: #38bdf8;
+    color: #1d4ed8;
   }
 
   .inv-arrow-circle {
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: #38bdf8;
-    color: #05192d;
+    background: #dbeafe;
+    color: #1d4ed8;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1448,17 +1449,18 @@
 
   .inv-rental-sub {
     font-size: 0.6875rem;
-    color: rgba(255, 255, 255, 0.65);
+    color: #64748b;
     margin-top: 0.2rem;
   }
 
   .inv-cream-bottom-sheet {
-    background: #fcf9f2;
+    background: #f8fafc;
     color: #082846;
     border-radius: 24px 24px 0 0;
     padding: 1rem 1rem 1.25rem;
     margin-top: auto;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+    border-top: 1px solid #e2e8f0;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
   }
 
   .inv-table-header {
@@ -1607,29 +1609,30 @@
   }
 
   .phone-back-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
     border-radius: 50%;
     width: 26px;
     height: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
+    color: #0f172a;
     cursor: pointer;
   }
 
   .subnav-title {
     font-size: 0.75rem;
     font-weight: 700;
-    color: #ffffff;
+    color: #082846;
   }
 
   .secure-tag {
     font-size: 0.5625rem;
     font-weight: 700;
-    background: #2563eb;
-    color: #ffffff;
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
     padding: 2px 6px;
     border-radius: 9999px;
   }
@@ -1650,13 +1653,16 @@
     align-items: center;
     justify-content: center;
     margin: 0.5rem 0;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
   }
 
   .corner-bracket {
     position: absolute;
     width: 14px;
     height: 14px;
-    border-color: #38bdf8;
+    border-color: #2563eb;
     border-style: solid;
     border-width: 0;
   }
@@ -1671,8 +1677,8 @@
     left: 4px;
     right: 4px;
     height: 2px;
-    background: #38bdf8;
-    box-shadow: 0 0 10px #38bdf8;
+    background: #2563eb;
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.4);
     animation: laserScan 2s infinite ease-in-out;
   }
 
@@ -1689,13 +1695,13 @@
   .scan-copy h4 {
     font-size: 0.8125rem;
     font-weight: 700;
-    color: #ffffff;
+    color: #082846;
     margin: 0 0 0.2rem 0;
   }
 
   .scan-copy p {
     font-size: 0.625rem;
-    color: #94a3b8;
+    color: #64748b;
     margin: 0;
   }
 
@@ -1703,12 +1709,12 @@
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    background: rgba(37, 99, 235, 0.15);
-    border: 1px solid rgba(56, 189, 248, 0.35);
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
     border-radius: 8px;
     padding: 0.45rem 0.65rem;
     font-size: 0.625rem;
-    color: #38bdf8;
+    color: #1d4ed8;
     font-weight: 600;
     margin: 0.5rem 0;
     text-align: left;
@@ -1739,7 +1745,8 @@
   /* ---------------- SCREEN 3: CHECKOUT ---------------- */
   .booking-hash {
     font-size: 0.625rem;
-    color: #38bdf8;
+    color: #1d4ed8;
+    font-weight: 700;
   }
 
   .checkout-scroll-body {
@@ -1751,7 +1758,8 @@
   }
 
   .checkout-item-card {
-    background: rgba(255, 255, 255, 0.08);
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
     border-radius: 12px;
     padding: 0.6rem;
     display: flex;
@@ -1763,7 +1771,8 @@
     width: 32px;
     height: 32px;
     border-radius: 6px;
-    background: #0b2540;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1779,19 +1788,19 @@
     display: flex;
     flex-direction: column;
     font-size: 0.71875rem;
-    color: #ffffff;
+    color: #082846;
   }
 
   .item-info span {
     font-size: 0.59375rem;
-    color: #94a3b8;
+    color: #64748b;
   }
 
   .item-val {
     margin-left: auto;
     font-size: 0.75rem;
     font-weight: 700;
-    color: #38bdf8;
+    color: #1d4ed8;
   }
 
   .checkout-lines {
@@ -1799,7 +1808,7 @@
     flex-direction: column;
     gap: 0.35rem;
     font-size: 0.6875rem;
-    color: #e2e8f0;
+    color: #475569;
   }
 
   .c-line {
@@ -1808,18 +1817,19 @@
   }
 
   .c-line.discount {
-    color: #38bdf8;
+    color: #0284c7;
   }
 
   .c-line.total {
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid #e2e8f0;
     padding-top: 0.4rem;
     font-size: 0.8125rem;
-    color: #ffffff;
+    color: #082846;
   }
 
   .checkout-pickup-card {
-    background: #ffffff;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
     border-radius: 10px;
     padding: 0.5rem;
     color: #082846;
@@ -1861,10 +1871,10 @@
   }
 
   .done-screen-title {
-    font-size: 2rem;
+    font-size: 1.85rem;
     font-weight: 800;
-    line-height: 1.1;
-    color: #ffffff;
+    line-height: 1.15;
+    color: #082846;
     letter-spacing: -0.03em;
     margin: 0 0 1rem 0;
   }
@@ -1873,19 +1883,19 @@
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    background: rgba(37, 99, 235, 0.18);
-    border: 1px solid #38bdf8;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
     border-radius: 999px;
     padding: 4px 10px;
     font-size: 0.625rem;
     font-weight: 700;
-    color: #38bdf8;
+    color: #1d4ed8;
     margin-bottom: 0.75rem;
   }
 
   .done-screen-subtext {
     font-size: 0.6875rem;
-    color: #cbd5e1;
+    color: #475569;
     line-height: 1.35;
     margin: 0 0 1.5rem 0;
   }

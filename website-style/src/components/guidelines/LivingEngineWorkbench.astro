@@ -33,19 +33,25 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
         <span>✦ Construir Motor (Build)</span>
       </button>
 
-      <!-- Presets Group -->
-      <div class="preset-pill-group" role="group" aria-label="Presets de distribución">
-        <button type="button" class="preset-btn active" data-preset="channels" title="Distribución de Canales Canónica">
-          <span>✦ Canales</span>
+      <!-- Views & Presets Group -->
+      <div class="preset-pill-group" role="group" aria-label="Vistas operativas y segmentos">
+        <button type="button" class="preset-btn active" data-view="channels" title="Canales y estaciones vasculares en vivo (Arrastrar bloques)">
+          <span>✦ Canales & Bloques</span>
         </button>
-        <button type="button" class="preset-btn" data-preset="matrix" title="Matriz Operativa Pipeline">
-          <span>⚡ Matriz Operativa</span>
+        <button type="button" class="preset-btn" data-view="dock" title="Muelle & Recepción (Rol Almacén / Bahía)">
+          <i class="pi pi-box"></i>
+          <span>Muelle & Bahía</span>
         </button>
-        <button type="button" class="preset-btn" data-preset="escrow" title="Arquitectura Custodia Escrow">
-          <span>🛡 Custodia Escrow</span>
+        <button type="button" class="preset-btn" data-view="telemetry" title="Telemetría IoT & Cadena de Frío (Rol Conductor)">
+          <i class="pi pi-compass"></i>
+          <span>Telemetría Frío</span>
+        </button>
+        <button type="button" class="preset-btn" data-view="escrow" title="Custodia & Liquidación Escrow (Rol Comprador)">
+          <i class="pi pi-lock"></i>
+          <span>Custodia Escrow</span>
         </button>
         <button type="button" class="preset-btn reset-btn" data-preset="reset" title="Restablecer posiciones canónicas">
-          <span>↺ Resetear</span>
+          <span>↺ Reset</span>
         </button>
       </div>
     </div>
@@ -136,7 +142,7 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
 
   <!-- 2. Sculpted Bürocratik Canvas Stage Frame -->
   <section class="workbench-hero-stage" id="workbench-hero-stage" aria-label="Escenario Motor Gráfico Nexafy">
-    <div class="hero-sculpted-canvas" id="hero-sculpted-canvas">
+    <div class="hero-sculpted-canvas" id="workbench-sculpted-canvas">
 
       <!-- 2.1 Unified Architectural SVG Silhouette Background -->
       <svg 
@@ -171,13 +177,15 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
         <rect x="0" y="0" width="1440" height="820" fill="url(#workbench-blueprint-grid)" clip-path="url(#workbench-silhouette-clip)" opacity="0.65" />
       </svg>
 
-      <!-- 2.2 TOP LAYER (Notches & Monumental Headline Canopy with Proper Padding) -->
+      <!-- 2.2 TOP LAYER (Notches & Monumental Headline Canopy with Generous Padding) -->
       <header class="hero-top-layer">
-        <!-- Top-Left White Notch: Nexa Brand & Primary Links -->
+        <!-- Top-Left White Notch: Home Return + Nexa Brand & Primary Links -->
         <div class="hero-top-left">
-          <a href="/" class="nexa-brand" aria-label="Nexa Platform">
-            <img src="/assets/nexa-nx-blue.svg" alt="Nexa" width="28" height="28" class="nexa-brand-logo" />
-            <span class="nexa-brand-word">Nexa</span>
+          <a href="/" class="hero-home-btn" title="Volver al Inicio" aria-label="Inicio">
+            <i class="pi pi-home" aria-hidden="true"></i>
+          </a>
+          <a href="/" class="nexa-brand" id="hero-nexa-brand" aria-label="Nexa Platform" title="Nexa Platform (Haz clic para alternar color)">
+            <img src="/assets/logo-nexa-blue.svg" alt="Nexa Platform" height="28" class="nexa-brand-logo-img" id="hero-nexa-logo" />
           </a>
 
           <nav class="hero-nav-links" aria-label="Primary navigation">
@@ -201,15 +209,8 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
           </div>
         </div>
 
-        <!-- Top-Right White Notch: CTA & Login -->
+        <!-- Top-Right White Notch: CTA & Login (0 Language Dropdown) -->
         <div class="hero-top-right">
-          <div class="hero-lang-pill" aria-label="Language selector">
-            <button type="button" class="lang-toggle-btn active" aria-label="Selected language English">EN</button>
-            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <polyline points="2 4 6 8 10 4"></polyline>
-            </svg>
-          </div>
-
           <a href="#book-demo" class="hero-book-btn">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -220,13 +221,13 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
             <span>Book a Demo</span>
           </a>
 
-          <a href="#login" class="hero-login-btn">
+          <a href="#login" class="hero-login-btn" id="btn-open-landing-login">
             <span>Login</span>
           </a>
         </div>
       </header>
 
-      <!-- 2.3 CENTER STAGE (Closed Vascular Pipeline with Authentic Nexa Cold-Chain Mocks) -->
+      <!-- 2.3 CENTER STAGE (Multiple Operational Views & Rich Micro-Components) -->
       <div class="hero-center-stage" id="circuit-stage">
         
         <!-- Live Dragging HUD / Coordinates Tooltip -->
@@ -235,116 +236,137 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
           <span class="hud-coords-text" id="hud-coords-text">X: 0px · Y: 0px</span>
         </div>
 
-        <!-- 1. The Origin Node: TERMINAL PESQUERO CALLAO -->
-        <div class="circuit-hub origin-hub" id="circuit-hub" role="region" aria-label="Terminal Pesquero Callao">
-          <div class="hub-label">
-            <span class="hub-kicker">TERMINAL</span>
-            <span class="hub-title">PESQUERO</span>
-            <span class="hub-badge">CALLAO · B2B</span>
+        <!-- ===================================================================
+             VIEW 1 (DEFAULT): CANALES & ESTACIONES (Draggable 60fps Pipeline)
+             =================================================================== -->
+        <div class="workbench-stage-view active" id="view-channels-stage">
+          <!-- 1. The Origin Node: TERMINAL PESQUERO CALLAO (High-tech Terminal Card, 0 Circles) -->
+          <div class="circuit-hub origin-hub" id="circuit-hub" role="region" aria-label="Terminal Pesquero Callao">
+            <div class="hub-terminal-header">
+              <span class="terminal-status-dot active"></span>
+              <span class="terminal-kicker">ORIGEN B2B</span>
+              <span class="drag-handle-grip hub-grip" title="Arrastrar origen">⋮⋮</span>
+            </div>
+            <div class="hub-label">
+              <strong class="hub-title">Terminal Pesquero</strong>
+              <span class="hub-location">Callao · Muelle Bahía 02</span>
+              <div class="hub-port-badge">
+                <i class="pi pi-box"></i>
+                <span>Lotes SANIPES OK</span>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <!-- 2. Continuous Vascular Conduit Circuit (Organically Bending Closed Pipeline) -->
-        <svg 
-          class="circuit-svg" 
-          viewBox="0 0 1140 420" 
-          fill="none" 
-          xmlns="http://www.w3.org/2000/svg" 
-          preserveAspectRatio="xMidYMid meet"
-          aria-hidden="true"
-        >
-          <!-- Main Trunk: Origin Node (x:150) -> Nexa Core Bus (x:340) -->
-          <path 
-            class="circuit-pipe-line line-trunk" 
-            id="pipe-trunk"
-            d="M 150 210 L 340 210" 
-            stroke="#bae6fd" 
-            stroke-width="26" 
-            stroke-linecap="round"
-          />
+          <!-- 2. Continuous Vascular Conduit Circuit (Organically Bending Closed Pipeline) -->
+          <svg 
+            class="circuit-svg" 
+            id="workbench-circuit-svg"
+            viewBox="0 0 1140 480" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg" 
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <!-- Main Trunk: Origin Node -> Nexa Core Bus -->
+            <path 
+              class="circuit-pipe-line line-trunk" 
+              id="pipe-trunk"
+              d="" 
+              stroke="#bae6fd" 
+              stroke-width="26" 
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
 
-          <!-- Branch 1 (Top Conduit to Station 01: Despacho en Bahía) -->
-          <path 
-            class="circuit-pipe-line line-branch-top" 
-            id="pipe-branch-top"
-            d="M 460 210 L 515 210 A 18 18 0 0 0 533 192 L 533 88 A 18 18 0 0 1 551 70 L 590 70" 
-            stroke="#bae6fd" 
-            stroke-width="24" 
-            stroke-linejoin="round"
-          />
+            <!-- Branch 1 (Top Conduit to Station 01: Despacho en Bahía) -->
+            <path 
+              class="circuit-pipe-line line-branch-top" 
+              id="pipe-branch-top"
+              d="" 
+              stroke="#bae6fd" 
+              stroke-width="24" 
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
 
-          <!-- Branch 2 (Center Conduit to Station 02: Telemetría Sensirion IoT) -->
-          <path 
-            class="circuit-pipe-line line-branch-mid" 
-            id="pipe-branch-mid"
-            d="M 460 210 L 590 210" 
-            stroke="#bae6fd" 
-            stroke-width="24" 
-            stroke-linecap="round"
-          />
+            <!-- Branch 2 (Center Conduit to Station 02: Telemetría Sensirion IoT) -->
+            <path 
+              class="circuit-pipe-line line-branch-mid" 
+              id="pipe-branch-mid"
+              d="" 
+              stroke="#bae6fd" 
+              stroke-width="24" 
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
 
-          <!-- Branch 3 (Bottom Conduit to Station 03: Custodia Escrow 100%) -->
-          <path 
-            class="circuit-pipe-line line-branch-bot" 
-            id="pipe-branch-bot"
-            d="M 460 210 L 515 210 A 18 18 0 0 1 533 228 L 533 332 A 18 18 0 0 0 551 350 L 590 350" 
-            stroke="#bae6fd" 
-            stroke-width="24" 
-            stroke-linejoin="round"
-          />
+            <!-- Branch 3 (Bottom Conduit to Station 03: Custodia Escrow 100%) -->
+            <path 
+              class="circuit-pipe-line line-branch-bot" 
+              id="pipe-branch-bot"
+              d="" 
+              stroke="#bae6fd" 
+              stroke-width="24" 
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
 
-          <!-- Exit Conduit from Station 01 (x:870, y:70) merging to Destination Hub (x:975, y:210) -->
-          <path 
-            class="circuit-pipe-line line-exit-top" 
-            id="pipe-exit-top"
-            d="M 870 70 L 910 70 A 18 18 0 0 1 928 88 L 928 192 A 18 18 0 0 0 946 210 L 975 210" 
-            stroke="#bae6fd" 
-            stroke-width="24" 
-            stroke-linejoin="round"
-          />
+            <!-- Exit Conduit from Station 01 merging to Destination Hub -->
+            <path 
+              class="circuit-pipe-line line-exit-top" 
+              id="pipe-exit-top"
+              d="" 
+              stroke="#bae6fd" 
+              stroke-width="24" 
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
 
-          <!-- Exit Conduit from Station 02 (x:870, y:210) into Destination Hub -->
-          <path 
-            class="circuit-pipe-line line-exit-mid" 
-            id="pipe-exit-mid"
-            d="M 870 210 L 975 210" 
-            stroke="#bae6fd" 
-            stroke-width="24" 
-            stroke-linecap="round"
-          />
+            <!-- Exit Conduit from Station 02 into Destination Hub -->
+            <path 
+              class="circuit-pipe-line line-exit-mid" 
+              id="pipe-exit-mid"
+              d="" 
+              stroke="#bae6fd" 
+              stroke-width="24" 
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
 
-          <!-- Exit Conduit from Station 03 (x:870, y:350) merging to Destination Hub (x:975, y:210) -->
-          <path 
-            class="circuit-pipe-line line-exit-bot" 
-            id="pipe-exit-bot"
-            d="M 870 350 L 910 350 A 18 18 0 0 0 928 332 L 928 228 A 18 18 0 0 1 946 210 L 975 210" 
-            stroke="#bae6fd" 
-            stroke-width="24" 
-            stroke-linejoin="round"
-          />
+            <!-- Exit Conduit from Station 03 merging to Destination Hub -->
+            <path 
+              class="circuit-pipe-line line-exit-bot" 
+              id="pipe-exit-bot"
+              d="" 
+              stroke="#bae6fd" 
+              stroke-width="24" 
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
 
-          <!-- Pulse Indicators moving through the closed conduits -->
-          <circle cx="245" cy="210" r="5" fill="#2563eb" class="pipe-pulse pulse-1" />
-          <circle cx="533" cy="140" r="4.5" fill="#38bdf8" class="pipe-pulse pulse-2" />
-          <circle cx="533" cy="280" r="4.5" fill="#2563eb" class="pipe-pulse pulse-3" />
-          <circle cx="928" cy="140" r="4.5" fill="#38bdf8" class="pipe-pulse pulse-4" />
-          <circle cx="928" cy="280" r="4.5" fill="#2563eb" class="pipe-pulse pulse-5" />
-        </svg>
+            <!-- Signal Pulse Particles Flowing through the Conduits -->
+            <circle id="pulse-trunk" class="pulse-particle" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2" cx="-50" cy="-50" />
+            <circle id="pulse-branch-top" class="pulse-particle" r="5" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5" cx="-50" cy="-50" />
+            <circle id="pulse-branch-mid" class="pulse-particle" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" cx="-50" cy="-50" />
+            <circle id="pulse-branch-bot" class="pulse-particle" r="5" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5" cx="-50" cy="-50" />
+            <circle id="pulse-exit-top" class="pulse-particle" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" cx="-50" cy="-50" />
+            <circle id="pulse-exit-mid" class="pulse-particle" r="5" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5" cx="-50" cy="-50" />
+            <circle id="pulse-exit-bot" class="pulse-particle" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" cx="-50" cy="-50" />
+          </svg>
 
-        <!-- 3. Central Router Node: NEXA CORE BUS -->
-        <div class="circuit-center-hub" id="circuit-center-hub" aria-label="Nexa Core Bus">
-          <div class="center-hub-content">
-            <img src="/assets/nexa-nx-white.svg" alt="NX" width="26" height="26" class="center-hub-icon" />
-            <span class="center-hub-title">NEXA HUB</span>
-            <span class="center-hub-sub">Core Dispatch Bus</span>
+          <!-- 3. Central Router Node: NEXA CORE BUS -->
+          <div class="circuit-center-hub" id="circuit-center-hub" aria-label="Nexa Core Bus">
+            <div class="center-hub-content">
+              <img src="/assets/logo-nexa-white.svg" alt="Nexa Hub" class="center-hub-logo" />
+              <span class="center-hub-title">NEXA DISPATCH BUS</span>
+              <span class="center-hub-sub">Ruteo Criptográfico & FEFO</span>
+            </div>
+            <span class="drag-handle-grip hub-grip" title="Arrastrar núcleo">⋮⋮</span>
           </div>
-        </div>
 
-        <!-- 4. Three Symmetrically Aligned White Station Blocks (Zero Overlap, Pure Autolayout) -->
-        <div class="circuit-stations-column" id="circuit-stations" aria-label="Estaciones Operativas de Cadena de Frío">
-          
+          <!-- 4. Three Symmetrically Aligned White Station Blocks (Draggable & Non-Overlapping) -->
           <!-- Station 01: Despacho en Bahía (DSP-204) -->
-          <article class="station-card station-top channel-card card-store" id="station-01-card" aria-label="Estación 01: Despacho en Bahía">
+          <article class="station-card station-top workbench-card card-01-fefo" id="station-01-card" aria-label="Estación 01: Despacho en Bahía">
             <div class="station-header">
               <span class="station-icon-wrap blue">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -359,15 +381,26 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
                 <strong class="station-name">Muelle Callao · Rampa 04</strong>
               </div>
               <span class="station-pill-state">FEFO ACTIVO</span>
+              <span class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</span>
+            </div>
+            <div class="station-body-items">
+              <div class="station-micro-row">
+                <span class="micro-badge"><i class="pi pi-box"></i> L-8841</span>
+                <span class="micro-text">500 kg Salmón Coho Fresco</span>
+                <span class="micro-status-tag">Báscula OK</span>
+              </div>
+              <div class="station-progress-wrap">
+                <div class="station-progress-bar" style="width: 86%;"></div>
+              </div>
             </div>
             <div class="station-footer">
-              <span class="station-meta text-mono">DSP-204 · Lote L-8841 · 500 kg Salmón</span>
+              <span class="station-meta text-mono">SANIPES Cert. #4410 · Temp -18.4°C</span>
               <span class="station-status-dot active" title="Rampa conectada"></span>
             </div>
           </article>
 
           <!-- Station 02: Telemetría Sensirion IoT (Sensirion SHT40) -->
-          <article class="station-card station-mid channel-card card-email" id="station-02-card" aria-label="Estación 02: Telemetría Sensirion IoT">
+          <article class="station-card station-mid workbench-card card-02-iot" id="station-02-card" aria-label="Estación 02: Telemetría Sensirion IoT">
             <div class="station-header">
               <span class="station-icon-wrap cyan">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -378,16 +411,30 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
                 <span class="station-step-tag">02 · TELEMETRÍA IOT</span>
                 <strong class="station-name">Sensirion SHT40 · -18.2°C</strong>
               </div>
-              <span class="station-pill-state active">CALIBRADO</span>
+              <span class="station-pill-state active">EN RUTA</span>
+              <span class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</span>
+            </div>
+            <div class="station-body-items">
+              <div class="station-micro-row">
+                <span class="micro-badge cyan"><i class="pi pi-compass"></i> GPS</span>
+                <span class="micro-text">Van B-402 · Av. Elmer Faucett km 4</span>
+                <span class="micro-status-tag cyan">Estable</span>
+              </div>
+              <div class="station-sparkline-row">
+                <svg class="mini-sparkline" viewBox="0 0 140 16" fill="none">
+                  <path d="M 0,9 L 20,7 L 40,10 L 60,8 L 80,9 L 100,7 L 120,8 L 140,7" stroke="#0284c7" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <span class="sparkline-val text-mono">-18.2°C</span>
+              </div>
             </div>
             <div class="station-footer">
-              <span class="station-meta text-mono">GPS Reefer Van B-402 · En ruta</span>
+              <span class="station-meta text-mono">Compresor Carrier 1450 RPM · Puerta Sellada</span>
               <span class="station-status-dot active" title="Transmisión continua"></span>
             </div>
           </article>
 
           <!-- Station 03: Custodia Escrow 100% ($3,450.00) -->
-          <article class="station-card station-bot channel-card card-online" id="station-03-card" aria-label="Estación 03: Custodia Escrow 100%">
+          <article class="station-card station-bot workbench-card card-03-escrow" id="station-03-card" aria-label="Estación 03: Custodia Escrow 100%">
             <div class="station-header">
               <span class="station-icon-wrap blue">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -399,21 +446,305 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
                 <strong class="station-name">Smart Contract B2B · $3,450.00</strong>
               </div>
               <span class="station-pill-state">PRE-AUTORIZADO</span>
+              <span class="drag-handle-grip" title="Arrastrar bloque">⋮⋮</span>
+            </div>
+            <div class="station-body-items">
+              <div class="station-micro-row">
+                <span class="micro-badge"><i class="pi pi-lock"></i> VAULT</span>
+                <span class="micro-text">Pre-bloqueo $3,450.00 USD</span>
+                <span class="micro-status-tag">Multi-Sig</span>
+              </div>
+              <div class="station-trigger-row">
+                <span class="trigger-label">Desbloqueo automático:</span>
+                <span class="trigger-condition text-mono">POD + Geotag Verificado</span>
+              </div>
             </div>
             <div class="station-footer">
-              <span class="station-meta text-mono">Liquidación automática por telemetría</span>
+              <span class="station-meta text-mono">Hash: 0x8f4c...3e1a · Liquidación instantánea</span>
               <span class="station-status-dot active" title="Garantía activa"></span>
             </div>
           </article>
 
+          <!-- 5. Destination Hub: Red Mayorista B2B (High-tech Terminal Card, 0 Circles) -->
+          <div class="circuit-hub destination-hub" id="circuit-dest-hub" role="region" aria-label="Red Mayorista B2B">
+            <div class="hub-terminal-header">
+              <span class="terminal-status-dot active"></span>
+              <span class="terminal-kicker">DESTINO MAYORISTA</span>
+              <span class="drag-handle-grip hub-grip" title="Arrastrar destino">⋮⋮</span>
+            </div>
+            <div class="hub-label">
+              <strong class="hub-title">Red Mayorista</strong>
+              <span class="hub-location">Lima Central · Santa Anita</span>
+              <div class="hub-port-badge dest-badge">
+                <i class="pi pi-check-circle"></i>
+                <span>Escrow Liberado</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- 5. Destination Hub: Red Mayorista B2B -->
-        <div class="circuit-hub destination-hub" id="circuit-dest-hub" role="region" aria-label="Red Mayorista B2B">
-          <div class="hub-label">
-            <span class="hub-kicker">RED MAYORISTA</span>
-            <span class="hub-title">COMPRADORES</span>
-            <span class="hub-badge">RECEPTION B2B</span>
+        <!-- ===================================================================
+             VIEW 2: SEGMENTO MUELLE & RECEPCIÓN (Rol Almacén / Bahía)
+             =================================================================== -->
+        <div class="workbench-stage-view" id="view-dock-stage" style="display: none;">
+          <div class="segment-cards-trio">
+            <!-- Dock Card 1: Industrial Weighing Scale -->
+            <div class="segment-panel-card">
+              <div class="segment-card-head">
+                <div class="segment-head-icon blue"><i class="pi pi-inbox"></i></div>
+                <div>
+                  <span class="segment-kicker">MUELLE CALLAO · RAMPA 02</span>
+                  <h4 class="segment-title">Báscula Toledo Digital</h4>
+                </div>
+                <span class="segment-chip active">EN LÍNEA</span>
+              </div>
+              <div class="segment-scale-display">
+                <span class="scale-metric-label">PESO NETO CARGA</span>
+                <strong class="scale-metric-value text-mono">500.00 <span class="unit">kg</span></strong>
+                <div class="scale-sub-metrics">
+                  <span>Bruto: 542.50 kg</span>
+                  <span>Tara: 42.50 kg</span>
+                  <span class="text-cyan">Sonda: -18.4°C</span>
+                </div>
+              </div>
+              <div class="segment-card-foot">
+                <button type="button" class="btn-panel-action" id="btn-tare-scale">
+                  <i class="pi pi-refresh"></i> Tarar Báscula (0.00 kg)
+                </button>
+              </div>
+            </div>
+
+            <!-- Dock Card 2: SANIPES Sanitary Inspection -->
+            <div class="segment-panel-card">
+              <div class="segment-card-head">
+                <div class="segment-head-icon cyan"><i class="pi pi-check-square"></i></div>
+                <div>
+                  <span class="segment-kicker">INSPECCIÓN SANITARIA</span>
+                  <h4 class="segment-title">Protocolo SANIPES 4.0</h4>
+                </div>
+                <span class="segment-chip active">CONFORME</span>
+              </div>
+              <div class="segment-checklist-body">
+                <div class="check-item"><i class="pi pi-check"></i> <span>Ojos convexos & córnea transparente</span></div>
+                <div class="check-item"><i class="pi pi-check"></i> <span>Branquias rojo vivo sin mucosidad</span></div>
+                <div class="check-item"><i class="pi pi-check"></i> <span>Consistencia muscular firme y elástica</span></div>
+                <div class="check-item"><i class="pi pi-check"></i> <span>pH de carne 6.4 (Rango 6.2 - 6.8)</span></div>
+              </div>
+              <div class="segment-card-foot">
+                <span class="badge-cert-stamp text-mono"><i class="pi pi-shield"></i> CERTIFICADO #SANIPES-2026-9041</span>
+              </div>
+            </div>
+
+            <!-- Dock Card 3: Batch Dispatch & Thermal Labeling -->
+            <div class="segment-panel-card">
+              <div class="segment-card-head">
+                <div class="segment-head-icon blue"><i class="pi pi-print"></i></div>
+                <div>
+                  <span class="segment-kicker">DESPACHO FEFO</span>
+                  <h4 class="segment-title">Etiquetado & Rampa</h4>
+                </div>
+                <span class="segment-chip">RAMPA 04</span>
+              </div>
+              <div class="segment-label-preview">
+                <div class="label-code-row">
+                  <span class="barcode-ph text-mono">||| | |||| ||| |||||||</span>
+                  <span class="label-batch-id text-mono">LOTE L-8841</span>
+                </div>
+                <p class="label-desc">Salmón Coho Pacífico · Despacho Prioritario FEFO (Expira en 48h)</p>
+                <div class="label-route-tag">
+                  <i class="pi pi-truck"></i> Asignado a: Reefer Van B-402 (Conductor D. Morales)
+                </div>
+              </div>
+              <div class="segment-card-foot">
+                <button type="button" class="btn-panel-action primary">
+                  <i class="pi pi-send"></i> Autorizar Salida de Bahía
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================================================================
+             VIEW 3: TELEMETRÍA IOT & FLOTA FRIGORÍFICA (Rol Conductor)
+             =================================================================== -->
+        <div class="workbench-stage-view" id="view-telemetry-stage" style="display: none;">
+          <div class="segment-cards-trio">
+            <!-- Telemetry Card 1: Sensirion SHT40 Temperature Curve -->
+            <div class="segment-panel-card">
+              <div class="segment-card-head">
+                <div class="segment-head-icon cyan"><i class="pi pi-bolt"></i></div>
+                <div>
+                  <span class="segment-kicker">SENSOR IOT EN TIEMPO REAL</span>
+                  <h4 class="segment-title">Sensirion SHT40 Curve</h4>
+                </div>
+                <span class="segment-chip active">-18.2°C</span>
+              </div>
+              <div class="telemetry-chart-wrap">
+                <svg class="telemetry-svg-graph" viewBox="0 0 280 90" fill="none">
+                  <!-- Safe Band Area (-15 to -22) -->
+                  <rect x="0" y="20" width="280" height="50" fill="rgba(56, 189, 248, 0.1)" />
+                  <line x1="0" y1="20" x2="280" y2="20" stroke="rgba(56, 189, 248, 0.3)" stroke-dasharray="3 3" />
+                  <line x1="0" y1="70" x2="280" y2="70" stroke="rgba(56, 189, 248, 0.3)" stroke-dasharray="3 3" />
+                  <!-- Live Temperature Line -->
+                  <path d="M 0,46 Q 40,43 80,48 T 160,45 T 220,44 T 280,46" stroke="#0284c7" stroke-width="2.5" fill="none" />
+                  <circle cx="280" cy="46" r="4" fill="#38bdf8" />
+                </svg>
+                <div class="chart-legend-row">
+                  <span>Límite sup: -15.0°C</span>
+                  <span class="text-cyan">Actual: -18.2°C</span>
+                  <span>Límite inf: -22.0°C</span>
+                </div>
+              </div>
+              <div class="segment-card-foot">
+                <span class="foot-metric-text text-mono">0 Quiebres térmicos en 4.2h de viaje</span>
+              </div>
+            </div>
+
+            <!-- Telemetry Card 2: Carrier Vector Reefer Compressor -->
+            <div class="segment-panel-card">
+              <div class="segment-card-head">
+                <div class="segment-head-icon blue"><i class="pi pi-cog"></i></div>
+                <div>
+                  <span class="segment-kicker">UNIDAD DE REFRIGERACIÓN</span>
+                  <h4 class="segment-title">Carrier Vector 1550</h4>
+                </div>
+                <span class="segment-chip active">1450 RPM</span>
+              </div>
+              <div class="reefer-status-grid">
+                <div class="reefer-stat-item">
+                  <span class="stat-lbl">Presión Succión:</span>
+                  <strong class="stat-val text-mono">2.1 bar</strong>
+                </div>
+                <div class="reefer-stat-item">
+                  <span class="stat-lbl">Presión Descarga:</span>
+                  <strong class="stat-val text-mono">14.8 bar</strong>
+                </div>
+                <div class="reefer-stat-item">
+                  <span class="stat-lbl">Deshielo Ciclo:</span>
+                  <strong class="stat-val text-mono text-cyan">En 120 min</strong>
+                </div>
+                <div class="reefer-stat-item">
+                  <span class="stat-lbl">Puerta Trasera:</span>
+                  <strong class="stat-val text-mono text-cyan">Sellada (48m)</strong>
+                </div>
+              </div>
+              <div class="segment-card-foot">
+                <span class="foot-metric-text text-mono">Batería Auxiliar: 98% (Respaldo 12h)</span>
+              </div>
+            </div>
+
+            <!-- Telemetry Card 3: GPS Telemetry & Waypoints -->
+            <div class="segment-panel-card">
+              <div class="segment-card-head">
+                <div class="segment-head-icon cyan"><i class="pi pi-map"></i></div>
+                <div>
+                  <span class="segment-kicker">MONITOREO DE RUTA</span>
+                  <h4 class="segment-title">GPS Reefer Van B-402</h4>
+                </div>
+                <span class="segment-chip active">48 KM/H</span>
+              </div>
+              <div class="route-tracker-preview">
+                <div class="route-step-row active">
+                  <i class="pi pi-check-circle"></i>
+                  <span>08:15 Muelle Callao (Carga completa)</span>
+                </div>
+                <div class="route-step-row active">
+                  <i class="pi pi-compass"></i>
+                  <span>08:42 Av. Faucett km 4 (En trayecto)</span>
+                </div>
+                <div class="route-step-row">
+                  <i class="pi pi-circle"></i>
+                  <span>09:05 Mercado Santa Anita (Llegada est.)</span>
+                </div>
+              </div>
+              <div class="segment-card-foot">
+                <span class="foot-metric-text text-mono">Distancia restante: 14.2 km · ETA 23 min</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================================================================
+             VIEW 4: CUSTODIA & LIQUIDACIÓN ESCROW (Rol Comprador / Finanzas)
+             =================================================================== -->
+        <div class="workbench-stage-view" id="view-escrow-stage" style="display: none;">
+          <div class="segment-cards-trio">
+            <!-- Escrow Card 1: Multi-sig Vault -->
+            <div class="segment-panel-card">
+              <div class="segment-card-head">
+                <div class="segment-head-icon blue"><i class="pi pi-lock"></i></div>
+                <div>
+                  <span class="segment-kicker">BÓVEDA DE GARANTÍA</span>
+                  <h4 class="segment-title">Smart Vault B2B</h4>
+                </div>
+                <span class="segment-chip active">PRE-BLOQUEADO</span>
+              </div>
+              <div class="vault-balance-display">
+                <span class="vault-label">FONDOS BAJO CUSTODIA</span>
+                <strong class="vault-amount text-mono">$3,450.00 <span class="cur">USD</span></strong>
+                <div class="vault-meta-row">
+                  <span>Orden: #NEXA-ORD-8841</span>
+                  <span>Comprador: Supermercados Wong</span>
+                </div>
+              </div>
+              <div class="segment-card-foot">
+                <span class="foot-metric-text text-mono">Multi-Sig: 2 de 3 firmas requeridas</span>
+              </div>
+            </div>
+
+            <!-- Escrow Card 2: IoT Condition Oracle -->
+            <div class="segment-panel-card">
+              <div class="segment-card-head">
+                <div class="segment-head-icon cyan"><i class="pi pi-shield"></i></div>
+                <div>
+                  <span class="segment-kicker">ORÁCULO DE CONDICIONES</span>
+                  <h4 class="segment-title">Verificación de Cadena</h4>
+                </div>
+                <span class="segment-chip active">100% CUMPLIDO</span>
+              </div>
+              <div class="oracle-checklist">
+                <div class="oracle-rule verified">
+                  <i class="pi pi-check"></i>
+                  <span>Temperatura &le; -18.0°C sostenida</span>
+                </div>
+                <div class="oracle-rule verified">
+                  <i class="pi pi-check"></i>
+                  <span>0 Aperturas no autorizadas de puerta</span>
+                </div>
+                <div class="oracle-rule verified">
+                  <i class="pi pi-check"></i>
+                  <span>Geocerca de destino: Radio 200m Santa Anita</span>
+                </div>
+              </div>
+              <div class="segment-card-foot">
+                <span class="foot-metric-text text-mono">Oráculo Chainlink IoT · Calibración OK</span>
+              </div>
+            </div>
+
+            <!-- Escrow Card 3: Instant Settlement Trigger -->
+            <div class="segment-panel-card">
+              <div class="segment-card-head">
+                <div class="segment-head-icon blue"><i class="pi pi-dollar"></i></div>
+                <div>
+                  <span class="segment-kicker">LIQUIDACIÓN AUTOMÁTICA</span>
+                  <h4 class="segment-title">Desbloqueo Criptográfico</h4>
+                </div>
+                <span class="segment-chip">INSTANTÁNEO</span>
+              </div>
+              <div class="settlement-trigger-body">
+                <p class="settle-desc">
+                  Al recibir la confirmación biométrica o firma POD del comprador, el contrato transfiere los <strong>$3,450.00 USD</strong> al productor en 0.8 segundos.
+                </p>
+                <div class="hash-tag-box text-mono">
+                  Tx Hash: 0x8f4c29a0b17e4d88e0c4...3e1a
+                </div>
+              </div>
+              <div class="segment-card-foot">
+                <button type="button" class="btn-panel-action primary" id="btn-simulate-settlement">
+                  <i class="pi pi-check-circle"></i> Simular Firma POD & Payout
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -446,17 +777,17 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
               <span class="tracker-progress-segment"></span>
             </div>
             <div class="tracker-steps-row">
-              <button type="button" class="tracker-step active" data-chapter="1" aria-label="Chapter 1: Channels & Security" aria-pressed="true">
+              <button type="button" class="tracker-step active" data-chapter="1" data-segment="dock" aria-label="Paso 01: Muelle Callao (Almacén)" aria-pressed="true">
                 <span class="step-num text-mono">01</span>
-                <span class="step-title">Channels</span>
+                <span class="step-title">Muelle (Almacén)</span>
               </button>
-              <button type="button" class="tracker-step" data-chapter="2" aria-label="Chapter 2: Platform & SaaS" aria-pressed="false">
+              <button type="button" class="tracker-step" data-chapter="2" data-segment="telemetry" aria-label="Paso 02: Tránsito IoT (Conductor)" aria-pressed="false">
                 <span class="step-num text-mono">02</span>
-                <span class="step-title">SaaS B2B</span>
+                <span class="step-title">Tránsito (Conductor)</span>
               </button>
-              <button type="button" class="tracker-step" data-chapter="3" aria-label="Chapter 3: Safe Payments" aria-pressed="false">
+              <button type="button" class="tracker-step" data-chapter="3" data-segment="escrow" aria-label="Paso 03: Escrow Vault (Comprador)" aria-pressed="false">
                 <span class="step-num text-mono">03</span>
-                <span class="step-title">Escrow Link</span>
+                <span class="step-title">Escrow (Comprador)</span>
               </button>
             </div>
           </div>
@@ -469,6 +800,99 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
         </div>
       </footer>
 
+      <!-- Interactive Full-Screen Nexa Blue Login Modal matching user mockup -->
+      <div class="landing-login-modal-overlay" id="landing-login-modal" style="display: none;" role="dialog" aria-modal="true" aria-label="Nexa Login">
+        <div class="login-modal-phone-shell">
+          <button type="button" class="btn-close-login-modal" id="btn-close-landing-login" aria-label="Cerrar modal de acceso">
+            <i class="pi pi-times"></i>
+          </button>
+          
+          <div class="login-modal-screen-container">
+            <!-- Full Screen Nexa Blue Login Specimen -->
+            <div class="modal-auth-inner">
+              <!-- Top canopy with blue wave and topography -->
+              <div class="modal-canopy-top">
+                <svg class="modal-topo-mesh" viewBox="0 0 390 230" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <radialGradient id="modal-topo-glow" cx="50%" cy="20%" r="70%">
+                      <stop offset="0%" stop-color="#1d4ed8" stop-opacity="0.45" />
+                      <stop offset="100%" stop-color="#082846" stop-opacity="1" />
+                    </radialGradient>
+                  </defs>
+                  <rect width="390" height="230" fill="url(#modal-topo-glow)" />
+                  <g fill="none" stroke="rgba(56, 189, 248, 0.22)" stroke-width="1.3">
+                    <ellipse cx="220" cy="80" rx="35" ry="24" />
+                    <ellipse cx="220" cy="80" rx="65" ry="46" />
+                    <ellipse cx="220" cy="80" rx="100" ry="72" />
+                    <ellipse cx="220" cy="80" rx="140" ry="102" />
+                    <ellipse cx="220" cy="80" rx="185" ry="135" />
+                    <ellipse cx="70" cy="160" rx="60" ry="42" stroke="rgba(56, 189, 248, 0.14)" />
+                  </g>
+                </svg>
+                <svg class="modal-wave-divider" viewBox="0 0 390 55" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M 0,25 C 95,50 170,55 240,30 C 300,8 350,12 390,30 L 390,55 L 0,55 Z" fill="#ffffff" />
+                </svg>
+                <div class="modal-canopy-header">
+                  <img src="/assets/logo-nexa-white.svg" alt="Nexa" class="modal-canopy-logo" />
+                  <span class="modal-canopy-badge">LOGIN B2B</span>
+                </div>
+              </div>
+              
+              <!-- Form body matching user's mockup -->
+              <div class="modal-auth-body">
+                <div class="modal-header-block">
+                  <h2 class="modal-signin-title">Sign in</h2>
+                  <div class="modal-accent-bar" aria-hidden="true"></div>
+                </div>
+
+                <div class="modal-role-row">
+                  <button type="button" class="btn-modal-role active" data-email="diego.morales@nexa.pe">Conductor</button>
+                  <button type="button" class="btn-modal-role" data-email="alejandro.vargas@nexa.pe">Almacén</button>
+                  <button type="button" class="btn-modal-role" data-email="carlos.mendoza@supermercados.pe">Comprador</button>
+                </div>
+
+                <form class="modal-form-fields" id="landing-login-form" onsubmit="return false;">
+                  <div class="clean-field-group">
+                    <label class="clean-field-label">Email</label>
+                    <div class="clean-input-row">
+                      <span class="clean-field-icon"><i class="pi pi-envelope"></i></span>
+                      <input type="email" id="modal-email-input" class="clean-native-input" value="diego.morales@nexa.pe" placeholder="demo@email.com" required />
+                    </div>
+                    <div class="clean-field-line"></div>
+                  </div>
+
+                  <div class="clean-field-group">
+                    <label class="clean-field-label">Password</label>
+                    <div class="clean-input-row">
+                      <span class="clean-field-icon"><i class="pi pi-lock"></i></span>
+                      <input type="password" id="modal-pwd-input" class="clean-native-input" value="NexaCold2026!" placeholder="••••••••••••" required />
+                    </div>
+                    <div class="clean-field-line"></div>
+                  </div>
+
+                  <div class="clean-options-row">
+                    <label class="clean-remember-label">
+                      <input type="checkbox" checked />
+                      <span class="clean-check-box"></span>
+                      <span>Remember Me</span>
+                    </label>
+                    <a href="#forgot" class="clean-forgot-link">Forgot Password?</a>
+                  </div>
+
+                  <button type="submit" class="btn-signin-primary" id="btn-submit-landing-login">
+                    <span>Sign in</span>
+                  </button>
+
+                  <div class="signin-signup-prompt">
+                    <span>Don't have an Account ?</span>
+                    <a href="#signup" class="signup-link">Sign up</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -789,19 +1213,45 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
     position: relative;
     z-index: 5;
     display: grid;
-    grid-template-columns: 390px 1fr 410px;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.5rem;
     align-items: flex-start;
     width: 100%;
-    min-height: 120px;
+    min-height: 135px;
   }
 
   /* Top-Left White Notch: Pure Transparent Background (Zero Spikes!) */
   .hero-top-left {
     display: flex;
     align-items: center;
-    gap: 2.5rem;
+    gap: 1.25rem;
     padding: 1.25rem 1.5rem 1.5rem 0.75rem;
     background: transparent;
+    flex-shrink: 0;
+  }
+
+  .hero-home-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1.5px solid #cbd5e1;
+    color: #082846;
+    font-size: 15px;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(8, 40, 70, 0.08);
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .hero-home-btn:hover {
+    background: #f0f9ff;
+    border-color: #38bdf8;
+    color: #0284c7;
+    transform: scale(1.05);
   }
 
   .nexa-brand {
@@ -851,8 +1301,10 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding-top: 0.65rem;
-    max-width: 520px;
+    padding-top: 0.95rem;
+    flex: 1;
+    min-width: 340px;
+    max-width: 680px;
     margin: 0 auto;
     z-index: 10;
   }
@@ -959,11 +1411,9 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
     z-index: 5;
     width: 100%;
     max-width: 1140px;
-    height: 440px;
+    height: 480px;
     margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    overflow: visible;
   }
 
   /* Continuous Vascular Circuit SVG */
@@ -982,92 +1432,141 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
   }
 
   /* Animated Signal Particles */
-  .pipe-pulse {
-    animation: flowPulse 2.8s infinite linear;
-  }
-
-  .pulse-1 { animation-delay: 0s; }
-  .pulse-2 { animation-delay: 0.7s; }
-  .pulse-3 { animation-delay: 1.4s; }
-  .pulse-4 { animation-delay: 0.4s; }
-  .pulse-5 { animation-delay: 1.1s; }
-
-  @keyframes flowPulse {
-    0% { opacity: 0; transform: scale(0.6); }
-    20% { opacity: 1; transform: scale(1.1); }
-    80% { opacity: 1; transform: scale(1.0); }
-    100% { opacity: 0; transform: scale(0.6); }
+  .pulse-particle {
+    filter: drop-shadow(0 0 5px #38bdf8);
+    pointer-events: none;
   }
 
   /* Hub Nodes */
+  /* Hub Nodes: High-Tech Terminals (0 Circles!) */
   .circuit-hub {
-    position: relative;
+    position: absolute;
     z-index: 10;
-    width: 154px;
-    height: 154px;
-    border-radius: 50%;
+    width: 165px;
+    height: 110px;
+    border-radius: 16px;
     background-color: #38bdf8;
     color: #082846;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 12px;
     box-shadow: 0 12px 32px rgba(56, 189, 248, 0.35);
-    flex-shrink: 0;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    transition: box-shadow 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .circuit-hub:hover {
-    transform: scale(1.04);
+    transform: scale(1.03);
+    box-shadow: 0 16px 36px rgba(56, 189, 248, 0.45);
+  }
+
+  .circuit-hub.is-dragging {
+    cursor: grabbing;
+    z-index: 50;
+    transform: scale(1.05);
+    box-shadow: 0 20px 44px rgba(56, 189, 248, 0.6);
   }
 
   .destination-hub {
     background-color: #2563eb;
     color: #ffffff;
+    width: 175px;
+    height: 110px;
+    border-radius: 16px;
     box-shadow: 0 12px 32px rgba(37, 99, 235, 0.35);
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    touch-action: none;
+    cursor: grab;
+  }
+
+  .destination-hub:hover {
+    box-shadow: 0 16px 36px rgba(37, 99, 235, 0.45);
+  }
+
+  .destination-hub.is-dragging {
+    cursor: grabbing;
+    z-index: 50;
+    transform: scale(1.05);
+    box-shadow: 0 20px 44px rgba(37, 99, 235, 0.6);
+  }
+
+  .hub-terminal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid rgba(8, 40, 70, 0.15);
+    padding-bottom: 4px;
+  }
+
+  .destination-hub .hub-terminal-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .terminal-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #0284c7;
+    box-shadow: 0 0 6px #0284c7;
+  }
+
+  .destination-hub .terminal-status-dot {
+    background: #38bdf8;
+    box-shadow: 0 0 6px #38bdf8;
+  }
+
+  .terminal-kicker {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
   }
 
   .hub-label {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 3px;
-    padding: 0.5rem;
-  }
-
-  .hub-kicker {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    opacity: 0.85;
+    gap: 2px;
   }
 
   .hub-title {
     font-family: var(--nexa-font-family-heading, 'Plus Jakarta Sans', sans-serif);
-    font-size: 13.5px;
+    font-size: 13px;
     font-weight: 800;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
   }
 
-  .hub-badge {
+  .hub-location {
+    font-size: 10.5px;
+    opacity: 0.9;
+  }
+
+  .hub-port-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
     margin-top: 4px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(8, 40, 70, 0.12);
     font-family: var(--nexa-font-family-mono, monospace);
-    font-size: 9.5px;
+    font-size: 9px;
     font-weight: 700;
-    background: rgba(8, 40, 70, 0.15);
-    padding: 2px 7px;
-    border-radius: 9999px;
   }
 
-  .destination-hub .hub-badge {
+  .dest-badge {
     background: rgba(255, 255, 255, 0.2);
     color: #ffffff;
   }
 
   /* Central Router Node (Nexa Core Bus) */
   .circuit-center-hub {
-    position: relative;
+    position: absolute;
     z-index: 10;
     width: 120px;
     height: 120px;
@@ -1080,12 +1579,21 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
     justify-content: center;
     text-align: center;
     box-shadow: 0 0 28px rgba(56, 189, 248, 0.25);
-    flex-shrink: 0;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    transition: box-shadow 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .circuit-center-hub:hover {
-    transform: scale(1.05);
+    transform: scale(1.04);
+  }
+
+  .circuit-center-hub.is-dragging {
+    cursor: grabbing;
+    z-index: 50;
+    transform: scale(1.07);
+    box-shadow: 0 0 36px rgba(56, 189, 248, 0.5);
   }
 
   .center-hub-content {
@@ -1110,32 +1618,201 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
     font-weight: 600;
   }
 
-  /* Symmetrically Aligned Three White Station Cards (Pure Autolayout) */
-  .circuit-stations-column {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    gap: 1.15rem;
-    width: 295px;
-    flex-shrink: 0;
-  }
-
+  /* Symmetrically Aligned Three White Station Cards (Pure Autolayout & Draggable) */
   .station-card {
+    position: absolute;
+    z-index: 10;
+    width: 335px;
     background: #ffffff;
+    opacity: 1 !important;
     border-radius: 16px;
-    padding: 0.85rem 1.15rem;
+    padding: 0.75rem 1rem;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.4rem;
     color: #082846;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
   }
 
   .station-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25);
+  }
+
+  .station-card.is-dragging {
+    cursor: grabbing;
+    z-index: 50;
+    transform: scale(1.04);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .station-body-items {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 3px 0;
+    border-top: 1px solid #f1f5f9;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .station-micro-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    font-size: 11px;
+  }
+
+  .micro-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-weight: 700;
+    font-size: 10px;
+  }
+
+  .micro-badge.cyan {
+    background: #e0f2fe;
+    color: #0284c7;
+  }
+
+  .micro-text {
+    font-weight: 600;
+    color: #334155;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 11px;
+  }
+
+  .micro-status-tag {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #0284c7;
+    background: #e0f2fe;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .micro-status-tag.cyan {
+    color: #0284c7;
+    background: #e0f2fe;
+  }
+
+  .station-progress-wrap {
+    width: 100%;
+    height: 4px;
+    background: #e2e8f0;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 1px;
+  }
+
+  .station-progress-bar {
+    height: 100%;
+    background: #2563eb;
+    border-radius: 2px;
+  }
+
+  .station-sparkline-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .mini-sparkline {
+    width: 130px;
+    height: 15px;
+  }
+
+  .sparkline-val {
+    font-size: 10px;
+    font-weight: 700;
+    color: #0284c7;
+  }
+
+  .station-trigger-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 10px;
+  }
+
+  .trigger-label {
+    color: #64748b;
+  }
+
+  .trigger-condition {
+    color: #2563eb;
+    font-weight: 700;
+  }
+
+  .drag-handle-grip {
+    cursor: grab;
+    color: #94a3b8;
+    font-size: 14px;
+    line-height: 1;
+    user-select: none;
+    padding: 2px 4px;
+    transition: color 0.15s ease;
+  }
+
+  .drag-handle-grip:hover {
+    color: #38bdf8;
+  }
+
+  .hub-grip {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+  }
+
+  .drag-coords-hud {
+    position: absolute;
+    top: 14px;
+    left: 20px;
+    z-index: 60;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    background: rgba(8, 40, 70, 0.94);
+    border: 1px solid #38bdf8;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 999px;
+    padding: 6px 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+  }
+
+  .hud-pill-tag {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #ffffff;
+    background: #0284c7;
+    padding: 2px 7px;
+    border-radius: 6px;
+  }
+
+  .hud-coords-text {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #bae6fd;
   }
 
   .station-header {
@@ -1326,13 +2003,14 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
     height: 100%;
     width: 33.33%;
     background: #2563eb;
-    transition: width 0.3s ease;
+    box-shadow: 0 0 8px rgba(37, 99, 235, 0.5);
+    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .tracker-steps-row {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
 
   .tracker-step {
@@ -1343,14 +2021,21 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
     gap: 4px;
     color: #64748b;
     cursor: pointer;
-    padding: 2px;
+    padding: 3px 6px;
+    border-radius: 6px;
     font-size: 11px;
-    transition: color 0.15s ease;
+    transition: all 0.15s ease;
+  }
+
+  .tracker-step:hover {
+    color: #2563eb;
+    background: rgba(37, 99, 235, 0.08);
   }
 
   .tracker-step.active {
     color: #082846;
     font-weight: 700;
+    background: rgba(37, 99, 235, 0.12);
   }
 
   .step-num {
@@ -1464,111 +2149,1440 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
   .text-cyan {
     color: #0284c7;
   }
+
+  /* --------------------------------------------------------------------------
+     2.5 OPERATIONAL SEGMENT VIEWS (MUELLE, TELEMETRÍA, ESCROW)
+     -------------------------------------------------------------------------- */
+  .workbench-stage-view {
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease;
+  }
+
+  .workbench-stage-view:not(#view-channels-stage) {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+  }
+
+  .segment-cards-trio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    width: 100%;
+    max-width: 1100px;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  .segment-panel-card {
+    background: rgba(10, 42, 74, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 16px;
+    padding: 1.25rem;
+    border: 1.5px solid rgba(56, 189, 248, 0.35);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    color: #ffffff;
+    min-height: 290px;
+    box-sizing: border-box;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .segment-panel-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(56, 189, 248, 0.65);
+    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.55), 0 0 24px rgba(56, 189, 248, 0.2);
+  }
+
+  .segment-card-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    justify-content: space-between;
+  }
+
+  .segment-head-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .segment-head-icon.blue {
+    background: rgba(37, 99, 235, 0.25);
+    color: #38bdf8;
+  }
+
+  .segment-head-icon.cyan {
+    background: rgba(56, 189, 248, 0.25);
+    color: #7dd3fc;
+  }
+
+  .segment-kicker {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 8.5px;
+    font-weight: 700;
+    color: #94a3b8;
+    letter-spacing: 0.05em;
+    display: block;
+  }
+
+  .segment-title {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 2px 0 0 0;
+    line-height: 1.2;
+  }
+
+  .segment-chip {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2.5px 7px;
+    border-radius: 6px;
+    background: rgba(15, 23, 42, 0.6);
+    color: #94a3b8;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+  }
+
+  .segment-chip.active {
+    background: rgba(56, 189, 248, 0.25);
+    color: #38bdf8;
+    border-color: rgba(56, 189, 248, 0.4);
+  }
+
+  /* Segment Body Micro-elements */
+  .segment-scale-display {
+    background: rgba(8, 30, 55, 0.75);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+  }
+
+  .scale-metric-label {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #94a3b8;
+    letter-spacing: 0.04em;
+  }
+
+  .scale-metric-value {
+    font-size: 28px;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1;
+  }
+
+  .scale-metric-value .unit {
+    font-size: 14px;
+    color: #38bdf8;
+  }
+
+  .scale-sub-metrics {
+    display: flex;
+    justify-content: space-around;
+    font-size: 9.5px;
+    color: #94a3b8;
+    border-top: 1px dashed rgba(56, 189, 248, 0.2);
+    padding-top: 6px;
+    margin-top: 4px;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .segment-checklist-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #e2e8f0;
+  }
+
+  .check-item i {
+    color: #38bdf8;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+
+  .badge-cert-stamp {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #7dd3fc;
+    background: rgba(56, 189, 248, 0.2);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .segment-label-preview {
+    background: rgba(8, 30, 55, 0.75);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 10px;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .label-code-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+  }
+
+  .barcode-ph {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #ffffff;
+  }
+
+  .label-batch-id {
+    font-weight: 800;
+    color: #38bdf8;
+    background: rgba(37, 99, 235, 0.3);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 9.5px;
+  }
+
+  .label-desc {
+    font-size: 10.5px;
+    color: #cbd5e1;
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  .label-route-tag {
+    font-size: 9.5px;
+    color: #7dd3fc;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 600;
+  }
+
+  .btn-panel-action {
+    width: 100%;
+    padding: 0.55rem 0.85rem;
+    background: rgba(15, 23, 42, 0.6);
+    color: #e2e8f0;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .btn-panel-action:hover {
+    background: rgba(56, 189, 248, 0.2);
+    color: #ffffff;
+    border-color: rgba(56, 189, 248, 0.5);
+  }
+
+  .btn-panel-action.primary {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #38bdf8;
+  }
+
+  .btn-panel-action.primary:hover {
+    background: #1d4ed8;
+    box-shadow: 0 0 16px rgba(56, 189, 248, 0.5);
+  }
+
+  .telemetry-chart-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .telemetry-svg-graph {
+    width: 100%;
+    height: 70px;
+    background: rgba(8, 30, 55, 0.75);
+    border-radius: 8px;
+    border: 1px solid rgba(56, 189, 248, 0.25);
+  }
+
+  .chart-legend-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: #94a3b8;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .reefer-status-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    background: rgba(8, 30, 55, 0.75);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 10px;
+    padding: 0.65rem;
+  }
+
+  .reefer-stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .stat-lbl {
+    font-size: 8.5px;
+    color: #94a3b8;
+  }
+
+  .stat-val {
+    font-size: 11.5px;
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  .route-tracker-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .route-step-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10.5px;
+    color: #94a3b8;
+  }
+
+  .route-step-row.active {
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .route-step-row.active i {
+    color: #38bdf8;
+  }
+
+  .vault-balance-display {
+    background: rgba(8, 30, 55, 0.75);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+  }
+
+  .vault-label {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #94a3b8;
+    letter-spacing: 0.04em;
+  }
+
+  .vault-amount {
+    font-size: 26px;
+    font-weight: 900;
+    color: #38bdf8;
+    line-height: 1;
+  }
+
+  .vault-amount .cur {
+    font-size: 13px;
+    color: #7dd3fc;
+  }
+
+  .vault-meta-row {
+    display: flex;
+    justify-content: space-around;
+    font-size: 9.5px;
+    color: #94a3b8;
+    border-top: 1px dashed rgba(56, 189, 248, 0.2);
+    padding-top: 6px;
+    margin-top: 4px;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .oracle-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .oracle-rule {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #cbd5e1;
+  }
+
+  .oracle-rule.verified i {
+    color: #38bdf8;
+    font-size: 11px;
+  }
+
+  .settlement-trigger-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .settle-desc {
+    font-size: 10.5px;
+    color: #cbd5e1;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .hash-tag-box {
+    font-size: 9px;
+    background: rgba(8, 30, 55, 0.85);
+    color: #7dd3fc;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    padding: 4px 8px;
+    border-radius: 4px;
+    word-break: break-all;
+  }
+
+  .foot-metric-text {
+    font-size: 9.5px;
+    color: #94a3b8;
+    font-weight: 600;
+  }
+
+  /* --------------------------------------------------------------------------
+     2.6 FULL-SCREEN NEXA BLUE LOGIN MODAL SPECIMEN
+     -------------------------------------------------------------------------- */
+  .landing-login-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(8, 40, 70, 0.78);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    animation: modalFadeIn 0.25s ease-out;
+  }
+
+  @keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .login-modal-phone-shell {
+    position: relative;
+    width: 380px;
+    max-width: 100%;
+    max-height: 90vh;
+    background: #ffffff;
+    border-radius: 36px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 4px solid #082846;
+    animation: modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes modalSlideUp {
+    from { transform: translateY(24px) scale(0.96); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+  }
+
+  .btn-close-login-modal {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 30;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s;
+  }
+
+  .btn-close-login-modal:hover {
+    background: rgba(255, 255, 255, 0.35);
+  }
+
+  .login-modal-screen-container {
+    overflow-y: auto;
+    width: 100%;
+  }
+
+  .modal-auth-inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .modal-canopy-top {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    background: #082846;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    box-sizing: border-box;
+  }
+
+  .modal-topo-mesh {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .modal-wave-divider {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .modal-canopy-header {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .modal-canopy-logo {
+    height: 26px;
+    width: auto;
+  }
+
+  .modal-canopy-badge {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.16);
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+
+  .modal-auth-body {
+    padding: 1.25rem 1.5rem 1.75rem;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .modal-header-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .modal-signin-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #082846;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .modal-accent-bar {
+    width: 32px;
+    height: 3.5px;
+    border-radius: 2px;
+    background: #2563eb;
+  }
+
+  .modal-role-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .btn-modal-role {
+    flex: 1;
+    padding: 6px 4px;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-modal-role.active {
+    background: #082846;
+    color: #ffffff;
+    border-color: #082846;
+  }
+
+  .modal-form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .clean-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .clean-field-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+  }
+
+  .clean-input-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+  }
+
+  .clean-field-icon {
+    color: #94a3b8;
+    font-size: 14px;
+  }
+
+  .clean-native-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 13px;
+    color: #082846;
+    width: 100%;
+    font-weight: 600;
+  }
+
+  .clean-field-line {
+    height: 1.5px;
+    background: #e2e8f0;
+    width: 100%;
+    transition: background 0.2s ease;
+  }
+
+  .clean-field-group:focus-within .clean-field-line {
+    background: #2563eb;
+  }
+
+  .clean-options-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #64748b;
+  }
+
+  .clean-remember-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .clean-forgot-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .btn-signin-primary {
+    width: 100%;
+    padding: 0.75rem;
+    background: #082846;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(8, 40, 70, 0.3);
+    transition: background 0.2s ease;
+  }
+
+  .btn-signin-primary:hover {
+    background: #0e3d6b;
+  }
+
+  .signin-signup-prompt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #64748b;
+  }
+
+  .signup-link {
+    color: #2563eb;
+    font-weight: 700;
+    text-decoration: none;
+  }
 </style>
 
 <script>
   /**
-   * NEXAFY LIVING GRAPHICS ENGINE — CLIENT CONTROLLER
-   * Ensures closed vascular pipeline, interactive preset switching, tone toggling,
-   * and build assembly animation with 0 collisions.
+   * NEXAFY LIVING GRAPHICS ENGINE — 60FPS CLIENT CONTROLLER
+   * Full drag-and-drop support across all nodes, zero circles (high-tech terminals),
+   * real-time vascular conduit recalculation with smooth S-curves/fillets, particle pulse animation,
+   * live HUD coordinates, multi-segment view switcher, and interactive Nexa logo color toggle.
    */
-  function initLivingEngineWorkbench() {
-    const btnBuild = document.getElementById('btn-build-engine') as HTMLButtonElement | null;
-    const tickerMsg = document.getElementById('workbench-ticker-msg');
-    const stations = document.querySelectorAll<HTMLElement>('.station-card');
-    const pipes = document.querySelectorAll<SVGPathElement>('.circuit-pipe-line');
 
-    // Build Engine Assembly Animation
-    btnBuild?.addEventListener('click', () => {
-      if (btnBuild) btnBuild.disabled = true;
-      if (tickerMsg) tickerMsg.textContent = '✦ Ensamblando Red Vasculares Nexafy: Conectando Muelle Callao...';
+  interface NodeState {
+    id: string;
+    name: string;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  }
 
-      // Stage 1: Fade out stations
-      stations.forEach(s => {
-        s.style.opacity = '0';
-        s.style.transform = 'scale(0.85)';
-        s.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
-      });
+  interface EdgeDef {
+    id: string;
+    pathId: string;
+    pulseId: string;
+    sourceId: string;
+    targetId: string;
+    getSourcePoint: () => { x: number; y: number };
+    getTargetPoint: () => { x: number; y: number };
+    pulseProgress: number;
+    pulseSpeed: number;
+  }
 
-      // Stage 2: Staggered spring docking
-      setTimeout(() => {
-        if (stations[0]) {
-          stations[0].style.opacity = '1';
-          stations[0].style.transform = 'scale(1)';
-        }
-        if (tickerMsg) tickerMsg.textContent = '✦ Estación 01 [Despacho en Bahía · FEFO] acoplada';
-      }, 300);
+  // Canonical Initial Positions (Symmetric & Zero Collision)
+  const INITIAL_POSITIONS: Record<string, { x: number; y: number }> = {
+    'circuit-hub':        { x: 20, y: 185 },
+    'circuit-center-hub': { x: 235, y: 180 },
+    'station-01-card':    { x: 410, y: 35 },
+    'station-02-card':    { x: 410, y: 190 },
+    'station-03-card':    { x: 410, y: 345 },
+    'circuit-dest-hub':   { x: 900, y: 185 }
+  };
 
-      setTimeout(() => {
-        if (stations[1]) {
-          stations[1].style.opacity = '1';
-          stations[1].style.transform = 'scale(1)';
-        }
-        if (tickerMsg) tickerMsg.textContent = '✦ Estación 02 [Telemetría Sensirion IoT · -18.2°C] sincronizada';
-      }, 650);
+  const PRESET_MATRIX: Record<string, { x: number; y: number }> = {
+    'circuit-hub':        { x: 20, y: 185 },
+    'circuit-center-hub': { x: 220, y: 180 },
+    'station-01-card':    { x: 390, y: 30 },
+    'station-02-card':    { x: 390, y: 190 },
+    'station-03-card':    { x: 390, y: 350 },
+    'circuit-dest-hub':   { x: 890, y: 185 }
+  };
 
-      setTimeout(() => {
-        if (stations[2]) {
-          stations[2].style.opacity = '1';
-          stations[2].style.transform = 'scale(1)';
-        }
-        if (tickerMsg) tickerMsg.textContent = '✦ Estación 03 [Custodia Escrow 100% · $3,450.00] garantizada';
-      }, 1000);
+  const PRESET_ESCROW: Record<string, { x: number; y: number }> = {
+    'circuit-hub':        { x: 20, y: 185 },
+    'circuit-center-hub': { x: 235, y: 180 },
+    'station-01-card':    { x: 410, y: 35 },
+    'station-02-card':    { x: 410, y: 190 },
+    'station-03-card':    { x: 430, y: 345 },
+    'circuit-dest-hub':   { x: 900, y: 205 }
+  };
 
-      setTimeout(() => {
-        if (btnBuild) btnBuild.disabled = false;
-        if (tickerMsg) tickerMsg.textContent = '✦ Red Nexafy 100% Operativa · Despachos, Telemetría y Custodia Activos';
-      }, 1400);
+  const NODES: Record<string, NodeState> = {
+    'circuit-hub':        { id: 'circuit-hub', name: 'Terminal Pesquero', x: 20, y: 185, width: 165, height: 110 },
+    'circuit-center-hub': { id: 'circuit-center-hub', name: 'Nexa Hub Core', x: 235, y: 180, width: 120, height: 120 },
+    'station-01-card':    { id: 'station-01-card', name: '01 Despacho FEFO', x: 410, y: 35, width: 335, height: 100 },
+    'station-02-card':    { id: 'station-02-card', name: '02 Telemetría IoT', x: 410, y: 190, width: 335, height: 100 },
+    'station-03-card':    { id: 'station-03-card', name: '03 Escrow 100%', x: 410, y: 345, width: 335, height: 100 },
+    'circuit-dest-hub':   { id: 'circuit-dest-hub', name: 'Red Mayorista', x: 900, y: 185, width: 175, height: 110 }
+  };
+
+  const EDGES: EdgeDef[] = [
+    {
+      id: 'trunk',
+      pathId: 'pipe-trunk',
+      pulseId: 'pulse-trunk',
+      sourceId: 'circuit-hub',
+      targetId: 'circuit-center-hub',
+      getSourcePoint: () => ({ x: NODES['circuit-hub'].x + NODES['circuit-hub'].width, y: NODES['circuit-hub'].y + NODES['circuit-hub'].height / 2 }),
+      getTargetPoint: () => ({ x: NODES['circuit-center-hub'].x, y: NODES['circuit-center-hub'].y + NODES['circuit-center-hub'].height / 2 }),
+      pulseProgress: 0.1,
+      pulseSpeed: 0.005
+    },
+    {
+      id: 'branch-top',
+      pathId: 'pipe-branch-top',
+      pulseId: 'pulse-branch-top',
+      sourceId: 'circuit-center-hub',
+      targetId: 'station-01-card',
+      getSourcePoint: () => ({ x: NODES['circuit-center-hub'].x + NODES['circuit-center-hub'].width, y: NODES['circuit-center-hub'].y + 30 }),
+      getTargetPoint: () => ({ x: NODES['station-01-card'].x, y: NODES['station-01-card'].y + NODES['station-01-card'].height / 2 }),
+      pulseProgress: 0.3,
+      pulseSpeed: 0.004
+    },
+    {
+      id: 'branch-mid',
+      pathId: 'pipe-branch-mid',
+      pulseId: 'pulse-branch-mid',
+      sourceId: 'circuit-center-hub',
+      targetId: 'station-02-card',
+      getSourcePoint: () => ({ x: NODES['circuit-center-hub'].x + NODES['circuit-center-hub'].width, y: NODES['circuit-center-hub'].y + 60 }),
+      getTargetPoint: () => ({ x: NODES['station-02-card'].x, y: NODES['station-02-card'].y + NODES['station-02-card'].height / 2 }),
+      pulseProgress: 0.5,
+      pulseSpeed: 0.005
+    },
+    {
+      id: 'branch-bot',
+      pathId: 'pipe-branch-bot',
+      pulseId: 'pulse-branch-bot',
+      sourceId: 'circuit-center-hub',
+      targetId: 'station-03-card',
+      getSourcePoint: () => ({ x: NODES['circuit-center-hub'].x + NODES['circuit-center-hub'].width, y: NODES['circuit-center-hub'].y + 90 }),
+      getTargetPoint: () => ({ x: NODES['station-03-card'].x, y: NODES['station-03-card'].y + NODES['station-03-card'].height / 2 }),
+      pulseProgress: 0.2,
+      pulseSpeed: 0.004
+    },
+    {
+      id: 'exit-top',
+      pathId: 'pipe-exit-top',
+      pulseId: 'pulse-exit-top',
+      sourceId: 'station-01-card',
+      targetId: 'circuit-dest-hub',
+      getSourcePoint: () => ({ x: NODES['station-01-card'].x + NODES['station-01-card'].width, y: NODES['station-01-card'].y + NODES['station-01-card'].height / 2 }),
+      getTargetPoint: () => ({ x: NODES['circuit-dest-hub'].x, y: NODES['circuit-dest-hub'].y + 25 }),
+      pulseProgress: 0.6,
+      pulseSpeed: 0.004
+    },
+    {
+      id: 'exit-mid',
+      pathId: 'pipe-exit-mid',
+      pulseId: 'pulse-exit-mid',
+      sourceId: 'station-02-card',
+      targetId: 'circuit-dest-hub',
+      getSourcePoint: () => ({ x: NODES['station-02-card'].x + NODES['station-02-card'].width, y: NODES['station-02-card'].y + NODES['station-02-card'].height / 2 }),
+      getTargetPoint: () => ({ x: NODES['circuit-dest-hub'].x, y: NODES['circuit-dest-hub'].y + 55 }),
+      pulseProgress: 0.4,
+      pulseSpeed: 0.005
+    },
+    {
+      id: 'exit-bot',
+      pathId: 'pipe-exit-bot',
+      pulseId: 'pulse-exit-bot',
+      sourceId: 'station-03-card',
+      targetId: 'circuit-dest-hub',
+      getSourcePoint: () => ({ x: NODES['station-03-card'].x + NODES['station-03-card'].width, y: NODES['station-03-card'].y + NODES['station-03-card'].height / 2 }),
+      getTargetPoint: () => ({ x: NODES['circuit-dest-hub'].x, y: NODES['circuit-dest-hub'].y + 85 }),
+      pulseProgress: 0.7,
+      pulseSpeed: 0.004
+    }
+  ];
+
+  let isBuilding = false;
+
+  /**
+   * Smooth S-curve / Filleted Orthogonal Conduit Router
+   */
+  function routeConduit(p1: { x: number; y: number }, p2: { x: number; y: number }, radius: number = 20): string {
+    const dx = p2.x - p1.x;
+    const dy = p2.y - p1.y;
+
+    if (Math.abs(dy) < 2) {
+      return `M ${p1.x.toFixed(1)} ${p1.y.toFixed(1)} L ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+    }
+
+    if (dx >= 24) {
+      const midX = p1.x + dx / 2;
+      const r = Math.min(radius, Math.abs(dx) / 2 - 2, Math.abs(dy) / 2 - 2);
+      const signY = dy > 0 ? 1 : -1;
+
+      return `M ${p1.x.toFixed(1)} ${p1.y.toFixed(1)} ` +
+             `L ${(midX - r).toFixed(1)} ${p1.y.toFixed(1)} ` +
+             `Q ${midX.toFixed(1)} ${p1.y.toFixed(1)}, ${midX.toFixed(1)} ${(p1.y + signY * r).toFixed(1)} ` +
+             `L ${midX.toFixed(1)} ${(p2.y - signY * r).toFixed(1)} ` +
+             `Q ${midX.toFixed(1)} ${p2.y.toFixed(1)}, ${(midX + r).toFixed(1)} ${p2.y.toFixed(1)} ` +
+             `L ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+    }
+
+    const safeOffsetY = dy >= 0 ? 60 : -60;
+    return `M ${p1.x.toFixed(1)} ${p1.y.toFixed(1)} ` +
+           `C ${(p1.x + 35).toFixed(1)} ${p1.y.toFixed(1)}, ${(p1.x + 35).toFixed(1)} ${(p1.y + safeOffsetY).toFixed(1)}, ${(p1.x + p2.x) / 2} ${(p1.y + safeOffsetY).toFixed(1)} ` +
+           `C ${(p2.x - 35).toFixed(1)} ${(p1.y + safeOffsetY).toFixed(1)}, ${(p2.x - 35).toFixed(1)} ${p2.y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+  }
+
+  /**
+   * Recalculate all 7 vascular conduits dynamically in real time
+   */
+  function rerouteAll() {
+    EDGES.forEach(edge => {
+      const p1 = edge.getSourcePoint();
+      const p2 = edge.getTargetPoint();
+      const pathD = routeConduit(p1, p2, 20);
+      const pathEl = document.getElementById(edge.pathId) as SVGPathElement | null;
+      if (pathEl) {
+        pathEl.setAttribute('d', pathD);
+        pathEl.style.strokeDasharray = 'none';
+        pathEl.style.strokeDashoffset = '0';
+        pathEl.style.opacity = '1';
+      }
     });
 
-    // Preset Switching
+    checkCollisions();
+  }
+
+  /**
+   * Collision detection check between blocks
+   */
+  function checkCollisions() {
+    const ids = Object.keys(NODES);
+    let collisionCount = 0;
+
+    for (let i = 0; i < ids.length; i++) {
+      for (let j = i + 1; j < ids.length; j++) {
+        const a = NODES[ids[i]];
+        const b = NODES[ids[j]];
+
+        const overlapX = a.x < b.x + b.width - 6 && a.x + a.width - 6 > b.x;
+        const overlapY = a.y < b.y + b.height - 6 && a.y + a.height - 6 > b.y;
+
+        if (overlapX && overlapY) {
+          collisionCount++;
+        }
+      }
+    }
+
+    const collisionPill = document.querySelector('.collision-pill');
+    if (collisionPill) {
+      if (collisionCount === 0) {
+        collisionPill.innerHTML = '<i class="pi pi-check-circle" style="color: #0284c7;"></i> 0 Colisiones';
+        collisionPill.classList.remove('has-collision');
+      } else {
+        collisionPill.innerHTML = `<i class="pi pi-exclamation-triangle" style="color: #ef4444;"></i> ${collisionCount} Solapamiento${collisionCount > 1 ? 's' : ''}`;
+        collisionPill.classList.add('has-collision');
+      }
+    }
+  }
+
+  /**
+   * Interactive Drag & Drop System
+   */
+  function setupDragAndDrop() {
+    const stage = document.getElementById('circuit-stage');
+    if (!stage) return;
+
+    const dragHud = document.getElementById('workbench-drag-hud');
+    const hudCoordsText = document.getElementById('hud-coords-text');
+    const tickerMsg = document.getElementById('workbench-ticker-msg');
+
+    Object.keys(NODES).forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      el.style.left = `${NODES[id].x}px`;
+      el.style.top = `${NODES[id].y}px`;
+      el.style.opacity = '1';
+      el.style.transform = 'scale(1) translate(0, 0)';
+      el.style.display = 'flex';
+      el.style.visibility = 'visible';
+
+      let isDragging = false;
+      let dragOffset = { x: 0, y: 0 };
+
+      el.addEventListener('pointerdown', (e: PointerEvent) => {
+        if (isBuilding) return;
+        isDragging = true;
+        el.setPointerCapture(e.pointerId);
+
+        const rect = el.getBoundingClientRect();
+        dragOffset = {
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top
+        };
+
+        el.classList.add('is-dragging');
+        if (dragHud) dragHud.style.display = 'flex';
+        if (hudCoordsText) {
+          hudCoordsText.textContent = `${NODES[id].name} · X: ${Math.round(NODES[id].x)}px · Y: ${Math.round(NODES[id].y)}px`;
+        }
+        e.preventDefault();
+      });
+
+      el.addEventListener('pointermove', (e: PointerEvent) => {
+        if (!isDragging) return;
+
+        const stageRect = stage.getBoundingClientRect();
+        let newX = e.clientX - stageRect.left - dragOffset.x;
+        let newY = e.clientY - stageRect.top - dragOffset.y;
+
+        newX = Math.max(10, Math.min(stageRect.width - NODES[id].width - 10, newX));
+        newY = Math.max(10, Math.min(stageRect.height - NODES[id].height - 10, newY));
+
+        NODES[id].x = newX;
+        NODES[id].y = newY;
+
+        el.style.left = `${newX}px`;
+        el.style.top = `${newY}px`;
+
+        if (hudCoordsText) {
+          hudCoordsText.textContent = `${NODES[id].name} · X: ${Math.round(newX)}px · Y: ${Math.round(newY)}px`;
+        }
+
+        rerouteAll();
+      });
+
+      const onPointerEnd = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        el.classList.remove('is-dragging');
+        if (dragHud) dragHud.style.display = 'none';
+
+        if (tickerMsg) {
+          tickerMsg.textContent = `✦ Bloque [${NODES[id].name}] posicionado en (${Math.round(NODES[id].x)}, ${Math.round(NODES[id].y)}) · Conduits recalculados`;
+        }
+      };
+
+      el.addEventListener('pointerup', onPointerEnd);
+      el.addEventListener('pointercancel', onPointerEnd);
+    });
+  }
+
+  /**
+   * Animate Signal Pulses Flowing through Conduits (60 FPS)
+   */
+  function animateParticles() {
+    EDGES.forEach(edge => {
+      edge.pulseProgress += edge.pulseSpeed;
+      if (edge.pulseProgress > 1) edge.pulseProgress = 0;
+
+      const pathEl = document.getElementById(edge.pathId) as SVGPathElement | null;
+      const particleEl = document.getElementById(edge.pulseId) as SVGCircleElement | null;
+
+      if (pathEl && particleEl) {
+        const len = pathEl.getTotalLength();
+        if (len > 0) {
+          const pt = pathEl.getPointAtLength(edge.pulseProgress * len);
+          particleEl.setAttribute('cx', pt.x.toFixed(1));
+          particleEl.setAttribute('cy', pt.y.toFixed(1));
+        }
+      }
+    });
+
+    requestAnimationFrame(animateParticles);
+  }
+
+  /**
+   * Dynamic Assembly "Construir Motor (Build)"
+   */
+  function buildEngineAssembly() {
+    if (isBuilding) return;
+    isBuilding = true;
+
+    // Switch to channels view if on another tab
+    switchStageView('channels');
+
+    const btnBuild = document.getElementById('btn-build-engine') as HTMLButtonElement | null;
+    const tickerMsg = document.getElementById('workbench-ticker-msg');
+    if (btnBuild) btnBuild.disabled = true;
+
+    if (tickerMsg) {
+      tickerMsg.textContent = '✦ Ensamblando motor gráfico Nexafy: Conectando terminales y estaciones...';
+    }
+
+    Object.keys(NODES).forEach((id, idx) => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.style.transition = 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
+        el.style.opacity = '0.35';
+        el.style.transform = `scale(0.9) translate(${(idx % 2 === 0 ? -16 : 16)}px, ${(idx % 3 === 0 ? -12 : 12)}px)`;
+      }
+    });
+
+    const sequence = [
+      { ids: ['circuit-hub'], delay: 100, msg: '✦ 1/5: Origen [Terminal Pesquero Callao] conectado' },
+      { ids: ['circuit-center-hub'], delay: 400, msg: '✦ 2/5: Núcleo Bus [NEXA HUB Core] acoplado' },
+      { ids: ['station-01-card'], delay: 750, msg: '✦ 3/5: Estación 01 [Despacho en Bahía · FEFO] acoplada' },
+      { ids: ['station-02-card'], delay: 1100, msg: '✦ 4/5: Estación 02 [Telemetría Sensirion IoT · -18.2°C] sincronizada' },
+      { ids: ['station-03-card', 'circuit-dest-hub'], delay: 1450, msg: '✦ 5/5: Estación 03 [Custodia Escrow 100%] y Red Mayorista enlazadas' },
+    ];
+
+    sequence.forEach(step => {
+      setTimeout(() => {
+        step.ids.forEach(id => {
+          const el = document.getElementById(id);
+          const target = INITIAL_POSITIONS[id];
+          if (el && target) {
+            NODES[id].x = target.x;
+            NODES[id].y = target.y;
+            el.style.transition = 'left 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.4s ease, opacity 0.3s ease';
+            el.style.left = `${target.x}px`;
+            el.style.top = `${target.y}px`;
+            el.style.transform = 'scale(1) translate(0, 0)';
+            el.style.opacity = '1';
+          }
+        });
+        rerouteAll();
+        if (tickerMsg) tickerMsg.textContent = step.msg;
+      }, step.delay);
+    });
+
+    setTimeout(() => {
+      isBuilding = false;
+      if (btnBuild) btnBuild.disabled = false;
+      if (tickerMsg) {
+        tickerMsg.textContent = '✦ Motor Gráfico Nexafy Construido y 100% Operativo · Arrastra cualquier bloque libremente';
+      }
+      Object.keys(NODES).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.transition = 'none';
+      });
+    }, 1900);
+  }
+
+  /**
+   * Apply Preset Positions Smoothly
+   */
+  function applyPreset(presetKey: string) {
+    let preset = INITIAL_POSITIONS;
+    if (presetKey === 'matrix') preset = PRESET_MATRIX;
+    else if (presetKey === 'escrow') preset = PRESET_ESCROW;
+
+    // Switch back to channels view if needed
+    switchStageView('channels');
+
+    Object.keys(preset).forEach(id => {
+      const target = preset[id];
+      const el = document.getElementById(id);
+      if (el && target) {
+        NODES[id].x = target.x;
+        NODES[id].y = target.y;
+        el.style.transition = 'left 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        el.style.left = `${target.x}px`;
+        el.style.top = `${target.y}px`;
+      }
+    });
+
+    rerouteAll();
+
+    setTimeout(() => {
+      Object.keys(NODES).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.transition = 'none';
+      });
+    }, 500);
+
+    const tickerMsg = document.getElementById('workbench-ticker-msg');
+    if (tickerMsg) {
+      tickerMsg.textContent = `✦ Preset [${presetKey.toUpperCase()}] aplicado con 0 colisiones`;
+    }
+  }
+
+  /**
+   * Switch between multi-segment views (Channels, Dock, Telemetry, Escrow)
+   */
+  function switchStageView(viewKey: string) {
+    document.querySelectorAll('[data-view]').forEach(btn => {
+      btn.classList.toggle('active', (btn as HTMLElement).dataset.view === viewKey);
+    });
+
+    const views: Record<string, string> = {
+      'channels': 'view-channels-stage',
+      'dock': 'view-dock-stage',
+      'telemetry': 'view-telemetry-stage',
+      'escrow': 'view-escrow-stage'
+    };
+
+    Object.entries(views).forEach(([key, elementId]) => {
+      const el = document.getElementById(elementId);
+      if (el) {
+        if (key === viewKey) {
+          el.style.display = key === 'channels' ? 'block' : 'flex';
+          el.classList.add('active');
+        } else {
+          el.style.display = 'none';
+          el.classList.remove('active');
+        }
+      }
+    });
+
+    // Synchronize bottom-right logistics tracker steps
+    const stepMap: Record<string, number> = {
+      'channels': 1,
+      'dock': 1,
+      'telemetry': 2,
+      'escrow': 3
+    };
+    if (stepMap[viewKey]) {
+      updateTrackerActive(stepMap[viewKey]);
+    }
+
+    const tickerMsg = document.getElementById('workbench-ticker-msg');
+    if (tickerMsg) {
+      if (viewKey === 'channels') {
+        tickerMsg.textContent = '✦ Vista [CANALES & BLOQUES] activa: Conductos vasculares en vivo · Arrastra cualquier bloque libremente';
+        rerouteAll();
+      } else if (viewKey === 'dock') {
+        tickerMsg.textContent = '✦ Paso 01 · [MUELLE & ALMACÉN]: Báscula Toledo digital 500kg · Protocolo SANIPES 4.0 Conforme';
+      } else if (viewKey === 'telemetry') {
+        tickerMsg.textContent = '✦ Paso 02 · [TRÁNSITO & CONDUCTOR]: Sensirion SHT40 -18.2°C en ruta · Carrier 1550 OK · 0 quiebres térmicos';
+      } else if (viewKey === 'escrow') {
+        tickerMsg.textContent = '✦ Paso 03 · [ESCROW & COMPRADOR]: Bóveda multi-sig $3,450.00 USD pre-bloqueada · Oráculo IoT activo';
+      }
+    }
+  }
+
+  function updateTrackerActive(chapterNum: number) {
+    const trackerSteps = document.querySelectorAll<HTMLButtonElement>('.tracker-step');
+    const progressBar = document.querySelector<HTMLElement>('.tracker-progress-segment');
+    trackerSteps.forEach(s => {
+      const isCur = parseInt(s.dataset.chapter || '1', 10) === chapterNum;
+      s.classList.toggle('active', isCur);
+      s.setAttribute('aria-pressed', isCur ? 'true' : 'false');
+    });
+    if (progressBar) {
+      const widthMap: Record<number, string> = { 1: '33.33%', 2: '66.66%', 3: '100%' };
+      progressBar.style.width = widthMap[chapterNum] || '33.33%';
+    }
+  }
+
+  function setupChapterTracker() {
+    const trackerSteps = document.querySelectorAll<HTMLButtonElement>('.tracker-step');
+    trackerSteps.forEach(step => {
+      step.addEventListener('click', (e) => {
+        e.preventDefault();
+        const segment = step.dataset.segment || 'channels';
+        switchStageView(segment);
+      });
+    });
+
+    // Wire station cards on channels view to highlight tracker steps and update ticker
+    const station01 = document.getElementById('station-01-card');
+    const station02 = document.getElementById('station-02-card');
+    const station03 = document.getElementById('station-03-card');
+
+    station01?.addEventListener('click', () => {
+      updateTrackerActive(1);
+      const tickerMsg = document.getElementById('workbench-ticker-msg');
+      if (tickerMsg) tickerMsg.textContent = '✦ Estación 01 [Muelle Callao]: Lote L-8841 Salmón · Báscula Toledo OK';
+    });
+    station02?.addEventListener('click', () => {
+      updateTrackerActive(2);
+      const tickerMsg = document.getElementById('workbench-ticker-msg');
+      if (tickerMsg) tickerMsg.textContent = '✦ Estación 02 [Tránsito]: Sensirion SHT40 -18.2°C sostenida · Flota Van B-402';
+    });
+    station03?.addEventListener('click', () => {
+      updateTrackerActive(3);
+      const tickerMsg = document.getElementById('workbench-ticker-msg');
+      if (tickerMsg) tickerMsg.textContent = '✦ Estación 03 [Escrow]: Smart Contract Vault $3,450.00 USD · Liquidación automática';
+    });
+  }
+
+  /**
+   * Interactive Nexa Logo Color Switcher (Blue <-> White)
+   */
+  function setupInteractiveLogo() {
+    const brandBtn = document.getElementById('hero-nexa-brand');
+    const logoImg = document.getElementById('hero-nexa-logo') as HTMLImageElement | null;
+    const tickerMsg = document.getElementById('workbench-ticker-msg');
+
+    if (!brandBtn || !logoImg) return;
+
+    let isWhite = false;
+
+    brandBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      isWhite = !isWhite;
+      logoImg.src = isWhite ? '/assets/logo-nexa-white.svg' : '/assets/logo-nexa-blue.svg';
+      logoImg.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+      logoImg.style.transform = 'scale(1.08)';
+      setTimeout(() => { logoImg.style.transform = 'scale(1)'; }, 200);
+
+      const topLeft = document.querySelector<HTMLElement>('.hero-top-left');
+      if (topLeft) {
+        if (isWhite) {
+          topLeft.style.backgroundColor = '#082846';
+          topLeft.style.borderColor = 'rgba(56, 189, 248, 0.45)';
+          topLeft.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.35)';
+          topLeft.querySelectorAll<HTMLElement>('.hero-nav-link, .hero-home-btn').forEach(el => {
+            el.style.color = '#ffffff';
+          });
+        } else {
+          topLeft.style.backgroundColor = '';
+          topLeft.style.borderColor = '';
+          topLeft.style.boxShadow = '';
+          topLeft.querySelectorAll<HTMLElement>('.hero-nav-link, .hero-home-btn').forEach(el => {
+            el.style.color = '';
+          });
+        }
+      }
+
+      if (tickerMsg) {
+        tickerMsg.textContent = `✦ Modo interactivo Nexa: [${isWhite ? 'FONDO AZUL · LOGO BLANCO' : 'FONDO BLANCO · LOGO AZUL'}] activado`;
+      }
+    });
+  }
+
+  /**
+   * Full-Screen Mobile Login Modal Management
+   */
+  function setupLoginModal() {
+    const modal = document.getElementById('landing-login-modal');
+    const openBtn = document.getElementById('btn-open-landing-login');
+    const closeBtn = document.getElementById('btn-close-landing-login');
+    const emailInput = document.getElementById('modal-email-input') as HTMLInputElement | null;
+    const roleBtns = document.querySelectorAll<HTMLButtonElement>('.btn-modal-role');
+
+    if (!modal) return;
+
+    openBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      modal.style.display = 'flex';
+    });
+
+    closeBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      modal.style.display = 'none';
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    roleBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        roleBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (emailInput && btn.dataset.email) {
+          emailInput.value = btn.dataset.email;
+        }
+      });
+    });
+
+    // Tare scale simulator button
+    const btnTare = document.getElementById('btn-tare-scale');
+    btnTare?.addEventListener('click', () => {
+      const scaleVal = document.querySelector('.scale-metric-value');
+      if (scaleVal) {
+        scaleVal.innerHTML = '0.00 <span class="unit">kg</span>';
+        setTimeout(() => {
+          scaleVal.innerHTML = '500.00 <span class="unit">kg</span>';
+        }, 1500);
+      }
+    });
+
+    // Simulated escrow settlement
+    const btnSettle = document.getElementById('btn-simulate-settlement');
+    btnSettle?.addEventListener('click', () => {
+      const tickerMsg = document.getElementById('workbench-ticker-msg');
+      if (tickerMsg) {
+        tickerMsg.textContent = '✦ Smart Contract: Firma POD verificada · Liquidación de $3,450.00 USD ejecutada con éxito en 0.72s';
+      }
+    });
+  }
+
+  // Tones Management
+  const TONES: Record<string, { plate: string; accent: string; conduit: string }> = {
+    nexa:     { plate: '#082846', accent: '#38bdf8', conduit: '#bae6fd' },
+    ceramic:  { plate: '#1d3d63', accent: '#38bdf8', conduit: '#a5f3fc' },
+    cashmere: { plate: '#283a48', accent: '#7dd3fc', conduit: '#bae6fd' },
+    oceanic:  { plate: '#0c2038', accent: '#38bdf8', conduit: '#93c5fd' }
+  };
+
+  function applyTone(toneKey: string) {
+    const tone = TONES[toneKey];
+    if (!tone) return;
+
+    document.querySelectorAll('.tone-pill').forEach(btn => {
+      btn.classList.toggle('active', (btn as HTMLElement).dataset.tone === toneKey);
+    });
+
+    const silPath = document.querySelector<SVGPathElement>('.hero-silhouette-path');
+    if (silPath) silPath.setAttribute('fill', tone.plate);
+
+    const pipes = document.querySelectorAll<SVGPathElement>('.circuit-pipe-line');
+    pipes.forEach(p => p.setAttribute('stroke', tone.conduit));
+  }
+
+  function initLivingEngineWorkbench() {
+    setupDragAndDrop();
+    rerouteAll();
+    animateParticles();
+    setupInteractiveLogo();
+    setupLoginModal();
+    setupChapterTracker();
+
+    // Build Engine Assembly
+    const btnBuild = document.getElementById('btn-build-engine');
+    btnBuild?.addEventListener('click', buildEngineAssembly);
+
+    // Segment Views Switching
+    document.querySelectorAll<HTMLButtonElement>('[data-view]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const viewKey = btn.dataset.view || 'channels';
+        switchStageView(viewKey);
+      });
+    });
+
+    // Preset Switching & Reset
     document.querySelectorAll<HTMLButtonElement>('.preset-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const preset = btn.dataset.preset || 'channels';
-        document.querySelectorAll('.preset-btn').forEach(b => b.classList.toggle('active', b === btn));
-
-        if (preset === 'channels') {
-          stations.forEach(s => s.style.display = 'flex');
-          if (tickerMsg) tickerMsg.textContent = '✦ Preset [CANALES]: Flujo canónico de 3 estaciones cerrado';
-        } else if (preset === 'matrix') {
-          stations.forEach(s => s.style.display = 'flex');
-          if (tickerMsg) tickerMsg.textContent = '✦ Preset [MATRIZ]: Monitoreo de telemetría IoT Sensirion activo';
-        } else if (preset === 'escrow') {
-          stations.forEach(s => {
-            s.style.display = 'flex';
-          });
-          if (tickerMsg) tickerMsg.textContent = '✦ Preset [ESCROW]: Liquidación automática por contrato inteligente';
-        } else if (preset === 'reset') {
-          stations.forEach(s => {
-            s.style.display = 'flex';
-            s.style.opacity = '1';
-            s.style.transform = 'none';
-          });
-          if (tickerMsg) tickerMsg.textContent = '✦ Posiciones canónicas restablecidas';
+        const preset = btn.dataset.preset;
+        if (preset === 'reset') {
+          applyPreset('channels');
+        } else if (preset) {
+          applyPreset(preset);
         }
       });
     });
 
     // Tone Switching
-    const TONES: Record<string, { plate: string; accent: string; conduit: string }> = {
-      nexa:     { plate: '#082846', accent: '#38bdf8', conduit: '#bae6fd' },
-      ceramic:  { plate: '#1d3d63', accent: '#38bdf8', conduit: '#a5f3fc' },
-      cashmere: { plate: '#283a48', accent: '#7dd3fc', conduit: '#bae6fd' },
-      oceanic:  { plate: '#0c2038', accent: '#38bdf8', conduit: '#93c5fd' }
-    };
-
     document.querySelectorAll<HTMLButtonElement>('.tone-pill').forEach(btn => {
       btn.addEventListener('click', () => {
         const toneKey = btn.dataset.tone || 'nexa';
-        const tone = TONES[toneKey];
-        if (!tone) return;
-
-        document.querySelectorAll('.tone-pill').forEach(b => b.classList.toggle('active', b === btn));
-
-        const silPath = document.querySelector<SVGPathElement>('.hero-silhouette-path');
-        if (silPath) silPath.setAttribute('fill', tone.plate);
-
-        pipes.forEach(p => p.setAttribute('stroke', tone.conduit));
+        applyTone(toneKey);
       });
     });
 
@@ -1577,7 +3591,7 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
       btn.addEventListener('click', () => {
         const pastel = btn.dataset.pastel || '#bae6fd';
         document.querySelectorAll('.conduit-pill').forEach(b => b.classList.toggle('active', b === btn));
-        pipes.forEach(p => p.setAttribute('stroke', pastel));
+        document.querySelectorAll<SVGPathElement>('.circuit-pipe-line').forEach(p => p.setAttribute('stroke', pastel));
       });
     });
 
@@ -1595,7 +3609,6 @@ const workbenchChannelsPath = commandsToSvgPath(generateContainerCommands(NEXAFY
     });
   }
 
-  // Initialize immediately or on DOM ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initLivingEngineWorkbench);
   } else {

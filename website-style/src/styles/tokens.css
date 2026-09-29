@@ -160,8 +160,8 @@
 
   /* Device Mockup: Phone Specs */
   --phone-aspect-ratio:     390 / 800;
-  --phone-bezel-color:      var(--primitive-color-mint-500);
-  --phone-screen-bg:        var(--primitive-color-forest-900);
+  --phone-bezel-color:      #0f172a;
+  --phone-screen-bg:        #ffffff;
   --phone-bezel-radius:     var(--primitive-radius-lg);
   --phone-inner-radius:     15px;
 

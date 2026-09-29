@@ -82,32 +82,97 @@ import ComponentesNexaUiSection from '../components/guidelines/ComponentesNexaUi
     }
 
     /* Footer Note */
+    /* Master Solid Navy Footer */
     .guidelines-footer {
-      background: #ffffff;
-      border-top: 1px solid var(--nexa-color-border-default, #e2e8f0);
-      padding: 1rem 1.5rem;
-      font-size: 12px;
-      color: var(--nexa-color-text-secondary, #64748b);
+      background: #082846;
+      border-top: 2px solid #0284c7;
+      padding: 2.25rem 2rem;
+      color: #e0f2fe;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 2rem;
+    }
+
+    .footer-left-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      max-width: 480px;
+    }
+
+    .footer-brand-row {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .footer-nexa-logo {
+      height: 28px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .footer-brand-badge {
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-size: 11px;
+      font-weight: 700;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 2px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-brand-desc {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #bae6fd;
+    }
+
+    .footer-copy-text {
+      font-size: 11px;
+      color: #7dd3fc;
+      opacity: 0.85;
+    }
+
+    .footer-links-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-col-title {
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #38bdf8;
     }
 
     .footer-links {
       display: flex;
-      gap: 1rem;
+      flex-direction: column;
+      gap: 0.5rem;
     }
 
     .footer-links a {
-      color: var(--nexa-color-primary-700, #1b4fb8);
+      color: #ffffff;
       text-decoration: none;
       font-weight: 600;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s ease, transform 0.15s ease;
     }
 
     .footer-links a:hover {
-      text-decoration: underline;
+      color: #38bdf8;
+      transform: translateX(4px);
+      text-decoration: none;
     }
 
     /* Hero Live Showcase Switcher Bar */
@@ -263,16 +328,29 @@ import ComponentesNexaUiSection from '../components/guidelines/ComponentesNexaUi
 
     </main>
 
-    <!-- Footer -->
+    <!-- Master Solid Navy Footer linking to Nexafy Design Lab -->
     <footer class="guidelines-footer">
-      <div>
-        <strong>Nexafy · Living Geometry System (Website Style)</strong> · Pure flat solid colorimetry (Nexa Dark Blue #082846 & Celeste #38c8ff · 0 Gradients · 28px Conduits).
+      <div class="footer-left-col">
+        <div class="footer-brand-row">
+          <img src="/assets/logo-nexa-white.svg" alt="Nexa Suite" class="footer-nexa-logo" />
+          <span class="footer-brand-badge">DESIGN LAB & GUIDELINES</span>
+        </div>
+        <p class="footer-brand-desc">
+          Plataforma de ingeniería de diseño y especificaciones para distribución mayorista, telemetría IoT y liquidación B2B.
+        </p>
+        <span class="footer-copy-text">© 2026 Nexa Suite · Nexafy Living Geometry System · Pure Solid Colorimetry</span>
       </div>
-      <div class="footer-links">
-        <a href="/nexafy">✦ Ver Nexafy Live Landing &rarr;</a>
-        <a href="/flecto-forensic">🔬 Ver Análisis Forense Frame-by-Frame &rarr;</a>
-        <a href="/artifacts">Catálogo de Artefactos &rarr;</a>
-        <a href="/landing-spec">Landing Specs &rarr;</a>
+
+      <div class="footer-links-col">
+        <span class="footer-col-title">ACCESOS DIRECTOS A DESIGN LAB</span>
+        <div class="footer-links">
+          <a href="http://localhost:4200" target="_blank">✦ Web Style Guidelines (Puerto 4200) &rarr;</a>
+          <a href="http://localhost:4201" target="_blank">📱 Mobile Style Guidelines & Ergonomía (Puerto 4201) &rarr;</a>
+          <a href="/nexafy">✦ Ver Nexafy Live Landing &rarr;</a>
+          <a href="/flecto-forensic">🔬 Ver Análisis Forense Frame-by-Frame &rarr;</a>
+          <a href="/artifacts">Catálogo de Artefactos &rarr;</a>
+          <a href="/landing-spec">Landing Specs &rarr;</a>
+        </div>
       </div>
     </footer>
   </UnifiedLabShell>
