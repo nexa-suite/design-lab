@@ -31,6 +31,7 @@ import MobileHardwareSection from '../components/guidelines/MobileHardwareSectio
 import MobileResilienceSection from '../components/guidelines/MobileResilienceSection.astro';
 import MobileComponentsSection from '../components/guidelines/MobileComponentsSection.astro';
 import CodeSnippetsTabs from '../components/spec/CodeSnippetsTabs.astro';
+import KotlinMocksSection from '../components/kotlin-mocks/KotlinMocksSection.astro';
 
 // 4. Blueprint User Stories
 import DriverRouteStory from '../components/stories/DriverRouteStory.astro';
@@ -406,6 +407,25 @@ import GaleriaVisualAndroid from '../components/simulator/GaleriaVisualAndroid.a
           <InteractiveMobileForms />
           <InteractiveMobileNavbar />
         </div>
+      </section>
+
+      <!-- =====================================================================
+           PANTALLA 3.2.1: MOCKS CANÓNICOS EN KOTLIN COMPOSE M3 (NATIVO)
+           ===================================================================== -->
+      <section class="lab-screen-view" id="screen-kotlin-mocks" data-title="Kotlin Mocks (Nativo Android)">
+        <div class="screen-header-bar">
+          <div>
+            <span class="screen-badge-tag">100% KOTLIN NATIVO · JETPACK COMPOSE M3</span>
+            <h2 class="screen-main-title">Pantallas Canónicas en Kotlin Compose Puro (Sin Maquillaje Web)</h2>
+            <p class="screen-main-desc">
+              Implementación real en <code>:core:designsystem</code> (<code>MockMobileScreens.kt</code>) sincronizada con las User Stories y Criterios de Aceptación de <code>mobile-report</code>.
+            </p>
+          </div>
+          <div class="screen-actions">
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
+          </div>
+        </div>
+        <KotlinMocksSection />
       </section>
 
       <!-- =====================================================================

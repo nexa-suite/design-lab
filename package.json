@@ -36,6 +36,9 @@
     "validate:all": "npm run build:all && npm run validate:tokens && npm run validate:architecture",
     "docker:up": "docker compose up -d --build",
     "docker:down": "docker compose down",
-    "docker:logs": "docker compose logs -f"
+    "docker:logs": "docker compose logs -f",
+    "docker:mobile:up": "docker compose -f mobile-style/docker-compose.yml up -d --build",
+    "docker:mobile:down": "docker compose -f mobile-style/docker-compose.yml down",
+    "docker:mobile:logs": "docker compose -f mobile-style/docker-compose.yml logs -f"
   }
 }

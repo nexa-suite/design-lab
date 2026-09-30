@@ -177,8 +177,14 @@
             </div>
           </div>
 
-          <!-- Bottom Navigation Bar (Image 5 exact - ALWAYS ACTIVE!) -->
+          <!-- Bottom Navigation Bar (Canonical 5-destination with Inicio & Gestures) -->
           <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal">
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-home"></i>
+              </div>
+              <span class="bnav-label">Inicio</span>
+            </div>
             <div class="bnav-item active">
               <div class="bnav-pill-indicator">
                 <i class="pi pi-map-marker"></i>
@@ -204,6 +210,11 @@
               <span class="bnav-label">Checklist</span>
             </div>
           </nav>
+
+          <!-- Android Home Gesture Bar -->
+          <div class="android-gesture-pill-bar" aria-hidden="true">
+            <div class="gesture-handle"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -383,8 +394,14 @@
             </div>
           </div>
 
-          <!-- Bottom Navigation Bar (B2B Commercial - ALWAYS ACTIVE!) -->
+          <!-- Bottom Navigation Bar (Canonical 5-destination with Inicio & Gestures) -->
           <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal B2B">
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-home"></i>
+              </div>
+              <span class="bnav-label">Inicio</span>
+            </div>
             <div class="bnav-item active">
               <div class="bnav-pill-indicator">
                 <i class="pi pi-shopping-bag"></i>
@@ -410,6 +427,11 @@
               <span class="bnav-label">Mi Cuenta</span>
             </div>
           </nav>
+
+          <!-- Android Home Gesture Bar -->
+          <div class="android-gesture-pill-bar" aria-hidden="true">
+            <div class="gesture-handle"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -576,19 +598,25 @@
             </div>
           </div>
 
-          <!-- Bottom Navigation Bar (Warehouse Industrial - ALWAYS ACTIVE!) -->
+          <!-- Bottom Navigation Bar (Canonical 5-destination with Inicio & Gestures) -->
           <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal Almacén">
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
+                <i class="pi pi-home"></i>
+              </div>
+              <span class="bnav-label">Inicio</span>
+            </div>
             <div class="bnav-item active">
               <div class="bnav-pill-indicator">
                 <i class="pi pi-box"></i>
               </div>
-              <span class="bnav-label">Picking FEFO</span>
+              <span class="bnav-label">Picking</span>
             </div>
             <div class="bnav-item">
               <div class="bnav-pill-indicator">
                 <i class="pi pi-qrcode"></i>
               </div>
-              <span class="bnav-label">Escáner GS1</span>
+              <span class="bnav-label">Escáner</span>
             </div>
             <div class="bnav-item">
               <div class="bnav-pill-indicator">
@@ -603,6 +631,11 @@
               <span class="bnav-label">Mermas</span>
             </div>
           </nav>
+
+          <!-- Android Home Gesture Bar -->
+          <div class="android-gesture-pill-bar" aria-hidden="true">
+            <div class="gesture-handle"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -856,6 +889,12 @@
           <nav class="m3-bottom-nav tablet-bnav" aria-label="Navegación Tablet">
             <div class="bnav-item">
               <div class="bnav-pill-indicator">
+                <i class="pi pi-home"></i>
+              </div>
+              <span class="bnav-label">Inicio</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator">
                 <i class="pi pi-map-marker"></i>
               </div>
               <span class="bnav-label">Rutas de Patio</span>
@@ -879,6 +918,11 @@
               <span class="bnav-label">Checklist Equipos</span>
             </div>
           </nav>
+
+          <!-- Android Home Gesture Bar -->
+          <div class="android-gesture-pill-bar" aria-hidden="true">
+            <div class="gesture-handle"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -915,6 +959,12 @@
             </div>
 
             <nav class="rail-destinations">
+              <button type="button" class="rail-item">
+                <div class="rail-pill-indicator">
+                  <i class="pi pi-home"></i>
+                </div>
+                <span>Inicio</span>
+              </button>
               <button type="button" class="rail-item">
                 <div class="rail-pill-indicator">
                   <i class="pi pi-compass"></i>
@@ -1984,13 +2034,13 @@
      M3 BOTTOM NAVIGATION BAR (ALWAYS ACTIVE!)
      ========================================================================== */
   .m3-bottom-nav {
-    height: 64px;
+    height: 58px;
     background: #ffffff;
     border-top: 1px solid #e2e8f0;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    padding: 0 8px;
+    padding: 0 4px;
     flex-shrink: 0;
   }
 
@@ -1998,28 +2048,42 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3px;
-    min-width: 56px;
+    gap: 2px;
+    flex: 1;
+    max-width: 68px;
+    min-width: 48px;
     min-height: 48px;
     justify-content: center;
     cursor: pointer;
     color: #64748b;
+    padding: 3px 0 2px;
+    border: none;
+    background: transparent;
     transition: all 0.15s ease;
   }
 
   .bnav-pill-indicator {
-    padding: 3px 14px;
-    border-radius: 14px;
+    padding: 2px 8px;
+    width: 44px;
+    height: 26px;
+    box-sizing: border-box;
+    border-radius: 13px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 17px;
+    font-size: 16px;
     transition: all 0.15s ease;
   }
 
   .bnav-label {
-    font-size: 10.5px;
+    font-size: 9.5px;
     font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 66px;
+    text-align: center;
+    line-height: 1.1;
   }
 
   .bnav-item.active {
@@ -2033,6 +2097,25 @@
 
   .bnav-item.active .bnav-label {
     font-weight: 800;
+  }
+
+  /* Android Gesture Indicator */
+  .android-gesture-pill-bar {
+    width: 100%;
+    height: 16px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 4px;
+    flex-shrink: 0;
+  }
+
+  .gesture-handle {
+    width: 72px;
+    height: 4px;
+    border-radius: 999px;
+    background: #cbd5e1;
   }
 
   /* ==========================================================================
