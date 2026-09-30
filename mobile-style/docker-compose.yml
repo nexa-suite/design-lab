@@ -1,0 +1,9 @@
+services:
+  mobile-style:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nexa-mobile-style
+    ports:
+      - "4201:4201"
+    restart: unless-stopped

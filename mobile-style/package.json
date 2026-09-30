@@ -9,7 +9,10 @@
     "build": "astro check && astro build",
     "preview": "astro preview --port 4201 --host",
     "astro": "astro",
-    "check": "astro check"
+    "check": "astro check",
+    "docker:up": "docker compose up -d --build",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f"
   },
   "dependencies": {
     "astro": "^5.4.1",

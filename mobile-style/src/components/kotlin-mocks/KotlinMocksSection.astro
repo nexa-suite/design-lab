@@ -1,0 +1,4031 @@
+---
+/**
+ * KotlinMocksSection.astro
+ * Nexa Design Lab · Canonical Android Jetpack Compose M3 Specifications (100% Kotlin Nativo)
+ *
+ * MOCKS SEPARADOS POR ROLES OPERATIVOS & CON ARTEFACTOS CANÓNICOS RESPETADOS:
+ *
+ * ROL 1: CONDUCTOR EN RUTA (Diego Morales · Flota C-250 · WKN-892)
+ *   1.1 Despacho en Ruta & Telemetría Sensirion 2°C–6°C (MOB-US-026..028, 031)
+ *   1.2 Proof of Delivery (POD) & Firma Digital del Receptor (MOB-US-033, 034)
+ *   1.3 Cobro Contra Entrega (COD) & Vuelto en Efectivo (MOB-US-066..069)
+ *   1.4 Reporte de Siniestros & Evidencia CameraX con GPS (MOB-US-056..058)
+ *   1.5 Devoluciones RMA & Logística Inversa (MOB-US-070, 071)
+ *
+ * ROL 2: OPERADOR DE ALMACÉN FRIGORÍFICO (Alejandro Vargas · Planta Callao)
+ *   2.1 Picking FEFO con Lote Prioritario L-20260914-A (MOB-US-011..016, 051)
+ *   2.2 Escáner CameraX / GS1 con Retícula Láser & Fallback Manual (MOB-US-011, ADR-0018)
+ *   2.3 Inspección ISO 3691 & Bloqueo de Ignición Lockout (MOB-US-073)
+ *   2.4 Conteo Cíclico e Inventario Ciego sin Sesgo (MOB-US-061..065)
+ *   2.5 Resiliencia Offline SQLite / Room en Cámara Frigorífica (MOB-US-041..043)
+ *
+ * ROL 3: COORDINADORA DE DESPACHO (Mariela · Muelle 3 Frío)
+ *   3.1 Tablero de Muelle 3 Frío, Estiba de Pallets & Precinto #NX-9921 (MOB-US-020..025)
+ *
+ * ROL 4: COMPRADOR MAYORISTA B2B (Carlos Mendoza · Restaurantes del Mar)
+ *   4.1 Catálogo B2B Mayorista con Precios Escalonados por Volumen (MOB-US-036..039)
+ *   4.2 Recepción Comprador & Código Handoff OTP NX-8842 (MOB-US-047..049)
+ *
+ * ROL 5: SEGURIDAD & SESIÓN TRANSVERSAL (Mobile User)
+ *   5.1 Biometría BiometricPrompt & Selección de Sede Logística (MOB-US-001..003)
+ *
+ * ARTEFACTOS RESPETADOS 1:1:
+ *  - TopAppBar: 52dp canónica con drawer/back, título de pantalla, identificador de unidad y acciones contextuales.
+ *  - BottomNav: 58dp persistente con indicador píldora (#dbeafe / #1d4ed8) de 5 destinos canónicos por rol (con botón Inicio en la extrema izquierda) y barra de gestos Android nativa.
+ *  - Visor Escáner: Retícula de 4 esquinas, rayo láser animado y fallback manual asistido (ADR-0018).
+ *  - ZERO GREEN: Semántica de éxito estrictamente Cyan/Azul (#0284c7, #e0f2fe, #bae6fd).
+ */
+---
+
+<div class="kotlin-mocks-container">
+
+  <!-- Showcase Header -->
+  <header class="showcase-header">
+    <div class="header-content">
+      <span class="section-kicker-badge">
+        <i class="pi pi-android" aria-hidden="true"></i> ANDROID JETPACK COMPOSE M3 NATIVO (:core:designsystem)
+      </span>
+      <h2 class="showcase-title">Mocks Canónicos Separados por Roles Operativos</h2>
+      <p class="showcase-intro">
+        Navegación 1:1 estructurada por <strong>Roles de Usuario</strong> (Conductor, Almacén, Despacho, Comprador y Transversal), respetando con absoluta fidelidad los <strong>artefactos canónicos</strong> (M3 TopAppBar canónica, BottomNavigationBar de 5 destinos con botón Inicio en la extrema izquierda, barra de gestos Android y Visor CameraX con fallback manual).
+      </p>
+    </div>
+
+    <!-- PRIMARY ROLE SELECTOR TABS -->
+    <div class="roles-selector-container">
+      <span class="roles-kicker-label">SELECCIONAR ROL OPERATIVO:</span>
+      <div class="roles-tabs-bar" role="tablist" aria-label="Roles de Usuario Nexa">
+        <button type="button" class="role-pill-btn active" data-role="all">
+          <i class="pi pi-th-large"></i> Todos los Roles <span class="role-count-pill">14</span>
+        </button>
+        <button type="button" class="role-pill-btn" data-role="driver">
+          <i class="pi pi-truck"></i> Conductor en Ruta (Diego Morales) <span class="role-count-pill">5</span>
+        </button>
+        <button type="button" class="role-pill-btn" data-role="warehouse">
+          <i class="pi pi-box"></i> Operador Almacén (Alejandro Vargas) <span class="role-count-pill">5</span>
+        </button>
+        <button type="button" class="role-pill-btn" data-role="dispatch">
+          <i class="pi pi-send"></i> Coordinación Despacho (Mariela) <span class="role-count-pill">1</span>
+        </button>
+        <button type="button" class="role-pill-btn" data-role="buyer">
+          <i class="pi pi-shopping-bag"></i> Comprador B2B (Carlos Mendoza) <span class="role-count-pill">2</span>
+        </button>
+        <button type="button" class="role-pill-btn" data-role="auth">
+          <i class="pi pi-lock"></i> Seguridad & Sesión (Mobile User) <span class="role-count-pill">1</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- SECONDARY SCREEN SELECTOR PILLS -->
+    <div class="screens-selector-wrapper">
+      <div class="screens-pills-bar" role="tablist" aria-label="Pantallas Filtradas">
+        <!-- Driver Screens -->
+        <button type="button" class="screen-tab-btn active" data-target="mock-screen-route" data-role="driver">
+          <span class="screen-idx">1.1</span> <i class="pi pi-map-marker"></i> En Ruta & Telemetría
+        </button>
+        <button type="button" class="screen-tab-btn" data-target="mock-screen-pod" data-role="driver">
+          <span class="screen-idx">1.2</span> <i class="pi pi-check-circle"></i> Entrega POD & Firma
+        </button>
+        <button type="button" class="screen-tab-btn" data-target="mock-screen-cod" data-role="driver">
+          <span class="screen-idx">1.3</span> <i class="pi pi-dollar"></i> Cobro COD & Vuelto
+        </button>
+        <button type="button" class="screen-tab-btn" data-target="mock-screen-incident" data-role="driver">
+          <span class="screen-idx">1.4</span> <i class="pi pi-exclamation-triangle"></i> Siniestros & GPS
+        </button>
+        <button type="button" class="screen-tab-btn" data-target="mock-screen-rma" data-role="driver">
+          <span class="screen-idx">1.5</span> <i class="pi pi-undo"></i> Devoluciones RMA
+        </button>
+
+        <!-- Warehouse Screens -->
+        <button type="button" class="screen-tab-btn" data-target="mock-screen-picking" data-role="warehouse">
+          <span class="screen-idx">2.1</span> <i class="pi pi-box"></i> Picking FEFO
+        </button>
+        <button type="button" class="screen-tab-btn" data-target="mock-screen-scanner" data-role="warehouse">
+          <span class="screen-idx">2.2</span> <i class="pi pi-qrcode"></i> Escáner GS1 / CameraX
+        </button>
+        <button type="button" class="screen-tab-btn" data-target="mock-screen-inspection" data-role="warehouse">
+          <span class="screen-idx">2.3</span> <i class="pi pi-shield"></i> Inspección ISO 3691
+        </button>
+        <button type="button" class="screen-tab-btn" data-target="mock-screen-cycle" data-role="warehouse">
+          <span class="screen-idx">2.4</span> <i class="pi pi-table"></i> Conteo Cíclico Ciego
+        </button>
+
+        <!-- Dispatch Screen -->
+        <button type="button" class="screen-tab-btn" data-target="mock-screen-dispatch" data-role="dispatch">
+          <span class="screen-idx">3.1</span> <i class="pi pi-send"></i> Muelle 3 & Precinto
+        </button>
+
+        <!-- Buyer Screens -->
+        <button type="button" class="screen-tab-btn" data-target="mock-screen-catalog" data-role="buyer">
+          <span class="screen-idx">4.1</span> <i class="pi pi-shopping-bag"></i> Catálogo Tier Pricing
+        </button>
+        <button type="button" class="screen-tab-btn" data-target="mock-screen-receipt" data-role="buyer">
+          <span class="screen-idx">4.2</span> <i class="pi pi-check-circle"></i> Recepción OTP Handoff
+        </button>
+
+        <!-- Transversal Screens -->
+        <button type="button" class="screen-tab-btn" data-target="mock-screen-sync" data-role="warehouse">
+          <span class="screen-idx">2.5</span> <i class="pi pi-sync"></i> Resiliencia Offline
+        </button>
+        <button type="button" class="screen-tab-btn" data-target="mock-screen-auth" data-role="auth">
+          <span class="screen-idx">5.1</span> <i class="pi pi-lock"></i> Biometría & Sede
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOCKS STAGE LAYOUT -->
+  <div class="mocks-stage-layout">
+
+    <!-- =========================================================================
+         SCREEN 1.1: DRIVER EN RUTA & TELEMETRÍA (MOB-US-026..028, 031)
+         Samsung Galaxy S24 / Pixel 8 (390×844dp) · Diego Morales
+         ========================================================================= -->
+    <div class="mock-screen-card active" id="mock-screen-route" data-role="driver">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">ROL 1: CONDUCTOR · PANTALLA 1.1 (390×844dp)</span>
+          <h3 class="device-name">Despacho en Ruta & Telemetría Sensirion 2°C–6°C</h3>
+          <p class="device-sub">Diego Morales · Flota C-250 · Placa WKN-892 · Pedido SO-2026-0018 (ICISA Distribuciones)</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill role"><i class="pi pi-truck"></i> Conductor en Ruta</span>
+          <span class="meta-pill touch"><i class="pi pi-check"></i> 48dp OK</span>
+          <span class="meta-pill gold"><i class="pi pi-star-fill"></i> Gold Standard</span>
+        </div>
+      </div>
+
+      <div class="mock-split-viewer">
+        <div class="android-chassis phone-s24">
+          <div class="chassis-speaker-slit"></div>
+          <div class="chassis-punch-hole"></div>
+
+          <div class="android-screen-surface">
+            <!-- Android System Bar -->
+            <div class="m3-system-bar">
+              <span class="sys-time">14:35</span>
+              <div class="sys-icons">
+                <span class="sys-tech">5G LTE</span>
+                <i class="pi pi-wifi"></i>
+                <i class="pi pi-bolt"></i>
+                <span class="sys-battery">94%</span>
+              </div>
+            </div>
+
+            <!-- M3 TopAppBar (Image 4 exact) -->
+            <header class="m3-top-bar">
+              <button type="button" class="top-bar-btn" aria-label="Menú">
+                <i class="pi pi-bars"></i>
+              </button>
+              <h4 class="top-bar-title">Operaciones Nexa</h4>
+              <button type="button" class="top-bar-btn notif" aria-label="Notificaciones">
+                <i class="pi pi-bell"></i>
+                <span class="notif-red-dot"></span>
+              </button>
+            </header>
+
+            <!-- Screen Body -->
+            <div class="screen-scroll-body">
+              <!-- Driver Identification Card -->
+              <div class="driver-card-white">
+                <div class="driver-avatar-circle"><i class="pi pi-user"></i></div>
+                <div class="driver-info-block">
+                  <div class="driver-name-row">
+                    <strong class="driver-name">Diego Morales</strong>
+                    <span class="status-pill-cyan" id="route-driver-status">● EN RUTA</span>
+                  </div>
+                  <span class="driver-detail-text">Conductor Flota C-250 · ID #4829</span>
+                  <span class="driver-detail-sub">Furgón Refrigerado · Placa WKN-892</span>
+                </div>
+              </div>
+
+              <!-- Cold Chain Header & Calibrator -->
+              <div class="section-label-row">
+                <span class="screen-section-label">DESPACHO EN CURSO · CADENA DE FRÍO</span>
+                <div class="temp-stepper-box">
+                  <button type="button" class="btn-stepper-micro" id="btn-temp-minus">−0.2°</button>
+                  <span class="cold-chip-pill live" id="route-temp-badge">
+                    <i class="pi pi-snowflake"></i> <strong id="route-temp-val">3.8°C</strong> (2°-6°C)
+                  </span>
+                  <button type="button" class="btn-stepper-micro" id="btn-temp-plus">+0.2°</button>
+                </div>
+              </div>
+
+              <!-- Dispatch Card -->
+              <div class="dispatch-card-white">
+                <div class="dispatch-card-top">
+                  <span class="order-code-mono">SO-2026-0018</span>
+                  <span class="cold-chip-pill"><i class="pi pi-box"></i> 36 bultos</span>
+                </div>
+
+                <div class="dispatch-buyer-info">
+                  <h5 class="buyer-company-name">ICISA Distribuciones S.A.C.</h5>
+                  <p class="buyer-cargo-desc">24x Salmón Salar (ALM-LMO-982) + 12x Merluza Austral</p>
+                </div>
+
+                <!-- Route Timeline -->
+                <div class="route-timeline-box">
+                  <div class="timeline-stop">
+                    <span class="timeline-dot blue"></span>
+                    <div class="timeline-stop-text">
+                      <strong class="stop-name">Salida CD Frigorífico Callao</strong>
+                      <span class="stop-time">Salida Muelle 3 Frío · 13:45</span>
+                    </div>
+                  </div>
+                  <div class="timeline-vertical-line"></div>
+                  <div class="timeline-stop">
+                    <span class="timeline-dot blue"></span>
+                    <div class="timeline-stop-text">
+                      <strong class="stop-name">Peaje Ancón Km 48</strong>
+                      <span class="stop-time">Control Frío Validado · 14:10</span>
+                    </div>
+                  </div>
+                  <div class="timeline-vertical-line"></div>
+                  <div class="timeline-stop" id="tl-stop-dest">
+                    <span class="timeline-dot cyan" id="tl-dot-dest"></span>
+                    <div class="timeline-stop-text">
+                      <strong class="stop-name" id="tl-dest-title">Destino: ICISA Distribuciones</strong>
+                      <span class="stop-time" id="tl-dest-time">ETA 14:20 · Av. Argentina 1240</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Geofence 200m Simulator Action -->
+                <button type="button" class="btn-action-outline-pill" id="btn-toggle-arrival">
+                  <i class="pi pi-map-marker"></i>
+                  <span id="lbl-arrival">Simular Llegada al Destino (Geocerca 200m)</span>
+                </button>
+
+                <!-- Full Width CTA Button -->
+                <button type="button" class="btn-solid-blue-cta" id="btn-goto-pod">
+                  <i class="pi pi-check-circle"></i>
+                  <span>Proceder a Entrega & POD (Pantalla 1.2)</span>
+                </button>
+              </div>
+
+              <!-- Quick Telemetry Card -->
+              <div class="quick-telemetry-card">
+                <div class="telemetry-item">
+                  <span class="tel-label">Temperatura Caja</span>
+                  <strong class="tel-val success" id="quick-tel-temp"><i class="pi pi-check-circle"></i> 3.8°C</strong>
+                </div>
+                <div class="telemetry-separator"></div>
+                <div class="telemetry-item">
+                  <span class="tel-label">Batería Termógrafo</span>
+                  <strong class="tel-val">88% (Sensirion)</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Navigation Bar (Canonical 5-destination with Inicio & Gestures) -->
+            <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal">
+              <div class="bnav-item active" data-nav-target="mock-screen-route">
+                <div class="bnav-pill-indicator"><i class="pi pi-home"></i></div>
+                <span class="bnav-label">Inicio</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-route">
+                <div class="bnav-pill-indicator"><i class="pi pi-map-marker"></i></div>
+                <span class="bnav-label">Rutas</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-pod">
+                <div class="bnav-pill-indicator"><i class="pi pi-send"></i></div>
+                <span class="bnav-label">Despacho</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-picking">
+                <div class="bnav-pill-indicator"><i class="pi pi-box"></i></div>
+                <span class="bnav-label">Picking</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-incident">
+                <div class="bnav-pill-indicator"><i class="pi pi-check-square"></i></div>
+                <span class="bnav-label">Checklist</span>
+              </div>
+            </nav>
+
+            <!-- Android Home Gesture Bar -->
+            <div class="android-gesture-pill-bar" aria-hidden="true">
+              <div class="gesture-handle"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spec / Code Side Column -->
+        <div class="spec-side-col">
+          <div class="story-traceability-card">
+            <div class="trace-header">
+              <span class="trace-tag epic">MOBILE-EPIC-04</span>
+              <span class="trace-tag story">MOB-US-026 · MOB-US-027 · MOB-US-028</span>
+            </div>
+            <h4 class="trace-title">MOB-US-026 / 028 — Ver Entregas Asignadas & Navegación Autorizada</h4>
+            <p class="trace-persona"><strong>Actor Funcional:</strong> Diego Morales (Driver / Delivery Operator)</p>
+            <div class="trace-gherkin">
+              <div class="scenario-item"><span class="kw-given">GIVEN</span> Conductor autorizado en furgón WKN-892</div>
+              <div class="scenario-item"><span class="kw-when">WHEN</span> Abre navegación autorizada hacia el destino de entrega</div>
+              <div class="scenario-item"><span class="kw-then">THEN</span> Registra un único Delivery Attempt activo y monitorea temperatura de 2°C a 6°C</div>
+            </div>
+          </div>
+
+          <div class="code-editor-box">
+            <div class="editor-header">
+              <span class="file-name"><i class="pi pi-file-code"></i> MockMobileScreens.kt · MockDriverRouteScreen</span>
+              <span class="target-tag">Jetpack Compose M3 Nativo</span>
+            </div>
+            <pre><code><span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">MockDriverRouteScreen</span>(
+    onConfirmDelivery: () -&gt; <span class="type">Unit</span> = &#123;&#125;,
+    onScanHandoff: () -&gt; <span class="type">Unit</span> = &#123;&#125;,
+    modifier: <span class="type">Modifier</span> = Modifier
+) &#123;
+    <span class="kw">var</span> hasArrived <span class="kw">by</span> remember &#123; mutableStateOf(<span class="kw">false</span>) &#125;
+    <span class="kw">var</span> currentTemp <span class="kw">by</span> remember &#123; mutableFloatStateOf(<span class="num">3.8f</span>) &#125;
+
+    <span class="type">Column</span>(
+        modifier = modifier.fillMaxSize().background(NexaColors.Canvas).padding(<span class="num">16</span>.dp),
+        verticalArrangement = Arrangement.spacedBy(<span class="num">16</span>.dp)
+    ) &#123;
+        <span class="fn">NexaDriverProfileCard</span>(
+            driverName = <span class="str">"Diego Morales"</span>,
+            roleTitle = <span class="str">"Conductor Flota C-250 · ID #4829"</span>,
+            vehicleInfo = <span class="str">"Furgón Refrigerado · Placa WKN-892"</span>,
+            statusText = <span class="kw">if</span> (hasArrived) <span class="str">"● EN DESTINO"</span> <span class="kw">else</span> <span class="str">"● EN RUTA"</span>
+        )
+        <span class="fn">NexaColdChainBadge</span>(temperatureRange = String.format(<span class="str">"%.1f°C (2°-6°C)"</span>, currentTemp))
+        <span class="fn">NexaPrimaryButton</span>(label = <span class="str">"Proceder a Entrega &amp; POD"</span>, onClick = onConfirmDelivery)
+    &#125;
+&#125;</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         SCREEN 1.2: PROOF OF DELIVERY (POD) & FIRMA DIGITAL (MOB-US-033, 034)
+         Samsung Galaxy S24 (390×844dp) · Diego Morales
+         ========================================================================= -->
+    <div class="mock-screen-card" id="mock-screen-pod" data-role="driver">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">ROL 1: CONDUCTOR · PANTALLA 1.2 (390×844dp)</span>
+          <h3 class="device-name">Proof of Delivery (POD) & Firma Digital del Receptor</h3>
+          <p class="device-sub">Diego Morales · ICISA Distribuciones · Captura de Firma, Fotos de Remito & Timestamp</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill role"><i class="pi pi-pencil"></i> Firma Digital POD</span>
+          <span class="meta-pill touch"><i class="pi pi-camera"></i> 2 Fotos Adjuntas</span>
+          <span class="meta-pill feature"><i class="pi pi-shield"></i> SHA-256</span>
+        </div>
+      </div>
+
+      <div class="mock-split-viewer">
+        <div class="android-chassis phone-s24">
+          <div class="chassis-speaker-slit"></div>
+          <div class="chassis-punch-hole"></div>
+
+          <div class="android-screen-surface">
+            <div class="m3-system-bar">
+              <span class="sys-time">14:38</span>
+              <div class="sys-icons"><span class="sys-tech">5G</span><i class="pi pi-wifi"></i><span class="sys-battery">93%</span></div>
+            </div>
+
+            <!-- M3 TopAppBar -->
+            <header class="m3-top-bar">
+              <button type="button" class="top-bar-btn" aria-label="Volver"><i class="pi pi-arrow-left"></i></button>
+              <h4 class="top-bar-title">Registro POD & Firma</h4>
+              <button type="button" class="top-bar-btn notif" aria-label="Notificaciones"><i class="pi pi-bell"></i><span class="notif-red-dot"></span></button>
+            </header>
+
+            <div class="screen-scroll-body">
+              <div class="dispatch-card-white">
+                <div class="dispatch-card-top">
+                  <span class="order-code-mono">POD-2026-0018</span>
+                  <span class="status-pill-cyan">EN REVELACIÓN</span>
+                </div>
+                <div class="dispatch-buyer-info">
+                  <h5 class="buyer-company-name">Receptor: Lic. Mario Casas</h5>
+                  <p class="buyer-cargo-desc">DNI 10.482.912 · Encargado de Recepción Frío</p>
+                </div>
+
+                <!-- Digital Signature Canvas Preview -->
+                <div class="signature-canvas-box">
+                  <svg class="sig-svg" viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 20 50 Q 50 15, 75 40 T 130 35 Q 160 10, 180 55 T 230 45 Q 260 20, 290 40" fill="none" stroke="#082846" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M 60 48 Q 110 58, 220 50" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" />
+                    <circle cx="280" cy="38" r="2.5" fill="#0284c7" />
+                  </svg>
+                  <div class="sig-watermark-row">
+                    <span>Timestamp: 2026-09-29 14:38:22 COT</span>
+                    <span class="sig-hash">SHA-256: e82f...a19c</span>
+                  </div>
+                </div>
+
+                <!-- Photo Evidence Counter -->
+                <div class="pod-signature-row">
+                  <div class="toggle-text-block">
+                    <strong class="toggle-title">Fotos de Remito Físico & Mercadería</strong>
+                    <span class="toggle-sub">2 imágenes adjuntadas con GPS</span>
+                  </div>
+                  <button type="button" class="btn-badge-action" id="btn-pod-add-photo">
+                    <i class="pi pi-camera"></i> <span id="lbl-pod-photo-text">2 Fotos</span>
+                  </button>
+                </div>
+
+                <!-- Confirm POD Button -->
+                <button type="button" class="btn-solid-blue-cta" id="btn-finalize-pod-screen">
+                  <i class="pi pi-check-circle"></i>
+                  <span id="lbl-pod-screen-btn">Completar POD & Cerrar Entrega</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Bottom Navigation Bar (Canonical 5-destination with Inicio & Gestures) -->
+            <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal">
+              <div class="bnav-item" data-nav-target="mock-screen-route">
+                <div class="bnav-pill-indicator"><i class="pi pi-home"></i></div>
+                <span class="bnav-label">Inicio</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-route">
+                <div class="bnav-pill-indicator"><i class="pi pi-map-marker"></i></div>
+                <span class="bnav-label">Rutas</span>
+              </div>
+              <div class="bnav-item active" data-nav-target="mock-screen-pod">
+                <div class="bnav-pill-indicator"><i class="pi pi-send"></i></div>
+                <span class="bnav-label">Despacho</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-picking">
+                <div class="bnav-pill-indicator"><i class="pi pi-box"></i></div>
+                <span class="bnav-label">Picking</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-incident">
+                <div class="bnav-pill-indicator"><i class="pi pi-check-square"></i></div>
+                <span class="bnav-label">Checklist</span>
+              </div>
+            </nav>
+
+            <!-- Android Home Gesture Bar -->
+            <div class="android-gesture-pill-bar" aria-hidden="true">
+              <div class="gesture-handle"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec-side-col">
+          <div class="story-traceability-card">
+            <div class="trace-header">
+              <span class="trace-tag epic">MOBILE-EPIC-04</span>
+              <span class="trace-tag story">MOB-US-033 · MOB-US-034</span>
+            </div>
+            <h4 class="trace-title">MOB-US-033 / 034 — Proof of Delivery Inmutable & Cierre de Intento</h4>
+            <p class="trace-persona"><strong>Actor Funcional:</strong> Diego Morales (Driver / Delivery Operator)</p>
+            <div class="trace-gherkin">
+              <div class="scenario-item"><span class="kw-given">GIVEN</span> Mercadería descargada y comprobada físicamente en sitio</div>
+              <div class="scenario-item"><span class="kw-when">WHEN</span> Conductor adjunta firma vectorizada y fotos del remito firmado</div>
+              <div class="scenario-item"><span class="kw-then">THEN</span> Nexa genera hash inmutable SHA-256 y concluye el intento de entrega</div>
+            </div>
+          </div>
+
+          <div class="code-editor-box">
+            <div class="editor-header">
+              <span class="file-name"><i class="pi pi-file-code"></i> MockMobileScreens.kt · MockDriverRouteScreen (POD)</span>
+              <span class="target-tag">Jetpack Compose M3 Nativo</span>
+            </div>
+            <pre><code><span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">NexaPodSignatureSection</span>(
+    signatureCaptured: <span class="type">Boolean</span>,
+    photoCount: <span class="type">Int</span>,
+    onCompletePod: () -&gt; <span class="type">Unit</span>
+) &#123;
+    <span class="fn">NexaSignatureCanvas</span>(
+        isCaptured = signatureCaptured,
+        watermark = <span class="str">"SHA-256: e82f...a19c · 14:38 COT"</span>
+    )
+    <span class="fn">NexaPhotoEvidenceBadge</span>(count = photoCount)
+    <span class="fn">NexaPrimaryButton</span>(
+        label = <span class="str">"Completar POD &amp; Cerrar Entrega"</span>,
+        enabled = signatureCaptured,
+        onClick = onCompletePod
+    )
+&#125;</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         SCREEN 1.3: COBRO CONTRA ENTREGA (COD) & VUELTO (MOB-US-066..069)
+         Samsung Galaxy S24 (390×844dp) · Diego Morales
+         ========================================================================= -->
+    <div class="mock-screen-card" id="mock-screen-cod" data-role="driver">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">ROL 1: CONDUCTOR · PANTALLA 1.3 (390×844dp)</span>
+          <h3 class="device-name">Cobro Contra Entrega (COD) & Vuelto en Efectivo</h3>
+          <p class="device-sub">Diego Morales · Cobro $1,420.00 USD · Calculadora Reactiva de Vuelto (Cero Verde)</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill role"><i class="pi pi-dollar"></i> Cobro COD</span>
+          <span class="meta-pill touch"><i class="pi pi-calculator"></i> Vuelto Exacto</span>
+        </div>
+      </div>
+
+      <div class="mock-split-viewer">
+        <div class="android-chassis phone-s24">
+          <div class="chassis-speaker-slit"></div>
+          <div class="chassis-punch-hole"></div>
+
+          <div class="android-screen-surface">
+            <div class="m3-system-bar">
+              <span class="sys-time">14:40</span>
+              <div class="sys-icons"><span class="sys-tech">5G</span><i class="pi pi-wifi"></i><span class="sys-battery">92%</span></div>
+            </div>
+
+            <!-- M3 TopAppBar -->
+            <header class="m3-top-bar">
+              <button type="button" class="top-bar-btn" aria-label="Volver"><i class="pi pi-arrow-left"></i></button>
+              <h4 class="top-bar-title">Cobro en Sitio (COD)</h4>
+              <button type="button" class="top-bar-btn notif" aria-label="Notificaciones"><i class="pi pi-bell"></i><span class="notif-red-dot"></span></button>
+            </header>
+
+            <div class="screen-scroll-body">
+              <div class="dispatch-card-white">
+                <div class="dispatch-card-top">
+                  <span class="order-code-mono">ORDEN SO-2026-0018</span>
+                  <span class="status-pill-amber">PENDIENTE COBRO</span>
+                </div>
+                <div class="dispatch-buyer-info">
+                  <h5 class="buyer-company-name">Total Liquidación: $1,420.00 USD</h5>
+                  <p class="buyer-cargo-desc">Cliente: ICISA Distribuciones S.A.C.</p>
+                </div>
+
+                <div class="screen-section-label">MONTO RECIBIDO EN EFECTIVO</div>
+                <div class="cash-quick-buttons">
+                  <button type="button" class="cash-btn" data-amt="1420">$1,420</button>
+                  <button type="button" class="cash-btn" data-amt="1450">$1,450</button>
+                  <button type="button" class="cash-btn active" data-amt="1500">$1,500</button>
+                  <button type="button" class="cash-btn" data-amt="2000">$2,000</button>
+                </div>
+
+                <!-- Change Calculation Banner (Cyan SuccessSurface) -->
+                <div class="change-banner-cyan">
+                  <div class="change-banner-row">
+                    <span class="change-title">Vuelto a Entregar al Cliente:</span>
+                    <strong class="change-amount-display" id="val-cash-change">$80.00 USD</strong>
+                  </div>
+                  <span class="change-sub" id="lbl-cash-received-sub">Monto entregado: $1,500.00 USD</span>
+                </div>
+
+                <button type="button" class="btn-solid-blue-cta" id="btn-cod-confirm">
+                  <i class="pi pi-check-circle"></i>
+                  <span>Emitir Recibo Digital & Completar Cobro</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Bottom Navigation Bar (Canonical 5-destination with Inicio & Gestures) -->
+            <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal">
+              <div class="bnav-item" data-nav-target="mock-screen-route">
+                <div class="bnav-pill-indicator"><i class="pi pi-home"></i></div>
+                <span class="bnav-label">Inicio</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-route">
+                <div class="bnav-pill-indicator"><i class="pi pi-map-marker"></i></div>
+                <span class="bnav-label">Rutas</span>
+              </div>
+              <div class="bnav-item active" data-nav-target="mock-screen-pod">
+                <div class="bnav-pill-indicator"><i class="pi pi-send"></i></div>
+                <span class="bnav-label">Despacho</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-picking">
+                <div class="bnav-pill-indicator"><i class="pi pi-box"></i></div>
+                <span class="bnav-label">Picking</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-incident">
+                <div class="bnav-pill-indicator"><i class="pi pi-check-square"></i></div>
+                <span class="bnav-label">Checklist</span>
+              </div>
+            </nav>
+
+            <!-- Android Home Gesture Bar -->
+            <div class="android-gesture-pill-bar" aria-hidden="true">
+              <div class="gesture-handle"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec-side-col">
+          <div class="story-traceability-card">
+            <div class="trace-header"><span class="trace-tag epic">MOBILE-EPIC-10</span><span class="trace-tag story">MOB-US-066..069</span></div>
+            <h4 class="trace-title">MOB-US-066 / 069 — Cobro Contra Entrega (COD) & Vuelto</h4>
+            <p class="trace-persona"><strong>Actor Funcional:</strong> Diego Morales (Driver / Delivery Operator)</p>
+            <div class="trace-gherkin">
+              <div class="scenario-item"><span class="kw-given">GIVEN</span> Entrega con pago en sitio por $1,420.00 USD</div>
+              <div class="scenario-item"><span class="kw-when">WHEN</span> Chofer recibe efectivo por $1,500.00 USD</div>
+              <div class="scenario-item"><span class="kw-then">THEN</span> Nexa calcula el vuelto exacto ($80.00) en interfaz de alto contraste y emite comprobante</div>
+            </div>
+          </div>
+
+          <div class="code-editor-box">
+            <div class="editor-header">
+              <span class="file-name"><i class="pi pi-file-code"></i> MockMobileScreens.kt · MockCashOnDeliveryScreen</span>
+              <span class="target-tag">Jetpack Compose M3 Nativo</span>
+            </div>
+            <pre><code><span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">MockCashOnDeliveryScreen</span>(
+    onConfirmPayment: (Double, Double) -&gt; <span class="type">Unit</span> = &#123; _, _ -&gt; &#125;,
+    modifier: <span class="type">Modifier</span> = Modifier
+) &#123;
+    <span class="kw">val</span> totalAmount = <span class="num">1420.0</span>
+    <span class="kw">var</span> cashReceived <span class="kw">by</span> remember &#123; mutableDoubleStateOf(<span class="num">1500.0</span>) &#125;
+    <span class="kw">val</span> changeAmount = (cashReceived - totalAmount).coerceAtLeast(<span class="num">0.0</span>)
+
+    <span class="type">Surface</span>(
+        color = NexaColors.SuccessSurface,
+        border = BorderStroke(<span class="num">1</span>.dp, NexaColors.SuccessBorder)
+    ) &#123;
+        <span class="type">Text</span>(String.format(<span class="str">"Vuelto: $%.2f USD"</span>, changeAmount), color = NexaColors.Success)
+    &#125;
+&#125;</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         SCREEN 1.4: REPORTE DE SINIESTROS & CAMERAX CON GPS (MOB-US-056..058)
+         Samsung Galaxy S24 (390×844dp) · Diego Morales
+         ========================================================================= -->
+    <div class="mock-screen-card" id="mock-screen-incident" data-role="driver">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">ROL 1: CONDUCTOR · PANTALLA 1.4 (390×844dp)</span>
+          <h3 class="device-name">Reporte de Siniestros & Evidencia CameraX con GPS</h3>
+          <p class="device-sub">Diego Morales · Rotura de Empaque / Descongelamiento · Coordenadas -12.04318, -77.02824</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill role"><i class="pi pi-camera"></i> CameraX API</span>
+          <span class="meta-pill touch"><i class="pi pi-map-pin"></i> GPS Geotag</span>
+          <span class="meta-pill industrial"><i class="pi pi-exclamation-triangle"></i> Evidencia Inmutable</span>
+        </div>
+      </div>
+
+      <div class="mock-split-viewer">
+        <div class="android-chassis phone-s24">
+          <div class="chassis-speaker-slit"></div>
+          <div class="chassis-punch-hole"></div>
+
+          <div class="android-screen-surface">
+            <div class="m3-system-bar">
+              <span class="sys-time">14:42</span>
+              <div class="sys-icons"><span class="sys-tech">5G</span><i class="pi pi-wifi"></i><span class="sys-battery">91%</span></div>
+            </div>
+
+            <!-- M3 TopAppBar -->
+            <header class="m3-top-bar">
+              <button type="button" class="top-bar-btn" aria-label="Volver"><i class="pi pi-arrow-left"></i></button>
+              <h4 class="top-bar-title">Reporte de Siniestro</h4>
+              <button type="button" class="top-bar-btn notif" aria-label="Notificaciones"><i class="pi pi-bell"></i><span class="notif-red-dot"></span></button>
+            </header>
+
+            <div class="screen-scroll-body">
+              <div class="dispatch-card-white">
+                <div class="dispatch-card-top">
+                  <span class="order-code-mono">INCIDENTE #INC-2026-081</span>
+                  <span class="status-pill-amber" id="badge-incident-sev">MODERADO</span>
+                </div>
+
+                <div class="screen-section-label">NIVEL DE SEVERIDAD OPERACIONAL</div>
+                <div class="severity-chips-row">
+                  <button type="button" class="sev-chip" data-sev="LEVE">Leve</button>
+                  <button type="button" class="sev-chip active" data-sev="MODERADO">Moderado</button>
+                  <button type="button" class="sev-chip" data-sev="CRÍTICO">Crítico</button>
+                </div>
+
+                <!-- CameraX Viewfinder Simulation -->
+                <div class="camera-preview-box">
+                  <div class="camera-lens-overlay">
+                    <i class="pi pi-camera camera-center-icon"></i>
+                    <span class="camera-hint">CameraX Preview · Focal 24mm · ISO 400</span>
+                  </div>
+                  <div class="camera-meta-watermark">
+                    <span>GPS: -12.04318, -77.02824 · Callao</span>
+                    <span>Timestamp: 2026-09-29 14:42:05 COT</span>
+                  </div>
+                </div>
+
+                <button type="button" class="btn-solid-blue-cta" id="btn-submit-incident">
+                  <i class="pi pi-send"></i>
+                  <span>Registrar Incidencia & Notificar a Control</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Bottom Navigation Bar (Canonical 5-destination with Inicio & Gestures) -->
+            <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal">
+              <div class="bnav-item" data-nav-target="mock-screen-route">
+                <div class="bnav-pill-indicator"><i class="pi pi-home"></i></div>
+                <span class="bnav-label">Inicio</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-route">
+                <div class="bnav-pill-indicator"><i class="pi pi-map-marker"></i></div>
+                <span class="bnav-label">Rutas</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-pod">
+                <div class="bnav-pill-indicator"><i class="pi pi-send"></i></div>
+                <span class="bnav-label">Despacho</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-picking">
+                <div class="bnav-pill-indicator"><i class="pi pi-box"></i></div>
+                <span class="bnav-label">Picking</span>
+              </div>
+              <div class="bnav-item active" data-nav-target="mock-screen-incident">
+                <div class="bnav-pill-indicator"><i class="pi pi-check-square"></i></div>
+                <span class="bnav-label">Checklist</span>
+              </div>
+            </nav>
+
+            <!-- Android Home Gesture Bar -->
+            <div class="android-gesture-pill-bar" aria-hidden="true">
+              <div class="gesture-handle"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec-side-col">
+          <div class="story-traceability-card">
+            <div class="trace-header"><span class="trace-tag epic">MOBILE-EPIC-08</span><span class="trace-tag story">MOB-US-056..058</span></div>
+            <h4 class="trace-title">MOB-US-056 / 058 — Evidencia CameraX & Geolocalización de Siniestros</h4>
+            <p class="trace-persona"><strong>Actor Funcional:</strong> Diego Morales (Driver / Delivery Operator)</p>
+            <div class="trace-gherkin">
+              <div class="scenario-item"><span class="kw-given">GIVEN</span> Detección de rotura de empaque o anomalía en trayecto</div>
+              <div class="scenario-item"><span class="kw-when">WHEN</span> Chofer captura imagen con CameraX y registra severidad</div>
+              <div class="scenario-item"><span class="kw-then">THEN</span> Registra evidencia fotográfica con coordenadas GPS inmutables</div>
+            </div>
+          </div>
+
+          <div class="code-editor-box">
+            <div class="editor-header">
+              <span class="file-name"><i class="pi pi-file-code"></i> MockMobileScreens.kt · MockIncidentReportScreen</span>
+              <span class="target-tag">Jetpack Compose M3 Nativo</span>
+            </div>
+            <pre><code><span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">MockIncidentReportScreen</span>(
+    onCapturePhoto: () -&gt; <span class="type">Unit</span> = &#123;&#125;,
+    onSubmitIncident: () -&gt; <span class="type">Unit</span> = &#123;&#125;,
+    modifier: <span class="type">Modifier</span> = Modifier
+) &#123;
+    <span class="kw">var</span> selectedSeverity <span class="kw">by</span> remember &#123; mutableStateOf(<span class="str">"MODERADO"</span>) &#125;
+
+    <span class="fn">NexaSeveritySelector</span>(selected = selectedSeverity, onSelect = &#123; selectedSeverity = it &#125;)
+    <span class="fn">NexaCameraXPreviewCard</span>(onCapture = onCapturePhoto)
+    <span class="fn">NexaPrimaryButton</span>(label = <span class="str">"Registrar Incidencia &amp; Notificar a Control"</span>, onClick = onSubmitIncident)
+&#125;</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         SCREEN 1.5: LOGÍSTICA INVERSA & DEVOLUCIONES RMA (MOB-US-070, 071)
+         Samsung Galaxy S24 (390×844dp) · Diego Morales
+         ========================================================================= -->
+    <div class="mock-screen-card" id="mock-screen-rma" data-role="driver">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">ROL 1: CONDUCTOR · PANTALLA 1.5 (390×844dp)</span>
+          <h3 class="device-name">Logística Inversa & Devoluciones RMA en Ruta</h3>
+          <p class="device-sub">Diego Morales · Solicitud RMA-2026-0914 · 4 Cajas Rechazadas por Rotura Térmica</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill role"><i class="pi pi-undo"></i> RMA Inversa</span>
+          <span class="meta-pill touch"><i class="pi pi-qrcode"></i> Rótulo Cuarentena</span>
+        </div>
+      </div>
+
+      <div class="mock-split-viewer">
+        <div class="android-chassis phone-s24">
+          <div class="chassis-speaker-slit"></div>
+          <div class="chassis-punch-hole"></div>
+
+          <div class="android-screen-surface">
+            <div class="m3-system-bar">
+              <span class="sys-time">14:45</span>
+              <div class="sys-icons"><span class="sys-tech">5G</span><i class="pi pi-wifi"></i><span class="sys-battery">90%</span></div>
+            </div>
+
+            <!-- M3 TopAppBar -->
+            <header class="m3-top-bar">
+              <button type="button" class="top-bar-btn" aria-label="Volver"><i class="pi pi-arrow-left"></i></button>
+              <h4 class="top-bar-title">Devolución RMA en Ruta</h4>
+              <button type="button" class="top-bar-btn notif" aria-label="Notificaciones"><i class="pi pi-bell"></i><span class="notif-red-dot"></span></button>
+            </header>
+
+            <div class="screen-scroll-body">
+              <div class="dispatch-card-white">
+                <div class="dispatch-card-top">
+                  <span class="order-code-mono">RMA-2026-0914</span>
+                  <span class="status-pill-amber">EN EVALUACIÓN</span>
+                </div>
+                <div class="dispatch-buyer-info">
+                  <h5 class="buyer-company-name">Producto: Salmón Salar Filete</h5>
+                  <p class="buyer-cargo-desc">Lote: L-20260914-A · Motivo: Rotura de Empaque Térmico</p>
+                </div>
+
+                <div class="screen-section-label">CAJAS A REINGRESAR AL FURGÓN</div>
+                <div class="box-stepper-control">
+                  <button type="button" class="btn-stepper minus" id="btn-rma-minus">−1</button>
+                  <div class="stepper-center-data">
+                    <span class="stepper-amount-big" id="val-rma-boxes">4</span>
+                    <span class="stepper-total-hint">cajas devueltas</span>
+                  </div>
+                  <button type="button" class="btn-stepper plus" id="btn-rma-plus">+1</button>
+                </div>
+
+                <div class="quarantine-tag-box">
+                  <i class="pi pi-qrcode tag-qr-icon"></i>
+                  <div class="tag-meta">
+                    <strong>RÓTULO DE CUARENTENA: RMA-0914-Q</strong>
+                    <span>Reingreso a Furgón WKN-892 · Retorno a CD Callao</span>
+                  </div>
+                </div>
+
+                <button type="button" class="btn-solid-blue-cta">
+                  <i class="pi pi-check-circle"></i>
+                  <span>Aprobar Devolución & Reingreso</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Bottom Navigation Bar (Canonical 5-destination with Inicio & Gestures) -->
+            <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal">
+              <div class="bnav-item" data-nav-target="mock-screen-route"><div class="bnav-pill-indicator"><i class="pi pi-home"></i></div><span class="bnav-label">Inicio</span></div>
+              <div class="bnav-item" data-nav-target="mock-screen-route"><div class="bnav-pill-indicator"><i class="pi pi-map-marker"></i></div><span class="bnav-label">Rutas</span></div>
+              <div class="bnav-item" data-nav-target="mock-screen-pod"><div class="bnav-pill-indicator"><i class="pi pi-send"></i></div><span class="bnav-label">Despacho</span></div>
+              <div class="bnav-item" data-nav-target="mock-screen-picking"><div class="bnav-pill-indicator"><i class="pi pi-box"></i></div><span class="bnav-label">Picking</span></div>
+              <div class="bnav-item active" data-nav-target="mock-screen-incident"><div class="bnav-pill-indicator"><i class="pi pi-check-square"></i></div><span class="bnav-label">Checklist</span></div>
+            </nav>
+
+            <!-- Android Home Gesture Bar -->
+            <div class="android-gesture-pill-bar" aria-hidden="true">
+              <div class="gesture-handle"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec-side-col">
+          <div class="story-traceability-card">
+            <div class="trace-header"><span class="trace-tag epic">MOBILE-EPIC-11</span><span class="trace-tag story">MOB-US-070..071</span></div>
+            <h4 class="trace-title">MOB-US-070 / 071 — Devoluciones & Logística Inversa RMA</h4>
+            <p class="trace-persona"><strong>Actor Funcional:</strong> Diego Morales (Driver / Delivery Operator)</p>
+            <div class="trace-gherkin">
+              <div class="scenario-item"><span class="kw-given">GIVEN</span> Receptor rechaza mercadería por rotura térmica</div>
+              <div class="scenario-item"><span class="kw-when">WHEN</span> Chofer registra motivo y cantidad en furgón</div>
+              <div class="scenario-item"><span class="kw-then">THEN</span> Genera rótulo de cuarentena y actualiza el manifiesto sin borrar historia</div>
+            </div>
+          </div>
+
+          <div class="code-editor-box">
+            <div class="editor-header">
+              <span class="file-name"><i class="pi pi-file-code"></i> MockMobileScreens.kt · MockReturnsRmaScreen</span>
+              <span class="target-tag">Jetpack Compose M3 Nativo</span>
+            </div>
+            <pre><code><span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">MockReturnsRmaScreen</span>(
+    onApproveReturn: (Int, String) -&gt; <span class="type">Unit</span> = &#123; _, _ -&gt; &#125;,
+    modifier: <span class="type">Modifier</span> = Modifier
+) &#123;
+    <span class="kw">var</span> returnBoxes <span class="kw">by</span> remember &#123; mutableIntStateOf(<span class="num">4</span>) &#125;
+
+    <span class="fn">NexaQuantityStepper</span>(quantity = returnBoxes, onQuantityChange = &#123; returnBoxes = it &#125;)
+    <span class="fn">NexaPrimaryButton</span>(label = <span class="str">"Aprobar Devolución &amp; Reingreso"</span>)
+&#125;</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         SCREEN 2.1: WAREHOUSE PICKING FEFO (MOB-US-011..016, 051)
+         Zebra TC58 Rugged (412×820dp) · Alejandro Vargas
+         ========================================================================= -->
+    <div class="mock-screen-card" id="mock-screen-picking" data-role="warehouse">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">ROL 2: ALMACÉN · PANTALLA 2.1 (412×820dp INDUSTRIAL)</span>
+          <h3 class="device-name">Picking FEFO en Almacén Frigorífico</h3>
+          <p class="device-sub">Alejandro Vargas · Rack B-04-N2-P12 · Lote Prioritario L-20260914-A (Salmón Salar)</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill industrial"><i class="pi pi-shield"></i> Zebra SE55</span>
+          <span class="meta-pill touch"><i class="pi pi-hand"></i> 56dp Guantes Frío</span>
+          <span class="meta-pill zebra"><i class="pi pi-qrcode"></i> Regla FEFO</span>
+        </div>
+      </div>
+
+      <div class="mock-split-viewer">
+        <div class="android-chassis phone-zebra">
+          <div class="zebra-top-scanner-bumper">
+            <div class="scanner-amber-stripe"></div>
+            <span class="zebra-brand-label">ZEBRA TC58 · ENTERPRISE SE55</span>
+            <div class="scanner-amber-stripe"></div>
+          </div>
+
+          <div class="android-screen-surface">
+            <div class="m3-system-bar zebra-bar">
+              <span class="sys-time">14:35</span>
+              <div class="sys-icons"><span class="sys-tech">Zebra Wi-Fi 6E</span><i class="pi pi-qrcode"></i><span class="sys-battery">96%</span></div>
+            </div>
+
+            <!-- M3 TopAppBar -->
+            <header class="m3-top-bar">
+              <button type="button" class="top-bar-btn" aria-label="Menú">
+                <i class="pi pi-bars"></i>
+              </button>
+              <div class="top-bar-dual-title">
+                <h4 class="top-bar-title">Picking FEFO</h4>
+                <span class="unit-code-badge">Cámara Fría #2 (-18°C)</span>
+              </div>
+              <button type="button" class="top-bar-btn notif" aria-label="Notificaciones">
+                <i class="pi pi-bell"></i>
+                <span class="notif-red-dot"></span>
+              </button>
+            </header>
+
+            <div class="screen-scroll-body">
+              <div class="dispatch-card-white">
+                <div class="dispatch-card-top">
+                  <span class="order-code-mono">RACK B-04-N2-P12</span>
+                  <span class="cold-chip-pill live"><i class="pi pi-snowflake"></i> Cámara Frío #2 (-18°C)</span>
+                </div>
+                <div class="dispatch-buyer-info">
+                  <h5 class="buyer-company-name">SKU: ALM-LMO-982</h5>
+                  <p class="buyer-cargo-desc">Filete de Salmón Salar Fresco (Master Box 12x1kg)</p>
+                </div>
+
+                <div class="fefoflag-box">
+                  <span class="fefo-label"><i class="pi pi-exclamation-circle"></i> REGLA FEFO ESTRICTA</span>
+                  <strong class="fefo-lot">Lote Asignado: L-20260914-A (Vence: 14 Oct 2026)</strong>
+                </div>
+
+                <div class="box-stepper-control">
+                  <button type="button" class="btn-stepper minus" id="btn-pick-minus">−1</button>
+                  <div class="stepper-center-data">
+                    <span class="stepper-amount-big" id="val-picked-units">18</span>
+                    <span class="stepper-total-hint">de 24 cajas requeridas</span>
+                  </div>
+                  <button type="button" class="btn-stepper plus" id="btn-pick-plus">+1</button>
+                </div>
+
+                <div class="scanner-actions-grid">
+                  <button type="button" class="btn-solid-blue-cta industrial-56dp" id="btn-scan-barcode">
+                    <i class="pi pi-qrcode"></i>
+                    <span id="lbl-scan-barcode">Escanear Barcode (CameraX / SE55)</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Navigation Bar (Canonical 5-destination with Inicio & Gestures) -->
+            <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal Almacén">
+              <div class="bnav-item active" data-nav-target="mock-screen-picking">
+                <div class="bnav-pill-indicator"><i class="pi pi-home"></i></div>
+                <span class="bnav-label">Inicio</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-picking">
+                <div class="bnav-pill-indicator"><i class="pi pi-box"></i></div>
+                <span class="bnav-label">Picking</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-scanner">
+                <div class="bnav-pill-indicator"><i class="pi pi-qrcode"></i></div>
+                <span class="bnav-label">Escáner</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-inspection">
+                <div class="bnav-pill-indicator"><i class="pi pi-check-square"></i></div>
+                <span class="bnav-label">Checklist</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-cycle">
+                <div class="bnav-pill-indicator"><i class="pi pi-sitemap"></i></div>
+                <span class="bnav-label">Ubicaciones</span>
+              </div>
+            </nav>
+
+            <!-- Android Home Gesture Bar -->
+            <div class="android-gesture-pill-bar" aria-hidden="true">
+              <div class="gesture-handle"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec-side-col">
+          <div class="story-traceability-card">
+            <div class="trace-header"><span class="trace-tag epic">MOBILE-EPIC-02</span><span class="trace-tag story">MOB-US-011..016, 051</span></div>
+            <h4 class="trace-title">MOB-US-011 / 051 — Picking FEFO & Caducidad Prioritaria</h4>
+            <p class="trace-persona"><strong>Actor Funcional:</strong> Alejandro Vargas (Warehouse Operator)</p>
+            <div class="trace-gherkin">
+              <div class="scenario-item"><span class="kw-given">GIVEN</span> Operador en Rack B-04 con picking DSP-204 asignado</div>
+              <div class="scenario-item"><span class="kw-when">WHEN</span> Escanea etiqueta de lote o confirma unidades con steppers táctiles de 56dp</div>
+              <div class="scenario-item"><span class="kw-then">THEN</span> Valida lote prioritario FEFO L-20260914-A y actualiza saldo de muelle</div>
+            </div>
+          </div>
+
+          <div class="code-editor-box">
+            <div class="editor-header">
+              <span class="file-name"><i class="pi pi-file-code"></i> MockMobileScreens.kt · MockWarehousePickingScreen</span>
+              <span class="target-tag">Jetpack Compose M3 Nativo</span>
+            </div>
+            <pre><code><span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">MockWarehousePickingScreen</span>(
+    onItemScanned: () -&gt; <span class="type">Unit</span> = &#123;&#125;,
+    modifier: <span class="type">Modifier</span> = Modifier
+) &#123;
+    <span class="kw">var</span> pickedUnits <span class="kw">by</span> remember &#123; mutableIntStateOf(<span class="num">18</span>) &#125;
+    <span class="fn">NexaFefoAlertCard</span>(activeLot = <span class="str">"L-20260914-A"</span>, expiry = <span class="str">"14 Oct 2026"</span>)
+    <span class="fn">NexaQuantityStepper</span>(quantity = pickedUnits, min = <span class="num">0</span>, max = <span class="num">24</span>)
+    <span class="fn">NexaPrimaryButton</span>(label = <span class="str">"Confirmar Ubicación &amp; Pick (18/24)"</span>)
+&#125;</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         SCREEN 2.2: ESCÁNER CAMERAX CON RETÍCULA & FALLBACK MANUAL (MOB-US-011)
+         Zebra TC58 Rugged · Artefacto ScannerScreenSpec.astro 1:1
+         ========================================================================= -->
+    <div class="mock-screen-card" id="mock-screen-scanner" data-role="warehouse">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">ROL 2: ALMACÉN · PANTALLA 2.2 (412×820dp INDUSTRIAL)</span>
+          <h3 class="device-name">Escáner CameraX con Retícula Láser & Fallback Manual Obligatorio</h3>
+          <p class="device-sub">Alejandro Vargas · Artefacto ScannerScreenSpec.astro · GS1-128 & DataMatrix en Frío</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill industrial"><i class="pi pi-qrcode"></i> ML Kit Vision</span>
+          <span class="meta-pill touch"><i class="pi pi-pencil"></i> Fallback Manual</span>
+          <span class="meta-pill zebra"><i class="pi pi-shield"></i> ADR-0018</span>
+        </div>
+      </div>
+
+      <div class="mock-split-viewer">
+        <div class="android-chassis phone-zebra">
+          <div class="zebra-top-scanner-bumper">
+            <div class="scanner-amber-stripe"></div>
+            <span class="zebra-brand-label">ZEBRA TC58 · ENTERPRISE SE55</span>
+            <div class="scanner-amber-stripe"></div>
+          </div>
+
+          <div class="android-screen-surface">
+            <div class="m3-system-bar zebra-bar">
+              <span class="sys-time">14:36</span>
+              <div class="sys-icons"><span class="sys-tech">Zebra 6E</span><i class="pi pi-qrcode"></i><span class="sys-battery">95%</span></div>
+            </div>
+
+            <!-- M3 TopAppBar -->
+            <header class="m3-top-bar">
+              <button type="button" class="top-bar-btn" aria-label="Volver"><i class="pi pi-arrow-left"></i></button>
+              <h4 class="top-bar-title">Escáner CameraX / GS1</h4>
+              <button type="button" class="top-bar-btn" id="btn-mock-flash" aria-label="Flash"><i class="pi pi-bolt"></i></button>
+            </header>
+
+            <!-- SCANNER SCREEN ARTIFACT BODY (From ScannerScreenSpec.astro) -->
+            <div class="scanner-artifact-body">
+              <!-- Camera Feed Stage & Laser Reticle -->
+              <div class="camera-feed-stage-artifact">
+                <div class="viewfinder-box-artifact">
+                  <div class="corner-marker top-left"></div>
+                  <div class="corner-marker top-right"></div>
+                  <div class="corner-marker bottom-left"></div>
+                  <div class="corner-marker bottom-right"></div>
+                  
+                  <div class="laser-beam-animated"></div>
+
+                  <div class="scan-hint-label">
+                    <span>Alinee código GS1-128 o DataMatrix</span>
+                  </div>
+                </div>
+
+                <div class="hardware-badge-artifact">
+                  <span class="pulse-dot-cyan"></span>
+                  <span>CameraX ML Kit · Auto-focus Calibrado</span>
+                </div>
+              </div>
+
+              <!-- Detected Result Card -->
+              <div class="detected-asset-card-artifact">
+                <div class="asset-icon-box"><i class="pi pi-snowflake"></i></div>
+                <div class="asset-details-col">
+                  <div class="asset-code-row">
+                    <span class="order-code-mono">SKU ALM-LMO-982</span>
+                    <span class="status-pill-cyan">FEFO VALIDADO</span>
+                  </div>
+                  <strong class="asset-name-title">Salmón Salar Congelado 4-5kg</strong>
+                  <span class="asset-meta-text">Lote L-20260914-A · Sonda Térmica 3.8°C</span>
+                </div>
+              </div>
+
+              <!-- Mandatory Manual Fallback Group (ADR-0018) -->
+              <div class="manual-fallback-group-artifact">
+                <div class="fallback-header-row">
+                  <span class="fallback-title-text">¿Etiqueta escarchada o código ilegible?</span>
+                  <span class="fallback-badge-adr">ADR-0018 FALLBACK</span>
+                </div>
+                <div class="manual-input-row-artifact">
+                  <div class="input-icon-box"><i class="pi pi-pencil"></i></div>
+                  <input type="text" class="manual-code-field" value="SO-2026-0018-01" aria-label="Código manual" />
+                  <button type="button" class="btn-validate-manual">Validar</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Navigation Bar (Canonical 5-destination with Inicio & Gestures) -->
+            <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal Almacén">
+              <div class="bnav-item" data-nav-target="mock-screen-picking">
+                <div class="bnav-pill-indicator"><i class="pi pi-home"></i></div>
+                <span class="bnav-label">Inicio</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-picking">
+                <div class="bnav-pill-indicator"><i class="pi pi-box"></i></div>
+                <span class="bnav-label">Picking</span>
+              </div>
+              <div class="bnav-item active" data-nav-target="mock-screen-scanner">
+                <div class="bnav-pill-indicator"><i class="pi pi-qrcode"></i></div>
+                <span class="bnav-label">Escáner</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-inspection">
+                <div class="bnav-pill-indicator"><i class="pi pi-check-square"></i></div>
+                <span class="bnav-label">Checklist</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-cycle">
+                <div class="bnav-pill-indicator"><i class="pi pi-sitemap"></i></div>
+                <span class="bnav-label">Ubicaciones</span>
+              </div>
+            </nav>
+
+            <!-- Android Home Gesture Bar -->
+            <div class="android-gesture-pill-bar" aria-hidden="true">
+              <div class="gesture-handle"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec-side-col">
+          <div class="story-traceability-card">
+            <div class="trace-header"><span class="trace-tag epic">MOBILE-EPIC-02</span><span class="trace-tag story">MOB-US-011 · ADR-0018</span></div>
+            <h4 class="trace-title">MOB-US-011 / ADR-0018 — Reconocimiento GS1 & Fallback Manual Obligatorio</h4>
+            <p class="trace-persona"><strong>Actor Funcional:</strong> Alejandro Vargas (Warehouse Operator)</p>
+            <div class="trace-gherkin">
+              <div class="scenario-item"><span class="kw-given">GIVEN</span> Operador escaneando bulto con código GS1 o DataMatrix en ambiente frío</div>
+              <div class="scenario-item"><span class="kw-when">WHEN</span> Etiqueta está mojada o dañada por escarcha de cámara</div>
+              <div class="scenario-item"><span class="kw-then">THEN</span> El sistema provee un campo de ingreso manual obligatorio sin bloquear el flujo</div>
+            </div>
+          </div>
+
+          <div class="code-editor-box">
+            <div class="editor-header">
+              <span class="file-name"><i class="pi pi-file-code"></i> MockMobileScreens.kt · MockScannerScreen</span>
+              <span class="target-tag">Jetpack Compose M3 Nativo</span>
+            </div>
+            <pre><code><span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">MockScannerScreen</span>(
+    onBarcodeDetected: (String) -&gt; <span class="type">Unit</span> = &#123;&#125;,
+    onManualCodeSubmit: (String) -&gt; <span class="type">Unit</span> = &#123;&#125;
+) &#123;
+    <span class="cmt">// Viewfinder CameraX con Retícula y Laser</span>
+    <span class="fn">NexaCameraXViewfinder</span>(fps = <span class="num">60</span>, flashEnabled = isFlashOn)
+    
+    <span class="cmt">// Tarjeta de Asset Detectado con FEFO</span>
+    <span class="fn">NexaDetectedAssetCard</span>(sku = <span class="str">"ALM-LMO-982"</span>, lot = <span class="str">"L-20260914-A"</span>)
+    
+    <span class="cmt">// Fallback Manual Obligatorio según ADR-0018</span>
+    <span class="fn">NexaManualInputFallback</span>(
+        title = <span class="str">"¿Etiqueta húmeda o código ilegible?"</span>,
+        onSubmit = onManualCodeSubmit
+    )
+&#125;</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         SCREEN 2.3: INSPECCIÓN ISO 3691 & LOCKOUT (MOB-US-073)
+         Zebra TC58 Rugged (412×820dp) · Alejandro Vargas
+         ========================================================================= -->
+    <div class="mock-screen-card" id="mock-screen-inspection" data-role="warehouse">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">ROL 2: ALMACÉN · PANTALLA 2.3 (412×820dp INDUSTRIAL)</span>
+          <h3 class="device-name">Inspección Pre-operacional ISO 3691 & Bloqueo Lockout</h3>
+          <p class="device-sub">Alejandro Vargas · Apilador Crown 1.6T EQ-APIL-042 · Interlock de Ignición</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill industrial"><i class="pi pi-shield"></i> ISO 3691</span>
+          <span class="meta-pill touch"><i class="pi pi-hand"></i> 56dp Táctil</span>
+          <span class="meta-pill gold" id="pill-iso-status"><i class="pi pi-lock"></i> Lockout Activo</span>
+        </div>
+      </div>
+
+      <div class="mock-split-viewer">
+        <div class="android-chassis phone-zebra">
+          <div class="zebra-top-scanner-bumper">
+            <div class="scanner-amber-stripe"></div>
+            <span class="zebra-brand-label">ZEBRA TC58 · ENTERPRISE SE55</span>
+            <div class="scanner-amber-stripe"></div>
+          </div>
+
+          <div class="android-screen-surface">
+            <div class="m3-system-bar zebra-bar">
+              <span class="sys-time">14:38</span>
+              <div class="sys-icons"><span class="sys-tech">Zebra 6E</span><i class="pi pi-shield"></i><span class="sys-battery">97%</span></div>
+            </div>
+
+            <!-- M3 TopAppBar -->
+            <header class="m3-top-bar">
+              <button type="button" class="top-bar-btn" aria-label="Menú"><i class="pi pi-bars"></i></button>
+              <div class="top-bar-dual-title">
+                <h4 class="top-bar-title">Inspección ISO 3691</h4>
+                <span class="unit-code-badge">Apilador #MT-042</span>
+              </div>
+              <button type="button" class="top-bar-btn notif" aria-label="Notificaciones"><i class="pi pi-bell"></i><span class="notif-red-dot"></span></button>
+            </header>
+
+            <div class="screen-scroll-body">
+              <div class="ignition-warning-banner" id="ignition-banner">
+                <div class="warning-icon-box" id="ignition-icon-box"><i class="pi pi-exclamation-triangle"></i></div>
+                <div class="warning-text-col">
+                  <strong id="ignition-title">BLOQUEO DE IGNICIÓN ACTIVO</strong>
+                  <span id="ignition-sub">Completar los 4 puntos de seguridad para habilitar arranque</span>
+                </div>
+              </div>
+
+              <div class="screen-section-label">LISTA DE COMPROBACIÓN CRÍTICA (56DP)</div>
+              <div class="safety-switches-card">
+                <div class="safety-switch-row">
+                  <div class="switch-info"><strong class="switch-title">1. Frenos de Servicio & Emergencia</strong><span class="switch-desc">Frenado progresivo sin desvío</span></div>
+                  <input type="checkbox" class="nexa-checkbox iso-chk" id="iso-chk-1" checked />
+                </div>
+                <div class="safety-switch-row">
+                  <div class="switch-info"><strong class="switch-title">2. Nivel Batería Tracción (>80%)</strong><span class="switch-desc">Voltaje estable y bornes limpios</span></div>
+                  <input type="checkbox" class="nexa-checkbox iso-chk" id="iso-chk-2" checked />
+                </div>
+                <div class="safety-switch-row">
+                  <div class="switch-info"><strong class="switch-title">3. Estado de Mástil & Horquillas</strong><span class="switch-desc">Sin fisuras ni deformaciones</span></div>
+                  <input type="checkbox" class="nexa-checkbox iso-chk" id="iso-chk-3" checked />
+                </div>
+                <div class="safety-switch-row">
+                  <div class="switch-info"><strong class="switch-title">4. Sistema Hidráulico sin Fugas</strong><span class="switch-desc">Cilindro estanco, presión nominal OK</span></div>
+                  <input type="checkbox" class="nexa-checkbox iso-chk" id="iso-chk-4" checked />
+                </div>
+              </div>
+
+              <button type="button" class="btn-solid-blue-cta industrial-56dp" id="btn-validate-iso">
+                <i class="pi pi-shield"></i>
+                <span id="lbl-iso-btn">Liberar Ignición & Iniciar Turno</span>
+              </button>
+            </div>
+
+            <!-- Bottom Navigation Bar (Canonical 5-destination with Inicio & Gestures) -->
+            <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal Almacén">
+              <div class="bnav-item" data-nav-target="mock-screen-picking">
+                <div class="bnav-pill-indicator"><i class="pi pi-home"></i></div>
+                <span class="bnav-label">Inicio</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-picking">
+                <div class="bnav-pill-indicator"><i class="pi pi-box"></i></div>
+                <span class="bnav-label">Picking</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-scanner">
+                <div class="bnav-pill-indicator"><i class="pi pi-qrcode"></i></div>
+                <span class="bnav-label">Escáner</span>
+              </div>
+              <div class="bnav-item active" data-nav-target="mock-screen-inspection">
+                <div class="bnav-pill-indicator"><i class="pi pi-check-square"></i></div>
+                <span class="bnav-label">Checklist</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-cycle">
+                <div class="bnav-pill-indicator"><i class="pi pi-sitemap"></i></div>
+                <span class="bnav-label">Ubicaciones</span>
+              </div>
+            </nav>
+
+            <!-- Android Home Gesture Bar -->
+            <div class="android-gesture-pill-bar" aria-hidden="true">
+              <div class="gesture-handle"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec-side-col">
+          <div class="story-traceability-card">
+            <div class="trace-header"><span class="trace-tag epic">MOBILE-EPIC-12</span><span class="trace-tag story">MOB-US-073</span></div>
+            <h4 class="trace-title">MOB-US-073 — Inspección ISO 3691 & Bloqueo de Seguridad Operativa</h4>
+            <p class="trace-persona"><strong>Actor Funcional:</strong> Alejandro Vargas (Warehouse Operator)</p>
+            <div class="trace-gherkin">
+              <div class="scenario-item"><span class="kw-given">GIVEN</span> Operador iniciando turno con apilador Crown 1.6T</div>
+              <div class="scenario-item"><span class="kw-when">WHEN</span> Valida lista de 4 puntos críticos</div>
+              <div class="scenario-item"><span class="kw-then">THEN</span> Emite pase operativo si todo está conforme o mantiene bloqueo activo</div>
+            </div>
+          </div>
+
+          <div class="code-editor-box">
+            <div class="editor-header">
+              <span class="file-name"><i class="pi pi-file-code"></i> MockMobileScreens.kt · MockMachineryInspectionScreen</span>
+              <span class="target-tag">Jetpack Compose M3 Nativo</span>
+            </div>
+            <pre><code><span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">MockMachineryInspectionScreen</span>(
+    onUnlockIgnition: () -&gt; <span class="type">Unit</span> = &#123;&#125;
+) &#123;
+    <span class="kw">val</span> allApproved = brakesOk &amp;&amp; batteryOk &amp;&amp; forksOk &amp;&amp; hydraulicOk
+    <span class="fn">NexaStatusPill</span>(
+        text = <span class="kw">if</span> (allApproved) <span class="str">"OPERATIVO"</span> <span class="kw">else</span> <span class="str">"BLOQUEADO"</span>,
+        backgroundColor = <span class="kw">if</span> (allApproved) NexaColors.SuccessSurface <span class="kw">else</span> NexaColors.DangerSurface,
+        textColor = <span class="kw">if</span> (allApproved) NexaColors.Success <span class="kw">else</span> NexaColors.Danger,
+        borderColor = <span class="kw">if</span> (allApproved) NexaColors.SuccessBorder <span class="kw">else</span> NexaColors.DangerBorder
+    )
+&#125;</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         SCREEN 2.4: CONTEO CÍCLICO CIEGO (MOB-US-061..065)
+         Zebra TC58 Rugged (412×820dp) · Alejandro Vargas
+         ========================================================================= -->
+    <div class="mock-screen-card" id="mock-screen-cycle" data-role="warehouse">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">ROL 2: ALMACÉN · PANTALLA 2.4 (412×820dp INDUSTRIAL)</span>
+          <h3 class="device-name">Conteo Cíclico e Inventario Ciego sin Sesgo</h3>
+          <p class="device-sub">Alejandro Vargas · Pasillo Frío B · Posición C-12 · Conteo Ciego sin Saldo Teórico Previsto</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill industrial"><i class="pi pi-table"></i> Conteo Ciego</span>
+          <span class="meta-pill touch"><i class="pi pi-check"></i> Tolerancia ±2% OK</span>
+        </div>
+      </div>
+
+      <div class="mock-split-viewer">
+        <div class="android-chassis phone-zebra">
+          <div class="zebra-top-scanner-bumper">
+            <div class="scanner-amber-stripe"></div>
+            <span class="zebra-brand-label">ZEBRA TC58 · ENTERPRISE SE55</span>
+            <div class="scanner-amber-stripe"></div>
+          </div>
+
+          <div class="android-screen-surface">
+            <div class="m3-system-bar zebra-bar">
+              <span class="sys-time">14:40</span>
+              <div class="sys-icons"><span class="sys-tech">Zebra 6E</span><i class="pi pi-table"></i><span class="sys-battery">94%</span></div>
+            </div>
+
+            <!-- M3 TopAppBar -->
+            <header class="m3-top-bar">
+              <button type="button" class="top-bar-btn" aria-label="Volver"><i class="pi pi-arrow-left"></i></button>
+              <h4 class="top-bar-title">Conteo Cíclico Ciego</h4>
+              <button type="button" class="top-bar-btn notif" aria-label="Notificaciones"><i class="pi pi-bell"></i><span class="notif-red-dot"></span></button>
+            </header>
+
+            <div class="screen-scroll-body">
+              <div class="dispatch-card-white">
+                <div class="dispatch-card-top">
+                  <span class="order-code-mono">AUD-B-C12</span>
+                  <span class="status-pill-cyan">EN AUDITORÍA</span>
+                </div>
+                <div class="dispatch-buyer-info">
+                  <h5 class="buyer-company-name">SKU: ATUN-VEG-48U</h5>
+                  <p class="buyer-cargo-desc">Atún en Aceite Vegetal (Master Box 48u)</p>
+                </div>
+
+                <div class="screen-section-label">INGRESO DE CONTEO FÍSICO (CIEGO)</div>
+                <div class="box-stepper-control">
+                  <button type="button" class="btn-stepper minus" id="btn-cycle-minus">−5</button>
+                  <div class="stepper-center-data">
+                    <span class="stepper-amount-big" id="val-cycle-units">149</span>
+                    <span class="stepper-total-hint">unidades contadas físicamente</span>
+                  </div>
+                  <button type="button" class="btn-stepper plus" id="btn-cycle-plus">+5</button>
+                </div>
+
+                <div class="quick-telemetry-card">
+                  <div class="telemetry-item">
+                    <span class="tel-label">Varianza Teórica</span>
+                    <strong class="tel-val success" id="lbl-variance-val">-0.6% (Tolerancia OK)</strong>
+                  </div>
+                  <div class="telemetry-separator"></div>
+                  <div class="telemetry-item">
+                    <span class="tel-label">Estado Auditoría</span>
+                    <strong class="tel-val">Conforme</strong>
+                  </div>
+                </div>
+
+                <button type="button" class="btn-solid-blue-cta industrial-56dp">
+                  <i class="pi pi-check"></i>
+                  <span>Confirmar Conteo de Posición</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Bottom Navigation Bar (Canonical 5-destination with Inicio & Gestures) -->
+            <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal Almacén">
+              <div class="bnav-item" data-nav-target="mock-screen-picking"><div class="bnav-pill-indicator"><i class="pi pi-home"></i></div><span class="bnav-label">Inicio</span></div>
+              <div class="bnav-item" data-nav-target="mock-screen-picking"><div class="bnav-pill-indicator"><i class="pi pi-box"></i></div><span class="bnav-label">Picking</span></div>
+              <div class="bnav-item" data-nav-target="mock-screen-scanner"><div class="bnav-pill-indicator"><i class="pi pi-qrcode"></i></div><span class="bnav-label">Escáner</span></div>
+              <div class="bnav-item" data-nav-target="mock-screen-inspection"><div class="bnav-pill-indicator"><i class="pi pi-check-square"></i></div><span class="bnav-label">Checklist</span></div>
+              <div class="bnav-item active" data-nav-target="mock-screen-cycle"><div class="bnav-pill-indicator"><i class="pi pi-sitemap"></i></div><span class="bnav-label">Ubicaciones</span></div>
+            </nav>
+
+            <!-- Android Home Gesture Bar -->
+            <div class="android-gesture-pill-bar" aria-hidden="true">
+              <div class="gesture-handle"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec-side-col">
+          <div class="story-traceability-card">
+            <div class="trace-header"><span class="trace-tag epic">MOBILE-EPIC-08</span><span class="trace-tag story">MOB-US-061..065</span></div>
+            <h4 class="trace-title">MOB-US-061 / 065 — Conteo Cíclico e Inventario Ciego</h4>
+            <p class="trace-persona"><strong>Actor Funcional:</strong> Alejandro Vargas (Auditor de Almacén)</p>
+            <div class="trace-gherkin">
+              <div class="scenario-item"><span class="kw-given">GIVEN</span> Operador realizando auditoría sin sesgo de stock</div>
+              <div class="scenario-item"><span class="kw-when">WHEN</span> Ingresa recuento físico</div>
+              <div class="scenario-item"><span class="kw-then">THEN</span> El sistema calcula varianza contra tolerancia y registra hallazgo</div>
+            </div>
+          </div>
+
+          <div class="code-editor-box">
+            <div class="editor-header">
+              <span class="file-name"><i class="pi pi-file-code"></i> MockMobileScreens.kt · MockCycleCountScreen</span>
+              <span class="target-tag">Jetpack Compose M3 Nativo</span>
+            </div>
+            <pre><code><span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">MockCycleCountScreen</span>(
+    onConfirmCount: (Int) -&gt; <span class="type">Unit</span> = &#123;&#125;
+) &#123;
+    <span class="kw">var</span> physicalCount <span class="kw">by</span> remember &#123; mutableIntStateOf(<span class="num">149</span>) &#125;
+    <span class="fn">NexaQuantityStepper</span>(quantity = physicalCount, onQuantityChange = &#123; physicalCount = it &#125;)
+    <span class="fn">NexaPrimaryButton</span>(label = <span class="str">"Confirmar Conteo de Posición"</span>)
+&#125;</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         SCREEN 2.5: RESILIENCIA OFFLINE SQLITE / ROOM (MOB-US-041..043)
+         Samsung Galaxy S24 (390×844dp) · Alejandro Vargas / Conductor
+         ========================================================================= -->
+    <div class="mock-screen-card" id="mock-screen-sync" data-role="warehouse">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">ROL 2: ALMACÉN · PANTALLA 2.5 (390×844dp)</span>
+          <h3 class="device-name">Cola de Sincronización Offline SQLite / Room</h3>
+          <p class="device-sub">Túnel de Congelado / Sótano · Mutaciones en Cola Local · Replay Idempotente</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill feature"><i class="pi pi-database"></i> SQLite Room DB</span>
+          <span class="meta-pill touch"><i class="pi pi-sync"></i> Replay Idempotente</span>
+          <span class="meta-pill gold" id="pill-sync-status"><i class="pi pi-check"></i> 3 Encoladas</span>
+        </div>
+      </div>
+
+      <div class="mock-split-viewer">
+        <div class="android-chassis phone-s24">
+          <div class="chassis-speaker-slit"></div>
+          <div class="chassis-punch-hole"></div>
+
+          <div class="android-screen-surface">
+            <div class="m3-system-bar">
+              <span class="sys-time">14:42</span>
+              <div class="sys-icons"><span class="sys-tech" id="sync-net-tech">SIN RED</span><i class="pi pi-wifi text-muted"></i><span class="sys-battery">85%</span></div>
+            </div>
+
+            <!-- M3 TopAppBar -->
+            <header class="m3-top-bar">
+              <button type="button" class="top-bar-btn" aria-label="Menú"><i class="pi pi-bars"></i></button>
+              <h4 class="top-bar-title">Sincronización Local Room</h4>
+              <button type="button" class="top-bar-btn" aria-label="Sincronizar"><i class="pi pi-sync"></i></button>
+            </header>
+
+            <div class="screen-scroll-body">
+              <div class="dispatch-card-white">
+                <div class="dispatch-card-top">
+                  <span class="order-code-mono">ESTADO DE RED</span>
+                  <span class="status-pill-amber" id="badge-sync-net">OFFLINE</span>
+                </div>
+                <div class="dispatch-buyer-info">
+                  <h5 class="buyer-company-name" id="lbl-net-title">Cámara Frigorífica (Sin Conexión)</h5>
+                  <p class="buyer-cargo-desc" id="lbl-net-sub">Las mutaciones se guardan localmente en Room SQLite</p>
+                </div>
+
+                <div class="pod-signature-row">
+                  <label class="toggle-control-label">
+                    <input type="checkbox" id="chk-airplane-mode" class="nexa-checkbox" checked />
+                    <div class="toggle-text-block">
+                      <strong class="toggle-title">Simular Pérdida de Conexión</strong>
+                      <span class="toggle-sub">Encolar transacciones localmente</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="screen-section-label">COLA DE TRANSACCIONES PENDIENTES (3)</div>
+              <div class="sync-queue-list">
+                <div class="sync-item-card">
+                  <div class="sync-item-head"><span class="sync-id-mono">MUT-9941 · Picking Confirmed</span><span class="status-pill-cyan">EN COLA</span></div>
+                  <span class="sync-sub">Lote L-20260914-A · 14:31:02 COT</span>
+                </div>
+                <div class="sync-item-card">
+                  <div class="sync-item-head"><span class="sync-id-mono">MUT-9942 · Temperature Alert Log</span><span class="status-pill-cyan">EN COLA</span></div>
+                  <span class="sync-sub">Sensor Sensirion #4 · 3.8°C · 14:32:15 COT</span>
+                </div>
+                <div class="sync-item-card" id="mut-item-failed">
+                  <div class="sync-item-head"><span class="sync-id-mono">MUT-9943 · Geofence Arrival</span><span class="status-pill-cyan" id="lbl-mut-3-status">EN COLA</span></div>
+                  <span class="sync-sub" id="lbl-mut-failed-sub">Av. Argentina 1240 · 14:34:40 COT</span>
+                </div>
+              </div>
+
+              <button type="button" class="btn-solid-blue-cta" id="btn-force-sync">
+                <i class="pi pi-sync"></i>
+                <span id="lbl-sync-btn">Forzar Sincronización Inmediata</span>
+              </button>
+            </div>
+
+            <!-- Bottom Navigation Bar (Canonical 5-destination with Inicio & Gestures) -->
+            <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal Almacén">
+              <div class="bnav-item" data-nav-target="mock-screen-picking"><div class="bnav-pill-indicator"><i class="pi pi-home"></i></div><span class="bnav-label">Inicio</span></div>
+              <div class="bnav-item" data-nav-target="mock-screen-picking"><div class="bnav-pill-indicator"><i class="pi pi-box"></i></div><span class="bnav-label">Picking</span></div>
+              <div class="bnav-item" data-nav-target="mock-screen-scanner"><div class="bnav-pill-indicator"><i class="pi pi-qrcode"></i></div><span class="bnav-label">Escáner</span></div>
+              <div class="bnav-item" data-nav-target="mock-screen-inspection"><div class="bnav-pill-indicator"><i class="pi pi-check-square"></i></div><span class="bnav-label">Checklist</span></div>
+              <div class="bnav-item active" data-nav-target="mock-screen-cycle"><div class="bnav-pill-indicator"><i class="pi pi-sitemap"></i></div><span class="bnav-label">Ubicaciones</span></div>
+            </nav>
+
+            <!-- Android Home Gesture Bar -->
+            <div class="android-gesture-pill-bar" aria-hidden="true">
+              <div class="gesture-handle"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec-side-col">
+          <div class="story-traceability-card">
+            <div class="trace-header"><span class="trace-tag epic">MOBILE-EPIC-06</span><span class="trace-tag story">MOB-US-041..043</span></div>
+            <h4 class="trace-title">MOB-US-041 / 043 — Cola Local Offline & Replay Idempotente</h4>
+            <p class="trace-persona"><strong>Actor Funcional:</strong> Alejandro Vargas / Diego Morales</p>
+            <div class="trace-gherkin">
+              <div class="scenario-item"><span class="kw-given">GIVEN</span> Dispositivo dentro de cámara frigorífica con blindaje RF</div>
+              <div class="scenario-item"><span class="kw-when">WHEN</span> Realiza transacciones operacionales sin cobertura</div>
+              <div class="scenario-item"><span class="kw-then">THEN</span> Registra mutaciones en Room SQLite y ejecuta replay idempotente al recuperar red</div>
+            </div>
+          </div>
+
+          <div class="code-editor-box">
+            <div class="editor-header">
+              <span class="file-name"><i class="pi pi-file-code"></i> MockMobileScreens.kt · MockOfflineSyncScreen</span>
+              <span class="target-tag">Jetpack Compose M3 Nativo</span>
+            </div>
+            <pre><code><span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">MockOfflineSyncScreen</span>(
+    onForceSync: () -&gt; <span class="type">Unit</span> = &#123;&#125;
+) &#123;
+    <span class="fn">NexaStatusPill</span>(
+        text = <span class="kw">if</span> (isOffline) <span class="str">"OFFLINE"</span> <span class="kw">else</span> <span class="str">"ONLINE"</span>,
+        backgroundColor = <span class="kw">if</span> (isOffline) NexaColors.WarningSurface <span class="kw">else</span> NexaColors.SuccessSurface,
+        textColor = <span class="kw">if</span> (isOffline) NexaColors.Warning <span class="kw">else</span> NexaColors.Success,
+        borderColor = <span class="kw">if</span> (isOffline) NexaColors.WarningBorder <span class="kw">else</span> NexaColors.SuccessBorder
+    )
+&#125;</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         SCREEN 3.1: TABLERO DE MUELLE 3 & PRECINTO (MOB-US-020..025)
+         Samsung Galaxy S24 (390×844dp) · Mariela (Despacho)
+         ========================================================================= -->
+    <div class="mock-screen-card" id="mock-screen-dispatch" data-role="dispatch">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">ROL 3: DESPACHO · PANTALLA 3.1 (390×844dp)</span>
+          <h3 class="device-name">Tablero de Despacho & Muelle 3 Frío</h3>
+          <p class="device-sub">Mariela (Coordinadora) · Furgón WKN-892 · Precinto #NX-9921 · Estiba de Pallets</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill role"><i class="pi pi-send"></i> Despacho</span>
+          <span class="meta-pill touch"><i class="pi pi-check"></i> 48dp Touch OK</span>
+          <span class="meta-pill feature"><i class="pi pi-lock"></i> Precinto Verificado</span>
+        </div>
+      </div>
+
+      <div class="mock-split-viewer">
+        <div class="android-chassis phone-s24">
+          <div class="chassis-speaker-slit"></div>
+          <div class="chassis-punch-hole"></div>
+
+          <div class="android-screen-surface">
+            <div class="m3-system-bar">
+              <span class="sys-time">14:35</span>
+              <div class="sys-icons"><span class="sys-tech">5G LTE</span><i class="pi pi-wifi"></i><span class="sys-battery">91%</span></div>
+            </div>
+
+            <!-- M3 TopAppBar -->
+            <header class="m3-top-bar">
+              <button type="button" class="top-bar-btn" aria-label="Menú"><i class="pi pi-bars"></i></button>
+              <div class="top-bar-dual-title">
+                <h4 class="top-bar-title">Muelle 03 (Frío)</h4>
+                <span class="unit-code-badge">Precinto #NX-9921</span>
+              </div>
+              <button type="button" class="top-bar-btn notif" aria-label="Notificaciones"><i class="pi pi-bell"></i><span class="notif-red-dot"></span></button>
+            </header>
+
+            <div class="screen-scroll-body">
+              <div class="dispatch-card-white">
+                <div class="dispatch-card-top">
+                  <span class="order-code-mono">MUELLE-FR-03</span>
+                  <span class="status-pill-cyan" id="dispatch-dock-status">● EN ESTIBA</span>
+                </div>
+                <div class="dispatch-buyer-info">
+                  <h5 class="buyer-company-name">Furgón Refrigerado WKN-892</h5>
+                  <p class="buyer-cargo-desc">Conductor Asignado: Diego Morales · Flota C-250</p>
+                </div>
+
+                <div class="screen-section-label">ESTIBA DE PALLETS FRIGORÍFICOS</div>
+                <div class="box-stepper-control">
+                  <button type="button" class="btn-stepper minus" id="btn-pallet-minus">−1</button>
+                  <div class="stepper-center-data">
+                    <span class="stepper-amount-big" id="val-pallet-count">4</span>
+                    <span class="stepper-total-hint">de 6 pallets cargados</span>
+                  </div>
+                  <button type="button" class="btn-stepper plus" id="btn-pallet-plus">+1</button>
+                </div>
+
+                <div class="security-seal-row">
+                  <div class="seal-icon-box"><i class="pi pi-lock"></i></div>
+                  <div class="seal-info-col">
+                    <strong class="seal-title">Precinto de Seguridad #NX-9921</strong>
+                    <span class="seal-sub" id="lbl-seal-status">Precinto colocado en compuerta trasera</span>
+                  </div>
+                  <input type="checkbox" id="chk-seal-verified" class="nexa-checkbox" checked />
+                </div>
+
+                <button type="button" class="btn-solid-blue-cta" id="btn-authorize-dispatch">
+                  <i class="pi pi-send"></i>
+                  <span id="lbl-auth-dispatch">Autorizar Salida de Muelle (Handoff)</span>
+                </button>
+              </div>
+
+              <div class="quick-telemetry-card">
+                <div class="telemetry-item">
+                  <span class="tel-label">Temperatura Muelle</span>
+                  <strong class="tel-val success"><i class="pi pi-check-circle"></i> -2.5°C</strong>
+                </div>
+                <div class="telemetry-separator"></div>
+                <div class="telemetry-item">
+                  <span class="tel-label">Hora Estimada Partida</span>
+                  <strong class="tel-val">14:50 COT</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Navigation Bar (Canonical 5-destination with Inicio & Gestures) -->
+            <nav class="m3-bottom-nav" aria-label="Navegación Móvil Despacho">
+              <div class="bnav-item active" data-nav-target="mock-screen-dispatch">
+                <div class="bnav-pill-indicator"><i class="pi pi-home"></i></div>
+                <span class="bnav-label">Inicio</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-route">
+                <div class="bnav-pill-indicator"><i class="pi pi-map-marker"></i></div>
+                <span class="bnav-label">Rutas</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-dispatch">
+                <div class="bnav-pill-indicator"><i class="pi pi-send"></i></div>
+                <span class="bnav-label">Bahías Frío</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-picking">
+                <div class="bnav-pill-indicator"><i class="pi pi-box"></i></div>
+                <span class="bnav-label">Kanban</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-inspection">
+                <div class="bnav-pill-indicator"><i class="pi pi-file"></i></div>
+                <span class="bnav-label">Manifiestos</span>
+              </div>
+            </nav>
+
+            <!-- Android Home Gesture Bar -->
+            <div class="android-gesture-pill-bar" aria-hidden="true">
+              <div class="gesture-handle"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec-side-col">
+          <div class="story-traceability-card">
+            <div class="trace-header"><span class="trace-tag epic">MOBILE-EPIC-03</span><span class="trace-tag story">MOB-US-020..025</span></div>
+            <h4 class="trace-title">MOB-US-020 / 025 — Preparación de Despacho & Dispatch Handoff</h4>
+            <p class="trace-persona"><strong>Actor Funcional:</strong> Mariela (Dispatch Coordinator)</p>
+            <div class="trace-gherkin">
+              <div class="scenario-item"><span class="kw-given">GIVEN</span> Entregas agrupadas y estibadas en Muelle 03 Frío</div>
+              <div class="scenario-item"><span class="kw-when">WHEN</span> Valida precinto #NX-9921 y control térmico preliminar</div>
+              <div class="scenario-item"><span class="kw-then">THEN</span> Registra Dispatch Handoff y transfiere custodia física al furgón WKN-892</div>
+            </div>
+          </div>
+
+          <div class="code-editor-box">
+            <div class="editor-header">
+              <span class="file-name"><i class="pi pi-file-code"></i> MockMobileScreens.kt · MockDispatchKanbanScreen</span>
+              <span class="target-tag">Jetpack Compose M3 Nativo</span>
+            </div>
+            <pre><code><span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">MockDispatchKanbanScreen</span>(
+    onAuthorizeDispatch: () -&gt; <span class="type">Unit</span> = &#123;&#125;
+) &#123;
+    <span class="fn">NexaDockStagingCard</span>(bayName = <span class="str">"Muelle 03 (Frío)"</span>, vehicle = <span class="str">"WKN-892"</span>)
+    <span class="fn">NexaSecuritySealVerifier</span>(sealNumber = <span class="str">"#NX-9921"</span>, isVerified = <span class="kw">true</span>)
+    <span class="fn">NexaPrimaryButton</span>(label = <span class="str">"Autorizar Salida de Muelle (Dispatch Handoff)"</span>)
+&#125;</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         SCREEN 4.1: CATÁLOGO B2B & TIER PRICING (MOB-US-036..039)
+         Samsung Galaxy S24 Ultra (412×915dp) · Carlos Mendoza
+         ========================================================================= -->
+    <div class="mock-screen-card" id="mock-screen-catalog" data-role="buyer">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">ROL 4: COMPRADOR B2B · PANTALLA 4.1 (412×915dp PHABLET)</span>
+          <h3 class="device-name">Catálogo Mayorista B2B & Precios Escalonados</h3>
+          <p class="device-sub">Carlos Mendoza · Atún Aleta Amarilla (TUNA-YF-400) · Descuento por Volumen Escalonado</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill role"><i class="pi pi-shopping-bag"></i> Comprador B2B</span>
+          <span class="meta-pill touch"><i class="pi pi-check"></i> Steppers 48dp</span>
+          <span class="meta-pill feature"><i class="pi pi-percentage"></i> Tier Volume -8%</span>
+        </div>
+      </div>
+
+      <div class="mock-split-viewer">
+        <div class="android-chassis phone-s24-ultra">
+          <div class="chassis-speaker-slit"></div>
+          <div class="chassis-punch-hole"></div>
+
+          <div class="android-screen-surface">
+            <div class="m3-system-bar">
+              <span class="sys-time">14:35</span>
+              <div class="sys-icons"><span class="sys-tech">5G Ultra</span><i class="pi pi-wifi"></i><span class="sys-battery">89%</span></div>
+            </div>
+
+            <!-- M3 TopAppBar -->
+            <header class="m3-top-bar">
+              <button type="button" class="top-bar-btn" aria-label="Menú"><i class="pi pi-bars"></i></button>
+              <h4 class="top-bar-title">Catálogo Mayorista B2B</h4>
+              <button type="button" class="top-bar-btn notif" aria-label="Carrito de Compras"><i class="pi pi-shopping-cart"></i><span class="notif-badge-number">1</span></button>
+            </header>
+
+            <div class="screen-scroll-body">
+              <div class="dispatch-card-white">
+                <div class="dispatch-card-top">
+                  <span class="order-code-mono">TUNA-YF-400</span>
+                  <span class="cold-chip-pill live"><i class="pi pi-snowflake"></i> Congelado -18°C</span>
+                </div>
+                <div class="dispatch-buyer-info">
+                  <h5 class="buyer-company-name">Lomo de Atún Aleta Amarilla</h5>
+                  <p class="buyer-cargo-desc">Caja Master 10u x 2kg · Stock: 420 cajas</p>
+                </div>
+
+                <div class="tier-table-grid">
+                  <div class="tier-col" id="tier-col-1">
+                    <span class="tier-label">1 - 9 cajas</span>
+                    <strong class="tier-price">$45.00</strong>
+                    <span class="tier-save">Base</span>
+                  </div>
+                  <div class="tier-col active" id="tier-col-2">
+                    <span class="tier-label">10 - 49 cajas</span>
+                    <strong class="tier-price">$41.40</strong>
+                    <span class="tier-save highlight">-8% Vol.</span>
+                  </div>
+                  <div class="tier-col" id="tier-col-3">
+                    <span class="tier-label">50+ cajas</span>
+                    <strong class="tier-price">$38.25</strong>
+                    <span class="tier-save">-15% Pallet</span>
+                  </div>
+                </div>
+
+                <div class="box-stepper-control">
+                  <button type="button" class="btn-stepper minus" id="btn-cat-minus">−5</button>
+                  <div class="stepper-center-data">
+                    <span class="stepper-amount-big" id="val-cat-quantity">15</span>
+                    <span class="stepper-total-hint" id="lbl-unit-price">Precio: $41.40/caja</span>
+                  </div>
+                  <button type="button" class="btn-stepper plus" id="btn-cat-plus">+5</button>
+                </div>
+
+                <div class="subtotal-calc-box">
+                  <div class="subtotal-row">
+                    <span>Subtotal Estimado:</span>
+                    <strong class="subtotal-amount" id="val-cat-total">$621.00 USD</strong>
+                  </div>
+                  <span class="tier-applied-note" id="lbl-discount-note">✓ Descuento por volumen (-8%) aplicado</span>
+                </div>
+
+                <button type="button" class="btn-solid-blue-cta">
+                  <i class="pi pi-plus-circle"></i>
+                  <span>Añadir a Pedido PO-2026-0042</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Bottom Navigation Bar (Canonical 5-destination with Inicio & Gestures) -->
+            <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal B2B">
+              <div class="bnav-item active" data-nav-target="mock-screen-catalog">
+                <div class="bnav-pill-indicator"><i class="pi pi-home"></i></div>
+                <span class="bnav-label">Inicio</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-catalog">
+                <div class="bnav-pill-indicator"><i class="pi pi-shopping-bag"></i></div>
+                <span class="bnav-label">Catálogo</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-receipt">
+                <div class="bnav-pill-indicator"><i class="pi pi-list"></i></div>
+                <span class="bnav-label">Mis Pedidos</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-route">
+                <div class="bnav-pill-indicator"><i class="pi pi-compass"></i></div>
+                <span class="bnav-label">Tracking</span>
+              </div>
+              <div class="bnav-item" data-nav-target="mock-screen-cod">
+                <div class="bnav-pill-indicator"><i class="pi pi-user"></i></div>
+                <span class="bnav-label">Facturación</span>
+              </div>
+            </nav>
+
+            <!-- Android Home Gesture Bar -->
+            <div class="android-gesture-pill-bar" aria-hidden="true">
+              <div class="gesture-handle"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec-side-col">
+          <div class="story-traceability-card">
+            <div class="trace-header"><span class="trace-tag epic">MOBILE-EPIC-06</span><span class="trace-tag story">MOB-US-036..039</span></div>
+            <h4 class="trace-title">MOB-US-036 / 039 — Precios Escalonados & Compra Mayorista</h4>
+            <p class="trace-persona"><strong>Actor Funcional:</strong> Carlos Mendoza (Customer Buyer)</p>
+            <div class="trace-gherkin">
+              <div class="scenario-item"><span class="kw-given">GIVEN</span> Comprador B2B evaluando abastecimiento</div>
+              <div class="scenario-item"><span class="kw-when">WHEN</span> Incrementa volumen con steppers de 48dp</div>
+              <div class="scenario-item"><span class="kw-then">THEN</span> Aplica tarifa de volumen escalonada ($41.40) con feedback inmediato</div>
+            </div>
+          </div>
+
+          <div class="code-editor-box">
+            <div class="editor-header">
+              <span class="file-name"><i class="pi pi-file-code"></i> MockMobileScreens.kt · MockWholesaleCatalogScreen</span>
+              <span class="target-tag">Jetpack Compose M3 Nativo</span>
+            </div>
+            <pre><code><span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">MockWholesaleCatalogScreen</span>(
+    onAddToCart: (Int) -&gt; <span class="type">Unit</span> = &#123;&#125;
+) &#123;
+    <span class="kw">var</span> boxCount <span class="kw">by</span> remember &#123; mutableIntStateOf(<span class="num">15</span>) &#125;
+    <span class="fn">NexaVolumeTierTable</span>(activeCount = boxCount)
+    <span class="fn">NexaQuantityStepper</span>(quantity = boxCount, step = <span class="num">5</span>)
+    <span class="fn">NexaPrimaryButton</span>(label = <span class="str">"Añadir al Pedido ($621.00 USD)"</span>)
+&#125;</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         SCREEN 4.2: RECEPCIÓN COMPRADOR & OTP HANDOFF (MOB-US-047..049)
+         Samsung Galaxy S24 (390×844dp) · Carlos Mendoza
+         ========================================================================= -->
+    <div class="mock-screen-card" id="mock-screen-receipt" data-role="buyer">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">ROL 4: COMPRADOR B2B · PANTALLA 4.2 (390×844dp)</span>
+          <h3 class="device-name">Recepción de Mercadería & Código Handoff OTP</h3>
+          <p class="device-sub">Carlos Mendoza · Pedido PO-2026-0042 · Custodia Bidireccional con Diego Morales</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill role"><i class="pi pi-shield"></i> OTP Verificado</span>
+          <span class="meta-pill touch"><i class="pi pi-check"></i> Discrepancia Separada</span>
+          <span class="meta-pill feature"><i class="pi pi-qrcode"></i> NX-8842</span>
+        </div>
+      </div>
+
+      <div class="mock-split-viewer">
+        <div class="android-chassis phone-s24">
+          <div class="chassis-speaker-slit"></div>
+          <div class="chassis-punch-hole"></div>
+
+          <div class="android-screen-surface">
+            <div class="m3-system-bar">
+              <span class="sys-time">14:35</span>
+              <div class="sys-icons"><span class="sys-tech">5G LTE</span><i class="pi pi-wifi"></i><span class="sys-battery">88%</span></div>
+            </div>
+
+            <!-- M3 TopAppBar -->
+            <header class="m3-top-bar">
+              <button type="button" class="top-bar-btn" aria-label="Volver"><i class="pi pi-arrow-left"></i></button>
+              <h4 class="top-bar-title">Recepción de Mercadería</h4>
+              <button type="button" class="top-bar-btn notif" aria-label="Notificaciones"><i class="pi pi-bell"></i><span class="notif-red-dot"></span></button>
+            </header>
+
+            <div class="screen-scroll-body">
+              <div class="dispatch-card-white">
+                <div class="dispatch-card-top">
+                  <span class="order-code-mono">PO-2026-0042</span>
+                  <span class="status-pill-cyan">● EN DESTINO</span>
+                </div>
+                <div class="dispatch-buyer-info">
+                  <h5 class="buyer-company-name">Entrega por: Diego Morales</h5>
+                  <p class="buyer-cargo-desc">Furgón WKN-892 · 36 bultos recibidos</p>
+                </div>
+
+                <div class="otp-display-container">
+                  <span class="otp-label">CÓDIGO DE CUSTODIA (OTP HANDOFF)</span>
+                  <div class="otp-boxes-row">
+                    <span class="otp-char">N</span>
+                    <span class="otp-char">X</span>
+                    <span class="otp-separator">-</span>
+                    <span class="otp-char">8</span>
+                    <span class="otp-char">8</span>
+                    <span class="otp-char">4</span>
+                    <span class="otp-char">2</span>
+                  </div>
+                  <span class="otp-instruction">Dictar este código al chofer para liberar la entrega</span>
+                </div>
+
+                <div class="pod-signature-row">
+                  <label class="toggle-control-label">
+                    <input type="checkbox" id="chk-buyer-disc" class="nexa-checkbox" />
+                    <div class="toggle-text-block">
+                      <strong class="toggle-title">¿Registrar Bulto Dañado o Descongelado?</strong>
+                      <span class="toggle-sub" id="lbl-buyer-disc">Sin anomalías reportadas</span>
+                    </div>
+                  </label>
+                </div>
+
+                <button type="button" class="btn-solid-blue-cta" id="btn-confirm-custody">
+                  <i class="pi pi-check-circle"></i>
+                  <span>Confirmar Recepción de Custodia</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Bottom Navigation Bar (Canonical 5-destination with Inicio & Gestures) -->
+            <nav class="m3-bottom-nav" aria-label="Navegación Móvil Principal B2B">
+              <div class="bnav-item" data-nav-target="mock-screen-catalog"><div class="bnav-pill-indicator"><i class="pi pi-home"></i></div><span class="bnav-label">Inicio</span></div>
+              <div class="bnav-item" data-nav-target="mock-screen-catalog"><div class="bnav-pill-indicator"><i class="pi pi-shopping-bag"></i></div><span class="bnav-label">Catálogo</span></div>
+              <div class="bnav-item active" data-nav-target="mock-screen-receipt"><div class="bnav-pill-indicator"><i class="pi pi-list"></i></div><span class="bnav-label">Mis Pedidos</span></div>
+              <div class="bnav-item" data-nav-target="mock-screen-route"><div class="bnav-pill-indicator"><i class="pi pi-compass"></i></div><span class="bnav-label">Tracking</span></div>
+              <div class="bnav-item" data-nav-target="mock-screen-cod"><div class="bnav-pill-indicator"><i class="pi pi-user"></i></div><span class="bnav-label">Facturación</span></div>
+            </nav>
+
+            <!-- Android Home Gesture Bar -->
+            <div class="android-gesture-pill-bar" aria-hidden="true">
+              <div class="gesture-handle"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec-side-col">
+          <div class="story-traceability-card">
+            <div class="trace-header"><span class="trace-tag epic">MOBILE-EPIC-05</span><span class="trace-tag story">MOB-US-047..049</span></div>
+            <h4 class="trace-title">MOB-US-047 / 049 — Handoff OTP & Recepción del Comprador</h4>
+            <p class="trace-persona"><strong>Actor Funcional:</strong> Carlos Mendoza (Customer Buyer)</p>
+            <div class="trace-gherkin">
+              <div class="scenario-item"><span class="kw-given">GIVEN</span> Mercadería en sucursal del comprador</div>
+              <div class="scenario-item"><span class="kw-when">WHEN</span> Valida código OTP NX-8842</div>
+              <div class="scenario-item"><span class="kw-then">THEN</span> Registra Buyer Receipt sin sobrescribir hechos del transportista</div>
+            </div>
+          </div>
+
+          <div class="code-editor-box">
+            <div class="editor-header">
+              <span class="file-name"><i class="pi pi-file-code"></i> MockMobileScreens.kt · MockBuyerReceiptScreen</span>
+              <span class="target-tag">Jetpack Compose M3 Nativo</span>
+            </div>
+            <pre><code><span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">MockBuyerReceiptScreen</span>(
+    onConfirmReceipt: () -&gt; <span class="type">Unit</span> = &#123;&#125;
+) &#123;
+    <span class="fn">NexaOtpHandoffCard</span>(code = <span class="str">"NX-8842"</span>)
+    <span class="fn">NexaPrimaryButton</span>(label = <span class="str">"Confirmar Recepción de Custodia"</span>, onClick = onConfirmReceipt)
+&#125;</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         SCREEN 5.1: BIOMETRÍA & SELECCIÓN DE SEDE (MOB-US-001..003)
+         Samsung Galaxy S24 (390×844dp) · Mobile User (Transversal)
+         ========================================================================= -->
+    <div class="mock-screen-card" id="mock-screen-auth" data-role="auth">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">ROL 5: SEGURIDAD & SESIÓN · PANTALLA 5.1 (390×844dp)</span>
+          <h3 class="device-name">Biometría BiometricPrompt & Selección de Sede Logística</h3>
+          <p class="device-sub">Mobile User · Biometría Dactilar / FaceID · PIN Offline · Sede Frigorífica Callao</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill role"><i class="pi pi-lock"></i> BiometricPrompt</span>
+          <span class="meta-pill touch"><i class="pi pi-key"></i> PIN Offline</span>
+          <span class="meta-pill feature"><i class="pi pi-building"></i> Sede Callao</span>
+        </div>
+      </div>
+
+      <div class="mock-split-viewer">
+        <div class="android-chassis phone-s24">
+          <div class="chassis-speaker-slit"></div>
+          <div class="chassis-punch-hole"></div>
+
+          <div class="android-screen-surface">
+            <div class="m3-system-bar">
+              <span class="sys-time">14:35</span>
+              <div class="sys-icons"><span class="sys-tech">5G</span><i class="pi pi-wifi"></i><span class="sys-battery">90%</span></div>
+            </div>
+
+            <!-- M3 TopAppBar -->
+            <header class="m3-top-bar">
+              <button type="button" class="top-bar-btn" aria-label="Menú"><i class="pi pi-bars"></i></button>
+              <h4 class="top-bar-title">Acceso & Sede Logística</h4>
+              <button type="button" class="top-bar-btn" aria-label="Seguridad"><i class="pi pi-shield"></i></button>
+            </header>
+
+            <div class="screen-scroll-body">
+              <div class="dispatch-card-white">
+                <div class="dispatch-card-top">
+                  <span class="order-code-mono">SELECCIÓN DE SEDE</span>
+                  <span class="status-pill-cyan" id="badge-auth-state">● PENDIENTE</span>
+                </div>
+
+                <div class="hub-selector-box">
+                  <div class="hub-option-row active">
+                    <i class="pi pi-building hub-icon"></i>
+                    <div class="hub-info">
+                      <strong>Planta Frigorífica Callao</strong>
+                      <span>Av. Néstor Gambetta Km 8.5 · Almacén Frío</span>
+                    </div>
+                  </div>
+                  <div class="hub-option-row">
+                    <i class="pi pi-building hub-icon"></i>
+                    <div class="hub-info">
+                      <strong>Centro Logístico Villa El Salvador</strong>
+                      <span>Antigua Panamericana Sur Km 18</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="biometric-touch-target" id="btn-trigger-bio">
+                  <div class="bio-sensor-ring">
+                    <i class="pi pi-lock bio-icon" id="bio-icon-symbol"></i>
+                  </div>
+                  <strong class="bio-prompt-title" id="lbl-bio-title">Toca para Autenticación Biométrica</strong>
+                  <span class="bio-prompt-sub" id="lbl-bio-sub">Huella dactilar o FaceID validado</span>
+                </div>
+
+                <button type="button" class="btn-solid-blue-cta" id="btn-start-shift">
+                  <i class="pi pi-arrow-right"></i>
+                  <span>Iniciar Turno de Operaciones</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Bottom Navigation Bar (Canonical 5-destination with Inicio & Gestures) -->
+            <nav class="m3-bottom-nav" aria-label="Navegación Móvil Acceso">
+              <div class="bnav-item active" data-nav-target="mock-screen-auth"><div class="bnav-pill-indicator"><i class="pi pi-home"></i></div><span class="bnav-label">Inicio</span></div>
+              <div class="bnav-item" data-nav-target="mock-screen-auth"><div class="bnav-pill-indicator"><i class="pi pi-lock"></i></div><span class="bnav-label">Acceso</span></div>
+              <div class="bnav-item" data-nav-target="mock-screen-route"><div class="bnav-pill-indicator"><i class="pi pi-building"></i></div><span class="bnav-label">Sede</span></div>
+              <div class="bnav-item" data-nav-target="mock-screen-sync"><div class="bnav-pill-indicator"><i class="pi pi-mobile"></i></div><span class="bnav-label">Terminal</span></div>
+              <div class="bnav-item" data-nav-target="mock-screen-inspection"><div class="bnav-pill-indicator"><i class="pi pi-question-circle"></i></div><span class="bnav-label">Ayuda</span></div>
+            </nav>
+
+            <!-- Android Home Gesture Bar -->
+            <div class="android-gesture-pill-bar" aria-hidden="true">
+              <div class="gesture-handle"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec-side-col">
+          <div class="story-traceability-card">
+            <div class="trace-header"><span class="trace-tag epic">MOBILE-EPIC-01</span><span class="trace-tag story">MOB-US-001..003</span></div>
+            <h4 class="trace-title">MOB-US-001 / 003 — Acceso Seguro & Contexto Autorizado</h4>
+            <p class="trace-persona"><strong>Actor Funcional:</strong> Mobile User (Transversal)</p>
+            <div class="trace-gherkin">
+              <div class="scenario-item"><span class="kw-given">GIVEN</span> Usuario iniciando operaciones en terminal móvil</div>
+              <div class="scenario-item"><span class="kw-when">WHEN</span> Valida biometría y confirma sede operativa</div>
+              <div class="scenario-item"><span class="kw-then">THEN</span> El gateway entrega token de sesión acotado por contexto</div>
+            </div>
+          </div>
+
+          <div class="code-editor-box">
+            <div class="editor-header">
+              <span class="file-name"><i class="pi pi-file-code"></i> MockMobileScreens.kt · MockAuthWorkspaceScreen</span>
+              <span class="target-tag">Jetpack Compose M3 Nativo</span>
+            </div>
+            <pre><code><span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">MockAuthWorkspaceScreen</span>(
+    onAuthenticate: () -&gt; <span class="type">Unit</span> = &#123;&#125;
+) &#123;
+    <span class="fn">NexaHubSelector</span>(selected = <span class="str">"Callao"</span>)
+    <span class="fn">NexaPrimaryButton</span>(label = <span class="str">"Iniciar Turno de Operaciones"</span>, onClick = onAuthenticate)
+&#125;</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  /* ==========================================================================
+     NEXA DESIGN LAB · ROLES & CANONICAL ARTIFACTS STYLES
+     Clean white canvas, high-contrast, strictly ZERO GREEN (Cyan/Blue success)
+     ========================================================================== */
+  .kotlin-mocks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+    margin-bottom: 48px;
+  }
+
+  /* Header */
+  .showcase-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: var(--nexa-radius-card, 16px);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .section-kicker-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    text-transform: uppercase;
+  }
+
+  .showcase-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: clamp(20px, 2.5vw, 26px);
+    font-weight: 800;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 4px 0 0;
+    letter-spacing: -0.02em;
+  }
+
+  .showcase-intro {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--nexa-color-text-secondary, #64748b);
+    max-width: 950px;
+    margin: 4px 0 0;
+  }
+
+  /* PRIMARY ROLE SELECTOR TABS */
+  .roles-selector-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 14px;
+    border-top: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
+  }
+
+  .roles-kicker-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    text-transform: uppercase;
+  }
+
+  .roles-tabs-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .role-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    background: #ffffff;
+    color: #334155;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .role-pill-btn:hover {
+    background: #f8fafc;
+    border-color: #93c5fd;
+    color: #1d4ed8;
+  }
+
+  .role-pill-btn.active {
+    background: #082846; /* Nexa Navy Brand */
+    color: #ffffff;
+    border-color: #082846;
+  }
+
+  .role-pill-btn.active .role-count-pill {
+    background: #38c8ff;
+    color: #082846;
+  }
+
+  .role-count-pill {
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background: #e2e8f0;
+    color: #475569;
+  }
+
+  /* SECONDARY SCREEN PILLS BAR */
+  .screens-selector-wrapper {
+    overflow-x: auto;
+    padding-top: 10px;
+    border-top: 1px dashed var(--nexa-color-border-subtle, #f1f5f9);
+  }
+
+  .screens-pills-bar {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 6px;
+  }
+
+  .screen-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--nexa-color-border-default, #e2e8f0);
+    background: var(--nexa-color-neutral-50, #f8fafc);
+    color: var(--nexa-color-text-secondary, #475569);
+    font-size: 11.5px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+
+  .screen-tab-btn:hover {
+    background: #ffffff;
+    color: #2563eb;
+    border-color: #bfdbfe;
+  }
+
+  .screen-tab-btn.active {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: transparent;
+    font-weight: 700;
+  }
+
+  .screen-tab-btn.active .screen-idx {
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+  }
+
+  .screen-idx {
+    font-size: 10px;
+    font-weight: 800;
+    padding: 1px 4px;
+    border-radius: 4px;
+    background: #e2e8f0;
+    color: #475569;
+    font-family: monospace;
+  }
+
+  /* Mock Screen Cards */
+  .mocks-stage-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+  }
+
+  .mock-screen-card {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+  }
+
+  .mock-screen-card.active {
+    display: flex;
+  }
+
+  /* Card Meta Header */
+  .device-meta-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--nexa-color-border-subtle, #f1f5f9);
+  }
+
+  .device-eyebrow {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--nexa-color-primary-700, #1d4ed8);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .device-name {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--nexa-color-text-primary, #0f172a);
+    margin: 0;
+  }
+
+  .device-sub {
+    font-size: 13px;
+    color: var(--nexa-color-text-secondary, #64748b);
+    margin: 2px 0 0;
+  }
+
+  .meta-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .meta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+  }
+
+  .meta-pill.role { background: #f1f5f9; color: #334155; }
+  .meta-pill.touch { background: #e0f2fe; color: #0284c7; border-color: #bae6fd; }
+  .meta-pill.gold { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+  .meta-pill.feature { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
+  .meta-pill.industrial { background: #fff7ed; color: #9a3412; border-color: #ffedd5; }
+  .meta-pill.zebra { background: #0f172a; color: #f8fafc; }
+
+  /* Split Viewer */
+  .mock-split-viewer {
+    display: grid;
+    grid-template-columns: minmax(360px, 412px) 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  @media (max-width: 1080px) {
+    .mock-split-viewer {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ==========================================================================
+     PHYSICAL ANDROID CHASSIS FRAMES
+     ========================================================================== */
+  .android-chassis {
+    background: #0f172a;
+    border-radius: 36px;
+    padding: 10px;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.18), inset 0 0 0 2px #334155;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .android-chassis.phone-s24 {
+    max-width: 390px;
+    min-height: 740px;
+    border-radius: 40px;
+  }
+
+  .android-chassis.phone-s24-ultra {
+    max-width: 412px;
+    min-height: 780px;
+    border-radius: 28px;
+  }
+
+  .android-chassis.phone-zebra {
+    max-width: 412px;
+    min-height: 780px;
+    border-radius: 26px;
+    border: 4px solid #334155;
+    box-shadow: 0 16px 44px rgba(15, 23, 42, 0.25), inset 0 0 0 3px #0f172a;
+  }
+
+  .zebra-top-scanner-bumper {
+    height: 24px;
+    background: #1e293b;
+    border-radius: 14px 14px 4px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    margin-bottom: 6px;
+  }
+
+  .scanner-amber-stripe {
+    width: 28px;
+    height: 6px;
+    background: #eab308;
+    border-radius: 3px;
+  }
+
+  .zebra-brand-label {
+    font-size: 8.5px;
+    font-weight: 800;
+    color: #94a3b8;
+    letter-spacing: 0.1em;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  .chassis-speaker-slit {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 4px;
+    background: #334155;
+    border-radius: 2px;
+    z-index: 20;
+  }
+
+  .chassis-punch-hole {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background: #000000;
+    border-radius: 50%;
+    border: 1px solid #1e293b;
+    z-index: 20;
+  }
+
+  /* Android Screen Surface */
+  .android-screen-surface {
+    background: #f8fafc;
+    border-radius: 28px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 680px;
+    position: relative;
+    color: var(--nexa-color-text-primary, #0f172a);
+    font-family: var(--nexa-font-family-body, 'Inter', sans-serif);
+    font-size: 13px;
+  }
+
+  /* M3 System Bar */
+  .m3-system-bar {
+    height: 28px;
+    background: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #475569;
+    border-bottom: 1px solid #f1f5f9;
+    flex-shrink: 0;
+  }
+
+  .m3-system-bar.zebra-bar { border-bottom: 1px solid #e2e8f0; }
+  .sys-time { font-family: monospace; font-weight: 700; color: #0f172a; }
+  .sys-icons { display: flex; align-items: center; gap: 8px; }
+  .sys-tech { font-size: 9.5px; font-weight: 700; color: #2563eb; }
+  .sys-battery { font-family: monospace; font-size: 10.5px; }
+
+  /* ==========================================================================
+     M3 TOP APP BAR (CANONICAL - ALWAYS ACTIVE!)
+     ========================================================================== */
+  .m3-top-bar {
+    height: 52px;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    flex-shrink: 0;
+  }
+
+  .top-bar-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    border: none;
+    background: transparent;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .top-bar-btn:hover {
+    background: #f1f5f9;
+    color: #1e293b;
+  }
+
+  .top-bar-btn.notif .notif-red-dot {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 8px;
+    height: 8px;
+    background: #ef4444;
+    border-radius: 50%;
+    border: 1.5px solid #ffffff;
+  }
+
+  .notif-badge-number {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 800;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .top-bar-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .top-bar-dual-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .unit-code-badge {
+    font-size: 10px;
+    color: #2563eb;
+    font-weight: 700;
+  }
+
+  /* Screen Scroll Body */
+  .screen-scroll-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px 14px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .screen-section-label {
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #64748b;
+    text-transform: uppercase;
+    margin: 4px 2px;
+  }
+
+  .section-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* ==========================================================================
+     CARDS & ATOMIC COMPONENTS (ZERO GREEN Semantics)
+     ========================================================================== */
+  .driver-card-white {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .driver-avatar-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #e0f2fe;
+    color: #0284c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .driver-info-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .driver-name-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .driver-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .driver-detail-text, .driver-detail-sub {
+    font-size: 11.5px;
+    color: #64748b;
+  }
+
+  /* Semantic Status Pills (ZERO GREEN) */
+  .status-pill-cyan {
+    font-size: 9.5px;
+    font-weight: 800;
+    background: #e0f2fe;
+    color: #0284c7;
+    border: 1px solid #bae6fd;
+    padding: 2px 7px;
+    border-radius: 999px;
+  }
+
+  .status-pill-amber {
+    font-size: 9.5px;
+    font-weight: 800;
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+    padding: 2px 7px;
+    border-radius: 999px;
+  }
+
+  .cold-chip-pill {
+    background: #eff6ff;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .cold-chip-pill.live {
+    background: #e0f2fe;
+    color: #0284c7;
+    border-color: #bae6fd;
+  }
+
+  .order-code-mono {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 12.5px;
+    font-weight: 800;
+    color: #2563eb;
+  }
+
+  .dispatch-card-white {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .dispatch-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dispatch-buyer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .buyer-company-name {
+    font-size: 14.5px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .buyer-cargo-desc {
+    font-size: 11.5px;
+    color: #475569;
+    margin: 0;
+  }
+
+  /* Route Timeline */
+  .route-timeline-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .timeline-stop {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .timeline-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .timeline-dot.blue { background: #2563eb; }
+  .timeline-dot.cyan { background: #0284c7; }
+
+  .timeline-vertical-line {
+    width: 2px;
+    height: 16px;
+    background: #cbd5e1;
+    margin-left: 4px;
+  }
+
+  .timeline-stop-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stop-name { font-size: 12px; font-weight: 700; color: #0f172a; }
+  .stop-time { font-size: 10.5px; color: #64748b; }
+
+  /* Solid CTA Button (Navy Brand #082846) */
+  .btn-solid-blue-cta {
+    min-height: 52px;
+    background: #082846;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 13.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(8, 40, 70, 0.25);
+    transition: all 0.15s ease;
+    width: 100%;
+  }
+
+  .btn-solid-blue-cta:hover {
+    background: #172554;
+    transform: translateY(-1px);
+  }
+
+  .btn-solid-blue-cta.industrial-56dp {
+    min-height: 56px;
+    font-size: 14px;
+    background: #1d4ed8;
+  }
+
+  .btn-action-outline-pill {
+    min-height: 44px;
+    padding: 0 14px;
+    border-radius: 10px;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #1e293b;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-action-outline-pill.arrived {
+    background: #e0f2fe;
+    border-color: #bae6fd;
+    color: #0284c7;
+    font-weight: 700;
+  }
+
+  .quick-telemetry-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .telemetry-item { display: flex; flex-direction: column; gap: 2px; align-items: center; }
+  .tel-label { font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: 700; }
+  .tel-val { font-size: 13px; font-weight: 800; color: #0f172a; font-family: monospace; }
+  .tel-val.success { color: #0284c7; }
+  .telemetry-separator { width: 1px; height: 28px; background: #e2e8f0; }
+
+  /* Steppers & Quantity Controls */
+  .box-stepper-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 6px;
+  }
+
+  .btn-stepper {
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    color: #0f172a;
+    font-size: 16px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .stepper-center-data { display: flex; flex-direction: column; align-items: center; }
+  .stepper-amount-big { font-size: 20px; font-weight: 900; color: #0f172a; font-family: monospace; }
+  .stepper-total-hint { font-size: 10.5px; color: #64748b; }
+  .btn-stepper-micro { padding: 2px 6px; font-size: 10px; font-weight: 700; background: #e2e8f0; border: none; border-radius: 4px; cursor: pointer; }
+
+  /* FEFO Flag Box */
+  .fefoflag-box {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .fefo-label { font-size: 9.5px; font-weight: 800; color: #1e40af; }
+  .fefo-lot { font-size: 12px; color: #0f172a; font-family: monospace; }
+
+  /* Security / Seals / Toggles */
+  .security-seal-row, .pod-signature-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+  }
+  .seal-icon-box {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #e0f2fe;
+    color: #0284c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+  .seal-info-col, .toggle-text-block { flex: 1; display: flex; flex-direction: column; }
+  .seal-title, .toggle-title { font-size: 12px; font-weight: 700; color: #0f172a; }
+  .seal-sub, .toggle-sub { font-size: 10.5px; color: #64748b; }
+  .toggle-control-label { display: flex; align-items: center; gap: 10px; cursor: pointer; flex: 1; }
+  .nexa-checkbox { width: 20px; height: 20px; border-radius: 4px; accent-color: #2563eb; cursor: pointer; }
+  .btn-badge-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    color: #1e40af;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  /* ISO 3691 Safety Switches */
+  .ignition-warning-banner {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .ignition-warning-banner.passed { background: #e0f2fe; border-color: #bae6fd; }
+  .warning-icon-box {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fee2e2;
+    color: #dc2626;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .warning-icon-box.passed { background: #e0f2fe; color: #0284c7; }
+  .warning-text-col { display: flex; flex-direction: column; gap: 2px; }
+  .warning-text-col strong { font-size: 12px; color: #991b1b; }
+  .warning-text-col.passed strong { color: #0284c7; }
+  .warning-text-col span { font-size: 11px; color: #64748b; }
+  .safety-switches-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 6px 12px;
+    display: flex;
+    flex-direction: column;
+  }
+  .safety-switch-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+    min-height: 56px;
+  }
+  .safety-switch-row:last-child { border-bottom: none; }
+  .switch-info { display: flex; flex-direction: column; gap: 2px; }
+  .switch-title { font-size: 12.5px; font-weight: 700; color: #0f172a; }
+  .switch-desc { font-size: 10.5px; color: #64748b; }
+
+  /* Signature Canvas Preview */
+  .signature-canvas-box {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .sig-svg { width: 100%; height: 60px; }
+  .sig-watermark-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9.5px;
+    font-family: monospace;
+    color: #64748b;
+  }
+
+  /* Wholesale Tier Table */
+  .tier-table-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .tier-col {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .tier-col.active { background: #e0f2fe; border-color: #bae6fd; }
+  .tier-label { font-size: 10px; color: #64748b; }
+  .tier-price { font-size: 14px; font-weight: 800; color: #0f172a; font-family: monospace; }
+  .tier-save { font-size: 9.5px; font-weight: 700; color: #94a3b8; }
+  .tier-save.highlight { color: #0284c7; }
+  .subtotal-calc-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .subtotal-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 600; }
+  .subtotal-amount { font-size: 16px; font-weight: 800; color: #2563eb; font-family: monospace; }
+  .tier-applied-note { font-size: 10.5px; font-weight: 700; color: #0284c7; }
+
+  /* OTP Display Box */
+  .otp-display-container {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .otp-label { font-size: 10px; font-weight: 800; color: #64748b; letter-spacing: 0.08em; }
+  .otp-boxes-row { display: flex; gap: 6px; align-items: center; }
+  .otp-char {
+    width: 38px;
+    height: 44px;
+    background: #ffffff;
+    border: 2px solid #2563eb;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 900;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+  }
+  .otp-separator { font-size: 20px; font-weight: 800; color: #94a3b8; }
+  .otp-instruction { font-size: 11px; color: #64748b; }
+
+  /* Sync Queue Cards */
+  .sync-queue-list { display: flex; flex-direction: column; gap: 8px; }
+  .sync-item-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .sync-item-head { display: flex; justify-content: space-between; align-items: center; }
+  .sync-id-mono { font-size: 11.5px; font-weight: 700; color: #0f172a; font-family: monospace; }
+  .sync-sub { font-size: 10.5px; color: #64748b; }
+
+  /* CameraX Viewfinder Simulation */
+  .camera-preview-box {
+    height: 180px;
+    background: #0f172a;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px;
+  }
+  .camera-lens-overlay { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: #94a3b8; gap: 6px; }
+  .camera-center-icon { font-size: 36px; color: #38c8ff; }
+  .camera-hint { font-size: 10.5px; }
+  .camera-meta-watermark {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9.5px;
+    font-family: monospace;
+    color: #bae6fd;
+    background: rgba(15, 23, 42, 0.7);
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  .severity-chips-row { display: flex; gap: 8px; }
+  .sev-chip {
+    flex: 1;
+    padding: 8px 4px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .sev-chip.active { background: #fef3c7; border-color: #fde68a; color: #92400e; }
+
+  /* Cash on Delivery / Change Banner */
+  .cash-quick-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .cash-btn {
+    padding: 8px 4px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .cash-btn.active { background: #2563eb; color: #ffffff; border-color: #2563eb; }
+  .change-banner-cyan {
+    background: #e0f2fe;
+    border: 1px solid #bae6fd;
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .change-banner-row { display: flex; justify-content: space-between; align-items: center; }
+  .change-title { font-size: 12px; font-weight: 700; color: #075985; }
+  .change-amount-display { font-size: 18px; font-weight: 900; color: #0284c7; font-family: monospace; }
+  .change-sub { font-size: 10.5px; color: #0369a1; }
+
+  /* Quarantine Tag Box */
+  .quarantine-tag-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fef3c7;
+    border: 1px solid #fde68a;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  .tag-qr-icon { font-size: 28px; color: #92400e; }
+  .tag-meta { display: flex; flex-direction: column; gap: 2px; }
+  .tag-meta strong { font-size: 11.5px; color: #78350f; font-family: monospace; }
+  .tag-meta span { font-size: 10.5px; color: #92400e; }
+
+  /* Hub Selector */
+  .hub-selector-box { display: flex; flex-direction: column; gap: 8px; }
+  .hub-option-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    cursor: pointer;
+  }
+  .hub-option-row.active { background: #eff6ff; border-color: #93c5fd; }
+  .hub-icon { font-size: 20px; color: #2563eb; }
+  .hub-info { display: flex; flex-direction: column; gap: 2px; }
+  .hub-info strong { font-size: 12.5px; color: #0f172a; }
+  .hub-info span { font-size: 10.5px; color: #64748b; }
+
+  .biometric-touch-target {
+    border: 2px dashed #93c5fd;
+    background: #f0f9ff;
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .biometric-touch-target.verified { border-style: solid; border-color: #bae6fd; background: #e0f2fe; }
+  .bio-sensor-ring {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #082846;
+    color: #38c8ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+  .biometric-touch-target.verified .bio-sensor-ring { background: #0284c7; color: #ffffff; }
+  .bio-prompt-title { font-size: 13px; font-weight: 700; color: #0f172a; }
+  .bio-prompt-sub { font-size: 11px; color: #64748b; }
+
+  /* ==========================================================================
+     SCANNER ARTIFACT STYLES (MATCHING SCANNERSCREENSPEC.ASTRO)
+     ========================================================================== */
+  .scanner-artifact-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px 12px 18px;
+    flex: 1;
+    min-height: 0;
+    background: #090e17;
+    color: #ffffff;
+    overflow-y: auto;
+  }
+
+  .camera-feed-stage-artifact {
+    height: 220px;
+    background: radial-gradient(circle at center, #132438 0%, #060b13 100%);
+    border-radius: 14px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px;
+    border: 1px solid rgba(56, 200, 255, 0.2);
+  }
+
+  .viewfinder-box-artifact {
+    width: 200px;
+    height: 130px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .corner-marker {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid #38c8ff;
+  }
+  .corner-marker.top-left { top: 0; left: 0; border-right: none; border-bottom: none; }
+  .corner-marker.top-right { top: 0; right: 0; border-left: none; border-bottom: none; }
+  .corner-marker.bottom-left { bottom: 0; left: 0; border-right: none; border-top: none; }
+  .corner-marker.bottom-right { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+  .laser-beam-animated {
+    width: 90%;
+    height: 2px;
+    background: #38c8ff;
+    box-shadow: 0 0 8px #38c8ff;
+    animation: laserScan 2s infinite alternate ease-in-out;
+  }
+
+  @keyframes laserScan {
+    0% { transform: translateY(-50px); }
+    100% { transform: translateY(50px); }
+  }
+
+  .scan-hint-label {
+    position: absolute;
+    bottom: -20px;
+    font-size: 9.5px;
+    color: #94a3b8;
+    white-space: nowrap;
+  }
+
+  .hardware-badge-artifact {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    color: #bae6fd;
+    background: rgba(15, 23, 42, 0.8);
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  .pulse-dot-cyan {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #38c8ff;
+    animation: pulseScan 1.2s infinite;
+  }
+
+  @keyframes pulseScan {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .detected-asset-card-artifact {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .asset-icon-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #082846;
+    color: #38c8ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .asset-details-col { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+  .asset-code-row { display: flex; justify-content: space-between; align-items: center; }
+  .asset-name-title { font-size: 13px; color: #ffffff; font-weight: 700; }
+  .asset-meta-text { font-size: 10.5px; color: #94a3b8; }
+
+  .manual-fallback-group-artifact {
+    background: #111c2a;
+    border: 1px solid #1e3a5f;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .fallback-header-row { display: flex; justify-content: space-between; align-items: center; }
+  .fallback-title-text { font-size: 11px; font-weight: 700; color: #f1f5f9; }
+  .fallback-badge-adr { font-size: 9px; font-weight: 800; background: #082846; color: #38c8ff; padding: 2px 6px; border-radius: 4px; }
+  
+  .manual-input-row-artifact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #090e17;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 4px 8px;
+  }
+
+  .input-icon-box { color: #64748b; font-size: 13px; }
+  .manual-code-field {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 12px;
+    font-family: monospace;
+    outline: none;
+  }
+
+  .btn-validate-manual {
+    padding: 6px 12px;
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  /* ==========================================================================
+     M3 BOTTOM NAVIGATION BAR (CANONICAL - ALWAYS ACTIVE!)
+     ========================================================================== */
+  .m3-bottom-nav {
+    height: 58px;
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 4px;
+    flex-shrink: 0;
+  }
+
+  .bnav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+    max-width: 68px;
+    min-width: 48px;
+    min-height: 48px;
+    justify-content: center;
+    cursor: pointer;
+    color: #64748b;
+    padding: 3px 0 2px;
+    border: none;
+    background: transparent;
+    transition: all 0.15s ease;
+  }
+
+  .bnav-pill-indicator {
+    padding: 2px 8px;
+    width: 44px;
+    height: 26px;
+    box-sizing: border-box;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.15s ease;
+  }
+
+  .bnav-label {
+    font-size: 9.5px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 66px;
+    text-align: center;
+    line-height: 1.1;
+  }
+
+  .bnav-item:hover {
+    color: #1d4ed8;
+  }
+
+  .bnav-item.active {
+    color: #1d4ed8;
+  }
+
+  .bnav-item.active .bnav-pill-indicator {
+    background: #dbeafe;
+    color: #1d4ed8;
+  }
+
+  .bnav-item.active .bnav-label {
+    font-weight: 800;
+  }
+
+  /* Android Gesture Indicator */
+  .android-gesture-pill-bar {
+    width: 100%;
+    height: 16px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 4px;
+    flex-shrink: 0;
+  }
+
+  .gesture-handle {
+    width: 72px;
+    height: 4px;
+    border-radius: 999px;
+    background: #cbd5e1;
+  }
+
+  /* Right Column: Spec & Code */
+  .spec-side-col { display: flex; flex-direction: column; gap: 20px; }
+  .story-traceability-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .trace-header { display: flex; gap: 6px; flex-wrap: wrap; }
+  .trace-tag { font-size: 9.5px; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
+  .trace-tag.epic { background: #082846; color: #38c8ff; }
+  .trace-tag.story { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; }
+  .trace-title { font-size: 14px; font-weight: 800; color: #0f172a; margin: 0; }
+  .trace-persona { font-size: 12px; color: #475569; margin: 0; }
+  .trace-gherkin {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+  .scenario-item { display: flex; gap: 6px; align-items: baseline; }
+  .kw-given { font-weight: 800; color: #2563eb; font-size: 10px; }
+  .kw-when { font-weight: 800; color: #b45309; font-size: 10px; }
+  .kw-then { font-weight: 800; color: #0284c7; font-size: 10px; }
+
+  .code-editor-box {
+    background: #082846;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #1e3a5f;
+    box-shadow: 0 4px 16px rgba(8, 40, 70, 0.12);
+  }
+  .editor-header {
+    background: #0d3358;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1e3a5f;
+  }
+  .file-name { font-family: monospace; font-size: 11.5px; color: #38c8ff; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+  .target-tag { font-size: 9.5px; font-weight: 800; background: #1e3a5f; color: #93c5fd; padding: 2px 6px; border-radius: 4px; }
+  .code-editor-box pre {
+    margin: 0;
+    padding: 16px;
+    font-family: monospace;
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: #f1f5f9;
+    overflow-x: auto;
+    max-height: 480px;
+  }
+  .kw { color: #38c8ff; font-weight: 700; }
+  .fn { color: #93c5fd; font-weight: 700; }
+  .type { color: #fed7aa; }
+  .str { color: #a7f3d0; }
+  .num { color: #fbcfe8; }
+  .cmt { color: #64748b; font-style: italic; }
+
+  .screen-tab-btn.hidden { display: none !important; }
+</style>
+
+<script>
+  // =========================================================================
+  // 1. PRIMARY ROLE SELECTOR & SECONDARY SCREEN FILTERING
+  // =========================================================================
+  const rolePillBtns = document.querySelectorAll<HTMLButtonElement>('.role-pill-btn');
+  const screenTabBtns = document.querySelectorAll<HTMLButtonElement>('.screen-tab-btn');
+  const screenCards = document.querySelectorAll<HTMLElement>('.mock-screen-card');
+
+  // Switch role and filter screens
+  rolePillBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selectedRole = btn.getAttribute('data-role');
+      rolePillBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      let firstVisibleScreenBtn: HTMLButtonElement | null = null;
+
+      screenTabBtns.forEach(sBtn => {
+        const sRole = sBtn.getAttribute('data-role');
+        const isMatch = selectedRole === 'all' || sRole === selectedRole;
+        sBtn.classList.toggle('hidden', !isMatch);
+        if (isMatch && !firstVisibleScreenBtn) {
+          firstVisibleScreenBtn = sBtn;
+        }
+      });
+
+      // Automatically activate first visible screen in this role
+      if (firstVisibleScreenBtn) {
+        (firstVisibleScreenBtn as HTMLButtonElement).click();
+      }
+    });
+  });
+
+  // Switch active screen when clicking secondary pills
+  screenTabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      screenTabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      screenCards.forEach(card => {
+        card.classList.toggle('active', card.id === targetId);
+      });
+    });
+  });
+
+  // =========================================================================
+  // 2. BOTTOM NAVBAR ARTIFACT INTERACTIONS (Cross-navigation inside mockup)
+  // =========================================================================
+  document.querySelectorAll<HTMLElement>('.bnav-item[data-nav-target]').forEach(item => {
+    item.addEventListener('click', () => {
+      const targetScreenId = item.getAttribute('data-nav-target');
+      if (targetScreenId) {
+        const matchingBtn = document.querySelector<HTMLButtonElement>(`.screen-tab-btn[data-target="${targetScreenId}"]`);
+        matchingBtn?.click();
+      }
+    });
+  });
+
+  // Quick navigation button in Screen 1.1 to go to 1.2 POD
+  document.getElementById('btn-goto-pod')?.addEventListener('click', () => {
+    const podTab = document.querySelector<HTMLButtonElement>('.screen-tab-btn[data-target="mock-screen-pod"]');
+    podTab?.click();
+  });
+
+  // =========================================================================
+  // 3. SCREEN 1.1: Driver Temperature & Geofence (Diego Morales)
+  // =========================================================================
+  let routeTemp = 3.8;
+  const tempValEl = document.getElementById('route-temp-val');
+  const quickTelTemp = document.getElementById('quick-tel-temp');
+  const btnTempMinus = document.getElementById('btn-temp-minus');
+  const btnTempPlus = document.getElementById('btn-temp-plus');
+  const btnToggleArrival = document.getElementById('btn-toggle-arrival');
+  const lblArrival = document.getElementById('lbl-arrival');
+  const tlStopDest = document.getElementById('tl-stop-dest');
+  const tlDestTitle = document.getElementById('tl-dest-title');
+  const tlDestTime = document.getElementById('tl-dest-time');
+  const tlDotDest = document.getElementById('tl-dot-dest');
+  const routeDriverStatus = document.getElementById('route-driver-status');
+
+  let isArrived = false;
+
+  btnTempMinus?.addEventListener('click', () => {
+    routeTemp = Math.max(1.0, +(routeTemp - 0.2).toFixed(1));
+    updateTempUI();
+  });
+  btnTempPlus?.addEventListener('click', () => {
+    routeTemp = Math.min(9.0, +(routeTemp + 0.2).toFixed(1));
+    updateTempUI();
+  });
+
+  function updateTempUI() {
+    const formatted = `${routeTemp.toFixed(1)}°C`;
+    if (tempValEl) tempValEl.textContent = formatted;
+    if (quickTelTemp) quickTelTemp.innerHTML = `<i class="pi pi-check-circle"></i> ${formatted}`;
+  }
+
+  btnToggleArrival?.addEventListener('click', () => {
+    isArrived = !isArrived;
+    btnToggleArrival.classList.toggle('arrived', isArrived);
+    if (lblArrival) lblArrival.textContent = isArrived ? '✓ Llegada Registrada (Geocerca 200m)' : 'Simular Llegada al Destino (Geocerca 200m)';
+    if (tlDestTitle) tlDestTitle.textContent = isArrived ? 'Destino: ICISA Distribuciones (Arribado)' : 'Destino: ICISA Distribuciones';
+    if (tlDestTime) tlDestTime.textContent = isArrived ? '14:35 · En Bahía de Descarga M-2' : 'ETA 14:20 · Av. Argentina 1240';
+    if (tlStopDest) tlStopDest.classList.toggle('arrived', isArrived);
+    if (tlDotDest) tlDotDest.className = isArrived ? 'timeline-dot cyan' : 'timeline-dot blue';
+    if (routeDriverStatus) routeDriverStatus.textContent = isArrived ? '● EN DESTINO' : '● EN RUTA';
+  });
+
+  // =========================================================================
+  // 4. SCREEN 1.2: Proof of Delivery (POD)
+  // =========================================================================
+  let podPhotoCount = 2;
+  const btnPodAddPhoto = document.getElementById('btn-pod-add-photo');
+  const lblPodPhotoText = document.getElementById('lbl-pod-photo-text');
+  const btnFinalizePodScreen = document.getElementById('btn-finalize-pod-screen');
+  const lblPodScreenBtn = document.getElementById('lbl-pod-screen-btn');
+
+  btnPodAddPhoto?.addEventListener('click', () => {
+    podPhotoCount++;
+    if (lblPodPhotoText) lblPodPhotoText.textContent = `${podPhotoCount} Fotos`;
+  });
+
+  btnFinalizePodScreen?.addEventListener('click', () => {
+    if (lblPodScreenBtn) lblPodScreenBtn.textContent = '✓ Entrega Registrada (POD Completo Exitoso)';
+  });
+
+  // =========================================================================
+  // 5. SCREEN 1.3: Cash on Delivery Calculator (Diego Morales)
+  // =========================================================================
+  const cashBtns = document.querySelectorAll<HTMLButtonElement>('.cash-btn');
+  const valCashChange = document.getElementById('val-cash-change');
+  const lblCashReceivedSub = document.getElementById('lbl-cash-received-sub');
+  const totalDue = 1420.0;
+
+  cashBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      cashBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const amt = parseFloat(btn.getAttribute('data-amt') || '1500');
+      const change = Math.max(0, amt - totalDue);
+      if (valCashChange) valCashChange.textContent = `$${change.toFixed(2)} USD`;
+      if (lblCashReceivedSub) lblCashReceivedSub.textContent = `Monto entregado: $${amt.toFixed(2)} USD`;
+    });
+  });
+
+  // =========================================================================
+  // 6. SCREEN 1.4: Incident Report Severity
+  // =========================================================================
+  const sevChips = document.querySelectorAll<HTMLButtonElement>('.sev-chip');
+  const badgeIncidentSev = document.getElementById('badge-incident-sev');
+
+  sevChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      sevChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const sev = chip.getAttribute('data-sev') || 'MODERADO';
+      if (badgeIncidentSev) badgeIncidentSev.textContent = sev;
+    });
+  });
+
+  // =========================================================================
+  // 7. SCREEN 1.5: Returns RMA Steppers
+  // =========================================================================
+  let rmaBoxes = 4;
+  const valRmaBoxes = document.getElementById('val-rma-boxes');
+  const btnRmaMinus = document.getElementById('btn-rma-minus');
+  const btnRmaPlus = document.getElementById('btn-rma-plus');
+
+  btnRmaMinus?.addEventListener('click', () => {
+    if (rmaBoxes > 1) rmaBoxes--;
+    if (valRmaBoxes) valRmaBoxes.textContent = String(rmaBoxes);
+  });
+  btnRmaPlus?.addEventListener('click', () => {
+    if (rmaBoxes < 20) rmaBoxes++;
+    if (valRmaBoxes) valRmaBoxes.textContent = String(rmaBoxes);
+  });
+
+  // =========================================================================
+  // 8. SCREEN 2.1: Picking FEFO (Alejandro Vargas)
+  // =========================================================================
+  let pickedCount = 18;
+  const valPickedUnits = document.getElementById('val-picked-units');
+  const btnPickMinus = document.getElementById('btn-pick-minus');
+  const btnPickPlus = document.getElementById('btn-pick-plus');
+  const btnScanBarcode = document.getElementById('btn-scan-barcode');
+  const lblScanBarcode = document.getElementById('lbl-scan-barcode');
+
+  btnPickMinus?.addEventListener('click', () => {
+    if (pickedCount > 0) pickedCount--;
+    if (valPickedUnits) valPickedUnits.textContent = String(pickedCount);
+  });
+  btnPickPlus?.addEventListener('click', () => {
+    if (pickedCount < 24) pickedCount++;
+    if (valPickedUnits) valPickedUnits.textContent = String(pickedCount);
+  });
+  btnScanBarcode?.addEventListener('click', () => {
+    pickedCount = 24;
+    if (valPickedUnits) valPickedUnits.textContent = '24';
+    if (lblScanBarcode) lblScanBarcode.textContent = '✓ Lote L-20260914-A Escaneado (24/24)';
+  });
+
+  // =========================================================================
+  // 9. SCREEN 2.2: CameraX Scanner Flash Toggle
+  // =========================================================================
+  const btnMockFlash = document.getElementById('btn-mock-flash');
+  let flashActive = false;
+  btnMockFlash?.addEventListener('click', () => {
+    flashActive = !flashActive;
+    btnMockFlash.style.color = flashActive ? '#facc15' : '#475569';
+  });
+
+  // =========================================================================
+  // 10. SCREEN 2.3: Machinery Inspection ISO 3691 Lockout
+  // =========================================================================
+  const isoCheckboxes = document.querySelectorAll<HTMLInputElement>('.iso-chk');
+  const ignitionBanner = document.getElementById('ignition-banner');
+  const ignitionIconBox = document.getElementById('ignition-icon-box');
+  const ignitionTitle = document.getElementById('ignition-title');
+  const ignitionSub = document.getElementById('ignition-sub');
+  const btnValidateIso = document.getElementById('btn-validate-iso');
+  const lblIsoBtn = document.getElementById('lbl-iso-btn');
+  const pillIsoStatus = document.getElementById('pill-iso-status');
+
+  isoCheckboxes.forEach(chk => {
+    chk.addEventListener('change', checkIsoCompliance);
+  });
+
+  function checkIsoCompliance() {
+    const allChecked = Array.from(isoCheckboxes).every(c => c.checked);
+    if (allChecked) {
+      ignitionBanner?.classList.add('passed');
+      ignitionIconBox?.classList.add('passed');
+      if (ignitionIconBox) ignitionIconBox.innerHTML = '<i class="pi pi-check-circle"></i>';
+      if (ignitionTitle) {
+        ignitionTitle.textContent = 'IGNICIÓN LIBERADA (PASE ISO 3691)';
+        ignitionTitle.style.color = '#0284c7';
+      }
+      if (ignitionSub) ignitionSub.textContent = 'Todos los puntos de seguridad han sido verificados conforme';
+      if (btnValidateIso) (btnValidateIso as HTMLButtonElement).disabled = false;
+      if (lblIsoBtn) lblIsoBtn.textContent = 'Iniciar Turno de Operaciones';
+      if (pillIsoStatus) {
+        pillIsoStatus.className = 'meta-pill touch';
+        pillIsoStatus.innerHTML = '<i class="pi pi-check"></i> Operativo OK';
+      }
+    } else {
+      ignitionBanner?.classList.remove('passed');
+      ignitionIconBox?.classList.remove('passed');
+      if (ignitionIconBox) ignitionIconBox.innerHTML = '<i class="pi pi-exclamation-triangle"></i>';
+      if (ignitionTitle) {
+        ignitionTitle.textContent = 'BLOQUEO DE IGNICIÓN (LOCKOUT ACTIVO)';
+        ignitionTitle.style.color = '#991b1b';
+      }
+      if (ignitionSub) ignitionSub.textContent = 'Equipo no apto para operar hasta subsanar observación crítica';
+      if (btnValidateIso) (btnValidateIso as HTMLButtonElement).disabled = true;
+      if (lblIsoBtn) lblIsoBtn.textContent = 'Equipo Bloqueado por Seguridad';
+      if (pillIsoStatus) {
+        pillIsoStatus.className = 'meta-pill industrial';
+        pillIsoStatus.innerHTML = '<i class="pi pi-lock"></i> Bloqueado';
+      }
+    }
+  }
+
+  // =========================================================================
+  // 11. SCREEN 2.4: Cycle Count Steppers
+  // =========================================================================
+  let cycleUnits = 149;
+  const valCycleUnits = document.getElementById('val-cycle-units');
+  const btnCycleMinus = document.getElementById('btn-cycle-minus');
+  const btnCyclePlus = document.getElementById('btn-cycle-plus');
+  const lblVarianceVal = document.getElementById('lbl-variance-val');
+
+  btnCycleMinus?.addEventListener('click', () => {
+    cycleUnits -= 1;
+    if (valCycleUnits) valCycleUnits.textContent = String(cycleUnits);
+    const diffPct = (((cycleUnits - 150) / 150) * 100).toFixed(1);
+    if (lblVarianceVal) lblVarianceVal.textContent = `${diffPct}% (Tolerancia OK)`;
+  });
+  btnCyclePlus?.addEventListener('click', () => {
+    cycleUnits += 1;
+    if (valCycleUnits) valCycleUnits.textContent = String(cycleUnits);
+    const diffPct = (((cycleUnits - 150) / 150) * 100).toFixed(1);
+    if (lblVarianceVal) lblVarianceVal.textContent = `${diffPct}% (Tolerancia OK)`;
+  });
+
+  // =========================================================================
+  // 12. SCREEN 2.5: Offline Sync Queue Replay
+  // =========================================================================
+  const chkAirplaneMode = document.getElementById('chk-airplane-mode') as HTMLInputElement | null;
+  const badgeSyncNet = document.getElementById('badge-sync-net');
+  const syncNetTech = document.getElementById('sync-net-tech');
+  const lblNetTitle = document.getElementById('lbl-net-title');
+  const lblNetSub = document.getElementById('lbl-net-sub');
+  const btnForceSync = document.getElementById('btn-force-sync');
+  const lblSyncBtn = document.getElementById('lbl-sync-btn');
+  const pillSyncStatus = document.getElementById('pill-sync-status');
+
+  chkAirplaneMode?.addEventListener('change', () => {
+    const isOff = chkAirplaneMode.checked;
+    if (badgeSyncNet) {
+      badgeSyncNet.textContent = isOff ? 'OFFLINE' : 'ONLINE';
+      badgeSyncNet.className = isOff ? 'status-pill-amber' : 'status-pill-cyan';
+    }
+    if (syncNetTech) syncNetTech.textContent = isOff ? 'SIN RED' : '5G LTE';
+    if (lblNetTitle) lblNetTitle.textContent = isOff ? 'Cámara Frigorífica (Sin Conexión)' : 'Conectado al Gateway Central Nexa';
+    if (lblNetSub) lblNetSub.textContent = isOff ? 'Las mutaciones se guardan localmente en Room SQLite' : 'Conexión activa · Listo para sincronizar';
+  });
+
+  btnForceSync?.addEventListener('click', () => {
+    if (lblSyncBtn) lblSyncBtn.textContent = '✓ 3 Mutaciones Replicadas con Éxito';
+    if (pillSyncStatus) {
+      pillSyncStatus.className = 'meta-pill touch';
+      pillSyncStatus.innerHTML = '<i class="pi pi-check"></i> 100% Sync OK';
+    }
+  });
+
+  // =========================================================================
+  // 13. SCREEN 3.1: Dispatch Dock & Seal (Mariela)
+  // =========================================================================
+  let palletCount = 4;
+  const valPalletCount = document.getElementById('val-pallet-count');
+  const btnPalletMinus = document.getElementById('btn-pallet-minus');
+  const btnPalletPlus = document.getElementById('btn-pallet-plus');
+  const chkSealVerified = document.getElementById('chk-seal-verified') as HTMLInputElement | null;
+  const lblSealStatus = document.getElementById('lbl-seal-status');
+  const btnAuthorizeDispatch = document.getElementById('btn-authorize-dispatch');
+  const lblAuthDispatch = document.getElementById('lbl-auth-dispatch');
+  const dispatchDockStatus = document.getElementById('dispatch-dock-status');
+
+  btnPalletMinus?.addEventListener('click', () => {
+    if (palletCount > 1) palletCount--;
+    if (valPalletCount) valPalletCount.textContent = String(palletCount);
+  });
+  btnPalletPlus?.addEventListener('click', () => {
+    if (palletCount < 12) palletCount++;
+    if (valPalletCount) valPalletCount.textContent = String(palletCount);
+  });
+
+  chkSealVerified?.addEventListener('change', () => {
+    if (lblSealStatus) {
+      lblSealStatus.textContent = chkSealVerified.checked ? 'Precinto #NX-9921 verificado y sellado' : 'Falta verificación física de precinto';
+    }
+  });
+
+  btnAuthorizeDispatch?.addEventListener('click', () => {
+    if (lblAuthDispatch) lblAuthDispatch.textContent = '✓ Despacho Autorizado (WKN-892 en Ruta)';
+    if (dispatchDockStatus) dispatchDockStatus.textContent = '● SALIDA AUTORIZADA';
+  });
+
+  // =========================================================================
+  // 14. SCREEN 4.1: Wholesale Tier Pricing (Carlos Mendoza)
+  // =========================================================================
+  let catQty = 15;
+  const valCatQuantity = document.getElementById('val-cat-quantity');
+  const btnCatMinus = document.getElementById('btn-cat-minus');
+  const btnCatPlus = document.getElementById('btn-cat-plus');
+  const lblUnitPrice = document.getElementById('lbl-unit-price');
+  const valCatTotal = document.getElementById('val-cat-total');
+  const lblDiscountNote = document.getElementById('lbl-discount-note');
+  const tierCol1 = document.getElementById('tier-col-1');
+  const tierCol2 = document.getElementById('tier-col-2');
+  const tierCol3 = document.getElementById('tier-col-3');
+
+  function updateTierPricing() {
+    let price = 45.00;
+    tierCol1?.classList.remove('active');
+    tierCol2?.classList.remove('active');
+    tierCol3?.classList.remove('active');
+
+    if (catQty >= 50) {
+      price = 38.25;
+      tierCol3?.classList.add('active');
+      if (lblDiscountNote) lblDiscountNote.textContent = '✓ Tarifa paletizada (-15% dto.) aplicada';
+    } else if (catQty >= 10) {
+      price = 41.40;
+      tierCol2?.classList.add('active');
+      if (lblDiscountNote) lblDiscountNote.textContent = '✓ Descuento por volumen (-8%) aplicado';
+    } else {
+      tierCol1?.classList.add('active');
+      if (lblDiscountNote) lblDiscountNote.textContent = 'Tarifa base por caja individual';
+    }
+
+    if (valCatQuantity) valCatQuantity.textContent = String(catQty);
+    if (lblUnitPrice) lblUnitPrice.textContent = `Precio: $${price.toFixed(2)}/caja`;
+    const total = (catQty * price).toFixed(2);
+    if (valCatTotal) valCatTotal.textContent = `$${total} USD`;
+  }
+
+  btnCatMinus?.addEventListener('click', () => {
+    if (catQty > 5) catQty -= 5;
+    updateTierPricing();
+  });
+  btnCatPlus?.addEventListener('click', () => {
+    if (catQty < 100) catQty += 5;
+    updateTierPricing();
+  });
+
+  // =========================================================================
+  // 15. SCREEN 4.2: Buyer Receipt & Discrepancy (Carlos Mendoza)
+  // =========================================================================
+  const chkBuyerDisc = document.getElementById('chk-buyer-disc') as HTMLInputElement | null;
+  const lblBuyerDisc = document.getElementById('lbl-buyer-disc');
+  const btnConfirmCustody = document.getElementById('btn-confirm-custody');
+
+  chkBuyerDisc?.addEventListener('change', () => {
+    if (lblBuyerDisc) {
+      lblBuyerDisc.textContent = chkBuyerDisc.checked ? 'Reportando 1 caja descongelada (Foto adjunta)' : 'Sin anomalías reportadas';
+    }
+  });
+
+  btnConfirmCustody?.addEventListener('click', () => {
+    btnConfirmCustody.innerHTML = '<i class="pi pi-check"></i> Custodia Confirmada con Éxito';
+  });
+
+  // =========================================================================
+  // 16. SCREEN 5.1: Biometrics Auth Trigger
+  // =========================================================================
+  const btnTriggerBio = document.getElementById('btn-trigger-bio');
+  const bioIconSymbol = document.getElementById('bio-icon-symbol');
+  const lblBioTitle = document.getElementById('lbl-bio-title');
+  const lblBioSub = document.getElementById('lbl-bio-sub');
+  const badgeAuthState = document.getElementById('badge-auth-state');
+  const btnStartShift = document.getElementById('btn-start-shift') as HTMLButtonElement | null;
+
+  btnTriggerBio?.addEventListener('click', () => {
+    btnTriggerBio.classList.toggle('verified');
+    const isVer = btnTriggerBio.classList.contains('verified');
+    if (bioIconSymbol) bioIconSymbol.className = isVer ? 'pi pi-check-circle bio-icon' : 'pi pi-lock bio-icon';
+    if (lblBioTitle) lblBioTitle.textContent = isVer ? 'Biometría Verificada con Éxito' : 'Toca para Autenticación Biométrica';
+    if (lblBioSub) lblBioSub.textContent = isVer ? 'Sesión firmada con validez de 8 horas' : 'Huella dactilar o FaceID validado';
+    if (badgeAuthState) {
+      badgeAuthState.textContent = isVer ? '● AUTENTICADO' : '● PENDIENTE';
+      badgeAuthState.className = 'status-pill-cyan';
+    }
+    if (btnStartShift) {
+      btnStartShift.disabled = !isVer;
+    }
+  });
+
+  // Hub option row selection
+  document.querySelectorAll('.hub-option-row').forEach(row => {
+    row.addEventListener('click', () => {
+      document.querySelectorAll('.hub-option-row').forEach(r => r.classList.remove('active'));
+      row.classList.add('active');
+    });
+  });
+</script>
