@@ -21,6 +21,9 @@ import InteractiveWholesaleCatalog from './InteractiveWholesaleCatalog.astro';
 import InteractiveMobileForms from './InteractiveMobileForms.astro';
 import InteractiveDispatchMovement from './InteractiveDispatchMovement.astro';
 import LoginScreenSpec from './LoginScreenSpec.astro';
+import TelemetryColdChainSpec from './TelemetryColdChainSpec.astro';
+import OfflineResilienceSpec from './OfflineResilienceSpec.astro';
+import DigitalSignaturePODSpec from './DigitalSignaturePODSpec.astro';
 ---
 
 <div class="screen-spec-container" id="simulador-interactivo">
@@ -64,11 +67,20 @@ import LoginScreenSpec from './LoginScreenSpec.astro';
         <button type="button" class="btn-ctrl device-preset-btn" data-width="412" data-height="820" data-padding="12" data-name="Zebra TC58 Rugged (412dp)">
           <i class="pi pi-shield"></i> Zebra TC58 (412dp)
         </button>
+        <button type="button" class="btn-ctrl device-preset-btn" data-width="480" data-height="800" data-padding="12" data-name="Zebra MC9300 Gun (480dp)">
+          <i class="pi pi-qrcode"></i> Zebra MC9300 Gun (480dp)
+        </button>
         <button type="button" class="btn-ctrl device-preset-btn tablet" data-width="600" data-height="880" data-padding="20" data-name="Tab Active 8&quot; (600dp)">
           <i class="pi pi-tablet"></i> Tab Active 8" (600dp)
         </button>
+        <button type="button" class="btn-ctrl device-preset-btn tablet" data-width="700" data-height="840" data-padding="20" data-name="Galaxy Z Fold 5 Unfolded (700dp)">
+          <i class="pi pi-clone"></i> Z Fold 5 (700dp)
+        </button>
         <button type="button" class="btn-ctrl device-preset-btn tablet" data-width="800" data-height="920" data-padding="24" data-name="Tab S9 11&quot; (800dp)">
           <i class="pi pi-desktop"></i> Tab S9 11" (800dp)
+        </button>
+        <button type="button" class="btn-ctrl device-preset-btn" data-width="844" data-height="460" data-padding="16" data-name="In-Cab Landscape (844×390dp)">
+          <i class="pi pi-compass"></i> Cabina Horizontal (844dp)
         </button>
       </div>
     </div>
@@ -146,6 +158,15 @@ import LoginScreenSpec from './LoginScreenSpec.astro';
         </button>
         <button type="button" class="btn-ctrl screen-btn" data-screen="sheet" data-title="Detalle de Entrega M3">
           <i class="pi pi-sliders-h"></i> Bottom Sheet M3
+        </button>
+        <button type="button" class="btn-ctrl screen-btn" data-screen="telemetry" data-title="Telemetría Sensirion SHT40 & Cadena de Frío">
+          <i class="pi pi-bolt"></i> Telemetría Frío (Live)
+        </button>
+        <button type="button" class="btn-ctrl screen-btn" data-screen="offline-queue" data-title="Resiliencia Offline & SQLite Room">
+          <i class="pi pi-database"></i> Cola Offline (Live)
+        </button>
+        <button type="button" class="btn-ctrl screen-btn" data-screen="pod-signature" data-title="Prueba de Entrega POD & Firma Táctil">
+          <i class="pi pi-check-circle"></i> Firma POD (Live)
         </button>
       </div>
     </div>
@@ -231,6 +252,21 @@ import LoginScreenSpec from './LoginScreenSpec.astro';
         <!-- Screen 8: Canonical Bottom Sheet Specimen -->
         <div class="screen-view" id="view-sheet">
           <BottomSheetSpec />
+        </div>
+
+        <!-- Screen 9: Live Sensirion Cold Chain Telemetry -->
+        <div class="screen-view" id="view-telemetry">
+          <TelemetryColdChainSpec />
+        </div>
+
+        <!-- Screen 10: Live Offline Resilience & SQLite Room -->
+        <div class="screen-view" id="view-offline-queue">
+          <OfflineResilienceSpec />
+        </div>
+
+        <!-- Screen 11: Live Proof of Delivery & Digital Signature -->
+        <div class="screen-view" id="view-pod-signature">
+          <DigitalSignaturePODSpec />
         </div>
       </div>
 

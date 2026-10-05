@@ -16,6 +16,8 @@ import DeviceFrame from '../components/simulator/DeviceFrame.astro';
 import LoginScreenSpec from '../components/simulator/LoginScreenSpec.astro';
 
 // 2. Visual Design Foundations M3 (UPC Capítulo III · Rúbrica 3.1.1)
+import IdentidadMarcaLogosSection from '../components/guidelines/IdentidadMarcaLogosSection.astro';
+import TonoComunicacionSection from '../components/guidelines/TonoComunicacionSection.astro';
 import PrincipiosDisenoSection from '../components/guidelines/PrincipiosDisenoSection.astro';
 import TokensColorSection from '../components/guidelines/TokensColorSection.astro';
 import TipografiaSpSection from '../components/guidelines/TipografiaSpSection.astro';
@@ -62,6 +64,26 @@ import GaleriaVisualAndroid from '../components/simulator/GaleriaVisualAndroid.a
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" 
     rel="stylesheet"
   >
+
+  <script is:inline>
+    if (window.self !== window.top) {
+      document.documentElement.classList.add('is-embedded');
+    }
+  </script>
+
+  <style is:inline>
+    html.is-embedded .lab-sidebar {
+      display: none !important;
+    }
+    html.is-embedded .lab-main,
+    html.is-embedded .modular-screen-stage {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+    html.is-embedded body {
+      overflow-y: auto !important;
+    }
+  </style>
 
   <style>
     /* Global Reset & Box-Sizing Hygiene */
@@ -231,6 +253,44 @@ import GaleriaVisualAndroid from '../components/simulator/GaleriaVisualAndroid.a
         <div style="max-width: 1040px; width: 100%; margin: 0 auto;">
           <LoginScreenSpec />
         </div>
+      </section>
+
+      <!-- =====================================================================
+           PANTALLA 2.0A: IDENTIDAD DE MARCA & LOGOS MÓVILES (UPC RÚBRICA 3.1.1.1)
+           ===================================================================== -->
+      <section class="lab-screen-view" id="screen-foundations-branding" data-title="Identidad de Marca & Logos Móviles">
+        <div class="screen-header-bar">
+          <div>
+            <span class="screen-badge-tag">IDENTIDAD VISUAL · LOGOS MÓVILES</span>
+            <h2 class="screen-main-title">Identidad de Marca & Especificación de Logos Móviles</h2>
+            <p class="screen-main-desc">
+              Directrices de logotipo, isotipos móviles Android (<code>nexa-mobile.svg</code> y <code>nexa-mobile-inverted.svg</code>), área de seguridad de 16dp/24dp, contraste WCAG 2.2 AAA y Adaptive Icons.
+            </p>
+          </div>
+          <div class="screen-actions">
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
+          </div>
+        </div>
+        <IdentidadMarcaLogosSection />
+      </section>
+
+      <!-- =====================================================================
+           PANTALLA 2.0B: LAS 4 DIMENSIONES DE TONO DE VOZ & MICROCOPIA (NN/G)
+           ===================================================================== -->
+      <section class="lab-screen-view" id="screen-foundations-tone" data-title="Tono de Voz & Microcopia (NN/g)">
+        <div class="screen-header-bar">
+          <div>
+            <span class="screen-badge-tag">ESTILO DE COMUNICACIÓN · NIELSEN NORMAN GROUP</span>
+            <h2 class="screen-main-title">Las Cuatro Dimensiones de Tono de Voz & Microcopia Móvil</h2>
+            <p class="screen-main-desc">
+              Calibración de Serious, Profesional & Directo, Respectful y Serene para operaciones de frío con matriz bilingüe oficial en inglés (<code>en_US</code>) y español (<code>es_419</code>).
+            </p>
+          </div>
+          <div class="screen-actions">
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
+          </div>
+        </div>
+        <TonoComunicacionSection />
       </section>
 
       <!-- =====================================================================

@@ -30,6 +30,26 @@ import ComponentesNexaUiSection from '../components/guidelines/ComponentesNexaUi
     rel="stylesheet"
   >
 
+  <script is:inline>
+    if (window.self !== window.top) {
+      document.documentElement.classList.add('is-embedded');
+    }
+  </script>
+
+  <style is:inline>
+    html.is-embedded .lab-sidebar {
+      display: none !important;
+    }
+    html.is-embedded .lab-main,
+    html.is-embedded .guidelines-main {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+    html.is-embedded body {
+      overflow-y: auto !important;
+    }
+  </style>
+
   <style>
     * {
       box-sizing: border-box;
