@@ -79,7 +79,7 @@ export const NEXA_TOKEN_VALUES: Readonly<Record<string, string>> = {
   "--nexa-primitive-shadow-sm": "0 1px 3px rgb(15 23 42 / 6%), 0 1px 2px rgb(15 23 42 / 4%)",
   "--nexa-primitive-font-display": "'Plus Jakarta Sans', sans-serif",
   "--nexa-primitive-font-body": "'Inter', sans-serif",
-  "--nexa-primitive-font-mono": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+  "--nexa-primitive-font-mono": "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
   "--nexa-color-primary-50": "oklch(96.9% 0.014 264.5)",
   "--nexa-color-primary-100": "oklch(92.9% 0.034 263.6)",
   "--nexa-color-primary-200": "oklch(86% 0.068 262.1)",
@@ -219,7 +219,7 @@ export const NEXA_TOKEN_VALUES: Readonly<Record<string, string>> = {
   "--nexa-shadow-menu": "0 14px 32px rgb(15 23 42 / 14%)",
   "--nexa-font-family-display": "'Plus Jakarta Sans', sans-serif",
   "--nexa-font-family-body": "'Inter', sans-serif",
-  "--nexa-font-family-mono": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+  "--nexa-font-family-mono": "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
   "--nexa-font-size-xs": "12px",
   "--nexa-font-size-sm": "13px",
   "--nexa-font-size-base": "14px",
@@ -871,8 +871,8 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "name": "--nexa-primitive-font-mono",
     "layer": "primitive",
     "type": "other",
-    "sourceValue": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
-    "value": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+    "sourceValue": "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+    "value": "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
     "description": "Nexa primitive token nexa-primitive-font-mono."
   },
   {
@@ -1992,7 +1992,7 @@ export const NEXA_TOKEN_CATALOG: readonly NexaTokenReference[] = [
     "layer": "semantic",
     "type": "fontFamily",
     "sourceValue": "var(--nexa-primitive-font-mono)",
-    "value": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+    "value": "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
     "description": "Nexa semantic token nexa-font-family-mono."
   },
   {

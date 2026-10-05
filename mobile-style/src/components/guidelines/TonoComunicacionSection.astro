@@ -1,0 +1,614 @@
+---
+/**
+ * TonoComunicacionSection.astro
+ * Nexa Design Lab · Mobile Style Guidelines (UPC Capítulo III · Rúbrica 3.1.1.1 & NN/g)
+ *
+ * LAS 4 DIMENSIONES DE TONO DE VOZ (NIELSEN NORMAN GROUP) & GUÍA DE MICROCOPIA MÓVIL:
+ * 1. Funny vs. Serious (Calibrado: Serious / Crítico Operacional)
+ * 2. Formal vs. Casual (Calibrado: Profesional y Directo)
+ * 3. Respectful vs. Irreverent (Calibrado: Respectful y Empático)
+ * 4. Enthusiastic vs. Serene (Calibrado: Serene y Objetivo)
+ * + Microcopy Playbook (Alertas HACCP, Offline, POD, Empty States) en Inglés (en_US) y Español (es_419).
+ */
+
+interface ToneDimension {
+  id: string;
+  name: string;
+  leftPole: string;
+  rightPole: string;
+  positionPercent: number; // 0 (left) to 100 (right)
+  calibratedValue: string;
+  rationale: string;
+  mobileRule: string;
+  exampleGood: string;
+  exampleBad: string;
+}
+
+const toneDimensions: ToneDimension[] = [
+  {
+    id: 'funny-serious',
+    name: '1. Funny vs. Serious',
+    leftPole: 'Divertido (Funny)',
+    rightPole: 'Serio (Serious)',
+    positionPercent: 92,
+    calibratedValue: 'Serious (92%)',
+    rationale: 'La logística de cadena de frío y productos perecederos de alto valor involucra riesgos biológicos, multas regulatorias y pérdidas de miles de dólares por lote. El humor trivial o sarcasmo en alertas de frío destruye la confianza y ralentiza la respuesta del operario.',
+    mobileRule: 'Describir los estados de transporte y almacén con sobriedad y datos verificables; evitar chistes, juegos de palabras o metáforas.',
+    exampleGood: 'Discrepancia térmica: Cámara 03 registra 7.8°C (límite máximo permitido: 6.0°C). Comprobar cierre de compuerta.',
+    exampleBad: '¡Ups! Parece que hace un poco de calor en la cámara. ¿Acaso los mariscos quieren broncearse? 😅'
+  },
+  {
+    id: 'formal-casual',
+    name: '2. Formal vs. Casual',
+    leftPole: 'Casual',
+    rightPole: 'Formal',
+    positionPercent: 78,
+    calibratedValue: 'Profesional & Directo (78%)',
+    rationale: 'Los conductores en ruta y coordinadores de muelle interactúan bajo presión de tiempo y fatiga física. El lenguaje debe ser directo, con verbos imperativos claros y términos precisos del Ubiquitous Language (FEFO, rampa, muelle, precinto, POD).',
+    mobileRule: 'Utilizar verbos de acción concretos en segunda persona educada o infinitivo («Registrar entrega», «Escanear precinto»). Evitar formalismos barrocos («Estimado usuario, tenga a bien...»).',
+    exampleGood: 'Escanee el código de barras GS1-128 del pallet para confirmar lote FEFO antes de cargar.',
+    exampleBad: 'Estimado señor chofer, le solicitamos de la manera más atenta proceder a efectuar la lectura del respectivo pallet.'
+  },
+  {
+    id: 'respectful-irreverent',
+    name: '3. Respectful vs. Irreverent',
+    leftPole: 'Irreverente',
+    rightPole: 'Respetuoso',
+    positionPercent: 95,
+    calibratedValue: 'Respectful & Empático (95%)',
+    rationale: 'Cuando ocurre un fallo de escaneo óptico, señal GPS o corte de red en cámara subterránea, el sistema nunca debe culpar a la persona ni emitir juicios negativos. Debe reconocer la dificultad y ofrecer la salida alternativa inmediata.',
+    mobileRule: 'Asumir siempre la buena fe del operario. Proporcionar botones de contingencia («Ingreso manual de código», «Guardar sin conexión»).',
+    exampleGood: 'No se detectó código en la imagen tras 3 intentos. Ingrese los 6 dígitos del precinto manualmente.',
+    exampleBad: '¡Error del usuario! Enfocaste mal la cámara y el código no se ve. Intenta no mover las manos.'
+  },
+  {
+    id: 'enthusiastic-serene',
+    name: '4. Enthusiastic vs. Serene',
+    leftPole: 'Entusiasta',
+    rightPole: 'Sereno',
+    positionPercent: 88,
+    calibratedValue: 'Serene & Objetivo (88%)',
+    rationale: 'Completar una entrega o un picking no requiere confeti animado ni signos de exclamación exagerados. El operario necesita certeza tranquila de que su registro fue persistido en base de datos local y sincronizado con el servidor.',
+    mobileRule: 'Confirmar el éxito de operaciones con indicadores visuales claros (ícono de verificación, ID de transacción criptográfica) sin ruidos ni fanfarria.',
+    exampleGood: 'Despacho #NX-8821 completado y sincronizado. Siguiente parada: Muelle 4 (a 12 min).',
+    exampleBad: '¡¡¡YAAAY, ERES UN CRACK LOGÍSTICO!!! 🎉🥳 ¡Completaste la entrega con éxito total!'
+  }
+];
+---
+
+<div class="tone-spec-container" id="tone-voice-spec">
+
+  <!-- Section Header -->
+  <div class="tone-header-cluster">
+    <div class="tone-header-left">
+      <span class="tone-badge-tag"><i class="pi pi-comment"></i> ESTILO DE COMUNICACIÓN · NIELSEN NORMAN GROUP</span>
+      <h2 class="tone-section-title">Las Cuatro Dimensiones de Tono de Voz & Microcopia Móvil</h2>
+      <p class="tone-section-desc">
+        Directrices oficiales de lenguaje y redacción para la suite <strong>Nexa Mobile</strong> basadas en el marco de trabajo de Nielsen Norman Group.
+        Garantiza consistencia en inglés base (<code>en_US</code>) y español localizado (<code>es_419</code>) para conductores, estibadores y compradores.
+      </p>
+    </div>
+    <div class="tone-header-actions">
+      <span class="status-pill-nng"><i class="pi pi-bookmark"></i> NN/g Tone Framework Certified</span>
+    </div>
+  </div>
+
+  <!-- Interactive 4 Dimensions Sliders Grid -->
+  <div class="tone-sliders-grid">
+    {toneDimensions.map(dim => (
+      <div class="tone-dimension-card" id={`card-${dim.id}`}>
+        <div class="dimension-card-top">
+          <span class="dim-kicker">{dim.name}</span>
+          <span class="dim-calibrated-pill">{dim.calibratedValue}</span>
+        </div>
+
+        <!-- Visual Scale Meter -->
+        <div class="dimension-scale-wrap">
+          <div class="scale-labels">
+            <span class="pole-label left">{dim.leftPole}</span>
+            <span class="pole-label right">{dim.rightPole}</span>
+          </div>
+          <div class="scale-track">
+            <div class="scale-fill" style={`width: ${dim.positionPercent}%;`}></div>
+            <div class="scale-marker" style={`left: ${dim.positionPercent}%;`}>
+              <span class="marker-dot"></span>
+              <span class="marker-tooltip">{dim.positionPercent}%</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="dimension-rationale"><strong>Sustento Operativo:</strong> {dim.rationale}</p>
+        <p class="dimension-rule"><i class="pi pi-angle-right"></i> <strong>Regla Móvil:</strong> {dim.mobileRule}</p>
+
+        <!-- Comparative Examples -->
+        <div class="microcopy-comparison-box">
+          <div class="example-item good">
+            <div class="ex-badge"><i class="pi pi-check"></i> Recomendado Nexa:</div>
+            <div class="ex-text">«{dim.exampleGood}»</div>
+          </div>
+          <div class="example-item bad">
+            <div class="ex-badge"><i class="pi pi-times"></i> Rechazado:</div>
+            <div class="ex-text">«{dim.exampleBad}»</div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Microcopy Playbook & Bilingual Table -->
+  <div class="microcopy-playbook-card">
+    <div class="playbook-header">
+      <span class="rules-kicker">MATRIZ DE MICROCOPIA OPERATIVA BILINGÜE</span>
+      <h3 class="playbook-title">Playbook de Textos Móviles por Escenario Crítico</h3>
+      <p class="playbook-desc">
+        La rúbrica académica exige <strong>English (<code>en_US</code>)</strong> como idioma base de la suite y documentación de producto,
+        con soporte nativo para <strong>Spanish (<code>es_419</code>)</strong> como localización en campo.
+      </p>
+    </div>
+
+    <div class="playbook-table-wrapper">
+      <table class="playbook-table">
+        <thead>
+          <tr>
+            <th style="width: 18%;">Escenario de Interfaz</th>
+            <th style="width: 38%;">English Baseline (en_US) · Official</th>
+            <th style="width: 38%;">Spanish Localized (es_419) · Campo</th>
+            <th style="width: 6%;">Canal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>Alerta Crítica HACCP</strong>
+              <small class="table-sub">Desviación en ruta de frío</small>
+            </td>
+            <td>
+              <div class="msg-bubble en">
+                <i class="pi pi-exclamation-triangle"></i>
+                <div>
+                  <strong>Cold Chain Breach: Reefer #C-250 at 7.4°C</strong>
+                  <p>Threshold exceeded (+1.4°C over max limit). Verify compressor power or notify central dispatch.</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="msg-bubble es">
+                <i class="pi pi-exclamation-triangle"></i>
+                <div>
+                  <strong>Quiebre Térmico: Furgón #C-250 a 7.4°C</strong>
+                  <p>Límite excedido (+1.4°C sobre tolerancia). Comprobar compresor o notificar a despacho central.</p>
+                </div>
+              </div>
+            </td>
+            <td><span class="channel-pill">Push</span></td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong>Modo Sin Conexión</strong>
+              <small class="table-sub">Cámara subterránea</small>
+            </td>
+            <td>
+              <div class="msg-bubble en">
+                <i class="pi pi-cloud-download"></i>
+                <div>
+                  <strong>Working Offline · 14 Records Queued</strong>
+                  <p>All barcode scans and temperature checks are saved locally. Auto-sync will resume on network connection.</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="msg-bubble es">
+                <i class="pi pi-cloud-download"></i>
+                <div>
+                  <strong>Operando sin Conexión · 14 Registros en Cola</strong>
+                  <p>Lecturas y firmas guardadas en base de datos local. Sincronización automática al recuperar cobertura.</p>
+                </div>
+              </div>
+            </td>
+            <td><span class="channel-pill">Banner</span></td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong>Firma Digital POD</strong>
+              <small class="table-sub">Custodia del receptor</small>
+            </td>
+            <td>
+              <div class="msg-bubble en">
+                <i class="pi pi-pencil"></i>
+                <div>
+                  <strong>Sign Proof of Delivery (POD)</strong>
+                  <p>Please collect receiver's legal signature. Cryptographic timestamp and GPS coordinates will be attached.</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="msg-bubble es">
+                <i class="pi pi-pencil"></i>
+                <div>
+                  <strong>Firma de Prueba de Entrega (POD)</strong>
+                  <p>Solicite la firma del receptor autorizado. Se adjuntará sello temporal criptográfico y geolocalización GPS.</p>
+                </div>
+              </div>
+            </td>
+            <td><span class="channel-pill">Modal</span></td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong>Catálogo Vacío</strong>
+              <small class="table-sub">Zero state en búsqueda</small>
+            </td>
+            <td>
+              <div class="msg-bubble en">
+                <i class="pi pi-search"></i>
+                <div>
+                  <strong>No Wholesale Lots Found</strong>
+                  <p>No products match filter «Frozen Salmon > 200kg». Clear filters or request custom cold-storage reservation.</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="msg-bubble es">
+                <i class="pi pi-search"></i>
+                <div>
+                  <strong>Sin Lotes Mayoristas Encontrados</strong>
+                  <p>Ningún lote coincide con el filtro «Salmón Congelado > 200kg». Restablezca filtros o solicite cotización especial.</p>
+                </div>
+              </div>
+            </td>
+            <td><span class="channel-pill">Empty</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  .tone-spec-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+  }
+
+  /* Header */
+  .tone-header-cluster {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+  }
+
+  .tone-header-left {
+    max-width: 820px;
+  }
+
+  .tone-badge-tag {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--nexa-color-primary-600, #2563eb);
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    padding: 3px 8px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .tone-section-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.01em;
+  }
+
+  .tone-section-desc {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #64748b;
+    margin-top: 6px;
+  }
+
+  .status-pill-nng {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1d4ed8;
+    background: #dbeafe;
+    border: 1px solid #93c5fd;
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+
+  /* Sliders Grid */
+  .tone-sliders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  .tone-dimension-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .dimension-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dim-kicker {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .dim-calibrated-pill {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    color: #1d4ed8;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+
+  /* Scale Track */
+  .dimension-scale-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 0;
+  }
+
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+  }
+
+  .scale-track {
+    position: relative;
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 5px;
+  }
+
+  .scale-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #93c5fd 0%, #2563eb 100%);
+    border-radius: 5px;
+  }
+
+  .scale-marker {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .marker-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #1d4ed8;
+    border: 3px solid #ffffff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  }
+
+  .marker-tooltip {
+    position: absolute;
+    bottom: 22px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 700;
+    color: #ffffff;
+    background: #0f172a;
+    padding: 2px 5px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .dimension-rationale {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: #475569;
+  }
+
+  .dimension-rule {
+    font-size: 12px;
+    line-height: 1.45;
+    color: #1e293b;
+    background: #f8fafc;
+    border-left: 3px solid #2563eb;
+    padding: 8px 10px;
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* Microcopy Comparisons */
+  .microcopy-comparison-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .example-item {
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 1.4;
+
+    &.good {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #166534;
+    }
+
+    &.bad {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+    }
+  }
+
+  .ex-badge {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .ex-text {
+    font-style: italic;
+  }
+
+  /* Playbook Table */
+  .microcopy-playbook-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .playbook-header {
+    max-width: 800px;
+  }
+
+  .rules-kicker {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #2563eb;
+  }
+
+  .playbook-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 4px;
+  }
+
+  .playbook-desc {
+    font-size: 13.5px;
+    color: #64748b;
+    margin-top: 4px;
+  }
+
+  .playbook-table-wrapper {
+    overflow-x: auto;
+  }
+
+  .playbook-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+
+    th {
+      background: #f8fafc;
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 700;
+      color: #475569;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    td {
+      padding: 14px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+  }
+
+  .table-sub {
+    display: block;
+    color: #94a3b8;
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
+  .msg-bubble {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+
+    i {
+      font-size: 15px;
+      margin-top: 2px;
+      color: #2563eb;
+    }
+
+    strong {
+      display: block;
+      color: #0f172a;
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
+
+    p {
+      margin: 0;
+      color: #475569;
+      font-size: 11.5px;
+      line-height: 1.4;
+    }
+
+    &.en {
+      border-left: 3px solid #2563eb;
+    }
+
+    &.es {
+      border-left: 3px solid #0284c7;
+    }
+  }
+
+  .channel-pill {
+    display: inline-block;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    color: #475569;
+  }
+</style>

@@ -1,3 +1,5 @@
+name: nexa-design-lab
+
 services:
   web-style:
     build:
@@ -5,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: nexa-web-style
     ports:
-      - "4200:4200"
+      - "127.0.0.1:${NEXA_DESIGN_WEB_PORT:-4200}:4200"
     restart: unless-stopped
     networks:
       - nexa-style-network
@@ -16,7 +18,7 @@ services:
       dockerfile: Dockerfile
     container_name: nexa-mobile-style
     ports:
-      - "4201:4201"
+      - "127.0.0.1:${NEXA_DESIGN_MOBILE_PORT:-4201}:4201"
     restart: unless-stopped
     networks:
       - nexa-style-network
@@ -27,7 +29,7 @@ services:
       dockerfile: Dockerfile
     container_name: nexa-website-style
     ports:
-      - "4321:4321"
+      - "127.0.0.1:${NEXA_DESIGN_WEBSITE_PORT:-4321}:4321"
     restart: unless-stopped
     networks:
       - nexa-style-network
@@ -38,7 +40,7 @@ services:
       dockerfile: Dockerfile
     container_name: nexa-style-hub
     ports:
-      - "8090:80"
+      - "127.0.0.1:${NEXA_DESIGN_HUB_PORT:-8090}:80"
     depends_on:
       - web-style
       - mobile-style

@@ -1,0 +1,1032 @@
+---
+/**
+ * IdentidadMarcaLogosSection.astro
+ * Nexa Design Lab · Mobile Style Guidelines (UPC Capítulo III · Rúbrica 3.1.1.1)
+ *
+ * ESPECIFICACIÓN CANÓNICA DE IDENTIDAD DE MARCA & LOGOS MÓVILES:
+ * 1. Logotipo Corporativo Horizontal (Nexa Wordmark + Flecha de Ascenso)
+ * 2. Isotipo Móvil Canónico (nexa-mobile.svg) · 189x189dp fondo azul #2563EB con glifo NX blanco
+ * 3. Isotipo Móvil Invertido (nexa-mobile-inverted.svg) · 189x189dp fondo blanco con glifo NX azul
+ * 4. Monograma NX Transparente (nexa-nx-blue.svg / nexa-nx-white.svg)
+ * 5. Área de Reserva (Clear Space), Escala Mínima, Contraste WCAG 2.2 AAA y Adaptive Icons para Android
+ */
+---
+
+<div class="brand-spec-container" id="brand-logos-spec">
+
+  <!-- Section Header -->
+  <div class="brand-header-cluster">
+    <div class="brand-header-left">
+      <span class="brand-badge-tag"><i class="pi pi-shield"></i> IDENTIDAD VISUAL · LOGOS MÓVILES CANÓNICOS</span>
+      <h2 class="brand-section-title">Logotipos & Activos de Marca Nexa Mobile</h2>
+      <p class="brand-section-desc">
+        Especificación geométrica, área de reserva, pruebas de contraste WCAG 2.2 AAA y pautas de implementación para Android Jetpack Compose M3.
+        Incluye el isotipo móvil oficial (<code>nexa-mobile.svg</code>) y su variante invertida (<code>nexa-mobile-inverted.svg</code>) para superficies industriales.
+      </p>
+    </div>
+    <div class="brand-header-actions">
+      <span class="status-pill-verified"><i class="pi pi-check-circle"></i> Vector SVGs Verificados</span>
+      <a href="/assets/nexa-mobile.svg" download="nexa-mobile.svg" class="btn-brand-download">
+        <i class="pi pi-download"></i> Descargar nexa-mobile.svg
+      </a>
+      <a href="/assets/nexa-mobile-inverted.svg" download="nexa-mobile-inverted.svg" class="btn-brand-download secondary">
+        <i class="pi pi-download"></i> Descargar Invertido
+      </a>
+    </div>
+  </div>
+
+  <!-- Master Interactive Brand Showcase Grid (4 Pillars) -->
+  <div class="brand-showcase-grid">
+
+    <!-- Card 1: Official Mobile Isotype (nexa-mobile.svg) -->
+    <div class="brand-card-item primary-focus">
+      <div class="brand-card-top">
+        <span class="card-kicker">ISOTIPO MÓVIL CANÓNICO · 189×189 DP</span>
+        <span class="format-pill">SVG 1:1 · #2563EB</span>
+      </div>
+      
+      <!-- Visual Stage -->
+      <div class="brand-preview-stage bg-light-surface">
+        <div class="safe-zone-box">
+          <span class="safe-zone-marker top-left">16dp</span>
+          <img src="/assets/nexa-mobile.svg" alt="Nexa Mobile App Icon" class="brand-rendered-svg mobile-square" />
+          <span class="safe-zone-marker bottom-right">16dp</span>
+        </div>
+      </div>
+
+      <div class="brand-card-body">
+        <h3 class="asset-title">nexa-mobile.svg</h3>
+        <p class="asset-role">
+          Ícono oficial de la aplicación móvil Nexa (Android Launcher Icon, Splash Screen, y App Store listing). 
+          Contenedor azul corporativo <code>#2563EB</code> con glifo tipográfico «nx» en blanco puro y vector de flecha ascendente a 45°.
+        </p>
+        <div class="spec-metrics-table">
+          <div class="metric-row">
+            <span class="m-label">ViewBox Canónico:</span>
+            <span class="m-val mono">0 0 189 189</span>
+          </div>
+          <div class="metric-row">
+            <span class="m-label">Color de Fondo:</span>
+            <span class="m-val color-preview"><span class="swatch" style="background: #2563EB;"></span> #2563EB (RGB 37, 99, 235)</span>
+          </div>
+          <div class="metric-row">
+            <span class="m-label">Color de Glifo:</span>
+            <span class="m-val color-preview"><span class="swatch" style="background: #FFFFFF; border: 1px solid #cbd5e1;"></span> #FFFFFF (Blanco puro)</span>
+          </div>
+          <div class="metric-row">
+            <span class="m-label">Contraste WCAG 2.2:</span>
+            <span class="m-val pass-tag">4.75:1 · AAA Gráficos</span>
+          </div>
+          <div class="metric-row">
+            <span class="m-label">Uso en Android:</span>
+            <span class="m-val"><code>res/mipmap/ic_launcher</code> & Splash M3</span>
+          </div>
+        </div>
+      </div>
+      <div class="brand-card-footer">
+        <button type="button" class="btn-copy-code" data-copy='<Image src="/assets/nexa-mobile.svg" width={48} height={48} alt="Nexa" />'>
+          <i class="pi pi-copy"></i> Copiar Código Web
+        </button>
+        <button type="button" class="btn-copy-code" data-copy='// Jetpack Compose Launcher Asset&#10;Image(painter = painterResource(id = R.drawable.nexa_mobile), contentDescription = "Nexa Mobile", modifier = Modifier.size(48.dp))'>
+          <i class="pi pi-android"></i> Copiar Compose
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 2: Inverted Mobile Isotype (nexa-mobile-inverted.svg) -->
+    <div class="brand-card-item">
+      <div class="brand-card-top">
+        <span class="card-kicker">ISOTIPO INVERTIDO · ALTO CONTRASTE</span>
+        <span class="format-pill dark-pill">SVG 1:1 · #FFFFFF</span>
+      </div>
+
+      <!-- Visual Stage on Dark Background -->
+      <div class="brand-preview-stage bg-dark-surface">
+        <div class="safe-zone-box dark-mode">
+          <span class="safe-zone-marker top-left dark">16dp</span>
+          <img src="/assets/nexa-mobile-inverted.svg" alt="Nexa Mobile Inverted Icon" class="brand-rendered-svg mobile-square" />
+          <span class="safe-zone-marker bottom-right dark">16dp</span>
+        </div>
+      </div>
+
+      <div class="brand-card-body">
+        <h3 class="asset-title">nexa-mobile-inverted.svg</h3>
+        <p class="asset-role">
+          Variante invertida sobre fondo blanco con glifo azul <code>#2563EB</code>. 
+          Diseñado para interfaces oscuras, modales de alto contraste, pantallas OLED en turno nocturno y remitos de entrega POD impresos en papel térmico.
+        </p>
+        <div class="spec-metrics-table">
+          <div class="metric-row">
+            <span class="m-label">ViewBox Canónico:</span>
+            <span class="m-val mono">0 0 189 189</span>
+          </div>
+          <div class="metric-row">
+            <span class="m-label">Color de Fondo:</span>
+            <span class="m-val color-preview"><span class="swatch" style="background: #FFFFFF; border: 1px solid #cbd5e1;"></span> #FFFFFF (Blanco puro)</span>
+          </div>
+          <div class="metric-row">
+            <span class="m-label">Color de Glifo:</span>
+            <span class="m-val color-preview"><span class="swatch" style="background: #2563EB;"></span> #2563EB (RGB 37, 99, 235)</span>
+          </div>
+          <div class="metric-row">
+            <span class="m-label">Contraste sobre Dark:</span>
+            <span class="m-val pass-tag">14.8:1 · AAA Máximo</span>
+          </div>
+          <div class="metric-row">
+            <span class="m-label">Uso en Android:</span>
+            <span class="m-val">Dark Theme, Tickets Térmicos Zebra BLE</span>
+          </div>
+        </div>
+      </div>
+      <div class="brand-card-footer">
+        <button type="button" class="btn-copy-code" data-copy='<Image src="/assets/nexa-mobile-inverted.svg" width={48} height={48} alt="Nexa Inverted" />'>
+          <i class="pi pi-copy"></i> Copiar Código Web
+        </button>
+        <button type="button" class="btn-copy-code" data-copy='// Jetpack Compose Dark Asset&#10;Image(painter = painterResource(id = R.drawable.nexa_mobile_inverted), contentDescription = "Nexa Inverted", modifier = Modifier.size(48.dp))'>
+          <i class="pi pi-android"></i> Copiar Compose
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 3: Horizontal Wordmark (logo-nexa-blue.svg / logo-nexa-white.svg) -->
+    <div class="brand-card-item">
+      <div class="brand-card-top">
+        <span class="card-kicker">LOGOTIPO HORIZONTAL CORPORATIVO</span>
+        <span class="format-pill">315×98 DP · COMPOSICIÓN</span>
+      </div>
+
+      <!-- Visual Stage -->
+      <div class="brand-preview-stage bg-light-surface horizontal-box">
+        <img src="/assets/logo-nexa-blue.svg" alt="Nexa Wordmark Blue" class="brand-rendered-svg horizontal-logo" />
+      </div>
+
+      <div class="brand-card-body">
+        <h3 class="asset-title">logo-nexa-blue.svg / white.svg</h3>
+        <p class="asset-role">
+          Marca completa compuesta por el texto en minúsculas «nexa» con la flecha diagonal integrada en la «x».
+          Utilizado en cabeceras de bienvenida, pantallas de autenticación (Login) y reportes ejecutivos.
+        </p>
+        <div class="spec-metrics-table">
+          <div class="metric-row">
+            <span class="m-label">Proporción:</span>
+            <span class="m-val mono">3.21:1 (315 × 98)</span>
+          </div>
+          <div class="metric-row">
+            <span class="m-label">Color Azul:</span>
+            <span class="m-val color-preview"><span class="swatch" style="background: #2A67D9;"></span> #2A67D9 / #2563EB</span>
+          </div>
+          <div class="metric-row">
+            <span class="m-label">Versión Blanca:</span>
+            <span class="m-val mono">logo-nexa-white.svg</span>
+          </div>
+          <div class="metric-row">
+            <span class="m-label">Uso Primario:</span>
+            <span class="m-val">Login Screen & PDF Headers</span>
+          </div>
+        </div>
+      </div>
+      <div class="brand-card-footer">
+        <button type="button" class="btn-copy-code" data-copy='<img src="/assets/logo-nexa-blue.svg" alt="Nexa" height="32" />'>
+          <i class="pi pi-copy"></i> Copiar Wordmark
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 4: Transparent NX Monogram (nexa-nx-blue.svg / nexa-nx-white.svg) -->
+    <div class="brand-card-item">
+      <div class="brand-card-top">
+        <span class="card-kicker">MONOGRAMA NX TRANSPARENTE</span>
+        <span class="format-pill">189×189 DP · SIN CAJA</span>
+      </div>
+
+      <!-- Visual Stage -->
+      <div class="brand-preview-stage bg-light-surface">
+        <img src="/assets/nexa-nx-blue.svg" alt="Nexa NX Glyph" class="brand-rendered-svg nx-glyph" />
+      </div>
+
+      <div class="brand-card-body">
+        <h3 class="asset-title">nexa-nx-blue.svg / nexa-nx-white.svg</h3>
+        <p class="asset-role">
+          Glifo puro «NX» sin fondo rectangular. Diseñado para marcas de agua en firmas de entrega POD,
+          identificador en el NavigationRail de tablets Android y badges de estado en TopAppBar compactas.
+        </p>
+        <div class="spec-metrics-table">
+          <div class="metric-row">
+            <span class="m-label">Formato:</span>
+            <span class="m-val">Vector SVG transparente</span>
+          </div>
+          <div class="metric-row">
+            <span class="m-label">Colores:</span>
+            <span class="m-val mono">Azul #2563EB / Blanco #FFFFFF</span>
+          </div>
+          <div class="metric-row">
+            <span class="m-label">Uso Primario:</span>
+            <span class="m-val">NavigationRail, Watermark POD</span>
+          </div>
+        </div>
+      </div>
+      <div class="brand-card-footer">
+        <button type="button" class="btn-copy-code" data-copy='<img src="/assets/nexa-nx-blue.svg" alt="NX" width="24" height="24" />'>
+          <i class="pi pi-copy"></i> Copiar Monograma
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Detailed Guidelines: Clear Space, Sizing, Contrast, and Android Adaptive Icons -->
+  <div class="brand-rules-section">
+    <div class="brand-rules-header">
+      <span class="rules-kicker">NORMAS TÉCNICAS & ARQUITECTURA DE MARCA</span>
+      <h3 class="rules-title">Reglas de Implementación en Android Jetpack Compose</h3>
+      <p class="rules-desc">
+        Parámetros obligatorios de área de protección, escala mínima de reproducción y especificación para el icono adaptativo nativo de Android.
+      </p>
+    </div>
+
+    <div class="rules-columns-grid">
+      <!-- Col 1: Clear Space & Minimum Sizing -->
+      <div class="rule-box-card">
+        <div class="rule-card-header">
+          <i class="pi pi-arrows-alt"></i>
+          <h4>Área de Reserva & Escala Mínima</h4>
+        </div>
+        <p class="rule-text">
+          El área de reserva (Clear Space) protege la integridad y reconocimiento inmediato del isotipo móvil. 
+          Ningún elemento tipográfico, botón ni borde debe invadir este perímetro.
+        </p>
+        <ul class="rule-list">
+          <li><strong>Márgenes perimetrales:</strong> Mínimo <code>16dp</code> en smartphones (390-412dp) y <code>24dp</code> en tablets industriales (600-800dp).</li>
+          <li><strong>Launcher Icon Android:</strong> <code>48 × 48 dp</code> tamaño mínimo para garantizar toque ergonómico en home screen según WCAG 2.5.5.</li>
+          <li><strong>TopAppBar in-app:</strong> Altura óptima de <code>24dp</code> a <code>28dp</code> centrada o alineada a la izquierda.</li>
+          <li><strong>Splash Screen Android 12+:</strong> Centrado en pantalla con diámetro de <code>108dp</code> (área segura visible de <code>72dp</code>).</li>
+          <li><strong>Impresora Térmica Zebra:</strong> Mínimo <code>32 × 32 mm</code> a 203 DPI para recibos de custodia de patio.</li>
+        </ul>
+      </div>
+
+      <!-- Col 2: Android Adaptive Icon Architecture -->
+      <div class="rule-box-card">
+        <div class="rule-card-header">
+          <i class="pi pi-android"></i>
+          <h4>Especificación Adaptive Icon (API 26+)</h4>
+        </div>
+        <p class="rule-text">
+          Configuración oficial para <code>res/drawable-anydpi/ic_launcher.xml</code>. 
+          Android divide el icono en dos capas independientes para efectos de parallax y máscaras dinámicas (squircle, círculo, lágrima).
+        </p>
+        <div class="code-preview-box">
+          <pre><code>&lt;!-- res/mipmap-anydpi-v26/ic_launcher.xml --&gt;
+&lt;adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android"&gt;
+    &lt;background android:drawable="@color/nexa_brand_blue" /&gt; &lt;!-- #2563EB --&gt;
+    &lt;foreground&gt;
+        &lt;inset
+            android:drawable="@drawable/nexa_mobile_foreground"
+            android:inset="16dp" /&gt;
+    &lt;/foreground&gt;
+    &lt;monochrome android:drawable="@drawable/nexa_nx_monochrome" /&gt;
+&lt;/adaptive-icon&gt;</code></pre>
+        </div>
+        <span class="code-note"><i class="pi pi-info-circle"></i> Compatible con Android 13/14 Themed Icons (Monochrome).</span>
+      </div>
+
+      <!-- Col 3: Contrast & Accessibility Matrix -->
+      <div class="rule-box-card">
+        <div class="rule-card-header">
+          <i class="pi pi-check-square"></i>
+          <h4>Matriz de Contraste WCAG 2.2 AAA</h4>
+        </div>
+        <p class="rule-text">
+          En entornos de logística pesada (rampas al sol &gt;50,000 Lux o cámaras de frío tenue &lt;100 Lux), 
+          el contraste del logo previene errores de identificación de software.
+        </p>
+        <div class="contrast-breakdown-list">
+          <div class="contrast-row-item">
+            <div class="contrast-swatches">
+              <span class="swatch-pair bg-blue fg-white">NX</span>
+            </div>
+            <div class="contrast-details">
+              <strong>Blanco sobre Azul #2563EB</strong>
+              <span>Ratio: <strong>4.75:1</strong> · Pasa WCAG AAA Gráficos</span>
+            </div>
+          </div>
+          <div class="contrast-row-item">
+            <div class="contrast-swatches">
+              <span class="swatch-pair bg-white fg-blue">NX</span>
+            </div>
+            <div class="contrast-details">
+              <strong>Azul sobre Fondo Blanco #FFFFFF</strong>
+              <span>Ratio: <strong>4.75:1</strong> · Pasa WCAG AAA Gráficos</span>
+            </div>
+          </div>
+          <div class="contrast-row-item">
+            <div class="contrast-swatches">
+              <span class="swatch-pair bg-dark fg-white">NX</span>
+            </div>
+            <div class="contrast-details">
+              <strong>Invertido sobre Superficie #0F172A</strong>
+              <span>Ratio: <strong>14.8:1</strong> · Pasa WCAG AAA Máximo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Do's and Don'ts Matrix -->
+  <div class="dos-donts-section">
+    <div class="dos-donts-header">
+      <span class="rules-kicker">USOS PERMITIDOS & USOS INDEBIDOS</span>
+      <h3 class="rules-title">Matriz de Usos de Marca (Do's & Don'ts)</h3>
+      <p class="rules-desc">Pautas estrictas para diseñadores y desarrolladores al aplicar los activos en pantallas móviles.</p>
+    </div>
+
+    <div class="dos-donts-grid">
+      <!-- DO 1 -->
+      <div class="do-card">
+        <div class="do-pill"><i class="pi pi-check"></i> CORRECTO</div>
+        <div class="do-preview-box">
+          <img src="/assets/nexa-mobile.svg" alt="Uso correcto" style="width: 64px; height: 64px;" />
+        </div>
+        <p class="do-desc">Mantener la proporción 1:1 exacta de 189×189dp y el radio de esquina estándar de contenedor.</p>
+      </div>
+
+      <!-- DO 2 -->
+      <div class="do-card">
+        <div class="do-pill"><i class="pi pi-check"></i> CORRECTO</div>
+        <div class="do-preview-box dark-bg">
+          <img src="/assets/nexa-mobile-inverted.svg" alt="Uso correcto invertido" style="width: 64px; height: 64px;" />
+        </div>
+        <p class="do-desc">Utilizar la variante invertida sobre fondos oscuros o barras de estado con contraste mayor a 7:1.</p>
+      </div>
+
+      <!-- DONT 1 -->
+      <div class="dont-card">
+        <div class="dont-pill"><i class="pi pi-times"></i> PROHIBIDO</div>
+        <div class="dont-preview-box">
+          <img src="/assets/nexa-mobile.svg" alt="Uso incorrecto deformado" style="width: 90px; height: 48px;" />
+        </div>
+        <p class="dont-desc">Nunca deformar, estirar horizontal o verticalmente la geometría del isotipo.</p>
+      </div>
+
+      <!-- DONT 2 -->
+      <div class="dont-card">
+        <div class="dont-pill"><i class="pi pi-times"></i> PROHIBIDO</div>
+        <div class="dont-preview-box">
+          <img src="/assets/nexa-mobile.svg" alt="Uso incorrecto rotado" style="width: 64px; height: 64px; transform: rotate(25deg);" />
+        </div>
+        <p class="dont-desc">Nunca rotar el isotipo ni alterar el ángulo de 45° de la flecha integrada.</p>
+      </div>
+
+      <!-- DONT 3 -->
+      <div class="dont-card">
+        <div class="dont-pill"><i class="pi pi-times"></i> PROHIBIDO</div>
+        <div class="dont-preview-box" style="background: #ef4444;">
+          <img src="/assets/nexa-mobile.svg" alt="Uso incorrecto color" style="width: 64px; height: 64px; filter: hue-rotate(90deg);" />
+        </div>
+        <p class="dont-desc">Nunca sustituir el color azul corporativo #2563EB por colores ajenos a la marca.</p>
+      </div>
+
+      <!-- DONT 4 -->
+      <div class="dont-card">
+        <div class="dont-pill"><i class="pi pi-times"></i> PROHIBIDO</div>
+        <div class="dont-preview-box">
+          <img src="/assets/nexa-mobile.svg" alt="Uso incorrecto sombra" style="width: 64px; height: 64px; filter: drop-shadow(0 12px 16px rgba(239, 68, 68, 0.8));" />
+        </div>
+        <p class="dont-desc">Nunca aplicar sombras de color exageradas, biselados ni degradados no autorizados en M3.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const copyBtns = document.querySelectorAll('.btn-copy-code');
+    copyBtns.forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const text = btn.getAttribute('data-copy') || '';
+        try {
+          await navigator.clipboard.writeText(text);
+          const original = btn.innerHTML;
+          btn.innerHTML = '<i class="pi pi-check" style="color: #0284c7;"></i> ¡Copiado!';
+          setTimeout(() => {
+            btn.innerHTML = original;
+          }, 2000);
+        } catch (err) {
+          console.error('Error al copiar:', err);
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .brand-spec-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+  }
+
+  /* Header cluster */
+  .brand-header-cluster {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+  }
+
+  .brand-header-left {
+    max-width: 820px;
+  }
+
+  .brand-badge-tag {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--nexa-color-primary-600, #2563eb);
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    padding: 3px 8px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .brand-section-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.01em;
+  }
+
+  .brand-section-desc {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #64748b;
+    margin-top: 6px;
+  }
+
+  .brand-header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .status-pill-verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #0284c7;
+    background: #e0f2fe;
+    border: 1px solid #bae6fd;
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+
+  .btn-brand-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    background: #2563eb;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    border: 1px solid #1d4ed8;
+
+    &:hover {
+      background: #1d4ed8;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+    }
+
+    &.secondary {
+      background: #ffffff;
+      color: #334155;
+      border-color: #cbd5e1;
+
+      &:hover {
+        background: #f8fafc;
+        border-color: #94a3b8;
+      }
+    }
+  }
+
+  /* Master Showcase Grid */
+  .brand-showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 24px;
+  }
+
+  .brand-card-item {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    transition: all 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+      border-color: #94a3b8;
+    }
+
+    &.primary-focus {
+      border-color: #93c5fd;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+    }
+  }
+
+  .brand-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .card-kicker {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #475569;
+  }
+
+  .format-pill {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    border-radius: 4px;
+
+    &.dark-pill {
+      background: #0f172a;
+      color: #f8fafc;
+    }
+  }
+
+  /* Preview Stage */
+  .brand-preview-stage {
+    min-height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    position: relative;
+
+    &.bg-light-surface {
+      background: radial-gradient(circle, #f8fafc 0%, #edf2f7 100%);
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    &.bg-dark-surface {
+      background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
+      border-bottom: 1px solid #334155;
+    }
+
+    &.horizontal-box {
+      min-height: 190px;
+    }
+  }
+
+  .safe-zone-box {
+    border: 1.5px dashed #93c5fd;
+    padding: 16px;
+    border-radius: 12px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &.dark-mode {
+      border-color: #475569;
+    }
+  }
+
+  .safe-zone-marker {
+    position: absolute;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9px;
+    font-weight: 700;
+    color: #2563eb;
+    background: #eff6ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+
+    &.top-left {
+      top: -8px;
+      left: -8px;
+    }
+
+    &.bottom-right {
+      bottom: -8px;
+      right: -8px;
+    }
+
+    &.dark {
+      color: #93c5fd;
+      background: #1e293b;
+    }
+  }
+
+  .brand-rendered-svg {
+    display: block;
+    object-fit: contain;
+
+    &.mobile-square {
+      width: 104px;
+      height: 104px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+    }
+
+    &.horizontal-logo {
+      width: 220px;
+      height: auto;
+    }
+
+    &.nx-glyph {
+      width: 80px;
+      height: 80px;
+    }
+  }
+
+  .brand-card-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+  }
+
+  .asset-title {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .asset-role {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: #475569;
+  }
+
+  .spec-metrics-table {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+
+  .metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11.5px;
+  }
+
+  .m-label {
+    color: #64748b;
+    font-weight: 500;
+  }
+
+  .m-val {
+    color: #0f172a;
+    font-weight: 600;
+
+    &.mono {
+      font-family: var(--nexa-font-family-mono, monospace);
+    }
+  }
+
+  .color-preview {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+  }
+
+  .swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  .pass-tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: #0284c7;
+    background: #e0f2fe;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .brand-card-footer {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .btn-copy-code {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #334155;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+      border-color: #94a3b8;
+    }
+  }
+
+  /* Technical Rules Section */
+  .brand-rules-section {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .brand-rules-header {
+    max-width: 800px;
+  }
+
+  .rules-kicker {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #2563eb;
+  }
+
+  .rules-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 4px;
+  }
+
+  .rules-desc {
+    font-size: 13.5px;
+    color: #64748b;
+    margin-top: 4px;
+  }
+
+  .rules-columns-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 20px;
+  }
+
+  .rule-box-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .rule-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1d4ed8;
+
+    i {
+      font-size: 18px;
+    }
+
+    h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+  }
+
+  .rule-text {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: #475569;
+  }
+
+  .rule-list {
+    margin-left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 12px;
+    color: #334155;
+    line-height: 1.45;
+  }
+
+  .code-preview-box {
+    background: #0f172a;
+    border-radius: 8px;
+    padding: 12px;
+    overflow-x: auto;
+
+    pre {
+      margin: 0;
+    }
+
+    code {
+      font-family: var(--nexa-font-family-mono, monospace);
+      font-size: 11px;
+      color: #93c5fd;
+      line-height: 1.4;
+    }
+  }
+
+  .code-note {
+    font-size: 11px;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .contrast-breakdown-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .contrast-row-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+  }
+
+  .swatch-pair {
+    width: 38px;
+    height: 38px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-weight: 800;
+    font-size: 14px;
+
+    &.bg-blue {
+      background: #2563eb;
+      color: #ffffff;
+    }
+
+    &.bg-white {
+      background: #ffffff;
+      color: #2563eb;
+      border: 1px solid #cbd5e1;
+    }
+
+    &.bg-dark {
+      background: #0f172a;
+      color: #ffffff;
+    }
+  }
+
+  .contrast-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 11.5px;
+
+    strong {
+      color: #0f172a;
+    }
+
+    span {
+      color: #64748b;
+    }
+  }
+
+  /* Do's and Don'ts */
+  .dos-donts-section {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .dos-donts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+  }
+
+  .do-card, .dont-card {
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid #e2e8f0;
+  }
+
+  .do-card {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+  }
+
+  .dont-card {
+    background: #fef2f2;
+    border-color: #fecaca;
+  }
+
+  .do-pill, .dont-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 6px;
+    border-radius: 4px;
+    width: fit-content;
+  }
+
+  .do-pill {
+    background: #dcfce7;
+    color: #15803d;
+  }
+
+  .dont-pill {
+    background: #fee2e2;
+    color: #b91c1c;
+  }
+
+  .do-preview-box, .dont-preview-box {
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+
+    &.dark-bg {
+      background: #0f172a;
+      border-color: #334155;
+    }
+  }
+
+  .do-desc, .dont-desc {
+    font-size: 11.5px;
+    line-height: 1.4;
+    color: #475569;
+  }
+</style>

@@ -32,7 +32,7 @@
     <!-- Quick Filter / Device Jump Bar -->
     <div class="device-switcher-bar" role="tablist" aria-label="Filtro de factor de forma Android">
       <button type="button" class="dev-filter-btn active" data-filter="all">
-        <i class="pi pi-th-large"></i> Todos los Dispositivos (5)
+        <i class="pi pi-th-large"></i> Todos los Dispositivos (7)
       </button>
       <button type="button" class="dev-filter-btn" data-filter="s24">
         <i class="pi pi-mobile"></i> Galaxy S24 (390dp)
@@ -43,8 +43,14 @@
       <button type="button" class="dev-filter-btn" data-filter="zebra">
         <i class="pi pi-shield"></i> Zebra TC58 (412dp)
       </button>
+      <button type="button" class="dev-filter-btn" data-filter="mc9300">
+        <i class="pi pi-qrcode"></i> Zebra MC9300 (480dp)
+      </button>
       <button type="button" class="dev-filter-btn" data-filter="tab-active">
         <i class="pi pi-tablet"></i> Tab Active 8" (600dp)
+      </button>
+      <button type="button" class="dev-filter-btn" data-filter="zfold">
+        <i class="pi pi-clone"></i> Z Fold 5 (700dp)
       </button>
       <button type="button" class="dev-filter-btn" data-filter="tab-s9">
         <i class="pi pi-desktop"></i> Tab S9 11" (TwoPane)
@@ -1222,6 +1228,409 @@
               </div>
 
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         DEVICE 6: Samsung Galaxy Z Fold 5 (700×840dp Foldable Unfolded)
+         DUAL-PANE DISPATCH ROUTE & REAL-TIME BLE COLD-CHAIN TELEMETRY
+         ========================================================================= -->
+    <div class="device-card-wrapper full-width-tablet" data-device="zfold" id="device-zfold">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">DISPOSITIVO 6 · PLEGABLE EXPANDIDO DUAL-PANE (700×840dp)</span>
+          <h3 class="device-name">Samsung Galaxy Z Fold 5 (Foldable Unfolded 7.6")</h3>
+          <p class="device-sub">Pantalla: Despacho Dual-Pane & Monitoreo BLE de Cadena de Frío con Separación Hinge-Aware</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill fold"><i class="pi pi-clone"></i> Foldable 700dp</span>
+          <span class="meta-pill hinge"><i class="pi pi-arrows-h"></i> Hinge-Aware TwoPane</span>
+          <span class="meta-pill role"><i class="pi pi-user"></i> Supervisor de Ruta</span>
+        </div>
+      </div>
+
+      <!-- Physical Foldable Chassis -->
+      <div class="android-chassis phone-zfold">
+        <div class="chassis-punch-hole zfold-camera"></div>
+        <div class="chassis-fold-crease" aria-hidden="true"></div>
+
+        <!-- Screen Surface -->
+        <div class="android-screen-surface zfold-screen-surface">
+          <!-- Android 14 System Bar -->
+          <div class="m3-system-bar">
+            <span class="sys-time">14:35</span>
+            <div class="fold-center-status">
+              <span class="fold-status-chip"><i class="pi pi-compass"></i> Ruta Fría R-402 · Ventana 14:00 - 16:30</span>
+            </div>
+            <div class="sys-icons">
+              <span class="sys-tech">5G Ultra</span>
+              <span class="connectivity-dot-online">● BLE 5.3 Enlazado</span>
+              <span class="sys-battery">88%</span>
+            </div>
+          </div>
+
+          <!-- M3 TopAppBar -->
+          <header class="m3-top-bar zfold-top-bar">
+            <div class="top-bar-left-cluster">
+              <img src="/assets/nexa-mobile.svg" alt="Nexa Mobile" class="zfold-brand-logo" />
+              <div class="zfold-title-col">
+                <span class="zfold-brand-sub">NEXA DISPATCH & COLD CHAIN</span>
+                <h4 class="top-bar-title">Supervisión de Ruta R-402 · Stop 4/8</h4>
+              </div>
+            </div>
+            <div class="top-bar-right-cluster">
+              <button type="button" class="top-bar-btn" title="Historial GPS">
+                <i class="pi pi-history"></i>
+              </button>
+              <button type="button" class="top-bar-btn notif" title="Alertas de Cadena de Frío">
+                <i class="pi pi-bell"></i>
+                <span class="notif-badge-number">1</span>
+              </button>
+            </div>
+          </header>
+
+          <!-- Dual-Pane Body -->
+          <div class="zfold-twopane-grid">
+            <!-- PANE 1 (LEFT): Route Dispatch & Delivery Order -->
+            <div class="zfold-pane-left">
+              <div class="pane-header-strip">
+                <span class="pane-title"><i class="pi pi-map-marker"></i> Parada Activa: Metro San Miguel</span>
+                <span class="badge-status-onroute">En Descarga</span>
+              </div>
+
+              <!-- Customer & Order Card -->
+              <div class="zfold-order-card">
+                <div class="order-card-header">
+                  <div>
+                    <span class="order-client-name">Supermercados Peruanos S.A.</span>
+                    <span class="order-code">FAC-2026-90412 · Lote Congelado #CAR-991</span>
+                  </div>
+                  <span class="order-qty-pill">140 Cajas</span>
+                </div>
+                
+                <div class="order-spec-grid">
+                  <div class="spec-cell">
+                    <span class="spec-label">Rango Térmico</span>
+                    <span class="spec-val">-18.0°C a -22.0°C</span>
+                  </div>
+                  <div class="spec-cell">
+                    <span class="spec-label">Receptor Autorizado</span>
+                    <span class="spec-val">Carlos M. Huamán (DNI: 43819204)</span>
+                  </div>
+                </div>
+
+                <div class="order-actions-bar">
+                  <button type="button" class="btn-primary-m3">
+                    <i class="pi pi-pencil"></i> Capturar Firma Digital POD
+                  </button>
+                  <button type="button" class="btn-secondary-m3">
+                    <i class="pi pi-camera"></i> Evidencia (2/3)
+                  </button>
+                </div>
+              </div>
+
+              <!-- Next Stops Queue -->
+              <div class="stops-queue-container">
+                <span class="queue-heading">Siguientes Paradas de la Ruta:</span>
+                <div class="stop-mini-item">
+                  <span class="stop-num">5</span>
+                  <div class="stop-info">
+                    <span class="stop-name">Wong Óvalo Gutiérrez (Miraflores)</span>
+                    <span class="stop-detail">ETA 15:20 · 85 Cajas Frescos (2°-6°C)</span>
+                  </div>
+                  <span class="stop-pill pending">Pendiente</span>
+                </div>
+                <div class="stop-mini-item">
+                  <span class="stop-num">6</span>
+                  <div class="stop-info">
+                    <span class="stop-name">Plaza Vea Salaverry (Jesús María)</span>
+                    <span class="stop-detail">ETA 16:05 · 110 Cajas Mixtas</span>
+                  </div>
+                  <span class="stop-pill pending">Pendiente</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- HINGE SEPARATOR -->
+            <div class="zfold-hinge-divider" aria-hidden="true">
+              <div class="hinge-line"></div>
+            </div>
+
+            <!-- PANE 2 (RIGHT): Live BLE Cold-Chain Sensor Telemetry -->
+            <div class="zfold-pane-right">
+              <div class="pane-header-strip">
+                <span class="pane-title"><i class="pi pi-snowflake"></i> Sensor BLE Sensirion SHT40 (#089)</span>
+                <span class="badge-status-normal">● Calibración ISO-17025</span>
+              </div>
+
+              <!-- Live Sensor Metric Card -->
+              <div class="telemetry-gauge-card">
+                <div class="gauge-main-row">
+                  <div class="metric-reading-col">
+                    <span class="metric-title">Temperatura Cámara Fría</span>
+                    <span class="metric-big-value temp-normal">-19.4°C</span>
+                    <span class="metric-limits">Setpoint: -20.0°C · Umbral Máx: -18.0°C</span>
+                  </div>
+                  <div class="metric-reading-col">
+                    <span class="metric-title">Humedad Relativa</span>
+                    <span class="metric-big-value rh-val">79.5%</span>
+                    <span class="metric-limits">Sensor BLE: 2.4 GHz (-62 dBm)</span>
+                  </div>
+                </div>
+
+                <!-- SVG Thermal Sparkline -->
+                <div class="thermal-sparkline-box">
+                  <span class="sparkline-title">Historial Térmico Últimos 45 min (HACCP Conforme)</span>
+                  <svg class="fold-chart-svg" viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Danger Zone Limit -->
+                    <line x1="20" y1="20" x2="300" y2="20" stroke="#fecaca" stroke-dasharray="3,3" stroke-width="1.5" />
+                    <text x="5" y="16" font-size="8" font-weight="700" fill="#dc2626">-18.0°C (Límite)</text>
+                    <!-- Safe Zone -->
+                    <rect x="20" y="20" width="280" height="60" fill="rgba(240, 253, 250, 0.5)" />
+                    <!-- Curve -->
+                    <path d="M 20 60 Q 70 55, 120 62 T 200 58 T 260 64 T 300 60" fill="none" stroke="#0284c7" stroke-width="2.5" />
+                    <!-- Points -->
+                    <circle cx="20" cy="60" r="3" fill="#0284c7" />
+                    <circle cx="120" cy="62" r="3" fill="#0284c7" />
+                    <circle cx="200" cy="58" r="3" fill="#0284c7" />
+                    <circle cx="300" cy="60" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
+                    <text x="270" y="82" font-size="8.5" font-weight="700" fill="#2563eb">-19.4°C</text>
+                  </svg>
+                </div>
+
+                <!-- Chamber Door Status -->
+                <div class="door-status-row">
+                  <div class="door-indicator">
+                    <span class="door-dot closed"></span>
+                    <span class="door-text">Sello de Puerta Furgón: <strong>CERRADO & SELLADO</strong></span>
+                  </div>
+                  <span class="audit-hash-code">HMAC: 0x8F2A...C4B9</span>
+                </div>
+              </div>
+
+              <!-- Mitigation / Sync Trigger -->
+              <div class="telemetry-actions">
+                <button type="button" class="btn-outline-m3">
+                  <i class="pi pi-sync"></i> Forzar Lectura BLE
+                </button>
+                <button type="button" class="btn-warn-m3">
+                  <i class="pi pi-exclamation-triangle"></i> Protocolo HACCP
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Persistent M3 Bottom Nav -->
+          <nav class="m3-bottom-nav zfold-bottom-nav" aria-label="Navegación Móvil Inferior">
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator"><i class="pi pi-home"></i></div>
+              <span class="bnav-label">Inicio</span>
+            </div>
+            <div class="bnav-item active">
+              <div class="bnav-pill-indicator"><i class="pi pi-map"></i></div>
+              <span class="bnav-label">Rutas</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator"><i class="pi pi-snowflake"></i></div>
+              <span class="bnav-label">Telemetría</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator"><i class="pi pi-check-circle"></i></div>
+              <span class="bnav-label">Entregas</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator"><i class="pi pi-user"></i></div>
+              <span class="bnav-label">Perfil</span>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         DEVICE 7: Zebra MC9300 Ultra-Rugged Terminal Gun (480×800dp Industrial)
+         HIGH-SPEED SUB-ZERO FEFO SCANNING WITH PHYSICAL KEYPAD INTEGRATION
+         ========================================================================= -->
+    <div class="device-card-wrapper" data-device="mc9300" id="device-mc9300">
+      <div class="device-meta-header">
+        <div class="meta-title-col">
+          <span class="device-eyebrow">DISPOSITIVO 7 · TERMINAL RUGGED CON PISTOLA & TECLADO (480×800dp)</span>
+          <h3 class="device-name">Zebra MC9300 Ultra-Rugged Gun Terminal</h3>
+          <p class="device-sub">Pantalla: Picking FEFO de Alta Velocidad en Almacén Frigorífico (-25°C) con Mapeo de Teclas Físicas</p>
+        </div>
+        <div class="meta-pills">
+          <span class="meta-pill rugged"><i class="pi pi-qrcode"></i> Zebra MC9300</span>
+          <span class="meta-pill cold"><i class="pi pi-snowflake"></i> Frío -25°C</span>
+          <span class="meta-pill keys"><i class="pi pi-table"></i> Atajos Físicos [ENT/F1]</span>
+        </div>
+      </div>
+
+      <!-- Physical Rugged Gun Chassis with Scanner Bumper and Keypad -->
+      <div class="android-chassis phone-mc9300">
+        <!-- Top Laser Scanner Bumper -->
+        <div class="mc9300-scanner-bumper">
+          <div class="mc9300-scan-optic">
+            <span class="scanner-amber-stripe"></span>
+            <span class="mc9300-lens">SE4850 EXTENDED RANGE SCANNER</span>
+            <span class="scanner-amber-stripe"></span>
+          </div>
+          <span class="zebra-brand-label">ZEBRA MC9300 · IP67 FROST-FREE</span>
+        </div>
+
+        <!-- Touchscreen Surface -->
+        <div class="android-screen-surface mc9300-screen-surface">
+          <!-- Industrial High-Contrast System Bar -->
+          <div class="m3-system-bar zebra-sys-bar">
+            <span class="sys-time">14:35</span>
+            <div class="zebra-scan-status">
+              <span class="scan-laser-ready"><i class="pi pi-check"></i> SCANNER LISTO (Gatillo Activo)</span>
+            </div>
+            <div class="sys-icons">
+              <span class="sys-tech">WLAN 5G</span>
+              <span class="sys-battery">94%</span>
+            </div>
+          </div>
+
+          <!-- M3 TopAppBar with Brand and Shelf Context -->
+          <header class="m3-top-bar zebra-top-bar">
+            <div class="top-bar-left-cluster">
+              <img src="/assets/nexa-mobile.svg" alt="Nexa" class="mc9300-brand-icon" />
+              <div class="zebra-brand-col">
+                <span class="zebra-sub-loc">CÁMARA FRÍA 02 · SECTOR CARNES</span>
+                <h4 class="top-bar-title">Picking FEFO de Alta Velocidad</h4>
+              </div>
+            </div>
+            <div class="top-bar-right-cluster">
+              <span class="key-indicator-pill">[ESC] Atrás</span>
+            </div>
+          </header>
+
+          <!-- Picking FEFO Interface -->
+          <div class="mc9300-content-flow">
+            <!-- Target Shelf Location Banner -->
+            <div class="shelf-location-banner">
+              <div class="shelf-label-row">
+                <span class="shelf-eyebrow">UBICACIÓN OBJETIVO EN RACK</span>
+                <span class="shelf-fefo-badge"><i class="pi pi-clock"></i> FEFO Prioritario #1</span>
+              </div>
+              <div class="shelf-code-display">
+                PASILLO C · RACK 04 · NIVEL 2 <span class="shelf-code-tag">[C-04-2]</span>
+              </div>
+            </div>
+
+            <!-- Target Product & Barcode Box -->
+            <div class="picking-target-card">
+              <div class="product-id-row">
+                <div class="product-names">
+                  <h5 class="prod-title">Pechuga de Pollo Fresca Congelada (Caja 15kg)</h5>
+                  <span class="prod-sku">SKU: PO-FRES-15K · EAN-128 / GS1 DataBar</span>
+                </div>
+                <div class="picking-progress-badge">
+                  <span class="pick-curr">12</span> / <span class="pick-total">20</span> Cajas
+                </div>
+              </div>
+
+              <!-- Barcode Scan Reticle -->
+              <div class="barcode-reticle-box">
+                <div class="barcode-stripes-art" aria-hidden="true">
+                  <span class="b-line w2"></span><span class="b-line w1"></span><span class="b-line w3"></span>
+                  <span class="b-line w1"></span><span class="b-line w2"></span><span class="b-line w4"></span>
+                  <span class="b-line w1"></span><span class="b-line w2"></span><span class="b-line w1"></span>
+                  <span class="b-line w3"></span><span class="b-line w2"></span><span class="b-line w1"></span>
+                </div>
+                <div class="barcode-decoded-data">
+                  <span class="decoded-label">Último Código Leído:</span>
+                  <code class="decoded-code">(01)07750123456789(17)261130(10)LOT-2026-F9</code>
+                </div>
+              </div>
+
+              <div class="fefo-meta-grid">
+                <div class="fefo-cell">
+                  <span class="f-label">Fecha Vencimiento</span>
+                  <span class="f-val urgent">30-NOV-2026</span>
+                </div>
+                <div class="fefo-cell">
+                  <span class="f-label">Temperatura Req.</span>
+                  <span class="f-val">-18°C a -22°C</span>
+                </div>
+                <div class="fefo-cell">
+                  <span class="f-label">Lote Fabricante</span>
+                  <span class="f-val">LOT-2026-F9</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Physical Key Action Shortcuts -->
+            <div class="physical-shortcuts-strip">
+              <button type="button" class="btn-hardware-primary">
+                <span class="hw-key-cap">[ENT]</span>
+                <span class="hw-key-label">Confirmar Pallet / Caja</span>
+              </button>
+              <div class="hw-sub-actions">
+                <button type="button" class="btn-hardware-sub">
+                  <span class="hw-key-cap sub">[F1]</span> Discrepancia Lote
+                </button>
+                <button type="button" class="btn-hardware-sub">
+                  <span class="hw-key-cap sub">[F2]</span> Imprimir EAN-128
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Navigation Bar -->
+          <nav class="m3-bottom-nav mc9300-nav" aria-label="Navegación Zebra MC9300">
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator"><i class="pi pi-home"></i></div>
+              <span class="bnav-label">WMS</span>
+            </div>
+            <div class="bnav-item active">
+              <div class="bnav-pill-indicator"><i class="pi pi-box"></i></div>
+              <span class="bnav-label">Picking [1]</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator"><i class="pi pi-sync"></i></div>
+              <span class="bnav-label">Muelle [2]</span>
+            </div>
+            <div class="bnav-item">
+              <div class="bnav-pill-indicator"><i class="pi pi-cog"></i></div>
+              <span class="bnav-label">Ajustes [3]</span>
+            </div>
+          </nav>
+        </div>
+
+        <!-- Physical Elastomeric Keypad Chassis Section -->
+        <div class="mc9300-physical-keypad" aria-label="Teclado Físico Industrial Zebra MC9300">
+          <div class="keypad-brand-row">
+            <span class="keypad-label">ZEBRA 38-KEY FUNCTION MATRIX</span>
+            <div class="keypad-led-status">
+              <span class="led-dot green"></span>
+              <span class="led-dot blue"></span>
+            </div>
+          </div>
+          <!-- Function Keys Row -->
+          <div class="keypad-row fn-row">
+            <div class="key-cap fn"><span class="k-label">F1</span></div>
+            <div class="key-cap fn"><span class="k-label">F2</span></div>
+            <div class="key-cap fn"><span class="k-label">F3</span></div>
+            <div class="key-cap fn"><span class="k-label">F4</span></div>
+            <div class="key-cap fn esc"><span class="k-label">ESC</span></div>
+          </div>
+          <!-- Numeric Grid with Amber Big Enter -->
+          <div class="keypad-numeric-grid">
+            <div class="key-cap num"><span class="k-label">7</span></div>
+            <div class="key-cap num"><span class="k-label">8</span></div>
+            <div class="key-cap num"><span class="k-label">9</span></div>
+            <div class="key-cap fn tab"><span class="k-label">TAB</span></div>
+            <div class="key-cap num"><span class="k-label">4</span></div>
+            <div class="key-cap num"><span class="k-label">5</span></div>
+            <div class="key-cap num"><span class="k-label">6</span></div>
+            <div class="key-cap num bs"><span class="k-label">BKSP</span></div>
+            <div class="key-cap num"><span class="k-label">1</span></div>
+            <div class="key-cap num"><span class="k-label">2</span></div>
+            <div class="key-cap num"><span class="k-label">3</span></div>
+            <div class="key-cap ent-key"><span class="k-label">ENT ↵</span></div>
           </div>
         </div>
       </div>
@@ -3021,4 +3430,865 @@
   }
 
   .note-cyan { color: #0284c7; font-weight: 600; }
+
+  /* ==========================================================================
+     DEVICE 6: SAMSUNG GALAXY Z FOLD 5 (FOLDABLE 700DP DUAL-PANE)
+     ========================================================================== */
+  .android-chassis.phone-zfold {
+    width: min(720px, 100%);
+    min-height: 720px;
+    border-radius: 24px;
+    border: 4px solid #334155;
+    box-shadow: 0 16px 48px rgba(15, 23, 42, 0.22);
+    position: relative;
+    background: #0f172a;
+    padding: 10px;
+    margin: 12px auto;
+  }
+
+  .zfold-camera {
+    position: absolute;
+    top: 14px;
+    left: 75%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background: #000;
+    border-radius: 50%;
+    z-index: 25;
+  }
+
+  .chassis-fold-crease {
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 50%;
+    width: 2px;
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    z-index: 22;
+    pointer-events: none;
+  }
+
+  .zfold-screen-surface {
+    background: #f8fafc;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 700px;
+  }
+
+  .fold-center-status {
+    font-size: 11px;
+    color: #475569;
+  }
+
+  .fold-status-chip {
+    background: #e0f2fe;
+    color: #0369a1;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .zfold-top-bar {
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .zfold-brand-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+  }
+
+  .zfold-title-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .zfold-brand-sub {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #2563eb;
+    text-transform: uppercase;
+  }
+
+  .zfold-twopane-grid {
+    display: grid;
+    grid-template-columns: 1fr 2px 1fr;
+    flex: 1;
+    background: #f8fafc;
+    min-height: 580px;
+  }
+
+  .zfold-pane-left, .zfold-pane-right {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: #ffffff;
+  }
+
+  .zfold-hinge-divider {
+    background: #cbd5e1;
+    height: 100%;
+    position: relative;
+  }
+
+  .pane-header-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .pane-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #0f172a;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .badge-status-onroute {
+    font-size: 10px;
+    font-weight: 700;
+    background: #dbeafe;
+    color: #1d4ed8;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  .badge-status-normal {
+    font-size: 10px;
+    font-weight: 700;
+    background: #dcfce7;
+    color: #15803d;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  .zfold-order-card, .telemetry-gauge-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .order-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .order-client-name {
+    font-size: 13px;
+    font-weight: 800;
+    color: #0f172a;
+    display: block;
+  }
+
+  .order-code {
+    font-size: 10px;
+    color: #64748b;
+    font-family: monospace;
+  }
+
+  .order-qty-pill {
+    background: #eff6ff;
+    color: #2563eb;
+    font-weight: 700;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid #bfdbfe;
+  }
+
+  .order-spec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    background: #ffffff;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #f1f5f9;
+  }
+
+  .spec-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .spec-label {
+    font-size: 9px;
+    color: #64748b;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .spec-val {
+    font-size: 11px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .order-actions-bar {
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn-primary-m3 {
+    flex: 2;
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 44px;
+  }
+
+  .btn-secondary-m3 {
+    flex: 1;
+    background: #ffffff;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 44px;
+  }
+
+  .stops-queue-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .queue-heading {
+    font-size: 10px;
+    font-weight: 800;
+    color: #64748b;
+    text-transform: uppercase;
+  }
+
+  .stop-mini-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f8fafc;
+    border: 1px solid #f1f5f9;
+    padding: 6px 10px;
+    border-radius: 8px;
+  }
+
+  .stop-num {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    color: #334155;
+    font-size: 10px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stop-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stop-name {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  .stop-detail {
+    font-size: 9.5px;
+    color: #64748b;
+  }
+
+  .stop-pill.pending {
+    font-size: 9.5px;
+    background: #f1f5f9;
+    color: #64748b;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+
+  .gauge-main-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .metric-reading-col {
+    background: #ffffff;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #f1f5f9;
+  }
+
+  .metric-title {
+    font-size: 9px;
+    color: #64748b;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: block;
+  }
+
+  .metric-big-value {
+    font-size: 20px;
+    font-weight: 800;
+    font-family: monospace;
+    display: block;
+    margin: 2px 0;
+  }
+
+  .metric-big-value.temp-normal { color: #0284c7; }
+  .metric-big-value.rh-val { color: #059669; }
+
+  .metric-limits {
+    font-size: 8.5px;
+    color: #94a3b8;
+    display: block;
+  }
+
+  .thermal-sparkline-box {
+    background: #ffffff;
+    border: 1px solid #f1f5f9;
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .sparkline-title {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #334155;
+  }
+
+  .fold-chart-svg {
+    width: 100%;
+    height: 80px;
+  }
+
+  .door-status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #f1f5f9;
+  }
+
+  .door-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    color: #334155;
+  }
+
+  .door-dot.closed {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+  }
+
+  .audit-hash-code {
+    font-size: 9px;
+    font-family: monospace;
+    color: #64748b;
+  }
+
+  .telemetry-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn-outline-m3 {
+    flex: 1;
+    background: #ffffff;
+    color: #0284c7;
+    border: 1px solid #bae6fd;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 10.5px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-height: 40px;
+  }
+
+  .btn-warn-m3 {
+    flex: 1;
+    background: #fffbeb;
+    color: #b45309;
+    border: 1px solid #fde68a;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 10.5px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-height: 40px;
+  }
+
+  /* ==========================================================================
+     DEVICE 7: ZEBRA MC9300 ULTRA-RUGGED GUN TERMINAL (480DP INDUSTRIAL)
+     ========================================================================== */
+  .android-chassis.phone-mc9300 {
+    width: min(480px, 100%);
+    min-height: 960px;
+    border-radius: 28px;
+    border: 6px solid #1e293b;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.3), inset 0 0 0 3px #0f172a;
+    background: #0f172a;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    margin: 12px auto;
+  }
+
+  .mc9300-scanner-bumper {
+    height: 32px;
+    background: #1e293b;
+    border-radius: 16px 16px 6px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    margin-bottom: 8px;
+    border-bottom: 2px solid #334155;
+  }
+
+  .mc9300-scan-optic {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .mc9300-lens {
+    font-size: 8.5px;
+    font-weight: 800;
+    color: #e2e8f0;
+    letter-spacing: 0.08em;
+  }
+
+  .mc9300-screen-surface {
+    background: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 520px;
+  }
+
+  .zebra-sys-bar {
+    background: #0f172a;
+    color: #ffffff;
+  }
+
+  .zebra-scan-status {
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .scan-laser-ready {
+    color: #4ade80;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .zebra-top-bar {
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .mc9300-brand-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+  }
+
+  .zebra-brand-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .zebra-sub-loc {
+    font-size: 9px;
+    font-weight: 800;
+    color: #2563eb;
+    letter-spacing: 0.06em;
+  }
+
+  .key-indicator-pill {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+  }
+
+  .mc9300-content-flow {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    background: #f8fafc;
+  }
+
+  .shelf-location-banner {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    padding: 8px 10px;
+  }
+
+  .shelf-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;
+  }
+
+  .shelf-eyebrow {
+    font-size: 8.5px;
+    font-weight: 800;
+    color: #1d4ed8;
+    letter-spacing: 0.08em;
+  }
+
+  .shelf-fefo-badge {
+    background: #fef3c7;
+    color: #92400e;
+    font-size: 9px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .shelf-code-display {
+    font-size: 14px;
+    font-weight: 800;
+    color: #0f172a;
+    font-family: monospace;
+  }
+
+  .shelf-code-tag {
+    color: #2563eb;
+    font-weight: 900;
+  }
+
+  .picking-target-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .product-id-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .prod-title {
+    font-size: 12px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .prod-sku {
+    font-size: 9.5px;
+    color: #64748b;
+    font-family: monospace;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .picking-progress-badge {
+    background: #f1f5f9;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    color: #334155;
+    font-family: monospace;
+  }
+
+  .pick-curr { color: #2563eb; }
+
+  .barcode-reticle-box {
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 6px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .barcode-stripes-art {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    height: 32px;
+  }
+
+  .b-line {
+    background: #0f172a;
+    height: 100%;
+    border-radius: 1px;
+  }
+  .b-line.w1 { width: 2px; }
+  .b-line.w2 { width: 4px; }
+  .b-line.w3 { width: 6px; }
+  .b-line.w4 { width: 8px; }
+
+  .barcode-decoded-data {
+    text-align: center;
+  }
+
+  .decoded-label {
+    font-size: 8.5px;
+    color: #64748b;
+    display: block;
+  }
+
+  .decoded-code {
+    font-size: 10px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .fefo-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+    background: #f8fafc;
+    padding: 6px;
+    border-radius: 6px;
+  }
+
+  .fefo-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .f-label {
+    font-size: 8px;
+    color: #64748b;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .f-val {
+    font-size: 10px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .f-val.urgent { color: #dc2626; font-weight: 800; }
+
+  .physical-shortcuts-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .btn-hardware-primary {
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+  }
+
+  .hw-key-cap {
+    background: #1e40af;
+    color: #ffffff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 11px;
+  }
+
+  .hw-sub-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .btn-hardware-sub {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-height: 40px;
+  }
+
+  .hw-key-cap.sub {
+    background: #e2e8f0;
+    color: #1e293b;
+    font-size: 9.5px;
+  }
+
+  .mc9300-physical-keypad {
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 8px;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border: 1px solid #334155;
+  }
+
+  .keypad-brand-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4px;
+  }
+
+  .keypad-label {
+    font-size: 8px;
+    color: #94a3b8;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    font-family: monospace;
+  }
+
+  .keypad-led-status {
+    display: flex;
+    gap: 4px;
+  }
+
+  .led-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+  }
+  .led-dot.green { background: #22c55e; }
+  .led-dot.blue { background: #38bdf8; }
+
+  .keypad-row.fn-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+  }
+
+  .keypad-numeric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+  }
+
+  .key-cap {
+    background: #334155;
+    border: 1px solid #475569;
+    border-radius: 4px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 0 #0f172a;
+  }
+
+  .key-cap .k-label {
+    color: #e2e8f0;
+    font-size: 9px;
+    font-weight: 800;
+    font-family: monospace;
+  }
+
+  .key-cap.fn { background: #1e293b; border-color: #334155; }
+  .key-cap.esc { background: #7f1d1d; border-color: #991b1b; }
+  .key-cap.ent-key {
+    background: #d97706;
+    border-color: #f59e0b;
+    box-shadow: 0 2px 0 #92400e;
+  }
+  .key-cap.ent-key .k-label { color: #ffffff; }
 </style>

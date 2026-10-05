@@ -1,0 +1,511 @@
+---
+/**
+ * DigitalSignaturePODSpec.astro
+ * Canonical Proof of Delivery (POD) & Digital Signature Canvas (Jetpack Compose M3)
+ * Nexa Suite · Entrega en Destino & Firma Legal del Receptor (MOB-US-033, 034)
+ */
+---
+
+<div class="pod-mock-stage" id="mock-pod-container">
+
+  <!-- Delivery Context Header -->
+  <div class="pod-context-card">
+    <div class="pod-top-row">
+      <span class="delivery-order-badge">ORDEN DE DESPACHO #NX-8821</span>
+      <span class="delivery-status-pill"><i class="pi pi-clock"></i> En Descarga</span>
+    </div>
+
+    <div class="pod-meta-grid">
+      <div class="pod-meta-item">
+        <span class="lbl">Cliente Receptor:</span>
+        <strong class="val">Restaurantes del Mar S.A.C.</strong>
+      </div>
+      <div class="pod-meta-item">
+        <span class="lbl">Destino / Muelle:</span>
+        <strong class="val">Av. El Sol 450, Chorrillos · Rampa 2</strong>
+      </div>
+      <div class="pod-meta-item">
+        <span class="lbl">Carga Frigorífica:</span>
+        <strong class="val">18 Cajas Salmón Coho (450 kg @ -18°C)</strong>
+      </div>
+      <div class="pod-meta-item">
+        <span class="lbl">Precinto de Seguridad:</span>
+        <strong class="val">#NX-9921 (Verificado intacto)</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Receiver Identity Form -->
+  <div class="pod-receiver-card">
+    <div class="card-header-row">
+      <i class="pi pi-user-check"></i>
+      <h4>Identidad del Receptor Legal</h4>
+    </div>
+
+    <div class="receiver-form-grid">
+      <div class="input-field-wrap">
+        <label for="inp-receiver-name">Nombres y Apellidos:</label>
+        <input type="text" id="inp-receiver-name" value="Carlos Mendoza Villalobos" class="pod-text-input" />
+      </div>
+      <div class="input-field-wrap">
+        <label for="inp-receiver-dni">Documento de Identidad (DNI):</label>
+        <input type="text" id="inp-receiver-dni" value="44892104" class="pod-text-input" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Signature Canvas Card -->
+  <div class="pod-signature-card">
+    <div class="sig-header-row">
+      <div class="sig-title-wrap">
+        <i class="pi pi-pencil"></i>
+        <h4>Firma Digital Táctil del Receptor</h4>
+      </div>
+      <button type="button" class="btn-clear-sig" id="btn-clear-canvas">
+        <i class="pi pi-trash"></i> Limpiar Trazo
+      </button>
+    </div>
+
+    <p class="sig-instruction">
+      Dibuje la firma sobre el recuadro utilizando el dedo o puntero capacitivo. Diana táctil certificada de 56dp.
+    </p>
+
+    <!-- Canvas Frame -->
+    <div class="signature-canvas-stage">
+      <canvas id="pod-signature-canvas" width="340" height="150" class="interactive-sig-canvas"></canvas>
+      <div class="canvas-watermark" id="canvas-watermark-hint">
+        <i class="pi pi-pencil"></i>
+        <span>Firmar aquí</span>
+      </div>
+      <div class="canvas-baseline"></div>
+    </div>
+
+    <!-- Cryptographic Timestamp & GPS Seal -->
+    <div class="crypto-seal-box">
+      <div class="crypto-row">
+        <i class="pi pi-shield"></i>
+        <span>Sello HMAC-SHA256: <code>d7a8f3b2..e014</code></span>
+      </div>
+      <div class="crypto-row">
+        <i class="pi pi-map-marker"></i>
+        <span>Geocodificación: <code>-12.1648, -77.0210</code> · 14:35:12 COT</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delivery Confirmation CTA -->
+  <div class="pod-submit-card">
+    <button type="button" class="btn-confirm-delivery" id="btn-submit-delivery">
+      <i class="pi pi-check-circle"></i> Completar Entrega & Generar POD Digital
+    </button>
+    <div class="delivery-success-alert" id="alert-pod-success" style="display: none;">
+      <i class="pi pi-check"></i>
+      <div>
+        <strong>¡Entrega #NX-8821 Concluida Exitosamente!</strong>
+        <p>Manifiesto electrónico firmado y transmitido a plataforma central.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('pod-signature-canvas') as HTMLCanvasElement | null;
+    const btnClear = document.getElementById('btn-clear-canvas');
+    const hint = document.getElementById('canvas-watermark-hint');
+    const btnSubmit = document.getElementById('btn-submit-delivery');
+    const alertSuccess = document.getElementById('alert-pod-success');
+
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    ctx.strokeStyle = '#0f172a';
+    ctx.lineWidth = 2.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    let isDrawing = false;
+    let hasDrawn = false;
+
+    function getPos(e: MouseEvent | TouchEvent) {
+      const rect = canvas!.getBoundingClientRect();
+      if ('touches' in e && e.touches.length > 0) {
+        return {
+          x: e.touches[0].clientX - rect.left,
+          y: e.touches[0].clientY - rect.top
+        };
+      } else if ('clientX' in e) {
+        return {
+          x: (e as MouseEvent).clientX - rect.left,
+          y: (e as MouseEvent).clientY - rect.top
+        };
+      }
+      return { x: 0, y: 0 };
+    }
+
+    function startDraw(e: MouseEvent | TouchEvent) {
+      isDrawing = true;
+      hasDrawn = true;
+      if (hint) hint.style.opacity = '0';
+      const pos = getPos(e);
+      ctx?.beginPath();
+      ctx?.moveTo(pos.x, pos.y);
+    }
+
+    function draw(e: MouseEvent | TouchEvent) {
+      if (!isDrawing) return;
+      const pos = getPos(e);
+      ctx?.lineTo(pos.x, pos.y);
+      ctx?.stroke();
+    }
+
+    function stopDraw() {
+      isDrawing = false;
+    }
+
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    window.addEventListener('mouseup', stopDraw);
+
+    canvas.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      startDraw(e);
+    });
+    canvas.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      draw(e);
+    });
+    canvas.addEventListener('touchend', stopDraw);
+
+    btnClear?.addEventListener('click', () => {
+      ctx?.clearRect(0, 0, canvas!.width, canvas!.height);
+      hasDrawn = false;
+      if (hint) hint.style.opacity = '0.5';
+      if (alertSuccess) alertSuccess.style.display = 'none';
+    });
+
+    btnSubmit?.addEventListener('click', () => {
+      if (!hasDrawn) {
+        // Draw a simulated legal signature curve automatically
+        ctx.beginPath();
+        ctx.moveTo(30, 80);
+        ctx.bezierCurveTo(70, 30, 90, 110, 140, 60);
+        ctx.bezierCurveTo(170, 40, 200, 120, 260, 75);
+        ctx.lineTo(310, 85);
+        ctx.stroke();
+        hasDrawn = true;
+        if (hint) hint.style.opacity = '0';
+      }
+
+      if (alertSuccess) {
+        alertSuccess.style.display = 'flex';
+      }
+    });
+  });
+</script>
+
+<style>
+  .pod-mock-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+  }
+
+  /* Context Card */
+  .pod-context-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .pod-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .delivery-order-badge {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    color: #1d4ed8;
+    background: #eff6ff;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  .delivery-status-pill {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #d97706;
+    background: #fef3c7;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .pod-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding-top: 6px;
+    border-top: 1px solid #f1f5f9;
+  }
+
+  .pod-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    font-size: 11.5px;
+
+    .lbl {
+      color: #64748b;
+      font-size: 10.5px;
+    }
+
+    .val {
+      color: #0f172a;
+    }
+  }
+
+  /* Receiver Form Card */
+  .pod-receiver-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .card-header-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #2563eb;
+
+    h4 {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+  }
+
+  .receiver-form-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 8px;
+  }
+
+  .input-field-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    label {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #475569;
+    }
+  }
+
+  .pod-text-input {
+    padding: 6px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #0f172a;
+    background: #f8fafc;
+  }
+
+  /* Signature Card */
+  .pod-signature-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sig-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sig-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #2563eb;
+
+    h4 {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+  }
+
+  .btn-clear-sig {
+    background: transparent;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    &:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+  }
+
+  .sig-instruction {
+    font-size: 11.5px;
+    color: #64748b;
+  }
+
+  .signature-canvas-stage {
+    position: relative;
+    height: 130px;
+    background: #f8fafc;
+    border: 1.5px dashed #cbd5e1;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: crosshair;
+  }
+
+  .interactive-sig-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    touch-action: none;
+  }
+
+  .canvas-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #94a3b8;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    opacity: 0.5;
+  }
+
+  .canvas-baseline {
+    position: absolute;
+    bottom: 24px;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background: #e2e8f0;
+    pointer-events: none;
+  }
+
+  .crypto-seal-box {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 6px;
+    border-top: 1px dashed #e2e8f0;
+  }
+
+  .crypto-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10.5px;
+    color: #64748b;
+
+    i {
+      font-size: 11px;
+      color: #0284c7;
+    }
+
+    code {
+      font-family: var(--nexa-font-family-mono, monospace);
+      color: #0f172a;
+    }
+  }
+
+  /* Submit Card */
+  .pod-submit-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .btn-confirm-delivery {
+    width: 100%;
+    height: 52px; /* 52dp touch target */
+    border-radius: 10px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 13.5px;
+    font-weight: 700;
+    border: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.15s ease;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+
+    &:hover {
+      background: #1d4ed8;
+    }
+  }
+
+  .delivery-success-alert {
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    i {
+      color: #16a34a;
+      font-size: 16px;
+      margin-top: 2px;
+    }
+
+    strong {
+      color: #15803d;
+      font-size: 12px;
+      display: block;
+    }
+
+    p {
+      margin: 0;
+      font-size: 11.5px;
+      color: #166534;
+    }
+  }
+</style>
