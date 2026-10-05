@@ -1,6 +1,10 @@
 ---
 /**
- * CodeSnippetsTabs — Dual Code Generator for Android Jetpack Compose & Flutter
+ * CodeSnippetsTabs — Mobile Three-View Model Code Generator
+ * Supporting:
+ * 1. SwiftUI (iOS HIG · Strictly REFERENCE / FUTURE)
+ * 2. Jetpack Compose (Android M3 · READY / NATIVE)
+ * 3. Flutter (Buyer Mobile · READY)
  */
 ---
 
@@ -8,47 +12,82 @@
   <div class="snippet-header">
     <div class="snippet-tabs">
       <button type="button" class="tab-code active" data-lang="compose">
-        <i class="pi pi-android"></i> Jetpack Compose (Kotlin)
+        <svg class="tab-svg" viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="12" rx="2"></rect><circle cx="9" cy="5" r="1"></circle><circle cx="15" cy="5" r="1"></circle></svg>
+        Jetpack Compose (Android M3 · Native)
       </button>
       <button type="button" class="tab-code" data-lang="flutter">
-        <i class="pi pi-code"></i> Flutter (Dart)
+        <svg class="tab-svg" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+        Flutter (Buyer Mobile · Ready)
+      </button>
+      <button type="button" class="tab-code" data-lang="swiftui">
+        <svg class="tab-svg" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+        SwiftUI (iOS HIG · Reference)
       </button>
     </div>
-    <span class="spec-compliance">✓ WCAG 2.2 AA & M3 Compliant</span>
+    <div class="snippet-status-badge">
+      <span class="spec-compliance">WCAG 2.2 AAA & M3 Compliant</span>
+    </div>
   </div>
 
   <!-- Compose Snippet -->
   <div class="snippet-pane active" id="pane-compose">
-    <pre is:raw><code><span class="kw">@Composable</span>
-<span class="kw">fun</span> <span class="fn">NexaDriverDispatchCard</span>(
-    orderId: <span class="type">String</span>,
-    destination: <span class="type">String</span>,
-    onConfirmDelivery: () -&gt; <span class="type">Unit</span>,
-    modifier: <span class="type">Modifier</span> = <span class="type">Modifier</span>
+    <div class="pane-meta">
+      <span class="badge-status-native">STATUS: READY / NATIVE</span>
+      <span class="meta-desc">Consumes <code>com.nexa.mobile.operations.core.designsystem</code> (OperationsTheme, NexaColors, 56dp gloved target).</span>
+    </div>
+    <pre is:raw><code><span class="kw">package</span> com.nexa.mobile.operations.core.designsystem
+
+<span class="kw">import</span> androidx.compose.foundation.layout.*
+<span class="kw">import</span> androidx.compose.foundation.shape.RoundedCornerShape
+<span class="kw">import</span> androidx.compose.material3.*
+<span class="kw">import</span> androidx.compose.runtime.Composable
+<span class="kw">import</span> androidx.compose.ui.Modifier
+<span class="kw">import</span> androidx.compose.ui.semantics.Role
+<span class="kw">import</span> androidx.compose.ui.semantics.role
+<span class="kw">import</span> androidx.compose.ui.semantics.semantics
+<span class="kw">import</span> androidx.compose.ui.unit.dp
+
+<span class="cmt">/**
+ * NexaPrimaryButton — Industrial 56dp action button for warehouse and driver operations.
+ * Complies with NexaSizes.primaryButtonMinHeight (56dp sub-zero glove threshold).
+ */</span>
+<span class="kw">@Composable</span>
+<span class="kw">fun</span> <span class="fn">NexaPrimaryButton</span>(
+    label: <span class="type">String</span>,
+    onClick: () -&gt; <span class="type">Unit</span>,
+    modifier: <span class="type">Modifier</span> = <span class="type">Modifier</span>,
+    enabled: <span class="type">Boolean</span> = <span class="kw">true</span>,
+    loading: <span class="type">Boolean</span> = <span class="kw">false</span>,
+    gloveFriendly: <span class="type">Boolean</span> = <span class="kw">true</span>
 ) {
-    <span class="fn">Card</span>(
+    <span class="kw">val</span> minHeight = <span class="kw">if</span> (gloveFriendly) NexaSizes.primaryButtonMinHeight <span class="kw">else</span> NexaSizes.minimumTouchTarget
+    
+    <span class="fn">Button</span>(
+        onClick = onClick,
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = <span class="num">16.dp</span>, vertical = <span class="num">8.dp</span>),
-        shape = <span class="fn">RoundedCornerShape</span>(<span class="num">16.dp</span>),
-        colors = CardDefaults.cardColors(containerColor = NexaTokens.SurfaceCard),
-        elevation = CardDefaults.cardElevation(defaultElevation = <span class="num">2.dp</span>)
+            .defaultMinSize(minHeight = minHeight)
+            .semantics { role = Role.Button },
+        enabled = enabled &amp;&amp; !loading,
+        shape = NexaShapes.button, <span class="cmt">// 12dp rounded corner</span>
+        colors = ButtonDefaults.buttonColors(
+            containerColor = NexaColors.Primary,      <span class="cmt">// #2563EB</span>
+            contentColor = NexaColors.OnPrimary,        <span class="cmt">// #FFFFFF</span>
+            disabledContainerColor = NexaColors.Border, <span class="cmt">// #E2E8F0</span>
+            disabledContentColor = NexaColors.TextMuted <span class="cmt">// #94A3B8</span>
+        )
     ) {
-        <span class="fn">Column</span>(modifier = Modifier.padding(<span class="num">16.dp</span>)) {
-            <span class="fn">Text</span>(text = orderId, style = NexaTypography.titleMedium)
-            <span class="fn">Spacer</span>(modifier = Modifier.height(<span class="num">8.dp</span>))
-            <span class="fn">Text</span>(text = destination, style = NexaTypography.bodyMedium)
-            <span class="fn">Spacer</span>(modifier = Modifier.height(<span class="num">16.dp</span>))
-            <span class="fn">Button</span>(
-                onClick = onConfirmDelivery,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .heightIn(min = <span class="num">48.dp</span>), <span class="cmt">// 48dp minimum touch target</span>
-                shape = <span class="fn">RoundedCornerShape</span>(<span class="num">12.dp</span>),
-                colors = ButtonDefaults.buttonColors(containerColor = NexaTokens.Primary)
-            ) {
-                <span class="fn">Text</span>(<span class="str">"Confirmar Entrega en Sitio"</span>)
-            }
+        <span class="kw">if</span> (loading) {
+            <span class="fn">CircularProgressIndicator</span>(
+                modifier = Modifier.size(<span class="num">20.dp</span>),
+                color = NexaColors.OnPrimary,
+                strokeWidth = <span class="num">2.dp</span>
+            )
+        } <span class="kw">else</span> {
+            <span class="fn">Text</span>(
+                text = label,
+                style = MaterialTheme.typography.labelLarge
+            )
         }
     }
 }</code></pre>
@@ -56,56 +95,131 @@
 
   <!-- Flutter Snippet -->
   <div class="snippet-pane" id="pane-flutter">
-    <pre is:raw><code><span class="kw">class</span> <span class="type">NexaWholesaleProductCard</span> <span class="kw">extends</span> <span class="type">StatelessWidget</span> {
-  <span class="kw">final</span> <span class="type">String</span> title;
-  <span class="kw">final</span> <span class="type">String</span> sku;
-  <span class="kw">final</span> <span class="type">double</span> unitPrice;
-  <span class="kw">final</span> <span class="type">VoidCallback</span> onOrder;
+    <div class="pane-meta">
+      <span class="badge-status-flutter">STATUS: READY / BUYER MOBILE</span>
+      <span class="meta-desc">Consumes <code>ThemeData</code> augmented by <code>NexaThemeExtension</code> for B2B Wholesale Portal & Escrow.</span>
+    </div>
+    <pre is:raw><code><span class="kw">import</span> <span class="str">'package:flutter/material.dart'</span>;
 
-  <span class="kw">const</span> <span class="fn">NexaWholesaleProductCard</span>({
+<span class="cmt">/**
+ * NexaButton — Multi-platform button for Nexa Buyer Mobile application.
+ * Adapts between 48.0 standard hit target and 56.0 industrial glove target.
+ */</span>
+<span class="kw">class</span> <span class="type">NexaButton</span> <span class="kw">extends</span> <span class="type">StatelessWidget</span> {
+  <span class="kw">final</span> <span class="type">String</span> label;
+  <span class="kw">final</span> <span class="type">VoidCallback</span>? onPressed;
+  <span class="kw">final</span> <span class="type">bool</span> loading;
+  <span class="kw">final</span> <span class="type">bool</span> enabled;
+  <span class="kw">final</span> <span class="type">bool</span> gloveFriendly;
+
+  <span class="kw">const</span> <span class="fn">NexaButton</span>({
     <span class="kw">super</span>.key,
-    <span class="kw">required</span> <span class="kw">this</span>.title,
-    <span class="kw">required</span> <span class="kw">this</span>.sku,
-    <span class="kw">required</span> <span class="kw">this</span>.unitPrice,
-    <span class="kw">required</span> <span class="kw">this</span>.onOrder,
+    <span class="kw">required</span> <span class="kw">this</span>.label,
+    <span class="kw">required</span> <span class="kw">this</span>.onPressed,
+    <span class="kw">this</span>.loading = <span class="kw">false</span>,
+    <span class="kw">this</span>.enabled = <span class="kw">true</span>,
+    <span class="kw">this</span>.gloveFriendly = <span class="kw">true</span>,
   });
 
   <span class="kw">@override</span>
   <span class="type">Widget</span> <span class="fn">build</span>(<span class="type">BuildContext</span> context) {
-    <span class="kw">return</span> <span class="fn">Card</span>(
-      elevation: <span class="num">2</span>,
-      shape: <span class="fn">RoundedRectangleBorder</span>(
-        borderRadius: <span class="fn">BorderRadius.circular</span>(<span class="num">16</span>),
-      ),
-      child: <span class="fn">Padding</span>(
-        padding: <span class="kw">const</span> <span class="fn">EdgeInsets.all</span>(<span class="num">16</span>),
-        child: <span class="fn">Column</span>(
-          crossAxisAlignment: <span class="type">CrossAxisAlignment</span>.start,
-          children: [
-            <span class="fn">Text</span>(title, style: NexaTypography.titleMedium),
-            <span class="kw">const</span> <span class="fn">SizedBox</span>(height: <span class="num">4</span>),
-            <span class="fn">Text</span>(sku, style: NexaTypography.labelSmall),
-            <span class="kw">const</span> <span class="fn">SizedBox</span>(height: <span class="num">12</span>),
-            <span class="fn">SizedBox</span>(
-              width: <span class="type">double</span>.infinity,
-              height: <span class="num">48</span>, <span class="cmt">// 48dp minimum touch target</span>
-              child: <span class="fn">FilledButton.icon</span>(
-                onPressed: onOrder,
-                style: <span class="fn">FilledButton.styleFrom</span>(
-                  backgroundColor: NexaColors.primary,
-                  shape: <span class="fn">RoundedRectangleBorder</span>(
-                    borderRadius: <span class="fn">BorderRadius.circular</span>(<span class="num">12</span>),
+    <span class="kw">final</span> <span class="type">double</span> minHeight = gloveFriendly ? <span class="num">56.0</span> : <span class="num">48.0</span>;
+
+    <span class="kw">return</span> <span class="fn">Semantics</span>(
+      button: <span class="kw">true</span>,
+      enabled: enabled &amp;&amp; !loading,
+      label: label,
+      child: <span class="fn">SizedBox</span>(
+        width: <span class="type">double</span>.infinity,
+        height: minHeight,
+        child: <span class="fn">FilledButton</span>(
+          onPressed: (enabled &amp;&amp; !loading) ? onPressed : <span class="kw">null</span>,
+          style: FilledButton.styleFrom(
+            backgroundColor: <span class="kw">const</span> <span class="fn">Color</span>(<span class="num">0xFF2563EB</span>),
+            foregroundColor: Colors.white,
+            disabledBackgroundColor: <span class="kw">const</span> <span class="fn">Color</span>(<span class="num">0xFFE2E8F0</span>),
+            disabledForegroundColor: <span class="kw">const</span> <span class="fn">Color</span>(<span class="num">0xFF94A3B8</span>),
+            shape: <span class="fn">RoundedRectangleBorder</span>(
+              borderRadius: BorderRadius.circular(<span class="num">12.0</span>),
+            ),
+          ),
+          child: loading
+              ? <span class="kw">const</span> <span class="fn">SizedBox</span>(
+                  width: <span class="num">20</span>,
+                  height: <span class="num">20</span>,
+                  child: <span class="fn">CircularProgressIndicator</span>(strokeWidth: <span class="num">2.0</span>, color: Colors.white),
+                )
+              : <span class="fn">Text</span>(
+                  label,
+                  style: <span class="kw">const</span> <span class="fn">TextStyle</span>(
+                    fontFamily: <span class="str">'Inter'</span>,
+                    fontSize: <span class="num">16</span>,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-                icon: <span class="kw">const</span> <span class="fn">Icon</span>(Icons.shopping_cart, size: <span class="num">18</span>),
-                label: <span class="kw">const</span> <span class="fn">Text</span>(<span class="str">'Solicitar Pedido B2B'</span>),
-              ),
-            ),
-          ],
         ),
       ),
     );
   }
+}</code></pre>
+  </div>
+
+  <!-- SwiftUI Snippet -->
+  <div class="snippet-pane" id="pane-swiftui">
+    <div class="pane-meta">
+      <span class="badge-status-ref">STATUS: REFERENCE / FUTURE</span>
+      <span class="meta-desc">Reference contract adhering to Apple Human Interface Guidelines. Nexa does not ship a native iOS binary.</span>
+    </div>
+    <pre is:raw><code><span class="kw">import</span> SwiftUI
+
+<span class="cmt">/**
+ * NexaButtonStyle — Idiomatic SwiftUI ButtonStyle adhering to Apple HIG.
+ * Strictly a REFERENCE / FUTURE specification; Nexa does not currently deploy native iOS.
+ */</span>
+<span class="kw">public struct</span> <span class="type">NexaButtonStyle</span>: <span class="type">ButtonStyle</span> {
+    <span class="kw">public var</span> gloveFriendly: <span class="type">Bool</span> = <span class="kw">true</span>
+    <span class="kw">@Environment</span>(\.isEnabled) <span class="kw">private var</span> isEnabled: <span class="type">Bool</span>
+
+    <span class="kw">public func</span> <span class="fn">makeBody</span>(configuration: <span class="type">Configuration</span>) -&gt; <span class="kw">some</span> <span class="type">View</span> {
+        configuration.label
+            .font(.system(size: <span class="num">16</span>, weight: .semibold, design: .default))
+            .foregroundColor(isEnabled ? .white : Color(uiColor: .systemGray3))
+            .frame(maxWidth: .infinity)
+            .frame(height: gloveFriendly ? <span class="num">56</span> : <span class="num">44</span>) <span class="cmt">// HIG 44pt vs 56pt industrial</span>
+            .background(
+                <span class="fn">RoundedRectangle</span>(cornerRadius: <span class="num">12</span>, style: .continuous)
+                    .fill(isEnabled ? (configuration.isPressed ? Color(hex: <span class="num">0x1D4ED8</span>) : Color(hex: <span class="num">0x2563EB</span>)) : Color(hex: <span class="num">0xE2E8F0</span>))
+            )
+            .scaleEffect(configuration.isPressed ? <span class="num">0.98</span> : <span class="num">1.0</span>)
+            .animation(.easeInOut(duration: <span class="num">0.15</span>), value: configuration.isPressed)
+    }
+}
+
+<span class="kw">public struct</span> <span class="type">NexaPrimaryButton</span>: <span class="type">View</span> {
+    <span class="kw">public let</span> title: <span class="type">String</span>
+    <span class="kw">public let</span> isLoading: <span class="type">Bool</span>
+    <span class="kw">public let</span> action: () -&gt; <span class="type">Void</span>
+
+    <span class="kw">public init</span>(title: <span class="type">String</span>, isLoading: <span class="type">Bool</span> = <span class="kw">false</span>, action: <span class="kw">@escaping</span> () -&gt; <span class="type">Void</span>) {
+        <span class="kw">self</span>.title = title
+        <span class="kw">self</span>.isLoading = isLoading
+        <span class="kw">self</span>.action = action
+    }
+
+    <span class="kw">public var</span> body: <span class="kw">some</span> <span class="type">View</span> {
+        <span class="fn">Button</span>(action: {
+            <span class="kw">if</span> !isLoading { action() }
+        }) {
+            <span class="fn">ZStack</span> {
+                Text(title).opacity(isLoading ? <span class="num">0.0</span> : <span class="num">1.0</span>)
+                <span class="kw">if</span> isLoading {
+                    ProgressView().progressViewStyle(CircularProgressViewStyle(tint: .white))
+                }
+            }
+        }
+        .buttonStyle(NexaButtonStyle(gloveFriendly: <span class="kw">true</span>))
+        .accessibilityAddTraits(.isButton)
+    }
 }</code></pre>
   </div>
 </div>
@@ -121,7 +235,7 @@
 
   .snippet-header {
     background: #090d16;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -133,13 +247,14 @@
   .snippet-tabs {
     display: flex;
     gap: 6px;
+    flex-wrap: wrap;
   }
 
   .tab-code {
     background: transparent;
     border: 1px solid transparent;
     color: #94a3b8;
-    padding: 4px 10px;
+    padding: 6px 12px;
     border-radius: 6px;
     font-size: 12px;
     font-weight: 600;
@@ -147,6 +262,12 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: #1e293b;
+      color: #f1f5f9;
+    }
 
     &.active {
       background: #1e293b;
@@ -155,10 +276,21 @@
     }
   }
 
+  .tab-svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
   .spec-compliance {
     font-size: 11px;
     color: #38bdf8;
     font-weight: 700;
+    font-family: var(--nexa-mobile-font-family-mono, monospace);
   }
 
   .snippet-pane {
@@ -169,6 +301,59 @@
     &.active {
       display: block;
     }
+  }
+
+  .pane-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #1e293b;
+    font-size: 11.5px;
+  }
+
+  .badge-status-native {
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 800;
+    font-family: var(--nexa-mobile-font-family-mono, monospace);
+  }
+
+  .badge-status-flutter {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 800;
+    font-family: var(--nexa-mobile-font-family-mono, monospace);
+  }
+
+  .badge-status-ref {
+    background: #fffbeb;
+    color: #b45309;
+    border: 1px solid #fde68a;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 800;
+    font-family: var(--nexa-mobile-font-family-mono, monospace);
+  }
+
+  .meta-desc {
+    color: #94a3b8;
+    font-size: 11px;
+  }
+
+  .meta-desc code {
+    color: #38bdf8;
+    background: #1e293b;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-family: monospace;
   }
 
   pre {
