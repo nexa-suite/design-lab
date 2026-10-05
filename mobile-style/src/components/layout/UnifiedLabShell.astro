@@ -17,7 +17,7 @@ const { currentSection = 'overview' } = Astro.props;
   <aside class="lab-sidebar" aria-label="Mobile Style Navigation">
     <a class="lab-brand" href="/" title="Ir a la portada de Mobile Style">
       <NexaLogo variant="primary" height={26} />
-      <span>DESIGN LAB <b>v1.0.0 · Mobile Style</b></span>
+      <span>DESIGN LAB <b>v1.2.0 · Mobile Style</b></span>
     </a>
 
     <p class="lab-context">
@@ -84,6 +84,14 @@ const { currentSection = 'overview' } = Astro.props;
           <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
         </button>
         <div class="lab-nav-items">
+          <a class="lab-nav-item" href="#screen-foundations-branding" data-screen="screen-foundations-branding">
+            <i class="pi pi-shield" aria-hidden="true"></i>
+            <span>Identidad & Logos Canónicos</span>
+          </a>
+          <a class="lab-nav-item" href="#screen-foundations-tone" data-screen="screen-foundations-tone">
+            <i class="pi pi-comment" aria-hidden="true"></i>
+            <span>Tono de Voz & Microcopia</span>
+          </a>
           <a class="lab-nav-item" href="#screen-foundations-principles" data-screen="screen-foundations-principles">
             <i class="pi pi-compass" aria-hidden="true"></i>
             <span>Principios Móviles</span>
@@ -191,7 +199,7 @@ const { currentSection = 'overview' } = Astro.props;
         <button class="mobile-menu-button" id="btn-mobile-sidebar-toggle" type="button" aria-label="Abrir navegación móvil">
           <i class="pi pi-bars" aria-hidden="true"></i>
         </button>
-        <span class="topbar-title" id="topbar-screen-title">Design documentation · v1.0.0 (Mobile Style)</span>
+        <span class="topbar-title" id="topbar-screen-title">Design documentation · v1.2.0 (Mobile Style)</span>
       </div>
 
       <!-- Evaluation Controls (Clean Android Native priority) -->

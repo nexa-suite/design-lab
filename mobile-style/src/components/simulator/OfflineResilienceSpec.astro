@@ -1,0 +1,580 @@
+---
+/**
+ * OfflineResilienceSpec.astro
+ * Canonical Offline-First Resilience & SQLite Room Queue Specimen (Jetpack Compose M3)
+ * Nexa Suite · Resiliencia en Cámara Frigorífica & WorkManager Sync (MOB-US-041..043)
+ */
+---
+
+<div class="offline-mock-stage" id="mock-offline-container">
+  
+  <!-- Network Status & Faraday Cage Simulator -->
+  <div class="network-control-card">
+    <div class="net-status-row">
+      <div class="net-mode-pill" id="pill-network-status">
+        <i class="pi pi-cloud-download"></i>
+        <span id="txt-network-mode">MODO OFFLINE (CÁMARA SUBTERRÁNEA)</span>
+      </div>
+      <div class="db-status-pill">
+        <i class="pi pi-database"></i> SQLite Room + SQLCipher
+      </div>
+    </div>
+
+    <p class="net-desc" id="txt-network-desc">
+      Dispositivo sin cobertura en cámara de congelados (-25°C). 
+      Todas las transacciones se almacenan localmente en la cola cifrada de SQLite con cero pérdida de datos.
+    </p>
+
+    <!-- Network Toggle Bar -->
+    <div class="network-toggle-bar">
+      <span class="net-toggle-label">SIMULAR ENTORNO DE RED:</span>
+      <button type="button" class="btn-net-toggle active" id="btn-toggle-offline">
+        <i class="pi pi-times-circle"></i> Cámara Frío (Offline)
+      </button>
+      <button type="button" class="btn-net-toggle" id="btn-toggle-online">
+        <i class="pi pi-wifi"></i> Patio con 5G / Wi-Fi
+      </button>
+    </div>
+  </div>
+
+  <!-- Sync Queue Metrics Header -->
+  <div class="queue-summary-card">
+    <div class="queue-metric-box">
+      <span class="q-label">REGISTROS EN COLA LOCAL</span>
+      <span class="q-count" id="val-queue-count">14</span>
+      <span class="q-sub">Transacciones pendientes</span>
+    </div>
+    <div class="queue-metric-box">
+      <span class="q-label">VOLUMEN DE CARGA</span>
+      <span class="q-count" id="val-queue-payload">2.8 MB</span>
+      <span class="q-sub">Incluye 4 fotos POD</span>
+    </div>
+    <div class="queue-metric-box">
+      <span class="q-label">ÚLTIMO SYNC REMOTO</span>
+      <span class="q-count">Hace 48 min</span>
+      <span class="q-sub">Torre Callao Central</span>
+    </div>
+  </div>
+
+  <!-- Interactive Sync Action Bar -->
+  <div class="sync-action-card">
+    <div class="sync-action-top">
+      <div>
+        <h4 class="sync-title">WorkManager Background Dispatcher</h4>
+        <p class="sync-subtitle">Sincronización con retroceso exponencial (Exponential Backoff) y idempotencia UUID.</p>
+      </div>
+      <button type="button" class="btn-sync-now" id="btn-sync-trigger">
+        <i class="pi pi-refresh" id="icon-sync-spin"></i> Sincronizar Cola
+      </button>
+    </div>
+
+    <!-- Progress Bar (animated upon sync) -->
+    <div class="sync-progress-wrap" id="sync-progress-box" style="display: none;">
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="sync-progress-fill" style="width: 0%;"></div>
+      </div>
+      <div class="progress-meta-text">
+        <span id="txt-sync-progress-step">Iniciando handshake TLS 1.3...</span>
+        <span id="txt-sync-progress-pct">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pending Transactions List in SQLite Room -->
+  <div class="queue-list-card">
+    <div class="queue-list-header">
+      <div class="ql-title-wrap">
+        <i class="pi pi-list"></i>
+        <h4>Transacciones Almacenadas en SQLite (:core:database)</h4>
+      </div>
+      <span class="ql-count-tag" id="tag-queue-status">14 Pendientes</span>
+    </div>
+
+    <div class="transactions-items-list" id="transactions-list">
+      
+      <!-- Item 1: Picking scan -->
+      <div class="tx-item" data-id="tx-1">
+        <div class="tx-icon-col picking">
+          <i class="pi pi-box"></i>
+        </div>
+        <div class="tx-info-col">
+          <div class="tx-headline">
+            <strong>Picking Confirmado: Pallet #PL-0092</strong>
+            <span class="tx-badge queue">En Cola</span>
+          </div>
+          <span class="tx-meta">Lote: <code>L-20260914-A</code> · Salmón Coho 250kg · 14:12:05</span>
+        </div>
+        <span class="tx-uuid">UUID: <code>#a8f1..</code></span>
+      </div>
+
+      <!-- Item 2: Telemetry checkpoint -->
+      <div class="tx-item" data-id="tx-2">
+        <div class="tx-icon-col temp">
+          <i class="pi pi-thermometer"></i>
+        </div>
+        <div class="tx-info-col">
+          <div class="tx-headline">
+            <strong>Check Térmico BLE: 3.2°C Conforme</strong>
+            <span class="tx-badge queue">En Cola</span>
+          </div>
+          <span class="tx-meta">Sensor Sensirion SHT40 · Furgón C-250 · 14:18:22</span>
+        </div>
+        <span class="tx-uuid">UUID: <code>#4b2c..</code></span>
+      </div>
+
+      <!-- Item 3: POD signature -->
+      <div class="tx-item" data-id="tx-3">
+        <div class="tx-icon-col pod">
+          <i class="pi pi-pencil"></i>
+        </div>
+        <div class="tx-info-col">
+          <div class="tx-headline">
+            <strong>Firma POD + Foto Remito #GU-8821</strong>
+            <span class="tx-badge queue">En Cola</span>
+          </div>
+          <span class="tx-meta">Receptor: Carlos Mendoza · SHA-256 HMAC · 14:28:44</span>
+        </div>
+        <span class="tx-uuid">UUID: <code>#e90d..</code></span>
+      </div>
+
+      <!-- Item 4: Seal inspection -->
+      <div class="tx-item" data-id="tx-4">
+        <div class="tx-icon-col seal">
+          <i class="pi pi-lock"></i>
+        </div>
+        <div class="tx-info-col">
+          <div class="tx-headline">
+            <strong>Inspección de Precinto #NX-9921</strong>
+            <span class="tx-badge queue">En Cola</span>
+          </div>
+          <span class="tx-meta">Muelle 03 Callao · Verificación Conforme · 14:32:10</span>
+        </div>
+        <span class="tx-uuid">UUID: <code>#11fc..</code></span>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const btnOffline = document.getElementById('btn-toggle-offline');
+    const btnOnline = document.getElementById('btn-toggle-online');
+    const pillNet = document.getElementById('pill-network-status');
+    const txtNetMode = document.getElementById('txt-network-mode');
+    const txtNetDesc = document.getElementById('txt-network-desc');
+    const btnSync = document.getElementById('btn-sync-trigger');
+    const syncProgress = document.getElementById('sync-progress-box');
+    const progressFill = document.getElementById('sync-progress-fill');
+    const progressStep = document.getElementById('txt-sync-progress-step');
+    const progressPct = document.getElementById('txt-sync-progress-pct');
+    const queueCount = document.getElementById('val-queue-count');
+    const queueTag = document.getElementById('tag-queue-status');
+    const iconSpin = document.getElementById('icon-sync-spin');
+    const txItems = document.querySelectorAll('.tx-item');
+
+    let isOffline = true;
+
+    btnOffline?.addEventListener('click', () => {
+      isOffline = true;
+      btnOffline.classList.add('active');
+      btnOnline?.classList.remove('active');
+      if (pillNet) {
+        pillNet.className = 'net-mode-pill';
+        if (txtNetMode) txtNetMode.textContent = 'MODO OFFLINE (CÁMARA SUBTERRÁNEA)';
+      }
+      if (txtNetDesc) {
+        txtNetDesc.textContent = 'Dispositivo sin cobertura en cámara de congelados (-25°C). Todas las transacciones se almacenan localmente en la cola cifrada de SQLite con cero pérdida de datos.';
+      }
+    });
+
+    btnOnline?.addEventListener('click', () => {
+      isOffline = false;
+      btnOnline.classList.add('active');
+      btnOffline?.classList.remove('active');
+      if (pillNet) {
+        pillNet.className = 'net-mode-pill online';
+        if (txtNetMode) txtNetMode.textContent = 'CONEXIÓN ESTABLE · 5G LTE ACTIVO';
+      }
+      if (txtNetDesc) {
+        txtNetDesc.textContent = 'Cobertura de red restablecida en patio logístico. WorkManager listo para procesar la cola de sincronización.';
+      }
+    });
+
+    btnSync?.addEventListener('click', () => {
+      if (isOffline) {
+        alert('Dispositivo en Modo Offline. Para sincronizar, active primero la simulación de red «Patio con 5G / Wi-Fi».');
+        return;
+      }
+
+      if (syncProgress) syncProgress.style.display = 'block';
+      if (iconSpin) iconSpin.classList.add('pi-spin');
+
+      let pct = 0;
+      const interval = setInterval(() => {
+        pct += 25;
+        if (progressFill) progressFill.style.width = `${pct}%`;
+        if (progressPct) progressPct.textContent = `${pct}%`;
+
+        if (pct === 25) {
+          if (progressStep) progressStep.textContent = 'Handshake mutual TLS con servidor central...';
+        } else if (pct === 50) {
+          if (progressStep) progressStep.textContent = 'Subiendo firmas criptográficas y lecturas de frío...';
+        } else if (pct === 75) {
+          if (progressStep) progressStep.textContent = 'Validando resolución de conflictos Last-Write-Wins...';
+        } else if (pct >= 100) {
+          clearInterval(interval);
+          if (progressStep) progressStep.textContent = '¡Sincronización 100% exitosa! Cola limpia.';
+          if (iconSpin) iconSpin.classList.remove('pi-spin');
+          if (queueCount) queueCount.textContent = '0';
+          if (queueTag) {
+            queueTag.textContent = '0 Pendientes (Sincronizado)';
+            queueTag.className = 'ql-count-tag synced';
+          }
+
+          // Mark items as synced
+          document.querySelectorAll('.tx-badge').forEach(badge => {
+            badge.textContent = 'Sincronizado';
+            badge.className = 'tx-badge synced';
+          });
+        }
+      }, 500);
+    });
+  });
+</script>
+
+<style>
+  .offline-mock-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+  }
+
+  /* Network Card */
+  .network-control-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .net-status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .net-mode-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #991b1b;
+    background: #fee2e2;
+    padding: 3px 8px;
+    border-radius: 4px;
+
+    &.online {
+      background: #e0f2fe;
+      color: #0284c7;
+    }
+  }
+
+  .db-status-pill {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 600;
+    color: #475569;
+  }
+
+  .net-desc {
+    font-size: 12px;
+    line-height: 1.45;
+    color: #475569;
+  }
+
+  .network-toggle-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-top: 6px;
+    border-top: 1px dashed #e2e8f0;
+    flex-wrap: wrap;
+  }
+
+  .net-toggle-label {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #64748b;
+  }
+
+  .btn-net-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    color: #334155;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &.active {
+      background: #0f172a;
+      color: #ffffff;
+      border-color: #0f172a;
+    }
+  }
+
+  /* Queue Summary */
+  .queue-summary-card {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .queue-metric-box {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .q-label {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9px;
+    font-weight: 700;
+    color: #64748b;
+  }
+
+  .q-count {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  .q-sub {
+    font-size: 10.5px;
+    color: #94a3b8;
+  }
+
+  /* Sync Action Card */
+  .sync-action-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sync-action-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .sync-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .sync-subtitle {
+    font-size: 11.5px;
+    color: #64748b;
+    margin-top: 1px;
+  }
+
+  .btn-sync-now {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    border: 0;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: #1d4ed8;
+    }
+  }
+
+  .sync-progress-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 8px;
+    border-top: 1px solid #f1f5f9;
+  }
+
+  .progress-bar-track {
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0284c7, #2563eb);
+    transition: width 0.4s ease;
+  }
+
+  .progress-meta-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10.5px;
+    color: #64748b;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+
+  /* Queue List Card */
+  .queue-list-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .queue-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .ql-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #2563eb;
+
+    h4 {
+      font-size: 12px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+  }
+
+  .ql-count-tag {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    background: #fef3c7;
+    color: #b45309;
+    border-radius: 4px;
+
+    &.synced {
+      background: #dcfce7;
+      color: #15803d;
+    }
+  }
+
+  .transactions-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .tx-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+  }
+
+  .tx-icon-col {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+
+    &.picking { background: #dbeafe; color: #1d4ed8; }
+    &.temp { background: #e0f2fe; color: #0284c7; }
+    &.pod { background: #fef3c7; color: #b45309; }
+    &.seal { background: #ede9fe; color: #6d28d9; }
+  }
+
+  .tx-info-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .tx-headline {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #0f172a;
+  }
+
+  .tx-badge {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 9px;
+    font-weight: 700;
+    padding: 1px 4px;
+    border-radius: 3px;
+
+    &.queue {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    &.synced {
+      background: #dcfce7;
+      color: #15803d;
+    }
+  }
+
+  .tx-meta {
+    font-size: 10.5px;
+    color: #64748b;
+
+    code {
+      font-family: var(--nexa-font-family-mono, monospace);
+    }
+  }
+
+  .tx-uuid {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10px;
+    color: #94a3b8;
+  }
+</style>
