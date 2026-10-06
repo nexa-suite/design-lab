@@ -891,6 +891,14 @@ const { currentSection = 'overview' } = Astro.props;
   }
 
   window.addEventListener('hashchange', onHashChange);
+
+  // Cross-frame messaging from Design Lab Gateway Hub
+  window.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'switchScreen' && event.data.screen) {
+      switchScreen(event.data.screen, true);
+    }
+  });
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', onHashChange);
   } else {
