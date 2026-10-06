@@ -20,6 +20,10 @@ shared/
 │   └── README.md                   # Guía de tokens de diseño
 └── brand/                          # Activos de marca oficiales
     ├── logo-nexa.svg               # Isotipo y logotipo vectorial oficial Nexa
+    ├── logo-nexa-blue.svg          # Logotipo horizontal oficial versión azul corporativo (#2563EB)
+    ├── logo-nexa-white.svg         # Logotipo horizontal oficial versión blanca (#FFFFFF)
+    ├── nexa-mobile.svg             # Isotipo móvil canónico (fondo azul #2563EB, glifo NX blanco y flecha ascendente)
+    ├── nexa-mobile-inverted.svg    # Isotipo móvil invertido (fondo blanco, glifo NX azul #2563EB y flecha)
     └── Documento.svg               # Símbolo vectorial secundario
 ```
 
