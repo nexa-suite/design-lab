@@ -48,6 +48,50 @@ import ComponentesNexaUiSection from '../components/guidelines/ComponentesNexaUi
     html.is-embedded body {
       overflow-y: auto !important;
     }
+    .embedded-tab-bar {
+      display: none;
+    }
+    html.is-embedded .embedded-tab-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      overflow-x: auto;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+    }
+    .emb-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #475569;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .emb-tab-btn:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+      color: #0f172a;
+    }
+    .emb-tab-btn.active {
+      background: #082846;
+      border-color: #082846;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(8, 40, 70, 0.2);
+    }
+    .emb-tab-btn.active span {
+      color: #ffffff;
+    }
   </style>
 
   <style>
@@ -285,6 +329,30 @@ import ComponentesNexaUiSection from '../components/guidelines/ComponentesNexaUi
     <!-- Main Content Panes -->
     <main class="guidelines-main">
       
+      <!-- Embedded Navigation Bar (Visible when embedded in Design Lab Hub) -->
+      <nav class="embedded-tab-bar" aria-label="Website guidelines navigation">
+        <button type="button" class="emb-tab-btn active" data-nav-tab="motor-grafico">
+          <i class="pi pi-bolt" style="color: #38c8ff; margin-right: 6px;"></i>
+          <span>Motor Gráfico Vivo</span>
+        </button>
+        <button type="button" class="emb-tab-btn" data-nav-tab="colorimetria">
+          <i class="pi pi-palette" style="margin-right: 6px;"></i>
+          <span>Colorimetría (0 Degradados)</span>
+        </button>
+        <button type="button" class="emb-tab-btn" data-nav-tab="tipografia">
+          <i class="pi pi-align-left" style="margin-right: 6px;"></i>
+          <span>Tipografía Cinética</span>
+        </button>
+        <button type="button" class="emb-tab-btn" data-nav-tab="geometria">
+          <i class="pi pi-share-alt" style="margin-right: 6px;"></i>
+          <span>Conductos & Fillets (28px)</span>
+        </button>
+        <button type="button" class="emb-tab-btn" data-nav-tab="componentes">
+          <i class="pi pi-box" style="margin-right: 6px;"></i>
+          <span>Componentes Nexa UI</span>
+        </button>
+      </nav>
+
       <!-- Tab 1 (DEFAULT & PRIMARY): Motor Gráfico Nexafy Vivo & Hero Flecto Auténtico 1:1 -->
       <div id="pane-motor-grafico" class="tab-pane active" role="tabpanel">
         <div class="hero-live-showcase-container">
@@ -376,14 +444,15 @@ import ComponentesNexaUiSection from '../components/guidelines/ComponentesNexaUi
   </UnifiedLabShell>
 
   <script>
-    // Tab Switching Logic wired to MonorepoNavHeader data-nav-tab links
-    const navTabLinks = document.querySelectorAll<HTMLAnchorElement>('[data-nav-tab]');
+    // Tab Switching Logic wired to all [data-nav-tab] elements (sidebar links & embedded buttons)
+    const getNavTabElements = () => document.querySelectorAll<HTMLElement>('[data-nav-tab]');
     const tabPanes = document.querySelectorAll<HTMLElement>('.tab-pane');
 
     function switchTab(tabId: string) {
-      navTabLinks.forEach(link => {
-        const isTarget = link.getAttribute('data-nav-tab') === tabId;
-        link.classList.toggle('active', isTarget);
+      const navElements = getNavTabElements();
+      navElements.forEach(el => {
+        const isTarget = el.getAttribute('data-nav-tab') === tabId;
+        el.classList.toggle('active', isTarget);
       });
 
       tabPanes.forEach(pane => {
@@ -391,9 +460,10 @@ import ComponentesNexaUiSection from '../components/guidelines/ComponentesNexaUi
       });
     }
 
-    navTabLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        const tabId = link.getAttribute('data-nav-tab');
+    // Attach click listeners to all data-nav-tab triggers
+    getNavTabElements().forEach(el => {
+      el.addEventListener('click', (e) => {
+        const tabId = el.getAttribute('data-nav-tab');
         if (tabId) {
           e.preventDefault();
           switchTab(tabId);
@@ -405,14 +475,32 @@ import ComponentesNexaUiSection from '../components/guidelines/ComponentesNexaUi
       });
     });
 
-    // Hash routing on initial load
-    if (window.location.hash) {
-      const hash = window.location.hash.replace('#', '');
-      const validTabs = ['motor-grafico', 'colorimetria', 'tipografia', 'geometria', 'componentes'];
-      if (validTabs.includes(hash)) {
-        switchTab(hash);
+    // Hash change handler
+    function checkHashRoute() {
+      if (window.location.hash) {
+        const hash = window.location.hash.replace('#', '');
+        const validTabs = ['motor-grafico', 'colorimetria', 'tipografia', 'geometria', 'componentes'];
+        if (validTabs.includes(hash)) {
+          switchTab(hash);
+        }
       }
     }
+
+    // Listen to hash changes
+    window.addEventListener('hashchange', checkHashRoute);
+    checkHashRoute();
+
+    // Cross-frame messaging from Design Lab Gateway Hub
+    window.addEventListener('message', (event) => {
+      if (event.data && event.data.type === 'switchTab' && event.data.tab) {
+        const tab = event.data.tab;
+        const validTabs = ['motor-grafico', 'colorimetria', 'tipografia', 'geometria', 'componentes'];
+        if (validTabs.includes(tab)) {
+          switchTab(tab);
+          window.location.hash = tab;
+        }
+      }
+    });
 
     // Sub-view toggle between Living Engine Workbench and Historic Hero
     const btnShowWorkbench = document.getElementById('btn-show-workbench');
