@@ -1,6 +1,6 @@
 {
   "name": "nexa-design-lab-monorepo",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Nexa Suite Design Lab Monorepo: Web Style (Angular), Mobile Style (Android/Flutter), and Website Style (Nexafy Living Geometry).",
   "private": true,
   "packageManager": "npm@11.17.0",

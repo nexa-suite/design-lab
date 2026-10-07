@@ -28,6 +28,9 @@ const { currentSection = 'overview' } = Astro.props;
     <div class="monorepo-suite-switcher" aria-label="Nexa Style Triad">
       <span class="suite-title">STYLE MONOREPO</span>
       <div class="suite-links">
+        <a href="http://localhost:8080" class="suite-pill link" target="_self" title="Ir al Master Hub (General Style Guidelines)">
+          <i class="pi pi-home" aria-hidden="true"></i> Hub
+        </a>
         <a href="http://localhost:4200" class="suite-pill link" target="_self" title="Ir a Web Style Guidelines (Angular & PrimeNG)">
           <i class="pi pi-desktop" aria-hidden="true"></i> Web
         </a>
@@ -57,12 +60,12 @@ const { currentSection = 'overview' } = Astro.props;
       </div>
     </div>
 
-    <!-- Navigation Groups with Accordions (Modular Discrete Screens) -->
+    <!-- Navigation Groups with Accordions (Exclusive Mobile Content) -->
     <nav class="lab-nav" aria-label="Secciones de la documentación móvil">
-      <!-- Simulador & Calibrador Android (Pantalla principal) -->
+      <!-- 1. Simulador & Calibrador Android -->
       <section class="lab-nav-group">
         <button class="nav-section-button" type="button" data-nav-group="simulator">
-          <span class="nav-section">SIMULADOR ANDROID</span>
+          <span class="nav-section">SIMULADOR & ACCESO M3</span>
           <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
         </button>
         <div class="lab-nav-items">
@@ -77,71 +80,43 @@ const { currentSection = 'overview' } = Astro.props;
         </div>
       </section>
 
-      <!-- Fundamentos de Diseño Visual M3 -->
+      <!-- 2. Operaciones en Campo & Módulos en Vivo -->
       <section class="lab-nav-group">
-        <button class="nav-section-button" type="button" data-nav-group="foundations">
-          <span class="nav-section">GUÍAS DE DISEÑO & VISUALES M3</span>
+        <button class="nav-section-button" type="button" data-nav-group="operations">
+          <span class="nav-section">OPERACIONES EN CAMPO</span>
           <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
         </button>
         <div class="lab-nav-items">
-          <a class="lab-nav-item" href="#screen-foundations-branding" data-screen="screen-foundations-branding">
-            <i class="pi pi-shield" aria-hidden="true"></i>
-            <span>Identidad & Logos Canónicos</span>
+          <a class="lab-nav-item" href="#screen-modules" data-screen="screen-modules">
+            <i class="pi pi-sliders-h" aria-hidden="true"></i>
+            <span>Módulos Interactivos en Vivo</span>
           </a>
-          <a class="lab-nav-item" href="#screen-foundations-tone" data-screen="screen-foundations-tone">
-            <i class="pi pi-comment" aria-hidden="true"></i>
-            <span>Tono de Voz & Microcopia</span>
+          <a class="lab-nav-item" href="#screen-components" data-screen="screen-components">
+            <i class="pi pi-id-card" aria-hidden="true"></i>
+            <span>Catálogo Canónico Compose</span>
           </a>
-          <a class="lab-nav-item" href="#screen-foundations-principles" data-screen="screen-foundations-principles">
-            <i class="pi pi-compass" aria-hidden="true"></i>
-            <span>Principios Móviles</span>
-          </a>
-          <a class="lab-nav-item" href="#screen-foundations-color" data-screen="screen-foundations-color">
-            <i class="pi pi-palette" aria-hidden="true"></i>
-            <span>Paleta M3 & WCAG</span>
-          </a>
-          <a class="lab-nav-item" href="#screen-foundations-typography" data-screen="screen-foundations-typography">
-            <i class="pi pi-align-left" aria-hidden="true"></i>
-            <span>Tipografía en sp</span>
-          </a>
-          <a class="lab-nav-item" href="#screen-foundations-elevation" data-screen="screen-foundations-elevation">
-            <i class="pi pi-clone" aria-hidden="true"></i>
-            <span>Layering & Superficies M3</span>
-          </a>
-          <a class="lab-nav-item" href="#screen-foundations-grid" data-screen="screen-foundations-grid">
-            <i class="pi pi-th-large" aria-hidden="true"></i>
-            <span>Cuadrícula 8dp</span>
-          </a>
+        </div>
+      </section>
+
+      <!-- 3. Ergonomía & Hardware de Campo -->
+      <section class="lab-nav-group">
+        <button class="nav-section-button" type="button" data-nav-group="ergonomics">
+          <span class="nav-section">ERGONOMÍA & HARDWARE</span>
+          <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
+        </button>
+        <div class="lab-nav-items">
           <a class="lab-nav-item" href="#screen-foundations-ergonomics" data-screen="screen-foundations-ergonomics">
             <i class="pi pi-hand" aria-hidden="true"></i>
             <span>Diana Táctil 48dp vs 56dp</span>
           </a>
           <a class="lab-nav-item" href="#screen-foundations-reach" data-screen="screen-foundations-reach">
             <i class="pi pi-chart-pie" aria-hidden="true"></i>
-            <span>Zonas de Alcance Ergonómico</span>
+            <span>Zonas de Alcance del Pulgar</span>
           </a>
         </div>
       </section>
 
-      <!-- Componentes & Módulos en Vivo -->
-      <section class="lab-nav-group">
-        <button class="nav-section-button" type="button" data-nav-group="components">
-          <span class="nav-section">COMPONENTES & MÓDULOS</span>
-          <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
-        </button>
-        <div class="lab-nav-items">
-          <a class="lab-nav-item" href="#screen-components" data-screen="screen-components">
-            <i class="pi pi-id-card" aria-hidden="true"></i>
-            <span>Catálogo Canónico Compose</span>
-          </a>
-          <a class="lab-nav-item" href="#screen-modules" data-screen="screen-modules">
-            <i class="pi pi-sliders-h" aria-hidden="true"></i>
-            <span>Módulos Interactivos en Vivo</span>
-          </a>
-        </div>
-      </section>
-
-      <!-- Especificaciones Técnicas & Código Kotlin -->
+      <!-- 4. Código Nativo & Mocks Kotlin -->
       <section class="lab-nav-group">
         <button class="nav-section-button" type="button" data-nav-group="technical">
           <span class="nav-section">CÓDIGO & ARQUITECTURA</span>
@@ -150,15 +125,11 @@ const { currentSection = 'overview' } = Astro.props;
         <div class="lab-nav-items">
           <a class="lab-nav-item" href="#screen-kotlin-mocks" data-screen="screen-kotlin-mocks">
             <i class="pi pi-android" aria-hidden="true"></i>
-            <span>Kotlin Mocks (Nativo)</span>
+            <span>Kotlin Mocks (Roles Nativos)</span>
           </a>
           <a class="lab-nav-item" href="#screen-code" data-screen="screen-code">
             <i class="pi pi-code" aria-hidden="true"></i>
             <span>Generador de Código Kotlin 2.4</span>
-          </a>
-          <a class="lab-nav-item" href="#screen-stories" data-screen="screen-stories">
-            <i class="pi pi-book" aria-hidden="true"></i>
-            <span>Historias Blueprint en Campo</span>
           </a>
           <a class="lab-nav-item" href="#screen-architecture" data-screen="screen-architecture">
             <i class="pi pi-compass" aria-hidden="true"></i>
@@ -167,16 +138,40 @@ const { currentSection = 'overview' } = Astro.props;
         </div>
       </section>
 
-      <!-- 5. Galería Multi-Dispositivo (Al fondo como se solicitó) -->
+      <!-- 5. Historias Blueprint en Campo -->
+      <section class="lab-nav-group">
+        <button class="nav-section-button" type="button" data-nav-group="stories">
+          <span class="nav-section">BLUEPRINT EN CAMPO</span>
+          <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
+        </button>
+        <div class="lab-nav-items">
+          <a class="lab-nav-item" href="#screen-stories" data-screen="screen-stories">
+            <i class="pi pi-book" aria-hidden="true"></i>
+            <span>Historias de Usuario en Campo</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 6. Galería Multi-Dispositivo -->
       <section class="lab-nav-group">
         <button class="nav-section-button" type="button" data-nav-group="gallery">
-          <span class="nav-section">5. REPORTE VISUAL (MURAL)</span>
+          <span class="nav-section">REPORTE VISUAL (MURAL)</span>
           <i class="pi pi-chevron-down toggle-icon" aria-hidden="true"></i>
         </button>
         <div class="lab-nav-items">
           <a class="lab-nav-item" href="#screen-gallery" data-screen="screen-gallery">
             <i class="pi pi-th-large" aria-hidden="true"></i>
             <span>Mural 5 Dispositivos (Al fondo)</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 7. Directrices Generales (Enlace al Hub) -->
+      <section class="lab-nav-group">
+        <div class="lab-nav-items" style="padding-top: 8px; border-top: 1px solid var(--nexa-color-border-subtle, #e2e8f0);">
+          <a class="lab-nav-item" href="http://localhost:8080" target="_self" title="Ver Directrices Generales Compartidas en el Hub">
+            <i class="pi pi-external-link" aria-hidden="true" style="color: var(--nexa-color-primary-600, #2563eb);"></i>
+            <span>General Style Guidelines ↗</span>
           </a>
         </div>
       </section>
