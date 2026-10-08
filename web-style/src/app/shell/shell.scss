@@ -10,10 +10,6 @@
   max-height: 100vh;
   overflow: hidden;
   background-color: var(--nexa-surface-page);
-  background-image:
-    linear-gradient(var(--nexa-color-border-decorative) 1px, transparent 1px),
-    linear-gradient(90deg, var(--nexa-color-border-decorative) 1px, transparent 1px);
-  background-size: 32px 32px;
 }
 .lab-sidebar {
   height: 100vh;
@@ -307,11 +303,12 @@
 }
 .lab-topbar {
   display: flex;
-  min-height: 56px;
+  height: 48px;
+  min-height: 48px;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 0 clamp(18px, 3vw, 42px);
+  padding: 0 24px;
   border-bottom: 1px solid var(--nexa-color-border-structural);
   background: var(--nexa-surface-card);
   color: var(--nexa-color-text-secondary);
@@ -320,52 +317,51 @@
   top: 0;
   z-index: 90;
 }
-.topbar-review {
-  color: var(--nexa-color-primary-700);
-  font-weight: 600;
-  text-decoration: none;
-}
-.evaluation-controls {
+
+.topbar-left-meta {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin-inline: auto;
+  gap: 12px;
 }
-.evaluation-label {
-  color: var(--nexa-color-text-muted);
+
+.topbar-suite-title {
+  font-family: var(--nexa-font-family-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--nexa-color-text-primary);
+  letter-spacing: -0.2px;
+}
+
+.topbar-review-badge {
+  font-family: var(--nexa-font-family-mono);
   font-size: 10px;
-  font-weight: 800;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--nexa-color-primary-700);
+  background: var(--nexa-color-primary-50);
+  border: 1px solid var(--nexa-color-border-subtle);
+  padding: 2px 7px;
+  border-radius: var(--nexa-radius-sm);
 }
-.segmented-evaluation {
+
+.topbar-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-verified-badge {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
-  padding: 2px;
-  border: 1px solid var(--nexa-color-border-default);
-  border-radius: var(--nexa-radius-control);
-  background: var(--nexa-surface-inset);
-}
-.segmented-evaluation button {
-  min-height: 26px;
-  border: 0;
-  border-radius: var(--nexa-radius-sm);
-  padding: 0 7px;
-  color: var(--nexa-color-text-secondary);
-  background: transparent;
-  font-size: 10px;
-  cursor: pointer;
-}
-.segmented-evaluation button.selected {
-  color: var(--nexa-color-primary-700);
-  background: var(--nexa-surface-card);
-  box-shadow: var(--nexa-shadow-xs);
+  gap: 5px;
+  font-family: var(--nexa-font-family-mono);
+  font-size: 11px;
   font-weight: 700;
+  color: var(--nexa-color-primary-600);
+
+  i {
+    font-size: 12px;
+  }
 }
-.segmented-evaluation button:focus-visible { outline: none; box-shadow: var(--nexa-focus-ring); }
 .mobile-menu-button,
 .icon-button {
   display: none;

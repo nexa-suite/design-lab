@@ -1,12 +1,19 @@
-/* Single owner for documentation section spacing and separators. */
+/* Single owner for documentation section card architecture */
 .pattern-section,
 .context-section,
 .foundation-section,
 .component-doc-section,
 .component-section,
 nexa-documentation-section {
-  padding-block: var(--nexa-layout-section-gap);
-  border-bottom: 1px solid var(--nexa-color-border-structural);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--nexa-surface-card);
+  border: 1px solid var(--nexa-color-border-structural);
+  border-radius: var(--nexa-radius-card);
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--nexa-shadow-xs);
 }
 
 .pattern-section.evidence-first,
@@ -15,5 +22,5 @@ nexa-documentation-section {
 .component-doc-section.evidence-first,
 .component-section.evidence-first,
 nexa-documentation-section.evidence-first {
-  padding-top: 0;
+  padding-top: 24px;
 }
