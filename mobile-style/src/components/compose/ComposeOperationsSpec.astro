@@ -1,0 +1,97 @@
+---
+/**
+ * ComposeOperationsSpec.astro
+ * Nexa Design Lab · Canonical Android Jetpack Compose M3 Specifications
+ * 
+ * Bounded Context: Rugged Handheld Logistics & Driver App (:core:designsystem)
+ * Technology Stack: Kotlin 2.4, Jetpack Compose, Material 3, Zebra BLE Scanner API
+ */
+import KotlinMocksSection from '../kotlin-mocks/KotlinMocksSection.astro';
+---
+
+<div class="compose-spec-container">
+  <!-- Banner -->
+  <header class="spec-banner compose-banner">
+    <div class="banner-badge">
+      <svg class="icon-svg" viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="12" rx="2"></rect><circle cx="9" cy="5" r="1"></circle><circle cx="15" cy="5" r="1"></circle></svg>
+      <span>KOTLIN / JETPACK COMPOSE · CANONICAL OPERATIONS ARCHITECTURE</span>
+    </div>
+    <h2 class="banner-title">Especificación Canónica Jetpack Compose M3</h2>
+    <p class="banner-desc">
+      Arquitectura nativa de <strong>Nexa Operations Android</strong> (Zebra TC58, Handhelds industriales y conductores en ruta). Consume directamente el módulo monorepo <code>:core:designsystem</code> con dianas reforzadas de 56dp para guantes sub-cero y resiliencia offline SQLite/Room.
+    </p>
+    <div class="banner-tags">
+      <span class="tag-pill"><i class="pi pi-check-circle"></i> Kotlin 2.4</span>
+      <span class="tag-pill"><i class="pi pi-check-circle"></i> Jetpack Compose M3</span>
+      <span class="tag-pill"><i class="pi pi-check-circle"></i> :core:designsystem</span>
+      <span class="tag-pill"><i class="pi pi-check-circle"></i> SE4720 Laser Scanner</span>
+    </div>
+  </header>
+
+  <!-- Live Canonical Mocks -->
+  <KotlinMocksSection />
+</div>
+
+<style>
+  .compose-spec-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+  .spec-banner {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: 16px;
+    padding: 24px 28px;
+    box-shadow: 0 1px 3px rgba(15,23,42,0.04);
+  }
+  .compose-banner {
+    border-left: 4px solid #16a34a;
+  }
+  .banner-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    color: #16a34a;
+    background: #f0fdf4;
+    padding: 3px 8px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+  .banner-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.01em;
+  }
+  .banner-desc {
+    font-size: 13.5px;
+    color: #64748b;
+    margin-top: 6px;
+    line-height: 1.5;
+    max-width: 840px;
+  }
+  .banner-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #334155;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+</style>

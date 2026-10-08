@@ -1,0 +1,358 @@
+---
+/**
+ * SwiftUIHIGSpec.astro
+ * Nexa Design Lab · Canonical SwiftUI (iOS HIG) Mobile Specifications
+ * 
+ * Bounded Context: Native iOS Reference Architecture
+ * Technology Stack: Swift 6.x, SwiftUI, Apple Human Interface Guidelines (HIG)
+ */
+---
+
+<div class="platform-spec-container">
+  <!-- Platform Header Banner -->
+  <header class="spec-banner swift-banner">
+    <div class="banner-badge">
+      <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+      <span>SWIFTUI / iOS HIG · REFERENCE CONTRACT</span>
+    </div>
+    <h2 class="banner-title">Especificación Canónica SwiftUI (iOS HIG)</h2>
+    <p class="banner-desc">
+      Contrato canónico de diseño para la futura implementación nativa en iOS. Adapta los tokens W3C DTCG de Nexa al sistema de vistas declarativas de SwiftUI, respetando los estándares de accesibilidad de Apple (Dynamic Type, VoiceOver y diana táctil de 44pt / 56pt).
+    </p>
+    <div class="banner-tags">
+      <span class="tag-pill"><i class="pi pi-check-circle"></i> Swift 6.0</span>
+      <span class="tag-pill"><i class="pi pi-check-circle"></i> SwiftUI 5.0+</span>
+      <span class="tag-pill"><i class="pi pi-check-circle"></i> Apple HIG Conforme</span>
+      <span class="tag-pill"><i class="pi pi-check-circle"></i> Continuous Corners</span>
+    </div>
+  </header>
+
+  <!-- Spec Grid: Architecture Pillars -->
+  <div class="pillars-grid">
+    <!-- Card 1: SwiftUI ButtonStyle -->
+    <div class="pillar-card">
+      <div class="card-top">
+        <span class="card-kicker">BUTTONSTYLE DECLARATIVO</span>
+        <h3>NexaButtonStyle (HIG 44pt vs 56pt)</h3>
+      </div>
+      <p class="card-text">
+        Estilo de botón nativo con esquinas de superelipse continua (Apple Squircle) y retroalimentación táctil de escala:
+      </p>
+      <div class="code-box">
+        <pre is:raw><code><span class="kw">public struct</span> <span class="type">NexaButtonStyle</span>: <span class="type">ButtonStyle</span> {
+    <span class="kw">public var</span> gloveFriendly: <span class="type">Bool</span> = <span class="kw">true</span>
+    <span class="kw">@Environment</span>(\.isEnabled) <span class="kw">private var</span> isEnabled: <span class="type">Bool</span>
+
+    <span class="kw">public func</span> <span class="fn">makeBody</span>(configuration: <span class="type">Configuration</span>) -&gt; <span class="kw">some</span> <span class="type">View</span> {
+        configuration.label
+            .font(.system(size: <span class="num">16</span>, weight: .semibold))
+            .foregroundColor(isEnabled ? .white : Color(uiColor: .systemGray3))
+            .frame(maxWidth: .infinity)
+            .frame(height: gloveFriendly ? <span class="num">56</span> : <span class="num">44</span>)
+            .background(
+                <span class="fn">RoundedRectangle</span>(cornerRadius: <span class="num">12</span>, style: .continuous)
+                    .fill(isEnabled ? Color(hex: <span class="num">0x2563EB</span>) : Color(hex: <span class="num">0xE2E8F0</span>))
+            )
+            .scaleEffect(configuration.isPressed ? <span class="num">0.98</span> : <span class="num">1.0</span>)
+    }
+}</code></pre>
+      </div>
+    </div>
+
+    <!-- Card 2: Environment & Color Tokens -->
+    <div class="pillar-card">
+      <div class="card-top">
+        <span class="card-kicker">DESIGN TOKENS EN SWIFT</span>
+        <h3>NexaColors &amp; Semantic Extensions</h3>
+      </div>
+      <p class="card-text">
+        Extensión de <code>Color</code> generada desde los tokens W3C DTCG con soporte para Dark Mode automático en iOS:
+      </p>
+      <div class="code-box">
+        <pre is:raw><code><span class="kw">extension</span> <span class="type">Color</span> {
+    <span class="kw">public static let</span> nexaPrimary = Color(hex: <span class="num">0x2563EB</span>)
+    <span class="kw">public static let</span> nexaSurface = Color(hex: <span class="num">0xF6FAFF</span>)
+    <span class="kw">public static let</span> nexaDark = Color(hex: <span class="num">0x082846</span>)
+    <span class="kw">public static let</span> nexaBorder = Color(hex: <span class="num">0xE2E8F0</span>)
+}
+
+<span class="kw">extension</span> <span class="type">View</span> {
+    <span class="kw">public func</span> <span class="fn">nexaCardElevation</span>() -&gt; <span class="kw">some</span> <span class="type">View</span> {
+        <span class="kw">self</span>
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: <span class="num">16</span>, style: .continuous))
+            .shadow(color: Color.black.opacity(<span class="num">0.06</span>), radius: <span class="num">3</span>, x: <span class="num">0</span>, y: <span class="num">1</span>)
+    }
+}</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live SwiftUI Preview Representation -->
+  <div class="live-specimen-box">
+    <div class="specimen-header">
+      <span class="badge-swift">VISTA PREVIA SWIFTUI HIG (DECLARATIVE VIEW HIERARCHY)</span>
+      <span class="specimen-role">iOS HIG Reference Contract · Dynamic Type Supported</span>
+    </div>
+    <div class="swift-mock-screen">
+      <!-- iOS Navigation Bar -->
+      <div class="ios-nav-bar">
+        <span class="ios-back"><i class="pi pi-chevron-left"></i> Volver</span>
+        <span class="ios-title">Inspección de Carga</span>
+        <span class="ios-action">Listo</span>
+      </div>
+
+      <!-- iOS Content Area -->
+      <div class="ios-body">
+        <div class="ios-card">
+          <div class="ios-card-header">
+            <span class="ios-card-badge">CUSTODIA REEFER</span>
+            <span class="ios-card-temp">-18.4°C</span>
+          </div>
+          <div class="ios-card-title">Pallet #PL-00918 &middot; Puerto Callao</div>
+          <p class="ios-card-desc">Validado por sensor Bluetooth LE Sensirion. Cumplimiento HACCP 100%.</p>
+          <div class="ios-button-area">
+            <button type="button" class="ios-btn-primary">Firmar Entrega POD</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .platform-spec-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .spec-banner {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: 16px;
+    padding: 24px 28px;
+    box-shadow: 0 1px 3px rgba(15,23,42,0.04);
+  }
+  .swift-banner {
+    border-left: 4px solid #ea580c;
+  }
+  .banner-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    color: #ea580c;
+    background: #fff7ed;
+    padding: 3px 8px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+  .banner-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.01em;
+  }
+  .banner-desc {
+    font-size: 13.5px;
+    color: #64748b;
+    margin-top: 6px;
+    line-height: 1.5;
+    max-width: 840px;
+  }
+  .banner-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #334155;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 20px;
+  }
+  .pillar-card {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .card-top .card-kicker {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #ea580c;
+    text-transform: uppercase;
+  }
+  .card-top h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 2px;
+  }
+  .card-text {
+    font-size: 12.5px;
+    color: #64748b;
+    line-height: 1.45;
+  }
+  .code-box {
+    background: #082846;
+    border-radius: 10px;
+    padding: 14px;
+    overflow-x: auto;
+  }
+  .code-box pre {
+    margin: 0;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    line-height: 1.5;
+    color: #e2e8f0;
+  }
+  .kw { color: #f97316; font-weight: 600; }
+  .type { color: #a78bfa; }
+  .fn { color: #38bdf8; }
+  .num { color: #f472b6; }
+  .live-specimen-box {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: 16px;
+    padding: 20px;
+  }
+  .specimen-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .badge-swift {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #ea580c;
+    background: #fff7ed;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid #fed7aa;
+  }
+  .specimen-role {
+    font-size: 12px;
+    color: #64748b;
+  }
+  .swift-mock-screen {
+    max-width: 440px;
+    margin: 0 auto;
+    background: #f1f5f9;
+    border: 2px solid #cbd5e1;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(15,23,42,0.08);
+  }
+  .ios-nav-bar {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #e2e8f0;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+  }
+  .ios-back {
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+  }
+  .ios-title {
+    font-weight: 600;
+    color: #0f172a;
+  }
+  .ios-action {
+    color: #2563eb;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .ios-body {
+    padding: 16px;
+  }
+  .ios-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .ios-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .ios-card-badge {
+    font-size: 10px;
+    font-weight: 700;
+    color: #2563eb;
+    background: #eff6ff;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .ios-card-temp {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 12px;
+    font-weight: 700;
+    color: #0284c7;
+  }
+  .ios-card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+  }
+  .ios-card-desc {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.4;
+  }
+  .ios-button-area {
+    margin-top: 8px;
+  }
+  .ios-btn-primary {
+    width: 100%;
+    height: 48px;
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+  .ios-btn-primary:active {
+    opacity: 0.85;
+  }
+</style>

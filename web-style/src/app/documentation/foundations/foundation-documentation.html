@@ -1,50 +1,51 @@
 @switch (page().id) {
   @case ('brand-logo') {
     <section class="foundation-section evidence-first">
-      <div class="section-heading"><span class="section-index">01</span><div><p class="section-kicker">PRIMARY USAGE</p><h2>Use the supplied mark; never redraw the wordmark</h2><p class="section-intro">The canonical blue SVG is rendered directly from the versioned <code>logo-nexa/</code> evidence folder.</p></div></div>
-      <div class="brand-logo-grid"><article><p class="proof-label">LIGHT SURFACE / PRIMARY BLUE</p><div class="logo-stage light-logo"><nexa-logo alt="Nexa" /></div><small>Preferred on the light canonical appearance.</small></article><article class="inverse-logo-card"><p class="proof-label">DEEP SURFACE / INVERSE WHITE</p><div class="logo-stage dark-logo"><nexa-logo variant="inverse" alt="Nexa" /></div><small>Use only where the supplied inverse asset remains legible.</small></article></div>
-    </section>
-    <section class="foundation-section">
-      <div class="section-heading"><span class="section-index">02</span><div><p class="section-kicker">SIZE / SAFE SPACE</p><h2>Scale the asset without changing its geometry</h2><p class="section-intro">The dashed boundary is a documentation aid for clear space; it is not part of the logo.</p></div></div>
-      <div class="logo-size-grid"><article><p class="proof-label">COMPACT</p><div class="logo-safe-space compact-logo"><nexa-logo alt="Nexa" /></div><small>Navigation and dense utility use.</small></article><article><p class="proof-label">STANDARD</p><div class="logo-safe-space standard-logo"><nexa-logo alt="Nexa" /></div><small>Documentation and branded surfaces.</small></article><article><p class="proof-label">INVERSE</p><div class="logo-safe-space inverse-safe"><nexa-logo variant="inverse" alt="Nexa" /></div><small>Deep blue brand plane only.</small></article></div>
-    </section>
-    <section class="foundation-section">
-      <div class="section-heading"><span class="section-index">03</span><div><p class="section-kicker">IMPLEMENTATION RULES</p><h2>Only two supplied variants are currently supported</h2></div></div>
-      <div class="logo-rules"><div><i class="pi pi-check-circle" aria-hidden="true"></i><strong>Primary blue</strong><span>Use the supplied logo-nexa.svg asset.</span></div><div><i class="pi pi-check-circle" aria-hidden="true"></i><strong>Inverse white</strong><span>Use the supplied Documento.svg asset.</span></div><div><i class="pi pi-ban" aria-hidden="true"></i><strong>No fabricated monochrome</strong><span>Do not derive or recolor a variant until the source supports it.</span></div></div>
+      <div class="canonical-hub-banner" style="display: flex; gap: 16px; align-items: center; padding: 24px; border: 1px solid var(--nexa-color-primary-200); border-radius: var(--nexa-radius-card); background: var(--nexa-surface-info); color: var(--nexa-color-primary-800);">
+        <i class="pi pi-compass" style="font-size: 28px; color: var(--nexa-color-primary-600);"></i>
+        <div>
+          <h3 style="margin: 0 0 4px; font-size: 16px; font-weight: 700;">Fundación Canónica Centralizada en Nexa Hub</h3>
+          <p style="margin: 0; font-size: 13px; color: var(--nexa-color-text-secondary); line-height: 1.5;">
+            La especificación vectorial, geometrías de safe-space y variantes del logotipo residen de forma canónica y unificada en el <strong>Nexa Design System Hub</strong> para evitar desincronizaciones entre plataformas.
+          </p>
+          <a href="http://localhost:18090/#pane-hub-logos" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-weight: 700; font-size: 12px; color: var(--nexa-color-primary-600); text-decoration: none;">
+            Abrir Marca &amp; Logotipos en Hub <i class="pi pi-external-link"></i>
+          </a>
+        </div>
+      </div>
     </section>
   }
   @case ('color') {
     <section class="foundation-section evidence-first">
-      <div class="section-heading"><span class="section-index">01</span><div><p class="section-kicker">VISUAL SCALE</p><h2>Blue has a usable range, not one lucky hex</h2><p class="section-intro">Each swatch shows token, value, role and a candidate foreground pairing.</p></div></div>
-      <div class="blue-scale">
-        @for (token of blueScale; track token.shade) {
-          <article class="blue-token-card"><div class="blue-swatch" [style.background]="token.value"><span [class.light-text]="token.shade >= 500">Blue {{ token.shade }}</span></div><strong>Blue {{ token.shade }}</strong><code>{{ token.token }}</code><small>{{ token.value }}</small><p>{{ token.usage }}</p><span class="foreground-pair">{{ token.foreground }}</span></article>
-        }
+      <div class="canonical-hub-banner" style="display: flex; gap: 16px; align-items: center; padding: 24px; border: 1px solid var(--nexa-color-primary-200); border-radius: var(--nexa-radius-card); background: var(--nexa-surface-info); color: var(--nexa-color-primary-800);">
+        <i class="pi pi-palette" style="font-size: 28px; color: var(--nexa-color-primary-600);"></i>
+        <div>
+          <h3 style="margin: 0 0 4px; font-size: 16px; font-weight: 700;">Colorimetría Canónica Centralizada en Nexa Hub</h3>
+          <p style="margin: 0; font-size: 13px; color: var(--nexa-color-text-secondary); line-height: 1.5;">
+            Las escalas primitivas (Blue 50-950, Neutral Slate), paletas tonales OKLCH, familias semánticas y la matriz de contraste WCAG 2.2 AAA están unificadas centralmente en el <strong>Nexa Design System Hub</strong>.
+          </p>
+          <a href="http://localhost:18090/#pane-hub-color" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-weight: 700; font-size: 12px; color: var(--nexa-color-primary-600); text-decoration: none;">
+            Abrir Colorimetría en Hub <i class="pi pi-external-link"></i>
+          </a>
+        </div>
       </div>
-    </section>
-    <section class="foundation-section">
-      <div class="section-heading"><span class="section-index">02</span><div><p class="section-kicker">NEUTRAL RAMP</p><h2>Slate carries reading hierarchy</h2><p class="section-intro">Neutral values are rendered as surfaces and text roles, not left as a line of code.</p></div></div>
-      <div class="neutral-ramp">@for (token of neutralScale; track token.name) { <article><span class="neutral-swatch" [style.background]="token.value"></span><strong>{{ token.name }}</strong><code>{{ token.value }}</code><p>{{ token.note }}</p></article> }</div>
-    </section>
-    <section class="foundation-section">
-      <div class="section-heading"><span class="section-index">03</span><div><p class="section-kicker">SEMANTIC FAMILIES</p><h2>Every supporting hue has a job</h2><p class="section-intro">Icon, surface, border, foreground and label work together. Color never stands alone.</p></div></div>
-      <div class="family-grid">@for (family of colorFamilies; track family.name) { <article class="family-card" [style.--family-surface]="family.surface" [style.--family-border]="family.border" [style.--family-foreground]="family.foreground"><div class="family-swatch" [style.background]="family.surface"><i class="pi {{ family.icon }}" [style.color]="family.foreground" aria-hidden="true"></i><span [style.color]="family.foreground">{{ family.example }}</span></div><h3>{{ family.name }}</h3><div class="family-values"><span><b>Surface</b><code>{{ family.surface }}</code></span><span><b>Border</b><code>{{ family.border }}</code></span><span><b>Foreground</b><code>{{ family.foreground }}</code></span></div><nexa-status-chip [tone]="family.name.includes('Danger') ? 'danger' : family.name.includes('Attention') ? 'warning' : family.name.includes('Success') ? 'success' : 'info'">{{ family.example }}</nexa-status-chip></article> }</div>
-    </section>
-    <section class="foundation-section">
-      <div class="section-heading"><span class="section-index">04</span><div><p class="section-kicker">SEMANTIC MAP</p><h2>One meaning, multiple cues</h2></div></div>
-      <div class="semantic-map"><div><span class="cue-icon success"><i class="pi pi-check" aria-hidden="true"></i></span><strong>Completed</strong><small>Green surface + check icon + label</small></div><div><span class="cue-icon warning"><i class="pi pi-clock" aria-hidden="true"></i></span><strong>Awaiting review</strong><small>Amber surface + clock icon + label</small></div><div><span class="cue-icon danger"><i class="pi pi-ban" aria-hidden="true"></i></span><strong>Blocked</strong><small>Red surface + block icon + label</small></div></div>
     </section>
   }
   @case ('typography') {
     <section class="foundation-section evidence-first">
-      <div class="section-heading"><span class="section-index">01</span><div><p class="section-kicker">TYPE MATRIX</p><h2>Actual text roles, actual hierarchy</h2><p class="section-intro">Primary, secondary and tertiary treatments are shown across the full role scale.</p></div></div>
-      <div class="type-matrix"><div class="type-matrix-head"><span>Role</span><span>Primary</span><span>Secondary</span><span>Tertiary</span></div>@for (row of typeRows; track row.role) { <div class="type-matrix-row"><div class="type-meta"><strong>{{ row.role }}</strong><small>{{ row.size }} / {{ row.leading }} / {{ row.weight }}</small><code>{{ row.family }}</code></div><p class="type-sample primary-type" [style]="textStyle(row)">Purchase request</p><p class="type-sample secondary-type" [style]="textStyle(row)">Purchase request</p><p class="type-sample tertiary-type" [style]="textStyle(row)">Purchase request</p></div> }</div>
+      <div class="canonical-hub-banner" style="display: flex; gap: 16px; align-items: center; padding: 24px; border: 1px solid var(--nexa-color-primary-200); border-radius: var(--nexa-radius-card); background: var(--nexa-surface-info); color: var(--nexa-color-primary-800);">
+        <i class="pi pi-align-left" style="font-size: 28px; color: var(--nexa-color-primary-600);"></i>
+        <div>
+          <h3 style="margin: 0 0 4px; font-size: 16px; font-weight: 700;">Tipografía Canónica &amp; Sandbox Interactivo en Nexa Hub</h3>
+          <p style="margin: 0; font-size: 13px; color: var(--nexa-color-text-secondary); line-height: 1.5;">
+            La escala tipográfica modular (ratio 1.25), las 3 familias de Nexa y el nuevo <strong>Workbench Interactivo con calibres métricos de padding y bounding box</strong> se encuentran disponibles en el <strong>Nexa Design System Hub</strong>.
+          </p>
+          <a href="http://localhost:18090/#pane-hub-typography" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-weight: 700; font-size: 12px; color: var(--nexa-color-primary-600); text-decoration: none;">
+            Abrir Tipografía &amp; Workbench en Hub <i class="pi pi-external-link"></i>
+          </a>
+        </div>
+      </div>
     </section>
-    <section class="foundation-section">
-      <div class="section-heading"><span class="section-index">02</span><div><p class="section-kicker">RESIZE EVIDENCE</p><h2>Long content survives larger text</h2><p class="section-intro">Use shell evaluation controls to inspect Standard, Increased contrast, increased text spacing and 100–400% reflow.</p></div></div>
-      <div class="resize-proof"><article><p class="proof-label">PRIMARY TEXT</p><h3>Buyer purchase requests</h3><p>Review credit, availability and business document workload before creating a sales order. Long copy remains readable without clipping.</p></article><article><p class="proof-label">SECONDARY TEXT</p><p>La Cava Fría · Requested delivery 18 Aug · Refrigerated</p><button type="button">Review request <i class="pi pi-arrow-right" aria-hidden="true"></i></button></article></div>
-    </section>
-    <section class="foundation-section"><div class="section-heading"><span class="section-index">03</span><div><p class="section-kicker">CONTRAST</p><h2>Typography is readable by contract</h2></div></div><div class="mini-contrast-grid">@for (pair of contrastPairs.slice(0, 4); track pair.id) { @let result = contrast(pair.id); <article><span class="contrast-preview" [style.color]="pair.foreground" [style.background]="pair.background">Aa</span><div><strong>{{ pair.label }}</strong><small>{{ result.ratio }}:1 · {{ result.pass ? 'PASS' : 'FAIL' }} · {{ pair.gate }}</small></div></article> }</div></section>
   }
   @case ('layout-spacing') {
     <section class="foundation-section evidence-first"><div class="section-heading"><span class="section-index">01</span><div><p class="section-kicker">RHYTHM</p><h2>Spacing is visible at the point of use</h2><p class="section-intro">The scale is small enough to remember, large enough to create breathing room.</p></div></div><div class="spacing-board">@for (space of [1, 2, 3, 4, 6, 8, 12]; track space) { <div class="spacing-row"><code>space-{{ space }}</code><span class="spacing-bar" [style.width.px]="space * 4">{{ space * 4 }}px</span><small>{{ space === 1 ? 'icon gap' : space === 4 ? 'control padding' : space === 8 ? 'panel gap' : space === 12 ? 'section gap' : 'composition interval' }}</small></div> }</div></section>

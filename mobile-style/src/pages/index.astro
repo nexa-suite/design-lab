@@ -15,14 +15,7 @@ import UnifiedLabShell from '../components/layout/UnifiedLabShell.astro';
 import DeviceFrame from '../components/simulator/DeviceFrame.astro';
 import LoginScreenSpec from '../components/simulator/LoginScreenSpec.astro';
 
-// 2. Visual Design Foundations M3 (UPC Capítulo III · Rúbrica 3.1.1)
-import IdentidadMarcaLogosSection from '../components/guidelines/IdentidadMarcaLogosSection.astro';
-import TonoComunicacionSection from '../components/guidelines/TonoComunicacionSection.astro';
-import PrincipiosDisenoSection from '../components/guidelines/PrincipiosDisenoSection.astro';
-import TokensColorSection from '../components/guidelines/TokensColorSection.astro';
-import TipografiaSpSection from '../components/guidelines/TipografiaSpSection.astro';
-import ElevacionesM3Section from '../components/guidelines/ElevacionesM3Section.astro';
-import Cuadricula8dpSection from '../components/guidelines/Cuadricula8dpSection.astro';
+// 2. Visual Design Foundations M3 (Ergonomía & Hardware Específico Móvil)
 import Ergonomia48dpSection from '../components/guidelines/Ergonomia48dpSection.astro';
 import ZonasAlcanceSection from '../components/guidelines/ZonasAlcanceSection.astro';
 
@@ -34,6 +27,8 @@ import MobileResilienceSection from '../components/guidelines/MobileResilienceSe
 import MobileComponentsSection from '../components/guidelines/MobileComponentsSection.astro';
 import CodeSnippetsTabs from '../components/spec/CodeSnippetsTabs.astro';
 import KotlinMocksSection from '../components/kotlin-mocks/KotlinMocksSection.astro';
+import FlutterBuyerSpec from '../components/flutter/FlutterBuyerSpec.astro';
+import SwiftUIHIGSpec from '../components/swiftui/SwiftUIHIGSpec.astro';
 
 // 4. Blueprint User Stories
 import DriverRouteStory from '../components/stories/DriverRouteStory.astro';
@@ -256,139 +251,6 @@ import GaleriaVisualAndroid from '../components/simulator/GaleriaVisualAndroid.a
       </section>
 
       <!-- =====================================================================
-           PANTALLA 2.0A: IDENTIDAD DE MARCA & LOGOS MÓVILES (UPC RÚBRICA 3.1.1.1)
-           ===================================================================== -->
-      <section class="lab-screen-view" id="screen-foundations-branding" data-title="Identidad de Marca & Logos Móviles">
-        <div class="screen-header-bar">
-          <div>
-            <span class="screen-badge-tag">IDENTIDAD VISUAL · LOGOS MÓVILES</span>
-            <h2 class="screen-main-title">Identidad de Marca & Especificación de Logos Móviles</h2>
-            <p class="screen-main-desc">
-              Directrices de logotipo, isotipos móviles Android (<code>nexa-mobile.svg</code> y <code>nexa-mobile-inverted.svg</code>), área de seguridad de 16dp/24dp, contraste WCAG 2.2 AAA y Adaptive Icons.
-            </p>
-          </div>
-          <div class="screen-actions">
-            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
-          </div>
-        </div>
-        <IdentidadMarcaLogosSection />
-      </section>
-
-      <!-- =====================================================================
-           PANTALLA 2.0B: LAS 4 DIMENSIONES DE TONO DE VOZ & MICROCOPIA (NN/G)
-           ===================================================================== -->
-      <section class="lab-screen-view" id="screen-foundations-tone" data-title="Tono de Voz & Microcopia (NN/g)">
-        <div class="screen-header-bar">
-          <div>
-            <span class="screen-badge-tag">ESTILO DE COMUNICACIÓN · NIELSEN NORMAN GROUP</span>
-            <h2 class="screen-main-title">Las Cuatro Dimensiones de Tono de Voz & Microcopia Móvil</h2>
-            <p class="screen-main-desc">
-              Calibración de Serious, Profesional & Directo, Respectful y Serene para operaciones de frío con matriz bilingüe oficial en inglés (<code>en_US</code>) y español (<code>es_419</code>).
-            </p>
-          </div>
-          <div class="screen-actions">
-            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
-          </div>
-        </div>
-        <TonoComunicacionSection />
-      </section>
-
-      <!-- =====================================================================
-           PANTALLA 2.0: PRINCIPIOS DE DISEÑO MÓVIL
-           ===================================================================== -->
-      <section class="lab-screen-view" id="screen-foundations-principles" data-title="Principios de Diseño Móvil">
-        <div class="screen-header-bar">
-          <div>
-            <span class="screen-badge-tag">PRINCIPIOS & ERGONOMÍA DE CAMPO</span>
-            <h2 class="screen-main-title">Principios de Diseño Móvil para Logística y Cadena de Frío</h2>
-            <p class="screen-main-desc">
-              Directrices de glanceability (&lt;1s), interacción ergonómica con una sola mano, arquitectura offline-first, legibilidad extrema a &gt;50,000 Lux y retroalimentación háptica/acústica.
-            </p>
-          </div>
-          <div class="screen-actions">
-            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
-          </div>
-        </div>
-        <PrincipiosDisenoSection />
-      </section>
-
-      <!-- =====================================================================
-           PANTALLA 2.1: PALETA M3 & SWATCHES WCAG
-           ===================================================================== -->
-      <section class="lab-screen-view" id="screen-foundations-color" data-title="Paleta M3 & Contraste WCAG">
-        <div class="screen-header-bar">
-          <div>
-            <span class="screen-badge-tag">PALETA TONAL M3 & WCAG 2.2</span>
-            <h2 class="screen-main-title">Paleta Tonal Material 3 & Contraste Accesible</h2>
-            <p class="screen-main-desc">
-              Tokens tonales certificados bajo WCAG 2.2 AAA para Android Jetpack Compose con paleta de alto contraste para logística de campo.
-            </p>
-          </div>
-          <div class="screen-actions">
-            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
-          </div>
-        </div>
-        <TokensColorSection />
-      </section>
-
-      <!-- =====================================================================
-           PANTALLA 2.2: TIPOGRAFÍA ESCALAR EN SP
-           ===================================================================== -->
-      <section class="lab-screen-view" id="screen-foundations-typography" data-title="Tipografía Escalar en sp">
-        <div class="screen-header-bar">
-          <div>
-            <span class="screen-badge-tag">ESCALA EN SP DINÁMICO</span>
-            <h2 class="screen-main-title">Escala Tipográfica Dinámica en sp (Scale-Independent Pixels)</h2>
-            <p class="screen-main-desc">
-              Especificaciones de texto en <code>sp</code> con soporte nativo para escalado de accesibilidad del sistema operativo Android (85% a 200%).
-            </p>
-          </div>
-          <div class="screen-actions">
-            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
-          </div>
-        </div>
-        <TipografiaSpSection />
-      </section>
-
-      <!-- =====================================================================
-           PANTALLA 2.3: CUADRÍCULA ESPACIAL 8DP
-           ===================================================================== -->
-      <section class="lab-screen-view" id="screen-foundations-grid" data-title="Cuadrícula Espacial 8dp">
-        <div class="screen-header-bar">
-          <div>
-            <span class="screen-badge-tag">CUADRÍCULA ESPACIAL 8DP</span>
-            <h2 class="screen-main-title">Cuadrícula Espacial 8dp & Densidad Multiplataforma</h2>
-            <p class="screen-main-desc">
-              Ritmo vertical y horizontal de 8dp (y half-step de 4dp) alineado con los píxeles independientes de densidad (dp) de Android.
-            </p>
-          </div>
-          <div class="screen-actions">
-            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
-          </div>
-        </div>
-        <Cuadricula8dpSection />
-      </section>
-
-      <!-- =====================================================================
-           PANTALLA 2.4: ELEVACIÓN TONAL M3 (0 A 5)
-           ===================================================================== -->
-      <section class="lab-screen-view" id="screen-foundations-elevation" data-title="Elevación & Surface Tint">
-        <div class="screen-header-bar">
-          <div>
-            <span class="screen-badge-tag">LAYERING & ELEVACIONES M3</span>
-            <h2 class="screen-main-title">Layering, Elevaciones Tonales M3 y Jerarquía de Contenedores</h2>
-            <p class="screen-main-desc">
-              Capas de elevación sin sombras artificiales pesadas; profundidad jerárquica lograda mediante tinte de superficie tonal M3, contenedores (Lowest a Highest) y z-index estricto.
-            </p>
-          </div>
-          <div class="screen-actions">
-            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
-          </div>
-        </div>
-        <ElevacionesM3Section />
-      </section>
-
-      <!-- =====================================================================
            PANTALLA 2.5: ERGONOMÍA 48DP VS 56DP
            ===================================================================== -->
       <section class="lab-screen-view" id="screen-foundations-ergonomics" data-title="Ergonomía 48dp vs 56dp">
@@ -489,7 +351,45 @@ import GaleriaVisualAndroid from '../components/simulator/GaleriaVisualAndroid.a
       </section>
 
       <!-- =====================================================================
-           PANTALLA 3.3: GENERADOR DE CÓDIGO KOTLIN
+           PANTALLA 3.2.2: ESPECIFICACIÓN CANÓNICA FLUTTER (DART 3.X)
+           ===================================================================== -->
+      <section class="lab-screen-view" id="screen-flutter-spec" data-title="Flutter (Buyer Mobile)">
+        <div class="screen-header-bar">
+          <div>
+            <span class="screen-badge-tag">FLUTTER &middot; BUYER MOBILE APP</span>
+            <h2 class="screen-main-title">Pila Móvil Flutter (Dart 3.x) &middot; ThemeData Extension</h2>
+            <p class="screen-main-desc">
+              Implementación multiplataforma para el comprador mayorista B2B (Carlos Mendoza &middot; Restaurantes del Mar) con consumo directo de tokens DTCG.
+            </p>
+          </div>
+          <div class="screen-actions">
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
+          </div>
+        </div>
+        <FlutterBuyerSpec />
+      </section>
+
+      <!-- =====================================================================
+           PANTALLA 3.2.3: ESPECIFICACIÓN CANÓNICA SWIFTUI (iOS HIG)
+           ===================================================================== -->
+      <section class="lab-screen-view" id="screen-swiftui-spec" data-title="SwiftUI (iOS Reference)">
+        <div class="screen-header-bar">
+          <div>
+            <span class="screen-badge-tag">SWIFTUI &middot; iOS HIG REFERENCE CONTRACT</span>
+            <h2 class="screen-main-title">Pila Móvil SwiftUI &middot; Apple Human Interface Guidelines</h2>
+            <p class="screen-main-desc">
+              Contrato canónico declarativo en Swift 6 para compatibilidad con el ecosistema iOS de Apple (Dynamic Type, VoiceOver, esquinas continuas).
+            </p>
+          </div>
+          <div class="screen-actions">
+            <a href="#screen-simulator" class="btn-quick-nav"><i class="pi pi-arrow-left"></i> Volver al Simulador</a>
+          </div>
+        </div>
+        <SwiftUIHIGSpec />
+      </section>
+
+      <!-- =====================================================================
+           PANTALLA 3.3: GENERADOR DE CÓDIGO TRI-STACK
            ===================================================================== -->
       <section class="lab-screen-view" id="screen-code" data-title="Generador de Código Kotlin 2.4">
         <div class="screen-header-bar">

@@ -1,0 +1,368 @@
+---
+/**
+ * FlutterBuyerSpec.astro
+ * Nexa Design Lab · Canonical Flutter (Dart) Mobile Specifications
+ * 
+ * Bounded Context: B2B Buyer Mobile App (Restaurantes del Mar / Comprador Mayorista)
+ * Technology Stack: Flutter 3.x, Dart 3.x, Material 3, ThemeData + NexaThemeExtension
+ */
+---
+
+<div class="platform-spec-container">
+  <!-- Platform Header Banner -->
+  <header class="spec-banner flutter-banner">
+    <div class="banner-badge">
+      <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+      <span>FLUTTER / DART · B2B BUYER MOBILE ARCHITECTURE</span>
+    </div>
+    <h2 class="banner-title">Especificación Canónica Flutter (Dart 3.x)</h2>
+    <p class="banner-desc">
+      Arquitectura multi-plataforma de la aplicación <strong>Nexa Buyer Mobile</strong> (Carlos Mendoza · Restaurantes del Mar). Implementa <code>ThemeData</code> aumentado con <code>NexaThemeExtension</code> para consumir tokens W3C DTCG directamente en Dart sin capas intermedias.
+    </p>
+    <div class="banner-tags">
+      <span class="tag-pill"><i class="pi pi-check-circle"></i> Flutter 3.24+</span>
+      <span class="tag-pill"><i class="pi pi-check-circle"></i> Dart 3.5</span>
+      <span class="tag-pill"><i class="pi pi-check-circle"></i> ThemeData Extension</span>
+      <span class="tag-pill"><i class="pi pi-check-circle"></i> WCAG 2.2 AAA</span>
+    </div>
+  </header>
+
+  <!-- Spec Grid: Architecture Pillars -->
+  <div class="pillars-grid">
+    <!-- Card 1: Theme Extension -->
+    <div class="pillar-card">
+      <div class="card-top">
+        <span class="card-kicker">DESIGN TOKENS EN DART</span>
+        <h3>NexaThemeExtension</h3>
+      </div>
+      <p class="card-text">
+        Mapeo tipado y reactivo de los tokens de color corporativos, radios y espaciado espacial de 8px hacia el árbol de widgets de Flutter:
+      </p>
+      <div class="code-box">
+        <pre is:raw><code><span class="kw">class</span> <span class="type">NexaThemeExtension</span> <span class="kw">extends</span> <span class="type">ThemeExtension</span>&lt;<span class="type">NexaThemeExtension</span>&gt; {
+  <span class="kw">final</span> <span class="type">Color</span> primary;       <span class="cmt">// Color(0xFF2563EB)</span>
+  <span class="kw">final</span> <span class="type">Color</span> onPrimary;     <span class="cmt">// Color(0xFFFFFFFF)</span>
+  <span class="kw">final</span> <span class="type">Color</span> surfaceDark;   <span class="cmt">// Color(0xFF082846)</span>
+  <span class="kw">final</span> <span class="type">double</span> radiusControl;<span class="cmt">// 10.0</span>
+  <span class="kw">final</span> <span class="type">double</span> radiusCard;   <span class="cmt">// 16.0</span>
+
+  <span class="kw">const</span> <span class="fn">NexaThemeExtension</span>({
+    <span class="kw">required</span> <span class="kw">this</span>.primary,
+    <span class="kw">required</span> <span class="kw">this</span>.onPrimary,
+    <span class="kw">required</span> <span class="kw">this</span>.surfaceDark,
+    <span class="kw">required</span> <span class="kw">this</span>.radiusControl,
+    <span class="kw">required</span> <span class="kw">this</span>.radiusCard,
+  });
+}</code></pre>
+      </div>
+    </div>
+
+    <!-- Card 2: NexaButton Widget -->
+    <div class="pillar-card">
+      <div class="card-top">
+        <span class="card-kicker">WIDGET CANÓNICO</span>
+        <h3>NexaButton (FilledButton M3)</h3>
+      </div>
+      <p class="card-text">
+        Botón accesible con soporte dual para diana estándar de 48.0dp y diana de 56.0dp para operarios con guantes en muelle:
+      </p>
+      <div class="code-box">
+        <pre is:raw><code><span class="kw">class</span> <span class="type">NexaButton</span> <span class="kw">extends</span> <span class="type">StatelessWidget</span> {
+  <span class="kw">final</span> <span class="type">String</span> label;
+  <span class="kw">final</span> <span class="type">VoidCallback</span>? onPressed;
+  <span class="kw">final</span> <span class="type">bool</span> gloveFriendly; <span class="cmt">// 56.0 vs 48.0</span>
+
+  <span class="kw">@override</span>
+  <span class="type">Widget</span> <span class="fn">build</span>(<span class="type">BuildContext</span> context) {
+    <span class="kw">final</span> height = gloveFriendly ? <span class="num">56.0</span> : <span class="num">48.0</span>;
+    <span class="kw">return</span> <span class="fn">Semantics</span>(
+      button: <span class="kw">true</span>,
+      label: label,
+      child: <span class="fn">SizedBox</span>(
+        height: height,
+        child: <span class="fn">FilledButton</span>(
+          onPressed: onPressed,
+          style: FilledButton.styleFrom(
+            backgroundColor: <span class="kw">const</span> <span class="fn">Color</span>(<span class="num">0xFF2563EB</span>),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(<span class="num">12.0</span>),
+            ),
+          ),
+          child: <span class="fn">Text</span>(label),
+        ),
+      ),
+    );
+  }
+}</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live Flutter Preview Representation -->
+  <div class="live-specimen-box">
+    <div class="specimen-header">
+      <span class="badge-flutter">VISTA PREVIA COMPRADOR MAYORISTA B2B (DART TREE)</span>
+      <span class="specimen-role">MOB-US-036..039 · Catálogo B2B Mayorista</span>
+    </div>
+    <div class="flutter-mock-screen">
+      <!-- App Bar -->
+      <div class="fl-appbar">
+        <i class="pi pi-arrow-left"></i>
+        <div class="fl-title-box">
+          <span class="fl-title">Catálogo Mayorista B2B</span>
+          <span class="fl-sub">Restaurantes del Mar · Lista A-Mayorista</span>
+        </div>
+        <i class="pi pi-shopping-cart"></i>
+      </div>
+
+      <!-- Content Area -->
+      <div class="fl-body">
+        <div class="fl-product-card">
+          <div class="fl-prod-badge">Lote Refrigerado -18°C</div>
+          <div class="fl-prod-title">Salmón Premium Entero Eviscerado</div>
+          <div class="fl-prod-sku">SKU: SLM-CHL-001 · Origen: Chile</div>
+          <div class="fl-pricing-tier">
+            <span class="tier-label">Precio Mayorista (Tier 3 &gt;500 kg):</span>
+            <span class="tier-val">$18.50 / kg</span>
+          </div>
+          <button type="button" class="fl-btn-primary">
+            <i class="pi pi-plus"></i> Agregar al Pedido Mayorista
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .platform-spec-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .spec-banner {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: 16px;
+    padding: 24px 28px;
+    box-shadow: 0 1px 3px rgba(15,23,42,0.04);
+  }
+  .flutter-banner {
+    border-left: 4px solid #0284c7;
+  }
+  .banner-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    color: #0284c7;
+    background: #f0f9ff;
+    padding: 3px 8px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+  .banner-title {
+    font-family: var(--nexa-font-family-display, sans-serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.01em;
+  }
+  .banner-desc {
+    font-size: 13.5px;
+    color: #64748b;
+    margin-top: 6px;
+    line-height: 1.5;
+    max-width: 840px;
+  }
+  .banner-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #334155;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 20px;
+  }
+  .pillar-card {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .card-top .card-kicker {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #0284c7;
+    text-transform: uppercase;
+  }
+  .card-top h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 2px;
+  }
+  .card-text {
+    font-size: 12.5px;
+    color: #64748b;
+    line-height: 1.45;
+  }
+  .code-box {
+    background: #082846;
+    border-radius: 10px;
+    padding: 14px;
+    overflow-x: auto;
+  }
+  .code-box pre {
+    margin: 0;
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 11px;
+    line-height: 1.5;
+    color: #e2e8f0;
+  }
+  .kw { color: #38bdf8; font-weight: 600; }
+  .type { color: #a78bfa; }
+  .fn { color: #67e8f9; }
+  .cmt { color: #64748b; font-style: italic; }
+  .num { color: #f472b6; }
+  .live-specimen-box {
+    background: #ffffff;
+    border: 1px solid var(--nexa-color-border-structural, #e2e8f0);
+    border-radius: 16px;
+    padding: 20px;
+  }
+  .specimen-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .badge-flutter {
+    font-family: var(--nexa-font-family-mono, monospace);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #0284c7;
+    background: #f0f9ff;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid #bae6fd;
+  }
+  .specimen-role {
+    font-size: 12px;
+    color: #64748b;
+  }
+  .flutter-mock-screen {
+    max-width: 440px;
+    margin: 0 auto;
+    background: #f8fafc;
+    border: 2px solid #cbd5e1;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(15,23,42,0.08);
+  }
+  .fl-appbar {
+    background: #082846;
+    color: #ffffff;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .fl-title-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .fl-title {
+    font-size: 13.5px;
+    font-weight: 700;
+  }
+  .fl-sub {
+    font-size: 10.5px;
+    color: #94a3b8;
+  }
+  .fl-body {
+    padding: 16px;
+  }
+  .fl-product-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .fl-prod-badge {
+    font-size: 10px;
+    font-weight: 700;
+    color: #0284c7;
+    background: #e0f2fe;
+    padding: 2px 6px;
+    border-radius: 4px;
+    width: fit-content;
+  }
+  .fl-prod-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+  .fl-prod-sku {
+    font-size: 11px;
+    color: #64748b;
+  }
+  .fl-pricing-tier {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f1f5f9;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 11.5px;
+  }
+  .tier-val {
+    font-weight: 700;
+    color: #2563eb;
+    font-family: var(--nexa-font-family-mono, monospace);
+  }
+  .fl-btn-primary {
+    height: 48px;
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+</style>
