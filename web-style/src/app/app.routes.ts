@@ -61,11 +61,8 @@ export const routes: Routes = [
         ['principles', 'principles'],
         ['maturity', 'maturity'],
       ]),
-      { path: 'foundations', pathMatch: 'full', redirectTo: 'foundations/color' },
+      { path: 'foundations', pathMatch: 'full', redirectTo: 'foundations/layout-spacing' },
       ...pageRoutes(loadFoundationPage, [
-        ['foundations/color', 'color'],
-        ['foundations/brand-logo', 'brand-logo'],
-        ['foundations/typography', 'typography'],
         ['foundations/layout-spacing', 'layout-spacing'],
         ['foundations/shape-radius', 'shape-radius'],
         ['foundations/surfaces', 'surfaces'],

@@ -9,7 +9,11 @@
   height: 100vh;
   max-height: 100vh;
   overflow: hidden;
-  background: var(--nexa-surface-page);
+  background-color: var(--nexa-surface-page);
+  background-image:
+    linear-gradient(var(--nexa-color-border-decorative) 1px, transparent 1px),
+    linear-gradient(90deg, var(--nexa-color-border-decorative) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 .lab-sidebar {
   height: 100vh;

@@ -30,10 +30,10 @@ describe('Nexa Design Lab v0.10 routes', () => {
   });
 
   it('renders foundations, components, quality and engineering evidence', async () => {
-    const color = await navigate('/guidelines/foundations/color');
-    expect(color.querySelector('nexa-shell')).toBeTruthy();
-    expect(color.querySelector('h1')?.textContent).toContain('Color communicates');
-    expect(color.querySelectorAll('.blue-token-card')).toHaveLength(11);
+    const layout = await navigate('/guidelines/foundations/layout-spacing');
+    expect(layout.querySelector('nexa-shell')).toBeTruthy();
+    expect(layout.querySelector('h1')?.textContent).toContain('A 4px rhythm');
+    expect(layout.querySelector('.spacing-board')).toBeTruthy();
 
     const buttons = await navigate('/guidelines/components/buttons');
     expect(buttons.querySelector('h1')?.textContent).toContain('Buttons make one next action');

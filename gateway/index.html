@@ -4338,6 +4338,223 @@
       color: var(--nexa-color-primary-700);
     }
 
+    /* Nexa Padding, Margin & Box-Model Caliper */
+    .padding-caliper-card {
+      border: 1px solid var(--nexa-color-border-default);
+      border-radius: var(--nexa-radius-card);
+      background: var(--nexa-surface-card);
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .padding-controls-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: flex-end;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--nexa-color-border-decorative);
+      margin-bottom: 20px;
+    }
+    .padding-ctrl-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 130px;
+      flex: 1 1 auto;
+    }
+    .padding-ctrl-group label {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--nexa-color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .padding-ctrl-group label span.val-badge {
+      font-family: var(--nexa-font-family-mono);
+      color: var(--nexa-color-primary-600);
+      font-weight: 800;
+      background: rgba(37,99,235,0.08);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+    .padding-ctrl-group select {
+      height: 34px;
+      padding: 0 10px;
+      border: 1px solid var(--nexa-color-border-interactive);
+      border-radius: var(--nexa-radius-sm);
+      background: var(--nexa-surface-page);
+      color: var(--nexa-color-text-primary);
+      font-size: 12px;
+      font-family: var(--nexa-font-family-body);
+      outline: none;
+    }
+    .padding-ctrl-group select:focus {
+      border-color: var(--nexa-color-primary-600);
+      box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+    }
+    .padding-ctrl-group input[type="range"] {
+      height: 34px;
+      accent-color: var(--nexa-color-primary-600);
+      cursor: pointer;
+    }
+    .padding-stage {
+      position: relative;
+      min-height: 280px;
+      background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.03) 0%, transparent 70%), #f8fafc;
+      background-size: 100% 100%, 16px 16px;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.03) 0%, transparent 70%),
+        linear-gradient(to right, rgba(37, 99, 235, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(37, 99, 235, 0.06) 1px, transparent 1px);
+      border: 1px solid var(--nexa-color-border-default);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      overflow: hidden;
+      user-select: none;
+    }
+    .boxmodel-root {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .boxmodel-margin-layer {
+      position: relative;
+      border: 1.5px dashed #f97316;
+      background: rgba(249, 115, 22, 0.10);
+      border-radius: 8px;
+      padding: 16px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .boxmodel-margin-layer.no-debug {
+      border-color: transparent !important;
+      background: transparent !important;
+    }
+    .boxmodel-margin-layer.no-debug .boxmodel-label-margin,
+    .boxmodel-margin-layer.no-debug .boxmodel-label-padding {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .boxmodel-label-margin {
+      font-family: var(--nexa-font-family-mono);
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #c2410c;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      transition: opacity 0.15s ease;
+    }
+    .boxmodel-padding-layer {
+      position: relative;
+      border: 1.5px dashed #10b981;
+      background: rgba(16, 185, 129, 0.12);
+      border-radius: 6px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+    }
+    .boxmodel-padding-layer.no-debug {
+      border-color: transparent !important;
+      background: transparent !important;
+    }
+    .boxmodel-specimen {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--nexa-font-family-body);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      border: 1px solid #2563eb;
+      background: #2563eb;
+      color: #ffffff;
+      box-shadow: 0 1px 3px rgba(37,99,235,0.25);
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .boxmodel-specimen:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(37,99,235,0.35);
+    }
+    .boxmodel-specimen:active {
+      transform: translateY(0);
+    }
+    .touch-target-halo {
+      position: absolute;
+      pointer-events: none;
+      border: 2px dashed #ef4444;
+      border-radius: 8px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+    }
+    .touch-target-halo.active {
+      display: flex;
+    }
+    .touch-target-tag {
+      position: absolute;
+      top: -22px;
+      font-family: var(--nexa-font-family-mono);
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #b91c1c;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      padding: 1px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .padding-telemetry-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: var(--nexa-surface-inset);
+      border: 1px solid var(--nexa-color-border-default);
+      border-radius: var(--nexa-radius-md);
+    }
+    .padding-telemetry-chips {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+    }
+    .telemetry-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--nexa-font-family-mono);
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: #ffffff;
+      border: 1px solid var(--nexa-color-border-default);
+      color: #334155;
+    }
+    .telemetry-chip strong {
+      color: #0f172a;
+    }
+
   </style>
 </head>
 <body>
@@ -7888,18 +8105,549 @@
           </div>
         </section>
 
-        <!-- PANE: ERGONOMÍA & ZONAS DE ALCANCE (UNIFIED DUAL-PLATFORM) -->
-        <section class="foundation-pane" id="pane-hub-ergonomics">
+        <!-- PANE: ALIAS REDIRECT FOR COMPATIBILITY (MERGED INTO PANE-HUB-SURFACES) -->
+        <section class="foundation-pane" id="pane-hub-ergonomics" style="display:none;"></section>
+
+        <!-- PANE: VOICE & TONE -->
+        <section class="foundation-pane" id="pane-hub-tone">
           <header class="pane-header">
             <span class="pane-kicker">
-              <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="3" r="1"></circle><path d="M12 14v4"></path><path d="M9 18h6"></path></svg>
-              05 / FOUNDATIONS &middot; INTERACTION ERGONOMICS &amp; REACHABILITY
+              <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              07 / FOUNDATIONS &middot; VOICE &amp; TONE (NN/G)
             </span>
-            <h1 class="pane-title">Áreas de Interacción, Blancos Hápticos &amp; Zonas de Alcance</h1>
+            <h1 class="pane-title">Voice &amp; Tone: The 4 Dimensions (Nielsen Norman Group)</h1>
             <p class="pane-intro">
-              Arquitectura dual de geometría interactiva: Especificación unificada para Mobile y Web. Combina los pisos de blanco táctil WCAG 2.2 AA (48dp estándar y 56dp con guantes criogénicos en terminales industriales) con los arcos biomecánicos de Steven Hoober, y su contraparte en Desktop Web con hit-targets de 44px bajo la Ley de Fitts y zonas de escaneo en F.
+              Calibrated against the NN/g communication framework: Serious (92%), Formal (78%), Respectful (95%), Serene (88%). Complemented with a 3-part error recovery architecture and an exhaustive bilingual microcopy matrix.
             </p>
           </header>
+
+          <!-- The 4 Dimension Progress Meters -->
+          <div class="tone-meters-grid">
+            
+            <div class="tone-card">
+              <div class="tone-card-top">
+                <span class="tone-name">1. Funny vs. Serious</span>
+                <span class="tone-value-badge">Serious (92%)</span>
+              </div>
+              <div class="tone-track"><div class="tone-fill" style="width: 92%;"></div></div>
+              <div class="tone-poles"><span>Funny (0%)</span><span>Serious (100%)</span></div>
+              <p class="tone-rationale">
+                Cold chain logistics carries biological contamination risks and severe regulatory fines. Trivial humor or sarcasm in thermal alerts destroys trust and delays emergency operator response.
+              </p>
+              <div class="tone-sample-good">
+                <strong>Recommended:</strong> Thermal discrepancy: Chamber 03 reads 7.8&deg;C (limit: 6.0&deg;C). Check airlock seal immediately.
+              </div>
+              <div class="tone-sample-bad">
+                <strong>Rejected:</strong> Oops! It looks a bit warm in here! Are the fish trying to get a tan?
+              </div>
+            </div>
+
+            <div class="tone-card">
+              <div class="tone-card-top">
+                <span class="tone-name">2. Formal vs. Casual</span>
+                <span class="tone-value-badge">Formal &amp; Direct (78%)</span>
+              </div>
+              <div class="tone-track"><div class="tone-fill" style="width: 78%;"></div></div>
+              <div class="tone-poles"><span>Casual (0%)</span><span>Formal (100%)</span></div>
+              <p class="tone-rationale">
+                En-route drivers and dock workers operate under physical fatigue and tight SLA windows. Clear imperative verbs with ubiquitous domain vocabulary (FEFO, ramp, bay, POD). Zero ceremonial filler.
+              </p>
+              <div class="tone-sample-good">
+                <strong>Recommended:</strong> Scan pallet GS1-128 barcode to confirm FEFO batch prior to loading.
+              </div>
+              <div class="tone-sample-bad">
+                <strong>Rejected:</strong> Dear driver, we kindly request you take a moment to proceed with the barcode reading.
+              </div>
+            </div>
+
+            <div class="tone-card">
+              <div class="tone-card-top">
+                <span class="tone-name">3. Respectful vs. Irreverent</span>
+                <span class="tone-value-badge">Respectful (95%)</span>
+              </div>
+              <div class="tone-track"><div class="tone-fill" style="width: 95%;"></div></div>
+              <div class="tone-poles"><span>Irreverent (0%)</span><span>Respectful (100%)</span></div>
+              <p class="tone-rationale">
+                When optical scanning fails, GPS drops, or network times out in subterranean bays, the system never blames the operator. It acknowledges the physical contingency and surfaces an immediate escape hatch.
+              </p>
+              <div class="tone-sample-good">
+                <strong>Recommended:</strong> Barcode unreadable. Enter the 6-digit seal code manually.
+              </div>
+              <div class="tone-sample-bad">
+                <strong>Rejected:</strong> User error! You aimed the camera poorly and the code is blurry. Hold your hand still.
+              </div>
+            </div>
+
+            <div class="tone-card">
+              <div class="tone-card-top">
+                <span class="tone-name">4. Enthusiastic vs. Serene</span>
+                <span class="tone-value-badge">Serene &amp; Objective (88%)</span>
+              </div>
+              <div class="tone-track"><div class="tone-fill" style="width: 88%;"></div></div>
+              <div class="tone-poles"><span>Enthusiastic (0%)</span><span>Serene (100%)</span></div>
+              <p class="tone-rationale">
+                Completing a dispatch run does not warrant confetti or fanfare. The operator requires serene confirmation that their transaction was persisted to the local database and synchronized with the central cluster.
+              </p>
+              <div class="tone-sample-good">
+                <strong>Recommended:</strong> Dispatch #NX-8821 completed and synchronized. Next destination: Dock 4.
+              </div>
+              <div class="tone-sample-bad">
+                <strong>Rejected:</strong> YAAAY, YOU ARE A LOGISTICS ROCKSTAR! You completed the delivery with flying colors!
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bilingual Microcopy Playbook Table -->
+          <div class="doc-card">
+            <div class="doc-card-title">
+              <span>Bilingual Enterprise Microcopy Playbook (10 Critical Scenarios)</span>
+              <span class="badge-pass">en_US &amp; es_419 Localized</span>
+            </div>
+            <p class="doc-card-desc">
+              English (<code>en_US</code>) is the official baseline language of the architecture, with full Spanish (<code>es_419</code>) localization for field personnel.
+            </p>
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Operational Scenario</th>
+                    <th>English Baseline (en_US)</th>
+                    <th>Spanish Localized (es_419)</th>
+                    <th>Channel</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Alerta Crítica HACCP</strong></td>
+                    <td><strong>Cold Chain Breach: Reefer #C-250 at 7.4&deg;C.</strong> Threshold exceeded (+1.4&deg;C). Check compressor power.</td>
+                    <td><strong>Quiebre Térmico: Furgón #C-250 a 7.4&deg;C.</strong> Tolerancia excedida (+1.4&deg;C). Comprobar compresor.</td>
+                    <td><span class="badge-warning">Push</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Modo Sin Conexión</strong></td>
+                    <td><strong>Working Offline &middot; 14 records queued.</strong> Scans saved locally. Auto-sync will resume on network.</td>
+                    <td><strong>Modo sin Conexión &middot; 14 registros en cola.</strong> Guardados en BD local. Sincronización automática.</td>
+                    <td><span class="badge-info">Banner</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Firma Digital POD</strong></td>
+                    <td><strong>Sign Proof of Delivery (POD).</strong> Collect receiver signature. Cryptographic timestamp attached.</td>
+                    <td><strong>Firma de Prueba de Entrega (POD).</strong> Solicite firma del receptor. Sello temporal criptográfico incluido.</td>
+                    <td><span class="badge-pass">Modal</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Búsqueda Vacía</strong></td>
+                    <td><strong>No Wholesale Lots Found.</strong> No products match filter &laquo;Frozen Salmon &gt; 200kg&raquo;. Clear filters.</td>
+                    <td><strong>Sin Lotes Encontrados.</strong> Ningún producto coincide con &laquo;Salmón Congelado &gt; 200kg&raquo;. Restablezca filtros.</td>
+                    <td><span class="badge-info">Empty</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Escaneo Óptico Fallido</strong></td>
+                    <td><strong>Barcode Not Recognized.</strong> Optical scan unreadable after 3 attempts. Enter seal code manually.</td>
+                    <td><strong>Código no Reconocido.</strong> Lectura ilegible tras 3 intentos. Ingrese el código manualmente.</td>
+                    <td><span class="badge-warning">Inline</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Arribo a Geocerca</strong></td>
+                    <td><strong>Dock Geofence Detected.</strong> You are within 50m of Dock #3. Tap button to confirm dock arrival.</td>
+                    <td><strong>Geocerca de Muelle Detectada.</strong> Se encuentra a 50m del Muelle 3. Confirme arribo al muelle.</td>
+                    <td><span class="badge-pass">Snackbar</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Batería en Reserva</strong></td>
+                    <td><strong>Low Battery Alert (12%).</strong> GPS polling interval reduced to 60s to conserve terminal battery.</td>
+                    <td><strong>Batería en Reserva (12%).</strong> Frecuencia GPS reducida a 60s para conservar energía.</td>
+                    <td><span class="badge-warning">Banner</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Lote Certificado</strong></td>
+                    <td><strong>SANIPES Health Certificate Verified.</strong> Lot #8849 approved for inter-provincial transit.</td>
+                    <td><strong>Certificado Sanitario SANIPES Aprobado.</strong> Lote #8849 certificado para tránsito nacional.</td>
+                    <td><span class="badge-pass">Badge</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Discrepancia de Bultos</strong></td>
+                    <td><strong>Quantity Mismatch.</strong> Manifest expected 40 boxes; driver scanned 39. Confirm discrepancy code.</td>
+                    <td><strong>Discrepancia de Conteo.</strong> Guía indica 40 cajas; se escanearon 39. Registre motivo de faltante.</td>
+                    <td><span class="badge-warning">Dialog</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Sincronización Exitosa</strong></td>
+                    <td><strong>Sync Complete.</strong> All 14 queued records reconciled with central dispatch server.</td>
+                    <td><strong>Sincronización Concluida.</strong> Los 14 registros fueron reconciliados con el servidor central.</td>
+                    <td><span class="badge-pass">Toast</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- PANE: DESIGN TOKENS & ARTIFACTS -->
+        <section class="foundation-pane" id="pane-hub-tokens">
+          <header class="pane-header">
+            <span class="pane-kicker">
+              <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              08 / CONTRACTS &middot; DESIGN TOKENS (W3C DTCG)
+            </span>
+            <h1 class="pane-title">W3C Design Tokens Community Group Specification</h1>
+            <p class="pane-intro">
+              The single source of truth for the entire Nexa Suite monorepo. Authored in W3C DTCG JSON format, validated with strict JSON schemas, and compiled via Style Dictionary into CSS Custom Properties, SCSS variables, Kotlin 2.4 Compose primitives, and TypeScript interfaces.
+            </p>
+          </header>
+
+          <div class="doc-card">
+            <div class="doc-card-title">
+              <span>Token Architecture &amp; Compilation Pipeline</span>
+              <span class="badge-pass">W3C DTCG Format</span>
+            </div>
+            <p class="doc-card-desc">
+              Tokens flow downwards in three immutable tiers: <strong>Primitives</strong> (raw mathematical values) &rarr; <strong>Semantic</strong> (functional intent and roles) &rarr; <strong>Component / Platform</strong> (Jetpack Compose, Web nexa-ui, Astro Living Geometry).
+            </p>
+            <div class="code-block-box">
+              <div class="code-block-header">
+                <span>design-lab/tokens/color.tokens.json (W3C DTCG Schema)</span>
+                <span>JSON</span>
+              </div>
+              <pre class="code-block-pre"><code>{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "nexa": {
+    "color": {
+      "primary": {
+        "600": {
+          "$value": "#2563eb",
+          "$type": "color",
+          "$description": "Primary corporate blue CTA action token, WCAG AAA tested."
+        }
+      },
+      "secondary": {
+        "navy": {
+          "$value": "#082846",
+          "$type": "color",
+          "$description": "Deep industrial navy for 56dp gloved touch targets."
+        }
+      },
+      "tertiary": {
+        "cyan": {
+          "$value": "#38c8ff",
+          "$type": "color",
+          "$description": "Electric cyan laser barcode scan indicator."
+        }
+      }
+    }
+  }
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- PANE: QUALITY & CONTRACT AUDIT -->
+        <section class="foundation-pane" id="pane-hub-quality">
+          <header class="pane-header">
+            <span class="pane-kicker">
+              <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              09 / CONTRACTS &middot; QUALITY GATES &amp; AUDIT
+            </span>
+            <h1 class="pane-title">Quality Contracts &amp; Architecture Verification</h1>
+            <p class="pane-intro">
+              Mechanical guarantees executed on every CI/CD commit. Zero tolerance for broken color contracts, missing accessibility tags, unmeasured touch targets, or emoji leaks into industrial environments.
+            </p>
+          </header>
+
+          <div class="doc-card">
+            <div class="doc-card-title">
+              <span>Automated Contract Verification Gates</span>
+              <span class="badge-pass">3/3 Passed</span>
+            </div>
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Gate Command</th>
+                    <th>Automated Scope</th>
+                    <th>Evaluation Criteria</th>
+                    <th>Result</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>npm run validate:tokens</code></td>
+                    <td>Design Tokens W3C JSON</td>
+                    <td>Schema validation, missing $type, broken primitive references</td>
+                    <td><span class="badge-pass">0 ERRORS</span></td>
+                  </tr>
+                  <tr>
+                    <td><code>npm run validate:contrast</code></td>
+                    <td>24/24 Approved Contrast Pairs</td>
+                    <td>WCAG 2.2 AA (4.5:1) and AAA (7.0:1) mathematical check</td>
+                    <td><span class="badge-pass">24/24 PASS</span></td>
+                  </tr>
+                  <tr>
+                    <td><code>npm run validate:architecture</code></td>
+                    <td>Zero Emoji &amp; Clean Vector Assets</td>
+                    <td>Regex scan across all HTML, Astro and Kotlin source files</td>
+                    <td><span class="badge-pass">0 LEAKS</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- PANE: SURFACES, SPATIAL GEOMETRY, PADDING & HAPTIC TOUCH TARGETS (UNIFIED) -->
+        <section class="foundation-pane" id="pane-hub-surfaces">
+          <header class="pane-header">
+            <span class="pane-kicker">
+              <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+              04 / FOUNDATIONS &middot; SURFACES, GEOMETRÍA ESPACIAL, PADDING &amp; BLANCOS HÁPTICOS
+            </span>
+            <h1 class="pane-title">Superficies, Geometría Espacial, Padding &amp; Blancos Hápticos</h1>
+            <p class="pane-intro">
+              Arquitectura unificada de profundidad, modelos de caja (Box-Model) y ergonomía de contacto para Mobile y Desktop Web. Integra elevaciones opacas de alto contraste, calibración interactiva de padding/márgenes en tiempo real, y la garantía física de blancos táctiles WCAG 2.2 AA (48dp estándar) y terminales industriales criogénicos (56dp) bajo la Ley de Fitts.
+            </p>
+          </header>
+
+          <!-- 1. Interactive Surfaces & Depth Workbench (Drag & Drop on Grid) -->
+          <div class="surfaces-workbench-card">
+            <div class="doc-card-title">
+              <span>Nexa Surfaces &amp; Depth Workbench &middot; Sandbox Interactivo de Elevación y Cuadrícula</span>
+              <span class="badge-pass">Arrastrable &middot; Cuadrícula 8px / 16px</span>
+            </div>
+            <p class="doc-card-desc">
+              Arrastra libremente la tarjeta interactiva sobre la cuadrícula espacial para calibrar radios semánticos de curvatura, elevación de planos (Layer 0 a 4) y comportamiento táctil en tiempo real.
+            </p>
+
+            <!-- Workbench Controls -->
+            <div class="surface-controls-toolbar">
+              <!-- Preset Radius -->
+              <div class="surface-ctrl-group">
+                <label>Radio Semántico</label>
+                <select id="surface-ctrl-radius" onchange="updateSurfaceSandbox()">
+                  <option value="6|--nexa-radius-sm|Small Control (6px)">Small Control &middot; 6px (--nexa-radius-sm)</option>
+                  <option value="8|--nexa-radius-md|Medium Layout (8px)">Medium Layout &middot; 8px (--nexa-radius-md)</option>
+                  <option value="10|--nexa-radius-control|Standard Control (10px)">Standard Control &middot; 10px (--nexa-radius-control)</option>
+                  <option value="16|--nexa-radius-card|Card Surface (16px)" selected>Card Surface &middot; 16px (--nexa-radius-card)</option>
+                  <option value="18|--nexa-radius-panel|Panel Region (18px)">Panel Region &middot; 18px (--nexa-radius-panel)</option>
+                  <option value="24|--nexa-radius-dialog|Dialog / Modal (24px)">Dialog / Modal &middot; 24px (--nexa-radius-dialog)</option>
+                  <option value="999|--nexa-radius-pill|Pill / Badge (999px)">Pill / Badge &middot; 999px (--nexa-radius-pill)</option>
+                </select>
+              </div>
+
+              <!-- Elevation Tier -->
+              <div class="surface-ctrl-group">
+                <label>Elevación / Profundidad</label>
+                <select id="surface-ctrl-elevation" onchange="updateSurfaceSandbox()">
+                  <option value="none|none|--nexa-surface-page|Layer 0: Plano Base / Canvas (0px)">Layer 0: Plano Base (Sin sombra)</option>
+                  <option value="sm|0 1px 3px rgba(15,23,42,0.06)|--nexa-surface-card|Layer 1: Tarjeta Base (shadow-sm)" selected>Layer 1: Tarjeta Base (shadow-sm)</option>
+                  <option value="md|0 4px 12px rgba(15,23,42,0.08)|--nexa-surface-raised|Layer 2: Contenedor Elevado (shadow-md)">Layer 2: Contenedor Elevado (shadow-md)</option>
+                  <option value="lg|0 8px 24px rgba(15,23,42,0.12)|--nexa-surface-overlay|Layer 3: Popover &amp; Menú (shadow-lg)">Layer 3: Popover &amp; Menú (shadow-lg)</option>
+                  <option value="xl|0 16px 36px rgba(15,23,42,0.20)|--nexa-surface-modal|Layer 4: Diálogo &amp; Modal (shadow-xl)">Layer 4: Diálogo &amp; Modal (shadow-xl)</option>
+                  <option value="inset|inset 0 2px 4px rgba(15,23,42,0.06)|--nexa-surface-inset|Layer Inset: Contenedor Hundido">Layer Inset: Contenedor Hundido</option>
+                </select>
+              </div>
+
+              <!-- Surface Tone -->
+              <div class="surface-ctrl-group">
+                <label>Tono de Superficie</label>
+                <select id="surface-ctrl-bg" onchange="updateSurfaceSandbox()">
+                  <option value="#ffffff|#0f172a|#cbd5e1" selected>Blanco Puro (#FFFFFF)</option>
+                  <option value="#f6faff|#0f172a|#e2e8f0">Page Canvas (#F6FAFF)</option>
+                  <option value="#f1f5f9|#0f172a|#cbd5e1">Gris Inset (#F1F5F9)</option>
+                  <option value="#eff6ff|#1e40af|#bfdbfe">Azul Tint Activo (#EFF6FF)</option>
+                  <option value="#082846|#ffffff|#1e3a5f">Modo Nocturno / Dark (#082846)</option>
+                </select>
+              </div>
+
+              <!-- Grid Toggle -->
+              <div class="surface-ctrl-group" style="align-self: flex-end;">
+                <label>Cuadrícula Espacial</label>
+                <button type="button" class="btn-topbar-action selected" id="btn-toggle-surface-grid" onclick="toggleSurfaceGrid()" style="height: 34px;">
+                  <i class="pi pi-table"></i>
+                  <span>Cuadrícula 16px</span>
+                </button>
+              </div>
+
+              <!-- Snap to Grid -->
+              <div class="surface-ctrl-group" style="align-self: flex-end;">
+                <label>Alineación (Snap)</label>
+                <button type="button" class="btn-topbar-action selected" id="btn-toggle-surface-snap" onclick="toggleSurfaceSnap()" style="height: 34px;">
+                  <i class="pi pi-compass"></i>
+                  <span id="snap-btn-label">Snap 8px: On</span>
+                </button>
+              </div>
+
+              <!-- Reset / Center -->
+              <div class="surface-ctrl-group" style="align-self: flex-end;">
+                <label>Posición</label>
+                <button type="button" class="btn-topbar-action" onclick="resetSurfacePosition()" style="height: 34px;">
+                  <i class="pi pi-refresh"></i>
+                  <span>Centrar</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Live Stage with Grid & Draggable Box -->
+            <div class="surface-sandbox-stage show-grid" id="surface-sandbox-stage">
+              <div class="surface-grid-indicator-tag" id="surface-stage-info">Arrastra la tarjeta &middot; Cuadrícula activa (16px) &middot; Snap 8px</div>
+              
+              <div class="draggable-surface-box" id="draggable-surface-item" style="left: 64px; top: 48px;">
+                <div class="draggable-surface-header" id="draggable-surface-handle">
+                  <span style="display: flex; align-items: center; gap: 6px;">
+                    <i class="pi pi-arrows-alt" style="font-size: 11px;"></i>
+                    <span id="drag-header-title">Superficie Elevada</span>
+                  </span>
+                  <span class="draggable-coords-tag" id="drag-coords-tag">X: 64px &middot; Y: 48px</span>
+                </div>
+                <div class="draggable-surface-body">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <strong style="font-size: 13px;" id="drag-card-name">Card Surface</strong>
+                    <span class="radius-value-tag" id="drag-radius-pill">16px</span>
+                  </div>
+                  <p style="font-size: 11.5px; margin: 0; line-height: 1.4; opacity: 0.85;" id="drag-card-desc">
+                    Superficie de trabajo con elevación calibrada y separación limpia de planos.
+                  </p>
+                  <div style="display: flex; gap: 8px; margin-top: 4px;">
+                    <span style="font-size: 10px; padding: 2px 8px; border-radius: 4px; background: rgba(37,99,235,0.12); color: #2563eb; font-weight: 600;">Control Hijo</span>
+                    <span style="font-size: 10px; padding: 2px 8px; border-radius: 4px; border: 1px solid currentColor; opacity: 0.7;">Badge</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Live CSS Code Strip -->
+            <div class="surface-spec-strip">
+              <span id="surface-spec-tokens">
+                <strong>CSS Tokens:</strong> border-radius: var(--nexa-radius-card, 16px); box-shadow: 0 1px 3px rgba(15,23,42,0.06); background: #ffffff;
+              </span>
+              <button type="button" class="btn-topbar-action" style="margin-left: auto; height: 26px; padding: 0 8px; font-size: 10px;" onclick="copySurfaceTokens()">
+                <i class="pi pi-copy"></i> Copiar Tokens CSS
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. Interactive Padding, Margin & Box-Model Caliper -->
+          <div class="padding-caliper-card">
+            <div class="doc-card-title">
+              <span>Nexa Padding, Margin &amp; Box-Model Caliper &middot; Simulador Interactivo de Espaciado y Pisos Hápticos</span>
+              <span class="badge-pass" id="padding-wcag-badge">WCAG 2.2 AA (48dp) Conforme</span>
+            </div>
+            <p class="doc-card-desc">
+              Calibra paddings de bloque e inline, márgenes perimetrales y radios de curvatura en tiempo real. Inspecciona las capas concéntricas del Box-Model (contenido, padding, borde, margen) y verifica visualmente si el componente cumple el piso físico mínimo de 48dp (Mobile táctil) o 56dp (terminales industriales con guantes criogénicos).
+            </p>
+
+            <!-- Padding Controls Toolbar -->
+            <div class="padding-controls-toolbar">
+              <!-- Preset Selector -->
+              <div class="padding-ctrl-group" style="min-width: 170px;">
+                <label>Componente Preset</label>
+                <select id="padding-ctrl-preset" onchange="applyPaddingPreset(this.value)">
+                  <option value="btn-primary" selected>Botón Primario / CTA (48dp)</option>
+                  <option value="btn-industrial">Terminal Industrial (56dp)</option>
+                  <option value="input-field">Campo de Texto (48dp)</option>
+                  <option value="filter-chip">Chip de Filtro (Sub-piso 32dp)</option>
+                  <option value="card-item">Tarjeta Operativa / Tile</option>
+                </select>
+              </div>
+
+              <!-- Vertical Padding (Block) -->
+              <div class="padding-ctrl-group">
+                <label>Padding Block (Y) <span class="val-badge" id="val-pad-block">12px</span></label>
+                <input type="range" id="padding-ctrl-block" min="4" max="28" step="2" value="12" oninput="updatePaddingSpecimen()">
+              </div>
+
+              <!-- Horizontal Padding (Inline) -->
+              <div class="padding-ctrl-group">
+                <label>Padding Inline (X) <span class="val-badge" id="val-pad-inline">24px</span></label>
+                <input type="range" id="padding-ctrl-inline" min="8" max="48" step="4" value="24" oninput="updatePaddingSpecimen()">
+              </div>
+
+              <!-- Outer Margin -->
+              <div class="padding-ctrl-group">
+                <label>Margen Exterior <span class="val-badge" id="val-pad-margin">16px</span></label>
+                <input type="range" id="padding-ctrl-margin" min="0" max="32" step="4" value="16" oninput="updatePaddingSpecimen()">
+              </div>
+
+              <!-- Gap -->
+              <div class="padding-ctrl-group">
+                <label>Gap Interno <span class="val-badge" id="val-pad-gap">8px</span></label>
+                <input type="range" id="padding-ctrl-gap" min="0" max="20" step="2" value="8" oninput="updatePaddingSpecimen()">
+              </div>
+
+              <!-- Radius Select -->
+              <div class="padding-ctrl-group" style="min-width: 140px;">
+                <label>Radio Semántico</label>
+                <select id="padding-ctrl-radius" onchange="updatePaddingSpecimen()">
+                  <option value="6|--nexa-radius-sm">6px (--nexa-radius-sm)</option>
+                  <option value="8|--nexa-radius-md">8px (--nexa-radius-md)</option>
+                  <option value="10|--nexa-radius-control" selected>10px (--nexa-radius-control)</option>
+                  <option value="16|--nexa-radius-card">16px (--nexa-radius-card)</option>
+                  <option value="999|--nexa-radius-pill">999px (--nexa-radius-pill)</option>
+                </select>
+              </div>
+
+              <!-- Toggle Inspection Mode -->
+              <div class="padding-ctrl-group" style="min-width: 130px; align-self: flex-end;">
+                <label>Capa Box-Model</label>
+                <button type="button" class="btn-topbar-action selected" id="btn-toggle-boxmodel" onclick="toggleBoxModelDebug()" style="height: 34px; width: 100%; justify-content: center;">
+                  <i class="pi pi-eye"></i> <span id="label-boxmodel-btn">Inspector ON</span>
+                </button>
+              </div>
+
+              <!-- Toggle Touch Target Halo -->
+              <div class="padding-ctrl-group" style="min-width: 130px; align-self: flex-end;">
+                <label>Halo Háptico (48/56)</label>
+                <button type="button" class="btn-topbar-action selected" id="btn-toggle-halo" onclick="toggleTouchTargetHalo()" style="height: 34px; width: 100%; justify-content: center;">
+                  <i class="pi pi-circle"></i> <span id="label-halo-btn">Piso 48dp ON</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Stage & Visualizer -->
+            <div class="padding-stage" id="padding-stage">
+              <div class="boxmodel-root" id="boxmodel-root">
+                <!-- Concentric Outer Margin (Orange) -->
+                <div class="boxmodel-margin-layer" id="boxmodel-margin-layer">
+                  <span class="boxmodel-label-margin" id="boxmodel-label-margin">MARGIN: 16px</span>
+
+                  <!-- Concentric Padding Layer (Emerald Green) -->
+                  <div class="boxmodel-padding-layer" id="boxmodel-padding-layer">
+                    <span class="boxmodel-label-padding" id="boxmodel-label-padding" style="position: absolute; top: 2px; font-size: 8.5px; font-family: var(--nexa-font-family-mono); color: #047857; font-weight: 700; text-transform: uppercase;">PADDING: 12px &times; 24px</span>
+
+                    <!-- Actual Rendered Specimen -->
+                    <div class="boxmodel-specimen" id="boxmodel-specimen" onclick="showToast('Elemento pulsado: Blanco háptico probado')" title="Pulsar para probar interacción">
+                      <svg class="icon-svg" id="specimen-icon" viewBox="0 0 24 24" style="width: 16px; height: 16px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      <span id="specimen-text">CONFIRMAR ACCIÓN</span>
+                    </div>
+                  </div>
+
+                  <!-- Virtual Haptic Touch Target Reference Halo -->
+                  <div class="touch-target-halo active" id="touch-target-halo">
+                    <span class="touch-target-tag" id="touch-target-tag">Piso Mínimo WCAG: 48&times;48dp</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Telemetry Bar -->
+            <div class="padding-telemetry-bar">
+              <div class="padding-telemetry-chips">
+                <span class="telemetry-chip"><strong>Dimensiones Totales:</strong> <span id="telemetry-total-dim">178px &times; 48px</span></span>
+                <span class="telemetry-chip"><strong>Box-Model:</strong> <span id="telemetry-boxmodel-detail">M: 16px | B: 1px | P: 12px 24px</span></span>
+                <span class="telemetry-chip"><strong>Piso Háptico:</strong> <span id="telemetry-haptic-eval" style="color: #15803d; font-weight: 700;">Conforme WCAG 2.2 AA (48dp)</span></span>
+              </div>
+              <button type="button" class="btn-topbar-action" style="height: 28px; padding: 0 10px; font-size: 11px;" onclick="copyPaddingTokens()">
+                <i class="pi pi-copy"></i> Copiar Tokens de Espaciado
+              </button>
+            </div>
+
+            <!-- Code Preview Strip -->
+            <div class="surface-spec-strip" style="margin-top: 12px;">
+              <span id="padding-spec-tokens" style="font-family: var(--nexa-font-family-mono); font-size: 11px;">
+                <strong>CSS Tokens:</strong> padding: var(--nexa-spacing-md, 12px) var(--nexa-spacing-2xl, 24px); margin: var(--nexa-spacing-lg, 16px); min-height: 48px; border-radius: var(--nexa-radius-control, 10px);
+              </span>
+            </div>
+          </div>
 
           <!-- 1. Caliper Comparison & Target Hitbox Rig (Dual Mobile & Desktop Web) -->
           <div class="doc-card" style="margin-bottom: 24px;">
@@ -8218,425 +8966,6 @@
                 </div>
               </div>
 
-            </div>
-          </div>
-        </section>
-
-        <!-- PANE: VOICE & TONE -->
-        <section class="foundation-pane" id="pane-hub-tone">
-          <header class="pane-header">
-            <span class="pane-kicker">
-              <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-              07 / FOUNDATIONS &middot; VOICE &amp; TONE (NN/G)
-            </span>
-            <h1 class="pane-title">Voice &amp; Tone: The 4 Dimensions (Nielsen Norman Group)</h1>
-            <p class="pane-intro">
-              Calibrated against the NN/g communication framework: Serious (92%), Formal (78%), Respectful (95%), Serene (88%). Complemented with a 3-part error recovery architecture and an exhaustive bilingual microcopy matrix.
-            </p>
-          </header>
-
-          <!-- The 4 Dimension Progress Meters -->
-          <div class="tone-meters-grid">
-            
-            <div class="tone-card">
-              <div class="tone-card-top">
-                <span class="tone-name">1. Funny vs. Serious</span>
-                <span class="tone-value-badge">Serious (92%)</span>
-              </div>
-              <div class="tone-track"><div class="tone-fill" style="width: 92%;"></div></div>
-              <div class="tone-poles"><span>Funny (0%)</span><span>Serious (100%)</span></div>
-              <p class="tone-rationale">
-                Cold chain logistics carries biological contamination risks and severe regulatory fines. Trivial humor or sarcasm in thermal alerts destroys trust and delays emergency operator response.
-              </p>
-              <div class="tone-sample-good">
-                <strong>Recommended:</strong> Thermal discrepancy: Chamber 03 reads 7.8&deg;C (limit: 6.0&deg;C). Check airlock seal immediately.
-              </div>
-              <div class="tone-sample-bad">
-                <strong>Rejected:</strong> Oops! It looks a bit warm in here! Are the fish trying to get a tan?
-              </div>
-            </div>
-
-            <div class="tone-card">
-              <div class="tone-card-top">
-                <span class="tone-name">2. Formal vs. Casual</span>
-                <span class="tone-value-badge">Formal &amp; Direct (78%)</span>
-              </div>
-              <div class="tone-track"><div class="tone-fill" style="width: 78%;"></div></div>
-              <div class="tone-poles"><span>Casual (0%)</span><span>Formal (100%)</span></div>
-              <p class="tone-rationale">
-                En-route drivers and dock workers operate under physical fatigue and tight SLA windows. Clear imperative verbs with ubiquitous domain vocabulary (FEFO, ramp, bay, POD). Zero ceremonial filler.
-              </p>
-              <div class="tone-sample-good">
-                <strong>Recommended:</strong> Scan pallet GS1-128 barcode to confirm FEFO batch prior to loading.
-              </div>
-              <div class="tone-sample-bad">
-                <strong>Rejected:</strong> Dear driver, we kindly request you take a moment to proceed with the barcode reading.
-              </div>
-            </div>
-
-            <div class="tone-card">
-              <div class="tone-card-top">
-                <span class="tone-name">3. Respectful vs. Irreverent</span>
-                <span class="tone-value-badge">Respectful (95%)</span>
-              </div>
-              <div class="tone-track"><div class="tone-fill" style="width: 95%;"></div></div>
-              <div class="tone-poles"><span>Irreverent (0%)</span><span>Respectful (100%)</span></div>
-              <p class="tone-rationale">
-                When optical scanning fails, GPS drops, or network times out in subterranean bays, the system never blames the operator. It acknowledges the physical contingency and surfaces an immediate escape hatch.
-              </p>
-              <div class="tone-sample-good">
-                <strong>Recommended:</strong> Barcode unreadable. Enter the 6-digit seal code manually.
-              </div>
-              <div class="tone-sample-bad">
-                <strong>Rejected:</strong> User error! You aimed the camera poorly and the code is blurry. Hold your hand still.
-              </div>
-            </div>
-
-            <div class="tone-card">
-              <div class="tone-card-top">
-                <span class="tone-name">4. Enthusiastic vs. Serene</span>
-                <span class="tone-value-badge">Serene &amp; Objective (88%)</span>
-              </div>
-              <div class="tone-track"><div class="tone-fill" style="width: 88%;"></div></div>
-              <div class="tone-poles"><span>Enthusiastic (0%)</span><span>Serene (100%)</span></div>
-              <p class="tone-rationale">
-                Completing a dispatch run does not warrant confetti or fanfare. The operator requires serene confirmation that their transaction was persisted to the local database and synchronized with the central cluster.
-              </p>
-              <div class="tone-sample-good">
-                <strong>Recommended:</strong> Dispatch #NX-8821 completed and synchronized. Next destination: Dock 4.
-              </div>
-              <div class="tone-sample-bad">
-                <strong>Rejected:</strong> YAAAY, YOU ARE A LOGISTICS ROCKSTAR! You completed the delivery with flying colors!
-              </div>
-            </div>
-
-          </div>
-
-          <!-- Bilingual Microcopy Playbook Table -->
-          <div class="doc-card">
-            <div class="doc-card-title">
-              <span>Bilingual Enterprise Microcopy Playbook (10 Critical Scenarios)</span>
-              <span class="badge-pass">en_US &amp; es_419 Localized</span>
-            </div>
-            <p class="doc-card-desc">
-              English (<code>en_US</code>) is the official baseline language of the architecture, with full Spanish (<code>es_419</code>) localization for field personnel.
-            </p>
-            <div class="table-container">
-              <table class="data-table">
-                <thead>
-                  <tr>
-                    <th>Operational Scenario</th>
-                    <th>English Baseline (en_US)</th>
-                    <th>Spanish Localized (es_419)</th>
-                    <th>Channel</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><strong>Alerta Crítica HACCP</strong></td>
-                    <td><strong>Cold Chain Breach: Reefer #C-250 at 7.4&deg;C.</strong> Threshold exceeded (+1.4&deg;C). Check compressor power.</td>
-                    <td><strong>Quiebre Térmico: Furgón #C-250 a 7.4&deg;C.</strong> Tolerancia excedida (+1.4&deg;C). Comprobar compresor.</td>
-                    <td><span class="badge-warning">Push</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Modo Sin Conexión</strong></td>
-                    <td><strong>Working Offline &middot; 14 records queued.</strong> Scans saved locally. Auto-sync will resume on network.</td>
-                    <td><strong>Modo sin Conexión &middot; 14 registros en cola.</strong> Guardados en BD local. Sincronización automática.</td>
-                    <td><span class="badge-info">Banner</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Firma Digital POD</strong></td>
-                    <td><strong>Sign Proof of Delivery (POD).</strong> Collect receiver signature. Cryptographic timestamp attached.</td>
-                    <td><strong>Firma de Prueba de Entrega (POD).</strong> Solicite firma del receptor. Sello temporal criptográfico incluido.</td>
-                    <td><span class="badge-pass">Modal</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Búsqueda Vacía</strong></td>
-                    <td><strong>No Wholesale Lots Found.</strong> No products match filter &laquo;Frozen Salmon &gt; 200kg&raquo;. Clear filters.</td>
-                    <td><strong>Sin Lotes Encontrados.</strong> Ningún producto coincide con &laquo;Salmón Congelado &gt; 200kg&raquo;. Restablezca filtros.</td>
-                    <td><span class="badge-info">Empty</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Escaneo Óptico Fallido</strong></td>
-                    <td><strong>Barcode Not Recognized.</strong> Optical scan unreadable after 3 attempts. Enter seal code manually.</td>
-                    <td><strong>Código no Reconocido.</strong> Lectura ilegible tras 3 intentos. Ingrese el código manualmente.</td>
-                    <td><span class="badge-warning">Inline</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Arribo a Geocerca</strong></td>
-                    <td><strong>Dock Geofence Detected.</strong> You are within 50m of Dock #3. Tap button to confirm dock arrival.</td>
-                    <td><strong>Geocerca de Muelle Detectada.</strong> Se encuentra a 50m del Muelle 3. Confirme arribo al muelle.</td>
-                    <td><span class="badge-pass">Snackbar</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Batería en Reserva</strong></td>
-                    <td><strong>Low Battery Alert (12%).</strong> GPS polling interval reduced to 60s to conserve terminal battery.</td>
-                    <td><strong>Batería en Reserva (12%).</strong> Frecuencia GPS reducida a 60s para conservar energía.</td>
-                    <td><span class="badge-warning">Banner</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Lote Certificado</strong></td>
-                    <td><strong>SANIPES Health Certificate Verified.</strong> Lot #8849 approved for inter-provincial transit.</td>
-                    <td><strong>Certificado Sanitario SANIPES Aprobado.</strong> Lote #8849 certificado para tránsito nacional.</td>
-                    <td><span class="badge-pass">Badge</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Discrepancia de Bultos</strong></td>
-                    <td><strong>Quantity Mismatch.</strong> Manifest expected 40 boxes; driver scanned 39. Confirm discrepancy code.</td>
-                    <td><strong>Discrepancia de Conteo.</strong> Guía indica 40 cajas; se escanearon 39. Registre motivo de faltante.</td>
-                    <td><span class="badge-warning">Dialog</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Sincronización Exitosa</strong></td>
-                    <td><strong>Sync Complete.</strong> All 14 queued records reconciled with central dispatch server.</td>
-                    <td><strong>Sincronización Concluida.</strong> Los 14 registros fueron reconciliados con el servidor central.</td>
-                    <td><span class="badge-pass">Toast</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
-        <!-- PANE: DESIGN TOKENS & ARTIFACTS -->
-        <section class="foundation-pane" id="pane-hub-tokens">
-          <header class="pane-header">
-            <span class="pane-kicker">
-              <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-              08 / CONTRACTS &middot; DESIGN TOKENS (W3C DTCG)
-            </span>
-            <h1 class="pane-title">W3C Design Tokens Community Group Specification</h1>
-            <p class="pane-intro">
-              The single source of truth for the entire Nexa Suite monorepo. Authored in W3C DTCG JSON format, validated with strict JSON schemas, and compiled via Style Dictionary into CSS Custom Properties, SCSS variables, Kotlin 2.4 Compose primitives, and TypeScript interfaces.
-            </p>
-          </header>
-
-          <div class="doc-card">
-            <div class="doc-card-title">
-              <span>Token Architecture &amp; Compilation Pipeline</span>
-              <span class="badge-pass">W3C DTCG Format</span>
-            </div>
-            <p class="doc-card-desc">
-              Tokens flow downwards in three immutable tiers: <strong>Primitives</strong> (raw mathematical values) &rarr; <strong>Semantic</strong> (functional intent and roles) &rarr; <strong>Component / Platform</strong> (Jetpack Compose, Web nexa-ui, Astro Living Geometry).
-            </p>
-            <div class="code-block-box">
-              <div class="code-block-header">
-                <span>design-lab/tokens/color.tokens.json (W3C DTCG Schema)</span>
-                <span>JSON</span>
-              </div>
-              <pre class="code-block-pre"><code>{
-  "$schema": "https://design-tokens.github.io/community-group/format/",
-  "nexa": {
-    "color": {
-      "primary": {
-        "600": {
-          "$value": "#2563eb",
-          "$type": "color",
-          "$description": "Primary corporate blue CTA action token, WCAG AAA tested."
-        }
-      },
-      "secondary": {
-        "navy": {
-          "$value": "#082846",
-          "$type": "color",
-          "$description": "Deep industrial navy for 56dp gloved touch targets."
-        }
-      },
-      "tertiary": {
-        "cyan": {
-          "$value": "#38c8ff",
-          "$type": "color",
-          "$description": "Electric cyan laser barcode scan indicator."
-        }
-      }
-    }
-  }
-}</code></pre>
-            </div>
-          </div>
-        </section>
-
-        <!-- PANE: QUALITY & CONTRACT AUDIT -->
-        <section class="foundation-pane" id="pane-hub-quality">
-          <header class="pane-header">
-            <span class="pane-kicker">
-              <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-              09 / CONTRACTS &middot; QUALITY GATES &amp; AUDIT
-            </span>
-            <h1 class="pane-title">Quality Contracts &amp; Architecture Verification</h1>
-            <p class="pane-intro">
-              Mechanical guarantees executed on every CI/CD commit. Zero tolerance for broken color contracts, missing accessibility tags, unmeasured touch targets, or emoji leaks into industrial environments.
-            </p>
-          </header>
-
-          <div class="doc-card">
-            <div class="doc-card-title">
-              <span>Automated Contract Verification Gates</span>
-              <span class="badge-pass">3/3 Passed</span>
-            </div>
-            <div class="table-container">
-              <table class="data-table">
-                <thead>
-                  <tr>
-                    <th>Gate Command</th>
-                    <th>Automated Scope</th>
-                    <th>Evaluation Criteria</th>
-                    <th>Result</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><code>npm run validate:tokens</code></td>
-                    <td>Design Tokens W3C JSON</td>
-                    <td>Schema validation, missing $type, broken primitive references</td>
-                    <td><span class="badge-pass">0 ERRORS</span></td>
-                  </tr>
-                  <tr>
-                    <td><code>npm run validate:contrast</code></td>
-                    <td>24/24 Approved Contrast Pairs</td>
-                    <td>WCAG 2.2 AA (4.5:1) and AAA (7.0:1) mathematical check</td>
-                    <td><span class="badge-pass">24/24 PASS</span></td>
-                  </tr>
-                  <tr>
-                    <td><code>npm run validate:architecture</code></td>
-                    <td>Zero Emoji &amp; Clean Vector Assets</td>
-                    <td>Regex scan across all HTML, Astro and Kotlin source files</td>
-                    <td><span class="badge-pass">0 LEAKS</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
-        <!-- PANE: SURFACES, DEPTH & MATERIALS -->
-        <section class="foundation-pane" id="pane-hub-surfaces">
-          <header class="pane-header">
-            <span class="pane-kicker">
-              <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-              04 / FOUNDATIONS &middot; SURFACES, DEPTH &amp; MATERIALS
-            </span>
-            <h1 class="pane-title">Surfaces, Elevation Hierarchy &amp; Material Contracts</h1>
-            <p class="pane-intro">
-              High-contrast opaque depth architecture. Translucent glass materials (such as Apple Liquid Glass) are strictly rejected from operational Product UI due to visibility failure under 10,000 to 100,000 lux warehouse illumination.
-            </p>
-          </header>
-
-          <!-- 1. Interactive Surfaces & Depth Workbench (Drag & Drop on Grid) -->
-          <div class="surfaces-workbench-card">
-            <div class="doc-card-title">
-              <span>Nexa Surfaces &amp; Depth Workbench &middot; Sandbox Interactivo de Elevación y Cuadrícula</span>
-              <span class="badge-pass">Arrastrable &middot; Cuadrícula 8px / 16px</span>
-            </div>
-            <p class="doc-card-desc">
-              Arrastra libremente la tarjeta interactiva sobre la cuadrícula espacial para calibrar radios semánticos de curvatura, elevación de planos (Layer 0 a 4) y comportamiento táctil en tiempo real.
-            </p>
-
-            <!-- Workbench Controls -->
-            <div class="surface-controls-toolbar">
-              <!-- Preset Radius -->
-              <div class="surface-ctrl-group">
-                <label>Radio Semántico</label>
-                <select id="surface-ctrl-radius" onchange="updateSurfaceSandbox()">
-                  <option value="6|--nexa-radius-sm|Small Control (6px)">Small Control &middot; 6px (--nexa-radius-sm)</option>
-                  <option value="8|--nexa-radius-md|Medium Layout (8px)">Medium Layout &middot; 8px (--nexa-radius-md)</option>
-                  <option value="10|--nexa-radius-control|Standard Control (10px)">Standard Control &middot; 10px (--nexa-radius-control)</option>
-                  <option value="16|--nexa-radius-card|Card Surface (16px)" selected>Card Surface &middot; 16px (--nexa-radius-card)</option>
-                  <option value="18|--nexa-radius-panel|Panel Region (18px)">Panel Region &middot; 18px (--nexa-radius-panel)</option>
-                  <option value="24|--nexa-radius-dialog|Dialog / Modal (24px)">Dialog / Modal &middot; 24px (--nexa-radius-dialog)</option>
-                  <option value="999|--nexa-radius-pill|Pill / Badge (999px)">Pill / Badge &middot; 999px (--nexa-radius-pill)</option>
-                </select>
-              </div>
-
-              <!-- Elevation Tier -->
-              <div class="surface-ctrl-group">
-                <label>Elevación / Profundidad</label>
-                <select id="surface-ctrl-elevation" onchange="updateSurfaceSandbox()">
-                  <option value="none|none|--nexa-surface-page|Layer 0: Plano Base / Canvas (0px)">Layer 0: Plano Base (Sin sombra)</option>
-                  <option value="sm|0 1px 3px rgba(15,23,42,0.06)|--nexa-surface-card|Layer 1: Tarjeta Base (shadow-sm)" selected>Layer 1: Tarjeta Base (shadow-sm)</option>
-                  <option value="md|0 4px 12px rgba(15,23,42,0.08)|--nexa-surface-raised|Layer 2: Contenedor Elevado (shadow-md)">Layer 2: Contenedor Elevado (shadow-md)</option>
-                  <option value="lg|0 8px 24px rgba(15,23,42,0.12)|--nexa-surface-overlay|Layer 3: Popover &amp; Menú (shadow-lg)">Layer 3: Popover &amp; Menú (shadow-lg)</option>
-                  <option value="xl|0 16px 36px rgba(15,23,42,0.20)|--nexa-surface-modal|Layer 4: Diálogo &amp; Modal (shadow-xl)">Layer 4: Diálogo &amp; Modal (shadow-xl)</option>
-                  <option value="inset|inset 0 2px 4px rgba(15,23,42,0.06)|--nexa-surface-inset|Layer Inset: Contenedor Hundido">Layer Inset: Contenedor Hundido</option>
-                </select>
-              </div>
-
-              <!-- Surface Tone -->
-              <div class="surface-ctrl-group">
-                <label>Tono de Superficie</label>
-                <select id="surface-ctrl-bg" onchange="updateSurfaceSandbox()">
-                  <option value="#ffffff|#0f172a|#cbd5e1" selected>Blanco Puro (#FFFFFF)</option>
-                  <option value="#f6faff|#0f172a|#e2e8f0">Page Canvas (#F6FAFF)</option>
-                  <option value="#f1f5f9|#0f172a|#cbd5e1">Gris Inset (#F1F5F9)</option>
-                  <option value="#eff6ff|#1e40af|#bfdbfe">Azul Tint Activo (#EFF6FF)</option>
-                  <option value="#082846|#ffffff|#1e3a5f">Modo Nocturno / Dark (#082846)</option>
-                </select>
-              </div>
-
-              <!-- Grid Toggle -->
-              <div class="surface-ctrl-group" style="align-self: flex-end;">
-                <label>Cuadrícula Espacial</label>
-                <button type="button" class="btn-topbar-action selected" id="btn-toggle-surface-grid" onclick="toggleSurfaceGrid()" style="height: 34px;">
-                  <i class="pi pi-table"></i>
-                  <span>Cuadrícula 16px</span>
-                </button>
-              </div>
-
-              <!-- Snap to Grid -->
-              <div class="surface-ctrl-group" style="align-self: flex-end;">
-                <label>Alineación (Snap)</label>
-                <button type="button" class="btn-topbar-action selected" id="btn-toggle-surface-snap" onclick="toggleSurfaceSnap()" style="height: 34px;">
-                  <i class="pi pi-compass"></i>
-                  <span id="snap-btn-label">Snap 8px: On</span>
-                </button>
-              </div>
-
-              <!-- Reset / Center -->
-              <div class="surface-ctrl-group" style="align-self: flex-end;">
-                <label>Posición</label>
-                <button type="button" class="btn-topbar-action" onclick="resetSurfacePosition()" style="height: 34px;">
-                  <i class="pi pi-refresh"></i>
-                  <span>Centrar</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Live Stage with Grid & Draggable Box -->
-            <div class="surface-sandbox-stage show-grid" id="surface-sandbox-stage">
-              <div class="surface-grid-indicator-tag" id="surface-stage-info">Arrastra la tarjeta &middot; Cuadrícula activa (16px) &middot; Snap 8px</div>
-              
-              <div class="draggable-surface-box" id="draggable-surface-item" style="left: 64px; top: 48px;">
-                <div class="draggable-surface-header" id="draggable-surface-handle">
-                  <span style="display: flex; align-items: center; gap: 6px;">
-                    <i class="pi pi-arrows-alt" style="font-size: 11px;"></i>
-                    <span id="drag-header-title">Superficie Elevada</span>
-                  </span>
-                  <span class="draggable-coords-tag" id="drag-coords-tag">X: 64px &middot; Y: 48px</span>
-                </div>
-                <div class="draggable-surface-body">
-                  <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <strong style="font-size: 13px;" id="drag-card-name">Card Surface</strong>
-                    <span class="radius-value-tag" id="drag-radius-pill">16px</span>
-                  </div>
-                  <p style="font-size: 11.5px; margin: 0; line-height: 1.4; opacity: 0.85;" id="drag-card-desc">
-                    Superficie de trabajo con elevación calibrada y separación limpia de planos.
-                  </p>
-                  <div style="display: flex; gap: 8px; margin-top: 4px;">
-                    <span style="font-size: 10px; padding: 2px 8px; border-radius: 4px; background: rgba(37,99,235,0.12); color: #2563eb; font-weight: 600;">Control Hijo</span>
-                    <span style="font-size: 10px; padding: 2px 8px; border-radius: 4px; border: 1px solid currentColor; opacity: 0.7;">Badge</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Live CSS Code Strip -->
-            <div class="surface-spec-strip">
-              <span id="surface-spec-tokens">
-                <strong>CSS Tokens:</strong> border-radius: var(--nexa-radius-card, 16px); box-shadow: 0 1px 3px rgba(15,23,42,0.06); background: #ffffff;
-              </span>
-              <button type="button" class="btn-topbar-action" style="margin-left: auto; height: 26px; padding: 0 8px; font-size: 10px;" onclick="copySurfaceTokens()">
-                <i class="pi pi-copy"></i> Copiar Tokens CSS
-              </button>
             </div>
           </div>
 
@@ -9820,9 +10149,8 @@
               { id: 'hub-color', label: 'Colorimetry & WCAG AAA', icon: 'palette', target: 'pane-hub-color' },
               { id: 'hub-typography', label: 'Typography & Scale', icon: 'align-left', target: 'pane-hub-typography' },
               { id: 'hub-grid', label: 'Spatial 8px Grid & Layout', icon: 'th-large', target: 'pane-hub-grid' },
-              { id: 'hub-surfaces', label: 'Surfaces & Depth Stack', icon: 'box', target: 'pane-hub-surfaces' },
-              { id: 'hub-icons', label: 'Iconography & PrimeIcons', icon: 'compass', target: 'pane-hub-icons' },
-              { id: 'hub-ergonomics', label: 'Áreas & Zonas de Alcance', icon: 'hand', target: 'pane-hub-ergonomics' }
+              { id: 'hub-surfaces', label: 'Superficies, Padding & Blancos Hápticos', icon: 'box', target: 'pane-hub-surfaces' },
+              { id: 'hub-icons', label: 'Iconography & PrimeIcons', icon: 'compass', target: 'pane-hub-icons' }
             ]
           },
           {
@@ -10176,7 +10504,9 @@
         // Hide all foundation panes
         document.querySelectorAll('.foundation-pane').forEach(el => el.classList.remove('active'));
 
-        const targetPane = document.getElementById(item.target);
+        let targetId = item.target;
+        if (targetId === 'pane-hub-ergonomics') targetId = 'pane-hub-surfaces';
+        const targetPane = document.getElementById(targetId);
         if (targetPane) {
           targetPane.classList.add('active');
         }
@@ -10957,6 +11287,7 @@
       filterHubIcons();
       updateTypeSandbox();
       updateSurfaceSandbox();
+      updatePaddingSpecimen();
       initSurfaceDrag();
       try {
         const savedLang = localStorage.getItem('nexa-lang') || 'es';
@@ -11170,6 +11501,240 @@
       });
     }
 
+    // --- PADDING & BOX-MODEL CALIPER INTERACTION ---
+    let boxModelDebugActive = true;
+    let touchHaloActive = true;
+
+    const SPACING_TOKEN_MAP = {
+      0: '--nexa-spacing-none',
+      4: '--nexa-spacing-xs',
+      8: '--nexa-spacing-sm',
+      12: '--nexa-spacing-md',
+      16: '--nexa-spacing-lg',
+      20: '--nexa-spacing-xl',
+      24: '--nexa-spacing-2xl',
+      32: '--nexa-spacing-3xl',
+      48: '--nexa-spacing-4xl'
+    };
+
+    function getClosestSpacingToken(px) {
+      if (SPACING_TOKEN_MAP[px]) return SPACING_TOKEN_MAP[px];
+      const keys = Object.keys(SPACING_TOKEN_MAP).map(Number).sort((a,b)=>a-b);
+      let closest = keys[0];
+      for (const k of keys) {
+        if (Math.abs(k - px) < Math.abs(closest - px)) closest = k;
+      }
+      return SPACING_TOKEN_MAP[closest] || '--nexa-spacing-md';
+    }
+
+    function applyPaddingPreset(presetKey) {
+      const blockInput = document.getElementById('padding-ctrl-block');
+      const inlineInput = document.getElementById('padding-ctrl-inline');
+      const marginInput = document.getElementById('padding-ctrl-margin');
+      const gapInput = document.getElementById('padding-ctrl-gap');
+      const radiusSelect = document.getElementById('padding-ctrl-radius');
+      const specimen = document.getElementById('boxmodel-specimen');
+      const icon = document.getElementById('specimen-icon');
+      const text = document.getElementById('specimen-text');
+
+      if (!blockInput || !inlineInput || !specimen) return;
+
+      if (presetKey === 'btn-primary') {
+        blockInput.value = 12;
+        inlineInput.value = 24;
+        marginInput.value = 16;
+        gapInput.value = 8;
+        if (radiusSelect) radiusSelect.value = '10|--nexa-radius-control';
+        specimen.style.background = '#2563eb';
+        specimen.style.borderColor = '#2563eb';
+        specimen.style.color = '#ffffff';
+        if (icon) icon.style.display = 'inline-block';
+        if (text) text.textContent = 'CONFIRMAR ACCIÓN';
+      } else if (presetKey === 'btn-industrial') {
+        blockInput.value = 16;
+        inlineInput.value = 28;
+        marginInput.value = 20;
+        gapInput.value = 10;
+        if (radiusSelect) radiusSelect.value = '10|--nexa-radius-control';
+        specimen.style.background = '#082846';
+        specimen.style.borderColor = '#082846';
+        specimen.style.color = '#ffffff';
+        if (icon) icon.style.display = 'inline-block';
+        if (text) text.textContent = 'CONFIRMAR ENTREGA (56DP)';
+      } else if (presetKey === 'input-field') {
+        blockInput.value = 12;
+        inlineInput.value = 16;
+        marginInput.value = 12;
+        gapInput.value = 8;
+        if (radiusSelect) radiusSelect.value = '8|--nexa-radius-md';
+        specimen.style.background = '#ffffff';
+        specimen.style.borderColor = '#cbd5e1';
+        specimen.style.color = '#0f172a';
+        if (icon) icon.style.display = 'inline-block';
+        if (text) text.textContent = 'Número de Lote / SKU...';
+      } else if (presetKey === 'filter-chip') {
+        blockInput.value = 6;
+        inlineInput.value = 12;
+        marginInput.value = 8;
+        gapInput.value = 6;
+        if (radiusSelect) radiusSelect.value = '999|--nexa-radius-pill';
+        specimen.style.background = '#eff6ff';
+        specimen.style.borderColor = '#bfdbfe';
+        specimen.style.color = '#1e40af';
+        if (icon) icon.style.display = 'none';
+        if (text) text.textContent = 'Congelados (-18°C)';
+      } else if (presetKey === 'card-item') {
+        blockInput.value = 16;
+        inlineInput.value = 20;
+        marginInput.value = 16;
+        gapInput.value = 12;
+        if (radiusSelect) radiusSelect.value = '16|--nexa-radius-card';
+        specimen.style.background = '#ffffff';
+        specimen.style.borderColor = '#e2e8f0';
+        specimen.style.color = '#0f172a';
+        if (icon) icon.style.display = 'inline-block';
+        if (text) text.textContent = 'Furgón Reefer #C-250 · Temperatura Óptima';
+      }
+
+      updatePaddingSpecimen();
+    }
+
+    function updatePaddingSpecimen() {
+      const blockVal = parseInt(document.getElementById('padding-ctrl-block')?.value || '12', 10);
+      const inlineVal = parseInt(document.getElementById('padding-ctrl-inline')?.value || '24', 10);
+      const marginVal = parseInt(document.getElementById('padding-ctrl-margin')?.value || '16', 10);
+      const gapVal = parseInt(document.getElementById('padding-ctrl-gap')?.value || '8', 10);
+      const radiusParts = (document.getElementById('padding-ctrl-radius')?.value || '10|--nexa-radius-control').split('|');
+      const radiusVal = radiusParts[0] === '999' ? '999px' : (radiusParts[0] + 'px');
+      const radiusToken = radiusParts[1] || '--nexa-radius-control';
+
+      // Badges
+      const valBlock = document.getElementById('val-pad-block');
+      const valInline = document.getElementById('val-pad-inline');
+      const valMargin = document.getElementById('val-pad-margin');
+      const valGap = document.getElementById('val-pad-gap');
+      if (valBlock) valBlock.textContent = blockVal + 'px';
+      if (valInline) valInline.textContent = inlineVal + 'px';
+      if (valMargin) valMargin.textContent = marginVal + 'px';
+      if (valGap) valGap.textContent = gapVal + 'px';
+
+      // Layers
+      const marginLayer = document.getElementById('boxmodel-margin-layer');
+      const paddingLayer = document.getElementById('boxmodel-padding-layer');
+      const specimen = document.getElementById('boxmodel-specimen');
+      const halo = document.getElementById('touch-target-halo');
+      const haloTag = document.getElementById('touch-target-tag');
+      const labelMargin = document.getElementById('boxmodel-label-margin');
+      const labelPadding = document.getElementById('boxmodel-label-padding');
+
+      if (marginLayer) {
+        marginLayer.style.padding = marginVal + 'px';
+        if (labelMargin) labelMargin.textContent = `MARGIN: ${marginVal}px`;
+      }
+
+      if (paddingLayer) {
+        paddingLayer.style.padding = `${blockVal}px ${inlineVal}px`;
+        if (labelPadding) labelPadding.textContent = `PADDING: ${blockVal}px × ${inlineVal}px`;
+      }
+
+      if (specimen) {
+        specimen.style.gap = gapVal + 'px';
+        specimen.style.borderRadius = radiusVal;
+      }
+
+      // Read calculated dimensions
+      requestAnimationFrame(() => {
+        if (!paddingLayer || !specimen) return;
+        const rect = paddingLayer.getBoundingClientRect();
+        const totalW = Math.round(rect.width);
+        const totalH = Math.round(rect.height);
+
+        // Halo sizing (minimum 48x48 or 56x56)
+        const isIndustrial = (document.getElementById('padding-ctrl-preset')?.value === 'btn-industrial');
+        const minTouchFloor = isIndustrial ? 56 : 48;
+        if (halo) {
+          halo.style.width = Math.max(minTouchFloor, totalW) + 'px';
+          halo.style.height = Math.max(minTouchFloor, totalH) + 'px';
+          if (haloTag) {
+            haloTag.textContent = isIndustrial 
+              ? `Piso Industrial: 56×56dp (${totalH >= 56 ? 'OK' : 'Deficiente'})`
+              : `Piso WCAG: 48×48dp (${totalH >= 48 ? 'OK' : 'Requiere Expansión'})`;
+          }
+        }
+
+        // Telemetry update
+        const dimEl = document.getElementById('telemetry-total-dim');
+        const bmDetailEl = document.getElementById('telemetry-boxmodel-detail');
+        const evalEl = document.getElementById('telemetry-haptic-eval');
+        const wcagBadge = document.getElementById('padding-wcag-badge');
+
+        if (dimEl) dimEl.textContent = `${totalW}px × ${totalH}px`;
+        if (bmDetailEl) bmDetailEl.textContent = `M: ${marginVal}px | B: 1px | P: ${blockVal}px ${inlineVal}px | R: ${radiusVal}`;
+
+        if (evalEl && wcagBadge) {
+          if (totalH >= 56) {
+            evalEl.innerHTML = '<span style="color: #047857; font-weight: 700;">Conforme Terminal Industrial Criogénico (&ge;56dp)</span>';
+            wcagBadge.className = 'badge-pass';
+            wcagBadge.textContent = 'Industrial 56dp Compliant';
+          } else if (totalH >= 48) {
+            evalEl.innerHTML = '<span style="color: #15803d; font-weight: 700;">Conforme WCAG 2.2 AA Táctil (&ge;48dp)</span>';
+            wcagBadge.className = 'badge-pass';
+            wcagBadge.textContent = 'WCAG 2.2 AA (48dp) Conforme';
+          } else {
+            evalEl.innerHTML = `<span style="color: #b91c1c; font-weight: 700;">Sub-piso (${totalH}dp &lt; 48dp) &middot; Requiere Expansión Háptica (WCAG 2.5.8)</span>`;
+            wcagBadge.className = 'badge-warning';
+            wcagBadge.textContent = 'Sub-piso 48dp (Requiere Hit-Target)';
+          }
+        }
+
+        // Spec tokens string
+        const tokensEl = document.getElementById('padding-spec-tokens');
+        if (tokensEl) {
+          const tokBlock = getClosestSpacingToken(blockVal);
+          const tokInline = getClosestSpacingToken(inlineVal);
+          const tokMargin = getClosestSpacingToken(marginVal);
+          tokensEl.innerHTML = `<strong>CSS Tokens:</strong> padding: var(${tokBlock}, ${blockVal}px) var(${tokInline}, ${inlineVal}px); margin: var(${tokMargin}, ${marginVal}px); min-height: ${Math.max(48, totalH)}px; border-radius: var(${radiusToken}, ${radiusVal});`;
+        }
+      });
+    }
+
+    function toggleBoxModelDebug() {
+      boxModelDebugActive = !boxModelDebugActive;
+      const marginLayer = document.getElementById('boxmodel-margin-layer');
+      const paddingLayer = document.getElementById('boxmodel-padding-layer');
+      const btn = document.getElementById('btn-toggle-boxmodel');
+      const label = document.getElementById('label-boxmodel-btn');
+
+      if (marginLayer) marginLayer.classList.toggle('no-debug', !boxModelDebugActive);
+      if (paddingLayer) paddingLayer.classList.toggle('no-debug', !boxModelDebugActive);
+      if (btn) btn.classList.toggle('selected', boxModelDebugActive);
+      if (label) label.textContent = boxModelDebugActive ? 'Inspector ON' : 'Inspector OFF';
+
+      showToast(boxModelDebugActive ? 'Capas de Box-Model visibles' : 'Modo limpio sin capas');
+    }
+
+    function toggleTouchTargetHalo() {
+      touchHaloActive = !touchHaloActive;
+      const halo = document.getElementById('touch-target-halo');
+      const btn = document.getElementById('btn-toggle-halo');
+      const label = document.getElementById('label-halo-btn');
+
+      if (halo) halo.classList.toggle('active', touchHaloActive);
+      if (btn) btn.classList.toggle('selected', touchHaloActive);
+      if (label) label.textContent = touchHaloActive ? 'Piso 48dp ON' : 'Piso 48dp OFF';
+
+      showToast(touchHaloActive ? 'Marco de referencia háptico visible' : 'Marco háptico oculto');
+    }
+
+    function copyPaddingTokens() {
+      const tokensEl = document.getElementById('padding-spec-tokens');
+      const text = tokensEl ? tokensEl.innerText.replace('CSS Tokens: ', '') : '';
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Tokens de espaciado copiados al portapapeles');
+      }).catch(() => {
+        showToast('Copiado');
+      });
+    }
 
     // --- COMPREHENSIVE I18N TRANSLATION ENGINE ---
     const I18N_COMPLETE = {
@@ -11191,9 +11756,9 @@
         navColor: 'Colorimetría & WCAG AAA',
         navTypography: 'Tipografía & Escala',
         navGrid: 'Grilla Espacial 8px & Layout',
-        navSurfaces: 'Superficies & Elevaciones',
+        navSurfaces: 'Superficies, Padding & Blancos Hápticos',
         navIcons: 'Iconografía & PrimeIcons',
-        navErgonomics: 'Áreas & Zonas de Alcance',
+        navErgonomics: 'Superficies, Padding & Blancos Hápticos',
         navComponents: 'Matriz de Componentes',
         navSettings: 'Ajustes & Accesibilidad',
         navPatterns: 'Objetos de Dominio (BC-01..11)',
@@ -11219,9 +11784,9 @@
         navColor: 'Colorimetry & WCAG AAA',
         navTypography: 'Typography & Modular Scale',
         navGrid: 'Spatial 8px Grid & Layout',
-        navSurfaces: 'Surfaces & Depth Stack',
+        navSurfaces: 'Surfaces, Spatial Padding & Touch Targets',
         navIcons: 'Iconography & PrimeIcons',
-        navErgonomics: 'Interaction Areas & Reach Zones',
+        navErgonomics: 'Surfaces, Spatial Padding & Touch Targets',
         navComponents: 'Component Specimen Matrix',
         navSettings: 'Settings & Accessibility',
         navPatterns: 'Domain Objects (BC-01..11)',

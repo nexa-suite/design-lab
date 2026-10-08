@@ -8,7 +8,7 @@
   "highRiskStates": ["default", "hover", "focus", "pressed", "selected", "disabled", "loading", "error", "expanded-open"],
   "canonicalRoutes": [
     { "path": "overview", "area": "START HERE", "states": ["default", "focus"] },
-    { "path": "foundations/color", "area": "FOUNDATIONS", "states": ["default", "semantic"] },
+    { "path": "foundations/layout-spacing", "area": "FOUNDATIONS", "states": ["default"] },
     { "path": "foundations/motion", "area": "FOUNDATIONS", "states": ["standard", "reduced"] },
     { "path": "components/buttons", "area": "COMPONENTS", "states": ["default", "hover", "focus", "pressed", "disabled", "loading", "success", "error"] },
     { "path": "components/progress-indicators", "area": "COMPONENTS", "states": ["determinate", "indeterminate", "paused", "complete", "error", "skeleton"] },
@@ -32,9 +32,7 @@
   ],
   "screenshotEvidence": [
     { "path": "overview", "state": "default", "purpose": "canonical overview" },
-    { "path": "foundations/brand-logo", "state": "default", "purpose": "canonical Nexa brand" },
-    { "path": "foundations/color", "state": "semantic", "purpose": "semantic color map" },
-    { "path": "foundations/typography", "state": "default", "purpose": "type hierarchy" },
+    { "path": "foundations/layout-spacing", "state": "default", "purpose": "spatial rhythm and layout" },
     { "path": "components/buttons", "state": "focus", "purpose": "real button focus geometry" },
     { "path": "components/text-fields", "state": "focus", "purpose": "real input focus geometry" },
     { "path": "components/checkbox", "state": "focus", "purpose": "native checkbox focus geometry" },
